@@ -1,0 +1,42 @@
+name: EGX v2 smoke test
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test health and reference stocks
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="https://egx-market-feed-v2.netlify.app"
+          echo "Testing $BASE"
+          python - <<'PY'
+          import json, urllib.request
+          base = 'https://egx-market-feed-v2.netlify.app'
+          paths = ['/api/health'] + [f'/api/stock?symbol={s}' for s in ['SWDY','ORWE','EFID','MASR','AMOC','KORA']]
+          for path in paths:
+              with urllib.request.urlopen(base + path, timeout=30) as r:
+                  data = json.load(r)
+              print('\nENDPOINT', path)
+              print(json.dumps({
+                  'status': data.get('status'),
+                  'version': data.get('version'),
+                  'symbol': data.get('symbol'),
+                  'last_price': data.get('last_price'),
+                  'change_percent': data.get('change_percent'),
+                  'session_status': data.get('session_status'),
+                  'sma200': (data.get('technical') or {}).get('sma200'),
+                  'relative_volume_10d': (data.get('technical') or {}).get('relative_volume_10d'),
+                  'demand_confirmation_score': data.get('demand_confirmation_score'),
+                  'event_risk': data.get('event_risk'),
+                  'capabilities': data.get('capabilities'),
+              }, ensure_ascii=False))
+              if data.get('status') != 'ok':
+                  raise SystemExit(f'FAILED {path}: status is not ok')
+          print('\nALL_SMOKE_TESTS_OK')
+          PY
