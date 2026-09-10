@@ -1,0 +1,8 @@
+{
+  "name": "egx-market-feed-v2",
+  "version": "7.1.0",
+  "private": true,
+  "description": "Resilient EGX market feed API on Netlify",
+  "engines": { "node": ">=20" },
+  "scripts": { "check": "cp netlify/functions/api.mts /tmp/egx-api.mjs && node --check /tmp/egx-api.mjs" }
+}
