@@ -2,6 +2,10 @@ name: EGX resilient bridge
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/egx-resilient-bridge.yml'
+      - 'egx-market-feed-v2/scripts/resilient-bridge.mjs'
   schedule:
     - cron: '*/5 7-13 * * 0-4'
 
@@ -43,6 +47,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          rm -rf /tmp/egx-live
           mkdir -p /tmp/egx-live
           cp out/latest.json /tmp/egx-live/latest.json
           cp out/health.json /tmp/egx-live/health.json
