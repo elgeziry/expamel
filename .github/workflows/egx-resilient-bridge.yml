@@ -31,6 +31,7 @@ jobs:
           EGX_EXPECTED_CORE: '7.2.1'
           EGX_BRIDGE_OUT: 'out/latest.json'
           EGX_BRIDGE_HEALTH_OUT: 'out/health.json'
+          EGX_REQUIRED_SYMBOLS: 'SWDY,EFIH,EFID,BONY,ORWE,MASR,EGAL,JUFO,AMOC,SVCE,ORAS'
         run: node egx-market-feed-v2/scripts/resilient-bridge.mjs
 
       - name: Validate snapshot contract
@@ -42,6 +43,11 @@ jobs:
           jq -e '.data.market != null' out/latest.json >/dev/null
           jq -e '.data.screen.top_setup | type == "array"' out/latest.json >/dev/null
           jq -e '.path_health.direct.ok == true or .path_health.netlify.ok == true' out/latest.json >/dev/null
+          if jq -e '.path_health.direct.ok == true' out/latest.json >/dev/null; then
+            jq -e '.data.universe | type == "array" and length >= 50' out/latest.json >/dev/null
+            jq -e '.bridge.symbol_coverage.complete == true' out/latest.json >/dev/null
+            jq -e 'any(.data.universe[]; .symbol == "SWDY")' out/latest.json >/dev/null
+          fi
 
       - name: Publish latest snapshot to single-commit live branch
         shell: bash
