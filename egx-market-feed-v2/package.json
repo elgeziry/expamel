@@ -1,8 +1,12 @@
 {
   "name": "egx-market-feed-v2",
-  "version": "7.1.0",
+  "version": "7.2.0",
   "private": true,
-  "description": "Resilient EGX market feed API on Netlify",
+  "description": "Netlify-only EGX feed with a validated single-request execution bundle",
+  "dependencies": { "@netlify/blobs": "^11.0.3" },
   "engines": { "node": ">=20" },
-  "scripts": { "check": "cp netlify/functions/api.mts /tmp/egx-api.mjs && node --check /tmp/egx-api.mjs" }
+  "scripts": {
+    "check": "node --experimental-strip-types --check netlify/functions/api.mts && node --experimental-strip-types --check netlify/functions/diagnostics.mts && node --experimental-strip-types --check netlify/functions/execution-bundle.mts && node --experimental-strip-types --check netlify/functions/latest-execution.mts && node --experimental-strip-types --check netlify/functions/warm-execution.mts && node --experimental-strip-types --check netlify/functions/_lib/access.mts && node --check client/execution-fetch.mjs",
+    "test": "node --experimental-strip-types --test"
+  }
 }

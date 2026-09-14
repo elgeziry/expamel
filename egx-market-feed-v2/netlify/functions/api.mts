@@ -10,6 +10,8 @@ const FUND_COLUMNS = [
   'eps_diluted_growth_percent_fy','total_revenue_ttm','free_cash_flow_ttm','debt_to_equity_fq',
   'earnings_release_next_date','dividend_ex_date_upcoming','price_target_average','price_target_high','price_target_low'
 ];
+const MODE_COLUMNS = ['name', 'update_mode'];
+export const CORE_VERSION = '7.2.0';
 
 const num = (v) => Number.isFinite(Number(v)) ? Number(v) : null;
 const round = (v, d = 4) => v != null && Number.isFinite(v) ? Number(v.toFixed(d)) : null;
@@ -197,7 +199,7 @@ function headers() {
     'content-type': 'text/plain;charset=UTF-8',
     origin: 'https://www.tradingview.com',
     referer: 'https://www.tradingview.com/',
-    'user-agent': 'Mozilla/5.0 (compatible; EGXMarketFeed/7.1)'
+    'user-agent': `Mozilla/5.0 (compatible; EGXMarketFeed/${CORE_VERSION})`
   };
 }
 
@@ -210,14 +212,36 @@ function payload(columns, symbols = null, range = [0, 500]) {
   };
 }
 
-async function scan(columns, symbols = null, range = [0,500]) {
+function retryableStatus(status: number) {
+  return [408, 425, 429].includes(status) || status >= 500;
+}
+
+function retryAfterMs(res: Response) {
+  const value = res.headers.get('retry-after');
+  if (!value) return null;
+  const seconds = Number(value);
+  if (Number.isFinite(seconds)) return Math.min(10_000, Math.max(0, seconds * 1000));
+  const date = Date.parse(value);
+  return Number.isFinite(date) ? Math.min(10_000, Math.max(0, date - Date.now())) : null;
+}
+
+const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+async function scanOnce(columns, symbols = null, range = [0,500]) {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 9000);
+  const timer = setTimeout(() => controller.abort(), 8000);
   try {
     const res = await fetch(TV_URL, { method: 'POST', headers: headers(), body: JSON.stringify(payload(columns, symbols, range)), signal: controller.signal });
     const text = await res.text();
-    if (!res.ok) throw new Error(`TradingView ${res.status}: ${text.slice(0,300)}`);
-    const raw = JSON.parse(text);
+    if (!res.ok) {
+      const problem: any = new Error(`TradingView ${res.status}: ${text.slice(0,300)}`);
+      problem.status = res.status;
+      problem.retryAfterMs = retryAfterMs(res);
+      throw problem;
+    }
+    let raw: any;
+    try { raw = JSON.parse(text); }
+    catch { throw new Error(`TradingView schema error: invalid JSON (${text.slice(0,120)})`); }
     const rows = (raw.data || []).map((item) => {
       const row = { symbol_full: item.s };
       columns.forEach((c, i) => row[c] = item.d?.[i] ?? null);
@@ -228,6 +252,29 @@ async function scan(columns, symbols = null, range = [0,500]) {
   } finally { clearTimeout(timer); }
 }
 
+export async function scan(columns, symbols = null, range = [0,500], attempts = 3) {
+  const errors: string[] = [];
+  for (let attempt = 1; attempt <= attempts; attempt++) {
+    try {
+      return { ...(await scanOnce(columns, symbols, range)), attempts: attempt };
+    } catch (e: any) {
+      errors.push(String(e?.message || e));
+      const status = Number(e?.status);
+      const mayRetry = attempt < attempts && (!status || retryableStatus(status));
+      if (!mayRetry) {
+        const problem: any = new Error(errors.join(' | '));
+        problem.attempts = attempt;
+        throw problem;
+      }
+      const backoff = Number.isFinite(e?.retryAfterMs)
+        ? e.retryAfterMs
+        : Math.round(250 * (2 ** (attempt - 1)) + Math.random() * 150);
+      await wait(backoff);
+    }
+  }
+  throw new Error('TradingView request failed');
+}
+
 function mergeRows(base, extra) {
   const map = new Map(base.map(r => [r.symbol_full, { ...r }]));
   for (const r of extra) map.set(r.symbol_full, { ...(map.get(r.symbol_full) || {}), ...r });
@@ -236,20 +283,26 @@ function mergeRows(base, extra) {
 
 async function safeLayer(columns, symbols, range) {
   try { return { ok: true, ...(await scan(columns, symbols, range)), error: null }; }
-  catch (e) { return { ok: false, totalCount: 0, rows: [], error: String(e?.message || e) }; }
+  catch (e: any) { return { ok: false, totalCount: 0, rows: [], attempts: e?.attempts ?? 0, error: String(e?.message || e) }; }
 }
 
-async function fetchMarket(symbols = null) {
+export async function fetchMarket(symbols = null) {
+  const started = Date.now();
   const range = [0,500];
-  const base = await safeLayer(BASE_COLUMNS, symbols, range);
-  if (!base.ok) throw new Error(base.error || 'Base TradingView layer failed');
-  const [tech, fund] = await Promise.all([
+  const [base, tech, fund, mode] = await Promise.all([
+    safeLayer(BASE_COLUMNS, symbols, range),
     safeLayer(['name', ...TECH_COLUMNS], symbols, range),
-    safeLayer(['name', ...FUND_COLUMNS], symbols, range)
+    safeLayer(['name', ...FUND_COLUMNS], symbols, range),
+    safeLayer(MODE_COLUMNS, symbols, range)
   ]);
+  if (!base.ok) throw new Error(base.error || 'Base TradingView layer failed');
+  if (!base.rows.length || !base.rows.some(r => r.symbol && Number.isFinite(Number(r.close)))) {
+    throw new Error('TradingView schema error: no symbol with a numeric close');
+  }
   let rows = base.rows;
   if (tech.ok) rows = mergeRows(rows, tech.rows);
   if (fund.ok) rows = mergeRows(rows, fund.rows);
+  if (mode.ok) rows = mergeRows(rows, mode.rows);
   rows = rows.map(enrichRow);
   return {
     count: rows.length, total_count: base.totalCount, rows,
@@ -257,13 +310,24 @@ async function fetchMarket(symbols = null) {
       base: true,
       advanced_technicals: tech.ok,
       fundamentals_events: fund.ok,
+      update_mode: mode.ok,
       ...(tech.ok ? {} : { advanced_technicals_error: tech.error }),
-      ...(fund.ok ? {} : { fundamentals_events_error: fund.error })
+      ...(fund.ok ? {} : { fundamentals_events_error: fund.error }),
+      ...(mode.ok ? {} : { update_mode_error: mode.error })
+    },
+    upstream: {
+      duration_ms: Date.now() - started,
+      layers: {
+        base: { ok: base.ok, attempts: base.attempts },
+        advanced_technicals: { ok: tech.ok, attempts: tech.attempts },
+        fundamentals_events: { ok: fund.ok, attempts: fund.attempts },
+        update_mode: { ok: mode.ok, attempts: mode.attempts }
+      }
     }
   };
 }
 
-function sessionStatus(rows) {
+export function sessionStatus(rows, now = new Date()) {
   for (const r of rows) {
     const v = String(r.current_session || '').toLowerCase();
     if (['market','regular','continuous','open'].includes(v)) return 'continuous';
@@ -271,7 +335,7 @@ function sessionStatus(rows) {
     if (v.includes('post') || v.includes('closed')) return 'closed';
   }
   const parts = new Intl.DateTimeFormat('en-GB', { timeZone: 'Africa/Cairo', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false })
-    .formatToParts(new Date()).reduce((o,p) => (o[p.type]=p.value,o), {});
+    .formatToParts(now).reduce((o,p) => (o[p.type]=p.value,o), {});
   if (['Fri','Sat'].includes(parts.weekday)) return 'closed';
   const mins = Number(parts.hour) * 60 + Number(parts.minute);
   if (mins >= 570 && mins < 600) return 'auction';
@@ -290,7 +354,7 @@ function earlyFlags(r) {
 
 async function handleHealth() {
   const data = await fetchMarket(['BONY','EFID','EFIH']);
-  return json({ status: 'ok', version: '7.1.0', checked_at: new Date().toISOString(), session_status: sessionStatus(data.rows), source: 'TradingView public scanner', timestamp_kind: 'retrieval_time_not_exchange_tick_time', capabilities: data.capabilities,
+  return json({ status: 'ok', version: CORE_VERSION, checked_at: new Date().toISOString(), session_status: sessionStatus(data.rows), source: 'TradingView public scanner', timestamp_kind: 'retrieval_time_not_exchange_tick_time', capabilities: data.capabilities, upstream:data.upstream,
     probes: data.rows.map((r) => ({ symbol:r.symbol,last_price:r.close,change_percent:r.change,rsi:r.RSI,sma200:r.SMA200 ?? null,relative_volume_10d:r.relative_volume_10d,demand_confirmation_score:r.demand_confirmation_score,setup_score:r.decision_support?.setup_score,chase_risk:r.decision_support?.chase_risk })) });
 }
 
@@ -300,13 +364,13 @@ async function handleMarket() {
   const decliners = data.rows.filter((r) => Number(r.change) < 0).length;
   const unchanged = data.rows.length - advancers - decliners;
   const positivePct = data.rows.length ? advancers / data.rows.length * 100 : 0;
-  return json({ status:'ok',version:'7.1.0',count:data.count,total_count:data.total_count,retrieved_at:new Date().toISOString(),session_status:sessionStatus(data.rows),market:{regime:positivePct>=55?'strong':positivePct>=45?'mixed':'weak',breadth:{advancers,decliners,unchanged,positive_pct:Number(positivePct.toFixed(1))}},capabilities:data.capabilities,source:'TradingView public scanner',timestamp_kind:'retrieval_time_not_exchange_tick_time',data:data.rows });
+  return json({ status:'ok',version:CORE_VERSION,count:data.count,total_count:data.total_count,retrieved_at:new Date().toISOString(),session_status:sessionStatus(data.rows),market:{regime:positivePct>=55?'strong':positivePct>=45?'mixed':'weak',breadth:{advancers,decliners,unchanged,positive_pct:Number(positivePct.toFixed(1))}},capabilities:data.capabilities,upstream:data.upstream,source:'TradingView public scanner',timestamp_kind:'retrieval_time_not_exchange_tick_time',data:data.rows });
 }
 
 async function handleScreen() {
   const data = await fetchMarket();
   const ranked = data.rows.filter((r) => Number(r.value) >= 1_000_000 && Number(r.close) > 0).map((r) => ({ ...r, early_movement_flags: earlyFlags(r) })).sort((a,b) => (b.decision_support?.setup_score ?? 0)-(a.decision_support?.setup_score ?? 0));
-  return json({ status:'ok',version:'7.1.0',retrieved_at:new Date().toISOString(),session_status:sessionStatus(data.rows),capabilities:data.capabilities,top_setup:ranked.slice(0,40),early_movement:ranked.filter((r) => r.early_movement_flags.length).sort((a,b)=>(b.demand_confirmation_score??0)-(a.demand_confirmation_score??0)).slice(0,40),methodology:{note:'Technical/demand pre-screen only. Sharia, fundamentals, valuation and catalyst checks remain required before execution.',demand_score_components:['relative_volume','price_direction_and_close_location','traded_value','moving_average_trend','relative_performance']} });
+  return json({ status:'ok',version:CORE_VERSION,retrieved_at:new Date().toISOString(),session_status:sessionStatus(data.rows),capabilities:data.capabilities,upstream:data.upstream,top_setup:ranked.slice(0,40),early_movement:ranked.filter((r) => r.early_movement_flags.length).sort((a,b)=>(b.demand_confirmation_score??0)-(a.demand_confirmation_score??0)).slice(0,40),methodology:{note:'Technical/demand pre-screen only. Sharia, fundamentals, valuation and catalyst checks remain required before execution.',demand_score_components:['relative_volume','price_direction_and_close_location','traded_value','moving_average_trend','relative_performance']} });
 }
 
 async function handleStock(url) {
@@ -315,7 +379,7 @@ async function handleStock(url) {
   const data = await fetchMarket([symbol]);
   const r = data.rows.find((x) => x.symbol === symbol) || data.rows[0];
   if (!r) return error(`Symbol ${symbol} not found`, null, 404);
-  return json({ symbol,name:r.description||r.name||symbol,status:'ok',last_price:r.close,session_open:r.open,session_high:r.high,session_low:r.low,volume:r.volume,change_percent:r.change,value:r.value,market_cap:r.market_cap_basic,
+  return json({ symbol,name:r.description||r.name||symbol,status:'ok',version:CORE_VERSION,last_price:r.close,session_open:r.open,session_high:r.high,session_low:r.low,volume:r.volume,change_percent:r.change,value:r.value,market_cap:r.market_cap_basic,
     technical:{rsi:r.RSI,ema20:r.EMA20,sma20:r.SMA20,sma50:r.SMA50??null,ema50:r.EMA50??null,sma200:r.SMA200??null,ema200:r.EMA200??null,performance_1w_pct:r['Perf.W'],performance_1m_pct:r['Perf.1M'],avg_volume_10d:r.average_volume_10d_calc,relative_volume_10d:r.relative_volume_10d,long_term_trend:r.long_term_trend,distance_from_sma200_pct:r.distance_from_sma200_pct,close_location_in_day:r.close_location_in_day},
     fundamentals:{eps_diluted_ttm:r.earnings_per_share_diluted_ttm??null,pe_current:r.price_earnings_current??null,eps_growth_fq_pct:r.eps_diluted_growth_percent_fq??null,eps_growth_fy_pct:r.eps_diluted_growth_percent_fy??null,revenue_ttm:r.total_revenue_ttm??null,free_cash_flow_ttm:r.free_cash_flow_ttm??null,debt_to_equity_fq:r.debt_to_equity_fq??null,analyst_target_average:r.price_target_average??null,analyst_target_high:r.price_target_high??null,analyst_target_low:r.price_target_low??null,upside_to_analyst_target_pct:r.upside_to_analyst_target_pct},
     event_risk:r.event_risk,demand_confirmation_score:r.demand_confirmation_score,bid_ask_valid:false,source:'TradingView public scanner',source_timestamp:new Date().toISOString(),timestamp_kind:'retrieval_time_not_exchange_tick_time',session_status:sessionStatus(data.rows),decision_support:r.decision_support,capabilities:data.capabilities });
