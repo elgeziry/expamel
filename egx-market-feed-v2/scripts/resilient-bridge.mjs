@@ -5,8 +5,10 @@ const NETLIFY = process.env.EGX_NETLIFY_BASE || 'https://egx-market-feed-v2.netl
 const TV_URL = 'https://scanner.tradingview.com/egypt/scan';
 const OUT = process.env.EGX_BRIDGE_OUT || 'out/latest.json';
 const HEALTH_OUT = process.env.EGX_BRIDGE_HEALTH_OUT || 'out/health.json';
-const BRIDGE_VERSION = '1.0.0';
+const BRIDGE_VERSION = '1.1.0';
 const EXPECTED_CORE = process.env.EGX_EXPECTED_CORE || null;
+const REQUIRED_SYMBOLS = String(process.env.EGX_REQUIRED_SYMBOLS || 'SWDY,EFIH,EFID,BONY,ORWE,MASR,EGAL,JUFO,AMOC,SVCE,ORAS')
+  .split(',').map(s => s.trim().toUpperCase()).filter(Boolean);
 
 const COLUMNS = [
   'name','description','close','open','high','low','volume','change','market_cap_basic',
@@ -109,13 +111,25 @@ async function directPath() {
   } catch(e) { return {ok:false,latency_ms:Date.now()-started,error:String(e?.message||e)}; }
 }
 
+function candidateRows(data) {
+  if (!data) return [];
+  const pools = [data.rows, data.universe, data.stocks, data.screen?.top_setup];
+  return pools.find(Array.isArray) || [];
+}
+
 function compare(a,b){
   if(!a?.ok||!b?.ok) return {comparable:false};
-  const ar=a.data.rows || a.data.screen?.top_setup || [];
-  const br=b.data.rows || b.data.screen?.top_setup || [];
-  const bm=new Map(br.map(r=>[r.symbol,Number(r.close)])); let compared=0,maxDiff=0;
-  for(const r of ar){const x=Number(r.close),y=bm.get(r.symbol);if(Number.isFinite(x)&&Number.isFinite(y)&&y!==0){compared++;maxDiff=Math.max(maxDiff,Math.abs(x/y-1)*100);}}
+  const ar=candidateRows(a.data);
+  const br=candidateRows(b.data);
+  const bm=new Map(br.map(r=>[String(r.symbol||'').toUpperCase(),Number(r.close)])); let compared=0,maxDiff=0;
+  for(const r of ar){const x=Number(r.close),y=bm.get(String(r.symbol||'').toUpperCase());if(Number.isFinite(x)&&Number.isFinite(y)&&y!==0){compared++;maxDiff=Math.max(maxDiff,Math.abs(x/y-1)*100);}}
   return {comparable:compared>=10,compared_symbols:compared,max_close_diff_pct:round(maxDiff,4),agreement:compared>=10&&maxDiff<=0.05};
+}
+
+function coverage(universe) {
+  const present = new Set((universe||[]).map(r=>String(r.symbol||'').toUpperCase()));
+  const missing = REQUIRED_SYMBOLS.filter(s=>!present.has(s));
+  return {required_symbols:REQUIRED_SYMBOLS,present_count:REQUIRED_SYMBOLS.length-missing.length,missing_symbols:missing,complete:missing.length===0};
 }
 
 async function main(){
@@ -128,8 +142,22 @@ async function main(){
   else if(netlify.ok){selected=netlify.data;mode='netlify_only_degraded';}
   else throw new Error(`all_paths_failed | netlify=${netlify.error} | direct=${direct.error}`);
 
+  selected = {...selected};
+  if (direct.ok) {
+    selected.universe = direct.data.rows;
+    selected.universe_count = direct.data.count;
+    selected.universe_source = 'direct_tradingview_scanner';
+    selected.universe_contract = {
+      purpose:'full_symbol_lookup_and_stock_specific_analysis',
+      symbol_key:'symbol',
+      symbol_full_key:'symbol_full',
+      note:'Use data.universe for named-stock lookup even when Netlify is the selected execution bundle.'
+    };
+  }
+  const symbolCoverage = coverage(selected.universe || candidateRows(selected));
+
   const canonical={
-    bridge:{name:'EGX Resilient Bridge',version:BRIDGE_VERSION,generated_at:now.toISOString(),transport_independent:true,selected_mode:mode,market_phase:marketPhase(now),cross_check:cross},
+    bridge:{name:'EGX Resilient Bridge',version:BRIDGE_VERSION,generated_at:now.toISOString(),transport_independent:true,selected_mode:mode,market_phase:marketPhase(now),cross_check:cross,symbol_coverage:symbolCoverage},
     path_health:{netlify:{ok:netlify.ok,latency_ms:netlify.latency_ms,error:netlify.error??null,core_version:netlify.data?.version??null,execution_usable:netlify.data?.execution_usable??null},direct:{ok:direct.ok,latency_ms:direct.latency_ms,error:direct.error??null,row_count:direct.data?.count??null}},
     data:selected
   };
@@ -138,7 +166,7 @@ async function main(){
   await fs.mkdir(OUT.split('/').slice(0,-1).join('/')||'.',{recursive:true});
   await fs.writeFile(OUT,JSON.stringify(canonical,null,2));
   await fs.writeFile(HEALTH_OUT,JSON.stringify({bridge:canonical.bridge,path_health:canonical.path_health},null,2));
-  console.log(JSON.stringify({selected_mode:mode,sha256:hash,netlify:canonical.path_health.netlify,direct:canonical.path_health.direct,cross_check:cross}));
+  console.log(JSON.stringify({selected_mode:mode,sha256:hash,netlify:canonical.path_health.netlify,direct:canonical.path_health.direct,cross_check:cross,symbol_coverage:symbolCoverage}));
 }
 
 main().catch(e=>{console.error(e);process.exit(1);});
