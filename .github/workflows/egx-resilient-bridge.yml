@@ -1,0 +1,59 @@
+name: EGX resilient bridge
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/5 7-13 * * 0-4'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: egx-resilient-bridge
+  cancel-in-progress: true
+
+jobs:
+  bridge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build canonical snapshot using two independent paths
+        env:
+          EGX_EXPECTED_CORE: '7.2.1'
+          EGX_BRIDGE_OUT: 'out/latest.json'
+          EGX_BRIDGE_HEALTH_OUT: 'out/health.json'
+        run: node egx-market-feed-v2/scripts/resilient-bridge.mjs
+
+      - name: Validate snapshot contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          jq -e '.bridge.name == "EGX Resilient Bridge"' out/latest.json >/dev/null
+          jq -e '.bridge.data_sha256 | length == 64' out/latest.json >/dev/null
+          jq -e '.data.market != null' out/latest.json >/dev/null
+          jq -e '.data.screen.top_setup | type == "array"' out/latest.json >/dev/null
+          jq -e '.path_health.direct.ok == true or .path_health.netlify.ok == true' out/latest.json >/dev/null
+
+      - name: Publish latest snapshot to single-commit live branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/egx-live
+          cp out/latest.json /tmp/egx-live/latest.json
+          cp out/health.json /tmp/egx-live/health.json
+          cd /tmp/egx-live
+          git init
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git checkout -b egx-live
+          git add latest.json health.json
+          git commit -m "EGX live snapshot $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git push --force origin egx-live
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
