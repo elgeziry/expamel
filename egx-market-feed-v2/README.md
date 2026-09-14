@@ -1,4 +1,4 @@
-# EGX Market Feed v2 — 7.2.0
+# EGX Market Feed v2 — 7.2.1
 
 Netlify-only API for Egyptian Exchange screening and portfolio monitoring. Version 7.2 adds a single-request access layer, strict execution gates, retries, and a validated same-source snapshot. It does not use a Vercel or external market-data fallback.
 

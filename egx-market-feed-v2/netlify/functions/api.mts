@@ -11,7 +11,7 @@ const FUND_COLUMNS = [
   'earnings_release_next_date','dividend_ex_date_upcoming','price_target_average','price_target_high','price_target_low'
 ];
 const MODE_COLUMNS = ['name', 'update_mode'];
-export const CORE_VERSION = '7.2.0';
+export const CORE_VERSION = '7.2.1';
 
 const num = (v) => Number.isFinite(Number(v)) ? Number(v) : null;
 const round = (v, d = 4) => v != null && Number.isFinite(v) ? Number(v.toFixed(d)) : null;

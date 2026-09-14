@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { buildExecutionBundle, fingerprintRows, marketCalendar, normalizeSymbols, validateSnapshot } from '../netlify/functions/_lib/access.mts';
 import { scan } from '../netlify/functions/api.mts';
+import { containsSymbols } from '../client/execution-fetch.mjs';
 
 function rows(count = 60) {
   return Array.from({ length: count }, (_, i) => ({
@@ -55,6 +56,12 @@ test('snapshot gate rejects a live-session snapshot older than twenty minutes', 
 
 test('symbol normalization removes duplicates and rejects malformed values', () => {
   assert.deepEqual(normalizeSymbols(['egx:masr', 'MASR', '../bad', 'EFIH']), ['MASR', 'EFIH']);
+});
+
+test('snapshot reuse requires every requested symbol', () => {
+  const snapshot = { stocks: [{ symbol: 'MASR' }, { symbol: 'EFIH' }] };
+  assert.equal(containsSymbols(snapshot, ['MASR', 'EFIH']), true);
+  assert.equal(containsSymbols(snapshot, ['MASR', 'EGAL']), false);
 });
 
 test('upstream scan retries a transient server error', async () => {
