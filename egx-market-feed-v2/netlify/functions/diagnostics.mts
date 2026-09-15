@@ -1,6 +1,6 @@
 import { CORE_VERSION, fetchMarket } from './api.mts';
 import {
-  buildExecutionBundle, readSnapshot, SCHEMA_VERSION, SOURCE_ID, validateSnapshot
+  buildExecutionBundle, readHistory, readSnapshot, SCHEMA_VERSION, SOURCE_ID, validateSnapshot
 } from './_lib/access.mts';
 
 function json(body: unknown, status = 200) {
@@ -13,8 +13,9 @@ function json(body: unknown, status = 200) {
 export default async (req: Request) => {
   if (req.method !== 'GET') return json({ status: 'error', message: 'Method not allowed' }, 405);
   try {
-    const data = await fetchMarket();
-    const bundle: any = await buildExecutionBundle(data, { symbols: ['EFIH', 'MASR', 'EGAL'] });
+    const now = new Date();
+    const [data, history] = await Promise.all([fetchMarket(null, now), readHistory()]);
+    const bundle: any = await buildExecutionBundle(data, { symbols: ['EFIH', 'MASR', 'EGAL'], now, history });
     return json({
       status: bundle.execution_usable ? 'ok' : 'blocked',
       source_id: SOURCE_ID, core_version_expected: CORE_VERSION,
@@ -32,6 +33,11 @@ export default async (req: Request) => {
       capabilities: bundle.capabilities,
       upstream: bundle.upstream,
       quality: bundle.quality,
+      analytics: {
+        history_sessions: bundle.capabilities.daily_history_sessions,
+        complete_count: bundle.quality.analytics_complete_count,
+        provisional_count: bundle.quality.analytics_provisional_count
+      },
       probes: bundle.stocks.map((r: any) => ({
         symbol: r.symbol, last_price: r.close, volume: r.volume,
         change_percent: r.change, current_session: r.current_session,

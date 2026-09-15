@@ -1,5 +1,19 @@
 # EGX Market Feed v2 — 7.2.1
 
+## Portfolio analytics
+
+Every stock returned by `/api/execution-bundle` now includes an `analytics` object:
+
+- `momentum` — weighted three-session/week performance, elapsed-session-adjusted RVOL, close location, RSI, MA20/50 and acceleration.
+- `cycle_quality` — weekly structure, breakout strength, volume asymmetry, retest quality and higher-low formation.
+- `cycle_gap` — momentum minus cycle quality, classified as aligned, fragile acceleration or latent setup.
+- `entry_quality` — distance from value/support, ATR-normalized risk, liquidity/stop-hunt zones, risk/reward and chase risk.
+- `execution_readiness` — the 0–100 combined execution score with structural hard vetoes.
+
+The feed retains up to 90 compact daily observations in Netlify Blobs. Metrics expose their component inputs, missing components, confidence and status. During history bootstrap, provisional scores are visible for diagnosis but are explicitly marked `provisional_not_execution_eligible`; they cannot authorize execution. Complete execution eligibility begins only after the required historical structure is available.
+
+Live relative volume and traded value are adjusted for elapsed session time, with an opening-floor guard against unstable extrapolation. Raw values remain available in `relative_volume_10d_raw` and `value`.
+
 Netlify-only API for Egyptian Exchange screening and portfolio monitoring. Version 7.2 adds a single-request access layer, strict execution gates, retries, and a validated same-source snapshot. It does not use a Vercel or external market-data fallback.
 
 ## Endpoints

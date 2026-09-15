@@ -1,5 +1,5 @@
 import { fetchMarket } from './api.mts';
-import { buildExecutionBundle, marketCalendar, writeSnapshot } from './_lib/access.mts';
+import { buildExecutionBundle, marketCalendar, readHistory, updateHistory, writeSnapshot } from './_lib/access.mts';
 
 export default async () => {
   const now = new Date();
@@ -9,10 +9,10 @@ export default async () => {
     const [hour, minute] = calendar.cairo_time.split(':').map(Number);
     if (hour * 60 + minute > 885) return;
   }
-  const data = await fetchMarket();
-  const bundle: any = await buildExecutionBundle(data, { now });
+  const [data, history] = await Promise.all([fetchMarket(null, now), readHistory()]);
+  const bundle: any = await buildExecutionBundle(data, { now, history });
   bundle.delivery_mode = 'scheduled_fresh';
-  if (bundle.execution_usable) await writeSnapshot(bundle);
+  if (bundle.execution_usable) await Promise.all([writeSnapshot(bundle), updateHistory(data.rows, now)]);
 };
 
 export const config = { schedule: '*/15 * * * 0-4' };

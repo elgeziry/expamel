@@ -6,7 +6,7 @@
   "dependencies": { "@netlify/blobs": "^11.0.3" },
   "engines": { "node": ">=20" },
   "scripts": {
-    "check": "node --experimental-strip-types --check netlify/functions/api.mts && node --experimental-strip-types --check netlify/functions/diagnostics.mts && node --experimental-strip-types --check netlify/functions/execution-bundle.mts && node --experimental-strip-types --check netlify/functions/latest-execution.mts && node --experimental-strip-types --check netlify/functions/warm-execution.mts && node --experimental-strip-types --check netlify/functions/_lib/access.mts && node --check client/execution-fetch.mjs",
+    "check": "node --experimental-strip-types --check netlify/functions/api.mts && node --experimental-strip-types --check netlify/functions/diagnostics.mts && node --experimental-strip-types --check netlify/functions/execution-bundle.mts && node --experimental-strip-types --check netlify/functions/latest-execution.mts && node --experimental-strip-types --check netlify/functions/warm-execution.mts && node --experimental-strip-types --check netlify/functions/_lib/access.mts && node --experimental-strip-types --check netlify/functions/_lib/analytics.mts && node --check client/execution-fetch.mjs",
     "test": "node --experimental-strip-types --test"
   }
 }

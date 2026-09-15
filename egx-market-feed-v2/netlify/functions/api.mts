@@ -1,3 +1,5 @@
+import { adjustedRelativeVolume, adjustedTradedValue } from './_lib/analytics.mts';
+
 const TV_URL = 'https://scanner.tradingview.com/egypt/scan';
 
 const BASE_COLUMNS = [
@@ -74,13 +76,14 @@ function liquidityPoints(value) {
   return 0.3;
 }
 
-function demandConfirmationScore(row) {
-  const rv = relativeVolume(row);
+function demandConfirmationScore(row, now = new Date()) {
+  const rv = adjustedRelativeVolume(row, now).adjusted;
   const loc = closeLocation(row);
   const change = num(row.change);
   const close = num(row.close);
   const volume = num(row.volume);
-  const value = num(row.value) ?? (close != null && volume != null ? close * volume : null);
+  const rawValue = num(row.value) ?? (close != null && volume != null ? close * volume : null);
+  const value = adjustedTradedValue(rawValue, now, row.current_session).adjusted;
   const e20 = num(row.EMA20), s20 = num(row.SMA20), s200 = num(row.SMA200);
   const w = num(row['Perf.W']), m = num(row['Perf.1M']);
   let score = 0;
@@ -163,20 +166,26 @@ function chaseRisk(row) {
   return 'low';
 }
 
-function enrichRow(row) {
+function enrichRow(row, now = new Date()) {
   const close = num(row.close), volume = num(row.volume);
   const value = num(row.value) ?? (close != null && volume != null ? close * volume : null);
-  const rv = relativeVolume(row);
+  const valueInfo = adjustedTradedValue(value, now, row.current_session);
+  const rvInfo = adjustedRelativeVolume({ ...row, relative_volume_10d_raw: relativeVolume(row) }, now);
+  const rv = rvInfo.adjusted;
   const trend = longTermTrend(row);
   const target = num(row.price_target_average);
   const upside = close != null && target != null && close !== 0 ? (target / close - 1) * 100 : null;
   const technical = technicalScore(row);
-  const liquidity = liquidityScore(row);
-  const demand = demandConfirmationScore(row);
+  const liquidity = liquidityScore({ ...row, value: valueInfo.adjusted });
+  const demand = demandConfirmationScore(row, now);
   return {
     ...row,
     value: value == null ? null : round(value, 2),
+    value_session_adjusted: valueInfo.adjusted,
+    relative_volume_10d_raw: rvInfo.raw,
     relative_volume_10d: rv == null ? null : round(rv, 2),
+    relative_volume_10d_session_adjusted: rvInfo.adjusted,
+    relative_volume_adjustment: { session_progress: rvInfo.session_progress, method: rvInfo.method },
     relative_volume_label: relativeVolumeLabel(rv),
     close_location_in_day: closeLocation(row) == null ? null : round(closeLocation(row), 3),
     long_term_trend: trend.state,
@@ -286,7 +295,7 @@ async function safeLayer(columns, symbols, range) {
   catch (e: any) { return { ok: false, totalCount: 0, rows: [], attempts: e?.attempts ?? 0, error: String(e?.message || e) }; }
 }
 
-export async function fetchMarket(symbols = null) {
+export async function fetchMarket(symbols = null, now = new Date()) {
   const started = Date.now();
   const range = [0,500];
   const [base, tech, fund, mode] = await Promise.all([
@@ -303,7 +312,7 @@ export async function fetchMarket(symbols = null) {
   if (tech.ok) rows = mergeRows(rows, tech.rows);
   if (fund.ok) rows = mergeRows(rows, fund.rows);
   if (mode.ok) rows = mergeRows(rows, mode.rows);
-  rows = rows.map(enrichRow);
+  rows = rows.map(row => enrichRow(row, now));
   return {
     count: rows.length, total_count: base.totalCount, rows,
     capabilities: {

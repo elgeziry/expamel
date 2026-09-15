@@ -1,12 +1,14 @@
 import { getDeployStore, getStore } from '@netlify/blobs';
 import { CORE_VERSION, sessionStatus } from '../api.mts';
+import { enrichAnalytics, mergeHistory, type MarketHistory } from './analytics.mts';
 
 declare const Netlify: any;
 
 export const SOURCE_ID = 'egx-market-feed-v2';
-export const SCHEMA_VERSION = '2026-09-14';
+export const SCHEMA_VERSION = '2026-09-15-portfolio-analytics-v1';
 const SNAPSHOT_STORE = 'egx-market-feed-v2';
 const SNAPSHOT_KEY = 'latest-execution.json';
+const HISTORY_KEY = 'market-daily-history.json';
 export const DEFAULT_SYMBOLS = [
   'EFIH', 'EFID', 'ORWE', 'BONY', 'JUFO', 'AMOC', 'SVCE', 'EGAL', 'MASR', 'MICH'
 ];
@@ -100,17 +102,18 @@ function screen(rows: any[]) {
   };
 }
 
-export async function buildExecutionBundle(data: any, options: { symbols?: string[], now?: Date } = {}) {
+export async function buildExecutionBundle(data: any, options: { symbols?: string[], now?: Date, history?: MarketHistory | null } = {}) {
   const now = options.now ?? new Date();
   const requested = normalizeSymbols(options.symbols);
-  const bySymbol = new Map(data.rows.map((r: any) => [r.symbol, r]));
+  const analyticsRows = enrichAnalytics(data.rows, options.history ?? null, now);
+  const bySymbol = new Map(analyticsRows.map((r: any) => [r.symbol, r]));
   const missingSymbols = requested.filter(s => !bySymbol.has(s));
   const calendar = marketCalendar(now);
-  const scannerSession = sessionStatus(data.rows, now);
-  const rowCount = data.rows.length;
-  const uniqueSymbols = new Set(data.rows.map((r: any) => r.symbol)).size;
-  const closeCoverage = rowCount ? data.rows.filter((r: any) => Number.isFinite(Number(r.close))).length / rowCount : 0;
-  const volumeCoverage = rowCount ? data.rows.filter((r: any) => Number.isFinite(Number(r.volume))).length / rowCount : 0;
+  const scannerSession = sessionStatus(analyticsRows, now);
+  const rowCount = analyticsRows.length;
+  const uniqueSymbols = new Set(analyticsRows.map((r: any) => r.symbol)).size;
+  const closeCoverage = rowCount ? analyticsRows.filter((r: any) => Number.isFinite(Number(r.close))).length / rowCount : 0;
+  const volumeCoverage = rowCount ? analyticsRows.filter((r: any) => Number.isFinite(Number(r.volume))).length / rowCount : 0;
   const basicIntegrity = rowCount >= 50 && uniqueSymbols === rowCount && closeCoverage >= 0.9 && volumeCoverage >= 0.8;
   const liveSessionConsistent = calendar.market_calendar_phase !== 'continuous' || scannerSession === 'continuous';
   const liveExecutionUsable = basicIntegrity && liveSessionConsistent && data.capabilities?.update_mode === true;
@@ -128,8 +131,8 @@ export async function buildExecutionBundle(data: any, options: { symbols?: strin
   if (missingSymbols.length) warnings.push(`missing_requested_symbols:${missingSymbols.join(',')}`);
   warnings.push('official_holiday_calendar_not_verified');
 
-  const advancers = data.rows.filter((r: any) => Number(r.change) > 0).length;
-  const decliners = data.rows.filter((r: any) => Number(r.change) < 0).length;
+  const advancers = analyticsRows.filter((r: any) => Number(r.change) > 0).length;
+  const decliners = analyticsRows.filter((r: any) => Number(r.change) < 0).length;
   const unchanged = rowCount - advancers - decliners;
   const positivePct = rowCount ? advancers / rowCount * 100 : 0;
   return {
@@ -142,7 +145,7 @@ export async function buildExecutionBundle(data: any, options: { symbols?: strin
       ? (executionUsable ? 'medium_quote_timestamp_not_exposed' : 'high')
       : (executionUsable ? 'medium_reference_date_calendar_derived' : 'high'),
     blockers, warnings,
-    data_fingerprint_sha256: await fingerprintRows(data.rows),
+    data_fingerprint_sha256: await fingerprintRows(analyticsRows),
     session_status: scannerSession,
     market_calendar: calendar,
     expected_reference_session_date: calendar.expected_reference_session_date,
@@ -152,20 +155,27 @@ export async function buildExecutionBundle(data: any, options: { symbols?: strin
       external_sources_allowed_for: ['filings', 'fundamentals', 'sharia', 'catalysts'],
       external_sources_must_not_override_execution_market_data: true
     },
-    capabilities: data.capabilities, upstream: data.upstream,
+    capabilities: {
+      ...data.capabilities,
+      portfolio_analytics: true,
+      daily_history_sessions: options.history?.sessions?.length ?? 0
+    },
+    upstream: data.upstream,
     quality: {
       row_count: rowCount, upstream_total_count: data.total_count,
       unique_symbols: uniqueSymbols,
       close_coverage_pct: Number((closeCoverage * 100).toFixed(1)),
       volume_coverage_pct: Number((volumeCoverage * 100).toFixed(1)),
       basic_integrity_ok: basicIntegrity, live_session_consistent: liveSessionConsistent,
-      live_execution_usable: liveExecutionUsable
+      live_execution_usable: liveExecutionUsable,
+      analytics_complete_count: analyticsRows.filter((r: any) => r.analytics?.execution_metrics_eligible).length,
+      analytics_provisional_count: analyticsRows.filter((r: any) => !r.analytics?.execution_metrics_eligible).length
     },
     market: {
       regime: positivePct >= 55 ? 'strong' : positivePct >= 45 ? 'mixed' : 'weak',
       breadth: { advancers, decliners, unchanged, positive_pct: Number(positivePct.toFixed(1)) }
     },
-    screen: screen(data.rows),
+    screen: screen(analyticsRows),
     stocks: requested.map(s => bySymbol.get(s)).filter(Boolean),
     missing_symbols: missingSymbols
   };
@@ -184,6 +194,22 @@ export async function writeSnapshot(bundle: any) {
 
 export async function readSnapshot() {
   return blobStore().get(SNAPSHOT_KEY, { type: 'json' });
+}
+
+export async function readHistory(): Promise<MarketHistory | null> {
+  try {
+    const value: any = await blobStore().get(HISTORY_KEY, { type: 'json' });
+    return value?.schema_version === 'daily-bars-v1' && Array.isArray(value?.sessions) ? value : null;
+  } catch {
+    return null;
+  }
+}
+
+export async function updateHistory(rows: any[], now = new Date()) {
+  const existing = await readHistory();
+  const merged = mergeHistory(existing, rows, now);
+  await blobStore().setJSON(HISTORY_KEY, merged);
+  return merged;
 }
 
 export function validateSnapshot(snapshot: any, now = new Date()) {

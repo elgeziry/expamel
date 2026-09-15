@@ -1,6 +1,6 @@
 import { fetchMarket } from './api.mts';
 import {
-  buildExecutionBundle, normalizeSymbols, readSnapshot, validateSnapshot, writeSnapshot
+  buildExecutionBundle, normalizeSymbols, readHistory, readSnapshot, updateHistory, validateSnapshot, writeSnapshot
 } from './_lib/access.mts';
 
 function json(body: unknown, status = 200) {
@@ -16,8 +16,9 @@ export default async (req: Request) => {
   const rawSymbols = url.searchParams.get('symbols');
   const symbols = normalizeSymbols(rawSymbols ? rawSymbols.split(',') : null);
   try {
-    const data = await fetchMarket();
-    const bundle: any = await buildExecutionBundle(data, { symbols });
+    const now = new Date();
+    const [data, history] = await Promise.all([fetchMarket(null, now), readHistory()]);
+    const bundle: any = await buildExecutionBundle(data, { symbols, now, history });
     bundle.delivery_mode = 'fresh';
     if (!bundle.execution_usable) {
       try {
@@ -38,9 +39,9 @@ export default async (req: Request) => {
       return json(bundle, 503);
     }
     try {
-      await writeSnapshot(bundle);
+      await Promise.all([writeSnapshot(bundle), updateHistory(data.rows, now)]);
     } catch (snapshotError: any) {
-      bundle.warnings.push(`snapshot_write_failed:${String(snapshotError?.message || snapshotError)}`);
+      bundle.warnings.push(`persistence_write_failed:${String(snapshotError?.message || snapshotError)}`);
       if (bundle.status === 'ok') bundle.status = 'degraded';
     }
     return json(bundle);
