@@ -237,7 +237,9 @@ export function cycleQuality(row: any, history: MarketHistory | null, now = new 
   const availableWeight = components.filter(c => c.available).reduce((sum, c) => sum + c.weight, 0);
   const weighted = components.filter(c => c.available).reduce((sum, c) => sum + c.score! * c.weight, 0);
   const complete = components.every(c => c.available) && series.length >= 10;
-  let score = round(availableWeight ? weighted / availableWeight : null, 1);
+  // A lone intraday component is evidence, not a cycle. Publish a numeric cycle
+  // score only after at least half the model and four distinct sessions exist.
+  let score = round(availableWeight >= 0.50 && series.length >= 4 ? weighted / availableWeight : null, 1);
   let integrity = 'not_confirmed';
   if (priorHigh && close < priorHigh.value && (rv.adjusted ?? 0) >= 1.5 && (num(row.change) ?? 0) < -1) integrity = 'broken_failed_breakout';
   if (lows.length >= 2 && lows.at(-1)!.value < lows.at(-2)!.value && close < lows.at(-1)!.value) integrity = 'broken_lower_low';
@@ -267,7 +269,10 @@ export function entryQuality(row: any, history: MarketHistory | null, now = new 
   const resistance = resistanceCandidates[0] ?? null;
   const risk = support == null ? null : close - support;
   const reward = resistance == null ? null : resistance - close;
-  const rr = risk != null && risk > 0 && reward != null ? reward / risk : null;
+  // A moving average a few ticks below price is not a meaningful invalidation.
+  // Require ATR context and at least 0.25 ATR of real risk before publishing R/R.
+  const meaningfulRisk = atrValue != null && risk != null && risk >= atrValue * 0.25;
+  const rr = meaningfulRisk && reward != null ? reward / risk! : null;
   const distanceAtr = atrValue && support != null ? (close - support) / atrValue : null;
   let liquidityRisk = 'unavailable';
   if (atrValue && lows.length >= 2) {
@@ -295,8 +300,9 @@ export function entryQuality(row: any, history: MarketHistory | null, now = new 
   const weight = parts.filter(c => c.available).reduce((sum, c) => sum + c.weight, 0);
   const weighted = parts.filter(c => c.available).reduce((sum, c) => sum + c.score! * c.weight, 0);
   const complete = parts.every(c => c.available) && atrValue != null && series.length >= 10;
+  const score = weight >= 0.50 && series.length >= 4 ? round(weighted / weight, 1) : null;
   return {
-    score: round(weight ? weighted / weight : null, 1),
+    score,
     status: complete ? 'complete' : 'provisional_not_execution_eligible',
     confidence_pct: Math.min(100, Math.round(weight * 100 * Math.min(1, series.length / 10))),
     execution_eligible: complete, liquidity_zone: liquidityRisk,
@@ -339,7 +345,8 @@ export function enrichAnalytics(rows: any[], history: MarketHistory | null, now 
           status: executionEligible ? 'complete' : 'provisional_not_execution_eligible',
           execution_eligible: executionEligible && !hardVeto,
           hard_veto: hardVeto,
-          classification: readiness == null ? 'unavailable' : readiness >= 75 ? 'high' : readiness >= 65 ? 'conditional' : 'wait'
+          classification: !executionEligible ? 'provisional' : readiness == null ? 'unavailable'
+            : readiness >= 75 ? 'high' : readiness >= 65 ? 'conditional' : 'wait'
         },
         execution_metrics_eligible: executionEligible && !hardVeto
       }

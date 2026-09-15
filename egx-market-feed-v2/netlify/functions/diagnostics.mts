@@ -18,7 +18,7 @@ export default async (req: Request) => {
     const bundle: any = await buildExecutionBundle(data, { symbols: ['EFIH', 'MASR', 'EGAL'], now, history });
     return json({
       status: bundle.execution_usable ? 'ok' : 'blocked',
-      source_id: SOURCE_ID, core_version_expected: CORE_VERSION,
+      source_id: SOURCE_ID, version: CORE_VERSION, core_version_expected: CORE_VERSION,
       diagnostics_version: '2.0.0', schema_version: SCHEMA_VERSION,
       retrieved_at: bundle.retrieved_at,
       execution_usable: bundle.execution_usable,

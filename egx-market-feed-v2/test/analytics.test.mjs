@@ -50,6 +50,9 @@ test('analytics are explicitly provisional when historical structure is missing'
   assert.equal(result.analytics.cycle_quality.execution_eligible, false);
   assert.equal(result.analytics.execution_readiness.execution_eligible, false);
   assert.match(result.analytics.momentum.status, /^provisional/);
+  assert.equal(result.analytics.cycle_quality.score, null);
+  assert.equal(result.analytics.entry_quality.score, null);
+  assert.equal(result.analytics.execution_readiness.classification, 'provisional');
 });
 
 test('complete history produces bounded momentum, cycle, gap and entry scores', () => {
