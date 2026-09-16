@@ -26,11 +26,26 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Restore previous live acceptance state
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          rm -f out/previous.json
+          git fetch --force --depth=1 origin refs/heads/egx-live:refs/remotes/origin/egx-live || true
+          if git cat-file -e refs/remotes/origin/egx-live:latest.json 2>/dev/null; then
+            git show refs/remotes/origin/egx-live:latest.json > out/previous.json
+            echo "Previous Bridge snapshot restored."
+          else
+            echo "No previous Bridge snapshot available; acceptance map will warm up safely."
+          fi
+
       - name: Build canonical snapshot using two independent paths
         env:
           EGX_EXPECTED_CORE: '7.2.1'
           EGX_BRIDGE_OUT: 'out/latest.json'
           EGX_BRIDGE_HEALTH_OUT: 'out/health.json'
+          EGX_PREVIOUS_SNAPSHOT: 'out/previous.json'
           EGX_REQUIRED_SYMBOLS: 'SWDY,EFIH,EFID,BONY,ORWE,MASR,EGAL,JUFO,AMOC,SVCE,ORAS'
         run: node egx-market-feed-v2/scripts/resilient-bridge.mjs
 
@@ -63,6 +78,9 @@ jobs:
             jq -e '.bridge.symbol_coverage.complete == true' out/latest.json >/dev/null
             jq -e 'any(.data.universe[]; .symbol == "SWDY")' out/latest.json >/dev/null
             jq -e '.symbols.SWDY.symbol == "SWDY"' out/focus.json >/dev/null
+            jq -e '.bridge.acceptance_map.method == "snapshot_volume_delta_by_last_price_proxy"' out/latest.json >/dev/null
+            jq -e '.data.analytics_capabilities.volume_profile_proxy.same_source_only == true' out/latest.json >/dev/null
+            jq -e 'all(.data.universe[]; .analytics.volume_profile.method == "snapshot_volume_delta_by_last_price_proxy")' out/latest.json >/dev/null
           fi
 
       - name: Publish latest snapshot to single-commit live branch
