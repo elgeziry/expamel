@@ -6,6 +6,10 @@ declare const Netlify: any;
 
 export const SOURCE_ID = 'egx-market-feed-v2';
 export const SCHEMA_VERSION = '2026-09-15-portfolio-analytics-v1';
+// Two consecutive full-market reads after the 2026-09-16 session returned
+// 296 unique instruments. Intraday reads can temporarily omit symbols while
+// still showing 100% field coverage for the smaller set they returned.
+export const CONFIRMED_UNIVERSE_FLOOR = 296;
 const SNAPSHOT_STORE = 'egx-market-feed-v2';
 const SNAPSHOT_KEY = 'latest-execution.json';
 const HISTORY_KEY = 'market-daily-history.json';
@@ -102,7 +106,7 @@ function screen(rows: any[]) {
   };
 }
 
-export async function buildExecutionBundle(data: any, options: { symbols?: string[], now?: Date, history?: MarketHistory | null } = {}) {
+export async function buildExecutionBundle(data: any, options: { symbols?: string[], now?: Date, history?: MarketHistory | null, expectedUniverseFloor?: number } = {}) {
   const now = options.now ?? new Date();
   const requested = normalizeSymbols(options.symbols);
   const analyticsRows = enrichAnalytics(data.rows, options.history ?? null, now);
@@ -112,15 +116,18 @@ export async function buildExecutionBundle(data: any, options: { symbols?: strin
   const scannerSession = sessionStatus(analyticsRows, now);
   const rowCount = analyticsRows.length;
   const uniqueSymbols = new Set(analyticsRows.map((r: any) => r.symbol)).size;
+  const expectedUniverseFloor = Math.max(1, options.expectedUniverseFloor ?? CONFIRMED_UNIVERSE_FLOOR);
+  const universeCoverage = rowCount / expectedUniverseFloor;
+  const universeComplete = rowCount >= expectedUniverseFloor;
   const closeCoverage = rowCount ? analyticsRows.filter((r: any) => Number.isFinite(Number(r.close))).length / rowCount : 0;
-  const volumeCoverage = rowCount ? analyticsRows.filter((r: any) => Number.isFinite(Number(r.volume))).length / rowCount : 0;
-  const basicIntegrity = rowCount >= 50 && uniqueSymbols === rowCount && closeCoverage >= 0.9 && volumeCoverage >= 0.8;
+  const volumeCoverage = rowCount ? analyticsRows.filter((r: any) => Number.isFinite(Number(r.volume)).length / rowCount : 0;
+  const basicIntegrity = universeComplete && uniqueSymbols === rowCount && closeCoverage >= 0.9 && volumeCoverage >= 0.8;
   const liveSessionConsistent = calendar.market_calendar_phase !== 'continuous' || scannerSession === 'continuous';
   const liveExecutionUsable = basicIntegrity && liveSessionConsistent && data.capabilities?.update_mode === true;
   const executionUsable = calendar.market_calendar_phase === 'continuous' ? liveExecutionUsable : basicIntegrity;
   const blockers: string[] = [];
   const warnings: string[] = [];
-  if (rowCount < 50) blockers.push('insufficient_row_count');
+  if (!universeComplete) blockers.push('incomplete_market_universe');
   if (uniqueSymbols !== rowCount) blockers.push('duplicate_symbols');
   if (closeCoverage < 0.9) blockers.push('low_close_coverage');
   if (volumeCoverage < 0.8) blockers.push('low_volume_coverage');
@@ -163,7 +170,11 @@ export async function buildExecutionBundle(data: any, options: { symbols?: strin
     upstream: data.upstream,
     quality: {
       row_count: rowCount, upstream_total_count: data.total_count,
+      expected_universe_floor: expectedUniverseFloor,
+      universe_coverage_pct: Number((universeCoverage * 100).toFixed(1)),
+      universe_complete: universeComplete,
       unique_symbols: uniqueSymbols,
+      coverage_scope: 'field_coverage_within_returned_universe',
       close_coverage_pct: Number((closeCoverage * 100).toFixed(1)),
       volume_coverage_pct: Number((volumeCoverage * 100).toFixed(1)),
       basic_integrity_ok: basicIntegrity, live_session_consistent: liveSessionConsistent,
