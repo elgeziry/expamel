@@ -120,7 +120,7 @@ export async function buildExecutionBundle(data: any, options: { symbols?: strin
   const universeCoverage = rowCount / expectedUniverseFloor;
   const universeComplete = rowCount >= expectedUniverseFloor;
   const closeCoverage = rowCount ? analyticsRows.filter((r: any) => Number.isFinite(Number(r.close))).length / rowCount : 0;
-  const volumeCoverage = rowCount ? analyticsRows.filter((r: any) => Number.isFinite(Number(r.volume)).length / rowCount : 0;
+  const volumeCoverage = rowCount ? analyticsRows.filter((r: any) => Number.isFinite(Number(r.volume))).length / rowCount : 0;
   const basicIntegrity = universeComplete && uniqueSymbols === rowCount && closeCoverage >= 0.9 && volumeCoverage >= 0.8;
   const liveSessionConsistent = calendar.market_calendar_phase !== 'continuous' || scannerSession === 'continuous';
   const liveExecutionUsable = basicIntegrity && liveSessionConsistent && data.capabilities?.update_mode === true;
