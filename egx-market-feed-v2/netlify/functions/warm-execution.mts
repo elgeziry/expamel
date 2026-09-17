@@ -12,7 +12,7 @@ export default async () => {
   const [data, history] = await Promise.all([fetchMarket(null, now), readHistory()]);
   const bundle: any = await buildExecutionBundle(data, { now, history });
   bundle.delivery_mode = 'scheduled_fresh';
-  if (bundle.execution_usable) await Promise.all([writeSnapshot(bundle), updateHistory(data.rows, now, history)]);
+  if (bundle.execution_usable) await Promise.all([writeSnapshot(bundle), updateHistory(data.rows, now)]);
 };
 
 // Netlify cron uses UTC. 06:00-12:45 UTC covers the EGX auction, continuous
