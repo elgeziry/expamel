@@ -1,0 +1,56 @@
+{
+  "bridge": {
+    "name": "EGX Resilient Bridge",
+    "version": "1.2.0",
+    "generated_at": "2026-09-17T09:46:16.603Z",
+    "transport_independent": true,
+    "selected_mode": "direct_due_to_netlify_gate_or_disagreement",
+    "market_phase": "continuous",
+    "cross_check": {
+      "comparable": true,
+      "compared_symbols": 10,
+      "max_close_diff_pct": 0.1821,
+      "agreement": false
+    },
+    "symbol_coverage": {
+      "required_symbols": [
+        "SWDY",
+        "EFIH",
+        "EFID",
+        "BONY",
+        "ORWE",
+        "MASR",
+        "EGAL",
+        "JUFO",
+        "AMOC",
+        "SVCE",
+        "ORAS"
+      ],
+      "present_count": 11,
+      "missing_symbols": [],
+      "complete": true
+    },
+    "acceptance_map": {
+      "enabled": true,
+      "method": "snapshot_volume_delta_by_last_price_proxy",
+      "previous_snapshot_loaded": true,
+      "session_date": "2026-09-17"
+    },
+    "data_sha256": "556c9e0e977188ddd3223c0b4f367a09cfaf3e10d9c745c24649701366c62611"
+  },
+  "path_health": {
+    "netlify": {
+      "ok": true,
+      "latency_ms": 1428,
+      "error": null,
+      "core_version": "7.2.1",
+      "execution_usable": true
+    },
+    "direct": {
+      "ok": true,
+      "latency_ms": 212,
+      "error": null,
+      "row_count": 296
+    }
+  }
+}
