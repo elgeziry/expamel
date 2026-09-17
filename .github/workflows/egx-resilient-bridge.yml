@@ -6,8 +6,11 @@ on:
     paths:
       - '.github/workflows/egx-resilient-bridge.yml'
       - 'egx-market-feed-v2/scripts/resilient-bridge.mjs'
-  schedule:
-    - cron: '*/5 7-13 * * 0-4'
+
+# Deliberately not scheduled. The Netlify V2 warmer already maintains the
+# trusted execution snapshot every 15 minutes during EGX-relevant hours.
+# Keeping this bridge manual avoids a second /api/execution-bundle fetch every
+# five minutes and preserves the bridge only for explicit resilience testing.
 
 permissions:
   contents: write
