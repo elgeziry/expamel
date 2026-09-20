@@ -142,11 +142,92 @@ jobs:
               }]
             }
           ' out/latest.json > /tmp/today.json
+          jq -e '(.stocks | length) >= 296' /tmp/today.json >/dev/null
           jq --slurpfile today /tmp/today.json --arg session "$SESSION" '
             .schema = "egx-session-history-v1"
             | .sessions = (((.sessions // []) | map(select(.date != $session))) + $today)
-            | .sessions = (.sessions | sort_by(.date) | if length > 40 then .[-40:] else . end)
-          ' /tmp/prior-history.json > out/history.json
+            | .sessions = (.sessions | sort_by(.date) | if length > 60 then .[-60:] else . end)
+          ' /tmp/prior-history.json > out/history-base.json
+
+          # Compute market-wide Cycle Quality from GitHub history only.
+          jq '
+            def clamp: if . < 0 then 0 elif . > 10 then 10 else . end;
+            def avg: if length == 0 then null else (add / length) end;
+            . as $h
+            | ($h.sessions | length) as $n
+            | ($h.sessions[-1]) as $today
+            | [
+                $today.stocks[] as $s
+                | ([ $h.sessions[] | .stocks[] | select(.symbol == $s.symbol) ]) as $series
+                | ($series | length) as $m
+                | ($series | map(.close)) as $cl
+                | ($series | map(.volume)) as $vol
+                | ($cl[-1]) as $last
+                | ($cl[0]) as $first
+                | ($cl[-6:] | max) as $recent_high
+                | ($cl[-6:] | min) as $recent_low
+                | ($cl[-12:-6] // []) as $prior6
+                | ($vol[-5:] | avg) as $v5
+                | ($vol[-10:] | avg) as $v10
+                | (($s.relative_volume_10d // 1) | tonumber) as $rv
+                | {
+                    symbol: $s.symbol,
+                    sessions_available: $m,
+                    status: (if $m >= 10 then "complete" elif $m >= 6 then "usable_provisional" else "warming_up" end),
+                    confidence_pct: (if $m >= 15 then 100 elif $m >= 10 then 85 elif $m >= 6 then 60 else (($m * 10) | if . > 50 then 50 else . end) end),
+                    components: {
+                      weekly_structure: (
+                        if $m >= 6 then
+                          (((($last / ($cl[-6] // $first)) - 1) * 100 * 0.8 + 5) | clamp)
+                        else null end
+                      ),
+                      breakout_strength: (
+                        if $m >= 7 and ($prior6|length) > 0 then
+                          (((($last / ($prior6|max)) - 1) * 35 + 5) | clamp)
+                        else null end
+                      ),
+                      volume_asymmetry: (
+                        if $v10 != null and $v10 > 0 then
+                          (((($v5 / $v10) - 0.7) * 8 + 4) | clamp)
+                        else (($rv * 3 + 2) | clamp) end
+                      ),
+                      retest_quality: (
+                        if $m >= 8 then
+                          (if $last >= $recent_low and $last <= ($recent_high * 1.03) then 7
+                           elif $last > $recent_high then 6
+                           else 4 end)
+                        else null end
+                      ),
+                      higher_low: (
+                        if $m >= 10 then
+                          (($cl[-5:] | min) as $l1 | ($cl[-10:-5] | min) as $l0
+                           | (if $l1 > $l0 then (((($l1/$l0)-1)*25+6)|clamp) else 3 end))
+                        else null end
+                      )
+                    }
+                  }
+                | .components as $c
+                | ([ $c.weekly_structure, $c.breakout_strength, $c.volume_asymmetry, $c.retest_quality, $c.higher_low ] | map(select(. != null))) as $available
+                | .score = (
+                    if .status == "complete" then
+                      (($c.weekly_structure*0.25)+($c.breakout_strength*0.20)+($c.volume_asymmetry*0.20)+($c.retest_quality*0.20)+($c.higher_low*0.15))
+                    elif ($available|length) >= 3 then ($available|avg)
+                    else null end
+                  )
+                | if .score != null then .score = ((.score*10|round)/10) else . end
+              ] as $cq
+            | $h
+            | .schema = "egx-session-history-v2"
+            | .coverage = {
+                latest_universe_count: ($today.stocks|length),
+                sessions_available: $n,
+                full_universe_target: 296,
+                cycle_quality_complete_count: ($cq|map(select(.status=="complete"))|length),
+                cycle_quality_usable_count: ($cq|map(select(.status=="complete" or .status=="usable_provisional"))|length)
+              }
+            | .cycle_quality = $cq
+          ' out/history-base.json > out/history.json
+          jq -e '.coverage.latest_universe_count >= 296 and (.cycle_quality|length) >= 296' out/history.json >/dev/null
 
       - name: Wrap V2 snapshot in EGX Resilient Bridge contract
         shell: bash
@@ -164,7 +245,9 @@ jobs:
                 transport_independent: true,
                 selected_mode: "netlify_only_degraded",
                 market_phase: (.session_status // "unknown"),
-                data_sha256: $sha
+                data_sha256: $sha,
+                history_contract: "egx-session-history-v2",
+                cycle_quality_engine: "github-history-v1"
               },
               path_health: {
                 netlify: {
@@ -195,7 +278,13 @@ jobs:
                     else ($s + {top_setup: []})
                     end
                 ),
-                stocks: (.stocks // [])
+                stocks: (.stocks // []),
+                history: {
+                  contract: "egx-session-history-v2",
+                  retention_sessions: 60,
+                  source: "github_zero_credit",
+                  cycle_quality: "computed_from_history_when_sufficient"
+                }
               }
             }
           ' out/v2-raw.json > out/latest.json
