@@ -2,6 +2,8 @@ name: EGX Netlify V2 transport mirror
 
 on:
   workflow_dispatch:
+  repository_dispatch:
+    types: [egx_bridge_refresh]
   schedule:
     # One refresh per hour during the EGX daytime window; portfolio alerts read GitHub only.
     - cron: '0 7-12 * * 0-4'
