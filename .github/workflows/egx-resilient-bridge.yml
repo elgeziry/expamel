@@ -183,8 +183,9 @@ jobs:
           fi
           cd "${GITHUB_WORKSPACE}"
           CACHED_SESSION="$(jq -r '.session_date // empty' out/external-history/summary.json 2>/dev/null || true)"
+          CACHED_SCHEMA="$(jq -r '.schema // empty' out/external-history/summary.json 2>/dev/null || true)"
           CACHED_ACCEPTED="$(jq -r '.accepted_symbols // 0' out/external-history/summary.json 2>/dev/null || echo 0)"
-          if [ "$CACHED_SESSION" = "$SESSION" ] && [ "${CACHED_ACCEPTED:-0}" -ge 1 ]; then
+          if [ "$CACHED_SESSION" = "$SESSION" ] && [ "$CACHED_SCHEMA" = "egx-external-history-v3" ] && [ "${CACHED_ACCEPTED:-0}" -ge 1 ]; then
             echo "Reusing validated external history cache for $SESSION: $CACHED_ACCEPTED symbols"
             exit 0
           fi
@@ -246,6 +247,7 @@ jobs:
           accepted=[]
           high_conf=[]
           medium_conf=[]
+          short_conf=[]
           for sym in symbols:
             d=frames.get(sym)
             if d is None:
@@ -281,18 +283,26 @@ jobs:
             except Exception:gap=999
             enough=len(bars)>=60
             fresh=gap<=7
-            # Strong identity gate: at least two moving-average matches, including short/medium trend.
+            # Tier A/B: 60-session identity requires at least two agreeing V2 moving averages.
             identity=(checks["sma20"] and checks["sma50"]) or (pass_count>=2 and (checks["sma20"] or checks["sma50"]))
-            ok=bool(enough and fresh and identity)
             med=sorted(comparable)[len(comparable)//2] if comparable else None
+            ok=bool(enough and fresh and identity)
+            depth=60 if ok else 0
             conf="rejected"
             if ok:
               conf="high" if pass_count==3 and med is not None and med<=2.5 else "medium"
+            # Tier C: adaptive recent-history rescue. If the 20-session mean itself agrees tightly
+            # with V2, use only the recent 20 completed bars; never pretend the older history was validated.
+            elif len(bars)>=20 and fresh and diffs["sma20"] is not None and diffs["sma20"]<=2.5:
+              ok=True; depth=20; conf="short"
+            if ok:
               accepted.append(sym)
-              (high_conf if conf=="high" else medium_conf).append(sym)
-              accepted_bars[sym]=bars[-60:]
+              if conf=="high": high_conf.append(sym)
+              elif conf=="medium": medium_conf.append(sym)
+              else: short_conf.append(sym)
+              accepted_bars[sym]=bars[-depth:]
             stats[sym]={
-              "accepted":ok,"confidence":conf,"bars_available":len(bars),"latest_date":latest_date,
+              "accepted":ok,"confidence":conf,"validated_depth":depth,"bars_available":len(bars),"latest_date":latest_date,
               "freshness_gap_days":gap,"v2_sma20":num(v2.get("SMA20")),"v2_sma50":num(v2.get("SMA50")),
               "v2_sma200":num(v2.get("SMA200")),"external_sma20":ext["sma20"],"external_sma50":ext["sma50"],
               "external_sma200":ext["sma200"],"diff_pct":diffs,"checks":checks
@@ -311,15 +321,16 @@ jobs:
                              "source":"external_validated_yfinance","stocks":arr})
           total=len(symbols)
           summary={
-            "schema":"egx-external-history-v2","purpose":"cycle-quality-history-only","execution_source":False,
+            "schema":"egx-external-history-v3","purpose":"cycle-quality-history-only","execution_source":False,
             "session_date":session_date,"generated_at":pd.Timestamp.utcnow().isoformat(),
             "provider":"yfinance","exchange_suffix":".CA","symbols_requested":total,
             "symbols_with_60plus":sum((v.get("bars_available") or 0)>=60 for v in stats.values()),
             "accepted_symbols":len(accepted),"high_confidence_symbols":len(high_conf),
-            "medium_confidence_symbols":len(medium_conf),"rejected_symbols":total-len(accepted),
+            "medium_confidence_symbols":len(medium_conf),"short_validated_symbols":len(short_conf),
+            "rejected_symbols":total-len(accepted),
             "history_sessions":len(sessions),"accepted_ratio_pct":round((len(accepted)/total*100),1) if total else 0,
-            "accepted":accepted,"high_confidence":high_conf,"medium_confidence":medium_conf,
-            "trust_gate":"60+ completed bars; <=7d freshness; >=2 SMA identity checks; current live session excluded"
+            "accepted":accepted,"high_confidence":high_conf,"medium_confidence":medium_conf,"short_validated":short_conf,
+            "trust_gate":"60-bar tier: <=7d freshness and >=2 SMA identity checks; 20-bar rescue: SMA20 diff <=2.5%; current live session excluded"
           }
           json.dump(summary,open("out/external-history/summary.json","w"),indent=2)
           json.dump({"schema":"egx-external-history-sessions-v2","session_date":session_date,"sessions":sessions},
@@ -331,10 +342,10 @@ jobs:
           json.dump({"session_date":session_date,"accepted":len(accepted),"items":cross},
                     open("out/external-history/crosscheck.json","w"))
           print(json.dumps({k:summary[k] for k in ("symbols_requested","symbols_with_60plus","accepted_symbols",
-                                                   "high_confidence_symbols","medium_confidence_symbols",
+                                                   "high_confidence_symbols","medium_confidence_symbols","short_validated_symbols",
                                                    "history_sessions","accepted_ratio_pct")}))
           PY
-          test -s out/external-history/summary.json || echo '{"schema":"egx-external-history-v2","accepted_symbols":0,"history_sessions":0}' > out/external-history/summary.json
+          test -s out/external-history/summary.json || echo '{"schema":"egx-external-history-v3","accepted_symbols":0,"history_sessions":0}' > out/external-history/summary.json
           test -s out/external-history/sessions.json || echo '{"schema":"egx-external-history-sessions-v2","sessions":[]}' > out/external-history/sessions.json
 
       - name: Recover historical sessions from GitHub snapshots
@@ -417,12 +428,13 @@ jobs:
           # Then add validated external sessions only where no native date already exists.
           # Native Bridge observations always win on duplicate dates.
           EXT_SESSIONS="${GITHUB_WORKSPACE}/out/external-history/sessions.json"
-          if [ -s "$EXT_SESSIONS" ]; then
+          if [ -s "$EXT_SESSIONS" ] && [ "$(jq -r '(.sessions // []) | length' "$EXT_SESSIONS" 2>/dev/null || echo 0)" -gt 0 ]; then
             jq --slurpfile ext "$EXT_SESSIONS" '
-              (.sessions // []) as $existing
-              | ($existing | map(.date)) as $dates
-              | (($ext[0].sessions // []) | map(select(.date as $d | ($dates | index($d)) == null))) as $new
-              | .sessions = (($existing + $new) | sort_by(.date))
+              # A fresh validated sidecar replaces older external sessions, while native dates are preserved.
+              ((.sessions // []) | map(select(.source != "external_validated_yfinance"))) as $native
+              | ($native | map(.date)) as $native_dates
+              | (($ext[0].sessions // []) | map(select(.date as $d | ($native_dates | index($d)) == null))) as $new
+              | .sessions = (($native + $new) | sort_by(.date))
             ' /tmp/prior-history.json > /tmp/prior-history-external.json
             mv /tmp/prior-history-external.json /tmp/prior-history.json
           fi
@@ -471,6 +483,7 @@ jobs:
                 | ([ $h.sessions[] | .stocks[] | select(.symbol == $s.symbol) ]) as $series
                 | ($series | length) as $m
                 | ($series | map(select((.history_source // "v2_bridge") == "external_validated_yfinance")) | length) as $external_m
+                | ($series | map(select(.history_confidence == "short")) | length) as $short_m
                 | ($m - $external_m) as $native_m
                 | ($series | map(.close)) as $cl
                 | ($series | map(.volume)) as $vol
@@ -487,12 +500,14 @@ jobs:
                     sessions_available: $m,
                     native_sessions: $native_m,
                     external_validated_sessions: $external_m,
+                    short_validated_sessions: $short_m,
                     provenance: (if $external_m > 0 and $native_m > 0 then "hybrid_validated_external_plus_v2"
                                  elif $external_m > 0 then "validated_external"
                                  else "v2_native" end),
                     status: (if $m >= 10 then "complete" elif $m >= 6 then "usable_provisional" else "warming_up" end),
                     confidence_pct: (
                       if $m >= 15 and $native_m >= 10 then 100
+                      elif $m >= 15 and $short_m > 0 and $external_m == $short_m then 70
                       elif $m >= 15 and $external_m > 0 then 90
                       elif $m >= 10 and $external_m > 0 then 80
                       elif $m >= 10 then 85
