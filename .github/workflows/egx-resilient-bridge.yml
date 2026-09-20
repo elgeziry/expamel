@@ -185,13 +185,13 @@ jobs:
           CACHED_SESSION="$(jq -r '.session_date // empty' out/external-history/summary.json 2>/dev/null || true)"
           CACHED_SCHEMA="$(jq -r '.schema // empty' out/external-history/summary.json 2>/dev/null || true)"
           CACHED_ACCEPTED="$(jq -r '.accepted_symbols // 0' out/external-history/summary.json 2>/dev/null || echo 0)"
-          if [ "$CACHED_SESSION" = "$SESSION" ] && [ "$CACHED_SCHEMA" = "egx-external-history-v3" ] && [ "${CACHED_ACCEPTED:-0}" -ge 1 ]; then
+          if [ "$CACHED_SESSION" = "$SESSION" ] && [ "$CACHED_SCHEMA" = "egx-external-history-v4" ] && [ "${CACHED_ACCEPTED:-0}" -ge 1 ]; then
             echo "Reusing validated external history cache for $SESSION: $CACHED_ACCEPTED symbols"
             exit 0
           fi
 
           rm -f out/external-history/*.json
-          python -m pip -q install yfinance pandas || exit 0
+          python -m pip -q install yfinance pandas investiny || exit 0
           python - <<'PY'
           import json, math, time
           from datetime import date, timedelta, datetime
@@ -308,27 +308,115 @@ jobs:
               "external_sma200":ext["sma200"],"diff_pct":diffs,"checks":checks
             }
 
+          # Secondary exact-symbol rescue for important/rejected names using Investing history.
+          # It can only enter Cycle Quality after passing the same V2 moving-average identity gates.
+          secondary_attempted=[]
+          secondary_rescued=[]
+          try:
+            from investiny import search_assets, historical_data
+            priority=["AMOC","JUFO","ABUK","ETEL","KZPC","AMER","COPR","INEG","AFMC","CCAP",
+                      "HDBK","DTPP","INFI","MBSC","ORAS","GOUR","BONY","VLMRA"]
+            priority += [x for x in symbols if not stats.get(x,{}).get("accepted")]
+            ordered=[]; seen=set()
+            for x in priority:
+              if x in by_symbol and x not in seen and not stats.get(x,{}).get("accepted"):
+                ordered.append(x); seen.add(x)
+            from_dt=(end-timedelta(days=430)).strftime("%m/%d/%Y")
+            to_dt=end.strftime("%m/%d/%Y")
+            for sym in ordered[:35]:
+              secondary_attempted.append(sym)
+              try:
+                results=search_assets(query=sym,limit=10,type="Stock") or []
+                exact=[r for r in results if str(r.get("symbol","")).upper()==sym]
+                # Prefer an explicitly Egyptian/Cairo/EGX exchange when search metadata exposes it.
+                egypt=[r for r in exact if any(k in str(r.get("exchange","")).lower() for k in ("egypt","cairo","egx"))]
+                candidates=egypt or exact
+                for cand in candidates[:2]:
+                  try:
+                    raw2=historical_data(investing_id=int(cand["ticker"]),from_date=from_dt,to_date=to_dt,interval="D")
+                    dates=raw2.get("date",[]); opens=raw2.get("open",[]); highs=raw2.get("high",[])
+                    lows=raw2.get("low",[]); closes2=raw2.get("close",[]); vols=raw2.get("volume",[])
+                    bars2=[]
+                    for n,dt0 in enumerate(dates):
+                      try:
+                        dt=pd.to_datetime(dt0).date().isoformat()
+                        if dt>=session_date: continue
+                        o,h,l,c=[num(arr[n]) for arr in (opens,highs,lows,closes2)]
+                        v=num(vols[n]) if n<len(vols) else 0
+                        if None in (o,h,l,c) or min(o,h,l,c)<=0: continue
+                        if h+1e-12<max(o,c,l) or l-1e-12>min(o,c,h): continue
+                        bars2.append({"date":dt,"open":o,"high":h,"low":l,"close":c,"volume":int(max(v or 0,0))})
+                      except Exception:
+                        continue
+                    bars2=sorted({b["date"]:b for b in bars2}.values(),key=lambda z:z["date"])
+                    cls=[b["close"] for b in bars2]
+                    ext2={"sma20":sma(cls,20),"sma50":sma(cls,50),"sma200":sma(cls,200)}
+                    v2=by_symbol[sym]
+                    dif2={k:pdiff(ext2[k],num(v2.get(k.upper()))) for k in ("sma20","sma50","sma200")}
+                    chk2={"sma20":dif2["sma20"] is not None and dif2["sma20"]<=4.0,
+                          "sma50":dif2["sma50"] is not None and dif2["sma50"]<=4.0,
+                          "sma200":dif2["sma200"] is not None and dif2["sma200"]<=6.0}
+                    pc=sum(chk2.values())
+                    ld=bars2[-1]["date"] if bars2 else None
+                    try:gap2=(datetime.fromisoformat(session_date)-datetime.fromisoformat(ld)).days if ld else 999
+                    except Exception:gap2=999
+                    identity2=(chk2["sma20"] and chk2["sma50"]) or (pc>=2 and (chk2["sma20"] or chk2["sma50"]))
+                    ok2=len(bars2)>=60 and gap2<=7 and identity2
+                    depth2=60 if ok2 else 0
+                    conf2="rejected"
+                    comparable2=[x for x in dif2.values() if x is not None]
+                    med2=sorted(comparable2)[len(comparable2)//2] if comparable2 else None
+                    if ok2:
+                      conf2="high" if pc==3 and med2 is not None and med2<=2.5 else "medium"
+                    elif len(bars2)>=20 and gap2<=7 and dif2["sma20"] is not None and dif2["sma20"]<=2.5:
+                      ok2=True; depth2=20; conf2="short"
+                    if not ok2: continue
+                    accepted.append(sym)
+                    if conf2=="high": high_conf.append(sym)
+                    elif conf2=="medium": medium_conf.append(sym)
+                    else: short_conf.append(sym)
+                    accepted_bars[sym]=bars2[-depth2:]
+                    stats[sym]={
+                      "accepted":True,"confidence":conf2,"validated_depth":depth2,"bars_available":len(bars2),
+                      "latest_date":ld,"freshness_gap_days":gap2,"source":"investiny",
+                      "investing_exchange":cand.get("exchange"),"investing_ticker":cand.get("ticker"),
+                      "v2_sma20":num(v2.get("SMA20")),"v2_sma50":num(v2.get("SMA50")),"v2_sma200":num(v2.get("SMA200")),
+                      "external_sma20":ext2["sma20"],"external_sma50":ext2["sma50"],"external_sma200":ext2["sma200"],
+                      "diff_pct":dif2,"checks":chk2
+                    }
+                    secondary_rescued.append(sym)
+                    break
+                  except Exception:
+                    continue
+              except Exception:
+                continue
+          except Exception:
+            pass
+
           by_date={}
           for sym,bars in accepted_bars.items():
             conf=stats[sym]["confidence"]
             for b in bars:
-              rec={"symbol":sym,**b,"history_source":"external_validated_yfinance","history_confidence":conf}
+              provider=stats[sym].get("source","yfinance")
+              rec={"symbol":sym,**b,"history_source":"external_validated_"+provider,"history_confidence":conf}
               by_date.setdefault(b["date"],[]).append(rec)
           sessions=[]
           for dt in sorted(by_date)[-60:]:
             arr=by_date[dt]
             sessions.append({"date":dt,"retrieved_at":None,"market":None,
-                             "source":"external_validated_yfinance","stocks":arr})
+                             "source":"external_validated_sidecar","stocks":arr})
           total=len(symbols)
           summary={
-            "schema":"egx-external-history-v3","purpose":"cycle-quality-history-only","execution_source":False,
+            "schema":"egx-external-history-v4","purpose":"cycle-quality-history-only","execution_source":False,
             "session_date":session_date,"generated_at":pd.Timestamp.utcnow().isoformat(),
-            "provider":"yfinance","exchange_suffix":".CA","symbols_requested":total,
+            "provider":"yfinance+investiny_fallback","exchange_suffix":".CA","symbols_requested":total,
             "symbols_with_60plus":sum((v.get("bars_available") or 0)>=60 for v in stats.values()),
-            "accepted_symbols":len(accepted),"high_confidence_symbols":len(high_conf),
+            "accepted_symbols":len(set(accepted)),"high_confidence_symbols":len(high_conf),
             "medium_confidence_symbols":len(medium_conf),"short_validated_symbols":len(short_conf),
-            "rejected_symbols":total-len(accepted),
-            "history_sessions":len(sessions),"accepted_ratio_pct":round((len(accepted)/total*100),1) if total else 0,
+            "secondary_attempted":secondary_attempted,"secondary_rescued":secondary_rescued,
+            "secondary_rescued_symbols":len(secondary_rescued),
+            "rejected_symbols":total-len(set(accepted)),
+            "history_sessions":len(sessions),"accepted_ratio_pct":round((len(set(accepted))/total*100),1) if total else 0,
             "accepted":accepted,"high_confidence":high_conf,"medium_confidence":medium_conf,"short_validated":short_conf,
             "trust_gate":"60-bar tier: <=7d freshness and >=2 SMA identity checks; 20-bar rescue: SMA20 diff <=2.5%; current live session excluded"
           }
@@ -345,7 +433,7 @@ jobs:
                                                    "high_confidence_symbols","medium_confidence_symbols","short_validated_symbols",
                                                    "history_sessions","accepted_ratio_pct")}))
           PY
-          test -s out/external-history/summary.json || echo '{"schema":"egx-external-history-v3","accepted_symbols":0,"history_sessions":0}' > out/external-history/summary.json
+          test -s out/external-history/summary.json || echo '{"schema":"egx-external-history-v4","accepted_symbols":0,"history_sessions":0}' > out/external-history/summary.json
           test -s out/external-history/sessions.json || echo '{"schema":"egx-external-history-sessions-v2","sessions":[]}' > out/external-history/sessions.json
 
       - name: Recover historical sessions from GitHub snapshots
@@ -431,7 +519,7 @@ jobs:
           if [ -s "$EXT_SESSIONS" ] && [ "$(jq -r '(.sessions // []) | length' "$EXT_SESSIONS" 2>/dev/null || echo 0)" -gt 0 ]; then
             jq --slurpfile ext "$EXT_SESSIONS" '
               # A fresh validated sidecar replaces older external sessions, while native dates are preserved.
-              ((.sessions // []) | map(select(.source != "external_validated_yfinance"))) as $native
+              ((.sessions // []) | map(select((((.source // "") | startswith("external_validated")) | not)))) as $native
               | ($native | map(.date)) as $native_dates
               | (($ext[0].sessions // []) | map(select(.date as $d | ($native_dates | index($d)) == null))) as $new
               | .sessions = (($native + $new) | sort_by(.date))
@@ -482,7 +570,7 @@ jobs:
                 $today.stocks[] as $s
                 | ([ $h.sessions[] | .stocks[] | select(.symbol == $s.symbol) ]) as $series
                 | ($series | length) as $m
-                | ($series | map(select((.history_source // "v2_bridge") == "external_validated_yfinance")) | length) as $external_m
+                | ($series | map(select(((.history_source // "") | startswith("external_validated_")))) | length) as $external_m
                 | ($series | map(select(.history_confidence == "short")) | length) as $short_m
                 | ($m - $external_m) as $native_m
                 | ($series | map(.close)) as $cl
@@ -562,7 +650,7 @@ jobs:
                 latest_universe_count: ($today.stocks|length),
                 sessions_available: $n,
                 full_universe_sessions_available: ($h.sessions|map(select((.stocks|length)>=296))|length),
-                external_history_sessions: ($h.sessions|map(select(.source=="external_validated_yfinance"))|length),
+                external_history_sessions: ($h.sessions|map(select(((.source // "") | startswith("external_validated"))))|length),
                 external_validated_symbols: ($cq|map(select(.external_validated_sessions>0))|length),
                 full_universe_target: 296,
                 cycle_quality_complete_count: ($cq|map(select(.status=="complete"))|length),
