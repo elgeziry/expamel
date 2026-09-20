@@ -495,6 +495,10 @@ jobs:
           cp out/focus.json /tmp/egx-live/focus.json
           cp out/universe.json /tmp/egx-live/universe.json
           cp out/history.json /tmp/egx-live/history.json
+          if [ -d out/external-history ]; then
+            mkdir -p /tmp/egx-live/external-history
+            cp -f out/external-history/*.json /tmp/egx-live/external-history/ 2>/dev/null || true
+          fi
           cd /tmp/egx-live
           git init -q
           git config user.name 'github-actions[bot]'
