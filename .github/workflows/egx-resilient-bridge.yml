@@ -108,6 +108,44 @@ jobs:
             }
           ' out/latest.json > out/focus.json
 
+      - name: Preserve zero-credit session history
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          # Read prior history from GitHub, never from Netlify. This survives the force-published live branch.
+          git init -q /tmp/history-repo
+          cd /tmp/history-repo
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if git fetch -q --depth=1 origin egx-live && git show FETCH_HEAD:history.json > /tmp/prior-history.json 2>/dev/null; then
+            :
+          else
+            echo '{"schema":"egx-session-history-v1","sessions":[]}' > /tmp/prior-history.json
+          fi
+          cd "${GITHUB_WORKSPACE}"
+          SESSION="$(jq -r '.expected_reference_session_date' out/latest.json)"
+          # Store one compact end/current observation per trading date; repeated hourly runs replace the same date.
+          jq --arg session "$SESSION" '
+            {
+              date: $session,
+              retrieved_at: .retrieved_at,
+              market: .market,
+              stocks: [.stocks[] | {
+                symbol, close, open, high, low, volume, change,
+                RSI, EMA20, SMA20, SMA50, SMA200,
+                relative_volume_10d,
+                long_term_trend,
+                close_location_in_day
+              }]
+            }
+          ' out/latest.json > /tmp/today.json
+          jq --slurpfile today /tmp/today.json --arg session "$SESSION" '
+            .schema = "egx-session-history-v1"
+            | .sessions = (((.sessions // []) | map(select(.date != $session))) + $today)
+            | .sessions = (.sessions | sort_by(.date) | if length > 40 then .[-40:] else . end)
+          ' /tmp/prior-history.json > out/history.json
+
       - name: Wrap V2 snapshot in EGX Resilient Bridge contract
         shell: bash
         run: |
@@ -180,6 +218,7 @@ jobs:
           cp out/contract.json /tmp/egx-live/contract.json
           cp out/transport.json /tmp/egx-live/transport.json
           cp out/focus.json /tmp/egx-live/focus.json
+          cp out/history.json /tmp/egx-live/history.json
           cd /tmp/egx-live
           git init -q
           git config user.name 'github-actions[bot]'
