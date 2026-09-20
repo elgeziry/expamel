@@ -73,13 +73,17 @@ jobs:
             (.data_fingerprint_sha256 | type == "string" and test("^[a-f0-9]{64}$"))
           ' out/health.json >/dev/null
 
-      - name: Fetch one canonical execution bundle
+      - name: Fetch canonical focus bundle and full market universe
         shell: bash
         env:
           SYMBOLS: EFIH,EFID,ORWE,BONY,JUFO,AMOC,SVCE,EGAL,MASR,ORHD,HELI,TMGH,ABUK,VLMRA
         run: |
           set -euo pipefail
-          curl -fsSL --connect-timeout 15 --max-time 60 --retry 1 --retry-delay 1             "${EGX_BASE}/api/execution-bundle?ts=${EGX_TS}" -o out/latest.json
+
+          # 1) Canonical execution bundle remains the authoritative focus/execution payload.
+          curl -fsSL --connect-timeout 15 --max-time 60 --retry 2 --retry-delay 1 \
+            "${EGX_BASE}/api/execution-bundle?symbols=${SYMBOLS}&ts=${EGX_TS}" -o out/latest.json
+
           jq -e '
             .source_id == "egx-market-feed-v2" and
             .version == "7.2.1" and
@@ -96,7 +100,9 @@ jobs:
             (.quality.live_session_consistent == true) and
             (.data_fingerprint_sha256 | type == "string" and test("^[a-f0-9]{64}$"))
           ' out/latest.json >/dev/null
-          jq '{source_id,version,retrieved_at,session_status,expected_reference_session_date,execution_usable,stale_risk,blockers,warnings,quality,data_fingerprint_sha256}'             out/latest.json > out/contract.json
+
+          jq '{source_id,version,retrieved_at,session_status,expected_reference_session_date,execution_usable,stale_risk,blockers,warnings,quality,data_fingerprint_sha256}' out/latest.json > out/contract.json
+
           jq --arg base "${EGX_BASE}" --arg mirrored_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" '
             {
               transport: "github-actions-netlify-v2-mirror",
@@ -107,6 +113,7 @@ jobs:
               external_market_crosscheck_used: false
             }
           ' <<< '{}' > out/transport.json
+
           jq --argjson req '["EFIH","EFID","ORWE","BONY","JUFO","AMOC","SVCE","EGAL","MASR","ORHD","HELI","TMGH","ABUK","VLMRA"]' '
             {
               retrieved_at,
@@ -116,12 +123,41 @@ jobs:
               stocks: (.stocks | map(select(.symbol as $s | $req | index($s))))
             }
           ' out/latest.json > out/focus.json
-          # Preserve the complete V2 universe separately from the focus list.
-          jq '{retrieved_at,session_status,expected_reference_session_date,quality,market,screen,stocks}' out/latest.json > out/universe.json
+
+          # 2) Full-universe discovery. Do NOT assume execution-bundle without symbols returns all rows.
+          # Try known V2 market endpoints and accept only a payload that truly contains the full universe.
+          rm -f out/universe-source.json
+          for endpoint in             "/api/market?ts=${EGX_TS}"             "/api/stocks?ts=${EGX_TS}"             "/api/universe?ts=${EGX_TS}"             "/api/comprehensive-scan?ts=${EGX_TS}"             "/api/execution-bundle?all=true&ts=${EGX_TS}"
+          do
+            echo "Trying full-universe endpoint: ${endpoint}"
+            if curl -fsSL --connect-timeout 15 --max-time 60 --retry 1 --retry-delay 1 "${EGX_BASE}${endpoint}" -o /tmp/candidate.json 2>/dev/null; then
+              COUNT="$(jq 'if (.stocks|type)=="array" then (.stocks|length) elif (.data.stocks|type)=="array" then (.data.stocks|length) elif (.rows|type)=="array" then (.rows|length) else 0 end' /tmp/candidate.json 2>/dev/null || echo 0)"
+              echo "Candidate rows: ${COUNT}"
+              if [ "${COUNT}" -ge 296 ]; then
+                cp /tmp/candidate.json out/universe-source.json
+                break
+              fi
+            fi
+          done
+
+          if [ ! -s out/universe-source.json ]; then
+            echo "::error::No V2 endpoint returned the full >=296-stock universe. Focus execution bundle remains valid; refusing to fake market-wide history."
+            exit 42
+          fi
+
+          jq '
+            if (.stocks|type)=="array" then
+              {retrieved_at,session_status,expected_reference_session_date,quality,market,screen,stocks}
+            elif (.data.stocks|type)=="array" then
+              (.data | {retrieved_at,session_status,expected_reference_session_date,quality,market,screen,stocks})
+            elif (.rows|type)=="array" then
+              {retrieved_at,session_status,expected_reference_session_date,quality,market,screen,stocks:.rows}
+            else error("unsupported universe schema") end
+          ' out/universe-source.json > out/universe.json
+
           ACTUAL="$(jq '.stocks | length' out/universe.json)"
-          EXPECTED="$(jq '.quality.row_count // 0' out/latest.json)"
-          echo "Universe coverage: ${ACTUAL}/${EXPECTED}"
-          jq -e '(.stocks | length) >= 296 and (.stocks | length) == (.quality.row_count)' out/universe.json >/dev/null
+          echo "Universe coverage: ${ACTUAL}/296+"
+          test "${ACTUAL}" -ge 296
 
       - name: Preserve zero-credit session history
         shell: bash
@@ -154,7 +190,7 @@ jobs:
                 close_location_in_day
               }]
             }
-          ' out/latest.json > /tmp/today.json
+          ' out/universe.json > /tmp/today.json
           jq -e '(.stocks | length) >= 296' /tmp/today.json >/dev/null
           jq --slurpfile today /tmp/today.json --arg session "$SESSION" '
             .schema = "egx-session-history-v1"
