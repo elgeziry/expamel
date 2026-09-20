@@ -1,108 +1,129 @@
-name: EGX resilient bridge
+name: EGX Netlify V2 transport mirror
 
 on:
   workflow_dispatch:
   push:
     paths:
       - '.github/workflows/egx-resilient-bridge.yml'
-      - 'egx-market-feed-v2/scripts/resilient-bridge.mjs'
-
-# Deliberately not scheduled. The Netlify V2 warmer already maintains the
-# trusted execution snapshot every 15 minutes during EGX-relevant hours.
-# Keeping this bridge manual avoids a second /api/execution-bundle fetch every
-# five minutes and preserves the bridge only for explicit resilience testing.
 
 permissions:
   contents: write
 
 concurrency:
-  group: egx-resilient-bridge
+  group: egx-netlify-v2-transport
   cancel-in-progress: true
 
 jobs:
-  bridge:
+  mirror:
     runs-on: ubuntu-latest
     timeout-minutes: 4
     steps:
-      - name: Checkout master
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - name: Select healthy Netlify V2 endpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          TS="$(date +%s%N)"
+          CANDIDATES=(
+            "https://egx-market-feed-v2.netlify.app"
+            "https://master--egx-market-feed-v2.netlify.app"
+          )
+          BASE=""
+          for candidate in "${CANDIDATES[@]}"; do
+            if ping="$(curl -fsSL --connect-timeout 15 --max-time 20 --retry 1 --retry-delay 1 "${candidate}/ping.txt?ts=${TS}" 2>/dev/null)"               && [[ "${ping}" == EGX-V2-ONLINE\ 7.2.1* ]]; then
+              BASE="${candidate}"
+              break
+            fi
+          done
+          test -n "${BASE}"
+          echo "EGX_BASE=${BASE}" >> "${GITHUB_ENV}"
+          echo "EGX_TS=${TS}" >> "${GITHUB_ENV}"
+          printf '%s\n' "${BASE}" > selected-base.txt
 
-      - name: Restore previous live acceptance state
+      - name: Fetch and validate diagnostics
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p out
-          rm -f out/previous.json
-          git fetch --force --depth=1 origin refs/heads/egx-live:refs/remotes/origin/egx-live || true
-          if git cat-file -e refs/remotes/origin/egx-live:latest.json 2>/dev/null; then
-            git show refs/remotes/origin/egx-live:latest.json > out/previous.json
-            echo "Previous Bridge snapshot restored."
-          else
-            echo "No previous Bridge snapshot available; acceptance map will warm up safely."
-          fi
+          curl -fsSL --connect-timeout 15 --max-time 20 --retry 1 --retry-delay 1             "${EGX_BASE}/api/diagnostics?ts=${EGX_TS}" -o out/health.json
+          jq -e '
+            .source_id == "egx-market-feed-v2" and
+            (.version == "7.2.1" or .core_version_expected == "7.2.1") and
+            .execution_usable == true and
+            (.blockers | type == "array" and length == 0) and
+            (.expected_reference_session_date | type == "string" and length == 10) and
+            (.session_status | type == "string" and length > 0) and
+            (.stale_risk | type == "string" and length > 0) and
+            (.quality.row_count >= 296) and
+            (.quality.unique_symbols == .quality.row_count) and
+            (.quality.close_coverage_pct >= 90) and
+            (.quality.volume_coverage_pct >= 80) and
+            (.quality.live_session_consistent == true) and
+            (.data_fingerprint_sha256 | type == "string" and test("^[a-f0-9]{64}$"))
+          ' out/health.json >/dev/null
 
-      - name: Build canonical snapshot using two independent paths
-        env:
-          EGX_EXPECTED_CORE: '7.2.1'
-          EGX_BRIDGE_OUT: 'out/latest.json'
-          EGX_BRIDGE_HEALTH_OUT: 'out/health.json'
-          EGX_PREVIOUS_SNAPSHOT: 'out/previous.json'
-          EGX_REQUIRED_SYMBOLS: 'SWDY,EFIH,EFID,BONY,ORWE,MASR,EGAL,JUFO,AMOC,SVCE,ORAS'
-        run: node egx-market-feed-v2/scripts/resilient-bridge.mjs
-
-      - name: Build compact focus snapshots
+      - name: Fetch one canonical execution bundle
         shell: bash
+        env:
+          SYMBOLS: EFIH,EFID,ORWE,BONY,JUFO,AMOC,SVCE,EGAL,MASR,ORHD,HELI,TMGH,ABUK,VLMRA
         run: |
           set -euo pipefail
-          jq --argjson req '["SWDY","EFIH","EFID","BONY","ORWE","MASR","EGAL","JUFO","AMOC","SVCE","ORAS"]' '
+          curl -fsSL --connect-timeout 15 --max-time 60 --retry 1 --retry-delay 1             "${EGX_BASE}/api/execution-bundle?symbols=${SYMBOLS}&ts=${EGX_TS}" -o out/latest.json
+          jq -e '
+            .source_id == "egx-market-feed-v2" and
+            .version == "7.2.1" and
+            .execution_usable == true and
+            (.blockers | type == "array" and length == 0) and
+            (.expected_reference_session_date | type == "string" and length == 10) and
+            (.session_status | type == "string" and length > 0) and
+            (.market_calendar | type == "object") and
+            (.stale_risk | type == "string" and length > 0) and
+            (.quality.row_count >= 296) and
+            (.quality.unique_symbols == .quality.row_count) and
+            (.quality.close_coverage_pct >= 90) and
+            (.quality.volume_coverage_pct >= 80) and
+            (.quality.live_session_consistent == true) and
+            (.data_fingerprint_sha256 | type == "string" and test("^[a-f0-9]{64}$"))
+          ' out/latest.json >/dev/null
+          jq '{source_id,version,retrieved_at,session_status,expected_reference_session_date,execution_usable,stale_risk,blockers,warnings,quality,data_fingerprint_sha256}'             out/latest.json > out/contract.json
+          jq --arg base "${EGX_BASE}" --arg mirrored_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" '
             {
-              bridge: .bridge,
-              symbols: (
-                [.data.universe[] | select(.symbol as $s | $req | index($s))]
-                | map({key: .symbol, value: .})
-                | from_entries
-              )
+              transport: "github-actions-netlify-v2-mirror",
+              market_source: "EGX Market Feed V2.1 on Netlify only",
+              source_url: $base,
+              mirrored_at: $mirrored_at,
+              external_market_fallback_used: false,
+              external_market_crosscheck_used: false
+            }
+          ' <<< '{}' > out/transport.json
+          jq --argjson req '["EFIH","EFID","ORWE","BONY","JUFO","AMOC","SVCE","EGAL","MASR","ORHD","HELI","TMGH","ABUK","VLMRA"]' '
+            {
+              retrieved_at,
+              session_status,
+              market,
+              screen,
+              stocks: (.stocks | map(select(.symbol as $s | $req | index($s))))
             }
           ' out/latest.json > out/focus.json
 
-      - name: Validate snapshot contract
+      - name: Publish validated Netlify V2 snapshot
         shell: bash
-        run: |
-          set -euo pipefail
-          jq -e '.bridge.name == "EGX Resilient Bridge"' out/latest.json >/dev/null
-          jq -e '.bridge.data_sha256 | length == 64' out/latest.json >/dev/null
-          jq -e '.data.market != null' out/latest.json >/dev/null
-          jq -e '.data.screen.top_setup | type == "array"' out/latest.json >/dev/null
-          jq -e '.path_health.direct.ok == true or .path_health.netlify.ok == true' out/latest.json >/dev/null
-          if jq -e '.path_health.direct.ok == true' out/latest.json >/dev/null; then
-            jq -e '.data.universe | type == "array" and length >= 50' out/latest.json >/dev/null
-            jq -e '.bridge.symbol_coverage.complete == true' out/latest.json >/dev/null
-            jq -e 'any(.data.universe[]; .symbol == "SWDY")' out/latest.json >/dev/null
-            jq -e '.symbols.SWDY.symbol == "SWDY"' out/focus.json >/dev/null
-            jq -e '.bridge.acceptance_map.method == "snapshot_volume_delta_by_last_price_proxy"' out/latest.json >/dev/null
-            jq -e '.data.analytics_capabilities.volume_profile_proxy.same_source_only == true' out/latest.json >/dev/null
-            jq -e 'all(.data.universe[]; .analytics.volume_profile.method == "snapshot_volume_delta_by_last_price_proxy")' out/latest.json >/dev/null
-          fi
-
-      - name: Publish latest snapshot to single-commit live branch
-        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           rm -rf /tmp/egx-live
           mkdir -p /tmp/egx-live
           cp out/latest.json /tmp/egx-live/latest.json
           cp out/health.json /tmp/egx-live/health.json
+          cp out/contract.json /tmp/egx-live/contract.json
+          cp out/transport.json /tmp/egx-live/transport.json
           cp out/focus.json /tmp/egx-live/focus.json
           cd /tmp/egx-live
-          git init
+          git init -q
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git checkout -b egx-live
-          git add latest.json health.json focus.json
-          git commit -m "EGX live snapshot $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git checkout -q -b egx-live
+          git add .
+          git commit -q -m "Netlify V2 transport snapshot $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git push --force origin egx-live
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
