@@ -131,21 +131,23 @@ jobs:
 
           # V2 market may expose the universe under different documented shapes.
           jq '
-            if (.stocks|type)=="array" then
+            if type=="array" then
+              {retrieved_at:null,session_status:null,expected_reference_session_date:null,quality:null,market:null,screen:null,stocks:.}
+            elif type=="object" and ((.stocks? | type)=="array") then
               {retrieved_at,session_status,expected_reference_session_date,quality,market,screen,stocks}
-            elif (.data.stocks|type)=="array" then
+            elif type=="object" and ((.data? | type)=="object") and ((.data.stocks? | type)=="array") then
               (.data | {retrieved_at,session_status,expected_reference_session_date,quality,market,screen,stocks})
-            elif (.rows|type)=="array" then
+            elif type=="object" and ((.rows? | type)=="array") then
               {retrieved_at,session_status,expected_reference_session_date,quality,market,screen,stocks:.rows}
-            elif (.data|type)=="array" then
+            elif type=="object" and ((.data? | type)=="array") then
               {retrieved_at,session_status,expected_reference_session_date,quality,market,screen,stocks:.data}
             else
-              {retrieved_at,session_status,expected_reference_session_date,quality,market,screen,stocks:[]}
+              {retrieved_at:null,session_status:null,expected_reference_session_date:null,quality:null,market:null,screen:null,stocks:[]}
             end
           ' out/market.json > out/universe.json
 
           ACTUAL="$(jq '.stocks | length' out/universe.json)"
-          TOTAL="$(jq -r '.total_count // .count // .quality.row_count // 0' out/market.json)"
+          TOTAL="$(jq -r 'if type=="object" then (.total_count // .count // .quality.row_count // 0) else length end' out/market.json)"
           echo "V2 market metadata total_count=${TOTAL}; embedded rows=${ACTUAL}"
 
           # Never confuse market metadata coverage with embedded stock rows.
