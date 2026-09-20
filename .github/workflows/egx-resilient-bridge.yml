@@ -185,13 +185,14 @@ jobs:
           CACHED_SESSION="$(jq -r '.session_date // empty' out/external-history/summary.json 2>/dev/null || true)"
           CACHED_SCHEMA="$(jq -r '.schema // empty' out/external-history/summary.json 2>/dev/null || true)"
           CACHED_ACCEPTED="$(jq -r '.accepted_symbols // 0' out/external-history/summary.json 2>/dev/null || echo 0)"
-          if [ "$CACHED_SESSION" = "$SESSION" ] && [ "$CACHED_SCHEMA" = "egx-external-history-v4" ] && [ "${CACHED_ACCEPTED:-0}" -ge 1 ]; then
+          if [ "$CACHED_SESSION" = "$SESSION" ] && [ "$CACHED_SCHEMA" = "egx-external-history-v5" ] && [ "${CACHED_ACCEPTED:-0}" -ge 1 ]; then
             echo "Reusing validated external history cache for $SESSION: $CACHED_ACCEPTED symbols"
             exit 0
           fi
 
           rm -f out/external-history/*.json
           python -m pip -q install yfinance pandas investiny || exit 0
+          python -m pip -q install --upgrade --no-cache-dir git+https://github.com/rongardF/tvdatafeed.git || true
           python - <<'PY'
           import json, math, time
           from datetime import date, timedelta, datetime
@@ -393,6 +394,75 @@ jobs:
           except Exception:
             pass
 
+          # Third-source rescue: TradingView historical bars for still-rejected EGX symbols.
+          # This layer is historical only; execution prices remain V2-exclusive.
+          tertiary_attempted=[]
+          tertiary_rescued=[]
+          try:
+            from tvDatafeed import TvDatafeed, Interval
+            tv=TvDatafeed()
+            priority_tv=["AMOC","ABUK","ORAS","ETEL","JUFO","KZPC","AMER","COPR","INEG","AFMC",
+                         "CCAP","HDBK","DTPP","INFI","MBSC","GOUR","BONY","VLMRA"]
+            priority_tv += [x for x in symbols if not stats.get(x,{}).get("accepted")]
+            ordered_tv=[]; seen_tv=set()
+            for x in priority_tv:
+              if x in by_symbol and x not in seen_tv and not stats.get(x,{}).get("accepted"):
+                ordered_tv.append(x); seen_tv.add(x)
+            for sym in ordered_tv[:70]:
+              tertiary_attempted.append(sym)
+              try:
+                d2=tv.get_hist(symbol=sym,exchange="EGX",interval=Interval.in_daily,n_bars=260)
+                if d2 is None or getattr(d2,"empty",True): continue
+                bars3=[]
+                for idx,r in d2.sort_index().iterrows():
+                  dt=pd.Timestamp(idx).date().isoformat()
+                  if dt>=session_date: continue
+                  o,h,l,c=[num(r.get(k)) for k in ("open","high","low","close")]
+                  v=num(r.get("volume"))
+                  if None in (o,h,l,c) or min(o,h,l,c)<=0: continue
+                  if h+1e-12<max(o,c,l) or l-1e-12>min(o,c,h): continue
+                  bars3.append({"date":dt,"open":o,"high":h,"low":l,"close":c,"volume":int(max(v or 0,0))})
+                bars3=sorted({b["date"]:b for b in bars3}.values(),key=lambda z:z["date"])
+                cls3=[b["close"] for b in bars3]
+                ext3={"sma20":sma(cls3,20),"sma50":sma(cls3,50),"sma200":sma(cls3,200)}
+                v2=by_symbol[sym]
+                dif3={k:pdiff(ext3[k],num(v2.get(k.upper()))) for k in ("sma20","sma50","sma200")}
+                chk3={"sma20":dif3["sma20"] is not None and dif3["sma20"]<=3.0,
+                      "sma50":dif3["sma50"] is not None and dif3["sma50"]<=3.0,
+                      "sma200":dif3["sma200"] is not None and dif3["sma200"]<=5.0}
+                pc3=sum(chk3.values())
+                ld3=bars3[-1]["date"] if bars3 else None
+                try:gap3=(datetime.fromisoformat(session_date)-datetime.fromisoformat(ld3)).days if ld3 else 999
+                except Exception:gap3=999
+                identity3=(chk3["sma20"] and chk3["sma50"]) or (pc3>=2 and (chk3["sma20"] or chk3["sma50"]))
+                ok3=len(bars3)>=60 and gap3<=7 and identity3
+                depth3=60 if ok3 else 0
+                conf3="rejected"
+                comparable3=[x for x in dif3.values() if x is not None]
+                med3=sorted(comparable3)[len(comparable3)//2] if comparable3 else None
+                if ok3:
+                  conf3="high" if pc3==3 and med3 is not None and med3<=2.0 else "medium"
+                elif len(bars3)>=20 and gap3<=7 and dif3["sma20"] is not None and dif3["sma20"]<=1.75:
+                  ok3=True; depth3=20; conf3="short"
+                if not ok3: continue
+                accepted.append(sym)
+                if conf3=="high": high_conf.append(sym)
+                elif conf3=="medium": medium_conf.append(sym)
+                else: short_conf.append(sym)
+                accepted_bars[sym]=bars3[-depth3:]
+                stats[sym]={
+                  "accepted":True,"confidence":conf3,"validated_depth":depth3,"bars_available":len(bars3),
+                  "latest_date":ld3,"freshness_gap_days":gap3,"source":"tradingview",
+                  "v2_sma20":num(v2.get("SMA20")),"v2_sma50":num(v2.get("SMA50")),"v2_sma200":num(v2.get("SMA200")),
+                  "external_sma20":ext3["sma20"],"external_sma50":ext3["sma50"],"external_sma200":ext3["sma200"],
+                  "diff_pct":dif3,"checks":chk3
+                }
+                tertiary_rescued.append(sym)
+              except Exception:
+                continue
+          except Exception:
+            pass
+
           by_date={}
           for sym,bars in accepted_bars.items():
             conf=stats[sym]["confidence"]
@@ -407,14 +477,16 @@ jobs:
                              "source":"external_validated_sidecar","stocks":arr})
           total=len(symbols)
           summary={
-            "schema":"egx-external-history-v4","purpose":"cycle-quality-history-only","execution_source":False,
+            "schema":"egx-external-history-v5","purpose":"cycle-quality-history-only","execution_source":False,
             "session_date":session_date,"generated_at":pd.Timestamp.utcnow().isoformat(),
-            "provider":"yfinance+investiny_fallback","exchange_suffix":".CA","symbols_requested":total,
+            "provider":"yfinance+investiny+tradingview_fallback","exchange_suffix":".CA","symbols_requested":total,
             "symbols_with_60plus":sum((v.get("bars_available") or 0)>=60 for v in stats.values()),
             "accepted_symbols":len(set(accepted)),"high_confidence_symbols":len(high_conf),
             "medium_confidence_symbols":len(medium_conf),"short_validated_symbols":len(short_conf),
             "secondary_attempted":secondary_attempted,"secondary_rescued":secondary_rescued,
             "secondary_rescued_symbols":len(secondary_rescued),
+            "tertiary_attempted":tertiary_attempted,"tertiary_rescued":tertiary_rescued,
+            "tertiary_rescued_symbols":len(tertiary_rescued),
             "rejected_symbols":total-len(set(accepted)),
             "history_sessions":len(sessions),"accepted_ratio_pct":round((len(set(accepted))/total*100),1) if total else 0,
             "accepted":accepted,"high_confidence":high_conf,"medium_confidence":medium_conf,"short_validated":short_conf,
@@ -433,7 +505,7 @@ jobs:
                                                    "high_confidence_symbols","medium_confidence_symbols","short_validated_symbols",
                                                    "history_sessions","accepted_ratio_pct")}))
           PY
-          test -s out/external-history/summary.json || echo '{"schema":"egx-external-history-v4","accepted_symbols":0,"history_sessions":0}' > out/external-history/summary.json
+          test -s out/external-history/summary.json || echo '{"schema":"egx-external-history-v5","accepted_symbols":0,"history_sessions":0}' > out/external-history/summary.json
           test -s out/external-history/sessions.json || echo '{"schema":"egx-external-history-sessions-v2","sessions":[]}' > out/external-history/sessions.json
 
       - name: Recover historical sessions from GitHub snapshots
