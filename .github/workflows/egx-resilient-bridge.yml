@@ -161,6 +161,68 @@ jobs:
             echo "FULL_UNIVERSE_AVAILABLE=false" >> "${GITHUB_ENV}"
           fi
 
+      - name: Build external historical sidecar
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out/external-history
+          python -m pip -q install yfinance pandas
+          python - <<'PY'
+          import json, math, time
+          from datetime import date, timedelta
+          import pandas as pd, yfinance as yf
+
+          U=json.load(open("out/universe.json"))
+          stocks=U.get("stocks",[])
+          symbols=sorted({str(x.get("symbol","")).strip().upper() for x in stocks if x.get("symbol")})
+          # Yahoo's EGX convention is SYMBOL.CA. Historical only: never execution.
+          tickers=[s+".CA" for s in symbols]
+          end=date.today()+timedelta(days=1)
+          start=end-timedelta(days=120)
+          raw=yf.download(tickers=tickers,start=start.isoformat(),end=end.isoformat(),
+                          interval="1d",group_by="ticker",auto_adjust=False,
+                          progress=False,threads=True)
+          rows=[]; stats={}
+          for sym,tkr in zip(symbols,tickers):
+            try:
+              d=raw[tkr].copy() if isinstance(raw.columns,pd.MultiIndex) else raw.copy()
+            except Exception:
+              stats[sym]={"bars":0,"reason":"missing_ticker"}; continue
+            d=d.dropna(subset=["Open","High","Low","Close"])
+            bars=[]
+            for idx,r in d.tail(60).iterrows():
+              vals=[r.get("Open"),r.get("High"),r.get("Low"),r.get("Close")]
+              if any(pd.isna(v) for v in vals): continue
+              o,h,l,c=map(float,vals); v=0 if pd.isna(r.get("Volume")) else int(r.get("Volume"))
+              if min(o,h,l,c)<=0 or h<max(o,c,l) or l>min(o,c,h): continue
+              bars.append({"date":pd.Timestamp(idx).date().isoformat(),"open":o,"high":h,"low":l,"close":c,"volume":v})
+            stats[sym]={"bars":len(bars)}
+            for b in bars: rows.append({"symbol":sym,**b,"source":"yfinance","exchange":"EGX"})
+          json.dump({"schema":"egx-external-history-v1","purpose":"cycle-quality-history-only",
+                     "execution_source":False,"generated_at":pd.Timestamp.utcnow().isoformat(),
+                     "symbols_requested":len(symbols),"symbols_with_15plus":sum(v["bars"]>=15 for v in stats.values()),
+                     "symbols_with_60":sum(v["bars"]>=60 for v in stats.values()),
+                     "stats":stats,"bars":rows},open("out/external-history/yahoo.json","w"))
+          print("external history:",len(symbols),"symbols;",sum(v["bars"]>=15 for v in stats.values()),"with >=15 bars")
+          PY
+
+          # Cross-check the newest external close against V2. This is a trust gate, not a price fallback.
+          jq -n --slurpfile ext out/external-history/yahoo.json --slurpfile uni out/universe.json '
+            ($uni[0].stocks // []) as $u |
+            ($ext[0].bars // []) as $b |
+            [ $u[] as $s |
+              ([ $b[] | select(.symbol==$s.symbol) ] | sort_by(.date) | last) as $e |
+              select($e != null and ($s.close|type)=="number") |
+              {symbol:$s.symbol,v2_close:$s.close,external_close:$e.close,
+               diff_pct:((($e.close-$s.close)/$s.close*100)|if .<0 then -. else . end)}
+            ] as $x |
+            {checked:($x|length),within_1pct:([$x[]|select(.diff_pct<=1)]|length),
+             within_3pct:([$x[]|select(.diff_pct<=3)]|length),
+             median_diff_pct:([$x[].diff_pct]|sort|if length==0 then null else .[length/2|floor] end),
+             sample:($x[:20])}
+          ' > out/external-history/crosscheck.json
+          cat out/external-history/crosscheck.json
+
       - name: Recover historical sessions from GitHub snapshots
         shell: bash
         env:
