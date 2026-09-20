@@ -79,7 +79,7 @@ jobs:
           SYMBOLS: EFIH,EFID,ORWE,BONY,JUFO,AMOC,SVCE,EGAL,MASR,ORHD,HELI,TMGH,ABUK,VLMRA
         run: |
           set -euo pipefail
-          curl -fsSL --connect-timeout 15 --max-time 60 --retry 1 --retry-delay 1             "${EGX_BASE}/api/execution-bundle?symbols=${SYMBOLS}&ts=${EGX_TS}" -o out/latest.json
+          curl -fsSL --connect-timeout 15 --max-time 60 --retry 1 --retry-delay 1             "${EGX_BASE}/api/execution-bundle?ts=${EGX_TS}" -o out/latest.json
           jq -e '
             .source_id == "egx-market-feed-v2" and
             .version == "7.2.1" and
@@ -118,7 +118,10 @@ jobs:
           ' out/latest.json > out/focus.json
           # Preserve the complete V2 universe separately from the focus list.
           jq '{retrieved_at,session_status,expected_reference_session_date,quality,market,screen,stocks}' out/latest.json > out/universe.json
-          jq -e '(.stocks | length) >= 296' out/universe.json >/dev/null
+          ACTUAL="$(jq '.stocks | length' out/universe.json)"
+          EXPECTED="$(jq '.quality.row_count // 0' out/latest.json)"
+          echo "Universe coverage: ${ACTUAL}/${EXPECTED}"
+          jq -e '(.stocks | length) >= 296 and (.stocks | length) == (.quality.row_count)' out/universe.json >/dev/null
 
       - name: Preserve zero-credit session history
         shell: bash
