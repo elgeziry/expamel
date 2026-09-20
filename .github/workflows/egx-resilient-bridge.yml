@@ -403,18 +403,30 @@ jobs:
           else
             echo '{"schema":"egx-session-history-v2","sessions":[]}' > /tmp/prior-history.json
           fi
-          # Merge any recoverable historical full-universe GitHub snapshots before adding today.
+          SESSION="$(jq -r '.expected_reference_session_date // empty' "${GITHUB_WORKSPACE}/out/universe.json")"
+          if [ -z "$SESSION" ] || [ "$SESSION" = "null" ]; then
+            SESSION="$(jq -r '.expected_reference_session_date' "${GITHUB_WORKSPACE}/out/latest.json")"
+          fi
+          # Merge recoverable native GitHub snapshots first.
           if [ -s /tmp/backfill/sessions.json ]; then
             jq --slurpfile recovered /tmp/backfill/sessions.json '
               .sessions = (((.sessions // []) + ($recovered[0] // [])) | unique_by(.date) | sort_by(.date))
             ' /tmp/prior-history.json > /tmp/prior-history-merged.json
             mv /tmp/prior-history-merged.json /tmp/prior-history.json
           fi
-          cd "${GITHUB_WORKSPACE}"
-          SESSION="$(jq -r '.expected_reference_session_date // empty' out/universe.json)"
-          if [ -z "$SESSION" ] || [ "$SESSION" = "null" ]; then
-            SESSION="$(jq -r '.expected_reference_session_date' out/latest.json)"
+          # Then add validated external sessions only where no native date already exists.
+          # Native Bridge observations always win on duplicate dates.
+          EXT_SESSIONS="${GITHUB_WORKSPACE}/out/external-history/sessions.json"
+          if [ -s "$EXT_SESSIONS" ]; then
+            jq --slurpfile ext "$EXT_SESSIONS" '
+              (.sessions // []) as $existing
+              | ($existing | map(.date)) as $dates
+              | (($ext[0].sessions // []) | map(select(.date as $d | ($dates | index($d)) == null))) as $new
+              | .sessions = (($existing + $new) | sort_by(.date))
+            ' /tmp/prior-history.json > /tmp/prior-history-external.json
+            mv /tmp/prior-history-external.json /tmp/prior-history.json
           fi
+          cd "${GITHUB_WORKSPACE}"
           HISTORY_INPUT="out/universe.json"
           if [ "${FULL_UNIVERSE_AVAILABLE:-false}" != "true" ]; then
             HISTORY_INPUT="out/latest.json"
@@ -425,12 +437,16 @@ jobs:
               date: $session,
               retrieved_at: .retrieved_at,
               market: .market,
+              source: "v2_bridge",
+              session_status: .session_status,
               stocks: [.stocks[] | {
                 symbol, close, open, high, low, volume, change,
                 RSI, EMA20, SMA20, SMA50, SMA200,
                 relative_volume_10d,
                 long_term_trend,
-                close_location_in_day
+                close_location_in_day,
+                history_source: "v2_bridge",
+                history_confidence: "authoritative_current"
               }]
             }
           ' "$HISTORY_INPUT" > /tmp/today.json
@@ -454,6 +470,8 @@ jobs:
                 $today.stocks[] as $s
                 | ([ $h.sessions[] | .stocks[] | select(.symbol == $s.symbol) ]) as $series
                 | ($series | length) as $m
+                | ($series | map(select((.history_source // "v2_bridge") == "external_validated_yfinance")) | length) as $external_m
+                | ($m - $external_m) as $native_m
                 | ($series | map(.close)) as $cl
                 | ($series | map(.volume)) as $vol
                 | ($cl[-1]) as $last
@@ -467,8 +485,21 @@ jobs:
                 | {
                     symbol: $s.symbol,
                     sessions_available: $m,
+                    native_sessions: $native_m,
+                    external_validated_sessions: $external_m,
+                    provenance: (if $external_m > 0 and $native_m > 0 then "hybrid_validated_external_plus_v2"
+                                 elif $external_m > 0 then "validated_external"
+                                 else "v2_native" end),
                     status: (if $m >= 10 then "complete" elif $m >= 6 then "usable_provisional" else "warming_up" end),
-                    confidence_pct: (if $m >= 15 then 100 elif $m >= 10 then 85 elif $m >= 6 then 60 else (($m * 10) | if . > 50 then 50 else . end) end),
+                    confidence_pct: (
+                      if $m >= 15 and $native_m >= 10 then 100
+                      elif $m >= 15 and $external_m > 0 then 90
+                      elif $m >= 10 and $external_m > 0 then 80
+                      elif $m >= 10 then 85
+                      elif $m >= 6 and $external_m > 0 then 55
+                      elif $m >= 6 then 60
+                      else (($m * 10) | if . > 50 then 50 else . end) end
+                    ),
                     components: {
                       weekly_structure: (
                         if $m >= 6 then
@@ -515,6 +546,9 @@ jobs:
             | .coverage = {
                 latest_universe_count: ($today.stocks|length),
                 sessions_available: $n,
+                full_universe_sessions_available: ($h.sessions|map(select((.stocks|length)>=296))|length),
+                external_history_sessions: ($h.sessions|map(select(.source=="external_validated_yfinance"))|length),
+                external_validated_symbols: ($cq|map(select(.external_validated_sessions>0))|length),
                 full_universe_target: 296,
                 cycle_quality_complete_count: ($cq|map(select(.status=="complete"))|length),
                 cycle_quality_usable_count: ($cq|map(select(.status=="complete" or .status=="usable_provisional"))|length)
@@ -543,7 +577,7 @@ jobs:
                 market_phase: (.session_status // "unknown"),
                 data_sha256: $sha,
                 history_contract: "egx-session-history-v2",
-                cycle_quality_engine: "github-history-v1"
+                cycle_quality_engine: "hybrid-validated-history-v2"
               },
               path_health: {
                 netlify: {
@@ -579,8 +613,8 @@ jobs:
                 history: {
                   contract: "egx-session-history-v2",
                   retention_sessions: 60,
-                  source: "github_zero_credit",
-                  cycle_quality: "computed_from_history_when_sufficient"
+                  source: "v2_native_plus_validated_external_history",
+                  cycle_quality: "computed_from_validated_history_when_sufficient"
                 }
               }
             }
