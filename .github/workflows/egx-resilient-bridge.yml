@@ -2,6 +2,9 @@ name: EGX Netlify V2 transport mirror
 
 on:
   workflow_dispatch:
+  schedule:
+    # One refresh per hour during the EGX daytime window; portfolio alerts read GitHub only.
+    - cron: '0 7-12 * * 0-4'
   push:
     paths:
       - '.github/workflows/egx-resilient-bridge.yml'
@@ -105,7 +108,66 @@ jobs:
             }
           ' out/latest.json > out/focus.json
 
-      - name: Publish validated Netlify V2 snapshot
+      - name: Wrap V2 snapshot in EGX Resilient Bridge contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp out/latest.json out/v2-raw.json
+          SHA="$(jq -r '.data_fingerprint_sha256' out/v2-raw.json)"
+          GENERATED="$(jq -r '.retrieved_at' out/v2-raw.json)"
+          jq --arg sha "$SHA" --arg generated "$GENERATED" '
+            {
+              bridge: {
+                name: "EGX Resilient Bridge",
+                version: "2.0-contract",
+                generated_at: $generated,
+                transport_independent: true,
+                selected_mode: "netlify_only_degraded",
+                market_phase: (.session_status // "unknown"),
+                data_sha256: $sha
+              },
+              path_health: {
+                netlify: {
+                  ok: true,
+                  execution_usable: (.execution_usable == true),
+                  source_id: .source_id
+                },
+                direct: {
+                  ok: false,
+                  row_count: 0,
+                  error: "not_used_by_credit_guard"
+                }
+              },
+              data: {
+                execution_usable: (.execution_usable == true),
+                retrieved_at: .retrieved_at,
+                session_status: .session_status,
+                expected_reference_session_date: .expected_reference_session_date,
+                stale_risk: .stale_risk,
+                blockers: (.blockers // []),
+                warnings: (.warnings // []),
+                quality: .quality,
+                market: .market,
+                screen: (
+                  (.screen // {}) as $s
+                  | if (($s.top_setup // null) | type) == "array"
+                    then $s
+                    else ($s + {top_setup: []})
+                    end
+                ),
+                stocks: (.stocks // [])
+              }
+            }
+          ' out/v2-raw.json > out/latest.json
+          jq -e '
+            .bridge.name == "EGX Resilient Bridge" and
+            (.bridge.data_sha256 | type == "string" and test("^[a-f0-9]{64}$")) and
+            (.data.market | type == "object") and
+            (.data.screen.top_setup | type == "array") and
+            ((.path_health.netlify.ok == true) or (.path_health.direct.ok == true))
+          ' out/latest.json >/dev/null
+
+      - name: Publish validated Bridge snapshot
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
