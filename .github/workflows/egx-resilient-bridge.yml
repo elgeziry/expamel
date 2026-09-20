@@ -279,6 +279,7 @@ jobs:
                     end
                 ),
                 stocks: (.stocks // []),
+                cycle_quality: ((input | .cycle_quality) // []),
                 history: {
                   contract: "egx-session-history-v2",
                   retention_sessions: 60,
@@ -287,12 +288,13 @@ jobs:
                 }
               }
             }
-          ' out/v2-raw.json > out/latest.json
+          ' out/v2-raw.json out/history.json > out/latest.json
           jq -e '
             .bridge.name == "EGX Resilient Bridge" and
             (.bridge.data_sha256 | type == "string" and test("^[a-f0-9]{64}$")) and
             (.data.market | type == "object") and
             (.data.screen.top_setup | type == "array") and
+            (.data.cycle_quality | type == "array" and length >= 296) and
             ((.path_health.netlify.ok == true) or (.path_health.direct.ok == true))
           ' out/latest.json >/dev/null
 
