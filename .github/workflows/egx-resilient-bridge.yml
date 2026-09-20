@@ -9,6 +9,7 @@ name: EGX Netlify V2 transport mirror
   issues:
     types: [labeled]
   schedule:
+    # trigger validation 2
     # One refresh per hour during the EGX daytime window; portfolio alerts read GitHub only.
     - cron: '0 7-12 * * 0-4'
   push:
