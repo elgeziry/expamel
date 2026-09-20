@@ -161,6 +161,57 @@ jobs:
             echo "FULL_UNIVERSE_AVAILABLE=false" >> "${GITHUB_ENV}"
           fi
 
+      - name: Recover historical sessions from GitHub snapshots
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/backfill
+          git init -q /tmp/backfill/repo
+          cd /tmp/backfill/repo
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          # Pull the live branch history once; this uses GitHub only and consumes no Netlify credits.
+          git fetch -q --filter=blob:none origin egx-live || true
+          : > /tmp/backfill/candidates.ndjson
+          for commit in $(git rev-list --all --remotes=origin/egx-live 2>/dev/null | head -n 120); do
+            for path in universe.json latest.json; do
+              if git cat-file -e "${commit}:${path}" 2>/dev/null; then
+                git show "${commit}:${path}" > /tmp/backfill/raw.json 2>/dev/null || continue
+                jq -c '
+                  def rows:
+                    if type=="array" then .
+                    elif ((.stocks? | type)=="array") then .stocks
+                    elif ((.data?.stocks? | type)=="array") then .data.stocks
+                    else [] end;
+                  (rows) as $r
+                  | if ($r|length) >= 296 then
+                      {
+                        date: (.expected_reference_session_date // .data.expected_reference_session_date // .retrieved_at[0:10] // .bridge.generated_at[0:10]),
+                        retrieved_at: (.retrieved_at // .bridge.generated_at),
+                        market: (.market // .data.market),
+                        stocks: [$r[] | {
+                          symbol, close, open, high, low, volume, change,
+                          RSI, EMA20, SMA20, SMA50, SMA200,
+                          relative_volume_10d,
+                          long_term_trend,
+                          close_location_in_day
+                        }]
+                      }
+                    else empty end
+                ' /tmp/backfill/raw.json >> /tmp/backfill/candidates.ndjson 2>/dev/null || true
+                break
+              fi
+            done
+          done
+          if [ -s /tmp/backfill/candidates.ndjson ]; then
+            jq -s 'unique_by(.date) | sort_by(.date)' /tmp/backfill/candidates.ndjson > /tmp/backfill/sessions.json
+          else
+            echo '[]' > /tmp/backfill/sessions.json
+          fi
+          echo "Recovered GitHub full-universe sessions: $(jq length /tmp/backfill/sessions.json)"
+          cd "${GITHUB_WORKSPACE}"
+
       - name: Preserve zero-credit session history
         shell: bash
         env:
@@ -174,7 +225,14 @@ jobs:
           if git fetch -q --depth=1 origin egx-live && git show FETCH_HEAD:history.json > /tmp/prior-history.json 2>/dev/null; then
             :
           else
-            echo '{"schema":"egx-session-history-v1","sessions":[]}' > /tmp/prior-history.json
+            echo '{"schema":"egx-session-history-v2","sessions":[]}' > /tmp/prior-history.json
+          fi
+          # Merge any recoverable historical full-universe GitHub snapshots before adding today.
+          if [ -s /tmp/backfill/sessions.json ]; then
+            jq --slurpfile recovered /tmp/backfill/sessions.json '
+              .sessions = (((.sessions // []) + ($recovered[0] // [])) | unique_by(.date) | sort_by(.date))
+            ' /tmp/prior-history.json > /tmp/prior-history-merged.json
+            mv /tmp/prior-history-merged.json /tmp/prior-history.json
           fi
           cd "${GITHUB_WORKSPACE}"
           SESSION="$(jq -r '.expected_reference_session_date // empty' out/universe.json)"
