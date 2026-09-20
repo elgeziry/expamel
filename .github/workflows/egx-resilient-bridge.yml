@@ -4,6 +4,8 @@ on:
   workflow_dispatch:
   repository_dispatch:
     types: [egx_bridge_refresh]
+  issues:
+    types: [labeled]
   schedule:
     # One refresh per hour during the EGX daytime window; portfolio alerts read GitHub only.
     - cron: '0 7-12 * * 0-4'
@@ -22,6 +24,7 @@ concurrency:
 
 jobs:
   mirror:
+    if: github.event_name != 'issues' || github.event.label.name == 'egx-bridge-refresh'
     runs-on: ubuntu-latest
     timeout-minutes: 4
     steps:
