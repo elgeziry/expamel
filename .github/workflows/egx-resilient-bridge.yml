@@ -116,6 +116,9 @@ jobs:
               stocks: (.stocks | map(select(.symbol as $s | $req | index($s))))
             }
           ' out/latest.json > out/focus.json
+          # Preserve the complete V2 universe separately from the focus list.
+          jq '{retrieved_at,session_status,expected_reference_session_date,quality,market,screen,stocks}' out/latest.json > out/universe.json
+          jq -e '(.stocks | length) >= 296' out/universe.json >/dev/null
 
       - name: Preserve zero-credit session history
         shell: bash
@@ -318,6 +321,7 @@ jobs:
           cp out/contract.json /tmp/egx-live/contract.json
           cp out/transport.json /tmp/egx-live/transport.json
           cp out/focus.json /tmp/egx-live/focus.json
+          cp out/universe.json /tmp/egx-live/universe.json
           cp out/history.json /tmp/egx-live/history.json
           cd /tmp/egx-live
           git init -q
