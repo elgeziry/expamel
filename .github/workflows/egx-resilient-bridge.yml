@@ -175,7 +175,10 @@ jobs:
             echo '{"schema":"egx-session-history-v1","sessions":[]}' > /tmp/prior-history.json
           fi
           cd "${GITHUB_WORKSPACE}"
-          SESSION="$(jq -r '.expected_reference_session_date' out/latest.json)"
+          SESSION="$(jq -r '.expected_reference_session_date // empty' out/universe.json)"
+          if [ -z "$SESSION" ] || [ "$SESSION" = "null" ]; then
+            SESSION="$(jq -r '.expected_reference_session_date' out/latest.json)"
+          fi
           # Store one compact end/current observation per trading date; repeated hourly runs replace the same date.
           jq --arg session "$SESSION" '
             {
