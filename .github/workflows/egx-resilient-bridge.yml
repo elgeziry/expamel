@@ -242,220 +242,220 @@ jobs:
           else
             echo "::warning::Canonical aggregate bundle unavailable; entering direct V2 stock fallback."
             python - <<'PY'
-            import concurrent.futures, datetime as dt, hashlib, json, math, os, time, urllib.parse, urllib.request
+          import concurrent.futures, datetime as dt, hashlib, json, math, os, time, urllib.parse, urllib.request
 
-            bases=[]
-            for b in [os.environ.get("EGX_BASE"),"https://egx-market-feed-v2.netlify.app","https://master--egx-market-feed-v2.netlify.app"]:
-                if b and b not in bases: bases.append(b.rstrip("/"))
+          bases=[]
+          for b in [os.environ.get("EGX_BASE"),"https://egx-market-feed-v2.netlify.app","https://master--egx-market-feed-v2.netlify.app"]:
+              if b and b not in bases: bases.append(b.rstrip("/"))
 
-            focus=[x.strip().upper() for x in os.environ.get("SYMBOLS","").split(",") if x.strip()]
-            try:
-                prior=json.load(open("out/prior-universe.json"))
-            except Exception:
-                prior={"stocks":[]}
-            prior_stocks=prior.get("stocks") or []
-            by={str(x.get("symbol","")).upper():x for x in prior_stocks if x.get("symbol")}
-            symbols=list(by)
-            for x in focus:
-                if x not in symbols: symbols.append(x)
+          focus=[x.strip().upper() for x in os.environ.get("SYMBOLS","").split(",") if x.strip()]
+          try:
+              prior=json.load(open("out/prior-universe.json"))
+          except Exception:
+              prior={"stocks":[]}
+          prior_stocks=prior.get("stocks") or []
+          by={str(x.get("symbol","")).upper():x for x in prior_stocks if x.get("symbol")}
+          symbols=list(by)
+          for x in focus:
+              if x not in symbols: symbols.append(x)
 
-            request_stamp=str(time.time_ns())
+          request_stamp=str(time.time_ns())
 
-            def number(v):
-                try:
-                    x=float(v)
-                    return x if math.isfinite(x) else None
-                except Exception:
-                    return None
+          def number(v):
+              try:
+                  x=float(v)
+                  return x if math.isfinite(x) else None
+              except Exception:
+                  return None
 
-            def fetch(sym):
-                last=None
-                for base in bases:
-                    for attempt in range(2):
-                        try:
-                            url=f"{base}/api/stock?symbol={urllib.parse.quote(sym)}&ts={request_stamp}{attempt}"
-                            req=urllib.request.Request(url,headers={"User-Agent":"EGX-Resilient-Bridge/3"})
-                            with urllib.request.urlopen(req,timeout=22) as r:
-                                d=json.load(r)
-                            if d.get("status")=="ok" and str(d.get("symbol",sym)).upper()==sym:
-                                return sym,d,base,None
-                            last=f"bad_status:{d.get('status')}"
-                        except Exception as e:
-                            last=f"{type(e).__name__}:{e}"
-                            time.sleep(.15*(attempt+1))
-                return sym,None,None,last
+          def fetch(sym):
+              last=None
+              for base in bases:
+                  for attempt in range(2):
+                      try:
+                          url=f"{base}/api/stock?symbol={urllib.parse.quote(sym)}&ts={request_stamp}{attempt}"
+                          req=urllib.request.Request(url,headers={"User-Agent":"EGX-Resilient-Bridge/3"})
+                          with urllib.request.urlopen(req,timeout=22) as r:
+                              d=json.load(r)
+                          if d.get("status")=="ok" and str(d.get("symbol",sym)).upper()==sym:
+                              return sym,d,base,None
+                          last=f"bad_status:{d.get('status')}"
+                      except Exception as e:
+                          last=f"{type(e).__name__}:{e}"
+                          time.sleep(.15*(attempt+1))
+              return sym,None,None,last
 
-            results={}
-            errors={}
-            workers=min(28,max(8,len(symbols)//8 if symbols else 8))
-            with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as ex:
-                futs=[ex.submit(fetch,s) for s in symbols]
-                for fut in concurrent.futures.as_completed(futs):
-                    sym,d,base,err=fut.result()
-                    if d is not None: results[sym]=(d,base)
-                    else: errors[sym]=err
+          results={}
+          errors={}
+          workers=min(28,max(8,len(symbols)//8 if symbols else 8))
+          with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as ex:
+              futs=[ex.submit(fetch,s) for s in symbols]
+              for fut in concurrent.futures.as_completed(futs):
+                  sym,d,base,err=fut.result()
+                  if d is not None: results[sym]=(d,base)
+                  else: errors[sym]=err
 
-            fetched_at=dt.datetime.now(dt.timezone.utc).isoformat().replace("+00:00","Z")
+          fetched_at=dt.datetime.now(dt.timezone.utc).isoformat().replace("+00:00","Z")
 
-            def first(d,*keys):
-                for k in keys:
-                    cur=d
-                    ok=True
-                    for part in k.split("."):
-                        if not isinstance(cur,dict) or part not in cur:
-                            ok=False
-                            break
-                        cur=cur[part]
-                    if ok and cur is not None:
-                        return cur
-                return None
+          def first(d,*keys):
+              for k in keys:
+                  cur=d
+                  ok=True
+                  for part in k.split("."):
+                      if not isinstance(cur,dict) or part not in cur:
+                          ok=False
+                          break
+                      cur=cur[part]
+                  if ok and cur is not None:
+                      return cur
+              return None
 
-            merged=[]
-            statuses=[]
-            for sym,(d,base) in results.items():
-                old=dict(by.get(sym) or {"symbol":sym,"name":sym,"description":sym})
-                mapping={
-                    "close": first(d,"last_price","close","price"),
-                    "open": first(d,"open","session.open","ohlc.open"),
-                    "high": first(d,"high","session.high","ohlc.high"),
-                    "low": first(d,"low","session.low","ohlc.low"),
-                    "volume": first(d,"volume","session.volume"),
-                    "change": first(d,"change_percent","change"),
-                    "RSI": first(d,"technical.rsi","technical.RSI"),
-                    "EMA20": first(d,"technical.ema20","technical.EMA20"),
-                    "SMA20": first(d,"technical.sma20","technical.SMA20"),
-                    "SMA50": first(d,"technical.sma50","technical.SMA50"),
-                    "SMA200": first(d,"technical.sma200","technical.SMA200"),
-                    "relative_volume_10d": first(d,"technical.relative_volume_10d","relative_volume_10d"),
-                    "demand_confirmation_score": first(d,"demand_confirmation_score"),
-                }
-                for k,v in mapping.items():
-                    if v is not None:
-                        old[k]=v
-                st=first(d,"session_status")
-                if st:
-                    statuses.append(str(st))
-                old["current_session"]=st or prior.get("session_status")
-                old["_direct_snapshot"]={
-                    "ok":True,
-                    "base":base,
-                    "fetched_at":fetched_at,
-                    "source_timestamp":first(d,"retrieved_at","updated_at","as_of","timestamp","last_update"),
-                    "status":d.get("status"),
-                    "field_freshness":{"price_technical":"direct_current","fundamentals":"carried_forward_last_validated"}
-                }
-                merged.append(old)
+          merged=[]
+          statuses=[]
+          for sym,(d,base) in results.items():
+              old=dict(by.get(sym) or {"symbol":sym,"name":sym,"description":sym})
+              mapping={
+                  "close": first(d,"last_price","close","price"),
+                  "open": first(d,"open","session.open","ohlc.open"),
+                  "high": first(d,"high","session.high","ohlc.high"),
+                  "low": first(d,"low","session.low","ohlc.low"),
+                  "volume": first(d,"volume","session.volume"),
+                  "change": first(d,"change_percent","change"),
+                  "RSI": first(d,"technical.rsi","technical.RSI"),
+                  "EMA20": first(d,"technical.ema20","technical.EMA20"),
+                  "SMA20": first(d,"technical.sma20","technical.SMA20"),
+                  "SMA50": first(d,"technical.sma50","technical.SMA50"),
+                  "SMA200": first(d,"technical.sma200","technical.SMA200"),
+                  "relative_volume_10d": first(d,"technical.relative_volume_10d","relative_volume_10d"),
+                  "demand_confirmation_score": first(d,"demand_confirmation_score"),
+              }
+              for k,v in mapping.items():
+                  if v is not None:
+                      old[k]=v
+              st=first(d,"session_status")
+              if st:
+                  statuses.append(str(st))
+              old["current_session"]=st or prior.get("session_status")
+              old["_direct_snapshot"]={
+                  "ok":True,
+                  "base":base,
+                  "fetched_at":fetched_at,
+                  "source_timestamp":first(d,"retrieved_at","updated_at","as_of","timestamp","last_update"),
+                  "status":d.get("status"),
+                  "field_freshness":{"price_technical":"direct_current","fundamentals":"carried_forward_last_validated"}
+              }
+              merged.append(old)
 
-            got=set(results)
-            for old0 in prior_stocks:
-                sym=str(old0.get("symbol","")).upper()
-                if sym and sym not in got:
-                    old=dict(old0)
-                    old["_direct_snapshot"]={"ok":False,"fetched_at":fetched_at,"field_freshness":{"price_technical":"stale_context_only"}}
-                    merged.append(old)
+          got=set(results)
+          for old0 in prior_stocks:
+              sym=str(old0.get("symbol","")).upper()
+              if sym and sym not in got:
+                  old=dict(old0)
+                  old["_direct_snapshot"]={"ok":False,"fetched_at":fetched_at,"field_freshness":{"price_technical":"stale_context_only"}}
+                  merged.append(old)
 
-            success=len(results)
-            focus_success=sum(1 for x in focus if x in results)
-            current=[x for x in merged if (x.get("_direct_snapshot") or {}).get("ok") is True]
-            adv=sum(1 for x in current if (number(x.get("change")) or 0)>0)
-            dec=sum(1 for x in current if (number(x.get("change")) or 0)<0)
-            unch=len(current)-adv-dec
-            positive=round(adv/max(len(current),1)*100,1)
-            session_status=max(set(statuses),key=statuses.count) if statuses else (prior.get("session_status") or "unknown")
-            expected_date=prior.get("expected_reference_session_date") or dt.datetime.now(dt.timezone.utc).date().isoformat()
-            top=sorted(current,key=lambda x: ((x.get("decision_support") or {}).get("setup_score") or -1),reverse=True)[:25]
-            market={
-                "regime":"direct_sampled",
-                "breadth":{"advancers":adv,"decliners":dec,"unchanged":unch,"positive_pct":positive},
-                "sampled":True,
-                "sample_size":len(current),
-                "sample_scope":"individual_v2_stock_endpoints"
-            }
-            execution_usable=success>=50 and focus_success>=min(8,len(focus))
-            quality={
-                "row_count":success,
-                "upstream_total_count":len(symbols),
-                "expected_universe_floor":50,
-                "universe_coverage_pct":round(success/max(len(symbols),1)*100,1),
-                "universe_complete":success>=len(symbols) and len(symbols)>0,
-                "unique_symbols":success,
-                "coverage_scope":"fresh_individual_v2_rows",
-                "close_coverage_pct":round(sum(1 for x in current if x.get("close") is not None)/max(success,1)*100,1),
-                "volume_coverage_pct":round(sum(1 for x in current if x.get("volume") is not None)/max(success,1)*100,1),
-                "basic_integrity_ok":success>=50,
-                "live_session_consistent":True,
-                "live_execution_usable":execution_usable,
-                "direct_focus_success":focus_success,
-                "direct_focus_requested":len(focus),
-                "stale_context_rows":max(0,len(merged)-success)
-            }
-            payload={
-                "source_id":"egx-market-feed-v2",
-                "version":"direct-stock-fallback",
-                "retrieved_at":fetched_at,
-                "session_status":session_status,
-                "expected_reference_session_date":expected_date,
-                "execution_usable":execution_usable,
-                "stale_risk":"controlled_direct_fallback" if execution_usable else "blocked",
-                "blockers":[] if execution_usable else [f"direct_rows_below_gate:{success}"],
-                "warnings":[
-                    "aggregate_endpoints_unavailable",
-                    "direct_v2_stock_fallback",
-                    "fundamentals_carried_forward_from_last_validated_universe",
-                    "market_breadth_sampled_from_fresh_direct_rows"
-                ],
-                "quality":quality,
-                "market":market,
-                "screen":{"top_setup":top,"early_movement":[],"degraded_direct_fallback":True},
-                "stocks":current
-            }
-            canon=json.dumps(payload,sort_keys=True,separators=(",",":"),ensure_ascii=False).encode()
-            payload["data_fingerprint_sha256"]=hashlib.sha256(canon).hexdigest()
-            json.dump(payload,open("out/latest.json","w"),ensure_ascii=False,indent=2)
-            json.dump({
-                "retrieved_at":fetched_at,
-                "session_status":session_status,
-                "expected_reference_session_date":expected_date,
-                "quality":quality,
-                "market":market,
-                "screen":payload["screen"],
-                "stocks":merged
-            },open("out/universe.json","w"),ensure_ascii=False,indent=2)
-            json.dump({
-                "retrieved_at":fetched_at,
-                "session_status":session_status,
-                "market":market,
-                "screen":payload["screen"],
-                "stocks":[x for x in current if str(x.get("symbol","")).upper() in focus]
-            },open("out/focus.json","w"),ensure_ascii=False,indent=2)
-            json.dump({
-                "source_id":payload["source_id"],
-                "version":payload["version"],
-                "retrieved_at":fetched_at,
-                "session_status":session_status,
-                "expected_reference_session_date":expected_date,
-                "execution_usable":execution_usable,
-                "stale_risk":payload["stale_risk"],
-                "blockers":payload["blockers"],
-                "warnings":payload["warnings"],
-                "quality":quality,
-                "data_fingerprint_sha256":payload["data_fingerprint_sha256"]
-            },open("out/contract.json","w"),ensure_ascii=False,indent=2)
-            json.dump({
-                "transport":"github-actions-direct-v2-fallback",
-                "market_source":"EGX Market Feed V2 individual stock endpoints",
-                "source_url":bases[0] if bases else None,
-                "mirrored_at":fetched_at,
-                "external_market_fallback_used":False,
-                "external_market_crosscheck_used":False,
-                "direct_rows":success,
-                "focus_success":focus_success,
-                "errors_sample":dict(list(errors.items())[:12])
-            },open("out/transport.json","w"),ensure_ascii=False,indent=2)
-            print(json.dumps({"direct_rows":success,"focus_success":focus_success,"requested":len(symbols),"execution_usable":execution_usable}))
-            if success < 50:
-                raise SystemExit("DIRECT_FALLBACK_GATE_FAILED: fewer than 50 fresh V2 stock rows")
-            PY
+          success=len(results)
+          focus_success=sum(1 for x in focus if x in results)
+          current=[x for x in merged if (x.get("_direct_snapshot") or {}).get("ok") is True]
+          adv=sum(1 for x in current if (number(x.get("change")) or 0)>0)
+          dec=sum(1 for x in current if (number(x.get("change")) or 0)<0)
+          unch=len(current)-adv-dec
+          positive=round(adv/max(len(current),1)*100,1)
+          session_status=max(set(statuses),key=statuses.count) if statuses else (prior.get("session_status") or "unknown")
+          expected_date=prior.get("expected_reference_session_date") or dt.datetime.now(dt.timezone.utc).date().isoformat()
+          top=sorted(current,key=lambda x: ((x.get("decision_support") or {}).get("setup_score") or -1),reverse=True)[:25]
+          market={
+              "regime":"direct_sampled",
+              "breadth":{"advancers":adv,"decliners":dec,"unchanged":unch,"positive_pct":positive},
+              "sampled":True,
+              "sample_size":len(current),
+              "sample_scope":"individual_v2_stock_endpoints"
+          }
+          execution_usable=success>=50 and focus_success>=min(8,len(focus))
+          quality={
+              "row_count":success,
+              "upstream_total_count":len(symbols),
+              "expected_universe_floor":50,
+              "universe_coverage_pct":round(success/max(len(symbols),1)*100,1),
+              "universe_complete":success>=len(symbols) and len(symbols)>0,
+              "unique_symbols":success,
+              "coverage_scope":"fresh_individual_v2_rows",
+              "close_coverage_pct":round(sum(1 for x in current if x.get("close") is not None)/max(success,1)*100,1),
+              "volume_coverage_pct":round(sum(1 for x in current if x.get("volume") is not None)/max(success,1)*100,1),
+              "basic_integrity_ok":success>=50,
+              "live_session_consistent":True,
+              "live_execution_usable":execution_usable,
+              "direct_focus_success":focus_success,
+              "direct_focus_requested":len(focus),
+              "stale_context_rows":max(0,len(merged)-success)
+          }
+          payload={
+              "source_id":"egx-market-feed-v2",
+              "version":"direct-stock-fallback",
+              "retrieved_at":fetched_at,
+              "session_status":session_status,
+              "expected_reference_session_date":expected_date,
+              "execution_usable":execution_usable,
+              "stale_risk":"controlled_direct_fallback" if execution_usable else "blocked",
+              "blockers":[] if execution_usable else [f"direct_rows_below_gate:{success}"],
+              "warnings":[
+                  "aggregate_endpoints_unavailable",
+                  "direct_v2_stock_fallback",
+                  "fundamentals_carried_forward_from_last_validated_universe",
+                  "market_breadth_sampled_from_fresh_direct_rows"
+              ],
+              "quality":quality,
+              "market":market,
+              "screen":{"top_setup":top,"early_movement":[],"degraded_direct_fallback":True},
+              "stocks":current
+          }
+          canon=json.dumps(payload,sort_keys=True,separators=(",",":"),ensure_ascii=False).encode()
+          payload["data_fingerprint_sha256"]=hashlib.sha256(canon).hexdigest()
+          json.dump(payload,open("out/latest.json","w"),ensure_ascii=False,indent=2)
+          json.dump({
+              "retrieved_at":fetched_at,
+              "session_status":session_status,
+              "expected_reference_session_date":expected_date,
+              "quality":quality,
+              "market":market,
+              "screen":payload["screen"],
+              "stocks":merged
+          },open("out/universe.json","w"),ensure_ascii=False,indent=2)
+          json.dump({
+              "retrieved_at":fetched_at,
+              "session_status":session_status,
+              "market":market,
+              "screen":payload["screen"],
+              "stocks":[x for x in current if str(x.get("symbol","")).upper() in focus]
+          },open("out/focus.json","w"),ensure_ascii=False,indent=2)
+          json.dump({
+              "source_id":payload["source_id"],
+              "version":payload["version"],
+              "retrieved_at":fetched_at,
+              "session_status":session_status,
+              "expected_reference_session_date":expected_date,
+              "execution_usable":execution_usable,
+              "stale_risk":payload["stale_risk"],
+              "blockers":payload["blockers"],
+              "warnings":payload["warnings"],
+              "quality":quality,
+              "data_fingerprint_sha256":payload["data_fingerprint_sha256"]
+          },open("out/contract.json","w"),ensure_ascii=False,indent=2)
+          json.dump({
+              "transport":"github-actions-direct-v2-fallback",
+              "market_source":"EGX Market Feed V2 individual stock endpoints",
+              "source_url":bases[0] if bases else None,
+              "mirrored_at":fetched_at,
+              "external_market_fallback_used":False,
+              "external_market_crosscheck_used":False,
+              "direct_rows":success,
+              "focus_success":focus_success,
+              "errors_sample":dict(list(errors.items())[:12])
+          },open("out/transport.json","w"),ensure_ascii=False,indent=2)
+          print(json.dumps({"direct_rows":success,"focus_success":focus_success,"requested":len(symbols),"execution_usable":execution_usable}))
+          if success < 50:
+              raise SystemExit("DIRECT_FALLBACK_GATE_FAILED: fewer than 50 fresh V2 stock rows")
+          PY
             DIRECT_ROWS="$(jq -r '.quality.row_count // 0' out/latest.json)"
             echo "SELECTED_MODE=direct_fallback" >> "${GITHUB_ENV}"
             echo "DIRECT_OK=true" >> "${GITHUB_ENV}"
