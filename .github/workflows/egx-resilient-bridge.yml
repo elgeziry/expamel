@@ -75,22 +75,46 @@ jobs:
               break
             fi
           done
-          test "$DIAG_OK" = true
-          jq -e '
-            .source_id == "egx-market-feed-v2" and
-            (.version == "7.2.1" or .core_version_expected == "7.2.1") and
-            .execution_usable == true and
-            (.blockers | type == "array" and length == 0) and
-            (.expected_reference_session_date | type == "string" and length == 10) and
-            (.session_status | type == "string" and length > 0) and
-            (.stale_risk | type == "string" and length > 0) and
-            (.quality.row_count >= 296) and
-            (.quality.unique_symbols == .quality.row_count) and
-            (.quality.close_coverage_pct >= 90) and
-            (.quality.volume_coverage_pct >= 80) and
-            (.quality.live_session_consistent == true) and
-            (.data_fingerprint_sha256 | type == "string" and test("^[a-f0-9]{64}$"))
-          ' out/health.json >/dev/null
+          if [ "$DIAG_OK" = true ]; then
+            jq -e '
+              .source_id == "egx-market-feed-v2" and
+              (.version == "7.2.1" or .core_version_expected == "7.2.1") and
+              .execution_usable == true and
+              (.blockers | type == "array" and length == 0) and
+              (.expected_reference_session_date | type == "string" and length == 10) and
+              (.session_status | type == "string" and length > 0) and
+              (.stale_risk | type == "string" and length > 0) and
+              (.quality.row_count >= 296) and
+              (.quality.unique_symbols == .quality.row_count) and
+              (.quality.close_coverage_pct >= 90) and
+              (.quality.volume_coverage_pct >= 80) and
+              (.quality.live_session_consistent == true) and
+              (.data_fingerprint_sha256 | type == "string" and test("^[a-f0-9]{64}$"))
+            ' out/health.json >/dev/null
+            echo "DIAGNOSTICS_DEGRADED=false" >> "${GITHUB_ENV}"
+          else
+            # Diagnostics can fail independently while V2 data endpoints remain healthy.
+            # Require /api/health here; the canonical execution bundle below remains
+            # the strict execution gate for coverage, freshness, blockers and fingerprint.
+            HEALTH_OK=false
+            declare -A SEEN_HEALTH_BASES=()
+            for candidate in "${EGX_BASE}" "https://egx-market-feed-v2.netlify.app" "https://master--egx-market-feed-v2.netlify.app"; do
+              if [ -n "${SEEN_HEALTH_BASES[$candidate]:-}" ]; then continue; fi
+              SEEN_HEALTH_BASES["$candidate"]=1
+              echo "Diagnostics unavailable; trying health fallback: $candidate"
+              if curl -fsSL --connect-timeout 15 --max-time 25 --retry 3 --retry-all-errors --retry-delay 2 \
+                "${candidate}/api/health?ts=${EGX_TS}" -o out/health-fallback.tmp \
+                && jq -e 'type=="object" and .status=="ok" and (.version=="7.2.1" or .core_version_expected=="7.2.1")' out/health-fallback.tmp >/dev/null 2>&1; then
+                jq '. + {diagnostics_degraded:true, diagnostics_fallback:"api_health"}' out/health-fallback.tmp > out/health.json
+                EGX_BASE="$candidate"
+                echo "EGX_BASE=${EGX_BASE}" >> "${GITHUB_ENV}"
+                echo "DIAGNOSTICS_DEGRADED=true" >> "${GITHUB_ENV}"
+                HEALTH_OK=true
+                break
+              fi
+            done
+            test "$HEALTH_OK" = true
+          fi
 
       - name: Fetch canonical focus bundle and full market universe
         shell: bash
@@ -100,7 +124,7 @@ jobs:
           set -euo pipefail
 
           # 1) Canonical execution bundle remains the authoritative focus/execution payload.
-          curl -fsSL --connect-timeout 15 --max-time 60 --retry 2 --retry-delay 1 \
+          curl -fsSL --connect-timeout 15 --max-time 60 --retry 4 --retry-all-errors --retry-delay 2 \
             "${EGX_BASE}/api/execution-bundle?symbols=${SYMBOLS}&ts=${EGX_TS}" -o out/latest.json
 
           jq -e '
@@ -145,7 +169,7 @@ jobs:
 
           # 2) Full-universe snapshot from the canonical V2 market endpoint.
           # /api/market is the endpoint already used by the repository's proven comprehensive scan.
-          curl -fsSL --connect-timeout 15 --max-time 60 --retry 2 --retry-delay 1 \
+          curl -fsSL --connect-timeout 15 --max-time 60 --retry 4 --retry-all-errors --retry-delay 2 \
             "${EGX_BASE}/api/market?ts=${EGX_TS}" -o out/market.json
 
           # V2 market may expose the universe under different documented shapes.
