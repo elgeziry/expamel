@@ -189,6 +189,13 @@ jobs:
             echo "Reusing validated external history cache for $SESSION: $CACHED_ACCEPTED symbols"
             exit 0
           fi
+          # Historical bars are deliberately decoupled from execution. If the current
+          # market universe is temporarily incomplete, keep the last validated sidecar
+          # instead of rebuilding it from a partial symbol set and shrinking coverage.
+          if [ "${FULL_UNIVERSE_AVAILABLE:-false}" != "true" ] && [ "$CACHED_SCHEMA" = "egx-external-history-v5" ] && [ "${CACHED_ACCEPTED:-0}" -ge 1 ]; then
+            echo "::warning::Current V2 universe is partial; reusing prior validated external-history cache ($CACHED_ACCEPTED symbols)."
+            exit 0
+          fi
 
           rm -f out/external-history/*.json
           python -m pip -q install yfinance pandas investiny || exit 0
@@ -600,10 +607,18 @@ jobs:
           fi
           cd "${GITHUB_WORKSPACE}"
           HISTORY_INPUT="out/universe.json"
-          if [ "${FULL_UNIVERSE_AVAILABLE:-false}" != "true" ]; then
+          UNIVERSE_ROWS="$(jq -r '(.stocks // []) | length' out/universe.json 2>/dev/null || echo 0)"
+          # A near-complete V2 universe (for example 295/296 because one row is
+          # transiently missing) is still far safer for historical analytics than
+          # collapsing Cycle Quality to the 10-14 execution-focus symbols. We only
+          # fall back to the focus bundle on a genuinely degraded market payload.
+          if [ "${UNIVERSE_ROWS:-0}" -lt 250 ]; then
+            echo "::warning::Market universe is severely degraded (${UNIVERSE_ROWS} rows); current-day history will use the focus bundle, while prior market-wide symbols remain preserved."
             HISTORY_INPUT="out/latest.json"
+          elif [ "${FULL_UNIVERSE_AVAILABLE:-false}" != "true" ]; then
+            echo "::warning::Using near-complete universe (${UNIVERSE_ROWS}/296) for current-day history; missing symbols remain represented by prior validated history only."
           fi
-          # Store one compact observation per trading date; use full universe only when it is truly present.
+          # Store one compact observation per trading date.
           jq --arg session "$SESSION" '
             {
               date: $session,
@@ -638,9 +653,12 @@ jobs:
             . as $h
             | ($h.sessions | length) as $n
             | ($h.sessions[-1]) as $today
+            | ([ $h.sessions[] | .stocks[] | .symbol ] | map(select(. != null and . != "")) | unique) as $symbols
             | [
-                $today.stocks[] as $s
-                | ([ $h.sessions[] | .stocks[] | select(.symbol == $s.symbol) ]) as $series
+                $symbols[] as $sym
+                | ([ $h.sessions[] | .stocks[] | select(.symbol == $sym) ]) as $series
+                | ($series[-1]) as $s
+                | (any($today.stocks[]; .symbol == $sym)) as $present_today
                 | ($series | length) as $m
                 | ($series | map(select(((.history_source // "") | startswith("external_validated_")))) | length) as $external_m
                 | ($series | map(select(.history_confidence == "short")) | length) as $short_m
@@ -657,6 +675,8 @@ jobs:
                 | (($s.relative_volume_10d // 1) | tonumber) as $rv
                 | {
                     symbol: $s.symbol,
+                    current_session_present: $present_today,
+                    freshness: (if $present_today then "current_session" else "prior_validated_history_only" end),
                     sessions_available: $m,
                     native_sessions: $native_m,
                     external_validated_sessions: $external_m,
@@ -726,7 +746,9 @@ jobs:
                 external_validated_symbols: ($cq|map(select(.external_validated_sessions>0))|length),
                 full_universe_target: 296,
                 cycle_quality_complete_count: ($cq|map(select(.status=="complete"))|length),
-                cycle_quality_usable_count: ($cq|map(select(.status=="complete" or .status=="usable_provisional"))|length)
+                cycle_quality_usable_count: ($cq|map(select(.status=="complete" or .status=="usable_provisional"))|length),
+                cycle_quality_current_session_count: ($cq|map(select(.current_session_present==true))|length),
+                cycle_quality_prior_only_count: ($cq|map(select(.current_session_present!=true))|length)
               }
             | .cycle_quality = $cq
           ' out/history-base.json > out/history.json
