@@ -56,7 +56,26 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p out
-          curl -fsSL --connect-timeout 15 --max-time 20 --retry 1 --retry-delay 1             "${EGX_BASE}/api/diagnostics?ts=${EGX_TS}" -o out/health.json
+          # Diagnostics is the execution gate, so recover from transient Netlify 5xx
+          # instead of failing after a single retry. Try both deployment aliases and
+          # keep the first response that is valid JSON.
+          DIAG_OK=false
+          declare -A SEEN_BASES=()
+          for candidate in "${EGX_BASE}" "https://egx-market-feed-v2.netlify.app" "https://master--egx-market-feed-v2.netlify.app"; do
+            if [ -n "${SEEN_BASES[$candidate]:-}" ]; then continue; fi
+            SEEN_BASES["$candidate"]=1
+            echo "Trying diagnostics: $candidate"
+            if curl -fsSL --connect-timeout 15 --max-time 25 --retry 4 --retry-all-errors --retry-delay 2 \
+              "${candidate}/api/diagnostics?ts=${EGX_TS}" -o out/health.tmp \
+              && jq -e 'type=="object" and .source_id=="egx-market-feed-v2"' out/health.tmp >/dev/null 2>&1; then
+              mv out/health.tmp out/health.json
+              EGX_BASE="$candidate"
+              echo "EGX_BASE=${EGX_BASE}" >> "${GITHUB_ENV}"
+              DIAG_OK=true
+              break
+            fi
+          done
+          test "$DIAG_OK" = true
           jq -e '
             .source_id == "egx-market-feed-v2" and
             (.version == "7.2.1" or .core_version_expected == "7.2.1") and
