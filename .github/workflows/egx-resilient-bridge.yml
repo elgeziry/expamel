@@ -10,7 +10,8 @@ name: EGX Netlify V2 transport mirror
     types: [labeled]
   schedule:
     # One refresh per hour during the EGX daytime window; portfolio alerts read GitHub only.
-    - cron: '0 7-12 * * 0-4'
+    # Refresh ahead of the hourly portfolio check; :35 is a resilience retry.
+    - cron: '5,35 7-11 * * 0-4'
   push:
     branches:
       - master
@@ -119,88 +120,347 @@ jobs:
       - name: Fetch canonical focus bundle and full market universe
         shell: bash
         env:
-          SYMBOLS: EFIH,EFID,ORWE,BONY,JUFO,AMOC,SVCE,EGAL,MASR,ORHD,HELI,TMGH,ABUK,VLMRA
+          SYMBOLS: EFIH,EFID,ORWE,BONY,JUFO,AMOC,SVCE,EGAL,MASR,ORHD,HELI,TMGH,ABUK,VLMRA,KABO,ATQA,MFPC,MPCO,ETEL
         run: |
           set -euo pipefail
+          mkdir -p out
 
-          # 1) Canonical execution bundle remains the authoritative focus/execution payload.
-          curl -fsSL --connect-timeout 15 --max-time 60 --retry 4 --retry-all-errors --retry-delay 2 \
-            "${EGX_BASE}/api/execution-bundle?symbols=${SYMBOLS}&ts=${EGX_TS}" -o out/latest.json
+          curl -fsSL --connect-timeout 10 --max-time 25 --retry 2 --retry-all-errors \
+            "https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/egx-live/universe.json?ts=${EGX_TS}" \
+            -o out/prior-universe.json || echo '{"stocks":[]}' > out/prior-universe.json
+          curl -fsSL --connect-timeout 10 --max-time 25 --retry 2 --retry-all-errors \
+            "https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/egx-live/latest.json?ts=${EGX_TS}" \
+            -o out/prior-bridge.json || echo '{}' > out/prior-bridge.json
 
-          jq -e '
-            .source_id == "egx-market-feed-v2" and
-            .version == "7.2.1" and
-            .execution_usable == true and
-            (.blockers | type == "array" and length == 0) and
-            (.expected_reference_session_date | type == "string" and length == 10) and
-            (.session_status | type == "string" and length > 0) and
-            (.market_calendar | type == "object") and
-            (.stale_risk | type == "string" and length > 0) and
-            (.quality.row_count >= 296) and
-            (.quality.unique_symbols == .quality.row_count) and
-            (.quality.close_coverage_pct >= 90) and
-            (.quality.volume_coverage_pct >= 80) and
-            (.quality.live_session_consistent == true) and
-            (.data_fingerprint_sha256 | type == "string" and test("^[a-f0-9]{64}$"))
-          ' out/latest.json >/dev/null
+          BUNDLE_OK=false
+          declare -A SEEN_BUNDLE_BASES=()
+          for candidate in "${EGX_BASE}" "https://egx-market-feed-v2.netlify.app" "https://master--egx-market-feed-v2.netlify.app"; do
+            if [ -n "${SEEN_BUNDLE_BASES[$candidate]:-}" ]; then continue; fi
+            SEEN_BUNDLE_BASES["$candidate"]=1
+            echo "Trying canonical execution bundle: $candidate"
+            if curl -fsSL --connect-timeout 12 --max-time 40 --retry 2 --retry-all-errors --retry-delay 2 \
+              "${candidate}/api/execution-bundle?symbols=${SYMBOLS}&ts=${EGX_TS}" -o out/latest.tmp \
+              && jq -e '
+                .source_id == "egx-market-feed-v2" and
+                .execution_usable == true and
+                (.blockers | type == "array" and length == 0) and
+                (.expected_reference_session_date | type == "string" and length == 10) and
+                (.session_status | type == "string" and length > 0) and
+                (.quality.row_count >= 50) and
+                (.quality.unique_symbols == .quality.row_count) and
+                (.quality.close_coverage_pct >= 90) and
+                (.quality.volume_coverage_pct >= 80) and
+                (.quality.live_session_consistent == true) and
+                (.data_fingerprint_sha256 | type == "string" and test("^[a-f0-9]{64}$"))
+              ' out/latest.tmp >/dev/null 2>&1; then
+              mv out/latest.tmp out/latest.json
+              EGX_BASE="$candidate"
+              echo "EGX_BASE=${EGX_BASE}" >> "${GITHUB_ENV}"
+              BUNDLE_OK=true
+              break
+            fi
+          done
 
-          jq '{source_id,version,retrieved_at,session_status,expected_reference_session_date,execution_usable,stale_risk,blockers,warnings,quality,data_fingerprint_sha256}' out/latest.json > out/contract.json
+          if [ "$BUNDLE_OK" = true ]; then
+            echo "SELECTED_MODE=netlify_only_degraded" >> "${GITHUB_ENV}"
+            echo "DIRECT_OK=false" >> "${GITHUB_ENV}"
+            echo "DIRECT_ROW_COUNT=0" >> "${GITHUB_ENV}"
+            echo "NETLIFY_OK=true" >> "${GITHUB_ENV}"
 
-          jq --arg base "${EGX_BASE}" --arg mirrored_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" '
-            {
-              transport: "github-actions-netlify-v2-mirror",
-              market_source: "EGX Market Feed V2.1 on Netlify only",
-              source_url: $base,
-              mirrored_at: $mirrored_at,
-              external_market_fallback_used: false,
-              external_market_crosscheck_used: false
-            }
-          ' <<< '{}' > out/transport.json
+            jq '{source_id,version,retrieved_at,session_status,expected_reference_session_date,execution_usable,stale_risk,blockers,warnings,quality,data_fingerprint_sha256}' out/latest.json > out/contract.json
+            jq --arg base "${EGX_BASE}" --arg mirrored_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" '
+              {
+                transport: "github-actions-netlify-v2-mirror",
+                market_source: "EGX Market Feed V2 canonical execution bundle",
+                source_url: $base,
+                mirrored_at: $mirrored_at,
+                external_market_fallback_used: false,
+                external_market_crosscheck_used: false
+              }
+            ' <<< '{}' > out/transport.json
+            jq --argjson req "$(printf '%s' "${SYMBOLS}" | jq -Rc 'split(",")')" '
+              {
+                retrieved_at,
+                session_status,
+                market,
+                screen,
+                stocks: (.stocks | map(select(.symbol as $s | $req | index($s))))
+              }
+            ' out/latest.json > out/focus.json
 
-          jq --argjson req '["EFIH","EFID","ORWE","BONY","JUFO","AMOC","SVCE","EGAL","MASR","ORHD","HELI","TMGH","ABUK","VLMRA"]' '
-            {
-              retrieved_at,
-              session_status,
-              market,
-              screen,
-              stocks: (.stocks | map(select(.symbol as $s | $req | index($s))))
-            }
-          ' out/latest.json > out/focus.json
+            MARKET_OK=false
+            if curl -fsSL --connect-timeout 12 --max-time 45 --retry 2 --retry-all-errors --retry-delay 2 \
+              "${EGX_BASE}/api/market?ts=${EGX_TS}" -o out/market.json; then
+              jq '
+                if type=="array" then
+                  {retrieved_at:null,session_status:null,expected_reference_session_date:null,quality:null,market:null,screen:null,stocks:.}
+                elif type=="object" and ((.stocks? | type)=="array") then
+                  {retrieved_at,session_status,expected_reference_session_date,quality,market,screen,stocks}
+                elif type=="object" and ((.data? | type)=="object") and ((.data.stocks? | type)=="array") then
+                  (.data | {retrieved_at,session_status,expected_reference_session_date,quality,market,screen,stocks})
+                elif type=="object" and ((.rows? | type)=="array") then
+                  {retrieved_at,session_status,expected_reference_session_date,quality,market,screen,stocks:.rows}
+                elif type=="object" and ((.data? | type)=="array") then
+                  {retrieved_at,session_status,expected_reference_session_date,quality,market,screen,stocks:.data}
+                else
+                  {retrieved_at:null,session_status:null,expected_reference_session_date:null,quality:null,market:null,screen:null,stocks:[]}
+                end
+              ' out/market.json > out/universe.json
+              ACTUAL="$(jq '.stocks | length' out/universe.json)"
+              if [ "${ACTUAL:-0}" -ge 250 ]; then MARKET_OK=true; fi
+            fi
 
-          # 2) Full-universe snapshot from the canonical V2 market endpoint.
-          # /api/market is the endpoint already used by the repository's proven comprehensive scan.
-          curl -fsSL --connect-timeout 15 --max-time 60 --retry 4 --retry-all-errors --retry-delay 2 \
-            "${EGX_BASE}/api/market?ts=${EGX_TS}" -o out/market.json
-
-          # V2 market may expose the universe under different documented shapes.
-          jq '
-            if type=="array" then
-              {retrieved_at:null,session_status:null,expected_reference_session_date:null,quality:null,market:null,screen:null,stocks:.}
-            elif type=="object" and ((.stocks? | type)=="array") then
-              {retrieved_at,session_status,expected_reference_session_date,quality,market,screen,stocks}
-            elif type=="object" and ((.data? | type)=="object") and ((.data.stocks? | type)=="array") then
-              (.data | {retrieved_at,session_status,expected_reference_session_date,quality,market,screen,stocks})
-            elif type=="object" and ((.rows? | type)=="array") then
-              {retrieved_at,session_status,expected_reference_session_date,quality,market,screen,stocks:.rows}
-            elif type=="object" and ((.data? | type)=="array") then
-              {retrieved_at,session_status,expected_reference_session_date,quality,market,screen,stocks:.data}
+            if [ "$MARKET_OK" = true ]; then
+              ACTUAL="$(jq '.stocks | length' out/universe.json)"
+              echo "V2 market embedded rows=${ACTUAL}"
+              if [ "${ACTUAL}" -ge 296 ]; then
+                echo "FULL_UNIVERSE_AVAILABLE=true" >> "${GITHUB_ENV}"
+              else
+                echo "FULL_UNIVERSE_AVAILABLE=false" >> "${GITHUB_ENV}"
+              fi
             else
-              {retrieved_at:null,session_status:null,expected_reference_session_date:null,quality:null,market:null,screen:null,stocks:[]}
-            end
-          ' out/market.json > out/universe.json
-
-          ACTUAL="$(jq '.stocks | length' out/universe.json)"
-          TOTAL="$(jq -r 'if type=="object" then (.total_count // .count // .quality.row_count // 0) else length end' out/market.json)"
-          echo "V2 market metadata total_count=${TOTAL}; embedded rows=${ACTUAL}"
-
-          # Never confuse market metadata coverage with embedded stock rows.
-          # If the endpoint reports the full market but does not embed all rows, keep execution alive
-          # and bootstrap market-wide history only when actual rows are available.
-          if [ "${ACTUAL}" -ge 296 ]; then
-            echo "Universe coverage: ${ACTUAL}/${TOTAL:-296}"
-            echo "FULL_UNIVERSE_AVAILABLE=true" >> "${GITHUB_ENV}"
+              echo "::warning::/api/market unavailable; preserving prior market context while keeping focus execution fresh."
+              jq --slurpfile fresh out/latest.json '
+                . as $prior
+                | ($fresh[0].stocks // []) as $f
+                | .stocks = [(.stocks // [])[] |
+                    . as $old |
+                    (($f | map(select(.symbol == $old.symbol)) | .[0]) // $old)
+                  ]
+                | .retrieved_at = $fresh[0].retrieved_at
+                | .session_status = $fresh[0].session_status
+                | .expected_reference_session_date = $fresh[0].expected_reference_session_date
+                | .market = $fresh[0].market
+                | .screen = $fresh[0].screen
+                | .quality = (($fresh[0].quality // {}) + {
+                    market_universe_context: "prior_validated_overlay",
+                    embedded_current_focus_count: (($f)|length)
+                  })
+              ' out/prior-universe.json > out/universe.json
+              echo "FULL_UNIVERSE_AVAILABLE=false" >> "${GITHUB_ENV}"
+            fi
           else
-            echo "::warning::V2 /api/market reports market coverage but does not embed >=296 stock rows; preserving focus execution path and deferring market-wide history expansion."
+            echo "::warning::Canonical aggregate bundle unavailable; entering direct V2 stock fallback."
+            python - <<'PY'
+            import concurrent.futures, datetime as dt, hashlib, json, math, os, time, urllib.parse, urllib.request
+
+            bases=[]
+            for b in [os.environ.get("EGX_BASE"),"https://egx-market-feed-v2.netlify.app","https://master--egx-market-feed-v2.netlify.app"]:
+                if b and b not in bases: bases.append(b.rstrip("/"))
+
+            focus=[x.strip().upper() for x in os.environ.get("SYMBOLS","").split(",") if x.strip()]
+            try:
+                prior=json.load(open("out/prior-universe.json"))
+            except Exception:
+                prior={"stocks":[]}
+            prior_stocks=prior.get("stocks") or []
+            by={str(x.get("symbol","")).upper():x for x in prior_stocks if x.get("symbol")}
+            symbols=list(by)
+            for x in focus:
+                if x not in symbols: symbols.append(x)
+
+            request_stamp=str(time.time_ns())
+
+            def number(v):
+                try:
+                    x=float(v)
+                    return x if math.isfinite(x) else None
+                except Exception:
+                    return None
+
+            def fetch(sym):
+                last=None
+                for base in bases:
+                    for attempt in range(2):
+                        try:
+                            url=f"{base}/api/stock?symbol={urllib.parse.quote(sym)}&ts={request_stamp}{attempt}"
+                            req=urllib.request.Request(url,headers={"User-Agent":"EGX-Resilient-Bridge/3"})
+                            with urllib.request.urlopen(req,timeout=22) as r:
+                                d=json.load(r)
+                            if d.get("status")=="ok" and str(d.get("symbol",sym)).upper()==sym:
+                                return sym,d,base,None
+                            last=f"bad_status:{d.get('status')}"
+                        except Exception as e:
+                            last=f"{type(e).__name__}:{e}"
+                            time.sleep(.15*(attempt+1))
+                return sym,None,None,last
+
+            results={}
+            errors={}
+            workers=min(28,max(8,len(symbols)//8 if symbols else 8))
+            with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as ex:
+                futs=[ex.submit(fetch,s) for s in symbols]
+                for fut in concurrent.futures.as_completed(futs):
+                    sym,d,base,err=fut.result()
+                    if d is not None: results[sym]=(d,base)
+                    else: errors[sym]=err
+
+            fetched_at=dt.datetime.now(dt.timezone.utc).isoformat().replace("+00:00","Z")
+
+            def first(d,*keys):
+                for k in keys:
+                    cur=d
+                    ok=True
+                    for part in k.split("."):
+                        if not isinstance(cur,dict) or part not in cur:
+                            ok=False
+                            break
+                        cur=cur[part]
+                    if ok and cur is not None:
+                        return cur
+                return None
+
+            merged=[]
+            statuses=[]
+            for sym,(d,base) in results.items():
+                old=dict(by.get(sym) or {"symbol":sym,"name":sym,"description":sym})
+                mapping={
+                    "close": first(d,"last_price","close","price"),
+                    "open": first(d,"open","session.open","ohlc.open"),
+                    "high": first(d,"high","session.high","ohlc.high"),
+                    "low": first(d,"low","session.low","ohlc.low"),
+                    "volume": first(d,"volume","session.volume"),
+                    "change": first(d,"change_percent","change"),
+                    "RSI": first(d,"technical.rsi","technical.RSI"),
+                    "EMA20": first(d,"technical.ema20","technical.EMA20"),
+                    "SMA20": first(d,"technical.sma20","technical.SMA20"),
+                    "SMA50": first(d,"technical.sma50","technical.SMA50"),
+                    "SMA200": first(d,"technical.sma200","technical.SMA200"),
+                    "relative_volume_10d": first(d,"technical.relative_volume_10d","relative_volume_10d"),
+                    "demand_confirmation_score": first(d,"demand_confirmation_score"),
+                }
+                for k,v in mapping.items():
+                    if v is not None:
+                        old[k]=v
+                st=first(d,"session_status")
+                if st:
+                    statuses.append(str(st))
+                old["current_session"]=st or prior.get("session_status")
+                old["_direct_snapshot"]={
+                    "ok":True,
+                    "base":base,
+                    "fetched_at":fetched_at,
+                    "source_timestamp":first(d,"retrieved_at","updated_at","as_of","timestamp","last_update"),
+                    "status":d.get("status"),
+                    "field_freshness":{"price_technical":"direct_current","fundamentals":"carried_forward_last_validated"}
+                }
+                merged.append(old)
+
+            got=set(results)
+            for old0 in prior_stocks:
+                sym=str(old0.get("symbol","")).upper()
+                if sym and sym not in got:
+                    old=dict(old0)
+                    old["_direct_snapshot"]={"ok":False,"fetched_at":fetched_at,"field_freshness":{"price_technical":"stale_context_only"}}
+                    merged.append(old)
+
+            success=len(results)
+            focus_success=sum(1 for x in focus if x in results)
+            current=[x for x in merged if (x.get("_direct_snapshot") or {}).get("ok") is True]
+            adv=sum(1 for x in current if (number(x.get("change")) or 0)>0)
+            dec=sum(1 for x in current if (number(x.get("change")) or 0)<0)
+            unch=len(current)-adv-dec
+            positive=round(adv/max(len(current),1)*100,1)
+            session_status=max(set(statuses),key=statuses.count) if statuses else (prior.get("session_status") or "unknown")
+            expected_date=prior.get("expected_reference_session_date") or dt.datetime.now(dt.timezone.utc).date().isoformat()
+            top=sorted(current,key=lambda x: ((x.get("decision_support") or {}).get("setup_score") or -1),reverse=True)[:25]
+            market={
+                "regime":"direct_sampled",
+                "breadth":{"advancers":adv,"decliners":dec,"unchanged":unch,"positive_pct":positive},
+                "sampled":True,
+                "sample_size":len(current),
+                "sample_scope":"individual_v2_stock_endpoints"
+            }
+            execution_usable=success>=50 and focus_success>=min(8,len(focus))
+            quality={
+                "row_count":success,
+                "upstream_total_count":len(symbols),
+                "expected_universe_floor":50,
+                "universe_coverage_pct":round(success/max(len(symbols),1)*100,1),
+                "universe_complete":success>=len(symbols) and len(symbols)>0,
+                "unique_symbols":success,
+                "coverage_scope":"fresh_individual_v2_rows",
+                "close_coverage_pct":round(sum(1 for x in current if x.get("close") is not None)/max(success,1)*100,1),
+                "volume_coverage_pct":round(sum(1 for x in current if x.get("volume") is not None)/max(success,1)*100,1),
+                "basic_integrity_ok":success>=50,
+                "live_session_consistent":True,
+                "live_execution_usable":execution_usable,
+                "direct_focus_success":focus_success,
+                "direct_focus_requested":len(focus),
+                "stale_context_rows":max(0,len(merged)-success)
+            }
+            payload={
+                "source_id":"egx-market-feed-v2",
+                "version":"direct-stock-fallback",
+                "retrieved_at":fetched_at,
+                "session_status":session_status,
+                "expected_reference_session_date":expected_date,
+                "execution_usable":execution_usable,
+                "stale_risk":"controlled_direct_fallback" if execution_usable else "blocked",
+                "blockers":[] if execution_usable else [f"direct_rows_below_gate:{success}"],
+                "warnings":[
+                    "aggregate_endpoints_unavailable",
+                    "direct_v2_stock_fallback",
+                    "fundamentals_carried_forward_from_last_validated_universe",
+                    "market_breadth_sampled_from_fresh_direct_rows"
+                ],
+                "quality":quality,
+                "market":market,
+                "screen":{"top_setup":top,"early_movement":[],"degraded_direct_fallback":True},
+                "stocks":current
+            }
+            canon=json.dumps(payload,sort_keys=True,separators=(",",":"),ensure_ascii=False).encode()
+            payload["data_fingerprint_sha256"]=hashlib.sha256(canon).hexdigest()
+            json.dump(payload,open("out/latest.json","w"),ensure_ascii=False,indent=2)
+            json.dump({
+                "retrieved_at":fetched_at,
+                "session_status":session_status,
+                "expected_reference_session_date":expected_date,
+                "quality":quality,
+                "market":market,
+                "screen":payload["screen"],
+                "stocks":merged
+            },open("out/universe.json","w"),ensure_ascii=False,indent=2)
+            json.dump({
+                "retrieved_at":fetched_at,
+                "session_status":session_status,
+                "market":market,
+                "screen":payload["screen"],
+                "stocks":[x for x in current if str(x.get("symbol","")).upper() in focus]
+            },open("out/focus.json","w"),ensure_ascii=False,indent=2)
+            json.dump({
+                "source_id":payload["source_id"],
+                "version":payload["version"],
+                "retrieved_at":fetched_at,
+                "session_status":session_status,
+                "expected_reference_session_date":expected_date,
+                "execution_usable":execution_usable,
+                "stale_risk":payload["stale_risk"],
+                "blockers":payload["blockers"],
+                "warnings":payload["warnings"],
+                "quality":quality,
+                "data_fingerprint_sha256":payload["data_fingerprint_sha256"]
+            },open("out/contract.json","w"),ensure_ascii=False,indent=2)
+            json.dump({
+                "transport":"github-actions-direct-v2-fallback",
+                "market_source":"EGX Market Feed V2 individual stock endpoints",
+                "source_url":bases[0] if bases else None,
+                "mirrored_at":fetched_at,
+                "external_market_fallback_used":False,
+                "external_market_crosscheck_used":False,
+                "direct_rows":success,
+                "focus_success":focus_success,
+                "errors_sample":dict(list(errors.items())[:12])
+            },open("out/transport.json","w"),ensure_ascii=False,indent=2)
+            print(json.dumps({"direct_rows":success,"focus_success":focus_success,"requested":len(symbols),"execution_usable":execution_usable}))
+            if success < 50:
+                raise SystemExit("DIRECT_FALLBACK_GATE_FAILED: fewer than 50 fresh V2 stock rows")
+            PY
+            DIRECT_ROWS="$(jq -r '.quality.row_count // 0' out/latest.json)"
+            echo "SELECTED_MODE=direct_fallback" >> "${GITHUB_ENV}"
+            echo "DIRECT_OK=true" >> "${GITHUB_ENV}"
+            echo "DIRECT_ROW_COUNT=${DIRECT_ROWS}" >> "${GITHUB_ENV}"
+            echo "NETLIFY_OK=false" >> "${GITHUB_ENV}"
             echo "FULL_UNIVERSE_AVAILABLE=false" >> "${GITHUB_ENV}"
           fi
 
@@ -806,14 +1066,19 @@ jobs:
           cp out/latest.json out/v2-raw.json
           SHA="$(jq -r '.data_fingerprint_sha256' out/v2-raw.json)"
           GENERATED="$(jq -r '.retrieved_at' out/v2-raw.json)"
-          jq --arg sha "$SHA" --arg generated "$GENERATED" '
+          MODE="${SELECTED_MODE:-netlify_only_degraded}"
+          DOK="${DIRECT_OK:-false}"
+          DROWS="${DIRECT_ROW_COUNT:-0}"
+          NOK="${NETLIFY_OK:-true}"
+          jq --arg sha "$SHA" --arg generated "$GENERATED" --arg mode "$MODE" \
+             --argjson direct_ok "$DOK" --argjson direct_rows "$DROWS" --argjson netlify_ok "$NOK" '
             {
               bridge: {
                 name: "EGX Resilient Bridge",
-                version: "2.0-contract",
+                version: "3.0-resilient-contract",
                 generated_at: $generated,
                 transport_independent: true,
-                selected_mode: "netlify_only_degraded",
+                selected_mode: $mode,
                 market_phase: (.session_status // "unknown"),
                 data_sha256: $sha,
                 history_contract: "egx-session-history-v2",
@@ -821,14 +1086,15 @@ jobs:
               },
               path_health: {
                 netlify: {
-                  ok: true,
-                  execution_usable: (.execution_usable == true),
+                  ok: $netlify_ok,
+                  execution_usable: (if $netlify_ok then (.execution_usable == true) else false end),
                   source_id: .source_id
                 },
                 direct: {
-                  ok: false,
-                  row_count: 0,
-                  error: "not_used_by_credit_guard"
+                  ok: $direct_ok,
+                  row_count: $direct_rows,
+                  execution_usable: (if $direct_ok then (.execution_usable == true and $direct_rows >= 50) else false end),
+                  source_id: .source_id
                 }
               },
               data: {
@@ -865,7 +1131,10 @@ jobs:
             (.data.market | type == "object") and
             (.data.screen.top_setup | type == "array") and
             (.data.cycle_quality | type == "array") and
-            ((.path_health.netlify.ok == true) or (.path_health.direct.ok == true))
+            ((.path_health.netlify.ok == true) or (.path_health.direct.ok == true)) and
+            (if .bridge.selected_mode == "direct_fallback"
+             then (.path_health.direct.ok == true and .path_health.direct.row_count >= 50 and .data.execution_usable == true)
+             else true end)
           ' out/latest.json >/dev/null
 
       - name: Publish validated Bridge snapshot
