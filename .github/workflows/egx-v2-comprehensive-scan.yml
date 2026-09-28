@@ -1,30 +1,146 @@
-name: EGX v2 comprehensive scan
-# include TANM and INEG exact-stock scan on 2026-09-13
+name: EGX V4 comprehensive market scan
 
-on:
+'on':
+  workflow_dispatch:
   push:
+    branches: [master]
     paths:
       - '.github/workflows/egx-v2-comprehensive-scan.yml'
-  workflow_dispatch:
+  schedule:
+    - cron: '45 12 * * 0-4'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: egx-v4-comprehensive-scan
+  cancel-in-progress: true
 
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 5
     steps:
-      - name: Fetch Netlify v2 market and reference stocks
+      - name: Validate V4 contract and build research-only scan
         shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          set -uo pipefail
-          BASE='https://egx-market-feed-v2.netlify.app'
-          C='curl -fsSL --connect-timeout 5 --max-time 25 --retry 1'
-          echo '=== HEALTH ==='
-          $C "$BASE/api/health" | jq -c '{status,version,checked_at,session_status,source,timestamp_kind,capabilities,probes}' || echo '{"status":"health_failed"}'
-          echo '=== MARKET ==='
-          $C "$BASE/api/market" | jq -c '{status,version,retrieved_at,session_status,market,capabilities,count,total_count}' || echo '{"status":"market_failed"}'
-          echo '=== SCREEN_TOP ==='
-          $C "$BASE/api/screen" | jq -c '{status,version,retrieved_at,session_status,capabilities,top_setup:[(.top_setup//[])[]|{symbol,name:(.description//.name),last_price:.close,change_percent:.change,value,relative_volume_10d,demand_confirmation_score,long_term_trend,distance_from_sma200_pct,event_risk,decision_support}],early_movement:[(.early_movement//[])[]|{symbol,name:(.description//.name),last_price:.close,change_percent:.change,value,relative_volume_10d,demand_confirmation_score,long_term_trend,distance_from_sma200_pct,event_risk,decision_support,early_movement_flags}]}' || echo '{"status":"screen_failed"}'
-          echo '=== EXACT_STOCKS ==='
-          export BASE
-          printf '%s\n' EFIH EFID BONY JUFO SVCE ORWE AMOC MICH MASR SWDY EGAL CLHO KORA TANM INEG ETEL ORHD ORAS GOUR IFAP ARCC MCQE EFIC POUL TMGH MPCO EPCO SKPC \
-            | xargs -I{} -P10 bash -c 'r=$(curl -fsSL --connect-timeout 5 --max-time 18 --retry 1 "$BASE/api/stock?symbol={}" 2>/dev/null) && printf "%s\n" "$r" | jq -c '"'"'{symbol,name,status,last_price,session_open,session_high,session_low,volume,change_percent,value,market_cap,technical,fundamentals,event_risk,demand_confirmation_score,session_status,decision_support,capabilities}'"'"' || echo '"'"'{"symbol":"{}","status":"fetch_failed"}'"'"''
+          set -euo pipefail
+          rm -rf /tmp/egx-scan
+          git init -q /tmp/egx-scan
+          cd /tmp/egx-scan
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git fetch -q origin egx-live
+          git checkout -q -B egx-live origin/egx-live
+
+          python - <<'PY'
+          import json, math
+          from datetime import datetime, timezone
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+
+          root=Path('/tmp/egx-scan')
+          def load(name):
+              p=root/name
+              if not p.exists(): raise SystemExit(f'V4_REQUIRED_FILE_MISSING:{name}')
+              return json.loads(p.read_text())
+
+          health=load('health.json')
+          contract=load('contract.json')
+          universe=load('universe.json')
+          now=datetime.now(timezone.utc)
+          cairo=now.astimezone(ZoneInfo('Africa/Cairo'))
+          reasons=[]
+
+          if health.get('status')!='ok': reasons.append('health_not_ok')
+          if health.get('execution_usable') is not True: reasons.append('health_execution_unusable')
+          if contract.get('bridge_gate')!='pass': reasons.append('bridge_gate_not_pass')
+          if contract.get('execution_usable') is not True: reasons.append('contract_execution_unusable')
+          if contract.get('blockers'): reasons.append('contract_blockers')
+          q=contract.get('quality') or {}
+          if q.get('focus_complete') is not True: reasons.append('focus_incomplete')
+          if q.get('full_market_fresh') is not True: reasons.append('full_market_not_fresh')
+          rows=universe.get('stocks') or []
+          if len(rows)<296: reasons.append(f'universe_rows:{len(rows)}')
+          fp=contract.get('data_fingerprint_sha256')
+          if not isinstance(fp,str) or len(fp)!=64: reasons.append('invalid_fingerprint')
+
+          retrieved=contract.get('retrieved_at')
+          try: ts=datetime.fromisoformat(str(retrieved).replace('Z','+00:00')).astimezone(timezone.utc)
+          except Exception: ts=None
+          age=(now-ts).total_seconds() if ts else None
+          phase=str(contract.get('session_status') or '').lower()
+          local_min=cairo.hour*60+cairo.minute
+          trading_day=cairo.weekday()<5
+          clock_live=trading_day and 570 <= local_min < 870
+          if clock_live:
+              if age is None or age>600 or age < -60: reasons.append(f'live_age:{age}')
+              if phase!='continuous': reasons.append(f'live_session_status:{phase}')
+              if contract.get('expected_reference_session_date')!=cairo.date().isoformat(): reasons.append('live_session_date_mismatch')
+
+          if reasons:
+              raise SystemExit('V4_FAIL_CLOSED:'+','.join(reasons))
+
+          def num(v):
+              try:
+                  x=float(v); return x if math.isfinite(x) else None
+              except Exception: return None
+          candidates=[]
+          for r in rows:
+              if not r.get('symbol') or (num(r.get('close')) or 0)<=0: continue
+              ds=r.get('decision_support') or {}
+              score=num(ds.get('setup_score'))
+              value=num(r.get('value')) or 0
+              if value < 1_000_000: continue
+              candidates.append({
+                  'symbol':r.get('symbol'),
+                  'name':r.get('description') or r.get('name'),
+                  'last_price':r.get('close'),
+                  'change_percent':r.get('change'),
+                  'value':value,
+                  'volume':r.get('volume'),
+                  'relative_volume_10d':r.get('relative_volume_10d'),
+                  'long_term_trend':r.get('long_term_trend'),
+                  'demand_confirmation_score':r.get('demand_confirmation_score'),
+                  'setup_score':score,
+                  'event_risk':r.get('event_risk'),
+                  'decision_support':ds,
+              })
+          candidates.sort(key=lambda x: ((x['setup_score'] if x['setup_score'] is not None else -1), x['value']), reverse=True)
+          out={
+              'schema':'egx-v4-comprehensive-scan-v1',
+              'generated_at':now.isoformat().replace('+00:00','Z'),
+              'session_date':contract.get('expected_reference_session_date'),
+              'session_status':contract.get('session_status'),
+              'v4_contract_retrieved_at':retrieved,
+              'v4_age_seconds':None if age is None else max(0,round(age,1)),
+              'execution_contract_valid':True,
+              'candidate_only':True,
+              'execution_source':'EGX Resilient Bridge V4 only',
+              'external_execution_fallback_allowed':False,
+              'freshness_semantics':'retrieval_age_plus_session_consistency_not_exchange_quote_age',
+              'requires_external_confirmation':['fundamentals','filings','material_news','geopolitics','sharia'],
+              'universe_count':len(rows),
+              'market':universe.get('market') or {},
+              'top_candidates':candidates[:50],
+              'note':'Candidates are research inputs, not standalone buy/sell signals.'
+          }
+          (root/'scan.json').write_text(json.dumps(out,ensure_ascii=False,indent=2))
+          print(json.dumps({'status':'pass','session':out['session_date'],'rows':len(rows),'candidates':len(candidates),'age_seconds':out['v4_age_seconds']}))
+          PY
+
+          SESSION="$(jq -r '.session_date' scan.json)"
+          mkdir -p "daily/${SESSION}"
+          cp scan.json "daily/${SESSION}/scan.json"
+          git add scan.json "daily/${SESSION}/scan.json"
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -q -m "EGX V4 comprehensive scan $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          for attempt in 1 2 3; do
+            if git push origin egx-live; then exit 0; fi
+            git pull --rebase origin egx-live || true
+            sleep $((attempt*2))
+          done
+          exit 1
