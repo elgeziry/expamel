@@ -11,12 +11,13 @@ export default async () => {
   }
   const [data, history] = await Promise.all([fetchMarket(null, now), readHistory()]);
   const bundle: any = await buildExecutionBundle(data, { now, history });
-  bundle.delivery_mode = 'scheduled_fresh';
+  bundle.delivery_mode = 'scheduled_fresh_v4';
   if (bundle.execution_usable) await Promise.all([writeSnapshot(bundle), updateHistory(data.rows, now)]);
 };
 
 // Netlify cron uses UTC. 06:00-12:45 UTC covers the EGX auction, continuous
 // session and the short post-close buffer across Cairo DST and winter time.
+// Five-minute warming keeps the canonical snapshot inside the 10-minute live gate.
 // The in-function marketCalendar gate remains authoritative and exits early
 // outside the actual Egyptian market window.
-export const config = { schedule: '*/15 6-12 * * 0-4' };
+export const config = { schedule: '*/5 6-12 * * 0-4' };
