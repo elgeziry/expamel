@@ -1,0 +1,122 @@
+name: EGX V4 full-session continuity audit
+
+'on':
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - '.github/workflows/egx-v4-session-audit.yml'
+  schedule:
+    - cron: '30 13 * * 0-4'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: egx-v4-session-audit
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Audit retained V4 intraday snapshots
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/egx-audit
+          git init -q /tmp/egx-audit
+          cd /tmp/egx-audit
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git fetch -q origin egx-live
+          git checkout -q -B egx-live origin/egx-live
+
+          python - <<'PY'
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+
+          root=Path('/tmp/egx-audit')
+          contract=json.loads((root/'contract.json').read_text())
+          session=contract.get('expected_reference_session_date')
+          snapdir=root/'snapshots'/str(session)
+          cairo=ZoneInfo('Africa/Cairo')
+          valid=[]; invalid=[]
+
+          for p in sorted(snapdir.glob('*.json')) if snapdir.exists() else []:
+              try:
+                  d=json.loads(p.read_text())
+                  rows=d.get('stocks') or []
+                  ts=datetime.fromisoformat(str(d.get('retrieved_at')).replace('Z','+00:00')).astimezone(timezone.utc)
+                  reasons=[]
+                  if d.get('execution_usable') is not True: reasons.append('execution_unusable')
+                  if d.get('expected_reference_session_date')!=session: reasons.append('session_mismatch')
+                  if len(rows)<21: reasons.append(f'focus_rows:{len(rows)}')
+                  if reasons: invalid.append({'file':p.name,'reasons':reasons})
+                  else: valid.append((ts,p.name))
+              except Exception as e:
+                  invalid.append({'file':p.name,'reasons':[f'parse:{type(e).__name__}']})
+
+          valid.sort()
+          gaps=[]
+          for (a,_),(b,_) in zip(valid,valid[1:]): gaps.append((b-a).total_seconds()/60)
+          first=valid[0][0].astimezone(cairo) if valid else None
+          last=valid[-1][0].astimezone(cairo) if valid else None
+          max_gap=max(gaps) if gaps else None
+          first_min=(first.hour*60+first.minute) if first else None
+          last_min=(last.hour*60+last.minute) if last else None
+
+          # A normal 10:00-14:30 Cairo session sampled every ~5m should yield ~50+ points.
+          # Pass threshold intentionally allows a short startup/post-close buffer.
+          full_day = (
+              len(valid)>=40 and first_min is not None and first_min<=615 and
+              last_min is not None and last_min>=860 and max_gap is not None and max_gap<=12
+          )
+          severe = (not valid) or (max_gap is not None and max_gap>30) or len(invalid)>max(3,len(valid)//10)
+          status='pass' if full_day and not invalid else ('fail' if severe else 'partial')
+          reasons=[]
+          if len(valid)<40: reasons.append('insufficient_snapshot_count')
+          if first_min is None or first_min>615: reasons.append('session_start_not_covered')
+          if last_min is None or last_min<860: reasons.append('session_end_not_covered')
+          if max_gap is None or max_gap>12: reasons.append('continuity_gap_over_12m_or_unmeasurable')
+          if invalid: reasons.append('invalid_snapshots_present')
+
+          out={
+              'schema':'egx-v4-session-audit-v1',
+              'generated_at':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'),
+              'session_date':session,
+              'status':status,
+              'valid_snapshot_count':len(valid),
+              'invalid_snapshot_count':len(invalid),
+              'first_snapshot_cairo':first.isoformat() if first else None,
+              'last_snapshot_cairo':last.isoformat() if last else None,
+              'max_gap_minutes':round(max_gap,2) if max_gap is not None else None,
+              'pass_criteria':{'min_snapshots':40,'first_by_cairo':'10:15','last_at_or_after_cairo':'14:20','max_gap_minutes':12},
+              'reasons':reasons,
+              'invalid_samples':invalid[:20],
+              'interpretation':'pass=full-session continuity evidenced; partial=valid data exists but full session not proven; fail=continuity or integrity materially broken'
+          }
+          (root/'session-audit.json').write_text(json.dumps(out,ensure_ascii=False,indent=2))
+          print(json.dumps(out,ensure_ascii=False,indent=2))
+          PY
+
+          SESSION="$(jq -r '.session_date' session-audit.json)"
+          mkdir -p "daily/${SESSION}"
+          cp session-audit.json "daily/${SESSION}/session-audit.json"
+          git add session-audit.json "daily/${SESSION}/session-audit.json"
+          if ! git diff --cached --quiet; then
+            git commit -q -m "EGX V4 session audit $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            for attempt in 1 2 3; do
+              if git push origin egx-live; then break; fi
+              git pull --rebase origin egx-live || true
+              sleep $((attempt*2))
+            done
+          fi
+          STATUS="$(jq -r '.status' session-audit.json)"
+          if [ "$STATUS" = 'fail' ]; then exit 1; fi
