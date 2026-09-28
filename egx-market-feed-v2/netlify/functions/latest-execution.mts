@@ -1,4 +1,5 @@
 import { readSnapshot, validateSnapshot } from './_lib/access.mts';
+import { enforceLiveSnapshotPolicy } from './_lib/live-policy.mts';
 
 function json(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -10,14 +11,16 @@ function json(body: unknown, status = 200) {
 export default async (req: Request) => {
   if (req.method !== 'GET') return json({ status: 'error', message: 'Method not allowed' }, 405);
   try {
+    const now = new Date();
     const snapshot: any = await readSnapshot();
     if (!snapshot) return json({ status: 'blocked', execution_usable: false, blockers: ['snapshot_missing'] }, 404);
-    const validation = validateSnapshot(snapshot);
+    const validation = enforceLiveSnapshotPolicy(snapshot, validateSnapshot(snapshot, now), now);
     return json({
       ...snapshot,
       delivery_mode: 'validated_snapshot',
       execution_usable: validation.usable,
       stale_risk: validation.usable ? 'controlled' : 'high',
+      blockers: [...new Set([...(snapshot?.blockers || []), ...validation.blockers])],
       snapshot_validation: validation
     }, validation.usable ? 200 : 503);
   } catch (e: any) {
