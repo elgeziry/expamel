@@ -2,6 +2,10 @@ name: EGX V4 history analytics
 
 'on':
   workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - '.github/workflows/egx-history-analytics.yml'
   schedule:
     # After the normal EGX post-close buffer. Netlify/GitHub live publishing is independent.
     - cron: '45 12 * * 0-4'
@@ -34,7 +38,7 @@ jobs:
           git checkout -q -B egx-live origin/egx-live
 
           python - <<'PY'
-          import json, math, os
+          import json, math
           from datetime import datetime, timezone
           from pathlib import Path
 
@@ -74,7 +78,6 @@ jobs:
               'session_status': u.get('session_status'),
               'stocks': compact,
           })
-          # Keep one observation per date and at most 60 trading sessions.
           by_date = {x.get('date'):x for x in sessions if x.get('date')}
           sessions = [by_date[d] for d in sorted(by_date)][-60:]
 
