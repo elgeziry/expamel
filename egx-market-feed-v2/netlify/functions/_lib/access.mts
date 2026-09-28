@@ -232,7 +232,11 @@ export function validateSnapshot(snapshot: any, now = new Date()) {
   if (!/^[a-f0-9]{64}$/.test(snapshot?.data_fingerprint_sha256 || '')) blockers.push('invalid_fingerprint');
   const age = snapshot?.retrieved_at ? (now.getTime() - new Date(snapshot.retrieved_at).getTime()) / 1000 : Infinity;
   const calendar = marketCalendar(now);
-  const maxAge = calendar.market_calendar_phase === 'continuous' ? 1200 : 345600;
+  // V4 uses one fail-closed intraday freshness contract across Netlify and GitHub.
+  // During auction/continuous trading, a recovery snapshot older than 10 minutes
+  // is never execution-usable. Outside those phases, the snapshot may still be
+  // used as a dated reference for post-close analysis, subject to session-date matching.
+  const maxAge = ['auction', 'continuous'].includes(calendar.market_calendar_phase) ? 600 : 345600;
   if (!Number.isFinite(age) || age < -60) blockers.push('invalid_snapshot_time');
   if (age > maxAge) blockers.push('snapshot_too_old');
   if (snapshot?.expected_reference_session_date !== calendar.expected_reference_session_date) blockers.push('session_date_mismatch');
