@@ -1,42 +1,76 @@
-name: EGX v2 smoke test
+name: EGX V4 contract smoke test
 
-on:
+'on':
+  workflow_dispatch:
   push:
     branches: [master]
-  workflow_dispatch:
+    paths:
+      - '.github/workflows/egx-v2-smoke-test.yml'
+      - '.github/workflows/egx-resilient-bridge.yml'
+      - 'egx-market-feed-v2/netlify/functions/**'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: egx-v4-contract-smoke
+  cancel-in-progress: true
 
 jobs:
   smoke:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
-      - name: Test health and reference stocks
+      - name: Test V4 GitHub contract and canonical production focus
         shell: bash
         run: |
           set -euo pipefail
-          BASE="https://egx-market-feed-v2.netlify.app"
-          echo "Testing $BASE"
           python - <<'PY'
-          import json, urllib.request
-          base = 'https://egx-market-feed-v2.netlify.app'
-          paths = ['/api/health'] + [f'/api/stock?symbol={s}' for s in ['SWDY','ORWE','EFID','MASR','AMOC','KORA']]
-          for path in paths:
-              with urllib.request.urlopen(base + path, timeout=30) as r:
-                  data = json.load(r)
-              print('\nENDPOINT', path)
-              print(json.dumps({
-                  'status': data.get('status'),
-                  'version': data.get('version'),
-                  'symbol': data.get('symbol'),
-                  'last_price': data.get('last_price'),
-                  'change_percent': data.get('change_percent'),
-                  'session_status': data.get('session_status'),
-                  'sma200': (data.get('technical') or {}).get('sma200'),
-                  'relative_volume_10d': (data.get('technical') or {}).get('relative_volume_10d'),
-                  'demand_confirmation_score': data.get('demand_confirmation_score'),
-                  'event_risk': data.get('event_risk'),
-                  'capabilities': data.get('capabilities'),
-              }, ensure_ascii=False))
-              if data.get('status') != 'ok':
-                  raise SystemExit(f'FAILED {path}: status is not ok')
-          print('\nALL_SMOKE_TESTS_OK')
+          import json, time, urllib.parse, urllib.request
+          from datetime import datetime, timezone
+          from zoneinfo import ZoneInfo
+
+          repo='elgeziry/expamel'
+          raw=f'https://raw.githubusercontent.com/{repo}/egx-live'
+          base='https://egx-market-feed-v2.netlify.app'
+          focus='EFIH,ICFC,EFID,EGAL,AMOC,JUFO,ORWE,SVCE,MASR,ORAS,BONY,MFPC,ABUK,ETEL,ORHD,HELI,TMGH,VLMRA,KABO,ATQA,MPCO'.split(',')
+          stamp=str(time.time_ns())
+
+          def get(url, timeout=40):
+              req=urllib.request.Request(url, headers={'User-Agent':'EGX-V4-Smoke/1.0','Cache-Control':'no-cache','Pragma':'no-cache'})
+              with urllib.request.urlopen(req, timeout=timeout) as r: return json.load(r)
+
+          health=get(f'{raw}/health.json?ts={stamp}')
+          contract=get(f'{raw}/contract.json?ts={stamp}')
+          universe=get(f'{raw}/universe.json?ts={stamp}')
+          query=urllib.parse.urlencode({'symbols':','.join(focus),'ts':stamp})
+          prod=get(f'{base}/api/execution-bundle?{query}')
+          now=datetime.now(timezone.utc)
+          cairo=now.astimezone(ZoneInfo('Africa/Cairo'))
+          reasons=[]
+          if health.get('status')!='ok' or health.get('execution_usable') is not True: reasons.append('health')
+          if contract.get('bridge_gate')!='pass' or contract.get('execution_usable') is not True or contract.get('blockers'): reasons.append('contract')
+          q=contract.get('quality') or {}
+          if q.get('focus_complete') is not True: reasons.append('focus_contract')
+          if len(universe.get('stocks') or [])<296: reasons.append('universe')
+          pq=prod.get('quality') or {}
+          if prod.get('source_id')!='egx-market-feed-v2' or prod.get('execution_usable') is not True or prod.get('blockers'): reasons.append('production')
+          if (pq.get('row_count') or 0)<296 or (pq.get('unique_symbols') or 0)<296: reasons.append('production_universe')
+          returned={str(x.get('symbol','')).upper() for x in (prod.get('stocks') or []) if x.get('symbol')}
+          missing=[s for s in focus if s not in returned]
+          if missing: reasons.append('missing_focus:'+','.join(missing))
+          if not isinstance(prod.get('data_fingerprint_sha256'),str) or len(prod.get('data_fingerprint_sha256'))!=64: reasons.append('fingerprint')
+
+          local_min=cairo.hour*60+cairo.minute
+          live=cairo.weekday()<5 and 570<=local_min<870
+          if live:
+              try: ts=datetime.fromisoformat(str(prod.get('retrieved_at')).replace('Z','+00:00')).astimezone(timezone.utc)
+              except Exception: ts=None
+              age=(now-ts).total_seconds() if ts else None
+              if age is None or age>600 or age < -60: reasons.append(f'live_age:{age}')
+              if str(prod.get('session_status') or '').lower()!='continuous': reasons.append('live_session_not_continuous')
+              if prod.get('expected_reference_session_date')!=cairo.date().isoformat(): reasons.append('live_date')
+
+          if reasons: raise SystemExit('V4_SMOKE_FAIL:'+','.join(reasons))
+          print(json.dumps({'status':'pass','rows':pq.get('row_count'),'focus':len(returned),'session_status':prod.get('session_status'),'retrieved_at':prod.get('retrieved_at'),'live_clock':live},indent=2))
           PY
