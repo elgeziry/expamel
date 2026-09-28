@@ -35,7 +35,7 @@ jobs:
           set -euo pipefail
           mkdir -p out
           python - <<'PY'
-          import json, hashlib, os, time, urllib.parse, urllib.request
+          import json, os, time, urllib.parse, urllib.request
           from datetime import datetime, timezone
           from zoneinfo import ZoneInfo
           from pathlib import Path
@@ -71,7 +71,7 @@ jobs:
               except Exception:
                   return None
 
-          def bundle_gate(d):
+          def bundle_gate(d, required_symbols=None):
               reasons=[]
               if not isinstance(d,dict): return False,['not_object'],None
               if d.get('source_id')!='egx-market-feed-v2': reasons.append('source_id')
@@ -83,6 +83,9 @@ jobs:
               if (q.get('close_coverage_pct') or 0) < 90: reasons.append('close_coverage')
               if (q.get('volume_coverage_pct') or 0) < 80: reasons.append('volume_coverage')
               if q.get('live_session_consistent') is not True: reasons.append('session_consistency')
+              returned={str(x.get('symbol','')).upper() for x in (d.get('stocks') or []) if x.get('symbol')}
+              missing_focus=[s for s in (required_symbols or []) if s not in returned]
+              if missing_focus: reasons.append('focus_missing:'+','.join(missing_focus))
               ts=parse_time(d.get('retrieved_at'))
               age=None
               if not ts:
@@ -111,7 +114,7 @@ jobs:
                   except Exception:
                       diagnostics=None
                   candidate=fetch_json(f'{base}/api/execution-bundle?{query}', attempts=3, timeout=35)
-                  ok,reasons,age=bundle_gate(candidate)
+                  ok,reasons,age=bundle_gate(candidate, focus)
                   if ok:
                       bundle=candidate; selected=base; live_age=age
                       break
@@ -171,11 +174,12 @@ jobs:
           quality['full_market_fresh']=market_payload is not None
           quality['focus_requested']=len(focus)
           quality['focus_returned']=len(focus_rows)
+          quality['focus_complete']=len(focus_rows)==len(focus)
 
           upstream_fp=bundle.get('data_fingerprint_sha256')
           bridge={
               'name':'EGX Resilient Bridge',
-              'version':'4.0-live-fail-closed',
+              'version':'4.1-live-focus-gated',
               'generated_at':bundle.get('retrieved_at'),
               'publisher_generated_at':now.isoformat().replace('+00:00','Z'),
               'transport_independent':True,
@@ -234,11 +238,12 @@ jobs:
           }
           health={
               'status':'ok',
-              'bridge_version':'4.0-live-fail-closed',
+              'bridge_version':'4.1-live-focus-gated',
               'checked_at':now.isoformat().replace('+00:00','Z'),
               'selected_base':selected,
               'live_age_seconds':display_age,
               'execution_usable':True,
+              'focus_complete':len(focus_rows)==len(focus),
               'full_market_fresh':market_payload is not None,
               'diagnostics_status': (diagnostics or {}).get('status') if isinstance(diagnostics,dict) else None,
               'failures_before_success':failures,
@@ -295,6 +300,7 @@ jobs:
           assert latest['data']['execution_usable'] is True
           assert not latest['data']['blockers']
           assert contract['bridge_gate']=='pass'
+          assert quality['focus_complete'] is True
           assert live_age is None or live_age <= 600
           print(json.dumps({'selected':selected,'age_seconds':display_age,'focus':len(focus_rows),'universe_rows':len(universe['stocks']),'universe_fresh':universe['universe_fresh']}))
           PY
