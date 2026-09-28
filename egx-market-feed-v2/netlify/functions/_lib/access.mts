@@ -14,7 +14,8 @@ const SNAPSHOT_STORE = 'egx-market-feed-v2';
 const SNAPSHOT_KEY = 'latest-execution.json';
 const HISTORY_KEY = 'market-daily-history.json';
 export const DEFAULT_SYMBOLS = [
-  'EFIH', 'EFID', 'ORWE', 'BONY', 'JUFO', 'AMOC', 'SVCE', 'EGAL', 'MASR', 'MICH'
+  'EFIH', 'ICFC', 'EFID', 'EGAL', 'AMOC', 'JUFO', 'ORWE', 'SVCE', 'MASR', 'ORAS',
+  'BONY', 'MFPC', 'ABUK', 'ETEL', 'ORHD', 'HELI', 'TMGH', 'VLMRA', 'KABO', 'ATQA', 'MPCO'
 ];
 
 function cairoParts(now = new Date()) {
