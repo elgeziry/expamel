@@ -22,7 +22,7 @@ concurrency:
 env:
   PRIMARY_BASE: https://egx-market-feed-v2.netlify.app
   BRANCH_BASE: https://master--egx-market-feed-v2.netlify.app
-  FOCUS_SYMBOLS: EFIH,IFCM,EFID,EGAL,AMOC,JUFO,ORWE,SVCE,MASR,ORAS,BNYN,BONY,MFPC,ABUK,ETEL,ORHD,HELI,TMGH,VLMRA,KABO,ATQA,MPCO
+  FOCUS_SYMBOLS: EFIH,ICFC,EFID,EGAL,AMOC,JUFO,ORWE,SVCE,MASR,ORAS,BONY,MFPC,ABUK,ETEL,ORHD,HELI,TMGH,VLMRA,KABO,ATQA,MPCO
 
 jobs:
   publish:
@@ -153,19 +153,20 @@ jobs:
           cycle_quality=history.get('cycle_quality') or [] if isinstance(history,dict) else []
 
           stocks=bundle.get('stocks') or []
-          have={str(x.get('symbol','')).upper() for x in stocks}
-          alias={'BONY':'BNYN'}
+          alias={'BNYN':'BONY','IFCM':'ICFC'}
           focus_rows=[]
           for row in stocks:
               r=dict(row)
               sym=str(r.get('symbol','')).upper()
               r['canonical_symbol']=alias.get(sym,sym)
               if sym=='BONY': r['symbol_aliases']=['BONY','BNYN']
+              if sym=='ICFC': r['symbol_aliases']=['ICFC','IFCM']
               if sym in focus or r['canonical_symbol'] in focus:
                   focus_rows.append(r)
 
+          display_age=None if live_age is None else max(0.0, live_age)
           quality=dict(bundle.get('quality') or {})
-          quality['bridge_live_age_seconds']=None if live_age is None else round(live_age,1)
+          quality['bridge_live_age_seconds']=None if display_age is None else round(display_age,1)
           quality['bridge_gate']='pass'
           quality['full_market_fresh']=market_payload is not None
           quality['focus_requested']=len(focus)
@@ -188,7 +189,7 @@ jobs:
           latest={
               'bridge':bridge,
               'path_health':{
-                  'netlify':{'ok':True,'base':selected,'execution_usable':True,'live_age_seconds':live_age},
+                  'netlify':{'ok':True,'base':selected,'execution_usable':True,'live_age_seconds':display_age},
                   'github_mirror':{'ok':True,'mode':'normal_non_force_commit'},
                   'full_market':{'ok':market_payload is not None,'base':market_base},
               },
@@ -197,7 +198,7 @@ jobs:
                   'retrieved_at':bundle.get('retrieved_at'),
                   'session_status':bundle.get('session_status'),
                   'expected_reference_session_date':bundle.get('expected_reference_session_date'),
-                  'stale_risk':'low' if live_age is not None and live_age<=300 else 'controlled',
+                  'stale_risk':'low' if display_age is not None and display_age<=300 else 'controlled',
                   'blockers':[],
                   'warnings':list(bundle.get('warnings') or []) + ([] if market_payload is not None else ['full_market_unavailable_focus_live_only']),
                   'quality':quality,
@@ -222,7 +223,7 @@ jobs:
               'session_status':bundle.get('session_status'),
               'expected_reference_session_date':bundle.get('expected_reference_session_date'),
               'execution_usable':True,
-              'live_age_seconds':live_age,
+              'live_age_seconds':display_age,
               'max_live_age_seconds':600,
               'stale_risk':latest['data']['stale_risk'],
               'blockers':[],
@@ -236,7 +237,7 @@ jobs:
               'bridge_version':'4.0-live-fail-closed',
               'checked_at':now.isoformat().replace('+00:00','Z'),
               'selected_base':selected,
-              'live_age_seconds':live_age,
+              'live_age_seconds':display_age,
               'execution_usable':True,
               'full_market_fresh':market_payload is not None,
               'diagnostics_status': (diagnostics or {}).get('status') if isinstance(diagnostics,dict) else None,
@@ -256,7 +257,7 @@ jobs:
               'session_status':bundle.get('session_status'),
               'expected_reference_session_date':bundle.get('expected_reference_session_date'),
               'execution_usable':True,
-              'live_age_seconds':live_age,
+              'live_age_seconds':display_age,
               'requested_symbols':focus,
               'canonical_aliases':alias,
               'market':bundle.get('market') or {},
@@ -295,7 +296,7 @@ jobs:
           assert not latest['data']['blockers']
           assert contract['bridge_gate']=='pass'
           assert live_age is None or live_age <= 600
-          print(json.dumps({'selected':selected,'age_seconds':live_age,'focus':len(focus_rows),'universe_rows':len(universe['stocks']),'universe_fresh':universe['universe_fresh']}))
+          print(json.dumps({'selected':selected,'age_seconds':display_age,'focus':len(focus_rows),'universe_rows':len(universe['stocks']),'universe_fresh':universe['universe_fresh']}))
           PY
 
       - name: Publish without force and retain compact intraday audit snapshots
