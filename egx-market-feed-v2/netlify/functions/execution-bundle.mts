@@ -2,6 +2,7 @@ import { fetchMarket } from './api.mts';
 import {
   buildExecutionBundle, normalizeSymbols, readHistory, readSnapshot, updateHistory, validateSnapshot, writeSnapshot
 } from './_lib/access.mts';
+import { enforceLiveExecutionPolicy, enforceLiveSnapshotPolicy } from './_lib/live-policy.mts';
 
 function json(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -18,12 +19,14 @@ export default async (req: Request) => {
   try {
     const now = new Date();
     const [data, history] = await Promise.all([fetchMarket(null, now), readHistory()]);
-    const bundle: any = await buildExecutionBundle(data, { symbols, now, history });
+    const bundle: any = enforceLiveExecutionPolicy(
+      await buildExecutionBundle(data, { symbols, now, history }), now
+    );
     bundle.delivery_mode = 'fresh';
     if (!bundle.execution_usable) {
       try {
         const snapshot: any = await readSnapshot();
-        const validation = validateSnapshot(snapshot);
+        const validation = enforceLiveSnapshotPolicy(snapshot, validateSnapshot(snapshot, now), now);
         if (validation.usable) {
           return json({
             ...snapshot,
@@ -47,8 +50,9 @@ export default async (req: Request) => {
     return json(bundle);
   } catch (freshError: any) {
     try {
+      const now = new Date();
       const snapshot: any = await readSnapshot();
-      const validation = validateSnapshot(snapshot);
+      const validation = enforceLiveSnapshotPolicy(snapshot, validateSnapshot(snapshot, now), now);
       return json({
         ...snapshot,
         delivery_mode: 'validated_snapshot',
