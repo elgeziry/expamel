@@ -1,0 +1,183 @@
+name: EGX V4 history analytics
+
+'on':
+  workflow_dispatch:
+  schedule:
+    # After the normal EGX post-close buffer. Netlify/GitHub live publishing is independent.
+    - cron: '45 12 * * 0-4'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: egx-v4-history-analytics
+  cancel-in-progress: true
+
+jobs:
+  history:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Load live branch and build one daily history observation
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/egx-history
+          git init -q /tmp/egx-history
+          cd /tmp/egx-history
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git fetch -q origin egx-live
+          git checkout -q -B egx-live origin/egx-live
+
+          python - <<'PY'
+          import json, math, os
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          root = Path('/tmp/egx-history')
+          universe_path = root / 'universe.json'
+          if not universe_path.exists():
+              raise SystemExit('No universe.json on egx-live; nothing to update')
+          u = json.loads(universe_path.read_text())
+          stocks = u.get('stocks') or []
+          session = u.get('expected_reference_session_date') or (u.get('retrieved_at') or '')[:10]
+          if not session or len(stocks) < 250:
+              raise SystemExit(f'Universe gate failed: session={session!r}, rows={len(stocks)}')
+
+          history_path = root / 'history.json'
+          if history_path.exists():
+              try:
+                  h = json.loads(history_path.read_text())
+              except Exception:
+                  h = {}
+          else:
+              h = {}
+          sessions = [x for x in (h.get('sessions') or []) if x.get('date') != session]
+          compact = []
+          fields = ('symbol','close','open','high','low','volume','change','RSI','EMA20','SMA20','SMA50','SMA200','relative_volume_10d','long_term_trend','close_location_in_day')
+          for s in stocks:
+              if not s.get('symbol'):
+                  continue
+              row = {k:s.get(k) for k in fields}
+              row['history_source'] = 'v4_live'
+              row['history_confidence'] = 'authoritative_current'
+              compact.append(row)
+          sessions.append({
+              'date': session,
+              'retrieved_at': u.get('retrieved_at'),
+              'market': u.get('market') or {},
+              'source': 'v4_live',
+              'session_status': u.get('session_status'),
+              'stocks': compact,
+          })
+          # Keep one observation per date and at most 60 trading sessions.
+          by_date = {x.get('date'):x for x in sessions if x.get('date')}
+          sessions = [by_date[d] for d in sorted(by_date)][-60:]
+
+          def num(v):
+              try:
+                  x=float(v)
+                  return x if math.isfinite(x) else None
+              except Exception:
+                  return None
+          def clamp(x): return max(0.0, min(10.0, x))
+          def avg(a):
+              a=[x for x in a if x is not None]
+              return sum(a)/len(a) if a else None
+
+          symbols = sorted({str(r.get('symbol')).upper() for sess in sessions for r in (sess.get('stocks') or []) if r.get('symbol')})
+          cycle=[]
+          latest_date=sessions[-1]['date'] if sessions else None
+          current_symbols={str(x.get('symbol')).upper() for x in (sessions[-1].get('stocks') or [])} if sessions else set()
+          for sym in symbols:
+              series=[]
+              for sess in sessions:
+                  for r in sess.get('stocks') or []:
+                      if str(r.get('symbol','')).upper()==sym and num(r.get('close')) is not None:
+                          rr=dict(r); rr['_date']=sess.get('date'); series.append(rr); break
+              m=len(series)
+              if not series:
+                  continue
+              closes=[num(x.get('close')) for x in series]
+              vols=[num(x.get('volume')) for x in series]
+              last=closes[-1]; first=closes[0]
+              recent=closes[-6:]
+              prior6=closes[-12:-6]
+              v5=avg(vols[-5:]); v10=avg(vols[-10:])
+              rv=num(series[-1].get('relative_volume_10d')) or 1.0
+              c={}
+              c['weekly_structure']=clamp(((last/(closes[-6] if m>=6 else first))-1)*100*0.8+5) if m>=6 and (closes[-6] if m>=6 else first) else None
+              c['breakout_strength']=clamp(((last/max(prior6))-1)*35+5) if m>=7 and prior6 and max(prior6)>0 else None
+              c['volume_asymmetry']=clamp(((v5/v10)-0.7)*8+4) if v5 is not None and v10 and v10>0 else clamp(rv*3+2)
+              if m>=8:
+                  lo=min(recent); hi=max(recent)
+                  c['retest_quality']=7 if lo <= last <= hi*1.03 else (6 if last>hi else 4)
+              else: c['retest_quality']=None
+              if m>=10:
+                  l1=min(closes[-5:]); l0=min(closes[-10:-5])
+                  c['higher_low']=clamp(((l1/l0)-1)*25+6) if l0 and l1>l0 else 3
+              else: c['higher_low']=None
+              available=[x for x in c.values() if x is not None]
+              status='complete' if m>=10 else ('usable_provisional' if m>=6 else 'warming_up')
+              if status=='complete':
+                  score=c['weekly_structure']*0.25+c['breakout_strength']*0.20+c['volume_asymmetry']*0.20+c['retest_quality']*0.20+c['higher_low']*0.15
+              elif len(available)>=3:
+                  score=sum(available)/len(available)
+              else: score=None
+              native=sum(1 for x in series if not str(x.get('history_source','')).startswith('external_validated'))
+              external=m-native
+              confidence = 100 if m>=15 and native>=10 else (90 if m>=15 and external>0 else (85 if m>=10 else (60 if m>=6 else min(50,m*10))))
+              cycle.append({
+                  'symbol':sym,
+                  'current_session_present': sym in current_symbols,
+                  'freshness':'current_session' if sym in current_symbols else 'prior_validated_history_only',
+                  'sessions_available':m,
+                  'native_sessions':native,
+                  'external_validated_sessions':external,
+                  'provenance':'hybrid_validated_external_plus_v4' if native and external else ('validated_external' if external else 'v4_native'),
+                  'status':status,
+                  'confidence_pct':confidence,
+                  'components':c,
+                  'score':round(score,1) if score is not None else None,
+              })
+
+          h = {
+              'schema':'egx-session-history-v4',
+              'generated_at':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'),
+              'sessions':sessions,
+              'coverage':{
+                  'latest_session_date':latest_date,
+                  'latest_universe_count':len(stocks),
+                  'sessions_available':len(sessions),
+                  'full_universe_target':296,
+                  'full_universe_sessions_available':sum(1 for x in sessions if len(x.get('stocks') or [])>=296),
+                  'cycle_quality_complete_count':sum(1 for x in cycle if x['status']=='complete'),
+                  'cycle_quality_usable_count':sum(1 for x in cycle if x['status'] in ('complete','usable_provisional')),
+                  'cycle_quality_current_session_count':sum(1 for x in cycle if x['current_session_present']),
+              },
+              'cycle_quality':cycle,
+          }
+          history_path.write_text(json.dumps(h, ensure_ascii=False, indent=2))
+          print(json.dumps({'session':session,'rows':len(stocks),'sessions':len(sessions),'cycle_quality':len(cycle)}))
+          PY
+
+          mkdir -p "daily/$(date -u +%Y-%m-%d)"
+          cp history.json "daily/$(date -u +%Y-%m-%d)/history.json"
+          git add history.json daily/
+          if git diff --cached --quiet; then
+            echo 'History already current; no commit required.'
+            exit 0
+          fi
+          git commit -q -m "EGX V4 daily history $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          for attempt in 1 2 3; do
+            if git push origin egx-live; then exit 0; fi
+            echo "Push retry ${attempt}: rebasing on latest egx-live"
+            git pull --rebase origin egx-live || true
+            sleep $((attempt*2))
+          done
+          echo 'History publish failed after retries' >&2
+          exit 1
