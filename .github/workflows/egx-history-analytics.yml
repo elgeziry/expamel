@@ -3,6 +3,7 @@ name: EGX V4 history analytics
 'on':
   workflow_dispatch:
   push:
+    # Self-test trigger: edits to this workflow execute the same production history path.
     branches: [master]
     paths:
       - '.github/workflows/egx-history-analytics.yml'
