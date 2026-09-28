@@ -1,20 +1,14 @@
-name: EGX Netlify V2 transport mirror
+name: EGX Resilient Bridge V4 live publisher
 
 'on':
   workflow_dispatch:
-  pull_request:
-    types: [opened, synchronize, reopened]
   repository_dispatch:
     types: [egx_bridge_refresh]
-  issues:
-    types: [labeled]
   schedule:
-    # One refresh per hour during the EGX daytime window; portfolio alerts read GitHub only.
-    # Refresh ahead of the hourly portfolio check; :35 is a resilience retry.
-    - cron: '5,35 7-11 * * 0-4'
+    # Five-minute live mirror. UTC window intentionally covers Cairo summer/winter EGX hours.
+    - cron: '*/5 6-12 * * 0-4'
   push:
-    branches:
-      - master
+    branches: [master]
     paths:
       - '.github/workflows/egx-resilient-bridge.yml'
 
@@ -22,1146 +16,339 @@ permissions:
   contents: write
 
 concurrency:
-  group: egx-netlify-v2-transport
+  group: egx-v4-live-publisher
   cancel-in-progress: true
 
+env:
+  PRIMARY_BASE: https://egx-market-feed-v2.netlify.app
+  BRANCH_BASE: https://master--egx-market-feed-v2.netlify.app
+  FOCUS_SYMBOLS: EFIH,IFCM,EFID,EGAL,AMOC,JUFO,ORWE,SVCE,MASR,ORAS,BNYN,BONY,MFPC,ABUK,ETEL,ORHD,HELI,TMGH,VLMRA,KABO,ATQA,MPCO
+
 jobs:
-  mirror:
-    if: github.event_name != 'issues' || github.event.label.name == 'egx-bridge-refresh'
+  publish:
     runs-on: ubuntu-latest
     timeout-minutes: 4
     steps:
-      - name: Select healthy Netlify V2 endpoint
-        shell: bash
-        run: |
-          set -euo pipefail
-          TS="$(date +%s%N)"
-          CANDIDATES=(
-            "https://egx-market-feed-v2.netlify.app"
-            "https://master--egx-market-feed-v2.netlify.app"
-          )
-          BASE=""
-          for candidate in "${CANDIDATES[@]}"; do
-            if ping="$(curl -fsSL --connect-timeout 15 --max-time 20 --retry 1 --retry-delay 1 "${candidate}/ping.txt?ts=${TS}" 2>/dev/null)"               && [[ "${ping}" == EGX-V2-ONLINE\ 7.2.1* ]]; then
-              BASE="${candidate}"
-              break
-            fi
-          done
-          test -n "${BASE}"
-          echo "EGX_BASE=${BASE}" >> "${GITHUB_ENV}"
-          echo "EGX_TS=${TS}" >> "${GITHUB_ENV}"
-          printf '%s\n' "${BASE}" > selected-base.txt
-
-      - name: Fetch and validate diagnostics
+      - name: Fetch, validate and build V4 live contract
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p out
-          # Diagnostics is the execution gate, so recover from transient Netlify 5xx
-          # instead of failing after a single retry. Try both deployment aliases and
-          # keep the first response that is valid JSON.
-          DIAG_OK=false
-          declare -A SEEN_BASES=()
-          for candidate in "${EGX_BASE}" "https://egx-market-feed-v2.netlify.app" "https://master--egx-market-feed-v2.netlify.app"; do
-            if [ -n "${SEEN_BASES[$candidate]:-}" ]; then continue; fi
-            SEEN_BASES["$candidate"]=1
-            echo "Trying diagnostics: $candidate"
-            if curl -fsSL --connect-timeout 15 --max-time 25 --retry 4 --retry-all-errors --retry-delay 2 \
-              "${candidate}/api/diagnostics?ts=${EGX_TS}" -o out/health.tmp \
-              && jq -e 'type=="object" and .source_id=="egx-market-feed-v2"' out/health.tmp >/dev/null 2>&1; then
-              mv out/health.tmp out/health.json
-              EGX_BASE="$candidate"
-              echo "EGX_BASE=${EGX_BASE}" >> "${GITHUB_ENV}"
-              DIAG_OK=true
-              break
-            fi
-          done
-          if [ "$DIAG_OK" = true ]; then
-            jq -e '
-              .source_id == "egx-market-feed-v2" and
-              (.version == "7.2.1" or .core_version_expected == "7.2.1") and
-              .execution_usable == true and
-              (.blockers | type == "array" and length == 0) and
-              (.expected_reference_session_date | type == "string" and length == 10) and
-              (.session_status | type == "string" and length > 0) and
-              (.stale_risk | type == "string" and length > 0) and
-              (.quality.row_count >= 296) and
-              (.quality.unique_symbols == .quality.row_count) and
-              (.quality.close_coverage_pct >= 90) and
-              (.quality.volume_coverage_pct >= 80) and
-              (.quality.live_session_consistent == true) and
-              (.data_fingerprint_sha256 | type == "string" and test("^[a-f0-9]{64}$"))
-            ' out/health.json >/dev/null
-            echo "DIAGNOSTICS_DEGRADED=false" >> "${GITHUB_ENV}"
-          else
-            # Diagnostics can fail independently while V2 data endpoints remain healthy.
-            # Require /api/health here; the canonical execution bundle below remains
-            # the strict execution gate for coverage, freshness, blockers and fingerprint.
-            HEALTH_OK=false
-            declare -A SEEN_HEALTH_BASES=()
-            for candidate in "${EGX_BASE}" "https://egx-market-feed-v2.netlify.app" "https://master--egx-market-feed-v2.netlify.app"; do
-              if [ -n "${SEEN_HEALTH_BASES[$candidate]:-}" ]; then continue; fi
-              SEEN_HEALTH_BASES["$candidate"]=1
-              echo "Diagnostics unavailable; trying health fallback: $candidate"
-              if curl -fsSL --connect-timeout 15 --max-time 25 --retry 3 --retry-all-errors --retry-delay 2 \
-                "${candidate}/api/health?ts=${EGX_TS}" -o out/health-fallback.tmp \
-                && jq -e 'type=="object" and .status=="ok" and (.version=="7.2.1" or .core_version_expected=="7.2.1")' out/health-fallback.tmp >/dev/null 2>&1; then
-                jq '. + {diagnostics_degraded:true, diagnostics_fallback:"api_health"}' out/health-fallback.tmp > out/health.json
-                EGX_BASE="$candidate"
-                echo "EGX_BASE=${EGX_BASE}" >> "${GITHUB_ENV}"
-                echo "DIAGNOSTICS_DEGRADED=true" >> "${GITHUB_ENV}"
-                HEALTH_OK=true
-                break
-              fi
-            done
-            test "$HEALTH_OK" = true
-          fi
-
-      - name: Fetch canonical focus bundle and full market universe
-        shell: bash
-        env:
-          SYMBOLS: EFIH,EFID,ORWE,BONY,JUFO,AMOC,SVCE,EGAL,MASR,ORHD,HELI,TMGH,ABUK,VLMRA,KABO,ATQA,MFPC,MPCO,ETEL
-        run: |
-          set -euo pipefail
-          mkdir -p out
-
-          curl -fsSL --connect-timeout 10 --max-time 25 --retry 2 --retry-all-errors \
-            "https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/egx-live/universe.json?ts=${EGX_TS}" \
-            -o out/prior-universe.json || echo '{"stocks":[]}' > out/prior-universe.json
-          curl -fsSL --connect-timeout 10 --max-time 25 --retry 2 --retry-all-errors \
-            "https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/egx-live/latest.json?ts=${EGX_TS}" \
-            -o out/prior-bridge.json || echo '{}' > out/prior-bridge.json
-
-          BUNDLE_OK=false
-          declare -A SEEN_BUNDLE_BASES=()
-          for candidate in "${EGX_BASE}" "https://egx-market-feed-v2.netlify.app" "https://master--egx-market-feed-v2.netlify.app"; do
-            if [ -n "${SEEN_BUNDLE_BASES[$candidate]:-}" ]; then continue; fi
-            SEEN_BUNDLE_BASES["$candidate"]=1
-            echo "Trying canonical execution bundle: $candidate"
-            if curl -fsSL --connect-timeout 12 --max-time 40 --retry 2 --retry-all-errors --retry-delay 2 \
-              "${candidate}/api/execution-bundle?symbols=${SYMBOLS}&ts=${EGX_TS}" -o out/latest.tmp \
-              && jq -e '
-                .source_id == "egx-market-feed-v2" and
-                .execution_usable == true and
-                (.blockers | type == "array" and length == 0) and
-                (.expected_reference_session_date | type == "string" and length == 10) and
-                (.session_status | type == "string" and length > 0) and
-                (.quality.row_count >= 50) and
-                (.quality.unique_symbols == .quality.row_count) and
-                (.quality.close_coverage_pct >= 90) and
-                (.quality.volume_coverage_pct >= 80) and
-                (.quality.live_session_consistent == true) and
-                (.data_fingerprint_sha256 | type == "string" and test("^[a-f0-9]{64}$"))
-              ' out/latest.tmp >/dev/null 2>&1; then
-              mv out/latest.tmp out/latest.json
-              EGX_BASE="$candidate"
-              echo "EGX_BASE=${EGX_BASE}" >> "${GITHUB_ENV}"
-              BUNDLE_OK=true
-              break
-            fi
-          done
-
-          if [ "$BUNDLE_OK" = true ]; then
-            echo "SELECTED_MODE=netlify_only_degraded" >> "${GITHUB_ENV}"
-            echo "DIRECT_OK=false" >> "${GITHUB_ENV}"
-            echo "DIRECT_ROW_COUNT=0" >> "${GITHUB_ENV}"
-            echo "NETLIFY_OK=true" >> "${GITHUB_ENV}"
-
-            jq '{source_id,version,retrieved_at,session_status,expected_reference_session_date,execution_usable,stale_risk,blockers,warnings,quality,data_fingerprint_sha256}' out/latest.json > out/contract.json
-            jq --arg base "${EGX_BASE}" --arg mirrored_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" '
-              {
-                transport: "github-actions-netlify-v2-mirror",
-                market_source: "EGX Market Feed V2 canonical execution bundle",
-                source_url: $base,
-                mirrored_at: $mirrored_at,
-                external_market_fallback_used: false,
-                external_market_crosscheck_used: false
-              }
-            ' <<< '{}' > out/transport.json
-            jq --argjson req "$(printf '%s' "${SYMBOLS}" | jq -Rc 'split(",")')" '
-              {
-                retrieved_at,
-                session_status,
-                market,
-                screen,
-                stocks: (.stocks | map(select(.symbol as $s | $req | index($s))))
-              }
-            ' out/latest.json > out/focus.json
-
-            MARKET_OK=false
-            if curl -fsSL --connect-timeout 12 --max-time 45 --retry 2 --retry-all-errors --retry-delay 2 \
-              "${EGX_BASE}/api/market?ts=${EGX_TS}" -o out/market.json; then
-              jq '
-                if type=="array" then
-                  {retrieved_at:null,session_status:null,expected_reference_session_date:null,quality:null,market:null,screen:null,stocks:.}
-                elif type=="object" and ((.stocks? | type)=="array") then
-                  {retrieved_at,session_status,expected_reference_session_date,quality,market,screen,stocks}
-                elif type=="object" and ((.data? | type)=="object") and ((.data.stocks? | type)=="array") then
-                  (.data | {retrieved_at,session_status,expected_reference_session_date,quality,market,screen,stocks})
-                elif type=="object" and ((.rows? | type)=="array") then
-                  {retrieved_at,session_status,expected_reference_session_date,quality,market,screen,stocks:.rows}
-                elif type=="object" and ((.data? | type)=="array") then
-                  {retrieved_at,session_status,expected_reference_session_date,quality,market,screen,stocks:.data}
-                else
-                  {retrieved_at:null,session_status:null,expected_reference_session_date:null,quality:null,market:null,screen:null,stocks:[]}
-                end
-              ' out/market.json > out/universe.json
-              ACTUAL="$(jq '.stocks | length' out/universe.json)"
-              if [ "${ACTUAL:-0}" -ge 250 ]; then MARKET_OK=true; fi
-            fi
-
-            if [ "$MARKET_OK" = true ]; then
-              ACTUAL="$(jq '.stocks | length' out/universe.json)"
-              echo "V2 market embedded rows=${ACTUAL}"
-              if [ "${ACTUAL}" -ge 296 ]; then
-                echo "FULL_UNIVERSE_AVAILABLE=true" >> "${GITHUB_ENV}"
-              else
-                echo "FULL_UNIVERSE_AVAILABLE=false" >> "${GITHUB_ENV}"
-              fi
-            else
-              echo "::warning::/api/market unavailable; preserving prior market context while keeping focus execution fresh."
-              jq --slurpfile fresh out/latest.json '
-                . as $prior
-                | ($fresh[0].stocks // []) as $f
-                | .stocks = [(.stocks // [])[] |
-                    . as $old |
-                    (($f | map(select(.symbol == $old.symbol)) | .[0]) // $old)
-                  ]
-                | .retrieved_at = $fresh[0].retrieved_at
-                | .session_status = $fresh[0].session_status
-                | .expected_reference_session_date = $fresh[0].expected_reference_session_date
-                | .market = $fresh[0].market
-                | .screen = $fresh[0].screen
-                | .quality = (($fresh[0].quality // {}) + {
-                    market_universe_context: "prior_validated_overlay",
-                    embedded_current_focus_count: (($f)|length)
-                  })
-              ' out/prior-universe.json > out/universe.json
-              echo "FULL_UNIVERSE_AVAILABLE=false" >> "${GITHUB_ENV}"
-            fi
-          else
-            echo "::warning::Canonical aggregate bundle unavailable; entering direct V2 stock fallback."
-            python - <<'PY'
-          import concurrent.futures, datetime as dt, hashlib, json, math, os, time, urllib.parse, urllib.request
+          python - <<'PY'
+          import json, hashlib, os, time, urllib.parse, urllib.request
+          from datetime import datetime, timezone
+          from zoneinfo import ZoneInfo
+          from pathlib import Path
 
           bases=[]
-          for b in [os.environ.get("EGX_BASE"),"https://egx-market-feed-v2.netlify.app","https://master--egx-market-feed-v2.netlify.app"]:
-              if b and b not in bases: bases.append(b.rstrip("/"))
+          for b in (os.environ['PRIMARY_BASE'], os.environ['BRANCH_BASE']):
+              if b and b not in bases: bases.append(b.rstrip('/'))
+          focus=[x.strip().upper() for x in os.environ['FOCUS_SYMBOLS'].split(',') if x.strip()]
+          now=datetime.now(timezone.utc)
+          cairo_now=now.astimezone(ZoneInfo('Africa/Cairo'))
+          stamp=str(time.time_ns())
 
-          focus=[x.strip().upper() for x in os.environ.get("SYMBOLS","").split(",") if x.strip()]
-          try:
-              prior=json.load(open("out/prior-universe.json"))
-          except Exception:
-              prior={"stocks":[]}
-          prior_stocks=prior.get("stocks") or []
-          by={str(x.get("symbol","")).upper():x for x in prior_stocks if x.get("symbol")}
-          symbols=list(by)
-          for x in focus:
-              if x not in symbols: symbols.append(x)
+          def fetch_json(url, attempts=3, timeout=30):
+              last=None
+              for attempt in range(attempts):
+                  try:
+                      req=urllib.request.Request(url, headers={
+                          'User-Agent':'EGX-Resilient-Bridge-V4/1.0',
+                          'Cache-Control':'no-cache',
+                          'Pragma':'no-cache',
+                      })
+                      with urllib.request.urlopen(req, timeout=timeout) as r:
+                          return json.load(r)
+                  except Exception as e:
+                      last=e
+                      time.sleep(1.2*(attempt+1))
+              raise last
 
-          request_stamp=str(time.time_ns())
-
-          def number(v):
+          def parse_time(v):
+              if not v: return None
               try:
-                  x=float(v)
-                  return x if math.isfinite(x) else None
+                  return datetime.fromisoformat(str(v).replace('Z','+00:00')).astimezone(timezone.utc)
               except Exception:
                   return None
 
-          def fetch(sym):
-              last=None
-              for base in bases:
-                  for attempt in range(2):
-                      try:
-                          url=f"{base}/api/stock?symbol={urllib.parse.quote(sym)}&ts={request_stamp}{attempt}"
-                          req=urllib.request.Request(url,headers={"User-Agent":"EGX-Resilient-Bridge/3"})
-                          with urllib.request.urlopen(req,timeout=22) as r:
-                              d=json.load(r)
-                          if d.get("status")=="ok" and str(d.get("symbol",sym)).upper()==sym:
-                              return sym,d,base,None
-                          last=f"bad_status:{d.get('status')}"
-                      except Exception as e:
-                          last=f"{type(e).__name__}:{e}"
-                          time.sleep(.15*(attempt+1))
-              return sym,None,None,last
+          def bundle_gate(d):
+              reasons=[]
+              if not isinstance(d,dict): return False,['not_object'],None
+              if d.get('source_id')!='egx-market-feed-v2': reasons.append('source_id')
+              if d.get('execution_usable') is not True: reasons.append('execution_usable')
+              if (d.get('blockers') or []): reasons.append('blockers')
+              q=d.get('quality') or {}
+              rows=q.get('row_count') or 0
+              if rows < 50: reasons.append(f'row_count:{rows}')
+              if (q.get('close_coverage_pct') or 0) < 90: reasons.append('close_coverage')
+              if (q.get('volume_coverage_pct') or 0) < 80: reasons.append('volume_coverage')
+              if q.get('live_session_consistent') is not True: reasons.append('session_consistency')
+              ts=parse_time(d.get('retrieved_at'))
+              age=None
+              if not ts:
+                  reasons.append('retrieved_at')
+              else:
+                  age=(now-ts).total_seconds()
+                  phase=str(d.get('session_status') or '').lower()
+                  if phase in {'auction','continuous','postclose','open','live'}:
+                      if age > 600: reasons.append(f'stale:{int(age)}s')
+                      if age < -180: reasons.append(f'clock_skew:{int(age)}s')
+                      ref=str(d.get('expected_reference_session_date') or '')
+                      if ref != cairo_now.date().isoformat(): reasons.append(f'session_date:{ref}')
+              fp=d.get('data_fingerprint_sha256')
+              if not (isinstance(fp,str) and len(fp)==64): reasons.append('fingerprint')
+              return not reasons,reasons,age
 
-          results={}
-          errors={}
-          workers=min(28,max(8,len(symbols)//8 if symbols else 8))
-          with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as ex:
-              futs=[ex.submit(fetch,s) for s in symbols]
-              for fut in concurrent.futures.as_completed(futs):
-                  sym,d,base,err=fut.result()
-                  if d is not None: results[sym]=(d,base)
-                  else: errors[sym]=err
-
-          fetched_at=dt.datetime.now(dt.timezone.utc).isoformat().replace("+00:00","Z")
-
-          def first(d,*keys):
-              for k in keys:
-                  cur=d
-                  ok=True
-                  for part in k.split("."):
-                      if not isinstance(cur,dict) or part not in cur:
-                          ok=False
-                          break
-                      cur=cur[part]
-                  if ok and cur is not None:
-                      return cur
-              return None
-
-          merged=[]
-          statuses=[]
-          for sym,(d,base) in results.items():
-              old=dict(by.get(sym) or {"symbol":sym,"name":sym,"description":sym})
-              mapping={
-                  "close": first(d,"last_price","close","price"),
-                  "open": first(d,"open","session.open","ohlc.open"),
-                  "high": first(d,"high","session.high","ohlc.high"),
-                  "low": first(d,"low","session.low","ohlc.low"),
-                  "volume": first(d,"volume","session.volume"),
-                  "change": first(d,"change_percent","change"),
-                  "RSI": first(d,"technical.rsi","technical.RSI"),
-                  "EMA20": first(d,"technical.ema20","technical.EMA20"),
-                  "SMA20": first(d,"technical.sma20","technical.SMA20"),
-                  "SMA50": first(d,"technical.sma50","technical.SMA50"),
-                  "SMA200": first(d,"technical.sma200","technical.SMA200"),
-                  "relative_volume_10d": first(d,"technical.relative_volume_10d","relative_volume_10d"),
-                  "demand_confirmation_score": first(d,"demand_confirmation_score"),
-              }
-              for k,v in mapping.items():
-                  if v is not None:
-                      old[k]=v
-              st=first(d,"session_status")
-              if st:
-                  statuses.append(str(st))
-              old["current_session"]=st or prior.get("session_status")
-              old["_direct_snapshot"]={
-                  "ok":True,
-                  "base":base,
-                  "fetched_at":fetched_at,
-                  "source_timestamp":first(d,"retrieved_at","updated_at","as_of","timestamp","last_update"),
-                  "status":d.get("status"),
-                  "field_freshness":{"price_technical":"direct_current","fundamentals":"carried_forward_last_validated"}
-              }
-              merged.append(old)
-
-          got=set(results)
-          for old0 in prior_stocks:
-              sym=str(old0.get("symbol","")).upper()
-              if sym and sym not in got:
-                  old=dict(old0)
-                  old["_direct_snapshot"]={"ok":False,"fetched_at":fetched_at,"field_freshness":{"price_technical":"stale_context_only"}}
-                  merged.append(old)
-
-          success=len(results)
-          focus_success=sum(1 for x in focus if x in results)
-          current=[x for x in merged if (x.get("_direct_snapshot") or {}).get("ok") is True]
-          adv=sum(1 for x in current if (number(x.get("change")) or 0)>0)
-          dec=sum(1 for x in current if (number(x.get("change")) or 0)<0)
-          unch=len(current)-adv-dec
-          positive=round(adv/max(len(current),1)*100,1)
-          session_status=max(set(statuses),key=statuses.count) if statuses else (prior.get("session_status") or "unknown")
-          expected_date=prior.get("expected_reference_session_date") or dt.datetime.now(dt.timezone.utc).date().isoformat()
-          top=sorted(current,key=lambda x: ((x.get("decision_support") or {}).get("setup_score") or -1),reverse=True)[:25]
-          market={
-              "regime":"direct_sampled",
-              "breadth":{"advancers":adv,"decliners":dec,"unchanged":unch,"positive_pct":positive},
-              "sampled":True,
-              "sample_size":len(current),
-              "sample_scope":"individual_v2_stock_endpoints"
-          }
-          execution_usable=success>=50 and focus_success>=min(8,len(focus))
-          quality={
-              "row_count":success,
-              "upstream_total_count":len(symbols),
-              "expected_universe_floor":50,
-              "universe_coverage_pct":round(success/max(len(symbols),1)*100,1),
-              "universe_complete":success>=len(symbols) and len(symbols)>0,
-              "unique_symbols":success,
-              "coverage_scope":"fresh_individual_v2_rows",
-              "close_coverage_pct":round(sum(1 for x in current if x.get("close") is not None)/max(success,1)*100,1),
-              "volume_coverage_pct":round(sum(1 for x in current if x.get("volume") is not None)/max(success,1)*100,1),
-              "basic_integrity_ok":success>=50,
-              "live_session_consistent":True,
-              "live_execution_usable":execution_usable,
-              "direct_focus_success":focus_success,
-              "direct_focus_requested":len(focus),
-              "stale_context_rows":max(0,len(merged)-success)
-          }
-          payload={
-              "source_id":"egx-market-feed-v2",
-              "version":"direct-stock-fallback",
-              "retrieved_at":fetched_at,
-              "session_status":session_status,
-              "expected_reference_session_date":expected_date,
-              "execution_usable":execution_usable,
-              "stale_risk":"controlled_direct_fallback" if execution_usable else "blocked",
-              "blockers":[] if execution_usable else [f"direct_rows_below_gate:{success}"],
-              "warnings":[
-                  "aggregate_endpoints_unavailable",
-                  "direct_v2_stock_fallback",
-                  "fundamentals_carried_forward_from_last_validated_universe",
-                  "market_breadth_sampled_from_fresh_direct_rows"
-              ],
-              "quality":quality,
-              "market":market,
-              "screen":{"top_setup":top,"early_movement":[],"degraded_direct_fallback":True},
-              "stocks":current
-          }
-          canon=json.dumps(payload,sort_keys=True,separators=(",",":"),ensure_ascii=False).encode()
-          payload["data_fingerprint_sha256"]=hashlib.sha256(canon).hexdigest()
-          json.dump(payload,open("out/latest.json","w"),ensure_ascii=False,indent=2)
-          json.dump({
-              "retrieved_at":fetched_at,
-              "session_status":session_status,
-              "expected_reference_session_date":expected_date,
-              "quality":quality,
-              "market":market,
-              "screen":payload["screen"],
-              "stocks":merged
-          },open("out/universe.json","w"),ensure_ascii=False,indent=2)
-          json.dump({
-              "retrieved_at":fetched_at,
-              "session_status":session_status,
-              "market":market,
-              "screen":payload["screen"],
-              "stocks":[x for x in current if str(x.get("symbol","")).upper() in focus]
-          },open("out/focus.json","w"),ensure_ascii=False,indent=2)
-          json.dump({
-              "source_id":payload["source_id"],
-              "version":payload["version"],
-              "retrieved_at":fetched_at,
-              "session_status":session_status,
-              "expected_reference_session_date":expected_date,
-              "execution_usable":execution_usable,
-              "stale_risk":payload["stale_risk"],
-              "blockers":payload["blockers"],
-              "warnings":payload["warnings"],
-              "quality":quality,
-              "data_fingerprint_sha256":payload["data_fingerprint_sha256"]
-          },open("out/contract.json","w"),ensure_ascii=False,indent=2)
-          json.dump({
-              "transport":"github-actions-direct-v2-fallback",
-              "market_source":"EGX Market Feed V2 individual stock endpoints",
-              "source_url":bases[0] if bases else None,
-              "mirrored_at":fetched_at,
-              "external_market_fallback_used":False,
-              "external_market_crosscheck_used":False,
-              "direct_rows":success,
-              "focus_success":focus_success,
-              "errors_sample":dict(list(errors.items())[:12])
-          },open("out/transport.json","w"),ensure_ascii=False,indent=2)
-          print(json.dumps({"direct_rows":success,"focus_success":focus_success,"requested":len(symbols),"execution_usable":execution_usable}))
-          if success < 50:
-              raise SystemExit("DIRECT_FALLBACK_GATE_FAILED: fewer than 50 fresh V2 stock rows")
-          PY
-            DIRECT_ROWS="$(jq -r '.quality.row_count // 0' out/latest.json)"
-            echo "SELECTED_MODE=direct_fallback" >> "${GITHUB_ENV}"
-            echo "DIRECT_OK=true" >> "${GITHUB_ENV}"
-            echo "DIRECT_ROW_COUNT=${DIRECT_ROWS}" >> "${GITHUB_ENV}"
-            echo "NETLIFY_OK=false" >> "${GITHUB_ENV}"
-            echo "FULL_UNIVERSE_AVAILABLE=false" >> "${GITHUB_ENV}"
-          fi
-
-      - name: Build validated external historical sidecar
-        continue-on-error: true
-        shell: bash
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -u
-          mkdir -p out/external-history
-          SESSION="$(jq -r '.expected_reference_session_date // empty' out/latest.json)"
-          # Daily cache: history is refreshed once per EGX session, not every hourly Bridge refresh.
-          rm -rf /tmp/ext-cache
-          mkdir -p /tmp/ext-cache
-          git init -q /tmp/ext-cache
-          cd /tmp/ext-cache
-          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          if git fetch -q --depth=1 origin egx-live 2>/dev/null; then
-            for p in summary.json sessions.json crosscheck.json source-stats.json; do
-              git show "FETCH_HEAD:external-history/$p" > "${GITHUB_WORKSPACE}/out/external-history/$p" 2>/dev/null || true
-            done
-          fi
-          cd "${GITHUB_WORKSPACE}"
-          CACHED_SESSION="$(jq -r '.session_date // empty' out/external-history/summary.json 2>/dev/null || true)"
-          CACHED_SCHEMA="$(jq -r '.schema // empty' out/external-history/summary.json 2>/dev/null || true)"
-          CACHED_ACCEPTED="$(jq -r '.accepted_symbols // 0' out/external-history/summary.json 2>/dev/null || echo 0)"
-          if [ "$CACHED_SESSION" = "$SESSION" ] && [ "$CACHED_SCHEMA" = "egx-external-history-v5" ] && [ "${CACHED_ACCEPTED:-0}" -ge 1 ]; then
-            echo "Reusing validated external history cache for $SESSION: $CACHED_ACCEPTED symbols"
-            exit 0
-          fi
-          # Historical bars are deliberately decoupled from execution. If the current
-          # market universe is temporarily incomplete, keep the last validated sidecar
-          # instead of rebuilding it from a partial symbol set and shrinking coverage.
-          if [ "${FULL_UNIVERSE_AVAILABLE:-false}" != "true" ] && [ "$CACHED_SCHEMA" = "egx-external-history-v5" ] && [ "${CACHED_ACCEPTED:-0}" -ge 1 ]; then
-            echo "::warning::Current V2 universe is partial; reusing prior validated external-history cache ($CACHED_ACCEPTED symbols)."
-            exit 0
-          fi
-
-          rm -f out/external-history/*.json
-          python -m pip -q install yfinance pandas investiny || exit 0
-          python -m pip -q install --upgrade --no-cache-dir git+https://github.com/rongardF/tvdatafeed.git || true
-          python - <<'PY'
-          import json, math, time
-          from datetime import date, timedelta, datetime
-          import pandas as pd
-          import yfinance as yf
-
-          universe=json.load(open("out/universe.json"))
-          latest=json.load(open("out/latest.json"))
-          stocks=universe.get("stocks",[])
-          by_symbol={str(x.get("symbol","")).strip().upper():x for x in stocks if x.get("symbol")}
-          symbols=sorted(by_symbol)
-          session_date=str(latest.get("expected_reference_session_date") or universe.get("expected_reference_session_date") or date.today().isoformat())
-          session_status=str(latest.get("session_status") or "")
-          end=date.today()+timedelta(days=1)
-          start=end-timedelta(days=430)
-
-          frames={}
-          batch_size=45
-          for pos in range(0,len(symbols),batch_size):
-            batch=symbols[pos:pos+batch_size]
-            tickers=[x+".CA" for x in batch]
-            data=None
-            for attempt in range(2):
+          diagnostics=None
+          bundle=None
+          selected=None
+          failures={}
+          query=urllib.parse.urlencode({'symbols':','.join(focus),'ts':stamp})
+          for base in bases:
               try:
-                data=yf.download(tickers=tickers,start=start.isoformat(),end=end.isoformat(),
-                                 interval="1d",group_by="ticker",auto_adjust=False,
-                                 progress=False,threads=True,timeout=30)
-                if data is not None and not data.empty: break
-              except Exception:
-                data=None
-              time.sleep(1.5*(attempt+1))
-            if data is None or data.empty: continue
-            for sym,tkr in zip(batch,tickers):
-              try:
-                d=data[tkr].copy() if isinstance(data.columns,pd.MultiIndex) else data.copy()
-                if not d.empty: frames[sym]=d
-              except Exception:
-                pass
-
-          def num(v):
-            try:
-              x=float(v)
-              return x if math.isfinite(x) else None
-            except Exception:return None
-          def pdiff(a,b):
-            if a is None or b is None or b==0:return None
-            return abs(a-b)/abs(b)*100.0
-          def sma(vals,n):
-            return sum(vals[-n:])/n if len(vals)>=n else None
-
-          accepted_bars={}
-          stats={}
-          accepted=[]
-          high_conf=[]
-          medium_conf=[]
-          short_conf=[]
-          for sym in symbols:
-            d=frames.get(sym)
-            if d is None:
-              stats[sym]={"accepted":False,"bars":0,"reason":"missing_ticker"}
-              continue
-            try:d=d.dropna(subset=["Open","High","Low","Close"]).sort_index()
-            except Exception:
-              stats[sym]={"accepted":False,"bars":0,"reason":"bad_frame"}; continue
-            bars=[]
-            for idx,r in d.iterrows():
-              dt=pd.Timestamp(idx).date().isoformat()
-              # Never backfill the current live session from an external provider.
-              if dt >= session_date: continue
-              o,h,l,c=[num(r.get(k)) for k in ("Open","High","Low","Close")]
-              v=num(r.get("Volume"))
-              if None in (o,h,l,c) or min(o,h,l,c)<=0: continue
-              if h+1e-12<max(o,c,l) or l-1e-12>min(o,c,h): continue
-              bars.append({"date":dt,"open":o,"high":h,"low":l,"close":c,"volume":int(max(v or 0,0))})
-            closes=[x["close"] for x in bars]
-            ext={"sma20":sma(closes,20),"sma50":sma(closes,50),"sma200":sma(closes,200)}
-            v2=by_symbol[sym]
-            diffs={k:pdiff(ext[k],num(v2.get(k.upper()))) for k in ("sma20","sma50","sma200")}
-            checks={
-              "sma20": diffs["sma20"] is not None and diffs["sma20"]<=4.0,
-              "sma50": diffs["sma50"] is not None and diffs["sma50"]<=4.0,
-              "sma200": diffs["sma200"] is not None and diffs["sma200"]<=6.0,
-            }
-            comparable=[x for x in diffs.values() if x is not None]
-            pass_count=sum(checks.values())
-            latest_date=bars[-1]["date"] if bars else None
-            try:
-              gap=(datetime.fromisoformat(session_date)-datetime.fromisoformat(latest_date)).days if latest_date else 999
-            except Exception:gap=999
-            enough=len(bars)>=60
-            fresh=gap<=7
-            # Tier A/B: 60-session identity requires at least two agreeing V2 moving averages.
-            identity=(checks["sma20"] and checks["sma50"]) or (pass_count>=2 and (checks["sma20"] or checks["sma50"]))
-            med=sorted(comparable)[len(comparable)//2] if comparable else None
-            ok=bool(enough and fresh and identity)
-            depth=60 if ok else 0
-            conf="rejected"
-            if ok:
-              conf="high" if pass_count==3 and med is not None and med<=2.5 else "medium"
-            # Tier C: adaptive recent-history rescue. If the 20-session mean itself agrees tightly
-            # with V2, use only the recent 20 completed bars; never pretend the older history was validated.
-            elif len(bars)>=20 and fresh and diffs["sma20"] is not None and diffs["sma20"]<=2.5:
-              ok=True; depth=20; conf="short"
-            if ok:
-              accepted.append(sym)
-              if conf=="high": high_conf.append(sym)
-              elif conf=="medium": medium_conf.append(sym)
-              else: short_conf.append(sym)
-              accepted_bars[sym]=bars[-depth:]
-            stats[sym]={
-              "accepted":ok,"confidence":conf,"validated_depth":depth,"bars_available":len(bars),"latest_date":latest_date,
-              "freshness_gap_days":gap,"v2_sma20":num(v2.get("SMA20")),"v2_sma50":num(v2.get("SMA50")),
-              "v2_sma200":num(v2.get("SMA200")),"external_sma20":ext["sma20"],"external_sma50":ext["sma50"],
-              "external_sma200":ext["sma200"],"diff_pct":diffs,"checks":checks
-            }
-
-          # Secondary exact-symbol rescue for important/rejected names using Investing history.
-          # It can only enter Cycle Quality after passing the same V2 moving-average identity gates.
-          secondary_attempted=[]
-          secondary_rescued=[]
-          try:
-            from investiny import search_assets, historical_data
-            priority=["AMOC","JUFO","ABUK","ETEL","KZPC","AMER","COPR","INEG","AFMC","CCAP",
-                      "HDBK","DTPP","INFI","MBSC","ORAS","GOUR","BONY","VLMRA"]
-            priority += [x for x in symbols if not stats.get(x,{}).get("accepted")]
-            ordered=[]; seen=set()
-            for x in priority:
-              if x in by_symbol and x not in seen and not stats.get(x,{}).get("accepted"):
-                ordered.append(x); seen.add(x)
-            from_dt=(end-timedelta(days=430)).strftime("%m/%d/%Y")
-            to_dt=end.strftime("%m/%d/%Y")
-            for sym in ordered[:35]:
-              secondary_attempted.append(sym)
-              try:
-                results=search_assets(query=sym,limit=10,type="Stock") or []
-                exact=[r for r in results if str(r.get("symbol","")).upper()==sym]
-                # Prefer an explicitly Egyptian/Cairo/EGX exchange when search metadata exposes it.
-                egypt=[r for r in exact if any(k in str(r.get("exchange","")).lower() for k in ("egypt","cairo","egx"))]
-                candidates=egypt or exact
-                for cand in candidates[:2]:
                   try:
-                    raw2=historical_data(investing_id=int(cand["ticker"]),from_date=from_dt,to_date=to_dt,interval="D")
-                    dates=raw2.get("date",[]); opens=raw2.get("open",[]); highs=raw2.get("high",[])
-                    lows=raw2.get("low",[]); closes2=raw2.get("close",[]); vols=raw2.get("volume",[])
-                    bars2=[]
-                    for n,dt0 in enumerate(dates):
-                      try:
-                        dt=pd.to_datetime(dt0).date().isoformat()
-                        if dt>=session_date: continue
-                        o,h,l,c=[num(arr[n]) for arr in (opens,highs,lows,closes2)]
-                        v=num(vols[n]) if n<len(vols) else 0
-                        if None in (o,h,l,c) or min(o,h,l,c)<=0: continue
-                        if h+1e-12<max(o,c,l) or l-1e-12>min(o,c,h): continue
-                        bars2.append({"date":dt,"open":o,"high":h,"low":l,"close":c,"volume":int(max(v or 0,0))})
-                      except Exception:
-                        continue
-                    bars2=sorted({b["date"]:b for b in bars2}.values(),key=lambda z:z["date"])
-                    cls=[b["close"] for b in bars2]
-                    ext2={"sma20":sma(cls,20),"sma50":sma(cls,50),"sma200":sma(cls,200)}
-                    v2=by_symbol[sym]
-                    dif2={k:pdiff(ext2[k],num(v2.get(k.upper()))) for k in ("sma20","sma50","sma200")}
-                    chk2={"sma20":dif2["sma20"] is not None and dif2["sma20"]<=4.0,
-                          "sma50":dif2["sma50"] is not None and dif2["sma50"]<=4.0,
-                          "sma200":dif2["sma200"] is not None and dif2["sma200"]<=6.0}
-                    pc=sum(chk2.values())
-                    ld=bars2[-1]["date"] if bars2 else None
-                    try:gap2=(datetime.fromisoformat(session_date)-datetime.fromisoformat(ld)).days if ld else 999
-                    except Exception:gap2=999
-                    identity2=(chk2["sma20"] and chk2["sma50"]) or (pc>=2 and (chk2["sma20"] or chk2["sma50"]))
-                    ok2=len(bars2)>=60 and gap2<=7 and identity2
-                    depth2=60 if ok2 else 0
-                    conf2="rejected"
-                    comparable2=[x for x in dif2.values() if x is not None]
-                    med2=sorted(comparable2)[len(comparable2)//2] if comparable2 else None
-                    if ok2:
-                      conf2="high" if pc==3 and med2 is not None and med2<=2.5 else "medium"
-                    elif len(bars2)>=20 and gap2<=7 and dif2["sma20"] is not None and dif2["sma20"]<=2.5:
-                      ok2=True; depth2=20; conf2="short"
-                    if not ok2: continue
-                    accepted.append(sym)
-                    if conf2=="high": high_conf.append(sym)
-                    elif conf2=="medium": medium_conf.append(sym)
-                    else: short_conf.append(sym)
-                    accepted_bars[sym]=bars2[-depth2:]
-                    stats[sym]={
-                      "accepted":True,"confidence":conf2,"validated_depth":depth2,"bars_available":len(bars2),
-                      "latest_date":ld,"freshness_gap_days":gap2,"source":"investiny",
-                      "investing_exchange":cand.get("exchange"),"investing_ticker":cand.get("ticker"),
-                      "v2_sma20":num(v2.get("SMA20")),"v2_sma50":num(v2.get("SMA50")),"v2_sma200":num(v2.get("SMA200")),
-                      "external_sma20":ext2["sma20"],"external_sma50":ext2["sma50"],"external_sma200":ext2["sma200"],
-                      "diff_pct":dif2,"checks":chk2
-                    }
-                    secondary_rescued.append(sym)
-                    break
+                      diagnostics=fetch_json(f'{base}/api/diagnostics?ts={stamp}', attempts=2, timeout=20)
                   except Exception:
-                    continue
-              except Exception:
-                continue
-          except Exception:
-            pass
+                      diagnostics=None
+                  candidate=fetch_json(f'{base}/api/execution-bundle?{query}', attempts=3, timeout=35)
+                  ok,reasons,age=bundle_gate(candidate)
+                  if ok:
+                      bundle=candidate; selected=base; live_age=age
+                      break
+                  failures[base]=reasons
+              except Exception as e:
+                  failures[base]=[f'{type(e).__name__}:{e}']
+          if bundle is None:
+              raise SystemExit('FAIL_CLOSED: no canonical execution bundle passed the V4 gate: '+json.dumps(failures))
 
-          # Third-source rescue: TradingView historical bars for still-rejected EGX symbols.
-          # This layer is historical only; execution prices remain V2-exclusive.
-          tertiary_attempted=[]
-          tertiary_rescued=[]
-          try:
-            from tvDatafeed import TvDatafeed, Interval
-            tv=TvDatafeed()
-            priority_tv=["AMOC","ABUK","ORAS","ETEL","JUFO","KZPC","AMER","COPR","INEG","AFMC",
-                         "CCAP","HDBK","DTPP","INFI","MBSC","GOUR","BONY","VLMRA"]
-            priority_tv += [x for x in symbols if not stats.get(x,{}).get("accepted")]
-            ordered_tv=[]; seen_tv=set()
-            for x in priority_tv:
-              if x in by_symbol and x not in seen_tv and not stats.get(x,{}).get("accepted"):
-                ordered_tv.append(x); seen_tv.add(x)
-            for sym in ordered_tv[:70]:
-              tertiary_attempted.append(sym)
+          # Full market is desirable for scanning/history, but it must never block a valid live focus packet.
+          market_payload=None
+          market_base=None
+          for base in [selected]+[x for x in bases if x!=selected]:
               try:
-                d2=tv.get_hist(symbol=sym,exchange="EGX",interval=Interval.in_daily,n_bars=260)
-                if d2 is None or getattr(d2,"empty",True): continue
-                bars3=[]
-                for idx,r in d2.sort_index().iterrows():
-                  dt=pd.Timestamp(idx).date().isoformat()
-                  if dt>=session_date: continue
-                  o,h,l,c=[num(r.get(k)) for k in ("open","high","low","close")]
-                  v=num(r.get("volume"))
-                  if None in (o,h,l,c) or min(o,h,l,c)<=0: continue
-                  if h+1e-12<max(o,c,l) or l-1e-12>min(o,c,h): continue
-                  bars3.append({"date":dt,"open":o,"high":h,"low":l,"close":c,"volume":int(max(v or 0,0))})
-                bars3=sorted({b["date"]:b for b in bars3}.values(),key=lambda z:z["date"])
-                cls3=[b["close"] for b in bars3]
-                ext3={"sma20":sma(cls3,20),"sma50":sma(cls3,50),"sma200":sma(cls3,200)}
-                v2=by_symbol[sym]
-                dif3={k:pdiff(ext3[k],num(v2.get(k.upper()))) for k in ("sma20","sma50","sma200")}
-                chk3={"sma20":dif3["sma20"] is not None and dif3["sma20"]<=3.0,
-                      "sma50":dif3["sma50"] is not None and dif3["sma50"]<=3.0,
-                      "sma200":dif3["sma200"] is not None and dif3["sma200"]<=5.0}
-                pc3=sum(chk3.values())
-                ld3=bars3[-1]["date"] if bars3 else None
-                try:gap3=(datetime.fromisoformat(session_date)-datetime.fromisoformat(ld3)).days if ld3 else 999
-                except Exception:gap3=999
-                identity3=(chk3["sma20"] and chk3["sma50"]) or (pc3>=2 and (chk3["sma20"] or chk3["sma50"]))
-                ok3=len(bars3)>=60 and gap3<=7 and identity3
-                depth3=60 if ok3 else 0
-                conf3="rejected"
-                comparable3=[x for x in dif3.values() if x is not None]
-                med3=sorted(comparable3)[len(comparable3)//2] if comparable3 else None
-                if ok3:
-                  conf3="high" if pc3==3 and med3 is not None and med3<=2.0 else "medium"
-                elif len(bars3)>=20 and gap3<=7 and dif3["sma20"] is not None and dif3["sma20"]<=1.75:
-                  ok3=True; depth3=20; conf3="short"
-                if not ok3: continue
-                accepted.append(sym)
-                if conf3=="high": high_conf.append(sym)
-                elif conf3=="medium": medium_conf.append(sym)
-                else: short_conf.append(sym)
-                accepted_bars[sym]=bars3[-depth3:]
-                stats[sym]={
-                  "accepted":True,"confidence":conf3,"validated_depth":depth3,"bars_available":len(bars3),
-                  "latest_date":ld3,"freshness_gap_days":gap3,"source":"tradingview",
-                  "v2_sma20":num(v2.get("SMA20")),"v2_sma50":num(v2.get("SMA50")),"v2_sma200":num(v2.get("SMA200")),
-                  "external_sma20":ext3["sma20"],"external_sma50":ext3["sma50"],"external_sma200":ext3["sma200"],
-                  "diff_pct":dif3,"checks":chk3
-                }
-                tertiary_rescued.append(sym)
+                  raw=fetch_json(f'{base}/api/market?ts={stamp}', attempts=2, timeout=40)
+                  if isinstance(raw,list):
+                      parsed={'stocks':raw}
+                  elif isinstance(raw,dict) and isinstance(raw.get('stocks'),list):
+                      parsed=raw
+                  elif isinstance(raw,dict) and isinstance(raw.get('data'),dict) and isinstance(raw['data'].get('stocks'),list):
+                      parsed=raw['data']
+                  elif isinstance(raw,dict) and isinstance(raw.get('rows'),list):
+                      parsed={'stocks':raw['rows']}
+                  elif isinstance(raw,dict) and isinstance(raw.get('data'),list):
+                      parsed={'stocks':raw['data']}
+                  else:
+                      parsed={'stocks':[]}
+                  if len(parsed.get('stocks') or []) >= 250:
+                      market_payload=parsed; market_base=base; break
               except Exception:
-                continue
+                  pass
+
+          # Read the last analytical history only as a sidecar. It cannot make stale execution data valid.
+          history={}
+          try:
+              history=fetch_json(f'https://raw.githubusercontent.com/{os.environ["GITHUB_REPOSITORY"]}/egx-live/history.json?ts={stamp}', attempts=1, timeout=15)
           except Exception:
-            pass
+              history={}
+          cycle_quality=history.get('cycle_quality') or [] if isinstance(history,dict) else []
 
-          by_date={}
-          for sym,bars in accepted_bars.items():
-            conf=stats[sym]["confidence"]
-            for b in bars:
-              provider=stats[sym].get("source","yfinance")
-              rec={"symbol":sym,**b,"history_source":"external_validated_"+provider,"history_confidence":conf}
-              by_date.setdefault(b["date"],[]).append(rec)
-          sessions=[]
-          for dt in sorted(by_date)[-60:]:
-            arr=by_date[dt]
-            sessions.append({"date":dt,"retrieved_at":None,"market":None,
-                             "source":"external_validated_sidecar","stocks":arr})
-          total=len(symbols)
-          summary={
-            "schema":"egx-external-history-v5","purpose":"cycle-quality-history-only","execution_source":False,
-            "session_date":session_date,"generated_at":pd.Timestamp.utcnow().isoformat(),
-            "provider":"yfinance+investiny+tradingview_fallback","exchange_suffix":".CA","symbols_requested":total,
-            "symbols_with_60plus":sum((v.get("bars_available") or 0)>=60 for v in stats.values()),
-            "accepted_symbols":len(set(accepted)),"high_confidence_symbols":len(high_conf),
-            "medium_confidence_symbols":len(medium_conf),"short_validated_symbols":len(short_conf),
-            "secondary_attempted":secondary_attempted,"secondary_rescued":secondary_rescued,
-            "secondary_rescued_symbols":len(secondary_rescued),
-            "tertiary_attempted":tertiary_attempted,"tertiary_rescued":tertiary_rescued,
-            "tertiary_rescued_symbols":len(tertiary_rescued),
-            "rejected_symbols":total-len(set(accepted)),
-            "history_sessions":len(sessions),"accepted_ratio_pct":round((len(set(accepted))/total*100),1) if total else 0,
-            "accepted":accepted,"high_confidence":high_conf,"medium_confidence":medium_conf,"short_validated":short_conf,
-            "trust_gate":"60-bar tier: <=7d freshness and >=2 SMA identity checks; 20-bar rescue: SMA20 diff <=2.5%; current live session excluded"
+          stocks=bundle.get('stocks') or []
+          have={str(x.get('symbol','')).upper() for x in stocks}
+          alias={'BONY':'BNYN'}
+          focus_rows=[]
+          for row in stocks:
+              r=dict(row)
+              sym=str(r.get('symbol','')).upper()
+              r['canonical_symbol']=alias.get(sym,sym)
+              if sym=='BONY': r['symbol_aliases']=['BONY','BNYN']
+              if sym in focus or r['canonical_symbol'] in focus:
+                  focus_rows.append(r)
+
+          quality=dict(bundle.get('quality') or {})
+          quality['bridge_live_age_seconds']=None if live_age is None else round(live_age,1)
+          quality['bridge_gate']='pass'
+          quality['full_market_fresh']=market_payload is not None
+          quality['focus_requested']=len(focus)
+          quality['focus_returned']=len(focus_rows)
+
+          upstream_fp=bundle.get('data_fingerprint_sha256')
+          bridge={
+              'name':'EGX Resilient Bridge',
+              'version':'4.0-live-fail-closed',
+              'generated_at':bundle.get('retrieved_at'),
+              'publisher_generated_at':now.isoformat().replace('+00:00','Z'),
+              'transport_independent':True,
+              'selected_mode':'netlify_canonical_v2',
+              'market_phase':bundle.get('session_status') or 'unknown',
+              'data_sha256':upstream_fp,
+              'live_max_age_seconds':600,
+              'history_contract':'egx-session-history-v4',
+              'cycle_quality_engine':'decoupled_daily-v4',
           }
-          json.dump(summary,open("out/external-history/summary.json","w"),indent=2)
-          json.dump({"schema":"egx-external-history-sessions-v2","session_date":session_date,"sessions":sessions},
-                    open("out/external-history/sessions.json","w"))
-          json.dump({"schema":"egx-external-history-stats-v2","session_date":session_date,"stats":stats},
-                    open("out/external-history/source-stats.json","w"))
-          cross=[{"symbol":s,"confidence":stats[s]["confidence"],"diff_pct":stats[s]["diff_pct"],
-                  "latest_date":stats[s]["latest_date"]} for s in accepted]
-          json.dump({"session_date":session_date,"accepted":len(accepted),"items":cross},
-                    open("out/external-history/crosscheck.json","w"))
-          print(json.dumps({k:summary[k] for k in ("symbols_requested","symbols_with_60plus","accepted_symbols",
-                                                   "high_confidence_symbols","medium_confidence_symbols","short_validated_symbols",
-                                                   "history_sessions","accepted_ratio_pct")}))
+          latest={
+              'bridge':bridge,
+              'path_health':{
+                  'netlify':{'ok':True,'base':selected,'execution_usable':True,'live_age_seconds':live_age},
+                  'github_mirror':{'ok':True,'mode':'normal_non_force_commit'},
+                  'full_market':{'ok':market_payload is not None,'base':market_base},
+              },
+              'data':{
+                  'execution_usable':True,
+                  'retrieved_at':bundle.get('retrieved_at'),
+                  'session_status':bundle.get('session_status'),
+                  'expected_reference_session_date':bundle.get('expected_reference_session_date'),
+                  'stale_risk':'low' if live_age is not None and live_age<=300 else 'controlled',
+                  'blockers':[],
+                  'warnings':list(bundle.get('warnings') or []) + ([] if market_payload is not None else ['full_market_unavailable_focus_live_only']),
+                  'quality':quality,
+                  'market':bundle.get('market') or {},
+                  'screen':bundle.get('screen') or {'top_setup':[]},
+                  'stocks':stocks,
+                  'cycle_quality':cycle_quality,
+                  'history':{
+                      'contract':history.get('schema','egx-session-history-v4') if isinstance(history,dict) else 'egx-session-history-v4',
+                      'retention_sessions':60,
+                      'source':'decoupled_daily_history',
+                  },
+              },
+          }
+          if not isinstance(latest['data']['screen'].get('top_setup'),list):
+              latest['data']['screen']['top_setup']=[]
+
+          contract={
+              'source_id':bundle.get('source_id'),
+              'version':bundle.get('version'),
+              'retrieved_at':bundle.get('retrieved_at'),
+              'session_status':bundle.get('session_status'),
+              'expected_reference_session_date':bundle.get('expected_reference_session_date'),
+              'execution_usable':True,
+              'live_age_seconds':live_age,
+              'max_live_age_seconds':600,
+              'stale_risk':latest['data']['stale_risk'],
+              'blockers':[],
+              'warnings':latest['data']['warnings'],
+              'quality':quality,
+              'data_fingerprint_sha256':upstream_fp,
+              'bridge_gate':'pass',
+          }
+          health={
+              'status':'ok',
+              'bridge_version':'4.0-live-fail-closed',
+              'checked_at':now.isoformat().replace('+00:00','Z'),
+              'selected_base':selected,
+              'live_age_seconds':live_age,
+              'execution_usable':True,
+              'full_market_fresh':market_payload is not None,
+              'diagnostics_status': (diagnostics or {}).get('status') if isinstance(diagnostics,dict) else None,
+              'failures_before_success':failures,
+          }
+          transport={
+              'transport':'github-actions-v4-non-force-mirror',
+              'market_source':'EGX Market Feed V2 canonical execution bundle',
+              'source_url':selected,
+              'mirrored_at':now.isoformat().replace('+00:00','Z'),
+              'external_market_fallback_used':False,
+              'external_market_crosscheck_used':False,
+              'full_market_source_url':market_base,
+          }
+          focus_doc={
+              'retrieved_at':bundle.get('retrieved_at'),
+              'session_status':bundle.get('session_status'),
+              'expected_reference_session_date':bundle.get('expected_reference_session_date'),
+              'execution_usable':True,
+              'live_age_seconds':live_age,
+              'requested_symbols':focus,
+              'canonical_aliases':alias,
+              'market':bundle.get('market') or {},
+              'screen':bundle.get('screen') or {},
+              'stocks':focus_rows,
+          }
+          if market_payload is not None:
+              universe={
+                  'retrieved_at':market_payload.get('retrieved_at') or bundle.get('retrieved_at'),
+                  'session_status':market_payload.get('session_status') or bundle.get('session_status'),
+                  'expected_reference_session_date':market_payload.get('expected_reference_session_date') or bundle.get('expected_reference_session_date'),
+                  'universe_fresh':True,
+                  'quality':market_payload.get('quality') or quality,
+                  'market':market_payload.get('market') or bundle.get('market') or {},
+                  'screen':market_payload.get('screen') or bundle.get('screen') or {},
+                  'stocks':market_payload.get('stocks') or [],
+              }
+          else:
+              universe={
+                  'retrieved_at':bundle.get('retrieved_at'),
+                  'session_status':bundle.get('session_status'),
+                  'expected_reference_session_date':bundle.get('expected_reference_session_date'),
+                  'universe_fresh':False,
+                  'quality':{**quality,'coverage_scope':'focus_only_no_full_market'},
+                  'market':bundle.get('market') or {},
+                  'screen':bundle.get('screen') or {},
+                  'stocks':stocks,
+              }
+
+          out=Path('out')
+          for name,obj in [('latest.json',latest),('contract.json',contract),('health.json',health),('transport.json',transport),('focus.json',focus_doc),('universe.json',universe)]:
+              (out/name).write_text(json.dumps(obj,ensure_ascii=False,indent=2))
+
+          # Final local fail-closed assertions.
+          assert latest['data']['execution_usable'] is True
+          assert not latest['data']['blockers']
+          assert contract['bridge_gate']=='pass'
+          assert live_age is None or live_age <= 600
+          print(json.dumps({'selected':selected,'age_seconds':live_age,'focus':len(focus_rows),'universe_rows':len(universe['stocks']),'universe_fresh':universe['universe_fresh']}))
           PY
-          test -s out/external-history/summary.json || echo '{"schema":"egx-external-history-v5","accepted_symbols":0,"history_sessions":0}' > out/external-history/summary.json
-          test -s out/external-history/sessions.json || echo '{"schema":"egx-external-history-sessions-v2","sessions":[]}' > out/external-history/sessions.json
 
-      - name: Recover historical sessions from GitHub snapshots
+      - name: Publish without force and retain compact intraday audit snapshots
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
-          mkdir -p /tmp/backfill
-          git init -q /tmp/backfill/repo
-          cd /tmp/backfill/repo
-          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          # Pull the live branch history once; this uses GitHub only and consumes no Netlify credits.
-          git fetch -q --filter=blob:none origin egx-live || true
-          : > /tmp/backfill/candidates.ndjson
-          for commit in $(git rev-list --all --remotes=origin/egx-live 2>/dev/null | head -n 120); do
-            for path in universe.json latest.json; do
-              if git cat-file -e "${commit}:${path}" 2>/dev/null; then
-                git show "${commit}:${path}" > /tmp/backfill/raw.json 2>/dev/null || continue
-                jq -c '
-                  def rows:
-                    if type=="array" then .
-                    elif ((.stocks? | type)=="array") then .stocks
-                    elif ((.data?.stocks? | type)=="array") then .data.stocks
-                    else [] end;
-                  (rows) as $r
-                  | if ($r|length) >= 296 then
-                      {
-                        date: (.expected_reference_session_date // .data.expected_reference_session_date // .retrieved_at[0:10] // .bridge.generated_at[0:10]),
-                        retrieved_at: (.retrieved_at // .bridge.generated_at),
-                        market: (.market // .data.market),
-                        stocks: [$r[] | {
-                          symbol, close, open, high, low, volume, change,
-                          RSI, EMA20, SMA20, SMA50, SMA200,
-                          relative_volume_10d,
-                          long_term_trend,
-                          close_location_in_day
-                        }]
-                      }
-                    else empty end
-                ' /tmp/backfill/raw.json >> /tmp/backfill/candidates.ndjson 2>/dev/null || true
-                break
-              fi
-            done
-          done
-          if [ -s /tmp/backfill/candidates.ndjson ]; then
-            jq -s 'unique_by(.date) | sort_by(.date)' /tmp/backfill/candidates.ndjson > /tmp/backfill/sessions.json
-          else
-            echo '[]' > /tmp/backfill/sessions.json
-          fi
-          echo "Recovered GitHub full-universe sessions: $(jq length /tmp/backfill/sessions.json)"
-          cd "${GITHUB_WORKSPACE}"
-
-      - name: Preserve zero-credit session history
-        shell: bash
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -euo pipefail
-          # Read prior history from GitHub, never from Netlify. This survives the force-published live branch.
-          git init -q /tmp/history-repo
-          cd /tmp/history-repo
-          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          if git fetch -q --depth=1 origin egx-live && git show FETCH_HEAD:history.json > /tmp/prior-history.json 2>/dev/null; then
-            :
-          else
-            echo '{"schema":"egx-session-history-v2","sessions":[]}' > /tmp/prior-history.json
-          fi
-          SESSION="$(jq -r '.expected_reference_session_date // empty' "${GITHUB_WORKSPACE}/out/universe.json")"
-          if [ -z "$SESSION" ] || [ "$SESSION" = "null" ]; then
-            SESSION="$(jq -r '.expected_reference_session_date' "${GITHUB_WORKSPACE}/out/latest.json")"
-          fi
-          # Merge recoverable native GitHub snapshots first.
-          if [ -s /tmp/backfill/sessions.json ]; then
-            jq --slurpfile recovered /tmp/backfill/sessions.json '
-              .sessions = (((.sessions // []) + ($recovered[0] // [])) | unique_by(.date) | sort_by(.date))
-            ' /tmp/prior-history.json > /tmp/prior-history-merged.json
-            mv /tmp/prior-history-merged.json /tmp/prior-history.json
-          fi
-          # Then add validated external sessions only where no native date already exists.
-          # Native Bridge observations always win on duplicate dates.
-          EXT_SESSIONS="${GITHUB_WORKSPACE}/out/external-history/sessions.json"
-          if [ -s "$EXT_SESSIONS" ] && [ "$(jq -r '(.sessions // []) | length' "$EXT_SESSIONS" 2>/dev/null || echo 0)" -gt 0 ]; then
-            jq --slurpfile ext "$EXT_SESSIONS" '
-              # A fresh validated sidecar replaces older external sessions, while native dates are preserved.
-              ((.sessions // []) | map(select((((.source // "") | startswith("external_validated")) | not)))) as $native
-              | ($native | map(.date)) as $native_dates
-              | (($ext[0].sessions // []) | map(select(.date as $d | ($native_dates | index($d)) == null))) as $new
-              | .sessions = (($native + $new) | sort_by(.date))
-            ' /tmp/prior-history.json > /tmp/prior-history-external.json
-            mv /tmp/prior-history-external.json /tmp/prior-history.json
-          fi
-          cd "${GITHUB_WORKSPACE}"
-          HISTORY_INPUT="out/universe.json"
-          UNIVERSE_ROWS="$(jq -r '(.stocks // []) | length' out/universe.json 2>/dev/null || echo 0)"
-          # A near-complete V2 universe (for example 295/296 because one row is
-          # transiently missing) is still far safer for historical analytics than
-          # collapsing Cycle Quality to the 10-14 execution-focus symbols. We only
-          # fall back to the focus bundle on a genuinely degraded market payload.
-          if [ "${UNIVERSE_ROWS:-0}" -lt 250 ]; then
-            echo "::warning::Market universe is severely degraded (${UNIVERSE_ROWS} rows); current-day history will use the focus bundle, while prior market-wide symbols remain preserved."
-            HISTORY_INPUT="out/latest.json"
-          elif [ "${FULL_UNIVERSE_AVAILABLE:-false}" != "true" ]; then
-            echo "::warning::Using near-complete universe (${UNIVERSE_ROWS}/296) for current-day history; missing symbols remain represented by prior validated history only."
-          fi
-          # Store one compact observation per trading date.
-          jq --arg session "$SESSION" '
-            {
-              date: $session,
-              retrieved_at: .retrieved_at,
-              market: .market,
-              source: "v2_bridge",
-              session_status: .session_status,
-              stocks: [.stocks[] | {
-                symbol, close, open, high, low, volume, change,
-                RSI, EMA20, SMA20, SMA50, SMA200,
-                relative_volume_10d,
-                long_term_trend,
-                close_location_in_day,
-                history_source: "v2_bridge",
-                history_confidence: "authoritative_current"
-              }]
-            }
-          ' "$HISTORY_INPUT" > /tmp/today.json
-          if [ "${FULL_UNIVERSE_AVAILABLE:-false}" = "true" ]; then
-            jq -e '(.stocks | length) >= 296' /tmp/today.json >/dev/null
-          fi
-          jq --slurpfile today /tmp/today.json --arg session "$SESSION" '
-            .schema = "egx-session-history-v1"
-            | .sessions = (((.sessions // []) | map(select(.date != $session))) + $today)
-            | .sessions = (.sessions | sort_by(.date) | if length > 60 then .[-60:] else . end)
-          ' /tmp/prior-history.json > out/history-base.json
-
-          # Compute market-wide Cycle Quality from GitHub history only.
-          jq '
-            def clamp: if . < 0 then 0 elif . > 10 then 10 else . end;
-            def avg: if length == 0 then null else (add / length) end;
-            . as $h
-            | ($h.sessions | length) as $n
-            | ($h.sessions[-1]) as $today
-            | ([ $h.sessions[] | .stocks[] | .symbol ] | map(select(. != null and . != "")) | unique) as $symbols
-            | [
-                $symbols[] as $sym
-                | ([ $h.sessions[] | .stocks[] | select(.symbol == $sym) ]) as $series
-                | ($series[-1]) as $s
-                | (any($today.stocks[]; .symbol == $sym)) as $present_today
-                | ($series | length) as $m
-                | ($series | map(select(((.history_source // "") | startswith("external_validated_")))) | length) as $external_m
-                | ($series | map(select(.history_confidence == "short")) | length) as $short_m
-                | ($m - $external_m) as $native_m
-                | ($series | map(.close)) as $cl
-                | ($series | map(.volume)) as $vol
-                | ($cl[-1]) as $last
-                | ($cl[0]) as $first
-                | ($cl[-6:] | max) as $recent_high
-                | ($cl[-6:] | min) as $recent_low
-                | ($cl[-12:-6] // []) as $prior6
-                | ($vol[-5:] | avg) as $v5
-                | ($vol[-10:] | avg) as $v10
-                | (($s.relative_volume_10d // 1) | tonumber) as $rv
-                | {
-                    symbol: $s.symbol,
-                    current_session_present: $present_today,
-                    freshness: (if $present_today then "current_session" else "prior_validated_history_only" end),
-                    sessions_available: $m,
-                    native_sessions: $native_m,
-                    external_validated_sessions: $external_m,
-                    short_validated_sessions: $short_m,
-                    provenance: (if $external_m > 0 and $native_m > 0 then "hybrid_validated_external_plus_v2"
-                                 elif $external_m > 0 then "validated_external"
-                                 else "v2_native" end),
-                    status: (if $m >= 10 then "complete" elif $m >= 6 then "usable_provisional" else "warming_up" end),
-                    confidence_pct: (
-                      if $m >= 15 and $native_m >= 10 then 100
-                      elif $m >= 15 and $short_m > 0 and $external_m == $short_m then 70
-                      elif $m >= 15 and $external_m > 0 then 90
-                      elif $m >= 10 and $external_m > 0 then 80
-                      elif $m >= 10 then 85
-                      elif $m >= 6 and $external_m > 0 then 55
-                      elif $m >= 6 then 60
-                      else (($m * 10) | if . > 50 then 50 else . end) end
-                    ),
-                    components: {
-                      weekly_structure: (
-                        if $m >= 6 then
-                          (((($last / ($cl[-6] // $first)) - 1) * 100 * 0.8 + 5) | clamp)
-                        else null end
-                      ),
-                      breakout_strength: (
-                        if $m >= 7 and ($prior6|length) > 0 then
-                          (((($last / ($prior6|max)) - 1) * 35 + 5) | clamp)
-                        else null end
-                      ),
-                      volume_asymmetry: (
-                        if $v10 != null and $v10 > 0 then
-                          (((($v5 / $v10) - 0.7) * 8 + 4) | clamp)
-                        else (($rv * 3 + 2) | clamp) end
-                      ),
-                      retest_quality: (
-                        if $m >= 8 then
-                          (if $last >= $recent_low and $last <= ($recent_high * 1.03) then 7
-                           elif $last > $recent_high then 6
-                           else 4 end)
-                        else null end
-                      ),
-                      higher_low: (
-                        if $m >= 10 then
-                          (($cl[-5:] | min) as $l1 | ($cl[-10:-5] | min) as $l0
-                           | (if $l1 > $l0 then (((($l1/$l0)-1)*25+6)|clamp) else 3 end))
-                        else null end
-                      )
-                    }
-                  }
-                | .components as $c
-                | ([ $c.weekly_structure, $c.breakout_strength, $c.volume_asymmetry, $c.retest_quality, $c.higher_low ] | map(select(. != null))) as $available
-                | .score = (
-                    if .status == "complete" then
-                      (($c.weekly_structure*0.25)+($c.breakout_strength*0.20)+($c.volume_asymmetry*0.20)+($c.retest_quality*0.20)+($c.higher_low*0.15))
-                    elif ($available|length) >= 3 then ($available|avg)
-                    else null end
-                  )
-                | if .score != null then .score = ((.score*10|round)/10) else . end
-              ] as $cq
-            | $h
-            | .schema = "egx-session-history-v2"
-            | .coverage = {
-                latest_universe_count: ($today.stocks|length),
-                sessions_available: $n,
-                full_universe_sessions_available: ($h.sessions|map(select((.stocks|length)>=296))|length),
-                external_history_sessions: ($h.sessions|map(select(((.source // "") | startswith("external_validated"))))|length),
-                external_validated_symbols: ($cq|map(select(.external_validated_sessions>0))|length),
-                full_universe_target: 296,
-                cycle_quality_complete_count: ($cq|map(select(.status=="complete"))|length),
-                cycle_quality_usable_count: ($cq|map(select(.status=="complete" or .status=="usable_provisional"))|length),
-                cycle_quality_current_session_count: ($cq|map(select(.current_session_present==true))|length),
-                cycle_quality_prior_only_count: ($cq|map(select(.current_session_present!=true))|length)
-              }
-            | .cycle_quality = $cq
-          ' out/history-base.json > out/history.json
-          if [ "${FULL_UNIVERSE_AVAILABLE:-false}" = "true" ]; then
-            jq -e '.coverage.latest_universe_count >= 296 and (.cycle_quality|length) >= 296' out/history.json >/dev/null
-          fi
-
-      - name: Wrap V2 snapshot in EGX Resilient Bridge contract
-        shell: bash
-        run: |
-          set -euo pipefail
-          cp out/latest.json out/v2-raw.json
-          SHA="$(jq -r '.data_fingerprint_sha256' out/v2-raw.json)"
-          GENERATED="$(jq -r '.retrieved_at' out/v2-raw.json)"
-          MODE="${SELECTED_MODE:-netlify_only_degraded}"
-          DOK="${DIRECT_OK:-false}"
-          DROWS="${DIRECT_ROW_COUNT:-0}"
-          NOK="${NETLIFY_OK:-true}"
-          jq --arg sha "$SHA" --arg generated "$GENERATED" --arg mode "$MODE" \
-             --argjson direct_ok "$DOK" --argjson direct_rows "$DROWS" --argjson netlify_ok "$NOK" '
-            {
-              bridge: {
-                name: "EGX Resilient Bridge",
-                version: "3.0-resilient-contract",
-                generated_at: $generated,
-                transport_independent: true,
-                selected_mode: $mode,
-                market_phase: (.session_status // "unknown"),
-                data_sha256: $sha,
-                history_contract: "egx-session-history-v2",
-                cycle_quality_engine: "hybrid-validated-history-v2"
-              },
-              path_health: {
-                netlify: {
-                  ok: $netlify_ok,
-                  execution_usable: (if $netlify_ok then (.execution_usable == true) else false end),
-                  source_id: .source_id
-                },
-                direct: {
-                  ok: $direct_ok,
-                  row_count: $direct_rows,
-                  execution_usable: (if $direct_ok then (.execution_usable == true and $direct_rows >= 50) else false end),
-                  source_id: .source_id
-                }
-              },
-              data: {
-                execution_usable: (.execution_usable == true),
-                retrieved_at: .retrieved_at,
-                session_status: .session_status,
-                expected_reference_session_date: .expected_reference_session_date,
-                stale_risk: .stale_risk,
-                blockers: (.blockers // []),
-                warnings: (.warnings // []),
-                quality: .quality,
-                market: .market,
-                screen: (
-                  (.screen // {}) as $s
-                  | if (($s.top_setup // null) | type) == "array"
-                    then $s
-                    else ($s + {top_setup: []})
-                    end
-                ),
-                stocks: (.stocks // []),
-                cycle_quality: ((input | .cycle_quality) // []),
-                history: {
-                  contract: "egx-session-history-v2",
-                  retention_sessions: 60,
-                  source: "v2_native_plus_validated_external_history",
-                  cycle_quality: "computed_from_validated_history_when_sufficient"
-                }
-              }
-            }
-          ' out/v2-raw.json out/history.json > out/latest.json
-          jq -e '
-            .bridge.name == "EGX Resilient Bridge" and
-            (.bridge.data_sha256 | type == "string" and test("^[a-f0-9]{64}$")) and
-            (.data.market | type == "object") and
-            (.data.screen.top_setup | type == "array") and
-            (.data.cycle_quality | type == "array") and
-            ((.path_health.netlify.ok == true) or (.path_health.direct.ok == true)) and
-            (if .bridge.selected_mode == "direct_fallback"
-             then (.path_health.direct.ok == true and .path_health.direct.row_count >= 50 and .data.execution_usable == true)
-             else true end)
-          ' out/latest.json >/dev/null
-
-      - name: Publish validated Bridge snapshot
-        shell: bash
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -euo pipefail
-          rm -rf /tmp/egx-live
-          mkdir -p /tmp/egx-live
-          cp out/latest.json /tmp/egx-live/latest.json
-          cp out/health.json /tmp/egx-live/health.json
-          cp out/contract.json /tmp/egx-live/contract.json
-          cp out/transport.json /tmp/egx-live/transport.json
-          cp out/focus.json /tmp/egx-live/focus.json
-          cp out/universe.json /tmp/egx-live/universe.json
-          cp out/history.json /tmp/egx-live/history.json
-          if [ -d out/external-history ]; then
-            mkdir -p /tmp/egx-live/external-history
-            cp -f out/external-history/*.json /tmp/egx-live/external-history/ 2>/dev/null || true
-          fi
-          cd /tmp/egx-live
-          git init -q
+          rm -rf /tmp/egx-pub
+          git init -q /tmp/egx-pub
+          cd /tmp/egx-pub
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git checkout -q -b egx-live
-          git add .
-          git commit -q -m "Netlify V2 transport snapshot $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          git push --force origin egx-live
+          if git ls-remote --exit-code --heads origin egx-live >/dev/null 2>&1; then
+            git fetch -q origin egx-live
+            git checkout -q -B egx-live origin/egx-live
+          else
+            git checkout -q --orphan egx-live
+            git rm -rf . >/dev/null 2>&1 || true
+          fi
+
+          cp "${GITHUB_WORKSPACE}/out/latest.json" latest.json
+          cp "${GITHUB_WORKSPACE}/out/contract.json" contract.json
+          cp "${GITHUB_WORKSPACE}/out/health.json" health.json
+          cp "${GITHUB_WORKSPACE}/out/transport.json" transport.json
+          cp "${GITHUB_WORKSPACE}/out/focus.json" focus.json
+          cp "${GITHUB_WORKSPACE}/out/universe.json" universe.json
+
+          SESSION="$(jq -r '.expected_reference_session_date' contract.json)"
+          SNAP="$(date -u +%H%M%SZ)"
+          mkdir -p "snapshots/${SESSION}"
+          cp focus.json "snapshots/${SESSION}/${SNAP}.json"
+          # Keep compact audit snapshots for the most recent seven session-date folders.
+          if [ -d snapshots ]; then
+            mapfile -t OLD < <(find snapshots -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sort | head -n -7)
+            for d in "${OLD[@]}"; do rm -rf "snapshots/$d"; done
+          fi
+
+          git add latest.json contract.json health.json transport.json focus.json universe.json snapshots/
+          if git diff --cached --quiet; then
+            echo 'No bridge change; nothing to publish.'
+            exit 0
+          fi
+          git commit -q -m "EGX V4 live snapshot $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          for attempt in 1 2 3; do
+            if git push origin egx-live; then
+              echo 'EGX V4 live publish succeeded.'
+              exit 0
+            fi
+            echo "Push retry ${attempt}: rebasing on latest egx-live"
+            git pull --rebase origin egx-live || true
+            sleep $((attempt*2))
+          done
+          echo 'EGX V4 live publish failed after retries' >&2
+          exit 1
