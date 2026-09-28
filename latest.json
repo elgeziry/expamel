@@ -2,8 +2,8 @@
   "bridge": {
     "name": "EGX Resilient Bridge",
     "version": "4.0-live-fail-closed",
-    "generated_at": "2026-09-28T11:55:59.070Z",
-    "publisher_generated_at": "2026-09-28T11:55:56.811915Z",
+    "generated_at": "2026-09-28T12:02:02.293Z",
+    "publisher_generated_at": "2026-09-28T12:02:00.141469Z",
     "transport_independent": true,
     "selected_mode": "netlify_canonical_v2",
     "market_phase": "closed",
@@ -17,7 +17,7 @@
       "ok": true,
       "base": "https://egx-market-feed-v2.netlify.app",
       "execution_usable": true,
-      "live_age_seconds": -2.258085
+      "live_age_seconds": 0.0
     },
     "github_mirror": {
       "ok": true,
@@ -30,13 +30,12 @@
   },
   "data": {
     "execution_usable": true,
-    "retrieved_at": "2026-09-28T11:55:59.070Z",
+    "retrieved_at": "2026-09-28T12:02:02.293Z",
     "session_status": "closed",
     "expected_reference_session_date": "2026-09-28",
     "stale_risk": "low",
     "blockers": [],
     "warnings": [
-      "missing_requested_symbols:IFCM,BNYN",
       "official_holiday_calendar_not_verified"
     ],
     "quality": {
@@ -54,11 +53,11 @@
       "live_execution_usable": true,
       "analytics_complete_count": 52,
       "analytics_provisional_count": 244,
-      "bridge_live_age_seconds": -2.3,
+      "bridge_live_age_seconds": 0.0,
       "bridge_gate": "pass",
       "full_market_fresh": true,
-      "focus_requested": 22,
-      "focus_returned": 20
+      "focus_requested": 21,
+      "focus_returned": 21
     },
     "market": {
       "regime": "weak",
@@ -615,275 +614,6 @@
           ]
         },
         {
-          "symbol_full": "EGX:EXPA",
-          "name": "EXPA",
-          "description": "Export Development Bank of Egypt",
-          "close": 21.55,
-          "open": 21.94,
-          "high": 22.08,
-          "low": 21.43,
-          "volume": 2937381,
-          "change": -1.7775752051048337,
-          "market_cap_basic": 29580000000,
-          "RSI": 55.28196890231661,
-          "EMA20": 21.374723447577818,
-          "SMA20": 21.428500000000007,
-          "Perf.W": 0.9367681498829006,
-          "Perf.1M": 7.8039019509755,
-          "average_volume_10d_calc": 1740726.2999999993,
-          "current_session": "out_of_session",
-          "symbol": "EXPA",
-          "SMA50": 20.816600000000008,
-          "EMA50": 20.735152382435203,
-          "SMA200": 17.968650000000018,
-          "EMA200": 18.375195521228914,
-          "relative_volume_10d_calc": 1.834348411798958,
-          "earnings_per_share_diluted_ttm": 5.3554,
-          "price_earnings_current": 4.096799492101431,
-          "eps_diluted_growth_percent_fq": -19.6018538024015,
-          "eps_diluted_growth_percent_fy": 15.938733369926,
-          "total_revenue_ttm": 36592879000,
-          "free_cash_flow_ttm": null,
-          "debt_to_equity_fq": 1.1976321551128901,
-          "earnings_release_next_date": null,
-          "dividend_ex_date_upcoming": null,
-          "price_target_average": 23.5,
-          "price_target_high": 23.5,
-          "price_target_low": 23.5,
-          "update_mode": "delayed_streaming_900",
-          "value": 63300560.55,
-          "value_session_adjusted": 63300560.55,
-          "relative_volume_10d_raw": 1.83,
-          "relative_volume_10d": 1.83,
-          "relative_volume_10d_session_adjusted": 1.83,
-          "relative_volume_adjustment": {
-            "session_progress": 1,
-            "method": "raw_full_session"
-          },
-          "relative_volume_label": "strong_demand_candidate",
-          "close_location_in_day": 0.185,
-          "long_term_trend": "long_term_uptrend",
-          "distance_from_sma200_pct": 19.93,
-          "demand_confirmation_score": 6.8,
-          "event_risk": {
-            "level": "unknown_or_low",
-            "next_event": null
-          },
-          "upside_to_analyst_target_pct": 9.05,
-          "decision_support": {
-            "technical_score": 9,
-            "liquidity_score": 9,
-            "setup_score": 8.6,
-            "chase_risk": "low"
-          },
-          "analytics": {
-            "momentum": {
-              "score": 5.4,
-              "status": "complete",
-              "confidence_pct": 100,
-              "execution_eligible": true,
-              "missing_components": [],
-              "components": [
-                {
-                  "name": "three_sessions_and_week",
-                  "score": 4.9,
-                  "weight": 0.3,
-                  "raw": {
-                    "performance_3_sessions_pct": -1.6,
-                    "performance_week_pct": 0.9367681498829006
-                  },
-                  "available": true
-                },
-                {
-                  "name": "relative_volume_10d",
-                  "score": 8,
-                  "weight": 0.2,
-                  "raw": {
-                    "raw": 1.83,
-                    "adjusted": 1.83,
-                    "session_progress": 1,
-                    "method": "raw_full_session"
-                  },
-                  "available": true
-                },
-                {
-                  "name": "close_location",
-                  "score": 1.4,
-                  "weight": 0.15,
-                  "raw": 0.185,
-                  "available": true
-                },
-                {
-                  "name": "rsi",
-                  "score": 6,
-                  "weight": 0.15,
-                  "raw": 55.28196890231661,
-                  "available": true
-                },
-                {
-                  "name": "ma20_50",
-                  "score": 10,
-                  "weight": 0.1,
-                  "raw": {
-                    "close": 21.55,
-                    "ma20": 21.428500000000007,
-                    "ma50": 20.816600000000008
-                  },
-                  "available": true
-                },
-                {
-                  "name": "continuity_acceleration",
-                  "score": 2,
-                  "weight": 0.1,
-                  "raw": {
-                    "sessions_available": 10
-                  },
-                  "available": true
-                }
-              ]
-            },
-            "cycle_quality": {
-              "score": 4,
-              "status": "complete",
-              "confidence_pct": 100,
-              "execution_eligible": true,
-              "integrity": "broken_failed_breakout",
-              "phase": "foundation_or_repair",
-              "sessions_available": 10,
-              "missing_components": [],
-              "components": [
-                {
-                  "name": "weekly_structure",
-                  "score": 10,
-                  "weight": 0.25,
-                  "raw": {
-                    "pivots_high": 2,
-                    "pivots_low": 3
-                  },
-                  "available": true
-                },
-                {
-                  "name": "breakout_strength",
-                  "score": 2.2,
-                  "weight": 0.2,
-                  "raw": {
-                    "prior_pivot_high": 22.5,
-                    "distance_pct": -4.22
-                  },
-                  "available": true
-                },
-                {
-                  "name": "volume_asymmetry",
-                  "score": 2,
-                  "weight": 0.2,
-                  "raw": {
-                    "raw": 1.83,
-                    "adjusted": 1.83,
-                    "session_progress": 1,
-                    "method": "raw_full_session"
-                  },
-                  "available": true
-                },
-                {
-                  "name": "retest_quality",
-                  "score": 5.5,
-                  "weight": 0.2,
-                  "raw": {
-                    "atr": 0.77,
-                    "distance_from_value_atr": 0.16
-                  },
-                  "available": true
-                },
-                {
-                  "name": "higher_low",
-                  "score": 9,
-                  "weight": 0.15,
-                  "raw": {
-                    "recent_pivot_lows": [
-                      21.28,
-                      21.3
-                    ]
-                  },
-                  "available": true
-                }
-              ]
-            },
-            "cycle_gap": {
-              "value": 1.4,
-              "classification": "aligned",
-              "status": "provisional_not_execution_eligible"
-            },
-            "entry_quality": {
-              "score": 6.3,
-              "status": "provisional_not_execution_eligible",
-              "confidence_pct": 70,
-              "execution_eligible": false,
-              "liquidity_zone": "equal_lows_stop_hunt_zone",
-              "support": 21.43,
-              "resistance": 22.5,
-              "invalidation": 21.43,
-              "risk_reward": null,
-              "missing_components": [
-                "risk_reward"
-              ],
-              "components": [
-                {
-                  "name": "distance_from_value_support",
-                  "score": 8.1,
-                  "weight": 0.3,
-                  "raw": {
-                    "support": 21.43,
-                    "distance_atr": 0.16
-                  },
-                  "available": true
-                },
-                {
-                  "name": "risk_reward",
-                  "score": null,
-                  "weight": 0.3,
-                  "raw": {
-                    "resistance": 22.5,
-                    "invalidation": 21.43,
-                    "rr": null
-                  },
-                  "available": false
-                },
-                {
-                  "name": "liquidity_stop_hunt",
-                  "score": 4,
-                  "weight": 0.2,
-                  "raw": "equal_lows_stop_hunt_zone",
-                  "available": true
-                },
-                {
-                  "name": "chase_slippage",
-                  "score": 8,
-                  "weight": 0.1,
-                  "raw": "low",
-                  "available": true
-                },
-                {
-                  "name": "close_location",
-                  "score": 4.1,
-                  "weight": 0.1,
-                  "raw": 0.185,
-                  "available": true
-                }
-              ]
-            },
-            "re_acceleration_trigger": "not_present",
-            "execution_readiness": {
-              "score": 49,
-              "status": "provisional_not_execution_eligible",
-              "execution_eligible": false,
-              "hard_veto": true,
-              "classification": "provisional"
-            },
-            "execution_metrics_eligible": false
-          },
-          "early_movement_flags": []
-        },
-        {
           "symbol_full": "EGX:CCAP",
           "name": "CCAP",
           "description": "QALA For Financial Investments",
@@ -1151,6 +881,275 @@
               "classification": "conditional"
             },
             "execution_metrics_eligible": true
+          },
+          "early_movement_flags": []
+        },
+        {
+          "symbol_full": "EGX:EXPA",
+          "name": "EXPA",
+          "description": "Export Development Bank of Egypt",
+          "close": 21.55,
+          "open": 21.94,
+          "high": 22.08,
+          "low": 21.43,
+          "volume": 2937381,
+          "change": -1.7775752051048337,
+          "market_cap_basic": 29580000000,
+          "RSI": 55.28196890231661,
+          "EMA20": 21.374723447577818,
+          "SMA20": 21.428500000000007,
+          "Perf.W": 0.9367681498829006,
+          "Perf.1M": 7.8039019509755,
+          "average_volume_10d_calc": 1740726.2999999993,
+          "current_session": "out_of_session",
+          "symbol": "EXPA",
+          "SMA50": 20.816600000000008,
+          "EMA50": 20.735152382435203,
+          "SMA200": 17.968650000000018,
+          "EMA200": 18.375195521228914,
+          "relative_volume_10d_calc": 1.834348411798958,
+          "earnings_per_share_diluted_ttm": 5.3554,
+          "price_earnings_current": 4.096799492101431,
+          "eps_diluted_growth_percent_fq": -19.6018538024015,
+          "eps_diluted_growth_percent_fy": 15.938733369926,
+          "total_revenue_ttm": 36592879000,
+          "free_cash_flow_ttm": null,
+          "debt_to_equity_fq": 1.1976321551128901,
+          "earnings_release_next_date": null,
+          "dividend_ex_date_upcoming": null,
+          "price_target_average": 23.5,
+          "price_target_high": 23.5,
+          "price_target_low": 23.5,
+          "update_mode": "delayed_streaming_900",
+          "value": 63300560.55,
+          "value_session_adjusted": 63300560.55,
+          "relative_volume_10d_raw": 1.83,
+          "relative_volume_10d": 1.83,
+          "relative_volume_10d_session_adjusted": 1.83,
+          "relative_volume_adjustment": {
+            "session_progress": 1,
+            "method": "raw_full_session"
+          },
+          "relative_volume_label": "strong_demand_candidate",
+          "close_location_in_day": 0.185,
+          "long_term_trend": "long_term_uptrend",
+          "distance_from_sma200_pct": 19.93,
+          "demand_confirmation_score": 6.8,
+          "event_risk": {
+            "level": "unknown_or_low",
+            "next_event": null
+          },
+          "upside_to_analyst_target_pct": 9.05,
+          "decision_support": {
+            "technical_score": 9,
+            "liquidity_score": 9,
+            "setup_score": 8.6,
+            "chase_risk": "low"
+          },
+          "analytics": {
+            "momentum": {
+              "score": 5.4,
+              "status": "complete",
+              "confidence_pct": 100,
+              "execution_eligible": true,
+              "missing_components": [],
+              "components": [
+                {
+                  "name": "three_sessions_and_week",
+                  "score": 4.9,
+                  "weight": 0.3,
+                  "raw": {
+                    "performance_3_sessions_pct": -1.6,
+                    "performance_week_pct": 0.9367681498829006
+                  },
+                  "available": true
+                },
+                {
+                  "name": "relative_volume_10d",
+                  "score": 8,
+                  "weight": 0.2,
+                  "raw": {
+                    "raw": 1.83,
+                    "adjusted": 1.83,
+                    "session_progress": 1,
+                    "method": "raw_full_session"
+                  },
+                  "available": true
+                },
+                {
+                  "name": "close_location",
+                  "score": 1.4,
+                  "weight": 0.15,
+                  "raw": 0.185,
+                  "available": true
+                },
+                {
+                  "name": "rsi",
+                  "score": 6,
+                  "weight": 0.15,
+                  "raw": 55.28196890231661,
+                  "available": true
+                },
+                {
+                  "name": "ma20_50",
+                  "score": 10,
+                  "weight": 0.1,
+                  "raw": {
+                    "close": 21.55,
+                    "ma20": 21.428500000000007,
+                    "ma50": 20.816600000000008
+                  },
+                  "available": true
+                },
+                {
+                  "name": "continuity_acceleration",
+                  "score": 2,
+                  "weight": 0.1,
+                  "raw": {
+                    "sessions_available": 10
+                  },
+                  "available": true
+                }
+              ]
+            },
+            "cycle_quality": {
+              "score": 4,
+              "status": "complete",
+              "confidence_pct": 100,
+              "execution_eligible": true,
+              "integrity": "broken_failed_breakout",
+              "phase": "foundation_or_repair",
+              "sessions_available": 10,
+              "missing_components": [],
+              "components": [
+                {
+                  "name": "weekly_structure",
+                  "score": 10,
+                  "weight": 0.25,
+                  "raw": {
+                    "pivots_high": 2,
+                    "pivots_low": 3
+                  },
+                  "available": true
+                },
+                {
+                  "name": "breakout_strength",
+                  "score": 2.2,
+                  "weight": 0.2,
+                  "raw": {
+                    "prior_pivot_high": 22.5,
+                    "distance_pct": -4.22
+                  },
+                  "available": true
+                },
+                {
+                  "name": "volume_asymmetry",
+                  "score": 2,
+                  "weight": 0.2,
+                  "raw": {
+                    "raw": 1.83,
+                    "adjusted": 1.83,
+                    "session_progress": 1,
+                    "method": "raw_full_session"
+                  },
+                  "available": true
+                },
+                {
+                  "name": "retest_quality",
+                  "score": 5.5,
+                  "weight": 0.2,
+                  "raw": {
+                    "atr": 0.77,
+                    "distance_from_value_atr": 0.16
+                  },
+                  "available": true
+                },
+                {
+                  "name": "higher_low",
+                  "score": 9,
+                  "weight": 0.15,
+                  "raw": {
+                    "recent_pivot_lows": [
+                      21.28,
+                      21.3
+                    ]
+                  },
+                  "available": true
+                }
+              ]
+            },
+            "cycle_gap": {
+              "value": 1.4,
+              "classification": "aligned",
+              "status": "provisional_not_execution_eligible"
+            },
+            "entry_quality": {
+              "score": 6.3,
+              "status": "provisional_not_execution_eligible",
+              "confidence_pct": 70,
+              "execution_eligible": false,
+              "liquidity_zone": "equal_lows_stop_hunt_zone",
+              "support": 21.43,
+              "resistance": 22.5,
+              "invalidation": 21.43,
+              "risk_reward": null,
+              "missing_components": [
+                "risk_reward"
+              ],
+              "components": [
+                {
+                  "name": "distance_from_value_support",
+                  "score": 8.1,
+                  "weight": 0.3,
+                  "raw": {
+                    "support": 21.43,
+                    "distance_atr": 0.16
+                  },
+                  "available": true
+                },
+                {
+                  "name": "risk_reward",
+                  "score": null,
+                  "weight": 0.3,
+                  "raw": {
+                    "resistance": 22.5,
+                    "invalidation": 21.43,
+                    "rr": null
+                  },
+                  "available": false
+                },
+                {
+                  "name": "liquidity_stop_hunt",
+                  "score": 4,
+                  "weight": 0.2,
+                  "raw": "equal_lows_stop_hunt_zone",
+                  "available": true
+                },
+                {
+                  "name": "chase_slippage",
+                  "score": 8,
+                  "weight": 0.1,
+                  "raw": "low",
+                  "available": true
+                },
+                {
+                  "name": "close_location",
+                  "score": 4.1,
+                  "weight": 0.1,
+                  "raw": 0.185,
+                  "available": true
+                }
+              ]
+            },
+            "re_acceleration_trigger": "not_present",
+            "execution_readiness": {
+              "score": 49,
+              "status": "provisional_not_execution_eligible",
+              "execution_eligible": false,
+              "hard_veto": true,
+              "classification": "provisional"
+            },
+            "execution_metrics_eligible": false
           },
           "early_movement_flags": []
         },
@@ -1433,6 +1432,275 @@
           "early_movement_flags": []
         },
         {
+          "symbol_full": "EGX:EGS370O1C013",
+          "name": "EGS370O1C013",
+          "description": "National Printing",
+          "close": 46.82,
+          "open": 49.93,
+          "high": 50.97,
+          "low": 43.7,
+          "volume": 1295476,
+          "change": -6.228720208291607,
+          "market_cap_basic": null,
+          "RSI": 67.85068845312745,
+          "EMA20": 40.627825945363924,
+          "SMA20": 38.16699999999999,
+          "Perf.W": 11.079478054567026,
+          "Perf.1M": 55.85885486018642,
+          "average_volume_10d_calc": 1680607.8,
+          "current_session": "out_of_session",
+          "symbol": "EGS370O1C013",
+          "SMA50": 32.96260000000002,
+          "EMA50": 34.717094799794566,
+          "SMA200": 25.046350000000004,
+          "EMA200": 27.140620267274432,
+          "relative_volume_10d_calc": 0.7695563910837444,
+          "earnings_per_share_diluted_ttm": null,
+          "price_earnings_current": null,
+          "eps_diluted_growth_percent_fq": null,
+          "eps_diluted_growth_percent_fy": null,
+          "total_revenue_ttm": null,
+          "free_cash_flow_ttm": null,
+          "debt_to_equity_fq": null,
+          "earnings_release_next_date": null,
+          "dividend_ex_date_upcoming": null,
+          "price_target_average": null,
+          "price_target_high": null,
+          "price_target_low": null,
+          "update_mode": "delayed_streaming_900",
+          "value": 60654186.32,
+          "value_session_adjusted": 60654186.32,
+          "relative_volume_10d_raw": 0.77,
+          "relative_volume_10d": 0.77,
+          "relative_volume_10d_session_adjusted": 0.77,
+          "relative_volume_adjustment": {
+            "session_progress": 1,
+            "method": "raw_full_session"
+          },
+          "relative_volume_label": "weak_or_normal",
+          "close_location_in_day": 0.429,
+          "long_term_trend": "long_term_uptrend",
+          "distance_from_sma200_pct": 86.93,
+          "demand_confirmation_score": 5.9,
+          "event_risk": {
+            "level": "unknown_or_low",
+            "next_event": null
+          },
+          "upside_to_analyst_target_pct": -100,
+          "decision_support": {
+            "technical_score": 9,
+            "liquidity_score": 9,
+            "setup_score": 8.4,
+            "chase_risk": "high"
+          },
+          "analytics": {
+            "momentum": {
+              "score": 5.8,
+              "status": "complete",
+              "confidence_pct": 100,
+              "execution_eligible": true,
+              "missing_components": [],
+              "components": [
+                {
+                  "name": "three_sessions_and_week",
+                  "score": 6.2,
+                  "weight": 0.3,
+                  "raw": {
+                    "performance_3_sessions_pct": -2.48,
+                    "performance_week_pct": 11.079478054567026
+                  },
+                  "available": true
+                },
+                {
+                  "name": "relative_volume_10d",
+                  "score": 4.5,
+                  "weight": 0.2,
+                  "raw": {
+                    "raw": 0.77,
+                    "adjusted": 0.77,
+                    "session_progress": 1,
+                    "method": "raw_full_session"
+                  },
+                  "available": true
+                },
+                {
+                  "name": "close_location",
+                  "score": 3.8,
+                  "weight": 0.15,
+                  "raw": 0.429,
+                  "available": true
+                },
+                {
+                  "name": "rsi",
+                  "score": 8,
+                  "weight": 0.15,
+                  "raw": 67.85068845312745,
+                  "available": true
+                },
+                {
+                  "name": "ma20_50",
+                  "score": 10,
+                  "weight": 0.1,
+                  "raw": {
+                    "close": 46.82,
+                    "ma20": 38.16699999999999,
+                    "ma50": 32.96260000000002
+                  },
+                  "available": true
+                },
+                {
+                  "name": "continuity_acceleration",
+                  "score": 3.2,
+                  "weight": 0.1,
+                  "raw": {
+                    "sessions_available": 10
+                  },
+                  "available": true
+                }
+              ]
+            },
+            "cycle_quality": {
+              "score": 7.1,
+              "status": "complete",
+              "confidence_pct": 100,
+              "execution_eligible": true,
+              "integrity": "not_confirmed",
+              "phase": "foundation_or_repair",
+              "sessions_available": 10,
+              "missing_components": [],
+              "components": [
+                {
+                  "name": "weekly_structure",
+                  "score": 10,
+                  "weight": 0.25,
+                  "raw": {
+                    "pivots_high": 2,
+                    "pivots_low": 2
+                  },
+                  "available": true
+                },
+                {
+                  "name": "breakout_strength",
+                  "score": 3.2,
+                  "weight": 0.2,
+                  "raw": {
+                    "prior_pivot_high": 57.8,
+                    "distance_pct": -19
+                  },
+                  "available": true
+                },
+                {
+                  "name": "volume_asymmetry",
+                  "score": 7,
+                  "weight": 0.2,
+                  "raw": {
+                    "raw": 0.77,
+                    "adjusted": 0.77,
+                    "session_progress": 1,
+                    "method": "raw_full_session"
+                  },
+                  "available": true
+                },
+                {
+                  "name": "retest_quality",
+                  "score": 6.3,
+                  "weight": 0.2,
+                  "raw": {
+                    "atr": 6.96,
+                    "distance_from_value_atr": 1.24
+                  },
+                  "available": true
+                },
+                {
+                  "name": "higher_low",
+                  "score": 9,
+                  "weight": 0.15,
+                  "raw": {
+                    "recent_pivot_lows": [
+                      34,
+                      39.05
+                    ]
+                  },
+                  "available": true
+                }
+              ]
+            },
+            "cycle_gap": {
+              "value": -1.3,
+              "classification": "aligned",
+              "status": "complete"
+            },
+            "entry_quality": {
+              "score": 6.3,
+              "status": "complete",
+              "confidence_pct": 100,
+              "execution_eligible": true,
+              "liquidity_zone": "normal",
+              "support": 40.63,
+              "resistance": 57.8,
+              "invalidation": 40.63,
+              "risk_reward": 1.77,
+              "missing_components": [],
+              "components": [
+                {
+                  "name": "distance_from_value_support",
+                  "score": 8,
+                  "weight": 0.3,
+                  "raw": {
+                    "support": 40.63,
+                    "distance_atr": 0.89
+                  },
+                  "available": true
+                },
+                {
+                  "name": "risk_reward",
+                  "score": 5,
+                  "weight": 0.3,
+                  "raw": {
+                    "resistance": 57.8,
+                    "invalidation": 40.63,
+                    "rr": 1.77
+                  },
+                  "available": true
+                },
+                {
+                  "name": "liquidity_stop_hunt",
+                  "score": 8,
+                  "weight": 0.2,
+                  "raw": "normal",
+                  "available": true
+                },
+                {
+                  "name": "chase_slippage",
+                  "score": 2,
+                  "weight": 0.1,
+                  "raw": "high",
+                  "available": true
+                },
+                {
+                  "name": "close_location",
+                  "score": 5.6,
+                  "weight": 0.1,
+                  "raw": 0.429,
+                  "available": true
+                }
+              ]
+            },
+            "re_acceleration_trigger": "not_present",
+            "execution_readiness": {
+              "score": 66.5,
+              "status": "complete",
+              "execution_eligible": true,
+              "hard_veto": false,
+              "classification": "conditional"
+            },
+            "execution_metrics_eligible": true
+          },
+          "early_movement_flags": [
+            "monthly_momentum_ge_20pct"
+          ]
+        },
+        {
           "symbol_full": "EGX:TAQA",
           "name": "TAQA",
           "description": "TAQA Arabia",
@@ -1706,275 +1974,6 @@
           "early_movement_flags": []
         },
         {
-          "symbol_full": "EGX:EGS370O1C013",
-          "name": "EGS370O1C013",
-          "description": "National Printing",
-          "close": 46.82,
-          "open": 49.93,
-          "high": 50.97,
-          "low": 43.7,
-          "volume": 1295476,
-          "change": -6.228720208291607,
-          "market_cap_basic": null,
-          "RSI": 67.85068845312745,
-          "EMA20": 40.627825945363924,
-          "SMA20": 38.16699999999999,
-          "Perf.W": 11.079478054567026,
-          "Perf.1M": 55.85885486018642,
-          "average_volume_10d_calc": 1680607.8,
-          "current_session": "out_of_session",
-          "symbol": "EGS370O1C013",
-          "SMA50": 32.96260000000002,
-          "EMA50": 34.717094799794566,
-          "SMA200": 25.046350000000004,
-          "EMA200": 27.140620267274432,
-          "relative_volume_10d_calc": 0.7695563910837444,
-          "earnings_per_share_diluted_ttm": null,
-          "price_earnings_current": null,
-          "eps_diluted_growth_percent_fq": null,
-          "eps_diluted_growth_percent_fy": null,
-          "total_revenue_ttm": null,
-          "free_cash_flow_ttm": null,
-          "debt_to_equity_fq": null,
-          "earnings_release_next_date": null,
-          "dividend_ex_date_upcoming": null,
-          "price_target_average": null,
-          "price_target_high": null,
-          "price_target_low": null,
-          "update_mode": "delayed_streaming_900",
-          "value": 60654186.32,
-          "value_session_adjusted": 60654186.32,
-          "relative_volume_10d_raw": 0.77,
-          "relative_volume_10d": 0.77,
-          "relative_volume_10d_session_adjusted": 0.77,
-          "relative_volume_adjustment": {
-            "session_progress": 1,
-            "method": "raw_full_session"
-          },
-          "relative_volume_label": "weak_or_normal",
-          "close_location_in_day": 0.429,
-          "long_term_trend": "long_term_uptrend",
-          "distance_from_sma200_pct": 86.93,
-          "demand_confirmation_score": 5.9,
-          "event_risk": {
-            "level": "unknown_or_low",
-            "next_event": null
-          },
-          "upside_to_analyst_target_pct": -100,
-          "decision_support": {
-            "technical_score": 9,
-            "liquidity_score": 9,
-            "setup_score": 8.4,
-            "chase_risk": "high"
-          },
-          "analytics": {
-            "momentum": {
-              "score": 5.8,
-              "status": "complete",
-              "confidence_pct": 100,
-              "execution_eligible": true,
-              "missing_components": [],
-              "components": [
-                {
-                  "name": "three_sessions_and_week",
-                  "score": 6.2,
-                  "weight": 0.3,
-                  "raw": {
-                    "performance_3_sessions_pct": -2.48,
-                    "performance_week_pct": 11.079478054567026
-                  },
-                  "available": true
-                },
-                {
-                  "name": "relative_volume_10d",
-                  "score": 4.5,
-                  "weight": 0.2,
-                  "raw": {
-                    "raw": 0.77,
-                    "adjusted": 0.77,
-                    "session_progress": 1,
-                    "method": "raw_full_session"
-                  },
-                  "available": true
-                },
-                {
-                  "name": "close_location",
-                  "score": 3.8,
-                  "weight": 0.15,
-                  "raw": 0.429,
-                  "available": true
-                },
-                {
-                  "name": "rsi",
-                  "score": 8,
-                  "weight": 0.15,
-                  "raw": 67.85068845312745,
-                  "available": true
-                },
-                {
-                  "name": "ma20_50",
-                  "score": 10,
-                  "weight": 0.1,
-                  "raw": {
-                    "close": 46.82,
-                    "ma20": 38.16699999999999,
-                    "ma50": 32.96260000000002
-                  },
-                  "available": true
-                },
-                {
-                  "name": "continuity_acceleration",
-                  "score": 3.2,
-                  "weight": 0.1,
-                  "raw": {
-                    "sessions_available": 10
-                  },
-                  "available": true
-                }
-              ]
-            },
-            "cycle_quality": {
-              "score": 7.1,
-              "status": "complete",
-              "confidence_pct": 100,
-              "execution_eligible": true,
-              "integrity": "not_confirmed",
-              "phase": "foundation_or_repair",
-              "sessions_available": 10,
-              "missing_components": [],
-              "components": [
-                {
-                  "name": "weekly_structure",
-                  "score": 10,
-                  "weight": 0.25,
-                  "raw": {
-                    "pivots_high": 2,
-                    "pivots_low": 2
-                  },
-                  "available": true
-                },
-                {
-                  "name": "breakout_strength",
-                  "score": 3.2,
-                  "weight": 0.2,
-                  "raw": {
-                    "prior_pivot_high": 57.8,
-                    "distance_pct": -19
-                  },
-                  "available": true
-                },
-                {
-                  "name": "volume_asymmetry",
-                  "score": 7,
-                  "weight": 0.2,
-                  "raw": {
-                    "raw": 0.77,
-                    "adjusted": 0.77,
-                    "session_progress": 1,
-                    "method": "raw_full_session"
-                  },
-                  "available": true
-                },
-                {
-                  "name": "retest_quality",
-                  "score": 6.3,
-                  "weight": 0.2,
-                  "raw": {
-                    "atr": 6.96,
-                    "distance_from_value_atr": 1.24
-                  },
-                  "available": true
-                },
-                {
-                  "name": "higher_low",
-                  "score": 9,
-                  "weight": 0.15,
-                  "raw": {
-                    "recent_pivot_lows": [
-                      34,
-                      39.05
-                    ]
-                  },
-                  "available": true
-                }
-              ]
-            },
-            "cycle_gap": {
-              "value": -1.3,
-              "classification": "aligned",
-              "status": "complete"
-            },
-            "entry_quality": {
-              "score": 6.3,
-              "status": "complete",
-              "confidence_pct": 100,
-              "execution_eligible": true,
-              "liquidity_zone": "normal",
-              "support": 40.63,
-              "resistance": 57.8,
-              "invalidation": 40.63,
-              "risk_reward": 1.77,
-              "missing_components": [],
-              "components": [
-                {
-                  "name": "distance_from_value_support",
-                  "score": 8,
-                  "weight": 0.3,
-                  "raw": {
-                    "support": 40.63,
-                    "distance_atr": 0.89
-                  },
-                  "available": true
-                },
-                {
-                  "name": "risk_reward",
-                  "score": 5,
-                  "weight": 0.3,
-                  "raw": {
-                    "resistance": 57.8,
-                    "invalidation": 40.63,
-                    "rr": 1.77
-                  },
-                  "available": true
-                },
-                {
-                  "name": "liquidity_stop_hunt",
-                  "score": 8,
-                  "weight": 0.2,
-                  "raw": "normal",
-                  "available": true
-                },
-                {
-                  "name": "chase_slippage",
-                  "score": 2,
-                  "weight": 0.1,
-                  "raw": "high",
-                  "available": true
-                },
-                {
-                  "name": "close_location",
-                  "score": 5.6,
-                  "weight": 0.1,
-                  "raw": 0.429,
-                  "available": true
-                }
-              ]
-            },
-            "re_acceleration_trigger": "not_present",
-            "execution_readiness": {
-              "score": 66.5,
-              "status": "complete",
-              "execution_eligible": true,
-              "hard_veto": false,
-              "classification": "conditional"
-            },
-            "execution_metrics_eligible": true
-          },
-          "early_movement_flags": [
-            "monthly_momentum_ge_20pct"
-          ]
-        },
-        {
           "symbol_full": "EGX:TANM",
           "name": "TANM",
           "description": "Tanmiya for Real Estate Investment",
@@ -2246,56 +2245,56 @@
           ]
         },
         {
-          "symbol_full": "EGX:AMIA",
-          "name": "AMIA",
-          "description": "Arab Moltaqa Investments Company",
-          "close": 18.69,
-          "open": 18.65,
-          "high": 18.94,
-          "low": 18.03,
-          "volume": 814212,
-          "change": 0.21447721179626117,
-          "market_cap_basic": 9614043543,
-          "RSI": 59.448112766530066,
-          "EMA20": 18.18882004837443,
-          "SMA20": 18.689499999999992,
-          "Perf.W": 1.3557483731019522,
-          "Perf.1M": -5.126903553299482,
-          "average_volume_10d_calc": 753277.1,
+          "symbol_full": "EGX:RUBX",
+          "name": "RUBX",
+          "description": "Rubex International for Plastic & Acrylic Manufacturing",
+          "close": 15.14,
+          "open": 16.28,
+          "high": 16.39,
+          "low": 14.72,
+          "volume": 3411282,
+          "change": -7.002457002457005,
+          "market_cap_basic": 1085826773,
+          "RSI": 54.97543140820145,
+          "EMA20": 14.483498632761277,
+          "SMA20": 14.016500000000013,
+          "Perf.W": -6.945298094652729,
+          "Perf.1M": 16.461538461538467,
+          "average_volume_10d_calc": 7043071.5,
           "current_session": "out_of_session",
-          "symbol": "AMIA",
-          "SMA50": 15.814800000000002,
-          "EMA50": 16.08424482536661,
-          "SMA200": 8.727649999999997,
-          "EMA200": 10.166537460046465,
-          "relative_volume_10d_calc": 1.042059710344434,
-          "earnings_per_share_diluted_ttm": 0.8196,
-          "price_earnings_current": 22.75500244021474,
-          "eps_diluted_growth_percent_fq": -31.6693944353519,
-          "eps_diluted_growth_percent_fy": 105.790297339593,
-          "total_revenue_ttm": 2569339872,
-          "free_cash_flow_ttm": -799640720,
-          "debt_to_equity_fq": 4.09819300099665,
+          "symbol": "RUBX",
+          "SMA50": 13.2832,
+          "EMA50": 13.44101809773355,
+          "SMA200": 10.936657749599998,
+          "EMA200": 11.483794771791029,
+          "relative_volume_10d_calc": 0.503262608529804,
+          "earnings_per_share_diluted_ttm": null,
+          "price_earnings_current": null,
+          "eps_diluted_growth_percent_fq": 523.880597014925,
+          "eps_diluted_growth_percent_fy": null,
+          "total_revenue_ttm": null,
+          "free_cash_flow_ttm": null,
+          "debt_to_equity_fq": 0.502139782885087,
           "earnings_release_next_date": null,
           "dividend_ex_date_upcoming": null,
           "price_target_average": null,
           "price_target_high": null,
           "price_target_low": null,
           "update_mode": "delayed_streaming_900",
-          "value": 15217622.28,
-          "value_session_adjusted": 15217622.28,
-          "relative_volume_10d_raw": 1.04,
-          "relative_volume_10d": 1.04,
-          "relative_volume_10d_session_adjusted": 1.04,
+          "value": 51646809.48,
+          "value_session_adjusted": 51646809.48,
+          "relative_volume_10d_raw": 0.5,
+          "relative_volume_10d": 0.5,
+          "relative_volume_10d_session_adjusted": 0.5,
           "relative_volume_adjustment": {
             "session_progress": 1,
             "method": "raw_full_session"
           },
-          "relative_volume_label": "moderate_interest",
-          "close_location_in_day": 0.725,
+          "relative_volume_label": "weak_or_normal",
+          "close_location_in_day": 0.251,
           "long_term_trend": "long_term_uptrend",
-          "distance_from_sma200_pct": 114.15,
-          "demand_confirmation_score": 6.8,
+          "distance_from_sma200_pct": 38.43,
+          "demand_confirmation_score": 4.6,
           "event_risk": {
             "level": "unknown_or_low",
             "next_event": null
@@ -2303,13 +2302,13 @@
           "upside_to_analyst_target_pct": -100,
           "decision_support": {
             "technical_score": 9,
-            "liquidity_score": 7,
+            "liquidity_score": 9,
             "setup_score": 8.1,
             "chase_risk": "low"
           },
           "analytics": {
             "momentum": {
-              "score": 6.4,
+              "score": 4.6,
               "status": "complete",
               "confidence_pct": 100,
               "execution_eligible": true,
@@ -2317,21 +2316,21 @@
               "components": [
                 {
                   "name": "three_sessions_and_week",
-                  "score": 5.3,
+                  "score": 5,
                   "weight": 0.3,
                   "raw": {
-                    "performance_3_sessions_pct": 1.08,
-                    "performance_week_pct": 1.3557483731019522
+                    "performance_3_sessions_pct": 7.22,
+                    "performance_week_pct": -6.945298094652729
                   },
                   "available": true
                 },
                 {
                   "name": "relative_volume_10d",
-                  "score": 6.5,
+                  "score": 3,
                   "weight": 0.2,
                   "raw": {
-                    "raw": 1.04,
-                    "adjusted": 1.04,
+                    "raw": 0.5,
+                    "adjusted": 0.5,
                     "session_progress": 1,
                     "method": "raw_full_session"
                   },
@@ -2339,16 +2338,16 @@
                 },
                 {
                   "name": "close_location",
-                  "score": 7.8,
+                  "score": 2,
                   "weight": 0.15,
-                  "raw": 0.725,
+                  "raw": 0.251,
                   "available": true
                 },
                 {
                   "name": "rsi",
                   "score": 6,
                   "weight": 0.15,
-                  "raw": 59.448112766530066,
+                  "raw": 54.97543140820145,
                   "available": true
                 },
                 {
@@ -2356,15 +2355,15 @@
                   "score": 10,
                   "weight": 0.1,
                   "raw": {
-                    "close": 18.69,
-                    "ma20": 18.689499999999992,
-                    "ma50": 15.814800000000002
+                    "close": 15.14,
+                    "ma20": 14.016500000000013,
+                    "ma50": 13.2832
                   },
                   "available": true
                 },
                 {
                   "name": "continuity_acceleration",
-                  "score": 4.2,
+                  "score": 3.2,
                   "weight": 0.1,
                   "raw": {
                     "sessions_available": 10
@@ -2374,12 +2373,12 @@
               ]
             },
             "cycle_quality": {
-              "score": 7.6,
+              "score": 6.2,
               "status": "complete",
               "confidence_pct": 100,
               "execution_eligible": true,
               "integrity": "not_confirmed",
-              "phase": "digestion_or_retest",
+              "phase": "foundation_or_repair",
               "sessions_available": 10,
               "missing_components": [],
               "components": [
@@ -2389,27 +2388,27 @@
                   "weight": 0.25,
                   "raw": {
                     "pivots_high": 2,
-                    "pivots_low": 2
+                    "pivots_low": 3
                   },
                   "available": true
                 },
                 {
                   "name": "breakout_strength",
-                  "score": 5.4,
+                  "score": 2.5,
                   "weight": 0.2,
                   "raw": {
-                    "prior_pivot_high": 18.9,
-                    "distance_pct": -1.11
+                    "prior_pivot_high": 18.59,
+                    "distance_pct": -18.56
                   },
                   "available": true
                 },
                 {
                   "name": "volume_asymmetry",
-                  "score": 6,
+                  "score": 2.3,
                   "weight": 0.2,
                   "raw": {
-                    "raw": 1.04,
-                    "adjusted": 1.04,
+                    "raw": 0.5,
+                    "adjusted": 0.5,
                     "session_progress": 1,
                     "method": "raw_full_session"
                   },
@@ -2417,11 +2416,11 @@
                 },
                 {
                   "name": "retest_quality",
-                  "score": 7.5,
+                  "score": 6.8,
                   "weight": 0.2,
                   "raw": {
-                    "atr": 0.86,
-                    "distance_from_value_atr": 0
+                    "atr": 2.57,
+                    "distance_from_value_atr": 0.44
                   },
                   "available": true
                 },
@@ -2431,8 +2430,8 @@
                   "weight": 0.15,
                   "raw": {
                     "recent_pivot_lows": [
-                      17.12,
-                      17.91
+                      12.9,
+                      14.07
                     ]
                   },
                   "available": true
@@ -2440,44 +2439,42 @@
               ]
             },
             "cycle_gap": {
-              "value": -1.2,
+              "value": -1.6,
               "classification": "aligned",
-              "status": "provisional_not_execution_eligible"
+              "status": "complete"
             },
             "entry_quality": {
-              "score": 7.8,
-              "status": "provisional_not_execution_eligible",
-              "confidence_pct": 70,
-              "execution_eligible": false,
+              "score": 8.4,
+              "status": "complete",
+              "confidence_pct": 100,
+              "execution_eligible": true,
               "liquidity_zone": "normal",
-              "support": 18.69,
-              "resistance": 18.9,
-              "invalidation": 18.69,
-              "risk_reward": null,
-              "missing_components": [
-                "risk_reward"
-              ],
+              "support": 14.48,
+              "resistance": 18.59,
+              "invalidation": 14.48,
+              "risk_reward": 5.26,
+              "missing_components": [],
               "components": [
                 {
                   "name": "distance_from_value_support",
-                  "score": 7.8,
+                  "score": 8.4,
                   "weight": 0.3,
                   "raw": {
-                    "support": 18.69,
-                    "distance_atr": 0
+                    "support": 14.48,
+                    "distance_atr": 0.26
                   },
                   "available": true
                 },
                 {
                   "name": "risk_reward",
-                  "score": null,
+                  "score": 10,
                   "weight": 0.3,
                   "raw": {
-                    "resistance": 18.9,
-                    "invalidation": 18.69,
-                    "rr": null
+                    "resistance": 18.59,
+                    "invalidation": 14.48,
+                    "rr": 5.26
                   },
-                  "available": false
+                  "available": true
                 },
                 {
                   "name": "liquidity_stop_hunt",
@@ -2495,22 +2492,22 @@
                 },
                 {
                   "name": "close_location",
-                  "score": 7.3,
+                  "score": 4.5,
                   "weight": 0.1,
-                  "raw": 0.725,
+                  "raw": 0.251,
                   "available": true
                 }
               ]
             },
-            "re_acceleration_trigger": "forming",
+            "re_acceleration_trigger": "not_present",
             "execution_readiness": {
-              "score": 72.5,
-              "status": "provisional_not_execution_eligible",
-              "execution_eligible": false,
+              "score": 64.7,
+              "status": "complete",
+              "execution_eligible": true,
               "hard_veto": false,
-              "classification": "provisional"
+              "classification": "wait"
             },
-            "execution_metrics_eligible": false
+            "execution_metrics_eligible": true
           },
           "early_movement_flags": []
         },
@@ -3048,56 +3045,56 @@
           "early_movement_flags": []
         },
         {
-          "symbol_full": "EGX:RUBX",
-          "name": "RUBX",
-          "description": "Rubex International for Plastic & Acrylic Manufacturing",
-          "close": 15.14,
-          "open": 16.28,
-          "high": 16.39,
-          "low": 14.72,
-          "volume": 3411282,
-          "change": -7.002457002457005,
-          "market_cap_basic": 1085826773,
-          "RSI": 54.97543140820145,
-          "EMA20": 14.483498632761277,
-          "SMA20": 14.016500000000013,
-          "Perf.W": -6.945298094652729,
-          "Perf.1M": 16.461538461538467,
-          "average_volume_10d_calc": 7043071.5,
+          "symbol_full": "EGX:AMIA",
+          "name": "AMIA",
+          "description": "Arab Moltaqa Investments Company",
+          "close": 18.69,
+          "open": 18.65,
+          "high": 18.94,
+          "low": 18.03,
+          "volume": 814212,
+          "change": 0.21447721179626117,
+          "market_cap_basic": 9614043543,
+          "RSI": 59.448112766530066,
+          "EMA20": 18.18882004837443,
+          "SMA20": 18.689499999999992,
+          "Perf.W": 1.3557483731019522,
+          "Perf.1M": -5.126903553299482,
+          "average_volume_10d_calc": 753277.1,
           "current_session": "out_of_session",
-          "symbol": "RUBX",
-          "SMA50": 13.2832,
-          "EMA50": 13.44101809773355,
-          "SMA200": 10.936657749599998,
-          "EMA200": 11.483794771791029,
-          "relative_volume_10d_calc": 0.503262608529804,
-          "earnings_per_share_diluted_ttm": null,
-          "price_earnings_current": null,
-          "eps_diluted_growth_percent_fq": 523.880597014925,
-          "eps_diluted_growth_percent_fy": null,
-          "total_revenue_ttm": null,
-          "free_cash_flow_ttm": null,
-          "debt_to_equity_fq": 0.502139782885087,
+          "symbol": "AMIA",
+          "SMA50": 15.814800000000002,
+          "EMA50": 16.08424482536661,
+          "SMA200": 8.727649999999997,
+          "EMA200": 10.166537460046465,
+          "relative_volume_10d_calc": 1.042059710344434,
+          "earnings_per_share_diluted_ttm": 0.8196,
+          "price_earnings_current": 22.75500244021474,
+          "eps_diluted_growth_percent_fq": -31.6693944353519,
+          "eps_diluted_growth_percent_fy": 105.790297339593,
+          "total_revenue_ttm": 2569339872,
+          "free_cash_flow_ttm": -799640720,
+          "debt_to_equity_fq": 4.09819300099665,
           "earnings_release_next_date": null,
           "dividend_ex_date_upcoming": null,
           "price_target_average": null,
           "price_target_high": null,
           "price_target_low": null,
           "update_mode": "delayed_streaming_900",
-          "value": 51646809.48,
-          "value_session_adjusted": 51646809.48,
-          "relative_volume_10d_raw": 0.5,
-          "relative_volume_10d": 0.5,
-          "relative_volume_10d_session_adjusted": 0.5,
+          "value": 15217622.28,
+          "value_session_adjusted": 15217622.28,
+          "relative_volume_10d_raw": 1.04,
+          "relative_volume_10d": 1.04,
+          "relative_volume_10d_session_adjusted": 1.04,
           "relative_volume_adjustment": {
             "session_progress": 1,
             "method": "raw_full_session"
           },
-          "relative_volume_label": "weak_or_normal",
-          "close_location_in_day": 0.251,
+          "relative_volume_label": "moderate_interest",
+          "close_location_in_day": 0.725,
           "long_term_trend": "long_term_uptrend",
-          "distance_from_sma200_pct": 38.43,
-          "demand_confirmation_score": 4.6,
+          "distance_from_sma200_pct": 114.15,
+          "demand_confirmation_score": 6.8,
           "event_risk": {
             "level": "unknown_or_low",
             "next_event": null
@@ -3105,13 +3102,13 @@
           "upside_to_analyst_target_pct": -100,
           "decision_support": {
             "technical_score": 9,
-            "liquidity_score": 9,
+            "liquidity_score": 7,
             "setup_score": 8.1,
             "chase_risk": "low"
           },
           "analytics": {
             "momentum": {
-              "score": 4.6,
+              "score": 6.4,
               "status": "complete",
               "confidence_pct": 100,
               "execution_eligible": true,
@@ -3119,21 +3116,21 @@
               "components": [
                 {
                   "name": "three_sessions_and_week",
-                  "score": 5,
+                  "score": 5.3,
                   "weight": 0.3,
                   "raw": {
-                    "performance_3_sessions_pct": 7.22,
-                    "performance_week_pct": -6.945298094652729
+                    "performance_3_sessions_pct": 1.08,
+                    "performance_week_pct": 1.3557483731019522
                   },
                   "available": true
                 },
                 {
                   "name": "relative_volume_10d",
-                  "score": 3,
+                  "score": 6.5,
                   "weight": 0.2,
                   "raw": {
-                    "raw": 0.5,
-                    "adjusted": 0.5,
+                    "raw": 1.04,
+                    "adjusted": 1.04,
                     "session_progress": 1,
                     "method": "raw_full_session"
                   },
@@ -3141,16 +3138,16 @@
                 },
                 {
                   "name": "close_location",
-                  "score": 2,
+                  "score": 7.8,
                   "weight": 0.15,
-                  "raw": 0.251,
+                  "raw": 0.725,
                   "available": true
                 },
                 {
                   "name": "rsi",
                   "score": 6,
                   "weight": 0.15,
-                  "raw": 54.97543140820145,
+                  "raw": 59.448112766530066,
                   "available": true
                 },
                 {
@@ -3158,15 +3155,15 @@
                   "score": 10,
                   "weight": 0.1,
                   "raw": {
-                    "close": 15.14,
-                    "ma20": 14.016500000000013,
-                    "ma50": 13.2832
+                    "close": 18.69,
+                    "ma20": 18.689499999999992,
+                    "ma50": 15.814800000000002
                   },
                   "available": true
                 },
                 {
                   "name": "continuity_acceleration",
-                  "score": 3.2,
+                  "score": 4.2,
                   "weight": 0.1,
                   "raw": {
                     "sessions_available": 10
@@ -3176,12 +3173,12 @@
               ]
             },
             "cycle_quality": {
-              "score": 6.2,
+              "score": 7.6,
               "status": "complete",
               "confidence_pct": 100,
               "execution_eligible": true,
               "integrity": "not_confirmed",
-              "phase": "foundation_or_repair",
+              "phase": "digestion_or_retest",
               "sessions_available": 10,
               "missing_components": [],
               "components": [
@@ -3191,27 +3188,27 @@
                   "weight": 0.25,
                   "raw": {
                     "pivots_high": 2,
-                    "pivots_low": 3
+                    "pivots_low": 2
                   },
                   "available": true
                 },
                 {
                   "name": "breakout_strength",
-                  "score": 2.5,
+                  "score": 5.4,
                   "weight": 0.2,
                   "raw": {
-                    "prior_pivot_high": 18.59,
-                    "distance_pct": -18.56
+                    "prior_pivot_high": 18.9,
+                    "distance_pct": -1.11
                   },
                   "available": true
                 },
                 {
                   "name": "volume_asymmetry",
-                  "score": 2.3,
+                  "score": 6,
                   "weight": 0.2,
                   "raw": {
-                    "raw": 0.5,
-                    "adjusted": 0.5,
+                    "raw": 1.04,
+                    "adjusted": 1.04,
                     "session_progress": 1,
                     "method": "raw_full_session"
                   },
@@ -3219,11 +3216,11 @@
                 },
                 {
                   "name": "retest_quality",
-                  "score": 6.8,
+                  "score": 7.5,
                   "weight": 0.2,
                   "raw": {
-                    "atr": 2.57,
-                    "distance_from_value_atr": 0.44
+                    "atr": 0.86,
+                    "distance_from_value_atr": 0
                   },
                   "available": true
                 },
@@ -3233,8 +3230,8 @@
                   "weight": 0.15,
                   "raw": {
                     "recent_pivot_lows": [
-                      12.9,
-                      14.07
+                      17.12,
+                      17.91
                     ]
                   },
                   "available": true
@@ -3242,42 +3239,44 @@
               ]
             },
             "cycle_gap": {
-              "value": -1.6,
+              "value": -1.2,
               "classification": "aligned",
-              "status": "complete"
+              "status": "provisional_not_execution_eligible"
             },
             "entry_quality": {
-              "score": 8.4,
-              "status": "complete",
-              "confidence_pct": 100,
-              "execution_eligible": true,
+              "score": 7.8,
+              "status": "provisional_not_execution_eligible",
+              "confidence_pct": 70,
+              "execution_eligible": false,
               "liquidity_zone": "normal",
-              "support": 14.48,
-              "resistance": 18.59,
-              "invalidation": 14.48,
-              "risk_reward": 5.26,
-              "missing_components": [],
+              "support": 18.69,
+              "resistance": 18.9,
+              "invalidation": 18.69,
+              "risk_reward": null,
+              "missing_components": [
+                "risk_reward"
+              ],
               "components": [
                 {
                   "name": "distance_from_value_support",
-                  "score": 8.4,
+                  "score": 7.8,
                   "weight": 0.3,
                   "raw": {
-                    "support": 14.48,
-                    "distance_atr": 0.26
+                    "support": 18.69,
+                    "distance_atr": 0
                   },
                   "available": true
                 },
                 {
                   "name": "risk_reward",
-                  "score": 10,
+                  "score": null,
                   "weight": 0.3,
                   "raw": {
-                    "resistance": 18.59,
-                    "invalidation": 14.48,
-                    "rr": 5.26
+                    "resistance": 18.9,
+                    "invalidation": 18.69,
+                    "rr": null
                   },
-                  "available": true
+                  "available": false
                 },
                 {
                   "name": "liquidity_stop_hunt",
@@ -3295,22 +3294,22 @@
                 },
                 {
                   "name": "close_location",
-                  "score": 4.5,
+                  "score": 7.3,
                   "weight": 0.1,
-                  "raw": 0.251,
+                  "raw": 0.725,
                   "available": true
                 }
               ]
             },
-            "re_acceleration_trigger": "not_present",
+            "re_acceleration_trigger": "forming",
             "execution_readiness": {
-              "score": 64.7,
-              "status": "complete",
-              "execution_eligible": true,
+              "score": 72.5,
+              "status": "provisional_not_execution_eligible",
+              "execution_eligible": false,
               "hard_veto": false,
-              "classification": "wait"
+              "classification": "provisional"
             },
-            "execution_metrics_eligible": true
+            "execution_metrics_eligible": false
           },
           "early_movement_flags": []
         },
@@ -3586,6 +3585,273 @@
           ]
         },
         {
+          "symbol_full": "EGX:SNFC",
+          "name": "SNFC",
+          "description": "Sharkia National Food",
+          "close": 11.4,
+          "open": 11.33,
+          "high": 11.54,
+          "low": 11.2,
+          "volume": 1485964,
+          "change": 0.6178287731685814,
+          "market_cap_basic": 1891719005,
+          "RSI": 59.43288191533412,
+          "EMA20": 11.16579767771239,
+          "SMA20": 11.038000000000006,
+          "Perf.W": 0.8849557522123862,
+          "Perf.1M": 6.741573033707871,
+          "average_volume_10d_calc": 1272616.900000009,
+          "current_session": "out_of_session",
+          "symbol": "SNFC",
+          "SMA50": 11.018000000000002,
+          "EMA50": 11.146165376039235,
+          "SMA200": 10.819650000000001,
+          "EMA200": 10.658745725968226,
+          "relative_volume_10d_calc": 1.111624545474056,
+          "earnings_per_share_diluted_ttm": null,
+          "price_earnings_current": null,
+          "eps_diluted_growth_percent_fq": 1300,
+          "eps_diluted_growth_percent_fy": null,
+          "total_revenue_ttm": null,
+          "free_cash_flow_ttm": null,
+          "debt_to_equity_fq": 0,
+          "earnings_release_next_date": null,
+          "dividend_ex_date_upcoming": null,
+          "price_target_average": null,
+          "price_target_high": null,
+          "price_target_low": null,
+          "update_mode": "delayed_streaming_900",
+          "value": 16939989.6,
+          "value_session_adjusted": 16939989.6,
+          "relative_volume_10d_raw": 1.11,
+          "relative_volume_10d": 1.11,
+          "relative_volume_10d_session_adjusted": 1.11,
+          "relative_volume_adjustment": {
+            "session_progress": 1,
+            "method": "raw_full_session"
+          },
+          "relative_volume_label": "moderate_interest",
+          "close_location_in_day": 0.588,
+          "long_term_trend": "long_term_uptrend",
+          "distance_from_sma200_pct": 5.36,
+          "demand_confirmation_score": 6.6,
+          "event_risk": {
+            "level": "unknown_or_low",
+            "next_event": null
+          },
+          "upside_to_analyst_target_pct": -100,
+          "decision_support": {
+            "technical_score": 9,
+            "liquidity_score": 7,
+            "setup_score": 8,
+            "chase_risk": "low"
+          },
+          "analytics": {
+            "momentum": {
+              "score": 6.1,
+              "status": "complete",
+              "confidence_pct": 100,
+              "execution_eligible": true,
+              "missing_components": [],
+              "components": [
+                {
+                  "name": "three_sessions_and_week",
+                  "score": 5,
+                  "weight": 0.3,
+                  "raw": {
+                    "performance_3_sessions_pct": -1.21,
+                    "performance_week_pct": 0.8849557522123862
+                  },
+                  "available": true
+                },
+                {
+                  "name": "relative_volume_10d",
+                  "score": 6.5,
+                  "weight": 0.2,
+                  "raw": {
+                    "raw": 1.11,
+                    "adjusted": 1.11,
+                    "session_progress": 1,
+                    "method": "raw_full_session"
+                  },
+                  "available": true
+                },
+                {
+                  "name": "close_location",
+                  "score": 6.4,
+                  "weight": 0.15,
+                  "raw": 0.588,
+                  "available": true
+                },
+                {
+                  "name": "rsi",
+                  "score": 6,
+                  "weight": 0.15,
+                  "raw": 59.43288191533412,
+                  "available": true
+                },
+                {
+                  "name": "ma20_50",
+                  "score": 10,
+                  "weight": 0.1,
+                  "raw": {
+                    "close": 11.4,
+                    "ma20": 11.038000000000006,
+                    "ma50": 11.018000000000002
+                  },
+                  "available": true
+                },
+                {
+                  "name": "continuity_acceleration",
+                  "score": 4.2,
+                  "weight": 0.1,
+                  "raw": {
+                    "sessions_available": 10
+                  },
+                  "available": true
+                }
+              ]
+            },
+            "cycle_quality": {
+              "score": 7.1,
+              "status": "complete",
+              "confidence_pct": 100,
+              "execution_eligible": true,
+              "integrity": "not_confirmed",
+              "phase": "digestion_or_retest",
+              "sessions_available": 10,
+              "missing_components": [],
+              "components": [
+                {
+                  "name": "weekly_structure",
+                  "score": 10,
+                  "weight": 0.25,
+                  "raw": {
+                    "pivots_high": 2,
+                    "pivots_low": 2
+                  },
+                  "available": true
+                },
+                {
+                  "name": "breakout_strength",
+                  "score": 4.9,
+                  "weight": 0.2,
+                  "raw": {
+                    "prior_pivot_high": 11.71,
+                    "distance_pct": -2.65
+                  },
+                  "available": true
+                },
+                {
+                  "name": "volume_asymmetry",
+                  "score": 5.5,
+                  "weight": 0.2,
+                  "raw": {
+                    "raw": 1.11,
+                    "adjusted": 1.11,
+                    "session_progress": 1,
+                    "method": "raw_full_session"
+                  },
+                  "available": true
+                },
+                {
+                  "name": "retest_quality",
+                  "score": 5.9,
+                  "weight": 0.2,
+                  "raw": {
+                    "atr": 0.3,
+                    "distance_from_value_atr": 1.21
+                  },
+                  "available": true
+                },
+                {
+                  "name": "higher_low",
+                  "score": 9,
+                  "weight": 0.15,
+                  "raw": {
+                    "recent_pivot_lows": [
+                      10.8,
+                      11.17
+                    ]
+                  },
+                  "available": true
+                }
+              ]
+            },
+            "cycle_gap": {
+              "value": -1,
+              "classification": "aligned",
+              "status": "complete"
+            },
+            "entry_quality": {
+              "score": 7,
+              "status": "complete",
+              "confidence_pct": 100,
+              "execution_eligible": true,
+              "liquidity_zone": "normal",
+              "support": 11.17,
+              "resistance": 11.71,
+              "invalidation": 11.17,
+              "risk_reward": 1.35,
+              "missing_components": [],
+              "components": [
+                {
+                  "name": "distance_from_value_support",
+                  "score": 8.3,
+                  "weight": 0.3,
+                  "raw": {
+                    "support": 11.17,
+                    "distance_atr": 0.77
+                  },
+                  "available": true
+                },
+                {
+                  "name": "risk_reward",
+                  "score": 5,
+                  "weight": 0.3,
+                  "raw": {
+                    "resistance": 11.71,
+                    "invalidation": 11.17,
+                    "rr": 1.35
+                  },
+                  "available": true
+                },
+                {
+                  "name": "liquidity_stop_hunt",
+                  "score": 8,
+                  "weight": 0.2,
+                  "raw": "normal",
+                  "available": true
+                },
+                {
+                  "name": "chase_slippage",
+                  "score": 8,
+                  "weight": 0.1,
+                  "raw": "low",
+                  "available": true
+                },
+                {
+                  "name": "close_location",
+                  "score": 6.5,
+                  "weight": 0.1,
+                  "raw": 0.588,
+                  "available": true
+                }
+              ]
+            },
+            "re_acceleration_trigger": "forming",
+            "execution_readiness": {
+              "score": 68.2,
+              "status": "complete",
+              "execution_eligible": true,
+              "hard_veto": false,
+              "classification": "conditional"
+            },
+            "execution_metrics_eligible": true
+          },
+          "early_movement_flags": []
+        },
+        {
           "symbol_full": "EGX:CIRA",
           "name": "CIRA",
           "description": "Cairo For Investment And Real Estate Developments -CIRA Education",
@@ -3855,273 +4121,6 @@
               "classification": "provisional"
             },
             "execution_metrics_eligible": false
-          },
-          "early_movement_flags": []
-        },
-        {
-          "symbol_full": "EGX:SNFC",
-          "name": "SNFC",
-          "description": "Sharkia National Food",
-          "close": 11.4,
-          "open": 11.33,
-          "high": 11.54,
-          "low": 11.2,
-          "volume": 1485964,
-          "change": 0.6178287731685814,
-          "market_cap_basic": 1891719005,
-          "RSI": 59.43288191533412,
-          "EMA20": 11.16579767771239,
-          "SMA20": 11.038000000000006,
-          "Perf.W": 0.8849557522123862,
-          "Perf.1M": 6.741573033707871,
-          "average_volume_10d_calc": 1272616.900000009,
-          "current_session": "out_of_session",
-          "symbol": "SNFC",
-          "SMA50": 11.018000000000002,
-          "EMA50": 11.146165376039235,
-          "SMA200": 10.819650000000001,
-          "EMA200": 10.658745725968226,
-          "relative_volume_10d_calc": 1.111624545474056,
-          "earnings_per_share_diluted_ttm": null,
-          "price_earnings_current": null,
-          "eps_diluted_growth_percent_fq": 1300,
-          "eps_diluted_growth_percent_fy": null,
-          "total_revenue_ttm": null,
-          "free_cash_flow_ttm": null,
-          "debt_to_equity_fq": 0,
-          "earnings_release_next_date": null,
-          "dividend_ex_date_upcoming": null,
-          "price_target_average": null,
-          "price_target_high": null,
-          "price_target_low": null,
-          "update_mode": "delayed_streaming_900",
-          "value": 16939989.6,
-          "value_session_adjusted": 16939989.6,
-          "relative_volume_10d_raw": 1.11,
-          "relative_volume_10d": 1.11,
-          "relative_volume_10d_session_adjusted": 1.11,
-          "relative_volume_adjustment": {
-            "session_progress": 1,
-            "method": "raw_full_session"
-          },
-          "relative_volume_label": "moderate_interest",
-          "close_location_in_day": 0.588,
-          "long_term_trend": "long_term_uptrend",
-          "distance_from_sma200_pct": 5.36,
-          "demand_confirmation_score": 6.6,
-          "event_risk": {
-            "level": "unknown_or_low",
-            "next_event": null
-          },
-          "upside_to_analyst_target_pct": -100,
-          "decision_support": {
-            "technical_score": 9,
-            "liquidity_score": 7,
-            "setup_score": 8,
-            "chase_risk": "low"
-          },
-          "analytics": {
-            "momentum": {
-              "score": 6.1,
-              "status": "complete",
-              "confidence_pct": 100,
-              "execution_eligible": true,
-              "missing_components": [],
-              "components": [
-                {
-                  "name": "three_sessions_and_week",
-                  "score": 5,
-                  "weight": 0.3,
-                  "raw": {
-                    "performance_3_sessions_pct": -1.21,
-                    "performance_week_pct": 0.8849557522123862
-                  },
-                  "available": true
-                },
-                {
-                  "name": "relative_volume_10d",
-                  "score": 6.5,
-                  "weight": 0.2,
-                  "raw": {
-                    "raw": 1.11,
-                    "adjusted": 1.11,
-                    "session_progress": 1,
-                    "method": "raw_full_session"
-                  },
-                  "available": true
-                },
-                {
-                  "name": "close_location",
-                  "score": 6.4,
-                  "weight": 0.15,
-                  "raw": 0.588,
-                  "available": true
-                },
-                {
-                  "name": "rsi",
-                  "score": 6,
-                  "weight": 0.15,
-                  "raw": 59.43288191533412,
-                  "available": true
-                },
-                {
-                  "name": "ma20_50",
-                  "score": 10,
-                  "weight": 0.1,
-                  "raw": {
-                    "close": 11.4,
-                    "ma20": 11.038000000000006,
-                    "ma50": 11.018000000000002
-                  },
-                  "available": true
-                },
-                {
-                  "name": "continuity_acceleration",
-                  "score": 4.2,
-                  "weight": 0.1,
-                  "raw": {
-                    "sessions_available": 10
-                  },
-                  "available": true
-                }
-              ]
-            },
-            "cycle_quality": {
-              "score": 7.1,
-              "status": "complete",
-              "confidence_pct": 100,
-              "execution_eligible": true,
-              "integrity": "not_confirmed",
-              "phase": "digestion_or_retest",
-              "sessions_available": 10,
-              "missing_components": [],
-              "components": [
-                {
-                  "name": "weekly_structure",
-                  "score": 10,
-                  "weight": 0.25,
-                  "raw": {
-                    "pivots_high": 2,
-                    "pivots_low": 2
-                  },
-                  "available": true
-                },
-                {
-                  "name": "breakout_strength",
-                  "score": 4.9,
-                  "weight": 0.2,
-                  "raw": {
-                    "prior_pivot_high": 11.71,
-                    "distance_pct": -2.65
-                  },
-                  "available": true
-                },
-                {
-                  "name": "volume_asymmetry",
-                  "score": 5.5,
-                  "weight": 0.2,
-                  "raw": {
-                    "raw": 1.11,
-                    "adjusted": 1.11,
-                    "session_progress": 1,
-                    "method": "raw_full_session"
-                  },
-                  "available": true
-                },
-                {
-                  "name": "retest_quality",
-                  "score": 5.9,
-                  "weight": 0.2,
-                  "raw": {
-                    "atr": 0.3,
-                    "distance_from_value_atr": 1.21
-                  },
-                  "available": true
-                },
-                {
-                  "name": "higher_low",
-                  "score": 9,
-                  "weight": 0.15,
-                  "raw": {
-                    "recent_pivot_lows": [
-                      10.8,
-                      11.17
-                    ]
-                  },
-                  "available": true
-                }
-              ]
-            },
-            "cycle_gap": {
-              "value": -1,
-              "classification": "aligned",
-              "status": "complete"
-            },
-            "entry_quality": {
-              "score": 7,
-              "status": "complete",
-              "confidence_pct": 100,
-              "execution_eligible": true,
-              "liquidity_zone": "normal",
-              "support": 11.17,
-              "resistance": 11.71,
-              "invalidation": 11.17,
-              "risk_reward": 1.35,
-              "missing_components": [],
-              "components": [
-                {
-                  "name": "distance_from_value_support",
-                  "score": 8.3,
-                  "weight": 0.3,
-                  "raw": {
-                    "support": 11.17,
-                    "distance_atr": 0.77
-                  },
-                  "available": true
-                },
-                {
-                  "name": "risk_reward",
-                  "score": 5,
-                  "weight": 0.3,
-                  "raw": {
-                    "resistance": 11.71,
-                    "invalidation": 11.17,
-                    "rr": 1.35
-                  },
-                  "available": true
-                },
-                {
-                  "name": "liquidity_stop_hunt",
-                  "score": 8,
-                  "weight": 0.2,
-                  "raw": "normal",
-                  "available": true
-                },
-                {
-                  "name": "chase_slippage",
-                  "score": 8,
-                  "weight": 0.1,
-                  "raw": "low",
-                  "available": true
-                },
-                {
-                  "name": "close_location",
-                  "score": 6.5,
-                  "weight": 0.1,
-                  "raw": 0.588,
-                  "available": true
-                }
-              ]
-            },
-            "re_acceleration_trigger": "forming",
-            "execution_readiness": {
-              "score": 68.2,
-              "status": "complete",
-              "execution_eligible": true,
-              "hard_veto": false,
-              "classification": "conditional"
-            },
-            "execution_metrics_eligible": true
           },
           "early_movement_flags": []
         },
@@ -4399,276 +4398,6 @@
           "early_movement_flags": []
         },
         {
-          "symbol_full": "EGX:KORA",
-          "name": "KORA",
-          "description": "KORRA",
-          "close": 6,
-          "open": 6,
-          "high": 6.24,
-          "low": 5.84,
-          "volume": 55753317,
-          "change": 0,
-          "market_cap_basic": null,
-          "RSI": 53.75931247057159,
-          "EMA20": 5.935507365287597,
-          "SMA20": 6.256,
-          "Perf.W": 3.448275862068969,
-          "Perf.1M": 77.51479289940829,
-          "average_volume_10d_calc": 78307430.8,
-          "current_session": "out_of_session",
-          "symbol": "KORA",
-          "SMA50": 4.524,
-          "EMA50": 4.995322896343646,
-          "SMA200": null,
-          "EMA200": null,
-          "relative_volume_10d_calc": 0.6580989546820973,
-          "earnings_per_share_diluted_ttm": null,
-          "price_earnings_current": null,
-          "eps_diluted_growth_percent_fq": null,
-          "eps_diluted_growth_percent_fy": null,
-          "total_revenue_ttm": null,
-          "free_cash_flow_ttm": null,
-          "debt_to_equity_fq": null,
-          "earnings_release_next_date": null,
-          "dividend_ex_date_upcoming": null,
-          "price_target_average": null,
-          "price_target_high": null,
-          "price_target_low": null,
-          "update_mode": "delayed_streaming_900",
-          "value": 334519902,
-          "value_session_adjusted": 334519902,
-          "relative_volume_10d_raw": 0.66,
-          "relative_volume_10d": 0.66,
-          "relative_volume_10d_session_adjusted": 0.66,
-          "relative_volume_adjustment": {
-            "session_progress": 1,
-            "method": "raw_full_session"
-          },
-          "relative_volume_label": "weak_or_normal",
-          "close_location_in_day": 0.4,
-          "long_term_trend": "sma200_unavailable",
-          "distance_from_sma200_pct": null,
-          "demand_confirmation_score": 5.8,
-          "event_risk": {
-            "level": "unknown_or_low",
-            "next_event": null
-          },
-          "upside_to_analyst_target_pct": -100,
-          "decision_support": {
-            "technical_score": 7.3,
-            "liquidity_score": 10,
-            "setup_score": 7.7,
-            "chase_risk": "high"
-          },
-          "analytics": {
-            "momentum": {
-              "score": 3.8,
-              "status": "complete",
-              "confidence_pct": 100,
-              "execution_eligible": true,
-              "missing_components": [],
-              "components": [
-                {
-                  "name": "three_sessions_and_week",
-                  "score": 3.9,
-                  "weight": 0.3,
-                  "raw": {
-                    "performance_3_sessions_pct": -11.63,
-                    "performance_week_pct": 3.448275862068969
-                  },
-                  "available": true
-                },
-                {
-                  "name": "relative_volume_10d",
-                  "score": 3,
-                  "weight": 0.2,
-                  "raw": {
-                    "raw": 0.66,
-                    "adjusted": 0.66,
-                    "session_progress": 1,
-                    "method": "raw_full_session"
-                  },
-                  "available": true
-                },
-                {
-                  "name": "close_location",
-                  "score": 3.5,
-                  "weight": 0.15,
-                  "raw": 0.4,
-                  "available": true
-                },
-                {
-                  "name": "rsi",
-                  "score": 6,
-                  "weight": 0.15,
-                  "raw": 53.75931247057159,
-                  "available": true
-                },
-                {
-                  "name": "ma20_50",
-                  "score": 5.5,
-                  "weight": 0.1,
-                  "raw": {
-                    "close": 6,
-                    "ma20": 6.256,
-                    "ma50": 4.524
-                  },
-                  "available": true
-                },
-                {
-                  "name": "continuity_acceleration",
-                  "score": 1,
-                  "weight": 0.1,
-                  "raw": {
-                    "sessions_available": 10
-                  },
-                  "available": true
-                }
-              ]
-            },
-            "cycle_quality": {
-              "score": 3.6,
-              "status": "complete",
-              "confidence_pct": 100,
-              "execution_eligible": true,
-              "integrity": "not_confirmed",
-              "phase": "foundation_or_repair",
-              "sessions_available": 10,
-              "missing_components": [],
-              "components": [
-                {
-                  "name": "weekly_structure",
-                  "score": 1,
-                  "weight": 0.25,
-                  "raw": {
-                    "pivots_high": 3,
-                    "pivots_low": 1
-                  },
-                  "available": true
-                },
-                {
-                  "name": "breakout_strength",
-                  "score": 3.1,
-                  "weight": 0.2,
-                  "raw": {
-                    "prior_pivot_high": 6.7,
-                    "distance_pct": -10.45
-                  },
-                  "available": true
-                },
-                {
-                  "name": "volume_asymmetry",
-                  "score": 4.6,
-                  "weight": 0.2,
-                  "raw": {
-                    "raw": 0.66,
-                    "adjusted": 0.66,
-                    "session_progress": 1,
-                    "method": "raw_full_session"
-                  },
-                  "available": true
-                },
-                {
-                  "name": "retest_quality",
-                  "score": 7.6,
-                  "weight": 0.2,
-                  "raw": {
-                    "atr": 0.75,
-                    "distance_from_value_atr": -0.34
-                  },
-                  "available": true
-                },
-                {
-                  "name": "higher_low",
-                  "score": 2,
-                  "weight": 0.15,
-                  "raw": {
-                    "recent_pivot_lows": [
-                      5.75
-                    ]
-                  },
-                  "available": true
-                }
-              ]
-            },
-            "cycle_gap": {
-              "value": 0.2,
-              "classification": "aligned",
-              "status": "provisional_not_execution_eligible"
-            },
-            "entry_quality": {
-              "score": 5.6,
-              "status": "provisional_not_execution_eligible",
-              "confidence_pct": 70,
-              "execution_eligible": false,
-              "liquidity_zone": "equal_lows_stop_hunt_zone",
-              "support": 5.94,
-              "resistance": 6.7,
-              "invalidation": 5.94,
-              "risk_reward": null,
-              "missing_components": [
-                "risk_reward"
-              ],
-              "components": [
-                {
-                  "name": "distance_from_value_support",
-                  "score": 8,
-                  "weight": 0.3,
-                  "raw": {
-                    "support": 5.94,
-                    "distance_atr": 0.09
-                  },
-                  "available": true
-                },
-                {
-                  "name": "risk_reward",
-                  "score": null,
-                  "weight": 0.3,
-                  "raw": {
-                    "resistance": 6.7,
-                    "invalidation": 5.94,
-                    "rr": null
-                  },
-                  "available": false
-                },
-                {
-                  "name": "liquidity_stop_hunt",
-                  "score": 4,
-                  "weight": 0.2,
-                  "raw": "equal_lows_stop_hunt_zone",
-                  "available": true
-                },
-                {
-                  "name": "chase_slippage",
-                  "score": 2,
-                  "weight": 0.1,
-                  "raw": "high",
-                  "available": true
-                },
-                {
-                  "name": "close_location",
-                  "score": 5.4,
-                  "weight": 0.1,
-                  "raw": 0.4,
-                  "available": true
-                }
-              ]
-            },
-            "re_acceleration_trigger": "not_present",
-            "execution_readiness": {
-              "score": 52.1,
-              "status": "provisional_not_execution_eligible",
-              "execution_eligible": false,
-              "hard_veto": false,
-              "classification": "provisional"
-            },
-            "execution_metrics_eligible": false
-          },
-          "early_movement_flags": [
-            "monthly_momentum_ge_20pct"
-          ]
-        },
-        {
           "symbol_full": "EGX:TYCN",
           "name": "TYCN",
           "description": "Tycoon Holding Company For Financial Investments",
@@ -4937,6 +4666,276 @@
           "early_movement_flags": [
             "daily_move_ge_8pct",
             "relative_volume_ge_2x"
+          ]
+        },
+        {
+          "symbol_full": "EGX:KORA",
+          "name": "KORA",
+          "description": "KORRA",
+          "close": 6,
+          "open": 6,
+          "high": 6.24,
+          "low": 5.84,
+          "volume": 55753317,
+          "change": 0,
+          "market_cap_basic": null,
+          "RSI": 53.75931247057159,
+          "EMA20": 5.935507365287597,
+          "SMA20": 6.256,
+          "Perf.W": 3.448275862068969,
+          "Perf.1M": 77.51479289940829,
+          "average_volume_10d_calc": 78307430.8,
+          "current_session": "out_of_session",
+          "symbol": "KORA",
+          "SMA50": 4.524,
+          "EMA50": 4.995322896343646,
+          "SMA200": null,
+          "EMA200": null,
+          "relative_volume_10d_calc": 0.6580989546820973,
+          "earnings_per_share_diluted_ttm": null,
+          "price_earnings_current": null,
+          "eps_diluted_growth_percent_fq": null,
+          "eps_diluted_growth_percent_fy": null,
+          "total_revenue_ttm": null,
+          "free_cash_flow_ttm": null,
+          "debt_to_equity_fq": null,
+          "earnings_release_next_date": null,
+          "dividend_ex_date_upcoming": null,
+          "price_target_average": null,
+          "price_target_high": null,
+          "price_target_low": null,
+          "update_mode": "delayed_streaming_900",
+          "value": 334519902,
+          "value_session_adjusted": 334519902,
+          "relative_volume_10d_raw": 0.66,
+          "relative_volume_10d": 0.66,
+          "relative_volume_10d_session_adjusted": 0.66,
+          "relative_volume_adjustment": {
+            "session_progress": 1,
+            "method": "raw_full_session"
+          },
+          "relative_volume_label": "weak_or_normal",
+          "close_location_in_day": 0.4,
+          "long_term_trend": "sma200_unavailable",
+          "distance_from_sma200_pct": null,
+          "demand_confirmation_score": 5.8,
+          "event_risk": {
+            "level": "unknown_or_low",
+            "next_event": null
+          },
+          "upside_to_analyst_target_pct": -100,
+          "decision_support": {
+            "technical_score": 7.3,
+            "liquidity_score": 10,
+            "setup_score": 7.7,
+            "chase_risk": "high"
+          },
+          "analytics": {
+            "momentum": {
+              "score": 3.8,
+              "status": "complete",
+              "confidence_pct": 100,
+              "execution_eligible": true,
+              "missing_components": [],
+              "components": [
+                {
+                  "name": "three_sessions_and_week",
+                  "score": 3.9,
+                  "weight": 0.3,
+                  "raw": {
+                    "performance_3_sessions_pct": -11.63,
+                    "performance_week_pct": 3.448275862068969
+                  },
+                  "available": true
+                },
+                {
+                  "name": "relative_volume_10d",
+                  "score": 3,
+                  "weight": 0.2,
+                  "raw": {
+                    "raw": 0.66,
+                    "adjusted": 0.66,
+                    "session_progress": 1,
+                    "method": "raw_full_session"
+                  },
+                  "available": true
+                },
+                {
+                  "name": "close_location",
+                  "score": 3.5,
+                  "weight": 0.15,
+                  "raw": 0.4,
+                  "available": true
+                },
+                {
+                  "name": "rsi",
+                  "score": 6,
+                  "weight": 0.15,
+                  "raw": 53.75931247057159,
+                  "available": true
+                },
+                {
+                  "name": "ma20_50",
+                  "score": 5.5,
+                  "weight": 0.1,
+                  "raw": {
+                    "close": 6,
+                    "ma20": 6.256,
+                    "ma50": 4.524
+                  },
+                  "available": true
+                },
+                {
+                  "name": "continuity_acceleration",
+                  "score": 1,
+                  "weight": 0.1,
+                  "raw": {
+                    "sessions_available": 10
+                  },
+                  "available": true
+                }
+              ]
+            },
+            "cycle_quality": {
+              "score": 3.6,
+              "status": "complete",
+              "confidence_pct": 100,
+              "execution_eligible": true,
+              "integrity": "not_confirmed",
+              "phase": "foundation_or_repair",
+              "sessions_available": 10,
+              "missing_components": [],
+              "components": [
+                {
+                  "name": "weekly_structure",
+                  "score": 1,
+                  "weight": 0.25,
+                  "raw": {
+                    "pivots_high": 3,
+                    "pivots_low": 1
+                  },
+                  "available": true
+                },
+                {
+                  "name": "breakout_strength",
+                  "score": 3.1,
+                  "weight": 0.2,
+                  "raw": {
+                    "prior_pivot_high": 6.7,
+                    "distance_pct": -10.45
+                  },
+                  "available": true
+                },
+                {
+                  "name": "volume_asymmetry",
+                  "score": 4.6,
+                  "weight": 0.2,
+                  "raw": {
+                    "raw": 0.66,
+                    "adjusted": 0.66,
+                    "session_progress": 1,
+                    "method": "raw_full_session"
+                  },
+                  "available": true
+                },
+                {
+                  "name": "retest_quality",
+                  "score": 7.6,
+                  "weight": 0.2,
+                  "raw": {
+                    "atr": 0.75,
+                    "distance_from_value_atr": -0.34
+                  },
+                  "available": true
+                },
+                {
+                  "name": "higher_low",
+                  "score": 2,
+                  "weight": 0.15,
+                  "raw": {
+                    "recent_pivot_lows": [
+                      5.75
+                    ]
+                  },
+                  "available": true
+                }
+              ]
+            },
+            "cycle_gap": {
+              "value": 0.2,
+              "classification": "aligned",
+              "status": "provisional_not_execution_eligible"
+            },
+            "entry_quality": {
+              "score": 5.6,
+              "status": "provisional_not_execution_eligible",
+              "confidence_pct": 70,
+              "execution_eligible": false,
+              "liquidity_zone": "equal_lows_stop_hunt_zone",
+              "support": 5.94,
+              "resistance": 6.7,
+              "invalidation": 5.94,
+              "risk_reward": null,
+              "missing_components": [
+                "risk_reward"
+              ],
+              "components": [
+                {
+                  "name": "distance_from_value_support",
+                  "score": 8,
+                  "weight": 0.3,
+                  "raw": {
+                    "support": 5.94,
+                    "distance_atr": 0.09
+                  },
+                  "available": true
+                },
+                {
+                  "name": "risk_reward",
+                  "score": null,
+                  "weight": 0.3,
+                  "raw": {
+                    "resistance": 6.7,
+                    "invalidation": 5.94,
+                    "rr": null
+                  },
+                  "available": false
+                },
+                {
+                  "name": "liquidity_stop_hunt",
+                  "score": 4,
+                  "weight": 0.2,
+                  "raw": "equal_lows_stop_hunt_zone",
+                  "available": true
+                },
+                {
+                  "name": "chase_slippage",
+                  "score": 2,
+                  "weight": 0.1,
+                  "raw": "high",
+                  "available": true
+                },
+                {
+                  "name": "close_location",
+                  "score": 5.4,
+                  "weight": 0.1,
+                  "raw": 0.4,
+                  "available": true
+                }
+              ]
+            },
+            "re_acceleration_trigger": "not_present",
+            "execution_readiness": {
+              "score": 52.1,
+              "status": "provisional_not_execution_eligible",
+              "execution_eligible": false,
+              "hard_veto": false,
+              "classification": "provisional"
+            },
+            "execution_metrics_eligible": false
+          },
+          "early_movement_flags": [
+            "monthly_momentum_ge_20pct"
           ]
         },
         {
@@ -7099,548 +7098,6 @@
           "early_movement_flags": []
         },
         {
-          "symbol_full": "EGX:MMAT",
-          "name": "MMAT",
-          "description": "Marsa Marsa Alam for Tourism Development",
-          "close": 4.93,
-          "open": 4.7,
-          "high": 4.93,
-          "low": 4.7,
-          "volume": 403727,
-          "change": 4.893617021276586,
-          "market_cap_basic": 224000001,
-          "RSI": 99.99247178999752,
-          "EMA20": 4.117031052497573,
-          "SMA20": 3.991000000000002,
-          "Perf.W": 21.130221130221116,
-          "Perf.1M": 39.6600566572238,
-          "average_volume_10d_calc": 132785.00000000148,
-          "current_session": "out_of_session",
-          "symbol": "MMAT",
-          "SMA50": 3.7586000000000017,
-          "EMA50": 3.7963128390934533,
-          "SMA200": 2.8979000000000035,
-          "EMA200": 3.0907006140089512,
-          "relative_volume_10d_calc": 4.016292902171896,
-          "earnings_per_share_diluted_ttm": null,
-          "price_earnings_current": null,
-          "eps_diluted_growth_percent_fq": 5.97484276729561,
-          "eps_diluted_growth_percent_fy": null,
-          "total_revenue_ttm": null,
-          "free_cash_flow_ttm": null,
-          "debt_to_equity_fq": 0,
-          "earnings_release_next_date": null,
-          "dividend_ex_date_upcoming": null,
-          "price_target_average": null,
-          "price_target_high": null,
-          "price_target_low": null,
-          "update_mode": "delayed_streaming_900",
-          "value": 1990374.11,
-          "value_session_adjusted": 1990374.11,
-          "relative_volume_10d_raw": 4.02,
-          "relative_volume_10d": 4.02,
-          "relative_volume_10d_session_adjusted": 4.02,
-          "relative_volume_adjustment": {
-            "session_progress": 1,
-            "method": "raw_full_session"
-          },
-          "relative_volume_label": "exceptional_activity",
-          "close_location_in_day": 1,
-          "long_term_trend": "long_term_uptrend",
-          "distance_from_sma200_pct": 70.12,
-          "demand_confirmation_score": 8.3,
-          "event_risk": {
-            "level": "unknown_or_low",
-            "next_event": null
-          },
-          "upside_to_analyst_target_pct": -100,
-          "decision_support": {
-            "technical_score": 7,
-            "liquidity_score": 4.5,
-            "setup_score": 6.6,
-            "chase_risk": "high"
-          },
-          "analytics": {
-            "momentum": {
-              "score": 9.2,
-              "status": "complete",
-              "confidence_pct": 100,
-              "execution_eligible": true,
-              "missing_components": [],
-              "components": [
-                {
-                  "name": "three_sessions_and_week",
-                  "score": 9.7,
-                  "weight": 0.3,
-                  "raw": {
-                    "performance_3_sessions_pct": 15.46,
-                    "performance_week_pct": 21.130221130221116
-                  },
-                  "available": true
-                },
-                {
-                  "name": "relative_volume_10d",
-                  "score": 10,
-                  "weight": 0.2,
-                  "raw": {
-                    "raw": 4.02,
-                    "adjusted": 4.02,
-                    "session_progress": 1,
-                    "method": "raw_full_session"
-                  },
-                  "available": true
-                },
-                {
-                  "name": "close_location",
-                  "score": 10,
-                  "weight": 0.15,
-                  "raw": 1,
-                  "available": true
-                },
-                {
-                  "name": "rsi",
-                  "score": 7,
-                  "weight": 0.15,
-                  "raw": 99.99247178999752,
-                  "available": true
-                },
-                {
-                  "name": "ma20_50",
-                  "score": 10,
-                  "weight": 0.1,
-                  "raw": {
-                    "close": 4.93,
-                    "ma20": 3.991000000000002,
-                    "ma50": 3.7586000000000017
-                  },
-                  "available": true
-                },
-                {
-                  "name": "continuity_acceleration",
-                  "score": 7.8,
-                  "weight": 0.1,
-                  "raw": {
-                    "sessions_available": 10
-                  },
-                  "available": true
-                }
-              ]
-            },
-            "cycle_quality": {
-              "score": 8.2,
-              "status": "complete",
-              "confidence_pct": 100,
-              "execution_eligible": true,
-              "integrity": "not_confirmed",
-              "phase": "late_extension",
-              "sessions_available": 10,
-              "missing_components": [],
-              "components": [
-                {
-                  "name": "weekly_structure",
-                  "score": 10,
-                  "weight": 0.25,
-                  "raw": {
-                    "pivots_high": 0,
-                    "pivots_low": 3
-                  },
-                  "available": true
-                },
-                {
-                  "name": "breakout_strength",
-                  "score": 10,
-                  "weight": 0.2,
-                  "raw": {
-                    "prior_pivot_high": 4.48,
-                    "distance_pct": 10.04
-                  },
-                  "available": true
-                },
-                {
-                  "name": "volume_asymmetry",
-                  "score": 9,
-                  "weight": 0.2,
-                  "raw": {
-                    "raw": 4.02,
-                    "adjusted": 4.02,
-                    "session_progress": 1,
-                    "method": "raw_full_session"
-                  },
-                  "available": true
-                },
-                {
-                  "name": "retest_quality",
-                  "score": 2.5,
-                  "weight": 0.2,
-                  "raw": {
-                    "atr": 0.16,
-                    "distance_from_value_atr": 5.79
-                  },
-                  "available": true
-                },
-                {
-                  "name": "higher_low",
-                  "score": 9,
-                  "weight": 0.15,
-                  "raw": {
-                    "recent_pivot_lows": [
-                      4.07,
-                      4.27
-                    ]
-                  },
-                  "available": true
-                }
-              ]
-            },
-            "cycle_gap": {
-              "value": 1,
-              "classification": "aligned",
-              "status": "provisional_not_execution_eligible"
-            },
-            "entry_quality": {
-              "score": 3.9,
-              "status": "provisional_not_execution_eligible",
-              "confidence_pct": 70,
-              "execution_eligible": false,
-              "liquidity_zone": "normal",
-              "support": 4.27,
-              "resistance": null,
-              "invalidation": 4.27,
-              "risk_reward": null,
-              "missing_components": [
-                "risk_reward"
-              ],
-              "components": [
-                {
-                  "name": "distance_from_value_support",
-                  "score": 0.1,
-                  "weight": 0.3,
-                  "raw": {
-                    "support": 4.27,
-                    "distance_atr": 4.07
-                  },
-                  "available": true
-                },
-                {
-                  "name": "risk_reward",
-                  "score": null,
-                  "weight": 0.3,
-                  "raw": {
-                    "resistance": null,
-                    "invalidation": 4.27,
-                    "rr": null
-                  },
-                  "available": false
-                },
-                {
-                  "name": "liquidity_stop_hunt",
-                  "score": 8,
-                  "weight": 0.2,
-                  "raw": "normal",
-                  "available": true
-                },
-                {
-                  "name": "chase_slippage",
-                  "score": 2,
-                  "weight": 0.1,
-                  "raw": "high",
-                  "available": true
-                },
-                {
-                  "name": "close_location",
-                  "score": 9,
-                  "weight": 0.1,
-                  "raw": 1,
-                  "available": true
-                }
-              ]
-            },
-            "re_acceleration_trigger": "not_present",
-            "execution_readiness": {
-              "score": 69.3,
-              "status": "provisional_not_execution_eligible",
-              "execution_eligible": false,
-              "hard_veto": false,
-              "classification": "provisional"
-            },
-            "execution_metrics_eligible": false
-          },
-          "early_movement_flags": [
-            "weekly_move_ge_20pct",
-            "relative_volume_ge_2x",
-            "monthly_momentum_ge_20pct"
-          ]
-        },
-        {
-          "symbol_full": "EGX:HBCO",
-          "name": "HBCO",
-          "description": "Heibco for Commercial Investments & Real Estate Development",
-          "close": 8.46,
-          "open": 9.34,
-          "high": 9.34,
-          "low": 8.41,
-          "volume": 8869236,
-          "change": -9.421841541755878,
-          "market_cap_basic": null,
-          "RSI": 48.474907711640576,
-          "EMA20": 8.728494775916175,
-          "SMA20": 9.303002509999999,
-          "Perf.W": 16.002435464276648,
-          "Perf.1M": -15.555986586014567,
-          "average_volume_10d_calc": 4964470.394299431,
-          "current_session": "out_of_session",
-          "symbol": "HBCO",
-          "SMA50": 8.5306273478,
-          "EMA50": 8.254543865585031,
-          "SMA200": 4.267756144749999,
-          "EMA200": 5.179881497385224,
-          "relative_volume_10d_calc": 2.1163452833035525,
-          "earnings_per_share_diluted_ttm": null,
-          "price_earnings_current": null,
-          "eps_diluted_growth_percent_fq": null,
-          "eps_diluted_growth_percent_fy": null,
-          "total_revenue_ttm": null,
-          "free_cash_flow_ttm": null,
-          "debt_to_equity_fq": null,
-          "earnings_release_next_date": null,
-          "dividend_ex_date_upcoming": null,
-          "price_target_average": null,
-          "price_target_high": null,
-          "price_target_low": null,
-          "update_mode": "delayed_streaming_900",
-          "value": 75033736.56,
-          "value_session_adjusted": 75033736.56,
-          "relative_volume_10d_raw": 2.12,
-          "relative_volume_10d": 2.12,
-          "relative_volume_10d_session_adjusted": 2.12,
-          "relative_volume_adjustment": {
-            "session_progress": 1,
-            "method": "raw_full_session"
-          },
-          "relative_volume_label": "exceptional_activity",
-          "close_location_in_day": 0.054,
-          "long_term_trend": "long_term_uptrend",
-          "distance_from_sma200_pct": 98.23,
-          "demand_confirmation_score": 6.2,
-          "event_risk": {
-            "level": "unknown_or_low",
-            "next_event": null
-          },
-          "upside_to_analyst_target_pct": -100,
-          "decision_support": {
-            "technical_score": 5.6,
-            "liquidity_score": 9,
-            "setup_score": 6.6,
-            "chase_risk": "medium"
-          },
-          "analytics": {
-            "momentum": {
-              "score": 4.2,
-              "status": "complete",
-              "confidence_pct": 100,
-              "execution_eligible": true,
-              "missing_components": [],
-              "components": [
-                {
-                  "name": "three_sessions_and_week",
-                  "score": 4.7,
-                  "weight": 0.3,
-                  "raw": {
-                    "performance_3_sessions_pct": -33.85,
-                    "performance_week_pct": 16.002435464276648
-                  },
-                  "available": true
-                },
-                {
-                  "name": "relative_volume_10d",
-                  "score": 9,
-                  "weight": 0.2,
-                  "raw": {
-                    "raw": 2.12,
-                    "adjusted": 2.12,
-                    "session_progress": 1,
-                    "method": "raw_full_session"
-                  },
-                  "available": true
-                },
-                {
-                  "name": "close_location",
-                  "score": 0,
-                  "weight": 0.15,
-                  "raw": 0.054,
-                  "available": true
-                },
-                {
-                  "name": "rsi",
-                  "score": 4.5,
-                  "weight": 0.15,
-                  "raw": 48.474907711640576,
-                  "available": true
-                },
-                {
-                  "name": "ma20_50",
-                  "score": 2,
-                  "weight": 0.1,
-                  "raw": {
-                    "close": 8.46,
-                    "ma20": 9.303002509999999,
-                    "ma50": 8.5306273478
-                  },
-                  "available": true
-                },
-                {
-                  "name": "continuity_acceleration",
-                  "score": 1,
-                  "weight": 0.1,
-                  "raw": {
-                    "sessions_available": 10
-                  },
-                  "available": true
-                }
-              ]
-            },
-            "cycle_quality": {
-              "score": 2,
-              "status": "complete",
-              "confidence_pct": 100,
-              "execution_eligible": true,
-              "integrity": "broken_failed_breakout",
-              "phase": "foundation_or_repair",
-              "sessions_available": 10,
-              "missing_components": [],
-              "components": [
-                {
-                  "name": "weekly_structure",
-                  "score": 1,
-                  "weight": 0.25,
-                  "raw": {
-                    "pivots_high": 4,
-                    "pivots_low": 0
-                  },
-                  "available": true
-                },
-                {
-                  "name": "breakout_strength",
-                  "score": 1.7,
-                  "weight": 0.2,
-                  "raw": {
-                    "prior_pivot_high": 11.52,
-                    "distance_pct": -26.56
-                  },
-                  "available": true
-                },
-                {
-                  "name": "volume_asymmetry",
-                  "score": 2,
-                  "weight": 0.2,
-                  "raw": {
-                    "raw": 2.12,
-                    "adjusted": 2.12,
-                    "session_progress": 1,
-                    "method": "raw_full_session"
-                  },
-                  "available": true
-                },
-                {
-                  "name": "retest_quality",
-                  "score": 3.8,
-                  "weight": 0.2,
-                  "raw": {
-                    "atr": 1.47,
-                    "distance_from_value_atr": -0.57
-                  },
-                  "available": true
-                },
-                {
-                  "name": "higher_low",
-                  "score": 2,
-                  "weight": 0.15,
-                  "raw": {
-                    "recent_pivot_lows": []
-                  },
-                  "available": true
-                }
-              ]
-            },
-            "cycle_gap": {
-              "value": 2.2,
-              "classification": "fragile_acceleration",
-              "status": "provisional_not_execution_eligible"
-            },
-            "entry_quality": {
-              "score": null,
-              "status": "provisional_not_execution_eligible",
-              "confidence_pct": 40,
-              "execution_eligible": false,
-              "liquidity_zone": "normal",
-              "support": null,
-              "resistance": 11.52,
-              "invalidation": null,
-              "risk_reward": null,
-              "missing_components": [
-                "distance_from_value_support",
-                "risk_reward"
-              ],
-              "components": [
-                {
-                  "name": "distance_from_value_support",
-                  "score": null,
-                  "weight": 0.3,
-                  "raw": {
-                    "support": null,
-                    "distance_atr": null
-                  },
-                  "available": false
-                },
-                {
-                  "name": "risk_reward",
-                  "score": null,
-                  "weight": 0.3,
-                  "raw": {
-                    "resistance": 11.52,
-                    "invalidation": null,
-                    "rr": null
-                  },
-                  "available": false
-                },
-                {
-                  "name": "liquidity_stop_hunt",
-                  "score": 8,
-                  "weight": 0.2,
-                  "raw": "normal",
-                  "available": true
-                },
-                {
-                  "name": "chase_slippage",
-                  "score": 5,
-                  "weight": 0.1,
-                  "raw": "medium",
-                  "available": true
-                },
-                {
-                  "name": "close_location",
-                  "score": 3.3,
-                  "weight": 0.1,
-                  "raw": 0.054,
-                  "available": true
-                }
-              ]
-            },
-            "re_acceleration_trigger": "not_present",
-            "execution_readiness": {
-              "score": 44.9,
-              "status": "provisional_not_execution_eligible",
-              "execution_eligible": false,
-              "hard_veto": true,
-              "classification": "provisional"
-            },
-            "execution_metrics_eligible": false
-          },
-          "early_movement_flags": [
-            "relative_volume_ge_2x"
-          ]
-        },
-        {
           "symbol_full": "EGX:ABUK",
           "name": "ABUK",
           "description": "Abou Kir Fertilizers & Chemical Industries Co.",
@@ -7912,6 +7369,275 @@
           "early_movement_flags": []
         },
         {
+          "symbol_full": "EGX:HBCO",
+          "name": "HBCO",
+          "description": "Heibco for Commercial Investments & Real Estate Development",
+          "close": 8.46,
+          "open": 9.34,
+          "high": 9.34,
+          "low": 8.41,
+          "volume": 8869236,
+          "change": -9.421841541755878,
+          "market_cap_basic": null,
+          "RSI": 48.474907711640576,
+          "EMA20": 8.728494775916175,
+          "SMA20": 9.303002509999999,
+          "Perf.W": 16.002435464276648,
+          "Perf.1M": -15.555986586014567,
+          "average_volume_10d_calc": 4964470.394299431,
+          "current_session": "out_of_session",
+          "symbol": "HBCO",
+          "SMA50": 8.5306273478,
+          "EMA50": 8.254543865585031,
+          "SMA200": 4.267756144749999,
+          "EMA200": 5.179881497385224,
+          "relative_volume_10d_calc": 2.1163452833035525,
+          "earnings_per_share_diluted_ttm": null,
+          "price_earnings_current": null,
+          "eps_diluted_growth_percent_fq": null,
+          "eps_diluted_growth_percent_fy": null,
+          "total_revenue_ttm": null,
+          "free_cash_flow_ttm": null,
+          "debt_to_equity_fq": null,
+          "earnings_release_next_date": null,
+          "dividend_ex_date_upcoming": null,
+          "price_target_average": null,
+          "price_target_high": null,
+          "price_target_low": null,
+          "update_mode": "delayed_streaming_900",
+          "value": 75033736.56,
+          "value_session_adjusted": 75033736.56,
+          "relative_volume_10d_raw": 2.12,
+          "relative_volume_10d": 2.12,
+          "relative_volume_10d_session_adjusted": 2.12,
+          "relative_volume_adjustment": {
+            "session_progress": 1,
+            "method": "raw_full_session"
+          },
+          "relative_volume_label": "exceptional_activity",
+          "close_location_in_day": 0.054,
+          "long_term_trend": "long_term_uptrend",
+          "distance_from_sma200_pct": 98.23,
+          "demand_confirmation_score": 6.2,
+          "event_risk": {
+            "level": "unknown_or_low",
+            "next_event": null
+          },
+          "upside_to_analyst_target_pct": -100,
+          "decision_support": {
+            "technical_score": 5.6,
+            "liquidity_score": 9,
+            "setup_score": 6.6,
+            "chase_risk": "medium"
+          },
+          "analytics": {
+            "momentum": {
+              "score": 4.2,
+              "status": "complete",
+              "confidence_pct": 100,
+              "execution_eligible": true,
+              "missing_components": [],
+              "components": [
+                {
+                  "name": "three_sessions_and_week",
+                  "score": 4.7,
+                  "weight": 0.3,
+                  "raw": {
+                    "performance_3_sessions_pct": -33.85,
+                    "performance_week_pct": 16.002435464276648
+                  },
+                  "available": true
+                },
+                {
+                  "name": "relative_volume_10d",
+                  "score": 9,
+                  "weight": 0.2,
+                  "raw": {
+                    "raw": 2.12,
+                    "adjusted": 2.12,
+                    "session_progress": 1,
+                    "method": "raw_full_session"
+                  },
+                  "available": true
+                },
+                {
+                  "name": "close_location",
+                  "score": 0,
+                  "weight": 0.15,
+                  "raw": 0.054,
+                  "available": true
+                },
+                {
+                  "name": "rsi",
+                  "score": 4.5,
+                  "weight": 0.15,
+                  "raw": 48.474907711640576,
+                  "available": true
+                },
+                {
+                  "name": "ma20_50",
+                  "score": 2,
+                  "weight": 0.1,
+                  "raw": {
+                    "close": 8.46,
+                    "ma20": 9.303002509999999,
+                    "ma50": 8.5306273478
+                  },
+                  "available": true
+                },
+                {
+                  "name": "continuity_acceleration",
+                  "score": 1,
+                  "weight": 0.1,
+                  "raw": {
+                    "sessions_available": 10
+                  },
+                  "available": true
+                }
+              ]
+            },
+            "cycle_quality": {
+              "score": 2,
+              "status": "complete",
+              "confidence_pct": 100,
+              "execution_eligible": true,
+              "integrity": "broken_failed_breakout",
+              "phase": "foundation_or_repair",
+              "sessions_available": 10,
+              "missing_components": [],
+              "components": [
+                {
+                  "name": "weekly_structure",
+                  "score": 1,
+                  "weight": 0.25,
+                  "raw": {
+                    "pivots_high": 4,
+                    "pivots_low": 0
+                  },
+                  "available": true
+                },
+                {
+                  "name": "breakout_strength",
+                  "score": 1.7,
+                  "weight": 0.2,
+                  "raw": {
+                    "prior_pivot_high": 11.52,
+                    "distance_pct": -26.56
+                  },
+                  "available": true
+                },
+                {
+                  "name": "volume_asymmetry",
+                  "score": 2,
+                  "weight": 0.2,
+                  "raw": {
+                    "raw": 2.12,
+                    "adjusted": 2.12,
+                    "session_progress": 1,
+                    "method": "raw_full_session"
+                  },
+                  "available": true
+                },
+                {
+                  "name": "retest_quality",
+                  "score": 3.8,
+                  "weight": 0.2,
+                  "raw": {
+                    "atr": 1.47,
+                    "distance_from_value_atr": -0.57
+                  },
+                  "available": true
+                },
+                {
+                  "name": "higher_low",
+                  "score": 2,
+                  "weight": 0.15,
+                  "raw": {
+                    "recent_pivot_lows": []
+                  },
+                  "available": true
+                }
+              ]
+            },
+            "cycle_gap": {
+              "value": 2.2,
+              "classification": "fragile_acceleration",
+              "status": "provisional_not_execution_eligible"
+            },
+            "entry_quality": {
+              "score": null,
+              "status": "provisional_not_execution_eligible",
+              "confidence_pct": 40,
+              "execution_eligible": false,
+              "liquidity_zone": "normal",
+              "support": null,
+              "resistance": 11.52,
+              "invalidation": null,
+              "risk_reward": null,
+              "missing_components": [
+                "distance_from_value_support",
+                "risk_reward"
+              ],
+              "components": [
+                {
+                  "name": "distance_from_value_support",
+                  "score": null,
+                  "weight": 0.3,
+                  "raw": {
+                    "support": null,
+                    "distance_atr": null
+                  },
+                  "available": false
+                },
+                {
+                  "name": "risk_reward",
+                  "score": null,
+                  "weight": 0.3,
+                  "raw": {
+                    "resistance": 11.52,
+                    "invalidation": null,
+                    "rr": null
+                  },
+                  "available": false
+                },
+                {
+                  "name": "liquidity_stop_hunt",
+                  "score": 8,
+                  "weight": 0.2,
+                  "raw": "normal",
+                  "available": true
+                },
+                {
+                  "name": "chase_slippage",
+                  "score": 5,
+                  "weight": 0.1,
+                  "raw": "medium",
+                  "available": true
+                },
+                {
+                  "name": "close_location",
+                  "score": 3.3,
+                  "weight": 0.1,
+                  "raw": 0.054,
+                  "available": true
+                }
+              ]
+            },
+            "re_acceleration_trigger": "not_present",
+            "execution_readiness": {
+              "score": 44.9,
+              "status": "provisional_not_execution_eligible",
+              "execution_eligible": false,
+              "hard_veto": true,
+              "classification": "provisional"
+            },
+            "execution_metrics_eligible": false
+          },
+          "early_movement_flags": [
+            "relative_volume_ge_2x"
+          ]
+        },
+        {
           "symbol_full": "EGX:MFPC",
           "name": "MFPC",
           "description": "Misr Fertilizers Production Company MOPCO",
@@ -8180,6 +7906,279 @@
             "execution_metrics_eligible": true
           },
           "early_movement_flags": []
+        },
+        {
+          "symbol_full": "EGX:MMAT",
+          "name": "MMAT",
+          "description": "Marsa Marsa Alam for Tourism Development",
+          "close": 4.93,
+          "open": 4.7,
+          "high": 4.93,
+          "low": 4.7,
+          "volume": 403727,
+          "change": 4.893617021276586,
+          "market_cap_basic": 224000001,
+          "RSI": 99.99247178999752,
+          "EMA20": 4.117031052497573,
+          "SMA20": 3.991000000000002,
+          "Perf.W": 21.130221130221116,
+          "Perf.1M": 39.6600566572238,
+          "average_volume_10d_calc": 132785.00000000148,
+          "current_session": "out_of_session",
+          "symbol": "MMAT",
+          "SMA50": 3.7586000000000017,
+          "EMA50": 3.7963128390934533,
+          "SMA200": 2.8979000000000035,
+          "EMA200": 3.0907006140089512,
+          "relative_volume_10d_calc": 4.016292902171896,
+          "earnings_per_share_diluted_ttm": null,
+          "price_earnings_current": null,
+          "eps_diluted_growth_percent_fq": 5.97484276729561,
+          "eps_diluted_growth_percent_fy": null,
+          "total_revenue_ttm": null,
+          "free_cash_flow_ttm": null,
+          "debt_to_equity_fq": 0,
+          "earnings_release_next_date": null,
+          "dividend_ex_date_upcoming": null,
+          "price_target_average": null,
+          "price_target_high": null,
+          "price_target_low": null,
+          "update_mode": "delayed_streaming_900",
+          "value": 1990374.11,
+          "value_session_adjusted": 1990374.11,
+          "relative_volume_10d_raw": 4.02,
+          "relative_volume_10d": 4.02,
+          "relative_volume_10d_session_adjusted": 4.02,
+          "relative_volume_adjustment": {
+            "session_progress": 1,
+            "method": "raw_full_session"
+          },
+          "relative_volume_label": "exceptional_activity",
+          "close_location_in_day": 1,
+          "long_term_trend": "long_term_uptrend",
+          "distance_from_sma200_pct": 70.12,
+          "demand_confirmation_score": 8.3,
+          "event_risk": {
+            "level": "unknown_or_low",
+            "next_event": null
+          },
+          "upside_to_analyst_target_pct": -100,
+          "decision_support": {
+            "technical_score": 7,
+            "liquidity_score": 4.5,
+            "setup_score": 6.6,
+            "chase_risk": "high"
+          },
+          "analytics": {
+            "momentum": {
+              "score": 9.2,
+              "status": "complete",
+              "confidence_pct": 100,
+              "execution_eligible": true,
+              "missing_components": [],
+              "components": [
+                {
+                  "name": "three_sessions_and_week",
+                  "score": 9.7,
+                  "weight": 0.3,
+                  "raw": {
+                    "performance_3_sessions_pct": 15.46,
+                    "performance_week_pct": 21.130221130221116
+                  },
+                  "available": true
+                },
+                {
+                  "name": "relative_volume_10d",
+                  "score": 10,
+                  "weight": 0.2,
+                  "raw": {
+                    "raw": 4.02,
+                    "adjusted": 4.02,
+                    "session_progress": 1,
+                    "method": "raw_full_session"
+                  },
+                  "available": true
+                },
+                {
+                  "name": "close_location",
+                  "score": 10,
+                  "weight": 0.15,
+                  "raw": 1,
+                  "available": true
+                },
+                {
+                  "name": "rsi",
+                  "score": 7,
+                  "weight": 0.15,
+                  "raw": 99.99247178999752,
+                  "available": true
+                },
+                {
+                  "name": "ma20_50",
+                  "score": 10,
+                  "weight": 0.1,
+                  "raw": {
+                    "close": 4.93,
+                    "ma20": 3.991000000000002,
+                    "ma50": 3.7586000000000017
+                  },
+                  "available": true
+                },
+                {
+                  "name": "continuity_acceleration",
+                  "score": 7.8,
+                  "weight": 0.1,
+                  "raw": {
+                    "sessions_available": 10
+                  },
+                  "available": true
+                }
+              ]
+            },
+            "cycle_quality": {
+              "score": 8.2,
+              "status": "complete",
+              "confidence_pct": 100,
+              "execution_eligible": true,
+              "integrity": "not_confirmed",
+              "phase": "late_extension",
+              "sessions_available": 10,
+              "missing_components": [],
+              "components": [
+                {
+                  "name": "weekly_structure",
+                  "score": 10,
+                  "weight": 0.25,
+                  "raw": {
+                    "pivots_high": 0,
+                    "pivots_low": 3
+                  },
+                  "available": true
+                },
+                {
+                  "name": "breakout_strength",
+                  "score": 10,
+                  "weight": 0.2,
+                  "raw": {
+                    "prior_pivot_high": 4.48,
+                    "distance_pct": 10.04
+                  },
+                  "available": true
+                },
+                {
+                  "name": "volume_asymmetry",
+                  "score": 9,
+                  "weight": 0.2,
+                  "raw": {
+                    "raw": 4.02,
+                    "adjusted": 4.02,
+                    "session_progress": 1,
+                    "method": "raw_full_session"
+                  },
+                  "available": true
+                },
+                {
+                  "name": "retest_quality",
+                  "score": 2.5,
+                  "weight": 0.2,
+                  "raw": {
+                    "atr": 0.16,
+                    "distance_from_value_atr": 5.79
+                  },
+                  "available": true
+                },
+                {
+                  "name": "higher_low",
+                  "score": 9,
+                  "weight": 0.15,
+                  "raw": {
+                    "recent_pivot_lows": [
+                      4.07,
+                      4.27
+                    ]
+                  },
+                  "available": true
+                }
+              ]
+            },
+            "cycle_gap": {
+              "value": 1,
+              "classification": "aligned",
+              "status": "provisional_not_execution_eligible"
+            },
+            "entry_quality": {
+              "score": 3.9,
+              "status": "provisional_not_execution_eligible",
+              "confidence_pct": 70,
+              "execution_eligible": false,
+              "liquidity_zone": "normal",
+              "support": 4.27,
+              "resistance": null,
+              "invalidation": 4.27,
+              "risk_reward": null,
+              "missing_components": [
+                "risk_reward"
+              ],
+              "components": [
+                {
+                  "name": "distance_from_value_support",
+                  "score": 0.1,
+                  "weight": 0.3,
+                  "raw": {
+                    "support": 4.27,
+                    "distance_atr": 4.07
+                  },
+                  "available": true
+                },
+                {
+                  "name": "risk_reward",
+                  "score": null,
+                  "weight": 0.3,
+                  "raw": {
+                    "resistance": null,
+                    "invalidation": 4.27,
+                    "rr": null
+                  },
+                  "available": false
+                },
+                {
+                  "name": "liquidity_stop_hunt",
+                  "score": 8,
+                  "weight": 0.2,
+                  "raw": "normal",
+                  "available": true
+                },
+                {
+                  "name": "chase_slippage",
+                  "score": 2,
+                  "weight": 0.1,
+                  "raw": "high",
+                  "available": true
+                },
+                {
+                  "name": "close_location",
+                  "score": 9,
+                  "weight": 0.1,
+                  "raw": 1,
+                  "available": true
+                }
+              ]
+            },
+            "re_acceleration_trigger": "not_present",
+            "execution_readiness": {
+              "score": 69.3,
+              "status": "provisional_not_execution_eligible",
+              "execution_eligible": false,
+              "hard_veto": false,
+              "classification": "provisional"
+            },
+            "execution_metrics_eligible": false
+          },
+          "early_movement_flags": [
+            "weekly_move_ge_20pct",
+            "relative_volume_ge_2x",
+            "monthly_momentum_ge_20pct"
+          ]
         },
         {
           "symbol_full": "EGX:GTWL",
@@ -8712,277 +8711,6 @@
             "re_acceleration_trigger": "not_present",
             "execution_readiness": {
               "score": 61.4,
-              "status": "complete",
-              "execution_eligible": true,
-              "hard_veto": false,
-              "classification": "wait"
-            },
-            "execution_metrics_eligible": true
-          },
-          "early_movement_flags": []
-        },
-        {
-          "symbol_full": "EGX:ADIB",
-          "name": "ADIB",
-          "description": "Abu Dhabi Islamic Bank-Egypt",
-          "close": 50.43,
-          "open": 51.9,
-          "high": 51.9,
-          "low": 49.05,
-          "volume": 2040926,
-          "change": -2.8323699421965296,
-          "market_cap_basic": 76500000000,
-          "RSI": 41.08907948377361,
-          "EMA20": 52.16480924919447,
-          "SMA20": 52.186000000000014,
-          "Perf.W": -4.488636363636359,
-          "Perf.1M": -5.931729155008394,
-          "average_volume_10d_calc": 1544633.7999999977,
-          "current_session": "out_of_session",
-          "symbol": "ADIB",
-          "SMA50": 52.47619999999999,
-          "EMA50": 51.610099108515726,
-          "SMA200": 43.00345,
-          "EMA200": 43.28628478628165,
-          "relative_volume_10d_calc": 1.3730806952655479,
-          "earnings_per_share_diluted_ttm": 10.3202,
-          "price_earnings_current": 5.0289723067382415,
-          "eps_diluted_growth_percent_fq": 38.3762664122484,
-          "eps_diluted_growth_percent_fy": 60.4591758695586,
-          "total_revenue_ttm": 56228829000,
-          "free_cash_flow_ttm": 1138729830,
-          "debt_to_equity_fq": 0.457810663846182,
-          "earnings_release_next_date": 1796212800,
-          "dividend_ex_date_upcoming": null,
-          "price_target_average": 59.72,
-          "price_target_high": 67,
-          "price_target_low": 46.6,
-          "update_mode": "delayed_streaming_900",
-          "value": 102923898.18,
-          "value_session_adjusted": 102923898.18,
-          "relative_volume_10d_raw": 1.37,
-          "relative_volume_10d": 1.37,
-          "relative_volume_10d_session_adjusted": 1.37,
-          "relative_volume_adjustment": {
-            "session_progress": 1,
-            "method": "raw_full_session"
-          },
-          "relative_volume_label": "moderate_interest",
-          "close_location_in_day": 0.484,
-          "long_term_trend": "long_term_uptrend",
-          "distance_from_sma200_pct": 17.27,
-          "demand_confirmation_score": 5.3,
-          "event_risk": {
-            "level": "low",
-            "next_event": {
-              "type": "earnings",
-              "at": 1796212800,
-              "trading_days": 47
-            }
-          },
-          "upside_to_analyst_target_pct": 18.42,
-          "decision_support": {
-            "technical_score": 4.4,
-            "liquidity_score": 10,
-            "setup_score": 6,
-            "chase_risk": "low"
-          },
-          "analytics": {
-            "momentum": {
-              "score": 4.2,
-              "status": "complete",
-              "confidence_pct": 100,
-              "execution_eligible": true,
-              "missing_components": [],
-              "components": [
-                {
-                  "name": "three_sessions_and_week",
-                  "score": 3.8,
-                  "weight": 0.3,
-                  "raw": {
-                    "performance_3_sessions_pct": -3.85,
-                    "performance_week_pct": -4.488636363636359
-                  },
-                  "available": true
-                },
-                {
-                  "name": "relative_volume_10d",
-                  "score": 6.5,
-                  "weight": 0.2,
-                  "raw": {
-                    "raw": 1.37,
-                    "adjusted": 1.37,
-                    "session_progress": 1,
-                    "method": "raw_full_session"
-                  },
-                  "available": true
-                },
-                {
-                  "name": "close_location",
-                  "score": 4.3,
-                  "weight": 0.15,
-                  "raw": 0.484,
-                  "available": true
-                },
-                {
-                  "name": "rsi",
-                  "score": 4.5,
-                  "weight": 0.15,
-                  "raw": 41.08907948377361,
-                  "available": true
-                },
-                {
-                  "name": "ma20_50",
-                  "score": 2,
-                  "weight": 0.1,
-                  "raw": {
-                    "close": 50.43,
-                    "ma20": 52.186000000000014,
-                    "ma50": 52.47619999999999
-                  },
-                  "available": true
-                },
-                {
-                  "name": "continuity_acceleration",
-                  "score": 2,
-                  "weight": 0.1,
-                  "raw": {
-                    "sessions_available": 10
-                  },
-                  "available": true
-                }
-              ]
-            },
-            "cycle_quality": {
-              "score": 2.9,
-              "status": "complete",
-              "confidence_pct": 100,
-              "execution_eligible": true,
-              "integrity": "not_confirmed",
-              "phase": "foundation_or_repair",
-              "sessions_available": 10,
-              "missing_components": [],
-              "components": [
-                {
-                  "name": "weekly_structure",
-                  "score": 1,
-                  "weight": 0.25,
-                  "raw": {
-                    "pivots_high": 1,
-                    "pivots_low": 3
-                  },
-                  "available": true
-                },
-                {
-                  "name": "breakout_strength",
-                  "score": 3.4,
-                  "weight": 0.2,
-                  "raw": {
-                    "prior_pivot_high": 54.3,
-                    "distance_pct": -7.13
-                  },
-                  "available": true
-                },
-                {
-                  "name": "volume_asymmetry",
-                  "score": 4.2,
-                  "weight": 0.2,
-                  "raw": {
-                    "raw": 1.37,
-                    "adjusted": 1.37,
-                    "session_progress": 1,
-                    "method": "raw_full_session"
-                  },
-                  "available": true
-                },
-                {
-                  "name": "retest_quality",
-                  "score": 4.1,
-                  "weight": 0.2,
-                  "raw": {
-                    "atr": 1.99,
-                    "distance_from_value_atr": -0.88
-                  },
-                  "available": true
-                },
-                {
-                  "name": "higher_low",
-                  "score": 2,
-                  "weight": 0.15,
-                  "raw": {
-                    "recent_pivot_lows": [
-                      51.8,
-                      49
-                    ]
-                  },
-                  "available": true
-                }
-              ]
-            },
-            "cycle_gap": {
-              "value": 1.3,
-              "classification": "aligned",
-              "status": "complete"
-            },
-            "entry_quality": {
-              "score": 7.9,
-              "status": "complete",
-              "confidence_pct": 100,
-              "execution_eligible": true,
-              "liquidity_zone": "normal",
-              "support": 49,
-              "resistance": 54.3,
-              "invalidation": 49,
-              "risk_reward": 2.71,
-              "missing_components": [],
-              "components": [
-                {
-                  "name": "distance_from_value_support",
-                  "score": 8.5,
-                  "weight": 0.3,
-                  "raw": {
-                    "support": 49,
-                    "distance_atr": 0.72
-                  },
-                  "available": true
-                },
-                {
-                  "name": "risk_reward",
-                  "score": 8,
-                  "weight": 0.3,
-                  "raw": {
-                    "resistance": 54.3,
-                    "invalidation": 49,
-                    "rr": 2.71
-                  },
-                  "available": true
-                },
-                {
-                  "name": "liquidity_stop_hunt",
-                  "score": 8,
-                  "weight": 0.2,
-                  "raw": "normal",
-                  "available": true
-                },
-                {
-                  "name": "chase_slippage",
-                  "score": 8,
-                  "weight": 0.1,
-                  "raw": "low",
-                  "available": true
-                },
-                {
-                  "name": "close_location",
-                  "score": 5.9,
-                  "weight": 0.1,
-                  "raw": 0.484,
-                  "available": true
-                }
-              ]
-            },
-            "re_acceleration_trigger": "not_present",
-            "execution_readiness": {
-              "score": 55.3,
               "status": "complete",
               "execution_eligible": true,
               "hard_veto": false,
@@ -9530,6 +9258,277 @@
           "early_movement_flags": []
         },
         {
+          "symbol_full": "EGX:ADIB",
+          "name": "ADIB",
+          "description": "Abu Dhabi Islamic Bank-Egypt",
+          "close": 50.43,
+          "open": 51.9,
+          "high": 51.9,
+          "low": 49.05,
+          "volume": 2040926,
+          "change": -2.8323699421965296,
+          "market_cap_basic": 76500000000,
+          "RSI": 41.08907948377361,
+          "EMA20": 52.16480924919447,
+          "SMA20": 52.186000000000014,
+          "Perf.W": -4.488636363636359,
+          "Perf.1M": -5.931729155008394,
+          "average_volume_10d_calc": 1544633.7999999977,
+          "current_session": "out_of_session",
+          "symbol": "ADIB",
+          "SMA50": 52.47619999999999,
+          "EMA50": 51.610099108515726,
+          "SMA200": 43.00345,
+          "EMA200": 43.28628478628165,
+          "relative_volume_10d_calc": 1.3730806952655479,
+          "earnings_per_share_diluted_ttm": 10.3202,
+          "price_earnings_current": 5.0289723067382415,
+          "eps_diluted_growth_percent_fq": 38.3762664122484,
+          "eps_diluted_growth_percent_fy": 60.4591758695586,
+          "total_revenue_ttm": 56228829000,
+          "free_cash_flow_ttm": 1138729830,
+          "debt_to_equity_fq": 0.457810663846182,
+          "earnings_release_next_date": 1796212800,
+          "dividend_ex_date_upcoming": null,
+          "price_target_average": 59.72,
+          "price_target_high": 67,
+          "price_target_low": 46.6,
+          "update_mode": "delayed_streaming_900",
+          "value": 102923898.18,
+          "value_session_adjusted": 102923898.18,
+          "relative_volume_10d_raw": 1.37,
+          "relative_volume_10d": 1.37,
+          "relative_volume_10d_session_adjusted": 1.37,
+          "relative_volume_adjustment": {
+            "session_progress": 1,
+            "method": "raw_full_session"
+          },
+          "relative_volume_label": "moderate_interest",
+          "close_location_in_day": 0.484,
+          "long_term_trend": "long_term_uptrend",
+          "distance_from_sma200_pct": 17.27,
+          "demand_confirmation_score": 5.3,
+          "event_risk": {
+            "level": "low",
+            "next_event": {
+              "type": "earnings",
+              "at": 1796212800,
+              "trading_days": 47
+            }
+          },
+          "upside_to_analyst_target_pct": 18.42,
+          "decision_support": {
+            "technical_score": 4.4,
+            "liquidity_score": 10,
+            "setup_score": 6,
+            "chase_risk": "low"
+          },
+          "analytics": {
+            "momentum": {
+              "score": 4.2,
+              "status": "complete",
+              "confidence_pct": 100,
+              "execution_eligible": true,
+              "missing_components": [],
+              "components": [
+                {
+                  "name": "three_sessions_and_week",
+                  "score": 3.8,
+                  "weight": 0.3,
+                  "raw": {
+                    "performance_3_sessions_pct": -3.85,
+                    "performance_week_pct": -4.488636363636359
+                  },
+                  "available": true
+                },
+                {
+                  "name": "relative_volume_10d",
+                  "score": 6.5,
+                  "weight": 0.2,
+                  "raw": {
+                    "raw": 1.37,
+                    "adjusted": 1.37,
+                    "session_progress": 1,
+                    "method": "raw_full_session"
+                  },
+                  "available": true
+                },
+                {
+                  "name": "close_location",
+                  "score": 4.3,
+                  "weight": 0.15,
+                  "raw": 0.484,
+                  "available": true
+                },
+                {
+                  "name": "rsi",
+                  "score": 4.5,
+                  "weight": 0.15,
+                  "raw": 41.08907948377361,
+                  "available": true
+                },
+                {
+                  "name": "ma20_50",
+                  "score": 2,
+                  "weight": 0.1,
+                  "raw": {
+                    "close": 50.43,
+                    "ma20": 52.186000000000014,
+                    "ma50": 52.47619999999999
+                  },
+                  "available": true
+                },
+                {
+                  "name": "continuity_acceleration",
+                  "score": 2,
+                  "weight": 0.1,
+                  "raw": {
+                    "sessions_available": 10
+                  },
+                  "available": true
+                }
+              ]
+            },
+            "cycle_quality": {
+              "score": 2.9,
+              "status": "complete",
+              "confidence_pct": 100,
+              "execution_eligible": true,
+              "integrity": "not_confirmed",
+              "phase": "foundation_or_repair",
+              "sessions_available": 10,
+              "missing_components": [],
+              "components": [
+                {
+                  "name": "weekly_structure",
+                  "score": 1,
+                  "weight": 0.25,
+                  "raw": {
+                    "pivots_high": 1,
+                    "pivots_low": 3
+                  },
+                  "available": true
+                },
+                {
+                  "name": "breakout_strength",
+                  "score": 3.4,
+                  "weight": 0.2,
+                  "raw": {
+                    "prior_pivot_high": 54.3,
+                    "distance_pct": -7.13
+                  },
+                  "available": true
+                },
+                {
+                  "name": "volume_asymmetry",
+                  "score": 4.2,
+                  "weight": 0.2,
+                  "raw": {
+                    "raw": 1.37,
+                    "adjusted": 1.37,
+                    "session_progress": 1,
+                    "method": "raw_full_session"
+                  },
+                  "available": true
+                },
+                {
+                  "name": "retest_quality",
+                  "score": 4.1,
+                  "weight": 0.2,
+                  "raw": {
+                    "atr": 1.99,
+                    "distance_from_value_atr": -0.88
+                  },
+                  "available": true
+                },
+                {
+                  "name": "higher_low",
+                  "score": 2,
+                  "weight": 0.15,
+                  "raw": {
+                    "recent_pivot_lows": [
+                      51.8,
+                      49
+                    ]
+                  },
+                  "available": true
+                }
+              ]
+            },
+            "cycle_gap": {
+              "value": 1.3,
+              "classification": "aligned",
+              "status": "complete"
+            },
+            "entry_quality": {
+              "score": 7.9,
+              "status": "complete",
+              "confidence_pct": 100,
+              "execution_eligible": true,
+              "liquidity_zone": "normal",
+              "support": 49,
+              "resistance": 54.3,
+              "invalidation": 49,
+              "risk_reward": 2.71,
+              "missing_components": [],
+              "components": [
+                {
+                  "name": "distance_from_value_support",
+                  "score": 8.5,
+                  "weight": 0.3,
+                  "raw": {
+                    "support": 49,
+                    "distance_atr": 0.72
+                  },
+                  "available": true
+                },
+                {
+                  "name": "risk_reward",
+                  "score": 8,
+                  "weight": 0.3,
+                  "raw": {
+                    "resistance": 54.3,
+                    "invalidation": 49,
+                    "rr": 2.71
+                  },
+                  "available": true
+                },
+                {
+                  "name": "liquidity_stop_hunt",
+                  "score": 8,
+                  "weight": 0.2,
+                  "raw": "normal",
+                  "available": true
+                },
+                {
+                  "name": "chase_slippage",
+                  "score": 8,
+                  "weight": 0.1,
+                  "raw": "low",
+                  "available": true
+                },
+                {
+                  "name": "close_location",
+                  "score": 5.9,
+                  "weight": 0.1,
+                  "raw": 0.484,
+                  "available": true
+                }
+              ]
+            },
+            "re_acceleration_trigger": "not_present",
+            "execution_readiness": {
+              "score": 55.3,
+              "status": "complete",
+              "execution_eligible": true,
+              "hard_veto": false,
+              "classification": "wait"
+            },
+            "execution_metrics_eligible": true
+          },
+          "early_movement_flags": []
+        },
+        {
           "symbol_full": "EGX:CERA",
           "name": "CERA",
           "description": "Arab Ceramic Co. - Ceramica Remas",
@@ -9789,280 +9788,6 @@
             "re_acceleration_trigger": "not_present",
             "execution_readiness": {
               "score": 48.5,
-              "status": "provisional_not_execution_eligible",
-              "execution_eligible": false,
-              "hard_veto": false,
-              "classification": "provisional"
-            },
-            "execution_metrics_eligible": false
-          },
-          "early_movement_flags": []
-        },
-        {
-          "symbol_full": "EGX:HELI",
-          "name": "HELI",
-          "description": "Heliopolis Housing",
-          "close": 7.4,
-          "open": 7.65,
-          "high": 7.72,
-          "low": 7.02,
-          "volume": 17154218,
-          "change": -3.2679738562091507,
-          "market_cap_basic": 31321099599,
-          "RSI": 37.57123743797117,
-          "EMA20": 7.926744113709224,
-          "SMA20": 8.009999999999991,
-          "Perf.W": -10.843373493975907,
-          "Perf.1M": 0.6802721088435472,
-          "average_volume_10d_calc": 19865649.49999996,
-          "current_session": "out_of_session",
-          "symbol": "HELI",
-          "SMA50": 8.017399999999999,
-          "EMA50": 7.784556533915129,
-          "SMA200": 5.896249999999994,
-          "EMA200": 6.30067341863215,
-          "relative_volume_10d_calc": 0.8801476774011732,
-          "earnings_per_share_diluted_ttm": null,
-          "price_earnings_current": null,
-          "eps_diluted_growth_percent_fq": null,
-          "eps_diluted_growth_percent_fy": null,
-          "total_revenue_ttm": null,
-          "free_cash_flow_ttm": null,
-          "debt_to_equity_fq": null,
-          "earnings_release_next_date": 1794312000,
-          "dividend_ex_date_upcoming": null,
-          "price_target_average": 10.78,
-          "price_target_high": 12,
-          "price_target_low": 9.56,
-          "update_mode": "delayed_streaming_900",
-          "value": 126941213.2,
-          "value_session_adjusted": 126941213.2,
-          "relative_volume_10d_raw": 0.88,
-          "relative_volume_10d": 0.88,
-          "relative_volume_10d_session_adjusted": 0.88,
-          "relative_volume_adjustment": {
-            "session_progress": 1,
-            "method": "raw_full_session"
-          },
-          "relative_volume_label": "weak_or_normal",
-          "close_location_in_day": 0.543,
-          "long_term_trend": "long_term_uptrend",
-          "distance_from_sma200_pct": 25.5,
-          "demand_confirmation_score": 5,
-          "event_risk": {
-            "level": "low",
-            "next_event": {
-              "type": "earnings",
-              "at": 1794312000,
-              "trading_days": 31
-            }
-          },
-          "upside_to_analyst_target_pct": 45.68,
-          "decision_support": {
-            "technical_score": 4.4,
-            "liquidity_score": 10,
-            "setup_score": 5.9,
-            "chase_risk": "low"
-          },
-          "analytics": {
-            "momentum": {
-              "score": 3,
-              "status": "complete",
-              "confidence_pct": 100,
-              "execution_eligible": true,
-              "missing_components": [],
-              "components": [
-                {
-                  "name": "three_sessions_and_week",
-                  "score": 2.1,
-                  "weight": 0.3,
-                  "raw": {
-                    "performance_3_sessions_pct": -9.76,
-                    "performance_week_pct": -10.843373493975907
-                  },
-                  "available": true
-                },
-                {
-                  "name": "relative_volume_10d",
-                  "score": 4.5,
-                  "weight": 0.2,
-                  "raw": {
-                    "raw": 0.88,
-                    "adjusted": 0.88,
-                    "session_progress": 1,
-                    "method": "raw_full_session"
-                  },
-                  "available": true
-                },
-                {
-                  "name": "close_location",
-                  "score": 4.9,
-                  "weight": 0.15,
-                  "raw": 0.543,
-                  "available": true
-                },
-                {
-                  "name": "rsi",
-                  "score": 3,
-                  "weight": 0.15,
-                  "raw": 37.57123743797117,
-                  "available": true
-                },
-                {
-                  "name": "ma20_50",
-                  "score": 2,
-                  "weight": 0.1,
-                  "raw": {
-                    "close": 7.4,
-                    "ma20": 8.009999999999991,
-                    "ma50": 8.017399999999999
-                  },
-                  "available": true
-                },
-                {
-                  "name": "continuity_acceleration",
-                  "score": 1,
-                  "weight": 0.1,
-                  "raw": {
-                    "sessions_available": 10
-                  },
-                  "available": true
-                }
-              ]
-            },
-            "cycle_quality": {
-              "score": 3.6,
-              "status": "complete",
-              "confidence_pct": 100,
-              "execution_eligible": true,
-              "integrity": "not_confirmed",
-              "phase": "foundation_or_repair",
-              "sessions_available": 10,
-              "missing_components": [],
-              "components": [
-                {
-                  "name": "weekly_structure",
-                  "score": 1,
-                  "weight": 0.25,
-                  "raw": {
-                    "pivots_high": 2,
-                    "pivots_low": 2
-                  },
-                  "available": true
-                },
-                {
-                  "name": "breakout_strength",
-                  "score": 3.7,
-                  "weight": 0.2,
-                  "raw": {
-                    "prior_pivot_high": 7.93,
-                    "distance_pct": -6.68
-                  },
-                  "available": true
-                },
-                {
-                  "name": "volume_asymmetry",
-                  "score": 4.4,
-                  "weight": 0.2,
-                  "raw": {
-                    "raw": 0.88,
-                    "adjusted": 0.88,
-                    "session_progress": 1,
-                    "method": "raw_full_session"
-                  },
-                  "available": true
-                },
-                {
-                  "name": "retest_quality",
-                  "score": 7,
-                  "weight": 0.2,
-                  "raw": {
-                    "atr": 0.43,
-                    "distance_from_value_atr": -1.43
-                  },
-                  "available": true
-                },
-                {
-                  "name": "higher_low",
-                  "score": 2,
-                  "weight": 0.15,
-                  "raw": {
-                    "recent_pivot_lows": [
-                      7.93,
-                      7.93
-                    ]
-                  },
-                  "available": true
-                }
-              ]
-            },
-            "cycle_gap": {
-              "value": -0.6,
-              "classification": "aligned",
-              "status": "provisional_not_execution_eligible"
-            },
-            "entry_quality": {
-              "score": null,
-              "status": "provisional_not_execution_eligible",
-              "confidence_pct": 40,
-              "execution_eligible": false,
-              "liquidity_zone": "equal_lows_stop_hunt_zone",
-              "support": null,
-              "resistance": 7.93,
-              "invalidation": null,
-              "risk_reward": null,
-              "missing_components": [
-                "distance_from_value_support",
-                "risk_reward"
-              ],
-              "components": [
-                {
-                  "name": "distance_from_value_support",
-                  "score": null,
-                  "weight": 0.3,
-                  "raw": {
-                    "support": null,
-                    "distance_atr": null
-                  },
-                  "available": false
-                },
-                {
-                  "name": "risk_reward",
-                  "score": null,
-                  "weight": 0.3,
-                  "raw": {
-                    "resistance": 7.93,
-                    "invalidation": null,
-                    "rr": null
-                  },
-                  "available": false
-                },
-                {
-                  "name": "liquidity_stop_hunt",
-                  "score": 4,
-                  "weight": 0.2,
-                  "raw": "equal_lows_stop_hunt_zone",
-                  "available": true
-                },
-                {
-                  "name": "chase_slippage",
-                  "score": 8,
-                  "weight": 0.1,
-                  "raw": "low",
-                  "available": true
-                },
-                {
-                  "name": "close_location",
-                  "score": 6.3,
-                  "weight": 0.1,
-                  "raw": 0.543,
-                  "available": true
-                }
-              ]
-            },
-            "re_acceleration_trigger": "not_present",
-            "execution_readiness": {
-              "score": 47.1,
               "status": "provisional_not_execution_eligible",
               "execution_eligible": false,
               "hard_veto": false,
@@ -10613,70 +10338,74 @@
           "early_movement_flags": []
         },
         {
-          "symbol_full": "EGX:NIPH",
-          "name": "NIPH",
-          "description": "El-Nile Co. for Pharmaceuticals & Chemical Industries",
-          "close": 298.34,
-          "open": 306.01,
-          "high": 309.8,
-          "low": 290.01,
-          "volume": 386834,
-          "change": -2.5064540374497617,
-          "market_cap_basic": 16275500488,
-          "RSI": 41.075260828254706,
-          "EMA20": 325.18403844841,
-          "SMA20": 327.67299999999994,
-          "Perf.W": -4.683706070287548,
-          "Perf.1M": -18.265253006766944,
-          "average_volume_10d_calc": 412248.09999999974,
+          "symbol_full": "EGX:HELI",
+          "name": "HELI",
+          "description": "Heliopolis Housing",
+          "close": 7.4,
+          "open": 7.65,
+          "high": 7.72,
+          "low": 7.02,
+          "volume": 17154218,
+          "change": -3.2679738562091507,
+          "market_cap_basic": 31321099599,
+          "RSI": 37.57123743797117,
+          "EMA20": 7.926744113709224,
+          "SMA20": 8.009999999999991,
+          "Perf.W": -10.843373493975907,
+          "Perf.1M": 0.6802721088435472,
+          "average_volume_10d_calc": 19865649.49999996,
           "current_session": "out_of_session",
-          "symbol": "NIPH",
-          "SMA50": 320.99319999999994,
-          "EMA50": 306.24185570555306,
-          "SMA200": 171.48745000000002,
-          "EMA200": 199.54445282124541,
-          "relative_volume_10d_calc": 0.9387545607983085,
-          "earnings_per_share_diluted_ttm": 6.2253,
-          "price_earnings_current": 49.155863974426936,
-          "eps_diluted_growth_percent_fq": 7.25223474543334,
-          "eps_diluted_growth_percent_fy": 18.2083986609602,
-          "total_revenue_ttm": 2239153713,
-          "free_cash_flow_ttm": -717510720,
-          "debt_to_equity_fq": 1.2265910714875201,
-          "earnings_release_next_date": null,
+          "symbol": "HELI",
+          "SMA50": 8.017399999999999,
+          "EMA50": 7.784556533915129,
+          "SMA200": 5.896249999999994,
+          "EMA200": 6.30067341863215,
+          "relative_volume_10d_calc": 0.8801476774011732,
+          "earnings_per_share_diluted_ttm": null,
+          "price_earnings_current": null,
+          "eps_diluted_growth_percent_fq": null,
+          "eps_diluted_growth_percent_fy": null,
+          "total_revenue_ttm": null,
+          "free_cash_flow_ttm": null,
+          "debt_to_equity_fq": null,
+          "earnings_release_next_date": 1794312000,
           "dividend_ex_date_upcoming": null,
-          "price_target_average": null,
-          "price_target_high": null,
-          "price_target_low": null,
+          "price_target_average": 10.78,
+          "price_target_high": 12,
+          "price_target_low": 9.56,
           "update_mode": "delayed_streaming_900",
-          "value": 115408055.56,
-          "value_session_adjusted": 115408055.56,
-          "relative_volume_10d_raw": 0.94,
-          "relative_volume_10d": 0.94,
-          "relative_volume_10d_session_adjusted": 0.94,
+          "value": 126941213.2,
+          "value_session_adjusted": 126941213.2,
+          "relative_volume_10d_raw": 0.88,
+          "relative_volume_10d": 0.88,
+          "relative_volume_10d_session_adjusted": 0.88,
           "relative_volume_adjustment": {
             "session_progress": 1,
             "method": "raw_full_session"
           },
           "relative_volume_label": "weak_or_normal",
-          "close_location_in_day": 0.421,
+          "close_location_in_day": 0.543,
           "long_term_trend": "long_term_uptrend",
-          "distance_from_sma200_pct": 73.97,
-          "demand_confirmation_score": 4.5,
+          "distance_from_sma200_pct": 25.5,
+          "demand_confirmation_score": 5,
           "event_risk": {
-            "level": "unknown_or_low",
-            "next_event": null
+            "level": "low",
+            "next_event": {
+              "type": "earnings",
+              "at": 1794312000,
+              "trading_days": 31
+            }
           },
-          "upside_to_analyst_target_pct": -100,
+          "upside_to_analyst_target_pct": 45.68,
           "decision_support": {
             "technical_score": 4.4,
             "liquidity_score": 10,
-            "setup_score": 5.8,
+            "setup_score": 5.9,
             "chase_risk": "low"
           },
           "analytics": {
             "momentum": {
-              "score": 3.2,
+              "score": 3,
               "status": "complete",
               "confidence_pct": 100,
               "execution_eligible": true,
@@ -10684,11 +10413,11 @@
               "components": [
                 {
                   "name": "three_sessions_and_week",
-                  "score": 2.6,
+                  "score": 2.1,
                   "weight": 0.3,
                   "raw": {
-                    "performance_3_sessions_pct": -12.77,
-                    "performance_week_pct": -4.683706070287548
+                    "performance_3_sessions_pct": -9.76,
+                    "performance_week_pct": -10.843373493975907
                   },
                   "available": true
                 },
@@ -10697,8 +10426,8 @@
                   "score": 4.5,
                   "weight": 0.2,
                   "raw": {
-                    "raw": 0.94,
-                    "adjusted": 0.94,
+                    "raw": 0.88,
+                    "adjusted": 0.88,
                     "session_progress": 1,
                     "method": "raw_full_session"
                   },
@@ -10706,16 +10435,16 @@
                 },
                 {
                   "name": "close_location",
-                  "score": 3.7,
+                  "score": 4.9,
                   "weight": 0.15,
-                  "raw": 0.421,
+                  "raw": 0.543,
                   "available": true
                 },
                 {
                   "name": "rsi",
-                  "score": 4.5,
+                  "score": 3,
                   "weight": 0.15,
-                  "raw": 41.075260828254706,
+                  "raw": 37.57123743797117,
                   "available": true
                 },
                 {
@@ -10723,9 +10452,9 @@
                   "score": 2,
                   "weight": 0.1,
                   "raw": {
-                    "close": 298.34,
-                    "ma20": 327.67299999999994,
-                    "ma50": 320.99319999999994
+                    "close": 7.4,
+                    "ma20": 8.009999999999991,
+                    "ma50": 8.017399999999999
                   },
                   "available": true
                 },
@@ -10741,7 +10470,7 @@
               ]
             },
             "cycle_quality": {
-              "score": 3.4,
+              "score": 3.6,
               "status": "complete",
               "confidence_pct": 100,
               "execution_eligible": true,
@@ -10755,28 +10484,28 @@
                   "score": 1,
                   "weight": 0.25,
                   "raw": {
-                    "pivots_high": 4,
+                    "pivots_high": 2,
                     "pivots_low": 2
                   },
                   "available": true
                 },
                 {
                   "name": "breakout_strength",
-                  "score": 3.2,
+                  "score": 3.7,
                   "weight": 0.2,
                   "raw": {
-                    "prior_pivot_high": 334,
-                    "distance_pct": -10.68
+                    "prior_pivot_high": 7.93,
+                    "distance_pct": -6.68
                   },
                   "available": true
                 },
                 {
                   "name": "volume_asymmetry",
-                  "score": 4.1,
+                  "score": 4.4,
                   "weight": 0.2,
                   "raw": {
-                    "raw": 0.94,
-                    "adjusted": 0.94,
+                    "raw": 0.88,
+                    "adjusted": 0.88,
                     "session_progress": 1,
                     "method": "raw_full_session"
                   },
@@ -10784,11 +10513,11 @@
                 },
                 {
                   "name": "retest_quality",
-                  "score": 6.8,
+                  "score": 7,
                   "weight": 0.2,
                   "raw": {
-                    "atr": 26.28,
-                    "distance_from_value_atr": -1.12
+                    "atr": 0.43,
+                    "distance_from_value_atr": -1.43
                   },
                   "available": true
                 },
@@ -10798,8 +10527,8 @@
                   "weight": 0.15,
                   "raw": {
                     "recent_pivot_lows": [
-                      307,
-                      290
+                      7.93,
+                      7.93
                     ]
                   },
                   "available": true
@@ -10807,48 +10536,51 @@
               ]
             },
             "cycle_gap": {
-              "value": -0.2,
+              "value": -0.6,
               "classification": "aligned",
-              "status": "complete"
+              "status": "provisional_not_execution_eligible"
             },
             "entry_quality": {
-              "score": 8.5,
-              "status": "complete",
-              "confidence_pct": 100,
-              "execution_eligible": true,
-              "liquidity_zone": "normal",
-              "support": 290,
-              "resistance": 334,
-              "invalidation": 290,
-              "risk_reward": 4.28,
-              "missing_components": [],
+              "score": null,
+              "status": "provisional_not_execution_eligible",
+              "confidence_pct": 40,
+              "execution_eligible": false,
+              "liquidity_zone": "equal_lows_stop_hunt_zone",
+              "support": null,
+              "resistance": 7.93,
+              "invalidation": null,
+              "risk_reward": null,
+              "missing_components": [
+                "distance_from_value_support",
+                "risk_reward"
+              ],
               "components": [
                 {
                   "name": "distance_from_value_support",
-                  "score": 8.5,
+                  "score": null,
                   "weight": 0.3,
                   "raw": {
-                    "support": 290,
-                    "distance_atr": 0.32
+                    "support": null,
+                    "distance_atr": null
                   },
-                  "available": true
+                  "available": false
                 },
                 {
                   "name": "risk_reward",
-                  "score": 10,
+                  "score": null,
                   "weight": 0.3,
                   "raw": {
-                    "resistance": 334,
-                    "invalidation": 290,
-                    "rr": 4.28
+                    "resistance": 7.93,
+                    "invalidation": null,
+                    "rr": null
                   },
-                  "available": true
+                  "available": false
                 },
                 {
                   "name": "liquidity_stop_hunt",
-                  "score": 8,
+                  "score": 4,
                   "weight": 0.2,
-                  "raw": "normal",
+                  "raw": "equal_lows_stop_hunt_zone",
                   "available": true
                 },
                 {
@@ -10860,22 +10592,294 @@
                 },
                 {
                   "name": "close_location",
-                  "score": 5.5,
+                  "score": 6.3,
                   "weight": 0.1,
-                  "raw": 0.421,
+                  "raw": 0.543,
                   "available": true
                 }
               ]
             },
             "re_acceleration_trigger": "not_present",
             "execution_readiness": {
-              "score": 55.3,
-              "status": "complete",
-              "execution_eligible": true,
+              "score": 47.1,
+              "status": "provisional_not_execution_eligible",
+              "execution_eligible": false,
               "hard_veto": false,
-              "classification": "wait"
+              "classification": "provisional"
             },
-            "execution_metrics_eligible": true
+            "execution_metrics_eligible": false
+          },
+          "early_movement_flags": []
+        },
+        {
+          "symbol_full": "EGX:HDBK",
+          "name": "HDBK",
+          "description": "Housing & Development Bank",
+          "close": 107,
+          "open": 107.79,
+          "high": 110.79,
+          "low": 105.51,
+          "volume": 218302,
+          "change": -0.5668618158163734,
+          "market_cap_basic": 116333448894,
+          "RSI": 49.172416182743014,
+          "EMA20": 109.84341477365511,
+          "SMA20": 113.51200000000006,
+          "Perf.W": -11.203319502074688,
+          "Perf.1M": 15.800865800865795,
+          "average_volume_10d_calc": 301127.7,
+          "current_session": "out_of_session",
+          "symbol": "HDBK",
+          "SMA50": 97.76539999999994,
+          "EMA50": 100.53143957379055,
+          "SMA200": 70.23352499999997,
+          "EMA200": 74.94452191506538,
+          "relative_volume_10d_calc": 0.6967888637370522,
+          "earnings_per_share_diluted_ttm": 18.7266,
+          "price_earnings_current": 5.746371471596552,
+          "eps_diluted_growth_percent_fq": 12.1728658112928,
+          "eps_diluted_growth_percent_fy": 50.3377858352289,
+          "total_revenue_ttm": 47479623762,
+          "free_cash_flow_ttm": 17460926570,
+          "debt_to_equity_fq": 0.0257965607411375,
+          "earnings_release_next_date": 1796212800,
+          "dividend_ex_date_upcoming": null,
+          "price_target_average": 77.586667,
+          "price_target_high": 98.5,
+          "price_target_low": 54.9,
+          "update_mode": "delayed_streaming_900",
+          "value": 23358314,
+          "value_session_adjusted": 23358314,
+          "relative_volume_10d_raw": 0.7,
+          "relative_volume_10d": 0.7,
+          "relative_volume_10d_session_adjusted": 0.7,
+          "relative_volume_adjustment": {
+            "session_progress": 1,
+            "method": "raw_full_session"
+          },
+          "relative_volume_label": "weak_or_normal",
+          "close_location_in_day": 0.282,
+          "long_term_trend": "long_term_uptrend",
+          "distance_from_sma200_pct": 52.35,
+          "demand_confirmation_score": 3.5,
+          "event_risk": {
+            "level": "low",
+            "next_event": {
+              "type": "earnings",
+              "at": 1796212800,
+              "trading_days": 47
+            }
+          },
+          "upside_to_analyst_target_pct": -27.49,
+          "decision_support": {
+            "technical_score": 5.6,
+            "liquidity_score": 8,
+            "setup_score": 5.8,
+            "chase_risk": "low"
+          },
+          "analytics": {
+            "momentum": {
+              "score": 3.2,
+              "status": "complete",
+              "confidence_pct": 100,
+              "execution_eligible": true,
+              "missing_components": [],
+              "components": [
+                {
+                  "name": "three_sessions_and_week",
+                  "score": 2.2,
+                  "weight": 0.3,
+                  "raw": {
+                    "performance_3_sessions_pct": -9.04,
+                    "performance_week_pct": -11.203319502074688
+                  },
+                  "available": true
+                },
+                {
+                  "name": "relative_volume_10d",
+                  "score": 4.5,
+                  "weight": 0.2,
+                  "raw": {
+                    "raw": 0.7,
+                    "adjusted": 0.7,
+                    "session_progress": 1,
+                    "method": "raw_full_session"
+                  },
+                  "available": true
+                },
+                {
+                  "name": "close_location",
+                  "score": 2.3,
+                  "weight": 0.15,
+                  "raw": 0.282,
+                  "available": true
+                },
+                {
+                  "name": "rsi",
+                  "score": 4.5,
+                  "weight": 0.15,
+                  "raw": 49.172416182743014,
+                  "available": true
+                },
+                {
+                  "name": "ma20_50",
+                  "score": 5.5,
+                  "weight": 0.1,
+                  "raw": {
+                    "close": 107,
+                    "ma20": 113.51200000000006,
+                    "ma50": 97.76539999999994
+                  },
+                  "available": true
+                },
+                {
+                  "name": "continuity_acceleration",
+                  "score": 1,
+                  "weight": 0.1,
+                  "raw": {
+                    "sessions_available": 10
+                  },
+                  "available": true
+                }
+              ]
+            },
+            "cycle_quality": {
+              "score": 3.3,
+              "status": "complete",
+              "confidence_pct": 100,
+              "execution_eligible": true,
+              "integrity": "not_confirmed",
+              "phase": "foundation_or_repair",
+              "sessions_available": 10,
+              "missing_components": [],
+              "components": [
+                {
+                  "name": "weekly_structure",
+                  "score": 1,
+                  "weight": 0.25,
+                  "raw": {
+                    "pivots_high": 2,
+                    "pivots_low": 1
+                  },
+                  "available": true
+                },
+                {
+                  "name": "breakout_strength",
+                  "score": 2.6,
+                  "weight": 0.2,
+                  "raw": {
+                    "prior_pivot_high": 113.65,
+                    "distance_pct": -5.85
+                  },
+                  "available": true
+                },
+                {
+                  "name": "volume_asymmetry",
+                  "score": 4,
+                  "weight": 0.2,
+                  "raw": {
+                    "raw": 0.7,
+                    "adjusted": 0.7,
+                    "session_progress": 1,
+                    "method": "raw_full_session"
+                  },
+                  "available": true
+                },
+                {
+                  "name": "retest_quality",
+                  "score": 7.2,
+                  "weight": 0.2,
+                  "raw": {
+                    "atr": 5.67,
+                    "distance_from_value_atr": -1.15
+                  },
+                  "available": true
+                },
+                {
+                  "name": "higher_low",
+                  "score": 2,
+                  "weight": 0.15,
+                  "raw": {
+                    "recent_pivot_lows": [
+                      106.85
+                    ]
+                  },
+                  "available": true
+                }
+              ]
+            },
+            "cycle_gap": {
+              "value": -0.1,
+              "classification": "aligned",
+              "status": "provisional_not_execution_eligible"
+            },
+            "entry_quality": {
+              "score": 6.3,
+              "status": "provisional_not_execution_eligible",
+              "confidence_pct": 70,
+              "execution_eligible": false,
+              "liquidity_zone": "equal_lows_stop_hunt_zone",
+              "support": 106.85,
+              "resistance": 113.65,
+              "invalidation": 106.85,
+              "risk_reward": null,
+              "missing_components": [
+                "risk_reward"
+              ],
+              "components": [
+                {
+                  "name": "distance_from_value_support",
+                  "score": 7.8,
+                  "weight": 0.3,
+                  "raw": {
+                    "support": 106.85,
+                    "distance_atr": 0.03
+                  },
+                  "available": true
+                },
+                {
+                  "name": "risk_reward",
+                  "score": null,
+                  "weight": 0.3,
+                  "raw": {
+                    "resistance": 113.65,
+                    "invalidation": 106.85,
+                    "rr": null
+                  },
+                  "available": false
+                },
+                {
+                  "name": "liquidity_stop_hunt",
+                  "score": 4,
+                  "weight": 0.2,
+                  "raw": "equal_lows_stop_hunt_zone",
+                  "available": true
+                },
+                {
+                  "name": "chase_slippage",
+                  "score": 8,
+                  "weight": 0.1,
+                  "raw": "low",
+                  "available": true
+                },
+                {
+                  "name": "close_location",
+                  "score": 4.7,
+                  "weight": 0.1,
+                  "raw": 0.282,
+                  "available": true
+                }
+              ]
+            },
+            "re_acceleration_trigger": "not_present",
+            "execution_readiness": {
+              "score": 45.4,
+              "status": "provisional_not_execution_eligible",
+              "execution_eligible": false,
+              "hard_veto": false,
+              "classification": "provisional"
+            },
+            "execution_metrics_eligible": false
           },
           "early_movement_flags": []
         }
@@ -16569,6 +16573,272 @@
             "classification": "provisional"
           },
           "execution_metrics_eligible": false
+        }
+      },
+      {
+        "symbol_full": "EGX:ICFC",
+        "name": "ICFC",
+        "description": "International Co. for Fertilizers & Chemicals",
+        "close": 22.05,
+        "open": 22.76,
+        "high": 22.99,
+        "low": 22,
+        "volume": 1096153,
+        "change": -3.119507908611603,
+        "market_cap_basic": 2593572677,
+        "RSI": 50.76412822925777,
+        "EMA20": 22.39208760548788,
+        "SMA20": 23.155,
+        "Perf.W": -7.079646017699114,
+        "Perf.1M": 2.7493010251630934,
+        "average_volume_10d_calc": 1063207.599999999,
+        "current_session": "out_of_session",
+        "symbol": "ICFC",
+        "SMA50": 19.70300000000001,
+        "EMA50": 20.459327422778372,
+        "SMA200": 16.35315,
+        "EMA200": 16.919793497865136,
+        "relative_volume_10d_calc": 0.8231500876014336,
+        "earnings_per_share_diluted_ttm": 1.6346,
+        "price_earnings_current": 13.923895754312982,
+        "eps_diluted_growth_percent_fq": null,
+        "eps_diluted_growth_percent_fy": null,
+        "total_revenue_ttm": 3686669262,
+        "free_cash_flow_ttm": -60645600,
+        "debt_to_equity_fq": 0.175755423193275,
+        "earnings_release_next_date": null,
+        "dividend_ex_date_upcoming": null,
+        "price_target_average": null,
+        "price_target_high": null,
+        "price_target_low": null,
+        "update_mode": "delayed_streaming_900",
+        "value": 24170173.65,
+        "value_session_adjusted": 24170173.65,
+        "relative_volume_10d_raw": 0.82,
+        "relative_volume_10d": 0.82,
+        "relative_volume_10d_session_adjusted": 0.82,
+        "relative_volume_adjustment": {
+          "session_progress": 1,
+          "method": "raw_full_session"
+        },
+        "relative_volume_label": "weak_or_normal",
+        "close_location_in_day": 0.051,
+        "long_term_trend": "long_term_uptrend",
+        "distance_from_sma200_pct": 34.84,
+        "demand_confirmation_score": 3.5,
+        "event_risk": {
+          "level": "unknown_or_low",
+          "next_event": null
+        },
+        "upside_to_analyst_target_pct": -100,
+        "decision_support": {
+          "technical_score": 5.6,
+          "liquidity_score": 8,
+          "setup_score": 5.8,
+          "chase_risk": "low"
+        },
+        "analytics": {
+          "momentum": {
+            "score": 3.6,
+            "status": "complete",
+            "confidence_pct": 100,
+            "execution_eligible": true,
+            "missing_components": [],
+            "components": [
+              {
+                "name": "three_sessions_and_week",
+                "score": 3.5,
+                "weight": 0.3,
+                "raw": {
+                  "performance_3_sessions_pct": -3.67,
+                  "performance_week_pct": -7.079646017699114
+                },
+                "available": true
+              },
+              {
+                "name": "relative_volume_10d",
+                "score": 4.5,
+                "weight": 0.2,
+                "raw": {
+                  "raw": 0.82,
+                  "adjusted": 0.82,
+                  "session_progress": 1,
+                  "method": "raw_full_session"
+                },
+                "available": true
+              },
+              {
+                "name": "close_location",
+                "score": 0,
+                "weight": 0.15,
+                "raw": 0.051,
+                "available": true
+              },
+              {
+                "name": "rsi",
+                "score": 6,
+                "weight": 0.15,
+                "raw": 50.76412822925777,
+                "available": true
+              },
+              {
+                "name": "ma20_50",
+                "score": 5.5,
+                "weight": 0.1,
+                "raw": {
+                  "close": 22.05,
+                  "ma20": 23.155,
+                  "ma50": 19.70300000000001
+                },
+                "available": true
+              },
+              {
+                "name": "continuity_acceleration",
+                "score": 2,
+                "weight": 0.1,
+                "raw": {
+                  "sessions_available": 10
+                },
+                "available": true
+              }
+            ]
+          },
+          "cycle_quality": {
+            "score": 2.5,
+            "status": "complete",
+            "confidence_pct": 100,
+            "execution_eligible": true,
+            "integrity": "not_confirmed",
+            "phase": "foundation_or_repair",
+            "sessions_available": 10,
+            "missing_components": [],
+            "components": [
+              {
+                "name": "weekly_structure",
+                "score": 1,
+                "weight": 0.25,
+                "raw": {
+                  "pivots_high": 1,
+                  "pivots_low": 3
+                },
+                "available": true
+              },
+              {
+                "name": "breakout_strength",
+                "score": 1.7,
+                "weight": 0.2,
+                "raw": {
+                  "prior_pivot_high": 24.35,
+                  "distance_pct": -9.45
+                },
+                "available": true
+              },
+              {
+                "name": "volume_asymmetry",
+                "score": 2.4,
+                "weight": 0.2,
+                "raw": {
+                  "raw": 0.82,
+                  "adjusted": 0.82,
+                  "session_progress": 1,
+                  "method": "raw_full_session"
+                },
+                "available": true
+              },
+              {
+                "name": "retest_quality",
+                "score": 5.8,
+                "weight": 0.2,
+                "raw": {
+                  "atr": 1.26,
+                  "distance_from_value_atr": -0.88
+                },
+                "available": true
+              },
+              {
+                "name": "higher_low",
+                "score": 2,
+                "weight": 0.15,
+                "raw": {
+                  "recent_pivot_lows": [
+                    21.8,
+                    21.16
+                  ]
+                },
+                "available": true
+              }
+            ]
+          },
+          "cycle_gap": {
+            "value": 1.1,
+            "classification": "aligned",
+            "status": "complete"
+          },
+          "entry_quality": {
+            "score": 7.7,
+            "status": "complete",
+            "confidence_pct": 100,
+            "execution_eligible": true,
+            "liquidity_zone": "normal",
+            "support": 21.16,
+            "resistance": 24.35,
+            "invalidation": 21.16,
+            "risk_reward": 2.58,
+            "missing_components": [],
+            "components": [
+              {
+                "name": "distance_from_value_support",
+                "score": 8.5,
+                "weight": 0.3,
+                "raw": {
+                  "support": 21.16,
+                  "distance_atr": 0.71
+                },
+                "available": true
+              },
+              {
+                "name": "risk_reward",
+                "score": 8,
+                "weight": 0.3,
+                "raw": {
+                  "resistance": 24.35,
+                  "invalidation": 21.16,
+                  "rr": 2.58
+                },
+                "available": true
+              },
+              {
+                "name": "liquidity_stop_hunt",
+                "score": 8,
+                "weight": 0.2,
+                "raw": "normal",
+                "available": true
+              },
+              {
+                "name": "chase_slippage",
+                "score": 8,
+                "weight": 0.1,
+                "raw": "low",
+                "available": true
+              },
+              {
+                "name": "close_location",
+                "score": 3.3,
+                "weight": 0.1,
+                "raw": 0.051,
+                "available": true
+              }
+            ]
+          },
+          "re_acceleration_trigger": "not_present",
+          "execution_readiness": {
+            "score": 47.1,
+            "status": "complete",
+            "execution_eligible": true,
+            "hard_veto": false,
+            "classification": "wait"
+          },
+          "execution_metrics_eligible": true
         }
       },
       {
