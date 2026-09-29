@@ -5,7 +5,7 @@ import { buildExecutionBundle } from '../netlify/functions/_lib/access.mts';
 const SOURCE_ID = 'egx-market-feed-v2';
 const EXPECTED_UNIVERSE_FLOOR = 296;
 const LIVE_MAX_AGE_SECONDS = 600;
-const STAGNATION_MAX_SECONDS = 600;
+const STAGNATION_MAX_SECONDS = 1200;
 const FOCUS = (process.env.FOCUS_SYMBOLS || 'EFIH,ICFC,EFID,EGAL,AMOC,JUFO,ORWE,SVCE,MASR,ORAS,BONY,MFPC,ABUK,ETEL,ORHD,HELI,TMGH,VLMRA,KABO,ATQA,MPCO')
   .split(',').map(x => x.trim().toUpperCase()).filter(Boolean);
 const REPO = process.env.GITHUB_REPOSITORY || 'elgeziry/expamel';
