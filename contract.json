@@ -1,16 +1,20 @@
 {
   "source_id": "egx-market-feed-v2",
   "version": "7.2.1",
-  "retrieved_at": "2026-09-28T19:28:26.836Z",
+  "bridge_version": "5.0-github-direct",
+  "transport": "github-actions-direct-upstream",
+  "retrieved_at": "2026-09-29T04:15:19.054Z",
   "session_status": "closed",
   "expected_reference_session_date": "2026-09-28",
   "execution_usable": true,
-  "live_age_seconds": 0.0,
+  "live_age_seconds": 0,
   "max_live_age_seconds": 600,
-  "stale_risk": "low",
+  "stale_risk": "medium_reference_date_calendar_derived",
   "blockers": [],
   "warnings": [
-    "official_holiday_calendar_not_verified"
+    "official_holiday_calendar_not_verified",
+    "transport_netlify_independent",
+    "quote_timestamp_not_exposed_liveness_guard_enabled"
   ],
   "quality": {
     "row_count": 296,
@@ -25,9 +29,9 @@
     "basic_integrity_ok": true,
     "live_session_consistent": true,
     "live_execution_usable": true,
-    "analytics_complete_count": 51,
-    "analytics_provisional_count": 245,
-    "bridge_live_age_seconds": 0.0,
+    "analytics_complete_count": 0,
+    "analytics_provisional_count": 296,
+    "bridge_live_age_seconds": 0,
     "bridge_gate": "pass",
     "full_market_fresh": true,
     "focus_requested": 21,
@@ -35,5 +39,12 @@
     "focus_complete": true
   },
   "data_fingerprint_sha256": "b928d3c74e2d54a85a49c94cdaa50fcc6fb8709d9abd37db1f5f8960c122a2b6",
-  "bridge_gate": "pass"
+  "bridge_gate": "pass",
+  "liveness": {
+    "method": "full_market_fingerprint_heartbeat",
+    "fingerprint_first_seen_at": "2026-09-29T04:15:19.054Z",
+    "stagnation_seconds": 0,
+    "max_stagnation_seconds": 600,
+    "passed": true
+  }
 }
