@@ -5,7 +5,7 @@ name: EGX Resilient Bridge V5 direct source
   repository_dispatch:
     types: [egx_bridge_refresh]
   schedule:
-    - cron: '*/5 6-12 * * 0-4'
+    - cron: '*/5 6-13 * * 0-4'
   push:
     branches: [master]
     paths:
@@ -20,9 +20,12 @@ name: EGX Resilient Bridge V5 direct source
 permissions:
   contents: write
 
+# Never cancel a running market publish just because the next 5-minute tick arrived.
+# The previous setting (cancel-in-progress: true) could repeatedly kill a slow run
+# before it reached the publish step. Queueing is safer than self-cancellation.
 concurrency:
   group: egx-v5-direct-publisher
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 env:
   FOCUS_SYMBOLS: EFIH,ICFC,EFID,EGAL,AMOC,JUFO,ORWE,SVCE,MASR,ORAS,BONY,MFPC,ABUK,ETEL,ORHD,HELI,TMGH,VLMRA,KABO,ATQA,MPCO
@@ -30,7 +33,7 @@ env:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
@@ -42,6 +45,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: npm
+          cache-dependency-path: egx-market-feed-v2/package-lock.json
 
       - name: Install feed dependencies
         working-directory: egx-market-feed-v2
