@@ -1,0 +1,76 @@
+name: EGX V5 freshness watchdog
+
+'on':
+  workflow_dispatch:
+  schedule:
+    - cron: '3,13,23,33,43,53 7-12 * * 0-4'
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: egx-v5-freshness-watchdog
+  cancel-in-progress: true
+
+jobs:
+  watchdog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Check egx-live freshness and self-heal
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          NOW_EPOCH="$(date -u +%s)"
+          TODAY_CAIRO="$(TZ=Africa/Cairo date +%Y-%m-%d)"
+          URL="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/egx-live/contract.json?run=${GITHUB_RUN_ID}"
+          CONTRACT="$(curl -fsSL --retry 2 --retry-delay 1 "$URL" || true)"
+
+          NEED_REFRESH=0
+          REASON=""
+
+          if [ -z "$CONTRACT" ]; then
+            NEED_REFRESH=1
+            REASON="contract_unreachable"
+          else
+            STAMP="$(printf '%s' "$CONTRACT" | jq -r '.retrieved_at // empty')"
+            SESSION="$(printf '%s' "$CONTRACT" | jq -r '.expected_reference_session_date // empty')"
+            GATE="$(printf '%s' "$CONTRACT" | jq -r '.bridge_gate // empty')"
+            USABLE="$(printf '%s' "$CONTRACT" | jq -r '.execution_usable // false')"
+
+            if [ -z "$STAMP" ]; then
+              NEED_REFRESH=1
+              REASON="missing_retrieved_at"
+            else
+              STAMP_EPOCH="$(date -u -d "$STAMP" +%s 2>/dev/null || echo 0)"
+              AGE=$((NOW_EPOCH-STAMP_EPOCH))
+              echo "Current contract age: ${AGE}s; session=${SESSION}; gate=${GATE}; usable=${USABLE}"
+              if [ "$STAMP_EPOCH" -eq 0 ] || [ "$AGE" -gt 420 ]; then
+                NEED_REFRESH=1
+                REASON="stale_contract_${AGE}s"
+              elif [ "$SESSION" != "$TODAY_CAIRO" ]; then
+                NEED_REFRESH=1
+                REASON="session_date_mismatch_${SESSION}_vs_${TODAY_CAIRO}"
+              elif [ "$GATE" != "pass" ] || [ "$USABLE" != "true" ]; then
+                NEED_REFRESH=1
+                REASON="gate_or_execution_unusable"
+              fi
+            fi
+          fi
+
+          if [ "$NEED_REFRESH" -eq 0 ]; then
+            echo "V5 feed is healthy; no recovery dispatch needed."
+            exit 0
+          fi
+
+          echo "V5 recovery required: ${REASON}"
+          curl -fsSL -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/egx-resilient-bridge-v5.yml/dispatches" \
+            -d '{"ref":"master"}'
+          echo "Recovery workflow dispatched."
