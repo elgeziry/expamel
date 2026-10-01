@@ -11,6 +11,7 @@ name: EGX Resilient Bridge V5 direct source
     paths:
       - '.github/workflows/egx-resilient-bridge-v5.yml'
       - 'egx-market-feed-v2/scripts/github-direct-publish.mts'
+      - 'egx-market-feed-v2/scripts/build-dynamic-radar.mts'
       - 'egx-market-feed-v2/netlify/functions/api.mts'
       - 'egx-market-feed-v2/netlify/functions/_lib/access.mts'
       - 'egx-market-feed-v2/netlify/functions/_lib/analytics.mts'
@@ -21,8 +22,7 @@ permissions:
   contents: write
 
 # Never cancel a running market publish just because the next 5-minute tick arrived.
-# The previous setting (cancel-in-progress: true) could repeatedly kill a slow run
-# before it reached the publish step. Queueing is safer than self-cancellation.
+# Queueing is safer than self-cancellation.
 concurrency:
   group: egx-v5-direct-publisher
   cancel-in-progress: false
@@ -56,15 +56,21 @@ jobs:
         working-directory: egx-market-feed-v2
         run: node --experimental-strip-types scripts/github-direct-publish.mts
 
+      - name: Build full-market dynamic opportunity radar
+        working-directory: egx-market-feed-v2
+        run: node --experimental-strip-types scripts/build-dynamic-radar.mts
+
       - name: Validate output contract
         working-directory: egx-market-feed-v2
         shell: bash
         run: |
           set -euo pipefail
           jq -e '.execution_usable == true and .bridge_gate == "pass" and (.blockers | length == 0)' out/contract.json >/dev/null
-          jq -e '.status == "ok" and .provider_dependency.netlify == false' out/health.json >/dev/null
+          jq -e '.quality.discovery_full_market_scanned == true and .quality.discovery_universe_count >= 296' out/contract.json >/dev/null
+          jq -e '.status == "ok" and .provider_dependency.netlify == false and .discovery.dynamic_focus_enabled == true' out/health.json >/dev/null
           jq -e '.transport == "github-actions-v5-direct-source" and .netlify_used == false' out/transport.json >/dev/null
           jq -e '.universe_fresh == true and (.stocks | length >= 296)' out/universe.json >/dev/null
+          jq -e '.discovery.universe_scanned_each_cycle == true and .discovery.universe_count >= 296' out/radar.json >/dev/null
 
       - name: Publish to egx-live without force
         shell: bash
@@ -94,6 +100,7 @@ jobs:
           cp "${SRC}/transport.json" transport.json
           cp "${SRC}/focus.json" focus.json
           cp "${SRC}/universe.json" universe.json
+          cp "${SRC}/radar.json" radar.json
 
           SESSION="$(jq -r '.expected_reference_session_date' contract.json)"
           SNAP="$(date -u +%H%M%SZ)"
@@ -108,7 +115,7 @@ jobs:
             find snapshots -type d -empty -delete || true
           fi
 
-          git add latest.json contract.json health.json transport.json focus.json universe.json snapshots
+          git add latest.json contract.json health.json transport.json focus.json universe.json radar.json snapshots
           if git diff --cached --quiet; then
             echo 'No publish changes.'
             exit 0
