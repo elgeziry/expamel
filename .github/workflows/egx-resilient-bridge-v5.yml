@@ -66,11 +66,11 @@ jobs:
         run: |
           set -euo pipefail
           jq -e '.execution_usable == true and .bridge_gate == "pass" and (.blockers | length == 0)' out/contract.json >/dev/null
-          jq -e '.quality.discovery_full_market_scanned == true and .quality.discovery_universe_count >= 296' out/contract.json >/dev/null
-          jq -e '.status == "ok" and .provider_dependency.netlify == false and .discovery.dynamic_focus_enabled == true' out/health.json >/dev/null
+          jq -e '.quality.discovery_full_market_scanned == true and .quality.discovery_universe_count >= 296 and .discovery_version == 2 and .quality.pre_move_sentinel_count > 0' out/contract.json >/dev/null
+          jq -e '.status == "ok" and .provider_dependency.netlify == false and .discovery.version == 2 and .discovery.dynamic_focus_enabled == true and .discovery.pre_move_sentinel_enabled == true and .discovery.structural_large_cap_watch_enabled == true' out/health.json >/dev/null
           jq -e '.transport == "github-actions-v5-direct-source" and .netlify_used == false' out/transport.json >/dev/null
           jq -e '.universe_fresh == true and (.stocks | length >= 296)' out/universe.json >/dev/null
-          jq -e '.discovery.universe_scanned_each_cycle == true and .discovery.universe_count >= 296' out/radar.json >/dev/null
+          jq -e '.radar_version == 2 and .discovery.universe_scanned_each_cycle == true and .discovery.universe_count >= 296 and (.pre_move_sentinel | length > 0) and .discovery.safeguards.focus_is_not_discovery_boundary == true' out/radar.json >/dev/null
 
       - name: Publish to egx-live without force
         shell: bash
