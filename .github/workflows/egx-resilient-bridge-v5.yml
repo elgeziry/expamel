@@ -1,5 +1,4 @@
 name: EGX Resilient Bridge V5 direct source
-
 'on':
   workflow_dispatch:
   repository_dispatch:
@@ -13,18 +12,15 @@ name: EGX Resilient Bridge V5 direct source
       - 'egx-market-feed-v2/scripts/github-direct-publish.mts'
       - 'egx-market-feed-v2/scripts/build-dynamic-radar.mts'
       - 'egx-market-feed-v2/scripts/build-capital-allocation-engine.mts'
+      - 'egx-market-feed-v2/research-overrides.json'
       - 'research-overrides.json'
-
 permissions:
   contents: write
-
 concurrency:
   group: egx-v5-direct-publisher
   cancel-in-progress: false
-
 env:
   FOCUS_SYMBOLS: EFIH,ICFC,EFID,EGAL,AMOC,JUFO,ORWE,SVCE,MASR,ORAS,BONY,MFPC,ABUK,ETEL,ORHD,HELI,TMGH,VLMRA,KABO,ATQA,MPCO,SWDY
-
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -53,7 +49,7 @@ jobs:
           URL="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/egx-live/history.json?ts=$(date +%s)"
           curl -fsSL --retry 3 --retry-delay 1 "$URL" -o egx-market-feed-v2/out/history.json
           jq -e '.schema == "egx-session-history-v4" and (.sessions|length) >= 6 and (.cycle_quality|length) > 0' egx-market-feed-v2/out/history.json >/dev/null
-      - name: Build Capital Allocation Engine V2
+      - name: Build Capital Allocation Engine V3
         working-directory: egx-market-feed-v2
         run: node --experimental-strip-types scripts/build-capital-allocation-engine.mts
       - name: Validate output contract and capital engine
@@ -64,7 +60,9 @@ jobs:
           jq -e '.execution_usable == true and .bridge_gate == "pass" and (.blockers | length == 0)' out/contract.json >/dev/null
           jq -e '.universe_fresh == true and (.stocks | length >= 296)' out/universe.json >/dev/null
           jq -e '.radar_version == 2 and .discovery.universe_count >= 296' out/radar.json >/dev/null
-          jq -e '.engine == "EGX Capital Allocation Engine" and .version == 2 and .history_integration.loaded == true and .history_integration.sessions_available >= 6 and .methodology.history_cycle_integrated == true and (.ranked | length > 0)' out/capital-allocation.json >/dev/null
+          jq -e '.engine == "EGX Capital Allocation Engine" and .version == 3 and .history_integration.loaded == true and .history_integration.sessions_available >= 6 and .methodology.history_cycle_integrated == true and (.ranked | length > 0)' out/capital-allocation.json >/dev/null
+          jq -e '.ranked[] | select(.symbol=="AMOC") | .gates.sharia_pass == true and .gates.fundamental_verified == true and .gates.valuation_verified == true and .gates.execution_ready == true' out/capital-allocation.json >/dev/null
+          jq -e '.ranked[] | select(.symbol=="GBCO") | .gates.sharia_pass == false and .gates.execution_ready == false' out/capital-allocation.json >/dev/null
       - name: Publish to egx-live without force
         shell: bash
         env:
@@ -81,6 +79,6 @@ jobs:
           mapfile -t SNAPSHOTS < <(find snapshots -type f -name '*.json' | sort); COUNT="${#SNAPSHOTS[@]}"; if [ "$COUNT" -gt 800 ]; then REMOVE=$((COUNT-800)); for ((i=0;i<REMOVE;i++)); do rm -f "${SNAPSHOTS[$i]}"; done; find snapshots -type d -empty -delete || true; fi
           git add latest.json contract.json health.json transport.json focus.json universe.json radar.json capital-allocation.json snapshots
           if git diff --cached --quiet; then exit 0; fi
-          git commit -q -m "EGX V5 + Capital Allocation V2 $(jq -r '.retrieved_at' contract.json)"
+          git commit -q -m "EGX V5 + Capital Allocation V3 $(jq -r '.retrieved_at' contract.json)"
           for attempt in 1 2 3 4 5; do if git push -q origin egx-live; then exit 0; fi; git fetch -q origin egx-live; git rebase origin/egx-live || { git rebase --abort || true; }; sleep $((attempt*2)); done
           exit 1
