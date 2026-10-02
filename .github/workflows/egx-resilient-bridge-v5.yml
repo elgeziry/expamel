@@ -12,6 +12,7 @@ name: EGX Resilient Bridge V5 direct source
       - '.github/workflows/egx-resilient-bridge-v5.yml'
       - 'egx-market-feed-v2/scripts/github-direct-publish.mts'
       - 'egx-market-feed-v2/scripts/build-dynamic-radar.mts'
+      - 'egx-market-feed-v2/scripts/build-capital-allocation-engine.mts'
       - 'egx-market-feed-v2/netlify/functions/api.mts'
       - 'egx-market-feed-v2/netlify/functions/_lib/access.mts'
       - 'egx-market-feed-v2/netlify/functions/_lib/analytics.mts'
@@ -21,8 +22,6 @@ name: EGX Resilient Bridge V5 direct source
 permissions:
   contents: write
 
-# Never cancel a running market publish just because the next 5-minute tick arrived.
-# Queueing is safer than self-cancellation.
 concurrency:
   group: egx-v5-direct-publisher
   cancel-in-progress: false
@@ -60,7 +59,11 @@ jobs:
         working-directory: egx-market-feed-v2
         run: node --experimental-strip-types scripts/build-dynamic-radar.mts
 
-      - name: Validate output contract
+      - name: Build Capital Allocation Engine
+        working-directory: egx-market-feed-v2
+        run: node --experimental-strip-types scripts/build-capital-allocation-engine.mts
+
+      - name: Validate output contract and capital engine
         working-directory: egx-market-feed-v2
         shell: bash
         run: |
@@ -71,6 +74,7 @@ jobs:
           jq -e '.transport == "github-actions-v5-direct-source" and .netlify_used == false' out/transport.json >/dev/null
           jq -e '.universe_fresh == true and (.stocks | length >= 296)' out/universe.json >/dev/null
           jq -e '.radar_version == 2 and .discovery.universe_scanned_each_cycle == true and .discovery.universe_count >= 296 and (.pre_move_sentinel | length > 0) and .discovery.safeguards.focus_is_not_discovery_boundary == true' out/radar.json >/dev/null
+          jq -e '.engine == "EGX Capital Allocation Engine" and .version == 1 and .methodology.fail_closed == true and .methodology.portfolio_replacement_required == true and (.ranked | length > 0)' out/capital-allocation.json >/dev/null
 
       - name: Publish to egx-live without force
         shell: bash
@@ -101,6 +105,7 @@ jobs:
           cp "${SRC}/focus.json" focus.json
           cp "${SRC}/universe.json" universe.json
           cp "${SRC}/radar.json" radar.json
+          cp "${SRC}/capital-allocation.json" capital-allocation.json
 
           SESSION="$(jq -r '.expected_reference_session_date' contract.json)"
           SNAP="$(date -u +%H%M%SZ)"
@@ -115,17 +120,17 @@ jobs:
             find snapshots -type d -empty -delete || true
           fi
 
-          git add latest.json contract.json health.json transport.json focus.json universe.json radar.json snapshots
+          git add latest.json contract.json health.json transport.json focus.json universe.json radar.json capital-allocation.json snapshots
           if git diff --cached --quiet; then
             echo 'No publish changes.'
             exit 0
           fi
           STAMP="$(jq -r '.retrieved_at' contract.json)"
-          git commit -q -m "EGX V5 direct snapshot ${STAMP}"
+          git commit -q -m "EGX V5 + Capital Allocation snapshot ${STAMP}"
 
           for attempt in 1 2 3 4; do
             if git push -q origin egx-live; then
-              echo "Published V5 direct packet on attempt ${attempt}."
+              echo "Published V5 + Capital Allocation packet on attempt ${attempt}."
               exit 0
             fi
             echo "Push race on attempt ${attempt}; rebasing."
