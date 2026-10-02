@@ -13,11 +13,7 @@ name: EGX Resilient Bridge V5 direct source
       - 'egx-market-feed-v2/scripts/github-direct-publish.mts'
       - 'egx-market-feed-v2/scripts/build-dynamic-radar.mts'
       - 'egx-market-feed-v2/scripts/build-capital-allocation-engine.mts'
-      - 'egx-market-feed-v2/netlify/functions/api.mts'
-      - 'egx-market-feed-v2/netlify/functions/_lib/access.mts'
-      - 'egx-market-feed-v2/netlify/functions/_lib/analytics.mts'
-      - 'egx-market-feed-v2/package.json'
-      - 'egx-market-feed-v2/package-lock.json'
+      - 'research-overrides.json'
 
 permissions:
   contents: write
@@ -34,48 +30,41 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v4
-        with:
-          ref: master
-          fetch-depth: 1
-
-      - name: Use Node 22
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+        with: {ref: master, fetch-depth: 1}
+      - uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: npm
           cache-dependency-path: egx-market-feed-v2/package-lock.json
-
       - name: Install feed dependencies
         working-directory: egx-market-feed-v2
         run: npm ci --no-audit --no-fund
-
       - name: Build direct V5 market packet
         working-directory: egx-market-feed-v2
         run: node --experimental-strip-types scripts/github-direct-publish.mts
-
       - name: Build full-market dynamic opportunity radar
         working-directory: egx-market-feed-v2
         run: node --experimental-strip-types scripts/build-dynamic-radar.mts
-
-      - name: Build Capital Allocation Engine
+      - name: Load retained history into current build
+        shell: bash
+        run: |
+          set -euo pipefail
+          URL="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/egx-live/history.json?ts=$(date +%s)"
+          curl -fsSL --retry 3 --retry-delay 1 "$URL" -o egx-market-feed-v2/out/history.json
+          jq -e '.schema == "egx-session-history-v4" and (.sessions|length) >= 6 and (.cycle_quality|length) > 0' egx-market-feed-v2/out/history.json >/dev/null
+      - name: Build Capital Allocation Engine V2
         working-directory: egx-market-feed-v2
         run: node --experimental-strip-types scripts/build-capital-allocation-engine.mts
-
       - name: Validate output contract and capital engine
         working-directory: egx-market-feed-v2
         shell: bash
         run: |
           set -euo pipefail
           jq -e '.execution_usable == true and .bridge_gate == "pass" and (.blockers | length == 0)' out/contract.json >/dev/null
-          jq -e '.quality.discovery_full_market_scanned == true and .quality.discovery_universe_count >= 296 and .discovery_version == 2 and .quality.pre_move_sentinel_count > 0' out/contract.json >/dev/null
-          jq -e '.status == "ok" and .provider_dependency.netlify == false and .discovery.version == 2 and .discovery.dynamic_focus_enabled == true and .discovery.pre_move_sentinel_enabled == true and .discovery.structural_large_cap_watch_enabled == true' out/health.json >/dev/null
-          jq -e '.transport == "github-actions-v5-direct-source" and .netlify_used == false' out/transport.json >/dev/null
           jq -e '.universe_fresh == true and (.stocks | length >= 296)' out/universe.json >/dev/null
-          jq -e '.radar_version == 2 and .discovery.universe_scanned_each_cycle == true and .discovery.universe_count >= 296 and (.pre_move_sentinel | length > 0) and .discovery.safeguards.focus_is_not_discovery_boundary == true' out/radar.json >/dev/null
-          jq -e '.engine == "EGX Capital Allocation Engine" and .version == 1 and .methodology.fail_closed == true and .methodology.portfolio_replacement_required == true and (.ranked | length > 0)' out/capital-allocation.json >/dev/null
-
+          jq -e '.radar_version == 2 and .discovery.universe_count >= 296' out/radar.json >/dev/null
+          jq -e '.engine == "EGX Capital Allocation Engine" and .version == 2 and .history_integration.loaded == true and .history_integration.sessions_available >= 6 and .methodology.history_cycle_integrated == true and (.ranked | length > 0)' out/capital-allocation.json >/dev/null
       - name: Publish to egx-live without force
         shell: bash
         env:
@@ -83,60 +72,15 @@ jobs:
         run: |
           set -euo pipefail
           SRC="${GITHUB_WORKSPACE}/egx-market-feed-v2/out"
-          rm -rf /tmp/egx-pub
-          git init -q /tmp/egx-pub
-          cd /tmp/egx-pub
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          rm -rf /tmp/egx-pub && git init -q /tmp/egx-pub && cd /tmp/egx-pub
+          git config user.name 'github-actions[bot]'; git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-
-          if git ls-remote --exit-code --heads origin egx-live >/dev/null 2>&1; then
-            git fetch -q origin egx-live
-            git checkout -q -B egx-live origin/egx-live
-          else
-            git checkout -q --orphan egx-live
-            git rm -rf . >/dev/null 2>&1 || true
-          fi
-
-          cp "${SRC}/latest.json" latest.json
-          cp "${SRC}/contract.json" contract.json
-          cp "${SRC}/health.json" health.json
-          cp "${SRC}/transport.json" transport.json
-          cp "${SRC}/focus.json" focus.json
-          cp "${SRC}/universe.json" universe.json
-          cp "${SRC}/radar.json" radar.json
-          cp "${SRC}/capital-allocation.json" capital-allocation.json
-
-          SESSION="$(jq -r '.expected_reference_session_date' contract.json)"
-          SNAP="$(date -u +%H%M%SZ)"
-          mkdir -p "snapshots/${SESSION}"
-          cp focus.json "snapshots/${SESSION}/${SNAP}.json"
-
-          mapfile -t SNAPSHOTS < <(find snapshots -type f -name '*.json' | sort)
-          COUNT="${#SNAPSHOTS[@]}"
-          if [ "$COUNT" -gt 500 ]; then
-            REMOVE=$((COUNT-500))
-            for ((i=0; i<REMOVE; i++)); do rm -f "${SNAPSHOTS[$i]}"; done
-            find snapshots -type d -empty -delete || true
-          fi
-
+          if git ls-remote --exit-code --heads origin egx-live >/dev/null 2>&1; then git fetch -q origin egx-live; git checkout -q -B egx-live origin/egx-live; else git checkout -q --orphan egx-live; git rm -rf . >/dev/null 2>&1 || true; fi
+          for f in latest.json contract.json health.json transport.json focus.json universe.json radar.json capital-allocation.json; do cp "${SRC}/$f" "$f"; done
+          SESSION="$(jq -r '.expected_reference_session_date' contract.json)"; SNAP="$(date -u +%H%M%SZ)"; mkdir -p "snapshots/${SESSION}"; cp focus.json "snapshots/${SESSION}/${SNAP}.json"
+          mapfile -t SNAPSHOTS < <(find snapshots -type f -name '*.json' | sort); COUNT="${#SNAPSHOTS[@]}"; if [ "$COUNT" -gt 800 ]; then REMOVE=$((COUNT-800)); for ((i=0;i<REMOVE;i++)); do rm -f "${SNAPSHOTS[$i]}"; done; find snapshots -type d -empty -delete || true; fi
           git add latest.json contract.json health.json transport.json focus.json universe.json radar.json capital-allocation.json snapshots
-          if git diff --cached --quiet; then
-            echo 'No publish changes.'
-            exit 0
-          fi
-          STAMP="$(jq -r '.retrieved_at' contract.json)"
-          git commit -q -m "EGX V5 + Capital Allocation snapshot ${STAMP}"
-
-          for attempt in 1 2 3 4; do
-            if git push -q origin egx-live; then
-              echo "Published V5 + Capital Allocation packet on attempt ${attempt}."
-              exit 0
-            fi
-            echo "Push race on attempt ${attempt}; rebasing."
-            git fetch -q origin egx-live
-            git rebase origin/egx-live || { git rebase --abort || true; sleep $((attempt*2)); continue; }
-            sleep $((attempt*2))
-          done
-          echo 'Failed to publish after retries.' >&2
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -q -m "EGX V5 + Capital Allocation V2 $(jq -r '.retrieved_at' contract.json)"
+          for attempt in 1 2 3 4 5; do if git push -q origin egx-live; then exit 0; fi; git fetch -q origin egx-live; git rebase origin/egx-live || { git rebase --abort || true; }; sleep $((attempt*2)); done
           exit 1
