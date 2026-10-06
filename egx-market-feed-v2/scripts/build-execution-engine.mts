@@ -6,7 +6,12 @@ const round=(v:number,d=2)=>Number(v.toFixed(d));
 async function json(path:string){return JSON.parse(await readFile(path,'utf8'));}
 const [capital,radar,universe,contract,history]=await Promise.all([json(`${OUT}/capital-allocation.json`),json(`${OUT}/radar.json`),json(`${OUT}/universe.json`),json(`${OUT}/contract.json`),json(`${OUT}/history.json`)]);
 if(contract?.bridge_gate!=='pass'||contract?.execution_usable!==true) throw new Error('FAIL_CLOSED:bridge_not_execution_usable');
-if((universe?.stocks||[]).length<296) throw new Error('FAIL_CLOSED:universe_below_296');
+const currentUniverse=(universe?.stocks||[]).length;
+const universeTarget=Number(universe?.roster_target_count||296);
+const quarantinedSymbols=Array.isArray(universe?.quarantined_symbols)?universe.quarantined_symbols:[];
+const universeOperational=universe?.universe_operational===true||currentUniverse>=universeTarget;
+if(!universeOperational) throw new Error('FAIL_CLOSED:universe_not_operational');
+if(currentUniverse+quarantinedSymbols.length<universeTarget) throw new Error('FAIL_CLOSED:universe_target_not_accounted');
 if(radar?.radar_version!==2) throw new Error('FAIL_CLOSED:radar_v2_missing');
 if((history?.sessions||[]).length<6) throw new Error('FAIL_CLOSED:history_missing');
 const bySym=new Map((universe.stocks||[]).map((x:any)=>[String(x.symbol||'').toUpperCase(),x]));
@@ -23,6 +28,6 @@ function plan(c:any){
 }
 const ranked=(capital.ranked||[]).map(plan);
 const executable=ranked.filter((x:any)=>['BUY_ZONE','LIMIT_ON_WEAKNESS'].includes(x.execution_plan?.status));
-const packet={engine:'EGX V5 Execution Engine',version:1,generated_at:new Date().toISOString(),reference_session:contract.expected_reference_session_date,architecture:['V5_resilient_data','history_cycle_quality','opportunity_sentinel_v2','capital_allocation_v3','execution_engine_v1'],fail_closed:true,universe_count:(universe.stocks||[]).length,history_sessions:(history.sessions||[]).length,executable_count:executable.length,execution_queue:executable.slice(0,10),ranked:ranked.slice(0,50),note:'Execution zones are systematic technical risk bands. Portfolio quantities require confirmed current NAV/cash/holdings and are never invented.'};
+const packet={engine:'EGX V5 Execution Engine',version:1,generated_at:new Date().toISOString(),reference_session:contract.expected_reference_session_date,architecture:['V5_resilient_data','history_cycle_quality','opportunity_sentinel_v2','capital_allocation_v3','execution_engine_v1'],fail_closed:true,universe_count:currentUniverse,universe_target:universeTarget,universe_operational:universeOperational,coverage_mode:universe?.quality?.coverage_mode||'complete',quarantined_symbols:quarantinedSymbols,history_sessions:(history.sessions||[]).length,executable_count:executable.length,execution_queue:executable.slice(0,10),ranked:ranked.slice(0,50),note:'Execution zones are systematic technical risk bands. Missing market symbols are quarantined, never price-filled. Portfolio quantities require confirmed current NAV/cash/holdings and are never invented.'};
 await writeFile(`${OUT}/execution-engine.json`,JSON.stringify(packet,null,2));
 console.log(JSON.stringify({engine:packet.engine,universe:packet.universe_count,history:packet.history_sessions,executable:packet.executable_count}));
