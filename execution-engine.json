@@ -1,7 +1,7 @@
 {
   "engine": "EGX V5 Execution Engine",
   "version": 1,
-  "generated_at": "2026-10-06T14:43:36.164Z",
+  "generated_at": "2026-10-06T14:44:07.364Z",
   "reference_session": "2026-10-06",
   "architecture": [
     "V5_resilient_data",
@@ -19,7 +19,7 @@
     "RMTV"
   ],
   "history_sessions": 60,
-  "executable_count": 4,
+  "executable_count": 5,
   "execution_queue": [
     {
       "symbol": "AMOC",
@@ -305,6 +305,80 @@
         "invalidation": 82.5,
         "risk_from_low_pct": 4.71,
         "day_extension": 0.385,
+        "sizing": {
+          "probe_pct_of_target": 25,
+          "core_add_pct": 35,
+          "reserve_pct": 40
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "ETEL",
+      "score": 70.6,
+      "raw_score": 77.6,
+      "penalty": 7,
+      "action": "ACCUMULATE_ON_WEAKNESS",
+      "stage": "pre_move_watch",
+      "discovery_score": 7.67,
+      "gates": {
+        "sharia_pass": true,
+        "fundamental_verified": true,
+        "valuation_verified": true,
+        "execution_ready": true
+      },
+      "sharia_status": "compliant",
+      "history_cycle": {
+        "symbol": "ETEL",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 58,
+        "native_sessions": 12,
+        "external_validated_sessions": 46,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 10,
+          "breakout_strength": 8.280457771983194,
+          "volume_asymmetry": 6.5938451653710235,
+          "retest_quality": 7,
+          "higher_low": 6.187969924812031
+        },
+        "score": 7.8
+      },
+      "components": {
+        "fundamentals": 9.3,
+        "valuation": 7.1,
+        "catalyst_transmission": 8.5,
+        "cycle_quality": 7.8,
+        "pre_move_stage": 9,
+        "institutional_proxy": 6.48,
+        "entry_quality": 7.76,
+        "risk_reward": 7.67,
+        "portfolio_fit": 5,
+        "liquidity": 10,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 5,
+      "previous_rank": null,
+      "rank_change": null,
+      "execution_plan": {
+        "status": "LIMIT_ON_WEAKNESS",
+        "reference_close": 149.88,
+        "entry_zone": [
+          145.37,
+          149.79
+        ],
+        "invalidation": 119.18,
+        "risk_from_low_pct": 21.97,
+        "day_extension": 0.673,
         "sizing": {
           "probe_pct_of_target": 25,
           "core_add_pct": 35,
@@ -616,6 +690,80 @@
       }
     },
     {
+      "symbol": "ETEL",
+      "score": 70.6,
+      "raw_score": 77.6,
+      "penalty": 7,
+      "action": "ACCUMULATE_ON_WEAKNESS",
+      "stage": "pre_move_watch",
+      "discovery_score": 7.67,
+      "gates": {
+        "sharia_pass": true,
+        "fundamental_verified": true,
+        "valuation_verified": true,
+        "execution_ready": true
+      },
+      "sharia_status": "compliant",
+      "history_cycle": {
+        "symbol": "ETEL",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 58,
+        "native_sessions": 12,
+        "external_validated_sessions": 46,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 10,
+          "breakout_strength": 8.280457771983194,
+          "volume_asymmetry": 6.5938451653710235,
+          "retest_quality": 7,
+          "higher_low": 6.187969924812031
+        },
+        "score": 7.8
+      },
+      "components": {
+        "fundamentals": 9.3,
+        "valuation": 7.1,
+        "catalyst_transmission": 8.5,
+        "cycle_quality": 7.8,
+        "pre_move_stage": 9,
+        "institutional_proxy": 6.48,
+        "entry_quality": 7.76,
+        "risk_reward": 7.67,
+        "portfolio_fit": 5,
+        "liquidity": 10,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 5,
+      "previous_rank": null,
+      "rank_change": null,
+      "execution_plan": {
+        "status": "LIMIT_ON_WEAKNESS",
+        "reference_close": 149.88,
+        "entry_zone": [
+          145.37,
+          149.79
+        ],
+        "invalidation": 119.18,
+        "risk_from_low_pct": 21.97,
+        "day_extension": 0.673,
+        "sizing": {
+          "probe_pct_of_target": 25,
+          "core_add_pct": 35,
+          "reserve_pct": 40
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
       "symbol": "GBCO",
       "score": 70.49,
       "raw_score": 70.49,
@@ -667,9 +815,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 5,
+      "rank": 6,
       "previous_rank": 5,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 31.78,
@@ -745,9 +893,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 6,
+      "rank": 7,
       "previous_rank": 6,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 24.79,
@@ -819,9 +967,9 @@
       },
       "missing_deep_analysis": [],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 7,
+      "rank": 8,
       "previous_rank": 7,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 343.41,
@@ -897,9 +1045,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 8,
+      "rank": 9,
       "previous_rank": 8,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 26.79,
@@ -975,9 +1123,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 9,
+      "rank": 10,
       "previous_rank": 9,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 11.48,
@@ -1053,9 +1201,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 10,
+      "rank": 11,
       "previous_rank": 10,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 21.5,
@@ -1131,9 +1279,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 11,
+      "rank": 12,
       "previous_rank": 11,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 5.02,
@@ -1209,9 +1357,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 12,
+      "rank": 13,
       "previous_rank": 12,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 38.48,
@@ -1287,9 +1435,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 13,
+      "rank": 14,
       "previous_rank": 13,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 0.92,
@@ -1365,9 +1513,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 14,
+      "rank": 15,
       "previous_rank": 14,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 18.72,
@@ -1443,9 +1591,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 15,
+      "rank": 16,
       "previous_rank": 15,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 21.83,
@@ -1521,9 +1669,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 16,
+      "rank": 17,
       "previous_rank": 16,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 38.84,
@@ -1599,9 +1747,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 17,
+      "rank": 18,
       "previous_rank": 17,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 19.36,
@@ -1677,9 +1825,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 18,
+      "rank": 19,
       "previous_rank": 18,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 12.94,
@@ -1755,9 +1903,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 19,
+      "rank": 20,
       "previous_rank": 19,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 237.22,
@@ -1833,9 +1981,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 20,
+      "rank": 21,
       "previous_rank": 20,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 59.27,
@@ -1911,9 +2059,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 21,
+      "rank": 22,
       "previous_rank": 21,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 242.56,
@@ -1989,9 +2137,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 22,
+      "rank": 23,
       "previous_rank": 22,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 18.11,
@@ -2067,9 +2215,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 23,
+      "rank": 24,
       "previous_rank": 23,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 17.14,
@@ -2145,9 +2293,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 24,
+      "rank": 25,
       "previous_rank": 24,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 1.41,
@@ -2223,9 +2371,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 25,
+      "rank": 26,
       "previous_rank": 25,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 23.9,
@@ -2301,9 +2449,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 26,
+      "rank": 27,
       "previous_rank": 26,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 11.05,
@@ -2379,9 +2527,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 27,
+      "rank": 28,
       "previous_rank": 27,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 12.09,
@@ -2457,9 +2605,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 28,
+      "rank": 29,
       "previous_rank": 28,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 2.05,
@@ -2535,9 +2683,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 29,
+      "rank": 30,
       "previous_rank": 29,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 15.5,
@@ -2613,9 +2761,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 30,
+      "rank": 31,
       "previous_rank": 30,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 34.5,
@@ -2691,9 +2839,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 31,
+      "rank": 32,
       "previous_rank": 31,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 404,
@@ -2769,9 +2917,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 32,
+      "rank": 33,
       "previous_rank": 32,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 7.59,
@@ -2847,9 +2995,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 33,
+      "rank": 34,
       "previous_rank": 33,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 316.07,
@@ -2925,9 +3073,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 34,
+      "rank": 35,
       "previous_rank": 34,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 9.4,
@@ -3003,9 +3151,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 35,
+      "rank": 36,
       "previous_rank": 35,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 118,
@@ -3081,9 +3229,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 36,
+      "rank": 37,
       "previous_rank": 36,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 0.69,
@@ -3159,9 +3307,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 37,
+      "rank": 38,
       "previous_rank": 37,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 23.06,
@@ -3237,9 +3385,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 38,
+      "rank": 39,
       "previous_rank": 38,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 14.33,
@@ -3315,9 +3463,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 39,
+      "rank": 40,
       "previous_rank": 39,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 196,
@@ -3393,9 +3541,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 40,
+      "rank": 41,
       "previous_rank": 40,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 0.37,
@@ -3471,9 +3619,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 41,
+      "rank": 42,
       "previous_rank": 41,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 70.01,
@@ -3549,9 +3697,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 42,
+      "rank": 43,
       "previous_rank": 42,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 0.49,
@@ -3627,9 +3775,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 43,
+      "rank": 44,
       "previous_rank": 43,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 2.76,
@@ -3705,9 +3853,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 44,
+      "rank": 45,
       "previous_rank": 44,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 39.49,
@@ -3739,12 +3887,12 @@
       "stage": "pre_move_watch",
       "discovery_score": 5.96,
       "gates": {
-        "sharia_pass": false,
+        "sharia_pass": true,
         "fundamental_verified": false,
         "valuation_verified": false,
         "execution_ready": false
       },
-      "sharia_status": "pending_verification",
+      "sharia_status": "compliant",
       "history_cycle": {
         "symbol": "SVCE",
         "current_session_present": true,
@@ -3779,13 +3927,12 @@
       },
       "missing_deep_analysis": [
         "fundamentals",
-        "valuation",
-        "sharia_verification"
+        "valuation"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 45,
+      "rank": 46,
       "previous_rank": 45,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 10.37,
@@ -3861,9 +4008,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 46,
+      "rank": 47,
       "previous_rank": 46,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 6.13,
@@ -3939,9 +4086,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 47,
+      "rank": 48,
       "previous_rank": 47,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 3.14,
@@ -4017,9 +4164,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 48,
+      "rank": 49,
       "previous_rank": 48,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 35.2,
@@ -4095,9 +4242,9 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 49,
+      "rank": 50,
       "previous_rank": 49,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 7.11,
@@ -4108,84 +4255,6 @@
         "invalidation": 6.66,
         "risk_from_low_pct": 4.71,
         "day_extension": 0.088,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "RMDA",
-      "score": 57.89,
-      "raw_score": 57.89,
-      "penalty": 0,
-      "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "pre_move_watch",
-      "discovery_score": 6.47,
-      "gates": {
-        "sharia_pass": false,
-        "fundamental_verified": false,
-        "valuation_verified": false,
-        "execution_ready": false
-      },
-      "sharia_status": "pending_verification",
-      "history_cycle": {
-        "symbol": "RMDA",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 53,
-        "native_sessions": 12,
-        "external_validated_sessions": 41,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 7.716981132075489,
-          "breakout_strength": 1.4426229508196773,
-          "volume_asymmetry": 5.522256832698911,
-          "retest_quality": 7,
-          "higher_low": 3
-        },
-        "score": 5.2
-      },
-      "components": {
-        "fundamentals": 5,
-        "valuation": 5,
-        "catalyst_transmission": 5,
-        "cycle_quality": 5.2,
-        "pre_move_stage": 9,
-        "institutional_proxy": 5.8,
-        "entry_quality": 6.26,
-        "risk_reward": 6.47,
-        "portfolio_fit": 5,
-        "liquidity": 8,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [
-        "fundamentals",
-        "valuation",
-        "sharia_verification"
-      ],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 50,
-      "previous_rank": 50,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 5.4,
-        "entry_zone": [
-          5.19,
-          5.35
-        ],
-        "invalidation": 4.96,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.565,
         "sizing": {
           "probe_pct_of_target": 0,
           "core_add_pct": 0,
