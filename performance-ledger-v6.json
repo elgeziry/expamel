@@ -1,7 +1,7 @@
 {
   "engine": "EGX V6 Performance Learning Ledger",
   "version": 1,
-  "generated_at": "2026-10-06T14:46:33.254Z",
+  "generated_at": "2026-10-06T14:46:57.548Z",
   "reference_session": "2026-10-06",
   "methodology": {
     "purpose": "track model signals and adverse/favorable excursion over future runs",
@@ -12,22 +12,23 @@
   },
   "summary": {
     "total_entries": 4,
-    "open_entries": 4,
+    "open_entries": 2,
     "invalidated_entries": 0,
+    "superseded_same_session_entries": 2,
     "open_positive": 0,
     "open_negative": 0,
     "average_open_return_pct": 0,
     "best_open": {
-      "id": "AMOC:2026-10-06:ACCUMULATE",
-      "symbol": "AMOC",
+      "id": "MASR:2026-10-06:ACCUMULATE",
+      "symbol": "MASR",
       "action": "ACCUMULATE",
       "first_session": "2026-10-06",
       "last_session": "2026-10-06",
-      "entry_price": 14.31,
-      "last_price": 14.31,
-      "initial_score": 76.06,
-      "current_score": 73.4,
-      "capital_efficiency_score": 5.12,
+      "entry_price": 7.61,
+      "last_price": 7.61,
+      "initial_score": 70.52,
+      "current_score": 73.7,
+      "capital_efficiency_score": 5.16,
       "evidence_coverage_pct": 100,
       "market_regime": "neutral_rotation",
       "status": "open",
@@ -37,19 +38,19 @@
       "observations": 3,
       "notional_only": true,
       "note": "Model signal tracking only; not proof of a user trade or fill.",
-      "current_model_action": "WAIT_ENTRY"
+      "current_model_action": "ACCUMULATE"
     },
     "worst_open": {
-      "id": "AMOC:2026-10-06:ACCUMULATE",
-      "symbol": "AMOC",
+      "id": "MASR:2026-10-06:ACCUMULATE",
+      "symbol": "MASR",
       "action": "ACCUMULATE",
       "first_session": "2026-10-06",
       "last_session": "2026-10-06",
-      "entry_price": 14.31,
-      "last_price": 14.31,
-      "initial_score": 76.06,
-      "current_score": 73.4,
-      "capital_efficiency_score": 5.12,
+      "entry_price": 7.61,
+      "last_price": 7.61,
+      "initial_score": 70.52,
+      "current_score": 73.7,
+      "capital_efficiency_score": 5.16,
       "evidence_coverage_pct": 100,
       "market_regime": "neutral_rotation",
       "status": "open",
@@ -59,7 +60,7 @@
       "observations": 3,
       "notional_only": true,
       "note": "Model signal tracking only; not proof of a user trade or fill.",
-      "current_model_action": "WAIT_ENTRY"
+      "current_model_action": "ACCUMULATE"
     }
   },
   "entries": [
@@ -76,11 +77,11 @@
       "capital_efficiency_score": 5.12,
       "evidence_coverage_pct": 100,
       "market_regime": "neutral_rotation",
-      "status": "open",
+      "status": "superseded_same_session",
       "current_return_pct": 0,
       "max_favorable_pct": 0,
       "max_adverse_pct": 0,
-      "observations": 3,
+      "observations": 4,
       "notional_only": true,
       "note": "Model signal tracking only; not proof of a user trade or fill.",
       "current_model_action": "WAIT_ENTRY"
@@ -98,11 +99,11 @@
       "capital_efficiency_score": 5.15,
       "evidence_coverage_pct": 100,
       "market_regime": "neutral_rotation",
-      "status": "open",
+      "status": "superseded_same_session",
       "current_return_pct": 0,
       "max_favorable_pct": 0,
       "max_adverse_pct": 0,
-      "observations": 2,
+      "observations": 3,
       "notional_only": true,
       "note": "Model signal tracking only; not proof of a user trade or fill.",
       "current_model_action": "WAIT_RISK_REWARD"
@@ -124,7 +125,7 @@
       "current_return_pct": 0,
       "max_favorable_pct": 0,
       "max_adverse_pct": 0,
-      "observations": 2,
+      "observations": 3,
       "notional_only": true,
       "note": "Model signal tracking only; not proof of a user trade or fill.",
       "current_model_action": "ACCUMULATE"
@@ -146,9 +147,10 @@
       "current_return_pct": 0,
       "max_favorable_pct": 0,
       "max_adverse_pct": 0,
-      "observations": 1,
+      "observations": 2,
       "notional_only": true,
-      "note": "Model signal tracking only; not proof of a user trade or fill."
+      "note": "Model signal tracking only; not proof of a user trade or fill.",
+      "current_model_action": "ACCUMULATE"
     }
   ]
 }
