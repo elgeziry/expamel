@@ -331,6 +331,9 @@ const discovery = {
   mode: 'full_universe_sentinel_then_dynamic_focus',
   universe_scanned_each_cycle: true,
   universe_count: universe.stocks?.length ?? 0,
+  roster_target_count: universe.roster_target_count ?? 296,
+  quarantined_symbols: universe.quarantined_symbols || [],
+  universe_operational: universe.universe_operational === true || (universe.stocks?.length ?? 0) >= 296,
   eligible_liquid_count: universeRows.length,
   permanent_focus_count: baseRows.length,
   dynamic_promoted_count: promotedRows.length,
@@ -347,6 +350,8 @@ const discovery = {
     quiet_accumulation_lane_enabled: true,
     institutional_flow_is_proxy_not_confirmed: true,
     extended_moves_marked_no_chase: true,
+    missing_symbols_quarantined_not_fabricated: true,
+    adaptive_coverage_preserves_fail_closed_for_missing_focus: true,
   },
   rule: 'Permanent focus is monitoring depth only. Opportunity discovery starts from the full EGX universe every cycle; pre-move and structural sentinels can promote names automatically.',
 };
@@ -370,7 +375,10 @@ contract.discovery_version = 2;
 
 health.discovery = {
   version: 2,
-  full_market_scan_ok: (universe.stocks?.length ?? 0) >= 296,
+  full_market_scan_ok: universe.universe_operational === true || (universe.stocks?.length ?? 0) >= 296,
+  current_universe_count: universe.stocks?.length ?? 0,
+  roster_target_count: universe.roster_target_count ?? 296,
+  quarantined_symbols: universe.quarantined_symbols || [],
   dynamic_focus_enabled: true,
   pre_move_sentinel_enabled: true,
   structural_large_cap_watch_enabled: true,
@@ -394,6 +402,7 @@ const radar = {
   rank_movers: rankMovers,
   newly_promoted: promotedRows.filter((r: any) => newlyPromotedSymbols.includes(symbolOf(r))),
   top_discovery: topDiscovery,
+  all_ranked: allRanked,
   extended_no_chase: extendedNoChase,
   lanes,
   institutional_proxy_note: 'This lane is a market-data proxy based on size, traded value, demand, relative volume and close location. It is not confirmed institution buy/sell flow.',
