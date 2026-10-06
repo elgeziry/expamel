@@ -1,7 +1,7 @@
 {
   "engine": "EGX V6 Performance Learning Ledger",
   "version": 1,
-  "generated_at": "2026-10-06T14:36:31.884Z",
+  "generated_at": "2026-10-06T14:39:52.409Z",
   "reference_session": "2026-10-06",
   "methodology": {
     "purpose": "track model signals and adverse/favorable excursion over future runs",
@@ -11,8 +11,8 @@
     "hard_fail_can_invalidate_open_signal": true
   },
   "summary": {
-    "total_entries": 1,
-    "open_entries": 1,
+    "total_entries": 3,
+    "open_entries": 3,
     "invalidated_entries": 0,
     "open_positive": 0,
     "open_negative": 0,
@@ -34,9 +34,10 @@
       "current_return_pct": 0,
       "max_favorable_pct": 0,
       "max_adverse_pct": 0,
-      "observations": 1,
+      "observations": 2,
       "notional_only": true,
-      "note": "Model signal tracking only; not proof of a user trade or fill."
+      "note": "Model signal tracking only; not proof of a user trade or fill.",
+      "current_model_action": "ACCUMULATE"
     },
     "worst_open": {
       "id": "AMOC:2026-10-06:ACCUMULATE",
@@ -55,9 +56,10 @@
       "current_return_pct": 0,
       "max_favorable_pct": 0,
       "max_adverse_pct": 0,
-      "observations": 1,
+      "observations": 2,
       "notional_only": true,
-      "note": "Model signal tracking only; not proof of a user trade or fill."
+      "note": "Model signal tracking only; not proof of a user trade or fill.",
+      "current_model_action": "ACCUMULATE"
     }
   },
   "entries": [
@@ -72,6 +74,49 @@
       "initial_score": 76.06,
       "current_score": 76.06,
       "capital_efficiency_score": 5.12,
+      "evidence_coverage_pct": 100,
+      "market_regime": "neutral_rotation",
+      "status": "open",
+      "current_return_pct": 0,
+      "max_favorable_pct": 0,
+      "max_adverse_pct": 0,
+      "observations": 2,
+      "notional_only": true,
+      "note": "Model signal tracking only; not proof of a user trade or fill.",
+      "current_model_action": "ACCUMULATE"
+    },
+    {
+      "id": "ORAS:2026-10-06:ACCUMULATE",
+      "symbol": "ORAS",
+      "action": "ACCUMULATE",
+      "first_session": "2026-10-06",
+      "last_session": "2026-10-06",
+      "entry_price": 842.99,
+      "last_price": 842.99,
+      "initial_score": 75.39,
+      "current_score": 75.39,
+      "capital_efficiency_score": 5.15,
+      "evidence_coverage_pct": 100,
+      "market_regime": "neutral_rotation",
+      "status": "open",
+      "current_return_pct": 0,
+      "max_favorable_pct": 0,
+      "max_adverse_pct": 0,
+      "observations": 1,
+      "notional_only": true,
+      "note": "Model signal tracking only; not proof of a user trade or fill."
+    },
+    {
+      "id": "MASR:2026-10-06:ACCUMULATE",
+      "symbol": "MASR",
+      "action": "ACCUMULATE",
+      "first_session": "2026-10-06",
+      "last_session": "2026-10-06",
+      "entry_price": 7.61,
+      "last_price": 7.61,
+      "initial_score": 70.52,
+      "current_score": 70.52,
+      "capital_efficiency_score": 5.16,
       "evidence_coverage_pct": 100,
       "market_regime": "neutral_rotation",
       "status": "open",
