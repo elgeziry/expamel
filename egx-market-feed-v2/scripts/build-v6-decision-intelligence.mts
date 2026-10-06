@@ -33,9 +33,23 @@ function rrProxy(r:any){ const up=targetScore(num(r?.upside_to_analyst_target_pc
 function catalystProxy(r:any){ const event=r?.event_risk?.next_event; const up=num(r?.upside_to_analyst_target_pct); let s=5; if(event?.type==='earnings')s+=0.6; if(up!=null&&up>15)s+=0.7; if((num(r?.['Perf.W'])||0)>5&&(num(r?.['Perf.1M'])||0)>8)s+=0.5; return round(clamp(s)); }
 function sourceCount(x:any){ return Array.isArray(x?.sources)?x.sources.length:0; }
 function shariaStatus(x:any){ return String(x?.sharia_status||'pending_verification').toLowerCase(); }
+function ageDays(iso:any){ if(!iso)return null; const t=new Date(String(iso)).getTime(); if(!Number.isFinite(t))return null; return Math.max(0,(Date.now()-t)/86400000); }
+function fresh(iso:any,maxDays:number){ const a=ageDays(iso); return a!=null&&a<=maxDays; }
 function verifiedResearch(x:any){
-  const sh=shariaStatus(x); const shariaVerified=x?.sharia_verified===true; const shariaPass=shariaVerified&&['compliant','purification_required'].includes(sh);
-  return { sharia_status:sh, sharia_verified:shariaVerified, sharia_pass:shariaPass, fundamentals_verified:x?.fundamentals_verified===true, valuation_verified:x?.valuation_verified===true, source_count:sourceCount(x), research_as_of:x?.updated_at||x?.fundamentals_as_of||x?.valuation_as_of||x?.sharia_as_of||null };
+  const sh=shariaStatus(x);
+  const shariaFresh=fresh(x?.sharia_as_of||x?.updated_at,120);
+  const fundamentalsFresh=fresh(x?.fundamentals_as_of||x?.updated_at,210);
+  const valuationFresh=fresh(x?.valuation_as_of||x?.updated_at,45);
+  const shariaVerified=x?.sharia_verified===true&&shariaFresh;
+  const fundamentalsVerified=x?.fundamentals_verified===true&&fundamentalsFresh;
+  const valuationVerified=x?.valuation_verified===true&&valuationFresh;
+  const shariaPass=shariaVerified&&['compliant','purification_required'].includes(sh);
+  return {
+    sharia_status:sh,sharia_verified:shariaVerified,sharia_pass:shariaPass,
+    fundamentals_verified:fundamentalsVerified,valuation_verified:valuationVerified,
+    freshness:{sharia:{as_of:x?.sharia_as_of||null,age_days:ageDays(x?.sharia_as_of),max_days:120,fresh:shariaFresh},fundamentals:{as_of:x?.fundamentals_as_of||null,age_days:ageDays(x?.fundamentals_as_of),max_days:210,fresh:fundamentalsFresh},valuation:{as_of:x?.valuation_as_of||null,age_days:ageDays(x?.valuation_as_of),max_days:45,fresh:valuationFresh}},
+    source_count:sourceCount(x), research_as_of:x?.updated_at||x?.fundamentals_as_of||x?.valuation_as_of||x?.sharia_as_of||null
+  };
 }
 function marketRegime(stocks:any[]){
   const changes=stocks.map(x=>num(x?.change)).filter((x):x is number=>x!=null); const up=changes.filter(x=>x>0.05).length, down=changes.filter(x=>x<-0.05).length, flat=changes.length-up-down;
