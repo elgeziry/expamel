@@ -25,7 +25,10 @@ const entries=oldEntries.map((e:any)=>{
   const ret=(price/Number(e.entry_price)-1)*100;
   const curr:any=currentBySym.get(String(e.symbol||'').toUpperCase())||{};
   const hardFail=curr?.action==='AVOID'||curr?.research?.sharia_status==='non_compliant'||curr?.corporate_action?.technical_history_gate===false;
-  return {...e,last_session:session,last_price:round(price),current_return_pct:round(ret),max_favorable_pct:round(Math.max(num(e.max_favorable_pct)??ret,ret)),max_adverse_pct:round(Math.min(num(e.max_adverse_pct)??ret,ret)),observations:(Number(e.observations)||0)+1,current_model_action:curr?.action||null,current_score:curr?.score??null,status:hardFail?'invalidated_by_current_model':e.status||'open'};
+  const actionable=['STRONG_BUY','BUY','ACCUMULATE'].includes(String(curr?.action||''));
+  const sameSessionSuperseded=String(e.first_session||'')===String(session)&&!actionable&&!hardFail;
+  const nextStatus=hardFail?'invalidated_by_current_model':sameSessionSuperseded?'superseded_same_session':e.status||'open';
+  return {...e,last_session:session,last_price:round(price),current_return_pct:round(ret),max_favorable_pct:round(Math.max(num(e.max_favorable_pct)??ret,ret)),max_adverse_pct:round(Math.min(num(e.max_adverse_pct)??ret,ret)),observations:(Number(e.observations)||0)+1,current_model_action:curr?.action||null,current_score:curr?.score??null,status:nextStatus};
 });
 const existingOpen=new Set(entries.filter((e:any)=>e.status==='open').map((e:any)=>String(e.symbol||'').toUpperCase()));
 const newSignals=(decision?.executable_queue||[]).filter((x:any)=>['STRONG_BUY','BUY','ACCUMULATE'].includes(x.action)).slice(0,12);
@@ -37,8 +40,9 @@ for(const s of newSignals){
 const trimmed=entries.slice(-500);
 const open=trimmed.filter((e:any)=>e.status==='open');
 const invalidated=trimmed.filter((e:any)=>e.status==='invalidated_by_current_model');
+const superseded=trimmed.filter((e:any)=>e.status==='superseded_same_session');
 const returns=open.map((e:any)=>num(e.current_return_pct)).filter((x):x is number=>x!=null);
-const summary={total_entries:trimmed.length,open_entries:open.length,invalidated_entries:invalidated.length,open_positive:returns.filter(x=>x>0).length,open_negative:returns.filter(x=>x<0).length,average_open_return_pct:returns.length?round(returns.reduce((a,b)=>a+b,0)/returns.length):null,best_open:[...open].sort((a:any,b:any)=>(num(b.current_return_pct)||0)-(num(a.current_return_pct)||0))[0]||null,worst_open:[...open].sort((a:any,b:any)=>(num(a.current_return_pct)||0)-(num(b.current_return_pct)||0))[0]||null};
+const summary={total_entries:trimmed.length,open_entries:open.length,invalidated_entries:invalidated.length,superseded_same_session_entries:superseded.length,open_positive:returns.filter(x=>x>0).length,open_negative:returns.filter(x=>x<0).length,average_open_return_pct:returns.length?round(returns.reduce((a,b)=>a+b,0)/returns.length):null,best_open:[...open].sort((a:any,b:any)=>(num(b.current_return_pct)||0)-(num(a.current_return_pct)||0))[0]||null,worst_open:[...open].sort((a:any,b:any)=>(num(a.current_return_pct)||0)-(num(b.current_return_pct)||0))[0]||null};
 const packet={engine:'EGX V6 Performance Learning Ledger',version:1,generated_at:new Date().toISOString(),reference_session:session,methodology:{purpose:'track model signals and adverse/favorable excursion over future runs',not_a_backtest:true,not_user_execution_log:true,never_rewrites_entry_price:true,hard_fail_can_invalidate_open_signal:true},summary,entries:trimmed};
 await writeFile(OUT+'/performance-ledger-v6.json',JSON.stringify(packet,null,2));
 console.log(JSON.stringify({engine:packet.engine,session,total:summary.total_entries,open:summary.open_entries,avg_open_return:summary.average_open_return_pct}));
