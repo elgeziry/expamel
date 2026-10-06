@@ -4,6 +4,7 @@ import { buildExecutionBundle } from '../netlify/functions/_lib/access.mts';
 
 const SOURCE_ID = 'egx-market-feed-v2';
 const EXPECTED_UNIVERSE_FLOOR = 296;
+const MAX_QUARANTINED_SYMBOLS = 1;
 const LIVE_MAX_AGE_SECONDS = 600;
 const STAGNATION_MAX_SECONDS = 1200;
 const FOCUS = (process.env.FOCUS_SYMBOLS || 'EFIH,ICFC,EFID,EGAL,AMOC,JUFO,ORWE,SVCE,MASR,ORAS,BONY,MFPC,ABUK,ETEL,ORHD,HELI,TMGH,VLMRA,KABO,ATQA,MPCO,SWDY')
@@ -41,14 +42,27 @@ async function readPreviousContract() {
   }
 }
 
-function assertBundle(bundle: any) {
+async function readPreviousUniverse() {
+  try {
+    const stamp = Date.now();
+    return await fetchJson(`https://raw.githubusercontent.com/${REPO}/egx-live/universe.json?ts=${stamp}`, 1);
+  } catch {
+    return null;
+  }
+}
+
+function symbolSet(rows: any[]) {
+  return new Set((rows || []).map((x: any) => String(x?.symbol || '').toUpperCase()).filter(Boolean));
+}
+
+function assertBundle(bundle: any, universeFloor = EXPECTED_UNIVERSE_FLOOR) {
   const reasons: string[] = [];
   if (!bundle || typeof bundle !== 'object') reasons.push('not_object');
   if (bundle?.source_id !== SOURCE_ID) reasons.push('source_identity_mismatch');
   if (bundle?.execution_usable !== true) reasons.push('execution_not_usable');
   if ((bundle?.blockers || []).length) reasons.push(`blockers:${(bundle.blockers || []).join(',')}`);
   const q = bundle?.quality || {};
-  if ((q.row_count || 0) < EXPECTED_UNIVERSE_FLOOR) reasons.push(`incomplete_universe:${q.row_count || 0}`);
+  if ((q.row_count || 0) < universeFloor) reasons.push(`incomplete_universe:${q.row_count || 0}`);
   if ((q.close_coverage_pct || 0) < 90) reasons.push('low_close_coverage');
   if ((q.volume_coverage_pct || 0) < 80) reasons.push('low_volume_coverage');
   if (q.live_session_consistent !== true) reasons.push('session_inconsistent');
@@ -59,15 +73,37 @@ function assertBundle(bundle: any) {
   if (reasons.length) throw new Error(`FAIL_CLOSED:${reasons.join('|')}`);
 }
 
-const previous = await readPreviousContract();
+const [previous, previousUniverse] = await Promise.all([readPreviousContract(), readPreviousUniverse()]);
 const market = await fetchMarket(null, now);
+const currentSymbols = symbolSet(market.rows || []);
+const previousTargetRows = Array.isArray(previousUniverse?.roster_target_symbols) && previousUniverse.roster_target_symbols.length >= EXPECTED_UNIVERSE_FLOOR
+  ? previousUniverse.roster_target_symbols.map((symbol: string) => ({ symbol }))
+  : (previousUniverse?.stocks || []);
+const targetSymbols = symbolSet(previousTargetRows);
+const missingSymbols = [...targetSymbols].filter(symbol => !currentSymbols.has(symbol)).sort();
+const addedSymbols = [...currentSymbols].filter(symbol => targetSymbols.size > 0 && !targetSymbols.has(symbol)).sort();
+const missingFocusSymbols = missingSymbols.filter(symbol => FOCUS.includes(symbol));
+const adaptiveCoverageAllowed =
+  targetSymbols.size >= EXPECTED_UNIVERSE_FLOOR &&
+  market.rows.length >= EXPECTED_UNIVERSE_FLOOR - MAX_QUARANTINED_SYMBOLS &&
+  missingSymbols.length <= MAX_QUARANTINED_SYMBOLS &&
+  missingFocusSymbols.length === 0;
+const effectiveUniverseFloor = market.rows.length >= EXPECTED_UNIVERSE_FLOOR
+  ? EXPECTED_UNIVERSE_FLOOR
+  : (adaptiveCoverageAllowed ? market.rows.length : EXPECTED_UNIVERSE_FLOOR);
 const bundle = await buildExecutionBundle(market, {
   symbols: FOCUS,
   now,
   history: null,
-  expectedUniverseFloor: EXPECTED_UNIVERSE_FLOOR,
+  expectedUniverseFloor: effectiveUniverseFloor,
 });
-assertBundle(bundle);
+assertBundle(bundle, effectiveUniverseFloor);
+const coverageComplete = market.rows.length >= EXPECTED_UNIVERSE_FLOOR;
+const coverageOperational = coverageComplete || adaptiveCoverageAllowed;
+const quarantine = coverageComplete ? [] : missingSymbols;
+const rosterTargetSymbols = targetSymbols.size >= EXPECTED_UNIVERSE_FLOOR
+  ? [...targetSymbols].sort()
+  : [...currentSymbols].sort();
 
 const fingerprint = bundle.data_fingerprint_sha256;
 const sameSession = previous?.expected_reference_session_date === bundle.expected_reference_session_date;
@@ -103,7 +139,17 @@ const quality = {
   ...(bundle.quality || {}),
   bridge_live_age_seconds: liveAge == null ? null : Number(liveAge.toFixed(1)),
   bridge_gate: 'pass',
-  full_market_fresh: market.rows.length >= EXPECTED_UNIVERSE_FLOOR,
+  expected_universe_target: EXPECTED_UNIVERSE_FLOOR,
+  effective_universe_floor: effectiveUniverseFloor,
+  current_universe_count: market.rows.length,
+  universe_coverage_pct: Number(((market.rows.length / EXPECTED_UNIVERSE_FLOOR) * 100).toFixed(2)),
+  full_market_fresh: coverageComplete,
+  universe_operational: coverageOperational,
+  coverage_mode: coverageComplete ? 'complete' : 'degraded_selective_quarantine',
+  missing_symbols: quarantine,
+  added_symbols_vs_target: addedSymbols,
+  quarantined_symbols: quarantine,
+  selective_execution_only: !coverageComplete,
   focus_requested: FOCUS.length,
   focus_returned: focusRows.length,
   focus_complete: focusRows.length === FOCUS.length,
@@ -111,6 +157,7 @@ const quality = {
 
 const warnings = [
   ...(bundle.warnings || []),
+  ...(!coverageComplete ? [`degraded_universe_quarantine:${quarantine.join(',')}`] : []),
   'transport_netlify_independent',
   'quote_timestamp_not_exposed_liveness_guard_enabled',
 ];
@@ -188,7 +235,10 @@ const health = {
   live_age_seconds: liveAge,
   execution_usable: true,
   focus_complete: focusRows.length === FOCUS.length,
-  full_market_fresh: market.rows.length >= EXPECTED_UNIVERSE_FLOOR,
+  full_market_fresh: coverageComplete,
+  universe_operational: coverageOperational,
+  coverage_mode: quality.coverage_mode,
+  quarantined_symbols: quarantine,
   liveness,
   provider_dependency: { netlify: false, vercel: false },
 };
@@ -221,7 +271,14 @@ const universe = {
   retrieved_at: bundle.retrieved_at,
   session_status: bundle.session_status,
   expected_reference_session_date: bundle.expected_reference_session_date,
-  universe_fresh: market.rows.length >= EXPECTED_UNIVERSE_FLOOR,
+  universe_fresh: coverageComplete,
+  universe_operational: coverageOperational,
+  universe_complete: coverageComplete,
+  roster_target_count: EXPECTED_UNIVERSE_FLOOR,
+  roster_target_symbols: rosterTargetSymbols,
+  quarantined_symbols: quarantine,
+  missing_symbols: quarantine,
+  added_symbols_vs_target: addedSymbols,
   quality,
   market: bundle.market || {},
   screen: bundle.screen || {},
@@ -244,6 +301,9 @@ console.log(JSON.stringify({
   bridge: '5.0-github-direct',
   execution_usable: true,
   rows: market.rows.length,
+  target_rows: EXPECTED_UNIVERSE_FLOOR,
+  coverage_mode: quality.coverage_mode,
+  quarantined_symbols: quarantine,
   focus: focusRows.length,
   session: bundle.session_status,
   reference_date: bundle.expected_reference_session_date,
