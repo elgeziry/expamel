@@ -15,6 +15,7 @@ name: EGX Resilient Bridge V5 + Decision Intelligence V6
       - 'egx-market-feed-v2/scripts/build-execution-engine.mts'
       - 'egx-market-feed-v2/scripts/build-v6-decision-intelligence.mts'
       - 'egx-market-feed-v2/scripts/build-v6-performance-ledger.mts'
+      - 'egx-market-feed-v2/scripts/build-private-portfolio-overlay.mts'
       - 'egx-market-feed-v2/research-overrides.json'
       - 'research-overrides.json'
 permissions:
@@ -44,6 +45,7 @@ jobs:
         run: |
           node --experimental-strip-types --check scripts/build-v6-decision-intelligence.mts
           node --experimental-strip-types --check scripts/build-v6-performance-ledger.mts
+          node --experimental-strip-types --check scripts/build-private-portfolio-overlay.mts
       - name: Build direct V5 market packet
         working-directory: egx-market-feed-v2
         run: node --experimental-strip-types scripts/github-direct-publish.mts
