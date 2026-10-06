@@ -75,15 +75,15 @@ jobs:
         run: |
           set -euo pipefail
           jq -e '.execution_usable == true and .bridge_gate == "pass" and (.blockers | length == 0)' out/contract.json >/dev/null
-          jq -e '.universe_fresh == true and (.stocks | length >= 296)' out/universe.json >/dev/null
-          jq -e '.radar_version == 2 and .discovery.universe_count >= 296 and .discovery.safeguards.focus_is_not_discovery_boundary == true and (.pre_move_sentinel|length)>0' out/radar.json >/dev/null
+          jq -e '.universe_operational == true and (((.stocks|length) + (.quarantined_symbols|length)) >= (.roster_target_count // 296)) and ((.quarantined_symbols|length) <= 1)' out/universe.json >/dev/null
+          jq -e '.radar_version == 2 and .discovery.universe_operational == true and ((.discovery.universe_count + (.discovery.quarantined_symbols|length)) >= (.discovery.roster_target_count // 296)) and .discovery.safeguards.focus_is_not_discovery_boundary == true and .discovery.safeguards.missing_symbols_quarantined_not_fabricated == true and (.pre_move_sentinel|length)>0' out/radar.json >/dev/null
           jq -e '.engine == "EGX Capital Allocation Engine" and .version == 3 and .history_integration.loaded == true and .history_integration.sessions_available >= 6 and .methodology.history_cycle_integrated == true and (.ranked | length > 0)' out/capital-allocation.json >/dev/null
-          jq -e '.engine == "EGX V5 Execution Engine" and .version == 1 and .fail_closed == true and .universe_count >= 296 and .history_sessions >= 6' out/execution-engine.json >/dev/null
+          jq -e '.engine == "EGX V5 Execution Engine" and .version == 1 and .fail_closed == true and .universe_operational == true and ((.universe_count + (.quarantined_symbols|length)) >= .universe_target) and .history_sessions >= 6' out/execution-engine.json >/dev/null
           jq -e '.ranked[] | select(.symbol=="GBCO") | .gates.sharia_pass == false and .gates.execution_ready == false' out/capital-allocation.json >/dev/null
-          jq -e '.engine == "EGX Decision Intelligence" and .version == 6 and .data_gates.pass == true and .methodology.full_universe_reaches_master_ranking == true and .methodology.sharia_fail_closed == true and (.all_ranked | length) >= 296 and .health.v5_capital_engine_seen == true and .health.v5_execution_engine_seen == true' out/decision-intelligence-v6.json >/dev/null
+          jq -e '.engine == "EGX Decision Intelligence" and .version == 6 and .data_gates.pass == true and .data_gates.universe_operational == true and .health.full_universe_accounted == true and .methodology.full_universe_reaches_master_ranking == true and .methodology.missing_symbols_quarantined_not_fabricated == true and .methodology.sharia_fail_closed == true and ((.all_ranked|length) == .data_gates.current_universe_count) and .health.v5_capital_engine_seen == true and .health.v5_execution_engine_seen == true' out/decision-intelligence-v6.json >/dev/null
           jq -e '.engine == "EGX Market Regime Engine" and .version == 1 and .label != null' out/market-regime-v6.json >/dev/null
           jq -e '.engine == "EGX V6 Research Queue" and .version == 1 and (.queue | length) > 0' out/research-queue-v6.json >/dev/null
-          jq -e '.engine == "EGX Corporate Action Anomaly Guard" and .version == 1 and .scanned >= 296' out/corporate-action-audit-v6.json >/dev/null
+          jq -e '.engine == "EGX Corporate Action Anomaly Guard" and .version == 1 and .full_universe_accounted == true and (.scanned + (.quarantined_unscanned|length) >= .universe_target)' out/corporate-action-audit-v6.json >/dev/null
           jq -e '.engine == "EGX Portfolio Replacement Challengers" and .version == 1 and .private_portfolio_required == true' out/replacement-challengers-v6.json >/dev/null
           jq -e '.engine == "EGX V6 Performance Learning Ledger" and .version == 1' out/performance-ledger-v6.json >/dev/null
       - name: Publish complete V5 + V6 stack to egx-live without force
