@@ -144,6 +144,7 @@ const quality = {
   current_universe_count: market.rows.length,
   universe_coverage_pct: Number(((market.rows.length / EXPECTED_UNIVERSE_FLOOR) * 100).toFixed(2)),
   full_market_fresh: coverageComplete,
+  universe_complete: coverageComplete,
   universe_operational: coverageOperational,
   coverage_mode: coverageComplete ? 'complete' : 'degraded_selective_quarantine',
   missing_symbols: quarantine,
