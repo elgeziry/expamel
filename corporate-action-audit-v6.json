@@ -1,0 +1,60 @@
+{
+  "engine": "EGX Corporate Action Anomaly Guard",
+  "version": 1,
+  "generated_at": "2026-10-06T14:36:31.618Z",
+  "reference_session": "2026-10-06",
+  "method": "detect >45% up-gap or >31% down-gap across retained closes unless explicitly verified adjusted",
+  "flagged": [
+    {
+      "symbol": "EFID",
+      "status": "suspected_unadjusted_event",
+      "technical_history_gate": false,
+      "anomalies": [
+        {
+          "date": "2026-09-29",
+          "previous_close": 28.43,
+          "close": 18.75,
+          "ratio": 0.6595
+        }
+      ],
+      "lookback_sessions": 30,
+      "verified_adjustment_override": false
+    },
+    {
+      "symbol": "POUL",
+      "status": "suspected_unadjusted_event",
+      "technical_history_gate": false,
+      "anomalies": [
+        {
+          "date": "2026-09-27",
+          "previous_close": 38.2,
+          "close": 9.53,
+          "ratio": 0.2495
+        }
+      ],
+      "lookback_sessions": 30,
+      "verified_adjustment_override": false
+    },
+    {
+      "symbol": "EGS659O1C015",
+      "status": "suspected_unadjusted_event",
+      "technical_history_gate": false,
+      "anomalies": [
+        {
+          "date": "2026-08-24",
+          "previous_close": 1.68,
+          "close": 1.15,
+          "ratio": 0.6845
+        }
+      ],
+      "lookback_sessions": 30,
+      "verified_adjustment_override": false
+    }
+  ],
+  "scanned": 295,
+  "universe_target": 296,
+  "quarantined_unscanned": [
+    "RMTV"
+  ],
+  "full_universe_accounted": true
+}
