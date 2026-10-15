@@ -1,7 +1,7 @@
 {
   "engine": "EGX V6 Research Queue",
   "version": 1,
-  "generated_at": "2026-10-15T12:36:53.006Z",
+  "generated_at": "2026-10-15T15:10:33.327Z",
   "reference_session": "2026-10-15",
   "queue": [
     {
@@ -102,6 +102,30 @@
     },
     {
       "priority": 5,
+      "symbol": "UPMS",
+      "score": 49.81,
+      "discovery_score": 8,
+      "action": "RESEARCH_SHARIA",
+      "missing": [
+        "sharia",
+        "fundamentals",
+        "valuation"
+      ],
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "why_now": {
+        "cycle": 3.9,
+        "institutional_proxy": 7.63,
+        "entry": 7.66,
+        "rr_proxy": 4.7
+      }
+    },
+    {
+      "priority": 6,
       "symbol": "ACAMD",
       "score": 64.5,
       "discovery_score": 7.88,
@@ -121,30 +145,6 @@
         "cycle": 6.5,
         "institutional_proxy": 6.8,
         "entry": 8.08,
-        "rr_proxy": 4.7
-      }
-    },
-    {
-      "priority": 6,
-      "symbol": "UPMS",
-      "score": 49.27,
-      "discovery_score": 7.74,
-      "action": "RESEARCH_SHARIA",
-      "missing": [
-        "sharia",
-        "fundamentals",
-        "valuation"
-      ],
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "why_now": {
-        "cycle": 3.9,
-        "institutional_proxy": 7.29,
-        "entry": 7.32,
         "rr_proxy": 4.7
       }
     },
@@ -632,8 +632,8 @@
     {
       "priority": 27,
       "symbol": "ICID",
-      "score": 49.64,
-      "discovery_score": 6.6,
+      "score": 49.62,
+      "discovery_score": 6.59,
       "action": "RESEARCH_SHARIA",
       "missing": [
         "sharia",
@@ -648,8 +648,8 @@
       ],
       "why_now": {
         "cycle": 3.7,
-        "institutional_proxy": 5.02,
-        "entry": 7.16,
+        "institutional_proxy": 5.01,
+        "entry": 7.15,
         "rr_proxy": 3.58
       }
     },
