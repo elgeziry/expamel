@@ -1,25 +1,10 @@
 {
   "engine": "EGX Corporate Action Anomaly Guard",
   "version": 1,
-  "generated_at": "2026-10-15T17:22:55.456Z",
-  "reference_session": "2026-10-15",
+  "generated_at": "2026-10-18T10:00:01.872Z",
+  "reference_session": "2026-10-18",
   "method": "detect >45% up-gap or >31% down-gap across retained closes unless explicitly verified adjusted",
   "flagged": [
-    {
-      "symbol": "EFID",
-      "status": "suspected_unadjusted_event",
-      "technical_history_gate": false,
-      "anomalies": [
-        {
-          "date": "2026-09-29",
-          "previous_close": 28.43,
-          "close": 18.75,
-          "ratio": 0.6595
-        }
-      ],
-      "lookback_sessions": 30,
-      "verified_adjustment_override": false
-    },
     {
       "symbol": "ORHD",
       "status": "suspected_unadjusted_event",
@@ -30,6 +15,21 @@
           "previous_close": 38.84,
           "close": 12,
           "ratio": 0.309
+        }
+      ],
+      "lookback_sessions": 30,
+      "verified_adjustment_override": false
+    },
+    {
+      "symbol": "EFID",
+      "status": "suspected_unadjusted_event",
+      "technical_history_gate": false,
+      "anomalies": [
+        {
+          "date": "2026-09-29",
+          "previous_close": 28.43,
+          "close": 18.75,
+          "ratio": 0.6595
         }
       ],
       "lookback_sessions": 30,
@@ -51,21 +51,6 @@
       "verified_adjustment_override": false
     },
     {
-      "symbol": "KORA",
-      "status": "suspected_unadjusted_event",
-      "technical_history_gate": false,
-      "anomalies": [
-        {
-          "date": "2026-10-14",
-          "previous_close": 4.62,
-          "close": 2.92,
-          "ratio": 0.632
-        }
-      ],
-      "lookback_sessions": 30,
-      "verified_adjustment_override": false
-    },
-    {
       "symbol": "EGS659O1C015",
       "status": "suspected_unadjusted_event",
       "technical_history_gate": false,
@@ -75,6 +60,21 @@
           "previous_close": 1.68,
           "close": 1.15,
           "ratio": 0.6845
+        }
+      ],
+      "lookback_sessions": 30,
+      "verified_adjustment_override": false
+    },
+    {
+      "symbol": "KORA",
+      "status": "suspected_unadjusted_event",
+      "technical_history_gate": false,
+      "anomalies": [
+        {
+          "date": "2026-10-14",
+          "previous_close": 4.62,
+          "close": 2.92,
+          "ratio": 0.632
         }
       ],
       "lookback_sessions": 30,
