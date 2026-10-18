@@ -1,0 +1,24 @@
+{
+  "schema": "egx-v4-session-audit-v1",
+  "generated_at": "2026-10-18T16:40:34.697805Z",
+  "session_date": "2026-10-18",
+  "status": "fail",
+  "valid_snapshot_count": 4,
+  "invalid_snapshot_count": 0,
+  "first_snapshot_cairo": "2026-10-18T12:59:59.666000+03:00",
+  "last_snapshot_cairo": "2026-10-18T18:48:01.622000+03:00",
+  "max_gap_minutes": 121.51,
+  "pass_criteria": {
+    "min_snapshots": 40,
+    "first_by_cairo": "10:15",
+    "last_at_or_after_cairo": "14:20",
+    "max_gap_minutes": 12
+  },
+  "reasons": [
+    "insufficient_snapshot_count",
+    "session_start_not_covered",
+    "continuity_gap_over_12m_or_unmeasurable"
+  ],
+  "invalid_samples": [],
+  "interpretation": "pass=full-session continuity evidenced; partial=valid data exists but full session not proven; fail=continuity or integrity materially broken"
+}
