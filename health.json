@@ -1,18 +1,20 @@
 {
   "status": "ok",
   "bridge_version": "5.0-github-direct",
-  "checked_at": "2026-10-19T11:23:44.734Z",
+  "checked_at": "2026-10-19T14:36:04.338Z",
   "selected_base": "direct://scanner.tradingview.com/egypt/scan",
   "live_age_seconds": 0,
   "execution_usable": true,
   "focus_complete": true,
-  "full_market_fresh": true,
+  "full_market_fresh": false,
   "universe_operational": true,
-  "coverage_mode": "complete",
-  "quarantined_symbols": [],
+  "coverage_mode": "degraded_selective_quarantine",
+  "quarantined_symbols": [
+    "HALN"
+  ],
   "liveness": {
     "method": "full_market_fingerprint_heartbeat",
-    "fingerprint_first_seen_at": "2026-10-19T11:23:44.734Z",
+    "fingerprint_first_seen_at": "2026-10-19T14:36:04.338Z",
     "stagnation_seconds": 0,
     "max_stagnation_seconds": 1200,
     "passed": true
@@ -24,13 +26,15 @@
   "discovery": {
     "version": 2,
     "full_market_scan_ok": true,
-    "current_universe_count": 296,
+    "current_universe_count": 295,
     "roster_target_count": 296,
-    "quarantined_symbols": [],
+    "quarantined_symbols": [
+      "HALN"
+    ],
     "dynamic_focus_enabled": true,
     "pre_move_sentinel_enabled": true,
     "structural_large_cap_watch_enabled": true,
-    "dynamic_promoted_count": 49,
-    "newly_promoted_count": 18
+    "dynamic_promoted_count": 51,
+    "newly_promoted_count": 7
   }
 }
