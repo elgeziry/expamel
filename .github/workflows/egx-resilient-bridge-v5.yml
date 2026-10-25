@@ -16,6 +16,7 @@ name: EGX Resilient Bridge V5 + Decision Intelligence V6
       - 'egx-market-feed-v2/scripts/build-v6-decision-intelligence.mts'
       - 'egx-market-feed-v2/scripts/build-v6-performance-ledger.mts'
       - 'egx-market-feed-v2/scripts/build-private-portfolio-overlay.mts'
+      - 'egx-market-feed-v2/scripts/build-capital-recovery-alerts.mts'
       - 'egx-market-feed-v2/research-overrides.json'
       - 'research-overrides.json'
 permissions:
@@ -46,6 +47,7 @@ jobs:
           node --experimental-strip-types --check scripts/build-v6-decision-intelligence.mts
           node --experimental-strip-types --check scripts/build-v6-performance-ledger.mts
           node --experimental-strip-types --check scripts/build-private-portfolio-overlay.mts
+          node --experimental-strip-types --check scripts/build-capital-recovery-alerts.mts
       - name: Build direct V5 market packet
         working-directory: egx-market-feed-v2
         run: node --experimental-strip-types scripts/github-direct-publish.mts
@@ -71,6 +73,9 @@ jobs:
       - name: Build V6 Performance Learning Ledger
         working-directory: egx-market-feed-v2
         run: node --experimental-strip-types scripts/build-v6-performance-ledger.mts
+      - name: Build Capital Recovery Alert Engine V1
+        working-directory: egx-market-feed-v2
+        run: node --experimental-strip-types scripts/build-capital-recovery-alerts.mts
       - name: Validate complete V5 + V6 intelligence stack
         working-directory: egx-market-feed-v2
         shell: bash
@@ -88,6 +93,7 @@ jobs:
           jq -e '.engine == "EGX Corporate Action Anomaly Guard" and .version == 1 and .full_universe_accounted == true and (.scanned + (.quarantined_unscanned|length) >= .universe_target)' out/corporate-action-audit-v6.json >/dev/null
           jq -e '.engine == "EGX Portfolio Replacement Challengers" and .version == 1 and .private_portfolio_required == true' out/replacement-challengers-v6.json >/dev/null
           jq -e '.engine == "EGX V6 Performance Learning Ledger" and .version == 1' out/performance-ledger-v6.json >/dev/null
+          jq -e '.engine == "EGX Capital Recovery Alert Engine" and .version == 1 and .reference_session != null and (.all_alerts|length) == 295 and .market_gate.state != null' out/capital-recovery-alerts-v1.json >/dev/null
       - name: Publish complete V5 + V6 stack to egx-live without force
         shell: bash
         env:
@@ -99,10 +105,10 @@ jobs:
           git config user.name 'github-actions[bot]'; git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           if git ls-remote --exit-code --heads origin egx-live >/dev/null 2>&1; then git fetch -q origin egx-live; git checkout -q -B egx-live origin/egx-live; else git checkout -q --orphan egx-live; git rm -rf . >/dev/null 2>&1 || true; fi
-          for f in latest.json contract.json health.json transport.json focus.json universe.json radar.json capital-allocation.json execution-engine.json decision-intelligence-v6.json market-regime-v6.json research-queue-v6.json corporate-action-audit-v6.json replacement-challengers-v6.json performance-ledger-v6.json; do cp "${SRC}/$f" "$f"; done
+          for f in latest.json contract.json health.json transport.json focus.json universe.json radar.json capital-allocation.json execution-engine.json decision-intelligence-v6.json market-regime-v6.json research-queue-v6.json corporate-action-audit-v6.json replacement-challengers-v6.json performance-ledger-v6.json capital-recovery-alerts-v1.json; do cp "${SRC}/$f" "$f"; done
           SESSION="$(jq -r '.expected_reference_session_date' contract.json)"; SNAP="$(date -u +%H%M%SZ)"; mkdir -p "snapshots/${SESSION}"; cp focus.json "snapshots/${SESSION}/${SNAP}.json"
           mapfile -t SNAPSHOTS < <(find snapshots -type f -name '*.json' | sort); COUNT="${#SNAPSHOTS[@]}"; if [ "$COUNT" -gt 800 ]; then REMOVE=$((COUNT-800)); for ((i=0;i<REMOVE;i++)); do rm -f "${SNAPSHOTS[$i]}"; done; find snapshots -type d -empty -delete || true; fi
-          git add latest.json contract.json health.json transport.json focus.json universe.json radar.json capital-allocation.json execution-engine.json decision-intelligence-v6.json market-regime-v6.json research-queue-v6.json corporate-action-audit-v6.json replacement-challengers-v6.json performance-ledger-v6.json snapshots
+          git add latest.json contract.json health.json transport.json focus.json universe.json radar.json capital-allocation.json execution-engine.json decision-intelligence-v6.json market-regime-v6.json research-queue-v6.json corporate-action-audit-v6.json replacement-challengers-v6.json performance-ledger-v6.json capital-recovery-alerts-v1.json snapshots
           if git diff --cached --quiet; then exit 0; fi
           git commit -q -m "EGX V5 + V6 decision intelligence $(jq -r '.retrieved_at' contract.json)"
           for attempt in 1 2 3 4 5; do if git push -q origin egx-live; then exit 0; fi; git fetch -q origin egx-live; git rebase origin/egx-live || { git rebase --abort || true; }; sleep $((attempt*2)); done
