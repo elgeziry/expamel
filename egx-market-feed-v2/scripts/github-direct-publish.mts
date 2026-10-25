@@ -3,7 +3,9 @@ import { fetchMarket } from '../netlify/functions/api.mts';
 import { buildExecutionBundle } from '../netlify/functions/_lib/access.mts';
 
 const SOURCE_ID = 'egx-market-feed-v2';
-const EXPECTED_UNIVERSE_FLOOR = 296;
+const LEGACY_UNIVERSE_TARGET = 296;
+const ROSTER_RETIRED_FROM_MAIN_MARKET = ['RMTV'];
+const REQUIRED_ACTIVE_LISTINGS = ['HALN'];
 const MAX_QUARANTINED_SYMBOLS = 1;
 const LIVE_MAX_AGE_SECONDS = 600;
 const STAGNATION_MAX_SECONDS = 1200;
@@ -55,7 +57,7 @@ function symbolSet(rows: any[]) {
   return new Set((rows || []).map((x: any) => String(x?.symbol || '').toUpperCase()).filter(Boolean));
 }
 
-function assertBundle(bundle: any, universeFloor = EXPECTED_UNIVERSE_FLOOR) {
+function assertBundle(bundle: any, universeFloor: number) {
   const reasons: string[] = [];
   if (!bundle || typeof bundle !== 'object') reasons.push('not_object');
   if (bundle?.source_id !== SOURCE_ID) reasons.push('source_identity_mismatch');
@@ -74,28 +76,56 @@ function assertBundle(bundle: any, universeFloor = EXPECTED_UNIVERSE_FLOOR) {
 }
 
 const [previous, previousUniverse] = await Promise.all([readPreviousContract(), readPreviousUniverse()]);
-const market = await fetchMarket(null, now);
-const currentSymbols = symbolSet(market.rows || []);
-const previousTargetRows = Array.isArray(previousUniverse?.roster_target_symbols) && previousUniverse.roster_target_symbols.length >= EXPECTED_UNIVERSE_FLOOR
+let market = await fetchMarket(null, now);
+
+const previousTargetRows = Array.isArray(previousUniverse?.roster_target_symbols) && previousUniverse.roster_target_symbols.length >= LEGACY_UNIVERSE_TARGET - 1
   ? previousUniverse.roster_target_symbols.map((symbol: string) => ({ symbol }))
   : (previousUniverse?.stocks || []);
-const targetSymbols = symbolSet(previousTargetRows);
-const missingSymbols = [...targetSymbols].filter(symbol => !currentSymbols.has(symbol)).sort();
-const addedSymbols = [...currentSymbols].filter(symbol => targetSymbols.size > 0 && !targetSymbols.has(symbol)).sort();
+const legacyTargetSymbols = symbolSet(previousTargetRows);
+const activeTargetSymbols = new Set([...legacyTargetSymbols].filter(symbol => !ROSTER_RETIRED_FROM_MAIN_MARKET.includes(symbol)));
+for (const symbol of REQUIRED_ACTIVE_LISTINGS) activeTargetSymbols.add(symbol);
+
+let currentSymbols = symbolSet(market.rows || []);
+const supplementalSymbols: string[] = [];
+for (const symbol of REQUIRED_ACTIVE_LISTINGS) {
+  if (currentSymbols.has(symbol)) continue;
+  try {
+    const supplement = await fetchMarket([symbol], now);
+    const row = (supplement.rows || []).find((x: any) => String(x?.symbol || '').toUpperCase() === symbol && Number.isFinite(Number(x?.close)));
+    if (row) {
+      row.data_provenance = 'supplemental_explicit_symbol_scan';
+      row.supplemental_reason = 'new_active_listing_missing_from_broad_stock_query';
+      market.rows.push(row);
+      supplementalSymbols.push(symbol);
+      currentSymbols = symbolSet(market.rows || []);
+    }
+  } catch (e) {
+    console.warn(JSON.stringify({ diagnostic:'supplemental_symbol_scan_failed', symbol, error:String((e as any)?.message || e) }));
+  }
+}
+market.rows = (market.rows || []).filter((row: any) => !ROSTER_RETIRED_FROM_MAIN_MARKET.includes(String(row?.symbol || '').toUpperCase()));
+market.count = market.rows.length;
+currentSymbols = symbolSet(market.rows || []);
+
+const activeTargetCount = activeTargetSymbols.size;
+const missingSymbols = [...activeTargetSymbols].filter(symbol => !currentSymbols.has(symbol)).sort();
+const addedSymbols = [...currentSymbols].filter(symbol => activeTargetSymbols.size > 0 && !activeTargetSymbols.has(symbol)).sort();
 const missingFocusSymbols = missingSymbols.filter(symbol => FOCUS.includes(symbol));
 const adaptiveCoverageAllowed =
-  targetSymbols.size >= EXPECTED_UNIVERSE_FLOOR &&
-  market.rows.length >= EXPECTED_UNIVERSE_FLOOR - MAX_QUARANTINED_SYMBOLS &&
+  market.rows.length >= activeTargetCount - MAX_QUARANTINED_SYMBOLS &&
   missingSymbols.length <= MAX_QUARANTINED_SYMBOLS &&
   missingFocusSymbols.length === 0;
-const effectiveUniverseFloor = market.rows.length >= EXPECTED_UNIVERSE_FLOOR
-  ? EXPECTED_UNIVERSE_FLOOR
-  : (adaptiveCoverageAllowed ? market.rows.length : EXPECTED_UNIVERSE_FLOOR);
+const effectiveUniverseFloor = market.rows.length >= activeTargetCount
+  ? activeTargetCount
+  : (adaptiveCoverageAllowed ? market.rows.length : activeTargetCount);
 console.log(JSON.stringify({
   diagnostic:'universe_reconciliation',
   current_count:market.rows.length,
-  target_count:EXPECTED_UNIVERSE_FLOOR,
-  previous_target_count:targetSymbols.size,
+  active_target_count:activeTargetCount,
+  legacy_target_count:legacyTargetSymbols.size,
+  retired_from_main_market:ROSTER_RETIRED_FROM_MAIN_MARKET,
+  required_active_listings:REQUIRED_ACTIVE_LISTINGS,
+  supplemental_symbols:supplementalSymbols,
   missing_symbols:missingSymbols,
   added_symbols_vs_target:addedSymbols,
   missing_focus_symbols:missingFocusSymbols,
@@ -108,12 +138,10 @@ const bundle = await buildExecutionBundle(market, {
   expectedUniverseFloor: effectiveUniverseFloor,
 });
 assertBundle(bundle, effectiveUniverseFloor);
-const coverageComplete = market.rows.length >= EXPECTED_UNIVERSE_FLOOR;
+const coverageComplete = market.rows.length >= activeTargetCount && missingSymbols.length === 0;
 const coverageOperational = coverageComplete || adaptiveCoverageAllowed;
 const quarantine = coverageComplete ? [] : missingSymbols;
-const rosterTargetSymbols = targetSymbols.size >= EXPECTED_UNIVERSE_FLOOR
-  ? [...targetSymbols].sort()
-  : [...currentSymbols].sort();
+const rosterTargetSymbols = [...activeTargetSymbols].sort();
 
 const fingerprint = bundle.data_fingerprint_sha256;
 const sameSession = previous?.expected_reference_session_date === bundle.expected_reference_session_date;
@@ -149,10 +177,14 @@ const quality = {
   ...(bundle.quality || {}),
   bridge_live_age_seconds: liveAge == null ? null : Number(liveAge.toFixed(1)),
   bridge_gate: 'pass',
-  expected_universe_target: EXPECTED_UNIVERSE_FLOOR,
+  legacy_universe_target: LEGACY_UNIVERSE_TARGET,
+  expected_universe_target: activeTargetCount,
   effective_universe_floor: effectiveUniverseFloor,
   current_universe_count: market.rows.length,
-  universe_coverage_pct: Number(((market.rows.length / EXPECTED_UNIVERSE_FLOOR) * 100).toFixed(2)),
+  universe_coverage_pct: Number(((market.rows.length / activeTargetCount) * 100).toFixed(2)),
+  roster_retired_from_main_market: ROSTER_RETIRED_FROM_MAIN_MARKET,
+  required_active_listings: REQUIRED_ACTIVE_LISTINGS,
+  supplemental_symbols: supplementalSymbols,
   full_market_fresh: coverageComplete,
   universe_complete: coverageComplete,
   universe_operational: coverageOperational,
@@ -263,6 +295,8 @@ const transport = {
   vercel_used: false,
   external_market_fallback_used: false,
   external_market_crosscheck_used: false,
+  same_source_explicit_symbol_supplement_used: supplementalSymbols.length > 0,
+  same_source_explicit_symbol_supplement_symbols: supplementalSymbols,
 };
 
 const focusDoc = {
@@ -285,7 +319,8 @@ const universe = {
   universe_fresh: coverageComplete,
   universe_operational: coverageOperational,
   universe_complete: coverageComplete,
-  roster_target_count: EXPECTED_UNIVERSE_FLOOR,
+  roster_target_count: activeTargetCount,
+  legacy_roster_target_count: LEGACY_UNIVERSE_TARGET,
   roster_target_symbols: rosterTargetSymbols,
   quarantined_symbols: quarantine,
   missing_symbols: quarantine,
@@ -312,7 +347,9 @@ console.log(JSON.stringify({
   bridge: '5.0-github-direct',
   execution_usable: true,
   rows: market.rows.length,
-  target_rows: EXPECTED_UNIVERSE_FLOOR,
+  target_rows: activeTargetCount,
+  legacy_target_rows: LEGACY_UNIVERSE_TARGET,
+  supplemental_symbols: supplementalSymbols,
   coverage_mode: quality.coverage_mode,
   quarantined_symbols: quarantine,
   focus: focusRows.length,
