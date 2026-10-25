@@ -37,6 +37,7 @@ jobs:
           git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git fetch -q origin egx-live
           git checkout -q -B egx-live origin/egx-live
+          curl -fsSL --retry 3 --retry-delay 1 "https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/master/egx-market-feed-v2/research-overrides.json?ts=$(date +%s)" -o research-overrides.json
 
           python - <<'PY'
           import json, math
@@ -62,6 +63,22 @@ jobs:
                   h = {}
           else:
               h = {}
+
+          research_path = root / 'research-overrides.json'
+          try:
+              research = json.loads(research_path.read_text()) if research_path.exists() else {}
+          except Exception:
+              research = {}
+          corp_actions = {}
+          for symbol, cfg in (research.get('stocks') or {}).items():
+              ev = cfg.get('corporate_action_event') or {}
+              if cfg.get('corporate_action_adjusted') is True and ev.get('normalization_verified') is True and ev.get('effective_date') and ev.get('reference_factor'):
+                  corp_actions[str(symbol).upper()] = {
+                      'effective_date': str(ev.get('effective_date')),
+                      'factor': float(ev.get('reference_factor')),
+                      'type': ev.get('type') or 'corporate_action'
+                  }
+
           sessions = [x for x in (h.get('sessions') or []) if x.get('date') != session]
           compact = []
           fields = ('symbol','close','open','high','low','volume','change','RSI','EMA20','SMA20','SMA50','SMA200','relative_volume_10d','long_term_trend','close_location_in_day')
@@ -82,6 +99,30 @@ jobs:
           })
           by_date = {x.get('date'):x for x in sessions if x.get('date')}
           sessions = [by_date[d] for d in sorted(by_date)][-60:]
+
+          normalization_events = []
+          for sess in sessions:
+              d = str(sess.get('date') or '')
+              for row in (sess.get('stocks') or []):
+                  symbol = str(row.get('symbol') or '').upper()
+                  cfg = corp_actions.get(symbol)
+                  if not cfg:
+                      row.pop('normalized_close', None)
+                      row.pop('corporate_action_normalization', None)
+                      continue
+                  raw_close = row.get('close')
+                  if d < cfg['effective_date'] and raw_close is not None:
+                      try:
+                          row['normalized_close'] = float(raw_close) * cfg['factor']
+                          row['corporate_action_normalization'] = {
+                              'type': cfg['type'],
+                              'effective_date': cfg['effective_date'],
+                              'factor': cfg['factor']
+                          }
+                      except Exception:
+                          row.pop('normalized_close', None)
+          for symbol,cfg in corp_actions.items():
+              normalization_events.append({'symbol':symbol, **cfg})
 
           def num(v):
               try:
@@ -107,7 +148,7 @@ jobs:
               m=len(series)
               if not series:
                   continue
-              closes=[num(x.get('close')) for x in series]
+              closes=[num(x.get('normalized_close') if x.get('normalized_close') is not None else x.get('close')) for x in series]
               vols=[num(x.get('volume')) for x in series]
               last=closes[-1]; first=closes[0]
               recent=closes[-6:]
@@ -163,6 +204,7 @@ jobs:
                   'cycle_quality_complete_count':sum(1 for x in cycle if x['status']=='complete'),
                   'cycle_quality_usable_count':sum(1 for x in cycle if x['status'] in ('complete','usable_provisional')),
                   'cycle_quality_current_session_count':sum(1 for x in cycle if x['current_session_present']),
+                  'corporate_action_normalizations':normalization_events,
               },
               'cycle_quality':cycle,
           }
