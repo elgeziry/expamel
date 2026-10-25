@@ -3,26 +3,25 @@
   "version": "7.2.1",
   "bridge_version": "5.0-github-direct",
   "transport": "github-actions-direct-upstream",
-  "retrieved_at": "2026-10-22T10:44:55.624Z",
-  "session_status": "continuous",
-  "expected_reference_session_date": "2026-10-22",
+  "retrieved_at": "2026-10-25T15:55:14.526Z",
+  "session_status": "closed",
+  "expected_reference_session_date": "2026-10-25",
   "execution_usable": true,
   "live_age_seconds": 0,
   "max_live_age_seconds": 600,
-  "stale_risk": "controlled_by_fingerprint_heartbeat",
+  "stale_risk": "medium_reference_date_calendar_derived",
   "blockers": [],
   "warnings": [
     "official_holiday_calendar_not_verified",
-    "degraded_universe_quarantine:HALN",
     "transport_netlify_independent",
     "quote_timestamp_not_exposed_liveness_guard_enabled"
   ],
   "quality": {
     "row_count": 295,
-    "upstream_total_count": 295,
+    "upstream_total_count": 294,
     "expected_universe_floor": 295,
-    "universe_coverage_pct": 99.66,
-    "universe_complete": false,
+    "universe_coverage_pct": 100,
+    "universe_complete": true,
     "unique_symbols": 295,
     "coverage_scope": "field_coverage_within_returned_universe",
     "close_coverage_pct": 100,
@@ -34,35 +33,41 @@
     "analytics_provisional_count": 295,
     "bridge_live_age_seconds": 0,
     "bridge_gate": "pass",
-    "expected_universe_target": 296,
+    "legacy_universe_target": 296,
+    "expected_universe_target": 295,
     "effective_universe_floor": 295,
     "current_universe_count": 295,
-    "full_market_fresh": false,
+    "roster_retired_from_main_market": [
+      "RMTV"
+    ],
+    "required_active_listings": [
+      "HALN"
+    ],
+    "supplemental_symbols": [
+      "HALN"
+    ],
+    "full_market_fresh": true,
     "universe_operational": true,
-    "coverage_mode": "degraded_selective_quarantine",
-    "missing_symbols": [
-      "HALN"
-    ],
+    "coverage_mode": "complete",
+    "missing_symbols": [],
     "added_symbols_vs_target": [],
-    "quarantined_symbols": [
-      "HALN"
-    ],
-    "selective_execution_only": true,
+    "quarantined_symbols": [],
+    "selective_execution_only": false,
     "focus_requested": 22,
     "focus_returned": 22,
     "focus_complete": true,
     "discovery_full_market_scanned": true,
     "discovery_universe_count": 295,
     "permanent_focus_count": 22,
-    "dynamic_focus_promoted_count": 41,
-    "effective_focus_count": 63,
+    "dynamic_focus_promoted_count": 32,
+    "effective_focus_count": 54,
     "pre_move_sentinel_count": 30
   },
-  "data_fingerprint_sha256": "bce8697b1c7a712260668577dacb0181037d4065bc8cbc8705422f2f73c95c4e",
+  "data_fingerprint_sha256": "e4b8510744c22d2e435800a8be8b5846643baad1b9af0aefedb1c316a8e99ce9",
   "bridge_gate": "pass",
   "liveness": {
     "method": "full_market_fingerprint_heartbeat",
-    "fingerprint_first_seen_at": "2026-10-22T10:44:55.624Z",
+    "fingerprint_first_seen_at": "2026-10-25T15:55:14.526Z",
     "stagnation_seconds": 0,
     "max_stagnation_seconds": 1200,
     "passed": true

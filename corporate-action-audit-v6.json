@@ -1,8 +1,8 @@
 {
   "engine": "EGX Corporate Action Anomaly Guard",
   "version": 1,
-  "generated_at": "2026-10-22T10:44:58.332Z",
-  "reference_session": "2026-10-22",
+  "generated_at": "2026-10-25T15:55:17.400Z",
+  "reference_session": "2026-10-25",
   "method": "detect >45% up-gap or >31% down-gap across retained closes unless explicitly verified adjusted",
   "flagged": [
     {
@@ -51,6 +51,21 @@
       "verified_adjustment_override": false
     },
     {
+      "symbol": "DTPP",
+      "status": "suspected_unadjusted_event",
+      "technical_history_gate": false,
+      "anomalies": [
+        {
+          "date": "2026-10-22",
+          "previous_close": 242,
+          "close": 52.79,
+          "ratio": 0.2181
+        }
+      ],
+      "lookback_sessions": 30,
+      "verified_adjustment_override": false
+    },
+    {
       "symbol": "KORA",
       "status": "suspected_unadjusted_event",
       "technical_history_gate": false,
@@ -82,9 +97,7 @@
     }
   ],
   "scanned": 295,
-  "universe_target": 296,
-  "quarantined_unscanned": [
-    "HALN"
-  ],
+  "universe_target": 295,
+  "quarantined_unscanned": [],
   "full_universe_accounted": true
 }
