@@ -1,7 +1,7 @@
 {
   "engine": "EGX Decision Intelligence",
   "version": 6,
-  "generated_at": "2026-10-25T16:06:23.512Z",
+  "generated_at": "2026-10-25T16:21:52.462Z",
   "reference_session": "2026-10-25",
   "architecture": [
     "V5_resilient_data_core",
@@ -88,6 +88,122 @@
     "v5_execution_engine_seen": true
   },
   "top_opportunities": [
+    {
+      "symbol": "MFPC",
+      "name": "Misr Fertilizers Production Company MOPCO",
+      "reference_close": 47.2,
+      "score": 82.83,
+      "pre_penalty_score": 82.83,
+      "red_team_penalty": 0,
+      "discovery_score": 8.33,
+      "capital_efficiency_score": 2.03,
+      "components": {
+        "fundamental_quality": 9.2,
+        "valuation": 8.1,
+        "earnings_quality": 9.2,
+        "catalyst": 8.4,
+        "catalyst_transmission": 8.6,
+        "institutional_intelligence": 8,
+        "cycle_relative_strength": 7.8,
+        "entry_quality": 8.74,
+        "liquidity": 9,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 6.72,
+        "discovery": 8.33
+      },
+      "research": {
+        "sharia_status": "compliant",
+        "sharia_verified": true,
+        "sharia_pass": true,
+        "fundamentals_verified": true,
+        "valuation_verified": true,
+        "freshness": {
+          "sharia": {
+            "as_of": "2026-09-10",
+            "age_days": 45.681856493055555,
+            "max_days": 120,
+            "fresh": true
+          },
+          "fundamentals": {
+            "as_of": "2026-06-30",
+            "age_days": 117.68185649305556,
+            "max_days": 210,
+            "fresh": true
+          },
+          "valuation": {
+            "as_of": "2026-10-25",
+            "age_days": 0.6818564930555555,
+            "max_days": 45,
+            "fresh": true
+          }
+        },
+        "source_count": 6,
+        "research_as_of": "2026-06-30",
+        "verified_fundamental_score": 9.2,
+        "verified_valuation_score": 8.1,
+        "method": "verified_override_plus_market_quant"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 30,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 7.8,
+        "sessions_available": 53,
+        "provenance": "hybrid_validated_external_plus_v4"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "fertilizer_cycle_and_urea_price_sensitivity",
+        "natural_gas_supply_and_input_cost_risk",
+        "export_and_geopolitical_logistics_exposure"
+      ],
+      "evidence_coverage_pct": 100,
+      "execution_ready": true,
+      "execution_plan": {
+        "status": "BUY_ZONE",
+        "reference_close": 47.2,
+        "entry_zone": [
+          44.68,
+          46.49
+        ],
+        "invalidation": 42.67,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 1,
+        "sizing": {
+          "probe_pct_of_target": 35,
+          "core_add_pct": 40,
+          "reserve_pct": 25
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      },
+      "market_row": {
+        "change": 4.171264621496359,
+        "liquidity_score": 9,
+        "decision_support": {
+          "technical_score": 9,
+          "liquidity_score": 9,
+          "setup_score": 8.9,
+          "chase_risk": "low"
+        }
+      },
+      "action": "WAIT_ENTRY",
+      "rank": 1
+    },
     {
       "symbol": "ADIB",
       "name": "Abu Dhabi Islamic Bank-Egypt",
@@ -202,7 +318,7 @@
         }
       },
       "action": "RESEARCH_SHARIA",
-      "rank": 1
+      "rank": 2
     },
     {
       "symbol": "ETEL",
@@ -236,19 +352,19 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-09-10",
-            "age_days": 45.67110480324074,
+            "age_days": 45.6818565625,
             "max_days": 120,
             "fresh": true
           },
           "fundamentals": {
             "as_of": "2026-06-30",
-            "age_days": 117.67110480324074,
+            "age_days": 117.6818565625,
             "max_days": 210,
             "fresh": true
           },
           "valuation": {
             "as_of": "2026-10-06",
-            "age_days": 19.67110480324074,
+            "age_days": 19.6818565625,
             "max_days": 45,
             "fresh": true
           }
@@ -314,7 +430,7 @@
         }
       },
       "action": "WAIT_ENTRY",
-      "rank": 2
+      "rank": 3
     },
     {
       "symbol": "EGAL",
@@ -348,19 +464,19 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-09-10",
-            "age_days": 45.67110512731482,
+            "age_days": 45.681856851851855,
             "max_days": 120,
             "fresh": true
           },
           "fundamentals": {
             "as_of": "2026-06-30",
-            "age_days": 117.67110512731482,
+            "age_days": 117.68185685185185,
             "max_days": 210,
             "fresh": true
           },
           "valuation": {
             "as_of": "2026-10-06",
-            "age_days": 19.671105127314814,
+            "age_days": 19.68185685185185,
             "max_days": 45,
             "fresh": true
           }
@@ -426,7 +542,7 @@
         }
       },
       "action": "NO_CHASE",
-      "rank": 3
+      "rank": 4
     },
     {
       "symbol": "FWRY",
@@ -460,7 +576,7 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-10-25",
-            "age_days": 0.6711053240740741,
+            "age_days": 0.6818564930555555,
             "max_days": 120,
             "fresh": true
           },
@@ -541,7 +657,7 @@
         }
       },
       "action": "DEEP_RESEARCH",
-      "rank": 4
+      "rank": 5
     },
     {
       "symbol": "AMOC",
@@ -575,19 +691,19 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-09-10",
-            "age_days": 45.67110486111111,
+            "age_days": 45.68185678240741,
             "max_days": 120,
             "fresh": true
           },
           "fundamentals": {
             "as_of": "2026-06-30",
-            "age_days": 117.67110486111112,
+            "age_days": 117.68185678240741,
             "max_days": 210,
             "fresh": true
           },
           "valuation": {
             "as_of": "2026-09-10",
-            "age_days": 45.67110486111111,
+            "age_days": 45.68185678240741,
             "max_days": 45,
             "fresh": false
           }
@@ -653,7 +769,7 @@
         }
       },
       "action": "DEEP_RESEARCH",
-      "rank": 5
+      "rank": 6
     },
     {
       "symbol": "TMGH",
@@ -687,19 +803,19 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-09-10",
-            "age_days": 45.671104988425924,
+            "age_days": 45.681856180555556,
             "max_days": 120,
             "fresh": true
           },
           "fundamentals": {
             "as_of": "2026-06-30",
-            "age_days": 117.67110498842592,
+            "age_days": 117.68185618055556,
             "max_days": 210,
             "fresh": true
           },
           "valuation": {
             "as_of": "2026-10-06",
-            "age_days": 19.671104988425927,
+            "age_days": 19.681856180555556,
             "max_days": 45,
             "fresh": true
           }
@@ -767,7 +883,7 @@
         }
       },
       "action": "NO_CHASE",
-      "rank": 6
+      "rank": 7
     },
     {
       "symbol": "MCQE",
@@ -863,7 +979,7 @@
         }
       },
       "action": "RESEARCH_SHARIA",
-      "rank": 7
+      "rank": 8
     },
     {
       "symbol": "MASR",
@@ -897,19 +1013,19 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-09-10",
-            "age_days": 45.67110482638889,
+            "age_days": 45.68185616898148,
             "max_days": 120,
             "fresh": true
           },
           "fundamentals": {
             "as_of": "2026-06-30",
-            "age_days": 117.67110482638888,
+            "age_days": 117.68185616898148,
             "max_days": 210,
             "fresh": true
           },
           "valuation": {
             "as_of": "2026-10-06",
-            "age_days": 19.671104826388888,
+            "age_days": 19.681856168981483,
             "max_days": 45,
             "fresh": true
           }
@@ -975,7 +1091,7 @@
         }
       },
       "action": "NO_CHASE",
-      "rank": 8
+      "rank": 9
     },
     {
       "symbol": "COMI",
@@ -1091,7 +1207,7 @@
         }
       },
       "action": "RESEARCH_SHARIA",
-      "rank": 9
+      "rank": 10
     },
     {
       "symbol": "ORAS",
@@ -1125,19 +1241,19 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-09-10",
-            "age_days": 45.67110545138889,
+            "age_days": 45.68185667824074,
             "max_days": 120,
             "fresh": true
           },
           "fundamentals": {
             "as_of": "2026-06-30",
-            "age_days": 117.67110545138888,
+            "age_days": 117.68185667824073,
             "max_days": 210,
             "fresh": true
           },
           "valuation": {
             "as_of": "2026-10-06",
-            "age_days": 19.67110545138889,
+            "age_days": 19.68185667824074,
             "max_days": 45,
             "fresh": true
           }
@@ -1205,7 +1321,7 @@
         }
       },
       "action": "WAIT_ENTRY",
-      "rank": 10
+      "rank": 11
     },
     {
       "symbol": "ARCC",
@@ -1321,121 +1437,6 @@
         }
       },
       "action": "RESEARCH_SHARIA",
-      "rank": 11
-    },
-    {
-      "symbol": "MFPC",
-      "name": "Misr Fertilizers Production Company MOPCO",
-      "reference_close": 47.2,
-      "score": 65.65,
-      "pre_penalty_score": 65.65,
-      "red_team_penalty": 0,
-      "discovery_score": 8.33,
-      "capital_efficiency_score": 1.79,
-      "components": {
-        "fundamental_quality": 4.38,
-        "valuation": 7.33,
-        "earnings_quality": 2,
-        "catalyst": 7.5,
-        "catalyst_transmission": 7.87,
-        "institutional_intelligence": 8,
-        "cycle_relative_strength": 7.8,
-        "entry_quality": 8.74,
-        "liquidity": 9,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 6.72,
-        "discovery": 8.33
-      },
-      "research": {
-        "sharia_status": "compliant",
-        "sharia_verified": true,
-        "sharia_pass": true,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": "2026-09-10",
-            "age_days": 45.67110481481482,
-            "max_days": 120,
-            "fresh": true
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 2,
-        "research_as_of": "2026-09-10",
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 30,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 7.8,
-        "sessions_available": 53,
-        "provenance": "hybrid_validated_external_plus_v4"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 67,
-      "execution_ready": false,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 47.2,
-        "entry_zone": [
-          44.68,
-          46.49
-        ],
-        "invalidation": 42.67,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 1,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      },
-      "market_row": {
-        "change": 4.171264621496359,
-        "liquidity_score": 9,
-        "decision_support": {
-          "technical_score": 9,
-          "liquidity_score": 9,
-          "setup_score": 8.9,
-          "chase_risk": "low"
-        }
-      },
-      "action": "DEEP_RESEARCH",
       "rank": 12
     },
     {
@@ -2203,7 +2204,7 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-09-10",
-            "age_days": 45.67110512731482,
+            "age_days": 45.681856840277774,
             "max_days": 120,
             "fresh": true
           },
@@ -2414,7 +2415,7 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-10-25",
-            "age_days": 0.6711054398148149,
+            "age_days": 0.6818556944444445,
             "max_days": 120,
             "fresh": true
           },
@@ -2529,13 +2530,13 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-09-10",
-            "age_days": 45.67110518518518,
+            "age_days": 45.68185596064815,
             "max_days": 120,
             "fresh": true
           },
           "fundamentals": {
             "as_of": "2026-06-30",
-            "age_days": 117.67110518518518,
+            "age_days": 117.68185596064815,
             "max_days": 210,
             "fresh": true
           },
@@ -2850,27 +2851,6 @@
   "research_queue": [
     {
       "priority": 1,
-      "symbol": "MFPC",
-      "score": 65.65,
-      "discovery_score": 8.33,
-      "action": "DEEP_RESEARCH",
-      "missing": [
-        "fundamentals",
-        "valuation"
-      ],
-      "red_team_flags": [
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "why_now": {
-        "cycle": 7.8,
-        "institutional_proxy": 8,
-        "entry": 8.74,
-        "rr_proxy": 6.72
-      }
-    },
-    {
-      "priority": 2,
       "symbol": "ELNA",
       "score": 56.24,
       "discovery_score": 7.76,
@@ -2894,7 +2874,7 @@
       }
     },
     {
-      "priority": 3,
+      "priority": 2,
       "symbol": "EOSB",
       "score": 56.9,
       "discovery_score": 7.58,
@@ -2918,7 +2898,7 @@
       }
     },
     {
-      "priority": 4,
+      "priority": 3,
       "symbol": "ADIB",
       "score": 75.27,
       "discovery_score": 7.44,
@@ -2941,7 +2921,7 @@
       }
     },
     {
-      "priority": 5,
+      "priority": 4,
       "symbol": "SDTI",
       "score": 51.24,
       "discovery_score": 7.35,
@@ -2966,7 +2946,7 @@
       }
     },
     {
-      "priority": 6,
+      "priority": 5,
       "symbol": "HDBK",
       "score": 62.81,
       "discovery_score": 7.23,
@@ -2990,7 +2970,7 @@
       }
     },
     {
-      "priority": 7,
+      "priority": 6,
       "symbol": "ABUK",
       "score": 57.08,
       "discovery_score": 7.01,
@@ -3014,7 +2994,7 @@
       }
     },
     {
-      "priority": 8,
+      "priority": 7,
       "symbol": "ALCN",
       "score": 56.45,
       "discovery_score": 6.68,
@@ -3038,7 +3018,7 @@
       }
     },
     {
-      "priority": 9,
+      "priority": 8,
       "symbol": "ADRI",
       "score": 48.24,
       "discovery_score": 6.53,
@@ -3062,7 +3042,7 @@
       }
     },
     {
-      "priority": 10,
+      "priority": 9,
       "symbol": "CPCI",
       "score": 59.53,
       "discovery_score": 6.29,
@@ -3086,7 +3066,7 @@
       }
     },
     {
-      "priority": 11,
+      "priority": 10,
       "symbol": "AMOC",
       "score": 71.06,
       "discovery_score": 6.14,
@@ -3103,7 +3083,7 @@
       }
     },
     {
-      "priority": 12,
+      "priority": 11,
       "symbol": "CCAP",
       "score": 58.96,
       "discovery_score": 6.08,
@@ -3127,7 +3107,7 @@
       }
     },
     {
-      "priority": 13,
+      "priority": 12,
       "symbol": "EMFD",
       "score": 62.3,
       "discovery_score": 6.03,
@@ -3150,7 +3130,7 @@
       }
     },
     {
-      "priority": 14,
+      "priority": 13,
       "symbol": "POUL",
       "score": 39.5,
       "discovery_score": 6.02,
@@ -3174,7 +3154,7 @@
       }
     },
     {
-      "priority": 15,
+      "priority": 14,
       "symbol": "OCDI",
       "score": 57.62,
       "discovery_score": 6,
@@ -3198,7 +3178,7 @@
       }
     },
     {
-      "priority": 16,
+      "priority": 15,
       "symbol": "HELI",
       "score": 62.19,
       "discovery_score": 5.92,
@@ -3219,7 +3199,7 @@
       }
     },
     {
-      "priority": 17,
+      "priority": 16,
       "symbol": "LUTS",
       "score": 47.33,
       "discovery_score": 5.82,
@@ -3243,7 +3223,7 @@
       }
     },
     {
-      "priority": 18,
+      "priority": 17,
       "symbol": "SWDY",
       "score": 54.3,
       "discovery_score": 5.7,
@@ -3267,7 +3247,7 @@
       }
     },
     {
-      "priority": 19,
+      "priority": 18,
       "symbol": "AXPH",
       "score": 50.6,
       "discovery_score": 5.67,
@@ -3291,7 +3271,7 @@
       }
     },
     {
-      "priority": 20,
+      "priority": 19,
       "symbol": "GPIM",
       "score": 36.06,
       "discovery_score": 5.61,
@@ -3316,7 +3296,7 @@
       }
     },
     {
-      "priority": 21,
+      "priority": 20,
       "symbol": "RUBX",
       "score": 52.93,
       "discovery_score": 5.52,
@@ -3340,7 +3320,7 @@
       }
     },
     {
-      "priority": 22,
+      "priority": 21,
       "symbol": "AIH",
       "score": 41.88,
       "discovery_score": 5.51,
@@ -3365,7 +3345,7 @@
       }
     },
     {
-      "priority": 23,
+      "priority": 22,
       "symbol": "AJWA",
       "score": 46.07,
       "discovery_score": 5.49,
@@ -3389,7 +3369,7 @@
       }
     },
     {
-      "priority": 24,
+      "priority": 23,
       "symbol": "PACH",
       "score": 46.95,
       "discovery_score": 5.43,
@@ -3413,7 +3393,7 @@
       }
     },
     {
-      "priority": 25,
+      "priority": 24,
       "symbol": "BTFH",
       "score": 28.29,
       "discovery_score": 5.43,
@@ -3439,7 +3419,7 @@
       }
     },
     {
-      "priority": 26,
+      "priority": 25,
       "symbol": "FWRY",
       "score": 72.43,
       "discovery_score": 5.41,
@@ -3460,7 +3440,7 @@
       }
     },
     {
-      "priority": 27,
+      "priority": 26,
       "symbol": "CRST",
       "score": 47.49,
       "discovery_score": 5.39,
@@ -3484,7 +3464,7 @@
       }
     },
     {
-      "priority": 28,
+      "priority": 27,
       "symbol": "EAST",
       "score": 55.22,
       "discovery_score": 5.37,
@@ -3509,7 +3489,7 @@
       }
     },
     {
-      "priority": 29,
+      "priority": 28,
       "symbol": "ARCC",
       "score": 66.01,
       "discovery_score": 5.34,
@@ -3532,7 +3512,7 @@
       }
     },
     {
-      "priority": 30,
+      "priority": 29,
       "symbol": "NARE",
       "score": 51.36,
       "discovery_score": 5.32,
@@ -3554,11 +3534,45 @@
         "entry": 5.45,
         "rr_proxy": 4.7
       }
+    },
+    {
+      "priority": 30,
+      "symbol": "GTWL",
+      "score": 52.54,
+      "discovery_score": 5.28,
+      "action": "RESEARCH_SHARIA",
+      "missing": [
+        "sharia",
+        "fundamentals",
+        "valuation"
+      ],
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "why_now": {
+        "cycle": 3.2,
+        "institutional_proxy": 5.74,
+        "entry": 3.88,
+        "rr_proxy": 4.7
+      }
     }
   ],
   "replacement_challengers": [
     {
       "rank": 1,
+      "symbol": "MFPC",
+      "action": "WAIT_ENTRY",
+      "score": 82.83,
+      "capital_efficiency_score": 2.03,
+      "execution_ready": true,
+      "portfolio_overlay_required": true,
+      "rule": "Compare against each existing holding after loading private portfolio state; never auto-sell from public-repo data alone."
+    },
+    {
+      "rank": 2,
       "symbol": "ADIB",
       "action": "RESEARCH_SHARIA",
       "score": 75.27,
@@ -3568,7 +3582,7 @@
       "rule": "Compare against each existing holding after loading private portfolio state; never auto-sell from public-repo data alone."
     },
     {
-      "rank": 2,
+      "rank": 3,
       "symbol": "ETEL",
       "action": "WAIT_ENTRY",
       "score": 74.42,
@@ -3578,7 +3592,7 @@
       "rule": "Compare against each existing holding after loading private portfolio state; never auto-sell from public-repo data alone."
     },
     {
-      "rank": 3,
+      "rank": 4,
       "symbol": "EGAL",
       "action": "NO_CHASE",
       "score": 74.1,
@@ -3588,7 +3602,7 @@
       "rule": "Compare against each existing holding after loading private portfolio state; never auto-sell from public-repo data alone."
     },
     {
-      "rank": 4,
+      "rank": 5,
       "symbol": "FWRY",
       "action": "DEEP_RESEARCH",
       "score": 72.43,
@@ -3598,7 +3612,7 @@
       "rule": "Compare against each existing holding after loading private portfolio state; never auto-sell from public-repo data alone."
     },
     {
-      "rank": 5,
+      "rank": 6,
       "symbol": "AMOC",
       "action": "DEEP_RESEARCH",
       "score": 71.06,
@@ -3608,7 +3622,7 @@
       "rule": "Compare against each existing holding after loading private portfolio state; never auto-sell from public-repo data alone."
     },
     {
-      "rank": 6,
+      "rank": 7,
       "symbol": "TMGH",
       "action": "NO_CHASE",
       "score": 70.96,
@@ -3618,7 +3632,7 @@
       "rule": "Compare against each existing holding after loading private portfolio state; never auto-sell from public-repo data alone."
     },
     {
-      "rank": 7,
+      "rank": 8,
       "symbol": "MCQE",
       "action": "RESEARCH_SHARIA",
       "score": 70.24,
@@ -3628,7 +3642,7 @@
       "rule": "Compare against each existing holding after loading private portfolio state; never auto-sell from public-repo data alone."
     },
     {
-      "rank": 8,
+      "rank": 9,
       "symbol": "MASR",
       "action": "NO_CHASE",
       "score": 70.08,
@@ -3638,7 +3652,7 @@
       "rule": "Compare against each existing holding after loading private portfolio state; never auto-sell from public-repo data alone."
     },
     {
-      "rank": 9,
+      "rank": 10,
       "symbol": "COMI",
       "action": "RESEARCH_SHARIA",
       "score": 69.81,
@@ -3648,7 +3662,7 @@
       "rule": "Compare against each existing holding after loading private portfolio state; never auto-sell from public-repo data alone."
     },
     {
-      "rank": 10,
+      "rank": 11,
       "symbol": "ORAS",
       "action": "WAIT_ENTRY",
       "score": 67.48,
@@ -3658,21 +3672,11 @@
       "rule": "Compare against each existing holding after loading private portfolio state; never auto-sell from public-repo data alone."
     },
     {
-      "rank": 11,
+      "rank": 12,
       "symbol": "ARCC",
       "action": "RESEARCH_SHARIA",
       "score": 66.01,
       "capital_efficiency_score": 1.75,
-      "execution_ready": false,
-      "portfolio_overlay_required": true,
-      "rule": "Compare against each existing holding after loading private portfolio state; never auto-sell from public-repo data alone."
-    },
-    {
-      "rank": 12,
-      "symbol": "MFPC",
-      "action": "DEEP_RESEARCH",
-      "score": 65.65,
-      "capital_efficiency_score": 1.79,
       "execution_ready": false,
       "portfolio_overlay_required": true,
       "rule": "Compare against each existing holding after loading private portfolio state; never auto-sell from public-repo data alone."
@@ -3759,6 +3763,122 @@
     }
   ],
   "all_ranked": [
+    {
+      "symbol": "MFPC",
+      "name": "Misr Fertilizers Production Company MOPCO",
+      "reference_close": 47.2,
+      "score": 82.83,
+      "pre_penalty_score": 82.83,
+      "red_team_penalty": 0,
+      "discovery_score": 8.33,
+      "capital_efficiency_score": 2.03,
+      "components": {
+        "fundamental_quality": 9.2,
+        "valuation": 8.1,
+        "earnings_quality": 9.2,
+        "catalyst": 8.4,
+        "catalyst_transmission": 8.6,
+        "institutional_intelligence": 8,
+        "cycle_relative_strength": 7.8,
+        "entry_quality": 8.74,
+        "liquidity": 9,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 6.72,
+        "discovery": 8.33
+      },
+      "research": {
+        "sharia_status": "compliant",
+        "sharia_verified": true,
+        "sharia_pass": true,
+        "fundamentals_verified": true,
+        "valuation_verified": true,
+        "freshness": {
+          "sharia": {
+            "as_of": "2026-09-10",
+            "age_days": 45.681856493055555,
+            "max_days": 120,
+            "fresh": true
+          },
+          "fundamentals": {
+            "as_of": "2026-06-30",
+            "age_days": 117.68185649305556,
+            "max_days": 210,
+            "fresh": true
+          },
+          "valuation": {
+            "as_of": "2026-10-25",
+            "age_days": 0.6818564930555555,
+            "max_days": 45,
+            "fresh": true
+          }
+        },
+        "source_count": 6,
+        "research_as_of": "2026-06-30",
+        "verified_fundamental_score": 9.2,
+        "verified_valuation_score": 8.1,
+        "method": "verified_override_plus_market_quant"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 30,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 7.8,
+        "sessions_available": 53,
+        "provenance": "hybrid_validated_external_plus_v4"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "fertilizer_cycle_and_urea_price_sensitivity",
+        "natural_gas_supply_and_input_cost_risk",
+        "export_and_geopolitical_logistics_exposure"
+      ],
+      "evidence_coverage_pct": 100,
+      "execution_ready": true,
+      "execution_plan": {
+        "status": "BUY_ZONE",
+        "reference_close": 47.2,
+        "entry_zone": [
+          44.68,
+          46.49
+        ],
+        "invalidation": 42.67,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 1,
+        "sizing": {
+          "probe_pct_of_target": 35,
+          "core_add_pct": 40,
+          "reserve_pct": 25
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      },
+      "market_row": {
+        "change": 4.171264621496359,
+        "liquidity_score": 9,
+        "decision_support": {
+          "technical_score": 9,
+          "liquidity_score": 9,
+          "setup_score": 8.9,
+          "chase_risk": "low"
+        }
+      },
+      "action": "WAIT_ENTRY",
+      "rank": 1
+    },
     {
       "symbol": "ADIB",
       "name": "Abu Dhabi Islamic Bank-Egypt",
@@ -3873,7 +3993,7 @@
         }
       },
       "action": "RESEARCH_SHARIA",
-      "rank": 1
+      "rank": 2
     },
     {
       "symbol": "ETEL",
@@ -3907,19 +4027,19 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-09-10",
-            "age_days": 45.67110480324074,
+            "age_days": 45.6818565625,
             "max_days": 120,
             "fresh": true
           },
           "fundamentals": {
             "as_of": "2026-06-30",
-            "age_days": 117.67110480324074,
+            "age_days": 117.6818565625,
             "max_days": 210,
             "fresh": true
           },
           "valuation": {
             "as_of": "2026-10-06",
-            "age_days": 19.67110480324074,
+            "age_days": 19.6818565625,
             "max_days": 45,
             "fresh": true
           }
@@ -3985,7 +4105,7 @@
         }
       },
       "action": "WAIT_ENTRY",
-      "rank": 2
+      "rank": 3
     },
     {
       "symbol": "EGAL",
@@ -4019,19 +4139,19 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-09-10",
-            "age_days": 45.67110512731482,
+            "age_days": 45.681856851851855,
             "max_days": 120,
             "fresh": true
           },
           "fundamentals": {
             "as_of": "2026-06-30",
-            "age_days": 117.67110512731482,
+            "age_days": 117.68185685185185,
             "max_days": 210,
             "fresh": true
           },
           "valuation": {
             "as_of": "2026-10-06",
-            "age_days": 19.671105127314814,
+            "age_days": 19.68185685185185,
             "max_days": 45,
             "fresh": true
           }
@@ -4097,7 +4217,7 @@
         }
       },
       "action": "NO_CHASE",
-      "rank": 3
+      "rank": 4
     },
     {
       "symbol": "FWRY",
@@ -4131,7 +4251,7 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-10-25",
-            "age_days": 0.6711053240740741,
+            "age_days": 0.6818564930555555,
             "max_days": 120,
             "fresh": true
           },
@@ -4212,7 +4332,7 @@
         }
       },
       "action": "DEEP_RESEARCH",
-      "rank": 4
+      "rank": 5
     },
     {
       "symbol": "AMOC",
@@ -4246,19 +4366,19 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-09-10",
-            "age_days": 45.67110486111111,
+            "age_days": 45.68185678240741,
             "max_days": 120,
             "fresh": true
           },
           "fundamentals": {
             "as_of": "2026-06-30",
-            "age_days": 117.67110486111112,
+            "age_days": 117.68185678240741,
             "max_days": 210,
             "fresh": true
           },
           "valuation": {
             "as_of": "2026-09-10",
-            "age_days": 45.67110486111111,
+            "age_days": 45.68185678240741,
             "max_days": 45,
             "fresh": false
           }
@@ -4324,7 +4444,7 @@
         }
       },
       "action": "DEEP_RESEARCH",
-      "rank": 5
+      "rank": 6
     },
     {
       "symbol": "TMGH",
@@ -4358,19 +4478,19 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-09-10",
-            "age_days": 45.671104988425924,
+            "age_days": 45.681856180555556,
             "max_days": 120,
             "fresh": true
           },
           "fundamentals": {
             "as_of": "2026-06-30",
-            "age_days": 117.67110498842592,
+            "age_days": 117.68185618055556,
             "max_days": 210,
             "fresh": true
           },
           "valuation": {
             "as_of": "2026-10-06",
-            "age_days": 19.671104988425927,
+            "age_days": 19.681856180555556,
             "max_days": 45,
             "fresh": true
           }
@@ -4438,7 +4558,7 @@
         }
       },
       "action": "NO_CHASE",
-      "rank": 6
+      "rank": 7
     },
     {
       "symbol": "MCQE",
@@ -4534,7 +4654,7 @@
         }
       },
       "action": "RESEARCH_SHARIA",
-      "rank": 7
+      "rank": 8
     },
     {
       "symbol": "MASR",
@@ -4568,19 +4688,19 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-09-10",
-            "age_days": 45.67110482638889,
+            "age_days": 45.68185616898148,
             "max_days": 120,
             "fresh": true
           },
           "fundamentals": {
             "as_of": "2026-06-30",
-            "age_days": 117.67110482638888,
+            "age_days": 117.68185616898148,
             "max_days": 210,
             "fresh": true
           },
           "valuation": {
             "as_of": "2026-10-06",
-            "age_days": 19.671104826388888,
+            "age_days": 19.681856168981483,
             "max_days": 45,
             "fresh": true
           }
@@ -4646,7 +4766,7 @@
         }
       },
       "action": "NO_CHASE",
-      "rank": 8
+      "rank": 9
     },
     {
       "symbol": "COMI",
@@ -4762,7 +4882,7 @@
         }
       },
       "action": "RESEARCH_SHARIA",
-      "rank": 9
+      "rank": 10
     },
     {
       "symbol": "ORAS",
@@ -4796,19 +4916,19 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-09-10",
-            "age_days": 45.67110545138889,
+            "age_days": 45.68185667824074,
             "max_days": 120,
             "fresh": true
           },
           "fundamentals": {
             "as_of": "2026-06-30",
-            "age_days": 117.67110545138888,
+            "age_days": 117.68185667824073,
             "max_days": 210,
             "fresh": true
           },
           "valuation": {
             "as_of": "2026-10-06",
-            "age_days": 19.67110545138889,
+            "age_days": 19.68185667824074,
             "max_days": 45,
             "fresh": true
           }
@@ -4876,7 +4996,7 @@
         }
       },
       "action": "WAIT_ENTRY",
-      "rank": 10
+      "rank": 11
     },
     {
       "symbol": "ARCC",
@@ -4992,121 +5112,6 @@
         }
       },
       "action": "RESEARCH_SHARIA",
-      "rank": 11
-    },
-    {
-      "symbol": "MFPC",
-      "name": "Misr Fertilizers Production Company MOPCO",
-      "reference_close": 47.2,
-      "score": 65.65,
-      "pre_penalty_score": 65.65,
-      "red_team_penalty": 0,
-      "discovery_score": 8.33,
-      "capital_efficiency_score": 1.79,
-      "components": {
-        "fundamental_quality": 4.38,
-        "valuation": 7.33,
-        "earnings_quality": 2,
-        "catalyst": 7.5,
-        "catalyst_transmission": 7.87,
-        "institutional_intelligence": 8,
-        "cycle_relative_strength": 7.8,
-        "entry_quality": 8.74,
-        "liquidity": 9,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 6.72,
-        "discovery": 8.33
-      },
-      "research": {
-        "sharia_status": "compliant",
-        "sharia_verified": true,
-        "sharia_pass": true,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": "2026-09-10",
-            "age_days": 45.67110481481482,
-            "max_days": 120,
-            "fresh": true
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 2,
-        "research_as_of": "2026-09-10",
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 30,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 7.8,
-        "sessions_available": 53,
-        "provenance": "hybrid_validated_external_plus_v4"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 67,
-      "execution_ready": false,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 47.2,
-        "entry_zone": [
-          44.68,
-          46.49
-        ],
-        "invalidation": 42.67,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 1,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      },
-      "market_row": {
-        "change": 4.171264621496359,
-        "liquidity_score": 9,
-        "decision_support": {
-          "technical_score": 9,
-          "liquidity_score": 9,
-          "setup_score": 8.9,
-          "chase_risk": "low"
-        }
-      },
-      "action": "DEEP_RESEARCH",
       "rank": 12
     },
     {
@@ -5874,7 +5879,7 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-09-10",
-            "age_days": 45.67110512731482,
+            "age_days": 45.681856840277774,
             "max_days": 120,
             "fresh": true
           },
@@ -6085,7 +6090,7 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-10-25",
-            "age_days": 0.6711054398148149,
+            "age_days": 0.6818556944444445,
             "max_days": 120,
             "fresh": true
           },
@@ -6200,13 +6205,13 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-09-10",
-            "age_days": 45.67110518518518,
+            "age_days": 45.68185596064815,
             "max_days": 120,
             "fresh": true
           },
           "fundamentals": {
             "as_of": "2026-06-30",
-            "age_days": 117.67110518518518,
+            "age_days": 117.68185596064815,
             "max_days": 210,
             "fresh": true
           },
@@ -8274,7 +8279,7 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-09-10",
-            "age_days": 45.67110505787037,
+            "age_days": 45.68185563657408,
             "max_days": 120,
             "fresh": true
           },
@@ -8603,7 +8608,7 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-09-10",
-            "age_days": 45.67110534722222,
+            "age_days": 45.68185581018518,
             "max_days": 120,
             "fresh": true
           },
@@ -9417,7 +9422,7 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-09-10",
-            "age_days": 45.671104988425924,
+            "age_days": 45.68185596064815,
             "max_days": 120,
             "fresh": true
           },
@@ -10815,7 +10820,7 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-10-25",
-            "age_days": 0.6711048958333333,
+            "age_days": 0.6818566435185185,
             "max_days": 120,
             "fresh": true
           },
@@ -12219,7 +12224,7 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-09-10",
-            "age_days": 45.671105069444444,
+            "age_days": 45.68185640046296,
             "max_days": 120,
             "fresh": true
           },
@@ -16112,7 +16117,7 @@
         "freshness": {
           "sharia": {
             "as_of": "2026-09-10",
-            "age_days": 45.67110496527778,
+            "age_days": 45.681856770833335,
             "max_days": 120,
             "fresh": true
           },
@@ -21637,202 +21642,8 @@
       "rank": 176
     },
     {
-      "symbol": "SIEG",
-      "name": "Egyptian Company for Pipes and Cement Products -Siegwart",
-      "reference_close": 10,
-      "score": 40.89,
-      "pre_penalty_score": 43.89,
-      "red_team_penalty": 3,
-      "discovery_score": 3.34,
-      "capital_efficiency_score": 0.92,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.65,
-        "institutional_intelligence": 2.1,
-        "cycle_relative_strength": 5.1,
-        "entry_quality": 3.79,
-        "liquidity": 2.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 3.35,
-        "discovery": 3.34
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 26,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 5.1,
-        "sessions_available": 26,
-        "provenance": "v4_native"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": 0,
-        "liquidity_score": 2.5,
-        "decision_support": {
-          "technical_score": 7.4,
-          "liquidity_score": 2.5,
-          "setup_score": 5,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 177
-    },
-    {
-      "symbol": "NBCC",
-      "name": "ALNASR For Building And Construction Company",
-      "reference_close": 5,
-      "score": 40.89,
-      "pre_penalty_score": 43.89,
-      "red_team_penalty": 3,
-      "discovery_score": 3.34,
-      "capital_efficiency_score": 0.92,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.65,
-        "institutional_intelligence": 2.1,
-        "cycle_relative_strength": 5.1,
-        "entry_quality": 3.79,
-        "liquidity": 2.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 3.35,
-        "discovery": 3.34
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 26,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 5.1,
-        "sessions_available": 26,
-        "provenance": "v4_native"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": 0,
-        "liquidity_score": 2.5,
-        "decision_support": {
-          "technical_score": 7.4,
-          "liquidity_score": 2.5,
-          "setup_score": 5,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 178
-    },
-    {
-      "symbol": "ELAB",
-      "name": "Egyptian Linear Alkyl Benzene Company",
+      "symbol": "HDST",
+      "name": "HEDGESTONE INVESTMENT",
       "reference_close": 0.1,
       "score": 40.89,
       "pre_penalty_score": 43.89,
@@ -21925,880 +21736,7 @@
         }
       },
       "action": "RESEARCH_SHARIA",
-      "rank": 179
-    },
-    {
-      "symbol": "EGS65621C012",
-      "name": "El Nasr Housing & Egp5",
-      "reference_close": 5,
-      "score": 40.89,
-      "pre_penalty_score": 43.89,
-      "red_team_penalty": 3,
-      "discovery_score": 3.34,
-      "capital_efficiency_score": 0.92,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.65,
-        "institutional_intelligence": 2.1,
-        "cycle_relative_strength": 5.1,
-        "entry_quality": 3.79,
-        "liquidity": 2.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 3.35,
-        "discovery": 3.34
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 26,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 5.1,
-        "sessions_available": 26,
-        "provenance": "v4_native"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": 0,
-        "liquidity_score": 2.5,
-        "decision_support": {
-          "technical_score": 7.4,
-          "liquidity_score": 2.5,
-          "setup_score": 5,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 180
-    },
-    {
-      "symbol": "YAYT",
-      "name": "Spring & Transportation Needs Manufacturing Co.",
-      "reference_close": 10,
-      "score": 40.89,
-      "pre_penalty_score": 43.89,
-      "red_team_penalty": 3,
-      "discovery_score": 3.34,
-      "capital_efficiency_score": 0.92,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.65,
-        "institutional_intelligence": 2.1,
-        "cycle_relative_strength": 5.1,
-        "entry_quality": 3.79,
-        "liquidity": 2.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 3.35,
-        "discovery": 3.34
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 26,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 5.1,
-        "sessions_available": 26,
-        "provenance": "v4_native"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": 0,
-        "liquidity_score": 2.5,
-        "decision_support": {
-          "technical_score": 7.4,
-          "liquidity_score": 2.5,
-          "setup_score": 5,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 181
-    },
-    {
-      "symbol": "ENPI",
-      "name": "Engineering for the Petroleum and Process Industries",
-      "reference_close": 0.125,
-      "score": 40.89,
-      "pre_penalty_score": 43.89,
-      "red_team_penalty": 3,
-      "discovery_score": 3.34,
-      "capital_efficiency_score": 0.92,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.65,
-        "institutional_intelligence": 2.1,
-        "cycle_relative_strength": 5.1,
-        "entry_quality": 3.79,
-        "liquidity": 2.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 3.35,
-        "discovery": 3.34
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 26,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 5.1,
-        "sessions_available": 26,
-        "provenance": "v4_native"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": 0,
-        "liquidity_score": 2.5,
-        "decision_support": {
-          "technical_score": 7.4,
-          "liquidity_score": 2.5,
-          "setup_score": 5,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 182
-    },
-    {
-      "symbol": "ALXD",
-      "name": "Alexandria For Investment and Urban Development",
-      "reference_close": 5,
-      "score": 40.89,
-      "pre_penalty_score": 43.89,
-      "red_team_penalty": 3,
-      "discovery_score": 3.34,
-      "capital_efficiency_score": 0.92,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.65,
-        "institutional_intelligence": 2.1,
-        "cycle_relative_strength": 5.1,
-        "entry_quality": 3.79,
-        "liquidity": 2.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 3.35,
-        "discovery": 3.34
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 26,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 5.1,
-        "sessions_available": 26,
-        "provenance": "v4_native"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": 0,
-        "liquidity_score": 2.5,
-        "decision_support": {
-          "technical_score": 7.4,
-          "liquidity_score": 2.5,
-          "setup_score": 5,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 183
-    },
-    {
-      "symbol": "MMHC",
-      "name": "El Mamoura Company For Construction & Tourism Development",
-      "reference_close": 10,
-      "score": 40.89,
-      "pre_penalty_score": 43.89,
-      "red_team_penalty": 3,
-      "discovery_score": 3.34,
-      "capital_efficiency_score": 0.92,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.65,
-        "institutional_intelligence": 2.1,
-        "cycle_relative_strength": 5.1,
-        "entry_quality": 3.79,
-        "liquidity": 2.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 3.35,
-        "discovery": 3.34
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 26,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 5.1,
-        "sessions_available": 26,
-        "provenance": "v4_native"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": 0,
-        "liquidity_score": 2.5,
-        "decision_support": {
-          "technical_score": 7.4,
-          "liquidity_score": 2.5,
-          "setup_score": 5,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 184
-    },
-    {
-      "symbol": "MITR",
-      "name": "Misr Travel&Touris Egp6",
-      "reference_close": 6,
-      "score": 40.89,
-      "pre_penalty_score": 43.89,
-      "red_team_penalty": 3,
-      "discovery_score": 3.34,
-      "capital_efficiency_score": 0.92,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.65,
-        "institutional_intelligence": 2.1,
-        "cycle_relative_strength": 5.1,
-        "entry_quality": 3.79,
-        "liquidity": 2.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 3.35,
-        "discovery": 3.34
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 26,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 5.1,
-        "sessions_available": 26,
-        "provenance": "v4_native"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": 0,
-        "liquidity_score": 2.5,
-        "decision_support": {
-          "technical_score": 7.4,
-          "liquidity_score": 2.5,
-          "setup_score": 5,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 185
-    },
-    {
-      "symbol": "NMIN",
-      "name": "El Nasr Mining Co Egp10",
-      "reference_close": 10,
-      "score": 40.89,
-      "pre_penalty_score": 43.89,
-      "red_team_penalty": 3,
-      "discovery_score": 3.34,
-      "capital_efficiency_score": 0.92,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.65,
-        "institutional_intelligence": 2.1,
-        "cycle_relative_strength": 5.1,
-        "entry_quality": 3.79,
-        "liquidity": 2.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 3.35,
-        "discovery": 3.34
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 26,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 5.1,
-        "sessions_available": 26,
-        "provenance": "v4_native"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": 0,
-        "liquidity_score": 2.5,
-        "decision_support": {
-          "technical_score": 7.4,
-          "liquidity_score": 2.5,
-          "setup_score": 5,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 186
-    },
-    {
-      "symbol": "ANCC",
-      "name": "ALNAHDA Industrial Co.",
-      "reference_close": 10,
-      "score": 40.89,
-      "pre_penalty_score": 43.89,
-      "red_team_penalty": 3,
-      "discovery_score": 3.34,
-      "capital_efficiency_score": 0.92,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.65,
-        "institutional_intelligence": 2.1,
-        "cycle_relative_strength": 5.1,
-        "entry_quality": 3.79,
-        "liquidity": 2.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 3.35,
-        "discovery": 3.34
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 26,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 5.1,
-        "sessions_available": 26,
-        "provenance": "v4_native"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": 0,
-        "liquidity_score": 2.5,
-        "decision_support": {
-          "technical_score": 7.4,
-          "liquidity_score": 2.5,
-          "setup_score": 5,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 187
-    },
-    {
-      "symbol": "POCO",
-      "name": "Port Said Container And Cargo Handling",
-      "reference_close": 5,
-      "score": 40.89,
-      "pre_penalty_score": 43.89,
-      "red_team_penalty": 3,
-      "discovery_score": 3.34,
-      "capital_efficiency_score": 0.92,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.65,
-        "institutional_intelligence": 2.1,
-        "cycle_relative_strength": 5.1,
-        "entry_quality": 3.79,
-        "liquidity": 2.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 3.35,
-        "discovery": 3.34
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 26,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 5.1,
-        "sessions_available": 26,
-        "provenance": "v4_native"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": 0,
-        "liquidity_score": 2.5,
-        "decision_support": {
-          "technical_score": 7.4,
-          "liquidity_score": 2.5,
-          "setup_score": 5,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 188
+      "rank": 177
     },
     {
       "symbol": "CID",
@@ -22895,1365 +21833,7 @@
         }
       },
       "action": "RESEARCH_SHARIA",
-      "rank": 189
-    },
-    {
-      "symbol": "PMSC",
-      "name": "Petroleum Marine Services Company",
-      "reference_close": 10,
-      "score": 40.89,
-      "pre_penalty_score": 43.89,
-      "red_team_penalty": 3,
-      "discovery_score": 3.34,
-      "capital_efficiency_score": 0.92,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.65,
-        "institutional_intelligence": 2.1,
-        "cycle_relative_strength": 5.1,
-        "entry_quality": 3.79,
-        "liquidity": 2.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 3.35,
-        "discovery": 3.34
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 26,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 5.1,
-        "sessions_available": 26,
-        "provenance": "v4_native"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": 0,
-        "liquidity_score": 2.5,
-        "decision_support": {
-          "technical_score": 7.4,
-          "liquidity_score": 2.5,
-          "setup_score": 5,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 190
-    },
-    {
-      "symbol": "DCCC",
-      "name": "Damietta Container and Cargo Handling",
-      "reference_close": 10,
-      "score": 40.89,
-      "pre_penalty_score": 43.89,
-      "red_team_penalty": 3,
-      "discovery_score": 3.34,
-      "capital_efficiency_score": 0.92,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.65,
-        "institutional_intelligence": 2.1,
-        "cycle_relative_strength": 5.1,
-        "entry_quality": 3.79,
-        "liquidity": 2.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 3.35,
-        "discovery": 3.34
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 26,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 5.1,
-        "sessions_available": 26,
-        "provenance": "v4_native"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": 0,
-        "liquidity_score": 2.5,
-        "decision_support": {
-          "technical_score": 7.4,
-          "liquidity_score": 2.5,
-          "setup_score": 5,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 191
-    },
-    {
-      "symbol": "EEP",
-      "name": "Egypt Education Platform - EEP",
-      "reference_close": 1,
-      "score": 40.89,
-      "pre_penalty_score": 43.89,
-      "red_team_penalty": 3,
-      "discovery_score": 3.34,
-      "capital_efficiency_score": 0.92,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.65,
-        "institutional_intelligence": 2.1,
-        "cycle_relative_strength": 5.1,
-        "entry_quality": 3.79,
-        "liquidity": 2.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 3.35,
-        "discovery": 3.34
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 26,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 5.1,
-        "sessions_available": 26,
-        "provenance": "v4_native"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": 0,
-        "liquidity_score": 2.5,
-        "decision_support": {
-          "technical_score": 7.4,
-          "liquidity_score": 2.5,
-          "setup_score": 5,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 192
-    },
-    {
-      "symbol": "EGOTH",
-      "name": "El Masreyah Touris Egp100",
-      "reference_close": 100,
-      "score": 40.89,
-      "pre_penalty_score": 43.89,
-      "red_team_penalty": 3,
-      "discovery_score": 3.34,
-      "capital_efficiency_score": 0.92,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.65,
-        "institutional_intelligence": 2.1,
-        "cycle_relative_strength": 5.1,
-        "entry_quality": 3.79,
-        "liquidity": 2.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 3.35,
-        "discovery": 3.34
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 26,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 5.1,
-        "sessions_available": 26,
-        "provenance": "v4_native"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": 0,
-        "liquidity_score": 2.5,
-        "decision_support": {
-          "technical_score": 7.4,
-          "liquidity_score": 2.5,
-          "setup_score": 5,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 193
-    },
-    {
-      "symbol": "KNGC",
-      "name": "EL- Nasr Glass And Crystal",
-      "reference_close": 10,
-      "score": 40.89,
-      "pre_penalty_score": 43.89,
-      "red_team_penalty": 3,
-      "discovery_score": 3.34,
-      "capital_efficiency_score": 0.92,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.65,
-        "institutional_intelligence": 2.1,
-        "cycle_relative_strength": 5.1,
-        "entry_quality": 3.79,
-        "liquidity": 2.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 3.35,
-        "discovery": 3.34
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 26,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 5.1,
-        "sessions_available": 26,
-        "provenance": "v4_native"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": 0,
-        "liquidity_score": 2.5,
-        "decision_support": {
-          "technical_score": 7.4,
-          "liquidity_score": 2.5,
-          "setup_score": 5,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 194
-    },
-    {
-      "symbol": "NFCI",
-      "name": "ELNASR Co For Fertilizers And Chemical Industries",
-      "reference_close": 10,
-      "score": 40.89,
-      "pre_penalty_score": 43.89,
-      "red_team_penalty": 3,
-      "discovery_score": 3.34,
-      "capital_efficiency_score": 0.92,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.65,
-        "institutional_intelligence": 2.1,
-        "cycle_relative_strength": 5.1,
-        "entry_quality": 3.79,
-        "liquidity": 2.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 3.35,
-        "discovery": 3.34
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 26,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 5.1,
-        "sessions_available": 26,
-        "provenance": "v4_native"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": 0,
-        "liquidity_score": 2.5,
-        "decision_support": {
-          "technical_score": 7.4,
-          "liquidity_score": 2.5,
-          "setup_score": 5,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 195
-    },
-    {
-      "symbol": "MLIC",
-      "name": "Misr Life Insurance",
-      "reference_close": 10,
-      "score": 40.89,
-      "pre_penalty_score": 43.89,
-      "red_team_penalty": 3,
-      "discovery_score": 3.34,
-      "capital_efficiency_score": 0.92,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.65,
-        "institutional_intelligence": 2.1,
-        "cycle_relative_strength": 5.1,
-        "entry_quality": 3.79,
-        "liquidity": 2.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 3.35,
-        "discovery": 3.34
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 26,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 5.1,
-        "sessions_available": 26,
-        "provenance": "v4_native"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": 0,
-        "liquidity_score": 2.5,
-        "decision_support": {
-          "technical_score": 7.4,
-          "liquidity_score": 2.5,
-          "setup_score": 5,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 196
-    },
-    {
-      "symbol": "GEOS",
-      "name": "Geos for trading and contracting",
-      "reference_close": 1,
-      "score": 40.89,
-      "pre_penalty_score": 43.89,
-      "red_team_penalty": 3,
-      "discovery_score": 3.34,
-      "capital_efficiency_score": 0.92,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.65,
-        "institutional_intelligence": 2.1,
-        "cycle_relative_strength": 5.1,
-        "entry_quality": 3.79,
-        "liquidity": 2.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 3.35,
-        "discovery": 3.34
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 26,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 5.1,
-        "sessions_available": 26,
-        "provenance": "v4_native"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": 0,
-        "liquidity_score": 2.5,
-        "decision_support": {
-          "technical_score": 7.4,
-          "liquidity_score": 2.5,
-          "setup_score": 5,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 197
-    },
-    {
-      "symbol": "ACFR",
-      "name": "Alexandria Company For Refractories",
-      "reference_close": 10,
-      "score": 40.89,
-      "pre_penalty_score": 43.89,
-      "red_team_penalty": 3,
-      "discovery_score": 3.34,
-      "capital_efficiency_score": 0.92,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.65,
-        "institutional_intelligence": 2.1,
-        "cycle_relative_strength": 5.1,
-        "entry_quality": 3.79,
-        "liquidity": 2.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 3.35,
-        "discovery": 3.34
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 26,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 5.1,
-        "sessions_available": 26,
-        "provenance": "v4_native"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": 0,
-        "liquidity_score": 2.5,
-        "decision_support": {
-          "technical_score": 7.4,
-          "liquidity_score": 2.5,
-          "setup_score": 5,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 198
-    },
-    {
-      "symbol": "NAMI",
-      "name": "National Asset Management And Investment",
-      "reference_close": 5,
-      "score": 40.89,
-      "pre_penalty_score": 43.89,
-      "red_team_penalty": 3,
-      "discovery_score": 3.34,
-      "capital_efficiency_score": 0.92,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.65,
-        "institutional_intelligence": 2.1,
-        "cycle_relative_strength": 5.1,
-        "entry_quality": 3.79,
-        "liquidity": 2.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 3.35,
-        "discovery": 3.34
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 25,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 5.1,
-        "sessions_available": 25,
-        "provenance": "v4_native"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": 0,
-        "liquidity_score": 2.5,
-        "decision_support": {
-          "technical_score": 7.4,
-          "liquidity_score": 2.5,
-          "setup_score": 5,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 199
-    },
-    {
-      "symbol": "OCAP",
-      "name": "OG Capital For Investments SPAC",
-      "reference_close": 1,
-      "score": 40.89,
-      "pre_penalty_score": 43.89,
-      "red_team_penalty": 3,
-      "discovery_score": 3.34,
-      "capital_efficiency_score": 0.92,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.65,
-        "institutional_intelligence": 2.1,
-        "cycle_relative_strength": 5.1,
-        "entry_quality": 3.79,
-        "liquidity": 2.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 3.35,
-        "discovery": 3.34
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 26,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 5.1,
-        "sessions_available": 26,
-        "provenance": "v4_native"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": 0,
-        "liquidity_score": 2.5,
-        "decision_support": {
-          "technical_score": 7.4,
-          "liquidity_score": 2.5,
-          "setup_score": 5,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 200
-    },
-    {
-      "symbol": "EGS72L31C011",
-      "name": "SOLARSOL For Energy",
-      "reference_close": 0.1,
-      "score": 40.89,
-      "pre_penalty_score": 43.89,
-      "red_team_penalty": 3,
-      "discovery_score": 3.34,
-      "capital_efficiency_score": 0.92,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.65,
-        "institutional_intelligence": 2.1,
-        "cycle_relative_strength": 5.1,
-        "entry_quality": 3.79,
-        "liquidity": 2.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 3.35,
-        "discovery": 3.34
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 26,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 5.1,
-        "sessions_available": 26,
-        "provenance": "v4_native"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": 0,
-        "liquidity_score": 2.5,
-        "decision_support": {
-          "technical_score": 7.4,
-          "liquidity_score": 2.5,
-          "setup_score": 5,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 201
-    },
-    {
-      "symbol": "SINA",
-      "name": "Sinai Manganese Company",
-      "reference_close": 15,
-      "score": 40.89,
-      "pre_penalty_score": 43.89,
-      "red_team_penalty": 3,
-      "discovery_score": 3.34,
-      "capital_efficiency_score": 0.92,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.65,
-        "institutional_intelligence": 2.1,
-        "cycle_relative_strength": 5.1,
-        "entry_quality": 3.79,
-        "liquidity": 2.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 3.35,
-        "discovery": 3.34
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 26,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 5.1,
-        "sessions_available": 26,
-        "provenance": "v4_native"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": 0,
-        "liquidity_score": 2.5,
-        "decision_support": {
-          "technical_score": 7.4,
-          "liquidity_score": 2.5,
-          "setup_score": 5,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 202
-    },
-    {
-      "symbol": "EGWA",
-      "name": "General Warehouses of Egypt",
-      "reference_close": 5,
-      "score": 40.89,
-      "pre_penalty_score": 43.89,
-      "red_team_penalty": 3,
-      "discovery_score": 3.34,
-      "capital_efficiency_score": 0.92,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.65,
-        "institutional_intelligence": 2.1,
-        "cycle_relative_strength": 5.1,
-        "entry_quality": 3.79,
-        "liquidity": 2.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 3.35,
-        "discovery": 3.34
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 26,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 5.1,
-        "sessions_available": 26,
-        "provenance": "v4_native"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": 0,
-        "liquidity_score": 2.5,
-        "decision_support": {
-          "technical_score": 7.4,
-          "liquidity_score": 2.5,
-          "setup_score": 5,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 203
+      "rank": 178
     },
     {
       "symbol": "EGS65101C015",
@@ -24350,7 +21930,783 @@
         }
       },
       "action": "RESEARCH_SHARIA",
-      "rank": 204
+      "rank": 179
+    },
+    {
+      "symbol": "OCAP",
+      "name": "OG Capital For Investments SPAC",
+      "reference_close": 1,
+      "score": 40.89,
+      "pre_penalty_score": 43.89,
+      "red_team_penalty": 3,
+      "discovery_score": 3.34,
+      "capital_efficiency_score": 0.92,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.65,
+        "institutional_intelligence": 2.1,
+        "cycle_relative_strength": 5.1,
+        "entry_quality": 3.79,
+        "liquidity": 2.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 3.35,
+        "discovery": 3.34
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 26,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 5.1,
+        "sessions_available": 26,
+        "provenance": "v4_native"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": 0,
+        "liquidity_score": 2.5,
+        "decision_support": {
+          "technical_score": 7.4,
+          "liquidity_score": 2.5,
+          "setup_score": 5,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
+      "rank": 180
+    },
+    {
+      "symbol": "POCO",
+      "name": "Port Said Container And Cargo Handling",
+      "reference_close": 5,
+      "score": 40.89,
+      "pre_penalty_score": 43.89,
+      "red_team_penalty": 3,
+      "discovery_score": 3.34,
+      "capital_efficiency_score": 0.92,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.65,
+        "institutional_intelligence": 2.1,
+        "cycle_relative_strength": 5.1,
+        "entry_quality": 3.79,
+        "liquidity": 2.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 3.35,
+        "discovery": 3.34
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 26,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 5.1,
+        "sessions_available": 26,
+        "provenance": "v4_native"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": 0,
+        "liquidity_score": 2.5,
+        "decision_support": {
+          "technical_score": 7.4,
+          "liquidity_score": 2.5,
+          "setup_score": 5,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
+      "rank": 181
+    },
+    {
+      "symbol": "PMSC",
+      "name": "Petroleum Marine Services Company",
+      "reference_close": 10,
+      "score": 40.89,
+      "pre_penalty_score": 43.89,
+      "red_team_penalty": 3,
+      "discovery_score": 3.34,
+      "capital_efficiency_score": 0.92,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.65,
+        "institutional_intelligence": 2.1,
+        "cycle_relative_strength": 5.1,
+        "entry_quality": 3.79,
+        "liquidity": 2.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 3.35,
+        "discovery": 3.34
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 26,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 5.1,
+        "sessions_available": 26,
+        "provenance": "v4_native"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": 0,
+        "liquidity_score": 2.5,
+        "decision_support": {
+          "technical_score": 7.4,
+          "liquidity_score": 2.5,
+          "setup_score": 5,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
+      "rank": 182
+    },
+    {
+      "symbol": "MMHC",
+      "name": "El Mamoura Company For Construction & Tourism Development",
+      "reference_close": 10,
+      "score": 40.89,
+      "pre_penalty_score": 43.89,
+      "red_team_penalty": 3,
+      "discovery_score": 3.34,
+      "capital_efficiency_score": 0.92,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.65,
+        "institutional_intelligence": 2.1,
+        "cycle_relative_strength": 5.1,
+        "entry_quality": 3.79,
+        "liquidity": 2.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 3.35,
+        "discovery": 3.34
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 26,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 5.1,
+        "sessions_available": 26,
+        "provenance": "v4_native"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": 0,
+        "liquidity_score": 2.5,
+        "decision_support": {
+          "technical_score": 7.4,
+          "liquidity_score": 2.5,
+          "setup_score": 5,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
+      "rank": 183
+    },
+    {
+      "symbol": "ELAB",
+      "name": "Egyptian Linear Alkyl Benzene Company",
+      "reference_close": 0.1,
+      "score": 40.89,
+      "pre_penalty_score": 43.89,
+      "red_team_penalty": 3,
+      "discovery_score": 3.34,
+      "capital_efficiency_score": 0.92,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.65,
+        "institutional_intelligence": 2.1,
+        "cycle_relative_strength": 5.1,
+        "entry_quality": 3.79,
+        "liquidity": 2.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 3.35,
+        "discovery": 3.34
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 26,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 5.1,
+        "sessions_available": 26,
+        "provenance": "v4_native"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": 0,
+        "liquidity_score": 2.5,
+        "decision_support": {
+          "technical_score": 7.4,
+          "liquidity_score": 2.5,
+          "setup_score": 5,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
+      "rank": 184
+    },
+    {
+      "symbol": "ALXD",
+      "name": "Alexandria For Investment and Urban Development",
+      "reference_close": 5,
+      "score": 40.89,
+      "pre_penalty_score": 43.89,
+      "red_team_penalty": 3,
+      "discovery_score": 3.34,
+      "capital_efficiency_score": 0.92,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.65,
+        "institutional_intelligence": 2.1,
+        "cycle_relative_strength": 5.1,
+        "entry_quality": 3.79,
+        "liquidity": 2.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 3.35,
+        "discovery": 3.34
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 26,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 5.1,
+        "sessions_available": 26,
+        "provenance": "v4_native"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": 0,
+        "liquidity_score": 2.5,
+        "decision_support": {
+          "technical_score": 7.4,
+          "liquidity_score": 2.5,
+          "setup_score": 5,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
+      "rank": 185
+    },
+    {
+      "symbol": "SIEG",
+      "name": "Egyptian Company for Pipes and Cement Products -Siegwart",
+      "reference_close": 10,
+      "score": 40.89,
+      "pre_penalty_score": 43.89,
+      "red_team_penalty": 3,
+      "discovery_score": 3.34,
+      "capital_efficiency_score": 0.92,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.65,
+        "institutional_intelligence": 2.1,
+        "cycle_relative_strength": 5.1,
+        "entry_quality": 3.79,
+        "liquidity": 2.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 3.35,
+        "discovery": 3.34
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 26,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 5.1,
+        "sessions_available": 26,
+        "provenance": "v4_native"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": 0,
+        "liquidity_score": 2.5,
+        "decision_support": {
+          "technical_score": 7.4,
+          "liquidity_score": 2.5,
+          "setup_score": 5,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
+      "rank": 186
+    },
+    {
+      "symbol": "ENPI",
+      "name": "Engineering for the Petroleum and Process Industries",
+      "reference_close": 0.125,
+      "score": 40.89,
+      "pre_penalty_score": 43.89,
+      "red_team_penalty": 3,
+      "discovery_score": 3.34,
+      "capital_efficiency_score": 0.92,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.65,
+        "institutional_intelligence": 2.1,
+        "cycle_relative_strength": 5.1,
+        "entry_quality": 3.79,
+        "liquidity": 2.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 3.35,
+        "discovery": 3.34
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 26,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 5.1,
+        "sessions_available": 26,
+        "provenance": "v4_native"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": 0,
+        "liquidity_score": 2.5,
+        "decision_support": {
+          "technical_score": 7.4,
+          "liquidity_score": 2.5,
+          "setup_score": 5,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
+      "rank": 187
     },
     {
       "symbol": "EFAC",
@@ -24447,7 +22803,1268 @@
         }
       },
       "action": "RESEARCH_SHARIA",
-      "rank": 205
+      "rank": 188
+    },
+    {
+      "symbol": "EEP",
+      "name": "Egypt Education Platform - EEP",
+      "reference_close": 1,
+      "score": 40.89,
+      "pre_penalty_score": 43.89,
+      "red_team_penalty": 3,
+      "discovery_score": 3.34,
+      "capital_efficiency_score": 0.92,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.65,
+        "institutional_intelligence": 2.1,
+        "cycle_relative_strength": 5.1,
+        "entry_quality": 3.79,
+        "liquidity": 2.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 3.35,
+        "discovery": 3.34
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 26,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 5.1,
+        "sessions_available": 26,
+        "provenance": "v4_native"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": 0,
+        "liquidity_score": 2.5,
+        "decision_support": {
+          "technical_score": 7.4,
+          "liquidity_score": 2.5,
+          "setup_score": 5,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
+      "rank": 189
+    },
+    {
+      "symbol": "MITR",
+      "name": "Misr Travel&Touris Egp6",
+      "reference_close": 6,
+      "score": 40.89,
+      "pre_penalty_score": 43.89,
+      "red_team_penalty": 3,
+      "discovery_score": 3.34,
+      "capital_efficiency_score": 0.92,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.65,
+        "institutional_intelligence": 2.1,
+        "cycle_relative_strength": 5.1,
+        "entry_quality": 3.79,
+        "liquidity": 2.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 3.35,
+        "discovery": 3.34
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 26,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 5.1,
+        "sessions_available": 26,
+        "provenance": "v4_native"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": 0,
+        "liquidity_score": 2.5,
+        "decision_support": {
+          "technical_score": 7.4,
+          "liquidity_score": 2.5,
+          "setup_score": 5,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
+      "rank": 190
+    },
+    {
+      "symbol": "NAMI",
+      "name": "National Asset Management And Investment",
+      "reference_close": 5,
+      "score": 40.89,
+      "pre_penalty_score": 43.89,
+      "red_team_penalty": 3,
+      "discovery_score": 3.34,
+      "capital_efficiency_score": 0.92,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.65,
+        "institutional_intelligence": 2.1,
+        "cycle_relative_strength": 5.1,
+        "entry_quality": 3.79,
+        "liquidity": 2.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 3.35,
+        "discovery": 3.34
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 25,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 5.1,
+        "sessions_available": 25,
+        "provenance": "v4_native"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": 0,
+        "liquidity_score": 2.5,
+        "decision_support": {
+          "technical_score": 7.4,
+          "liquidity_score": 2.5,
+          "setup_score": 5,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
+      "rank": 191
+    },
+    {
+      "symbol": "SINA",
+      "name": "Sinai Manganese Company",
+      "reference_close": 15,
+      "score": 40.89,
+      "pre_penalty_score": 43.89,
+      "red_team_penalty": 3,
+      "discovery_score": 3.34,
+      "capital_efficiency_score": 0.92,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.65,
+        "institutional_intelligence": 2.1,
+        "cycle_relative_strength": 5.1,
+        "entry_quality": 3.79,
+        "liquidity": 2.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 3.35,
+        "discovery": 3.34
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 26,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 5.1,
+        "sessions_available": 26,
+        "provenance": "v4_native"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": 0,
+        "liquidity_score": 2.5,
+        "decision_support": {
+          "technical_score": 7.4,
+          "liquidity_score": 2.5,
+          "setup_score": 5,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
+      "rank": 192
+    },
+    {
+      "symbol": "GEOS",
+      "name": "Geos for trading and contracting",
+      "reference_close": 1,
+      "score": 40.89,
+      "pre_penalty_score": 43.89,
+      "red_team_penalty": 3,
+      "discovery_score": 3.34,
+      "capital_efficiency_score": 0.92,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.65,
+        "institutional_intelligence": 2.1,
+        "cycle_relative_strength": 5.1,
+        "entry_quality": 3.79,
+        "liquidity": 2.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 3.35,
+        "discovery": 3.34
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 26,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 5.1,
+        "sessions_available": 26,
+        "provenance": "v4_native"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": 0,
+        "liquidity_score": 2.5,
+        "decision_support": {
+          "technical_score": 7.4,
+          "liquidity_score": 2.5,
+          "setup_score": 5,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
+      "rank": 193
+    },
+    {
+      "symbol": "EGS65621C012",
+      "name": "El Nasr Housing & Egp5",
+      "reference_close": 5,
+      "score": 40.89,
+      "pre_penalty_score": 43.89,
+      "red_team_penalty": 3,
+      "discovery_score": 3.34,
+      "capital_efficiency_score": 0.92,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.65,
+        "institutional_intelligence": 2.1,
+        "cycle_relative_strength": 5.1,
+        "entry_quality": 3.79,
+        "liquidity": 2.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 3.35,
+        "discovery": 3.34
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 26,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 5.1,
+        "sessions_available": 26,
+        "provenance": "v4_native"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": 0,
+        "liquidity_score": 2.5,
+        "decision_support": {
+          "technical_score": 7.4,
+          "liquidity_score": 2.5,
+          "setup_score": 5,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
+      "rank": 194
+    },
+    {
+      "symbol": "EGS65861C014",
+      "name": "Egyptian Contracting Co.-AL- ABD",
+      "reference_close": 5,
+      "score": 40.89,
+      "pre_penalty_score": 43.89,
+      "red_team_penalty": 3,
+      "discovery_score": 3.34,
+      "capital_efficiency_score": 0.92,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.65,
+        "institutional_intelligence": 2.1,
+        "cycle_relative_strength": 5.1,
+        "entry_quality": 3.79,
+        "liquidity": 2.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 3.35,
+        "discovery": 3.34
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 26,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 5.1,
+        "sessions_available": 26,
+        "provenance": "v4_native"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": 0,
+        "liquidity_score": 2.5,
+        "decision_support": {
+          "technical_score": 7.4,
+          "liquidity_score": 2.5,
+          "setup_score": 5,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
+      "rank": 195
+    },
+    {
+      "symbol": "EGOTH",
+      "name": "El Masreyah Touris Egp100",
+      "reference_close": 100,
+      "score": 40.89,
+      "pre_penalty_score": 43.89,
+      "red_team_penalty": 3,
+      "discovery_score": 3.34,
+      "capital_efficiency_score": 0.92,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.65,
+        "institutional_intelligence": 2.1,
+        "cycle_relative_strength": 5.1,
+        "entry_quality": 3.79,
+        "liquidity": 2.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 3.35,
+        "discovery": 3.34
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 26,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 5.1,
+        "sessions_available": 26,
+        "provenance": "v4_native"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": 0,
+        "liquidity_score": 2.5,
+        "decision_support": {
+          "technical_score": 7.4,
+          "liquidity_score": 2.5,
+          "setup_score": 5,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
+      "rank": 196
+    },
+    {
+      "symbol": "KNGC",
+      "name": "EL- Nasr Glass And Crystal",
+      "reference_close": 10,
+      "score": 40.89,
+      "pre_penalty_score": 43.89,
+      "red_team_penalty": 3,
+      "discovery_score": 3.34,
+      "capital_efficiency_score": 0.92,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.65,
+        "institutional_intelligence": 2.1,
+        "cycle_relative_strength": 5.1,
+        "entry_quality": 3.79,
+        "liquidity": 2.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 3.35,
+        "discovery": 3.34
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 26,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 5.1,
+        "sessions_available": 26,
+        "provenance": "v4_native"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": 0,
+        "liquidity_score": 2.5,
+        "decision_support": {
+          "technical_score": 7.4,
+          "liquidity_score": 2.5,
+          "setup_score": 5,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
+      "rank": 197
+    },
+    {
+      "symbol": "NBCC",
+      "name": "ALNASR For Building And Construction Company",
+      "reference_close": 5,
+      "score": 40.89,
+      "pre_penalty_score": 43.89,
+      "red_team_penalty": 3,
+      "discovery_score": 3.34,
+      "capital_efficiency_score": 0.92,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.65,
+        "institutional_intelligence": 2.1,
+        "cycle_relative_strength": 5.1,
+        "entry_quality": 3.79,
+        "liquidity": 2.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 3.35,
+        "discovery": 3.34
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 26,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 5.1,
+        "sessions_available": 26,
+        "provenance": "v4_native"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": 0,
+        "liquidity_score": 2.5,
+        "decision_support": {
+          "technical_score": 7.4,
+          "liquidity_score": 2.5,
+          "setup_score": 5,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
+      "rank": 198
+    },
+    {
+      "symbol": "EGS72L31C011",
+      "name": "SOLARSOL For Energy",
+      "reference_close": 0.1,
+      "score": 40.89,
+      "pre_penalty_score": 43.89,
+      "red_team_penalty": 3,
+      "discovery_score": 3.34,
+      "capital_efficiency_score": 0.92,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.65,
+        "institutional_intelligence": 2.1,
+        "cycle_relative_strength": 5.1,
+        "entry_quality": 3.79,
+        "liquidity": 2.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 3.35,
+        "discovery": 3.34
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 26,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 5.1,
+        "sessions_available": 26,
+        "provenance": "v4_native"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": 0,
+        "liquidity_score": 2.5,
+        "decision_support": {
+          "technical_score": 7.4,
+          "liquidity_score": 2.5,
+          "setup_score": 5,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
+      "rank": 199
+    },
+    {
+      "symbol": "MLIC",
+      "name": "Misr Life Insurance",
+      "reference_close": 10,
+      "score": 40.89,
+      "pre_penalty_score": 43.89,
+      "red_team_penalty": 3,
+      "discovery_score": 3.34,
+      "capital_efficiency_score": 0.92,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.65,
+        "institutional_intelligence": 2.1,
+        "cycle_relative_strength": 5.1,
+        "entry_quality": 3.79,
+        "liquidity": 2.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 3.35,
+        "discovery": 3.34
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 26,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 5.1,
+        "sessions_available": 26,
+        "provenance": "v4_native"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": 0,
+        "liquidity_score": 2.5,
+        "decision_support": {
+          "technical_score": 7.4,
+          "liquidity_score": 2.5,
+          "setup_score": 5,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
+      "rank": 200
+    },
+    {
+      "symbol": "EGWA",
+      "name": "General Warehouses of Egypt",
+      "reference_close": 5,
+      "score": 40.89,
+      "pre_penalty_score": 43.89,
+      "red_team_penalty": 3,
+      "discovery_score": 3.34,
+      "capital_efficiency_score": 0.92,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.65,
+        "institutional_intelligence": 2.1,
+        "cycle_relative_strength": 5.1,
+        "entry_quality": 3.79,
+        "liquidity": 2.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 3.35,
+        "discovery": 3.34
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 26,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 5.1,
+        "sessions_available": 26,
+        "provenance": "v4_native"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": 0,
+        "liquidity_score": 2.5,
+        "decision_support": {
+          "technical_score": 7.4,
+          "liquidity_score": 2.5,
+          "setup_score": 5,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
+      "rank": 201
     },
     {
       "symbol": "GROV",
@@ -24544,12 +24161,400 @@
         }
       },
       "action": "RESEARCH_SHARIA",
+      "rank": 202
+    },
+    {
+      "symbol": "YAYT",
+      "name": "Spring & Transportation Needs Manufacturing Co.",
+      "reference_close": 10,
+      "score": 40.89,
+      "pre_penalty_score": 43.89,
+      "red_team_penalty": 3,
+      "discovery_score": 3.34,
+      "capital_efficiency_score": 0.92,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.65,
+        "institutional_intelligence": 2.1,
+        "cycle_relative_strength": 5.1,
+        "entry_quality": 3.79,
+        "liquidity": 2.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 3.35,
+        "discovery": 3.34
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 26,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 5.1,
+        "sessions_available": 26,
+        "provenance": "v4_native"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": 0,
+        "liquidity_score": 2.5,
+        "decision_support": {
+          "technical_score": 7.4,
+          "liquidity_score": 2.5,
+          "setup_score": 5,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
+      "rank": 203
+    },
+    {
+      "symbol": "ANCC",
+      "name": "ALNAHDA Industrial Co.",
+      "reference_close": 10,
+      "score": 40.89,
+      "pre_penalty_score": 43.89,
+      "red_team_penalty": 3,
+      "discovery_score": 3.34,
+      "capital_efficiency_score": 0.92,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.65,
+        "institutional_intelligence": 2.1,
+        "cycle_relative_strength": 5.1,
+        "entry_quality": 3.79,
+        "liquidity": 2.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 3.35,
+        "discovery": 3.34
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 26,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 5.1,
+        "sessions_available": 26,
+        "provenance": "v4_native"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": 0,
+        "liquidity_score": 2.5,
+        "decision_support": {
+          "technical_score": 7.4,
+          "liquidity_score": 2.5,
+          "setup_score": 5,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
+      "rank": 204
+    },
+    {
+      "symbol": "DCCC",
+      "name": "Damietta Container and Cargo Handling",
+      "reference_close": 10,
+      "score": 40.89,
+      "pre_penalty_score": 43.89,
+      "red_team_penalty": 3,
+      "discovery_score": 3.34,
+      "capital_efficiency_score": 0.92,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.65,
+        "institutional_intelligence": 2.1,
+        "cycle_relative_strength": 5.1,
+        "entry_quality": 3.79,
+        "liquidity": 2.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 3.35,
+        "discovery": 3.34
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 26,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 5.1,
+        "sessions_available": 26,
+        "provenance": "v4_native"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": 0,
+        "liquidity_score": 2.5,
+        "decision_support": {
+          "technical_score": 7.4,
+          "liquidity_score": 2.5,
+          "setup_score": 5,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
+      "rank": 205
+    },
+    {
+      "symbol": "ACFR",
+      "name": "Alexandria Company For Refractories",
+      "reference_close": 10,
+      "score": 40.89,
+      "pre_penalty_score": 43.89,
+      "red_team_penalty": 3,
+      "discovery_score": 3.34,
+      "capital_efficiency_score": 0.92,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.65,
+        "institutional_intelligence": 2.1,
+        "cycle_relative_strength": 5.1,
+        "entry_quality": 3.79,
+        "liquidity": 2.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 3.35,
+        "discovery": 3.34
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 26,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 5.1,
+        "sessions_available": 26,
+        "provenance": "v4_native"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": 0,
+        "liquidity_score": 2.5,
+        "decision_support": {
+          "technical_score": 7.4,
+          "liquidity_score": 2.5,
+          "setup_score": 5,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
       "rank": 206
     },
     {
-      "symbol": "HDST",
-      "name": "HEDGESTONE INVESTMENT",
-      "reference_close": 0.1,
+      "symbol": "NMIN",
+      "name": "El Nasr Mining Co Egp10",
+      "reference_close": 10,
       "score": 40.89,
       "pre_penalty_score": 43.89,
       "red_team_penalty": 3,
@@ -24644,9 +24649,9 @@
       "rank": 207
     },
     {
-      "symbol": "EGS65861C014",
-      "name": "Egyptian Contracting Co.-AL- ABD",
-      "reference_close": 5,
+      "symbol": "NFCI",
+      "name": "ELNASR Co For Fertilizers And Chemical Industries",
+      "reference_close": 10,
       "score": 40.89,
       "pre_penalty_score": 43.89,
       "red_team_penalty": 3,
@@ -25852,103 +25857,6 @@
       "rank": 219
     },
     {
-      "symbol": "MOSC",
-      "name": "Misr Oils & Soap Co.",
-      "reference_close": 228,
-      "score": 39.93,
-      "pre_penalty_score": 42.93,
-      "red_team_penalty": 3,
-      "discovery_score": 2.4,
-      "capital_efficiency_score": 1.01,
-      "components": {
-        "fundamental_quality": 5.88,
-        "valuation": 3.65,
-        "earnings_quality": 5,
-        "catalyst": 5,
-        "catalyst_transmission": 4.71,
-        "institutional_intelligence": 2.02,
-        "cycle_relative_strength": 3,
-        "entry_quality": 2.36,
-        "liquidity": 4.5,
-        "portfolio_fit_neutral": 5,
-        "risk_reward_proxy": 4.7,
-        "discovery": 2.4
-      },
-      "research": {
-        "sharia_status": "pending_verification",
-        "sharia_verified": false,
-        "sharia_pass": false,
-        "fundamentals_verified": false,
-        "valuation_verified": false,
-        "freshness": {
-          "sharia": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 120,
-            "fresh": false
-          },
-          "fundamentals": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 210,
-            "fresh": false
-          },
-          "valuation": {
-            "as_of": null,
-            "age_days": null,
-            "max_days": 45,
-            "fresh": false
-          }
-        },
-        "source_count": 0,
-        "research_as_of": null,
-        "verified_fundamental_score": null,
-        "verified_valuation_score": null,
-        "method": "market_quant_research_priority_only"
-      },
-      "corporate_action": {
-        "status": "no_large_gap_detected",
-        "technical_history_gate": true,
-        "anomalies": [],
-        "lookback_sessions": 30,
-        "verified_adjustment_override": false
-      },
-      "history_cycle": {
-        "status": "complete",
-        "confidence_pct": 100,
-        "score": 3,
-        "sessions_available": 53,
-        "provenance": "hybrid_validated_external_plus_v4"
-      },
-      "institutional_confidence": "proxy_only",
-      "portfolio_overlay": {
-        "required": true,
-        "score_used": 5,
-        "note": "Private holdings/cash are intentionally not stored in this public repository."
-      },
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "evidence_coverage_pct": 33,
-      "execution_ready": false,
-      "execution_plan": null,
-      "market_row": {
-        "change": -8.613571686239933,
-        "liquidity_score": 4.5,
-        "decision_support": {
-          "technical_score": 3.1,
-          "liquidity_score": 4.5,
-          "setup_score": 3.1,
-          "chase_risk": "low"
-        }
-      },
-      "action": "RESEARCH_SHARIA",
-      "rank": 220
-    },
-    {
       "symbol": "KWIN",
       "name": "El Kahera El Watania Investment",
       "reference_close": 49.38,
@@ -26039,6 +25947,103 @@
           "technical_score": 2.7,
           "liquidity_score": 4.5,
           "setup_score": 2.9,
+          "chase_risk": "low"
+        }
+      },
+      "action": "RESEARCH_SHARIA",
+      "rank": 220
+    },
+    {
+      "symbol": "MOSC",
+      "name": "Misr Oils & Soap Co.",
+      "reference_close": 228,
+      "score": 39.93,
+      "pre_penalty_score": 42.93,
+      "red_team_penalty": 3,
+      "discovery_score": 2.4,
+      "capital_efficiency_score": 1.01,
+      "components": {
+        "fundamental_quality": 5.88,
+        "valuation": 3.65,
+        "earnings_quality": 5,
+        "catalyst": 5,
+        "catalyst_transmission": 4.71,
+        "institutional_intelligence": 2.02,
+        "cycle_relative_strength": 3,
+        "entry_quality": 2.36,
+        "liquidity": 4.5,
+        "portfolio_fit_neutral": 5,
+        "risk_reward_proxy": 4.7,
+        "discovery": 2.4
+      },
+      "research": {
+        "sharia_status": "pending_verification",
+        "sharia_verified": false,
+        "sharia_pass": false,
+        "fundamentals_verified": false,
+        "valuation_verified": false,
+        "freshness": {
+          "sharia": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 120,
+            "fresh": false
+          },
+          "fundamentals": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 210,
+            "fresh": false
+          },
+          "valuation": {
+            "as_of": null,
+            "age_days": null,
+            "max_days": 45,
+            "fresh": false
+          }
+        },
+        "source_count": 0,
+        "research_as_of": null,
+        "verified_fundamental_score": null,
+        "verified_valuation_score": null,
+        "method": "market_quant_research_priority_only"
+      },
+      "corporate_action": {
+        "status": "no_large_gap_detected",
+        "technical_history_gate": true,
+        "anomalies": [],
+        "lookback_sessions": 30,
+        "verified_adjustment_override": false
+      },
+      "history_cycle": {
+        "status": "complete",
+        "confidence_pct": 100,
+        "score": 3,
+        "sessions_available": 53,
+        "provenance": "hybrid_validated_external_plus_v4"
+      },
+      "institutional_confidence": "proxy_only",
+      "portfolio_overlay": {
+        "required": true,
+        "score_used": 5,
+        "note": "Private holdings/cash are intentionally not stored in this public repository."
+      },
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "evidence_coverage_pct": 33,
+      "execution_ready": false,
+      "execution_plan": null,
+      "market_row": {
+        "change": -8.613571686239933,
+        "liquidity_score": 4.5,
+        "decision_support": {
+          "technical_score": 3.1,
+          "liquidity_score": 4.5,
+          "setup_score": 3.1,
           "chase_risk": "low"
         }
       },

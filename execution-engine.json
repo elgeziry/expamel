@@ -1,7 +1,7 @@
 {
   "engine": "EGX V5 Execution Engine",
   "version": 1,
-  "generated_at": "2026-10-25T16:06:23.322Z",
+  "generated_at": "2026-10-25T16:21:52.115Z",
   "reference_session": "2026-10-25",
   "architecture": [
     "V5_resilient_data",
@@ -17,8 +17,82 @@
   "coverage_mode": "complete",
   "quarantined_symbols": [],
   "history_sessions": 60,
-  "executable_count": 1,
+  "executable_count": 2,
   "execution_queue": [
+    {
+      "symbol": "MFPC",
+      "score": 80.32,
+      "raw_score": 80.32,
+      "penalty": 0,
+      "action": "ACT_NOW",
+      "stage": "confirming",
+      "discovery_score": 8.88,
+      "gates": {
+        "sharia_pass": true,
+        "fundamental_verified": true,
+        "valuation_verified": true,
+        "execution_ready": true
+      },
+      "sharia_status": "compliant",
+      "history_cycle": {
+        "symbol": "MFPC",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 53,
+        "native_sessions": 26,
+        "external_validated_sessions": 27,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 10,
+          "breakout_strength": 5.52688172043011,
+          "volume_asymmetry": 8.778466328777391,
+          "retest_quality": 7,
+          "higher_low": 7.066350710900471
+        },
+        "score": 7.8
+      },
+      "components": {
+        "fundamentals": 9.2,
+        "valuation": 8.1,
+        "catalyst_transmission": 8.4,
+        "cycle_quality": 7.8,
+        "pre_move_stage": 7,
+        "institutional_proxy": 8.2,
+        "entry_quality": 8.47,
+        "risk_reward": 8.88,
+        "portfolio_fit": 5,
+        "liquidity": 9,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 1,
+      "previous_rank": 5,
+      "rank_change": 4,
+      "execution_plan": {
+        "status": "BUY_ZONE",
+        "reference_close": 47.2,
+        "entry_zone": [
+          44.68,
+          46.49
+        ],
+        "invalidation": 42.67,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 1,
+        "sizing": {
+          "probe_pct_of_target": 35,
+          "core_add_pct": 40,
+          "reserve_pct": 25
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
     {
       "symbol": "AMOC",
       "score": 70.51,
@@ -68,9 +142,9 @@
       },
       "missing_deep_analysis": [],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 1,
+      "rank": 2,
       "previous_rank": 1,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "LIMIT_ON_WEAKNESS",
         "reference_close": 12.94,
@@ -96,6 +170,80 @@
   ],
   "ranked": [
     {
+      "symbol": "MFPC",
+      "score": 80.32,
+      "raw_score": 80.32,
+      "penalty": 0,
+      "action": "ACT_NOW",
+      "stage": "confirming",
+      "discovery_score": 8.88,
+      "gates": {
+        "sharia_pass": true,
+        "fundamental_verified": true,
+        "valuation_verified": true,
+        "execution_ready": true
+      },
+      "sharia_status": "compliant",
+      "history_cycle": {
+        "symbol": "MFPC",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 53,
+        "native_sessions": 26,
+        "external_validated_sessions": 27,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 10,
+          "breakout_strength": 5.52688172043011,
+          "volume_asymmetry": 8.778466328777391,
+          "retest_quality": 7,
+          "higher_low": 7.066350710900471
+        },
+        "score": 7.8
+      },
+      "components": {
+        "fundamentals": 9.2,
+        "valuation": 8.1,
+        "catalyst_transmission": 8.4,
+        "cycle_quality": 7.8,
+        "pre_move_stage": 7,
+        "institutional_proxy": 8.2,
+        "entry_quality": 8.47,
+        "risk_reward": 8.88,
+        "portfolio_fit": 5,
+        "liquidity": 9,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 1,
+      "previous_rank": 5,
+      "rank_change": 4,
+      "execution_plan": {
+        "status": "BUY_ZONE",
+        "reference_close": 47.2,
+        "entry_zone": [
+          44.68,
+          46.49
+        ],
+        "invalidation": 42.67,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 1,
+        "sizing": {
+          "probe_pct_of_target": 35,
+          "core_add_pct": 40,
+          "reserve_pct": 25
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
       "symbol": "AMOC",
       "score": 70.51,
       "raw_score": 70.51,
@@ -144,9 +292,9 @@
       },
       "missing_deep_analysis": [],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 1,
+      "rank": 2,
       "previous_rank": 1,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "LIMIT_ON_WEAKNESS",
         "reference_close": 12.94,
@@ -218,9 +366,9 @@
       },
       "missing_deep_analysis": [],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 2,
+      "rank": 3,
       "previous_rank": 2,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 124.06,
@@ -292,9 +440,9 @@
       },
       "missing_deep_analysis": [],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 3,
+      "rank": 4,
       "previous_rank": 3,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 815,
@@ -366,9 +514,9 @@
       },
       "missing_deep_analysis": [],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 4,
+      "rank": 5,
       "previous_rank": 4,
-      "rank_change": 0,
+      "rank_change": -1,
       "execution_plan": {
         "status": "WATCH",
         "reference_close": 82,
@@ -379,83 +527,6 @@
         "invalidation": 76.38,
         "risk_from_low_pct": 4.71,
         "day_extension": 0.138,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "MFPC",
-      "score": 68.47,
-      "raw_score": 68.47,
-      "penalty": 0,
-      "action": "PRE_MOVE_WATCH",
-      "stage": "confirming",
-      "discovery_score": 8.88,
-      "gates": {
-        "sharia_pass": true,
-        "fundamental_verified": false,
-        "valuation_verified": false,
-        "execution_ready": false
-      },
-      "sharia_status": "compliant",
-      "history_cycle": {
-        "symbol": "MFPC",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 53,
-        "native_sessions": 26,
-        "external_validated_sessions": 27,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 10,
-          "breakout_strength": 5.52688172043011,
-          "volume_asymmetry": 8.778466328777391,
-          "retest_quality": 7,
-          "higher_low": 7.066350710900471
-        },
-        "score": 7.8
-      },
-      "components": {
-        "fundamentals": 5,
-        "valuation": 5,
-        "catalyst_transmission": 7.5,
-        "cycle_quality": 7.8,
-        "pre_move_stage": 7,
-        "institutional_proxy": 8.2,
-        "entry_quality": 8.47,
-        "risk_reward": 8.88,
-        "portfolio_fit": 5,
-        "liquidity": 9,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [
-        "fundamentals",
-        "valuation"
-      ],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 5,
-      "previous_rank": 5,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 47.2,
-        "entry_zone": [
-          44.68,
-          46.49
-        ],
-        "invalidation": 42.67,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 1,
         "sizing": {
           "probe_pct_of_target": 0,
           "core_add_pct": 0,
