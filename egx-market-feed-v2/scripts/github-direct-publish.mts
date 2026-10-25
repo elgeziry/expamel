@@ -91,6 +91,16 @@ const adaptiveCoverageAllowed =
 const effectiveUniverseFloor = market.rows.length >= EXPECTED_UNIVERSE_FLOOR
   ? EXPECTED_UNIVERSE_FLOOR
   : (adaptiveCoverageAllowed ? market.rows.length : EXPECTED_UNIVERSE_FLOOR);
+console.log(JSON.stringify({
+  diagnostic:'universe_reconciliation',
+  current_count:market.rows.length,
+  target_count:EXPECTED_UNIVERSE_FLOOR,
+  previous_target_count:targetSymbols.size,
+  missing_symbols:missingSymbols,
+  added_symbols_vs_target:addedSymbols,
+  missing_focus_symbols:missingFocusSymbols,
+  adaptive_coverage_allowed:adaptiveCoverageAllowed
+}));
 const bundle = await buildExecutionBundle(market, {
   symbols: FOCUS,
   now,
