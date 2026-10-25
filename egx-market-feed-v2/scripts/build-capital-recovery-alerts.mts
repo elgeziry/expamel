@@ -87,7 +87,7 @@ function alertFor(c:any){
   let reason='no_current_recovery_trigger';
   if(research?.sharia_verified===true&&research?.sharia_pass!==true){state='BLOCK_SHARIA';reason='sharia_gate_failed';}
   else if(!corpPass){state='BLOCK_CORPORATE_ACTION';reason='technical_history_not_normalized';}
-  else if(!verified){state='RESEARCH_REQUIRED';reason='fundamental_or_valuation_verification_incomplete';}
+  else if(!verified){state='BLOCKED_UNVERIFIED_EVIDENCE';reason='evidence_incomplete_transaction_not_authorized';}
   else if(buyAuthorized){state='BUY_TRIGGER';priority=100;reason=exceptionalRS&&panicBlock?'exceptional_relative_strength_overrides_market_panic':'all_execution_gates_passed';}
   else if(panicBlock){
     if(exceptionalRS){state='PREPARE_ORDER';priority=88;reason='exceptional_relative_strength_but_v6_buy_action_not_yet_confirmed';}
@@ -116,7 +116,7 @@ const buyNow=alerts.filter((x:any)=>x.state==='BUY_TRIGGER');
 const armed=alerts.filter((x:any)=>['PREPARE_ORDER','ARMED_WAIT_MARKET'].includes(x.state));
 const verifiedRecovery=alerts.filter((x:any)=>x.verified.sharia&&x.verified.fundamentals&&x.verified.valuation&&x.verified.corporate_action)
   .sort((a:any,b:any)=>b.recovery_score_100-a.recovery_score_100).slice(0,20);
-const noAverage=alerts.filter((x:any)=>x.falling_knife_risk||['BLOCK_SHARIA','BLOCK_CORPORATE_ACTION','RESEARCH_REQUIRED'].includes(x.state)).slice(0,60);
+const noAverage=alerts.filter((x:any)=>x.falling_knife_risk||['BLOCK_SHARIA','BLOCK_CORPORATE_ACTION','BLOCKED_UNVERIFIED_EVIDENCE'].includes(x.state)).slice(0,60);
 
 const packet={
   engine:'EGX Capital Recovery Alert Engine',version:1,generated_at:new Date().toISOString(),reference_session:v6.reference_session,
