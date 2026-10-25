@@ -77,6 +77,7 @@ const regimeMult=clamp(num(decision?.market_regime?.position_size_multiplier)??0
 const sizingAuthorized=holdingIssues.length===0&&missingInvalidations.length===0&&heatPct!=null&&heatPct<maxHeatPct!;
 
 const currentValueBySymbol=new Map(normalizedHoldings.filter((h:any)=>h.valid).map((h:any)=>[h.symbol,h.market_value_egp||0]));
+const currentHoldingBySymbol=new Map(normalizedHoldings.filter((h:any)=>h.valid).map((h:any)=>[h.symbol,h]));
 const candidates=(decision?.executable_queue||[]).filter((x:any)=>['STRONG_BUY','BUY','ACCUMULATE'].includes(String(x?.action)));
 let remainingCash=deployableCash;
 let projectedHeat=heatKnown;
@@ -100,6 +101,26 @@ for(const c of candidates){
   const quantity=sizingAuthorized?Math.max(0,Math.min(qtyByRisk,qtyByWeight,qtyByCash)):null;
   const cost=quantity==null?null:quantity*limit;
   const orderRisk=quantity==null?null:quantity*riskPerShare;
+  const held:any=currentHoldingBySymbol.get(symbol)||null;
+  let averageImprovement:any=null;
+  if(quantity!=null&&quantity>0&&held&&held.shares>0&&held.avg_cost>0){
+    const oldShares=Number(held.shares), oldAvg=Number(held.avg_cost);
+    const newShares=oldShares+quantity;
+    const newAvg=((oldShares*oldAvg)+(quantity*limit))/newShares;
+    const oldBreakEvenGapPct=(oldAvg/limit-1)*100;
+    const newBreakEvenGapPct=(newAvg/limit-1)*100;
+    const avgReductionPct=(1-newAvg/oldAvg)*100;
+    const breakEvenGapReductionPct=oldBreakEvenGapPct-newBreakEvenGapPct;
+    averageImprovement={
+      old_shares:oldShares,old_avg_cost:round(oldAvg),new_shares:newShares,new_avg_cost:round(newAvg),
+      avg_cost_reduction_pct:round(avgReductionPct),
+      break_even_gap_before_pct:round(oldBreakEvenGapPct),
+      break_even_gap_after_pct:round(newBreakEvenGapPct),
+      break_even_gap_reduction_points:round(breakEvenGapReductionPct),
+      added_capital_per_avg_reduction_point_egp:avgReductionPct>0?round(cost!/avgReductionPct):null,
+      recovery_efficiency_rule:'Lower cost basis is useful only when V6 execution gates and portfolio-risk limits also pass.'
+    };
+  }
   if(quantity!=null&&quantity>0){
     remainingCash-=cost!;
     projectedHeat+=orderRisk!;
@@ -110,6 +131,7 @@ for(const c of candidates){
     regime_position_multiplier:regimeMult,
     risk_budget_egp:round(riskBudget),max_target_value_egp:round(maxTargetValue),
     quantity:quantity==null?null:quantity,estimated_cost_egp:cost==null?null:round(cost),planned_risk_egp:orderRisk==null?null:round(orderRisk),
+    average_improvement:averageImprovement,
     sizing_status:sizingAuthorized?(quantity&&quantity>0?'AUTHORIZED':'NO_CAPACITY'):'BLOCKED_RECONCILE_PORTFOLIO_RISK',
     rule:'Quantity is the minimum of risk-budget, max-position, and deployable-cash limits.'
   });
@@ -133,7 +155,7 @@ const packet={
   privacy:{public_repository_state_used_for_market_only:true,private_holdings_written_to_public_repo:false,output_path:outputPath},
   policy:{...risk,max_new_orders_per_session:maxNewOrders,regime_position_size_multiplier:regimeMult},
   portfolio:{cash_egp:round(cash!),holdings_market_value_egp:round(portfolioValue),nav_egp:round(nav),cash_reserve_required_egp:round(reserveCash),deployable_cash_egp:round(deployableCash),known_open_risk_egp:round(heatKnown),known_portfolio_heat_pct:heatPct==null?null:round(heatPct),missing_invalidation_symbols:missingInvalidations,holding_data_issues:holdingIssues.map((x:any)=>({symbol:x.symbol,issue:x.issue})),sizing_authorized:sizingAuthorized},
-  holdings:normalizedHoldings,
+  holdings:normalizedHoldings.map((h:any)=>h.valid?{...h,break_even_gap_pct:h.current_price>0?round((h.avg_cost/h.current_price-1)*100):null}:h),
   replacement_review:replacementReview,
   proposed_orders:orders,
   projected:{remaining_cash_after_orders_egp:sizingAuthorized?round(remainingCash):null,projected_open_risk_egp:sizingAuthorized?round(projectedHeat):null,projected_heat_pct:sizingAuthorized&&nav>0?round(projectedHeat/nav*100):null},
