@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-06",
+  "updated_at": "2026-10-25",
   "stocks": {
     "AMOC": {
       "sharia_status": "compliant",
@@ -36,37 +36,94 @@
       ]
     },
     "FWRY": {
-      "sharia_status": "non_compliant",
+      "sharia_status": "compliant",
       "sharia_verified": true,
-      "sharia_as_of": "2026-09-10",
+      "sharia_as_of": "2026-10-25",
       "fundamentals_verified": false,
       "valuation_verified": false,
       "catalyst_score": 7,
       "sources": [
         "https://muslimxchange.com/ticker/fwry/",
-        "https://www.fawry.com/investor-relations/disclosures/"
+        "https://www.fawry.com/investor-relations/disclosures/",
+        "https://egxhub.com/Stock/FWRY"
+      ],
+      "sharia_source_conflict": true,
+      "sharia_conflict_rule": "User methodology: when credible Sharia sources conflict, accept the compliant classification while recording the conflict.",
+      "sharia_conflicting_sources": [
+        {
+          "url": "https://muslimxchange.com/ticker/fwry/",
+          "classification": "non_compliant",
+          "as_of": "2026-09-10"
+        },
+        {
+          "url": "https://egxhub.com/Stock/FWRY",
+          "classification": "compliant_current_EGX33_reference",
+          "as_of": "2026-10-25"
+        }
       ]
     },
     "EFIH": {
-      "sharia_status": "non_compliant",
+      "sharia_status": "compliant",
       "sharia_verified": true,
-      "sharia_as_of": "2026-09-10",
+      "sharia_as_of": "2026-10-25",
       "fundamentals_verified": false,
       "valuation_verified": false,
       "catalyst_score": 6.5,
       "sources": [
-        "https://muslimxchange.com/ticker/efih/"
+        "https://muslimxchange.com/ticker/efih/",
+        "https://egxtrade.com/stocks/EFIH/halal",
+        "https://foudalens.com/ar/stock/EFIH.CA"
+      ],
+      "sharia_source_conflict": true,
+      "sharia_conflict_rule": "User methodology: when credible Sharia sources conflict, accept the compliant classification while recording the conflict.",
+      "sharia_conflicting_sources": [
+        {
+          "url": "https://muslimxchange.com/ticker/efih/",
+          "classification": "non_compliant",
+          "as_of": "2026-09-10"
+        },
+        {
+          "url": "https://egxtrade.com/stocks/EFIH/halal",
+          "classification": "compliant_current_EGX33_reference",
+          "as_of": "2026-10-25"
+        },
+        {
+          "url": "https://foudalens.com/ar/stock/EFIH.CA",
+          "classification": "compliant_current_EGX33_reference",
+          "as_of": "2026-10-25"
+        }
       ]
     },
     "ORHD": {
-      "sharia_status": "non_compliant",
+      "sharia_status": "compliant",
       "sharia_verified": true,
-      "sharia_as_of": "2026-09-10",
+      "sharia_as_of": "2026-10-25",
       "fundamentals_verified": false,
       "valuation_verified": false,
       "catalyst_score": 7,
       "sources": [
-        "https://muslimxchange.com/ticker/orhd/"
+        "https://muslimxchange.com/ticker/orhd/",
+        "https://stocks.templatesnippet.com/stocks/ORHD",
+        "https://foudalens.com/ar/stock/ORHD.CA"
+      ],
+      "sharia_source_conflict": true,
+      "sharia_conflict_rule": "User methodology: when credible Sharia sources conflict, accept the compliant classification while recording the conflict.",
+      "sharia_conflicting_sources": [
+        {
+          "url": "https://muslimxchange.com/ticker/orhd/",
+          "classification": "non_compliant",
+          "as_of": "2026-09-10"
+        },
+        {
+          "url": "https://stocks.templatesnippet.com/stocks/ORHD",
+          "classification": "compliant_EGX33_reference",
+          "as_of": "2026-10-06"
+        },
+        {
+          "url": "https://foudalens.com/ar/stock/ORHD.CA",
+          "classification": "compliant_current_EGX33_reference",
+          "as_of": "2026-10-25"
+        }
       ]
     },
     "ORAS": {
