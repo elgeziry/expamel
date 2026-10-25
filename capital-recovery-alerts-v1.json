@@ -1,7 +1,7 @@
 {
   "engine": "EGX Capital Recovery Alert Engine",
   "version": 1,
-  "generated_at": "2026-10-25T16:32:48.916Z",
+  "generated_at": "2026-10-25T16:40:11.288Z",
   "reference_session": "2026-10-25",
   "objective": "Recover capital through verified quality and timed entries, not indiscriminate averaging down.",
   "market_gate": {
@@ -20,8 +20,8 @@
   },
   "summary": {
     "buy_triggers": 0,
-    "armed_waiting": 1,
-    "verified_recovery_candidates": 6,
+    "armed_waiting": 2,
+    "verified_recovery_candidates": 13,
     "total_scanned": 295
   },
   "buy_triggers": [],
@@ -71,6 +71,72 @@
           "probe_pct_of_target": 35,
           "core_add_pct": 40,
           "reserve_pct": 25
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      },
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "AMOC",
+      "rank": 5,
+      "v6_score": 74.24,
+      "v6_action": "ACCUMULATE",
+      "reference_close": 12.94,
+      "state": "ARMED_WAIT_MARKET",
+      "priority": 80,
+      "reason": "price_and_quality_ready_but_market_panic_gate_blocks_execution",
+      "recovery_score_100": 66.21,
+      "quality_score_10": 7.69,
+      "entry_state": {
+        "state": "IN_ZONE",
+        "distance_pct": 0,
+        "zone_low": 12.82,
+        "zone_high": 12.94
+      },
+      "entry_quality": 5.71,
+      "risk_reward": 6.35,
+      "cycle_strength": 4.7,
+      "institutional_intelligence": 5.64,
+      "day_change_pct": -4.22,
+      "relative_strength_vs_market_median_pct": 2.56,
+      "falling_knife_risk": false,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": true,
+        "fundamentals": true,
+        "valuation": true,
+        "corporate_action": true
+      },
+      "execution_plan": {
+        "status": "LIMIT_ON_WEAKNESS",
+        "reference_close": 12.94,
+        "entry_zone": [
+          12.82,
+          12.94
+        ],
+        "invalidation": 12.24,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.34,
+        "sizing": {
+          "probe_pct_of_target": 25,
+          "core_add_pct": 35,
+          "reserve_pct": 40
         },
         "rules": [
           "do_not_chase_above_entry_zone",
@@ -161,8 +227,74 @@
       }
     },
     {
+      "symbol": "HELI",
+      "rank": 2,
+      "v6_score": 75.37,
+      "v6_action": "NO_CHASE",
+      "reference_close": 6.12,
+      "state": "MARKET_BLOCKED",
+      "priority": 50,
+      "reason": "risk_off_panic_gate",
+      "recovery_score_100": 69.22,
+      "quality_score_10": 7.73,
+      "entry_state": {
+        "state": "ABOVE_ZONE",
+        "distance_pct": 1.16,
+        "zone_low": 5.87,
+        "zone_high": 6.05
+      },
+      "entry_quality": 4.72,
+      "risk_reward": 8.83,
+      "cycle_strength": 3.4,
+      "institutional_intelligence": 6.29,
+      "day_change_pct": -9.33,
+      "relative_strength_vs_market_median_pct": -2.55,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": true,
+        "fundamentals": true,
+        "valuation": true,
+        "corporate_action": true
+      },
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 6.12,
+        "entry_zone": [
+          5.87,
+          6.05
+        ],
+        "invalidation": 5.61,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.203,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      },
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
       "symbol": "EGAL",
-      "rank": 4,
+      "rank": 6,
       "v6_score": 74.1,
       "v6_action": "NO_CHASE",
       "reference_close": 290.1,
@@ -227,8 +359,74 @@
       }
     },
     {
-      "symbol": "TMGH",
+      "symbol": "EFIH",
       "rank": 7,
+      "v6_score": 73.86,
+      "v6_action": "NO_CHASE",
+      "reference_close": 20.75,
+      "state": "MARKET_BLOCKED",
+      "priority": 50,
+      "reason": "risk_off_panic_gate",
+      "recovery_score_100": 67.41,
+      "quality_score_10": 7.67,
+      "entry_state": {
+        "state": "ABOVE_ZONE",
+        "distance_pct": 0.73,
+        "zone_low": 20,
+        "zone_high": 20.6
+      },
+      "entry_quality": 4.03,
+      "risk_reward": 8.83,
+      "cycle_strength": 3.1,
+      "institutional_intelligence": 6.09,
+      "day_change_pct": -1.19,
+      "relative_strength_vs_market_median_pct": 5.59,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": true,
+        "fundamentals": true,
+        "valuation": true,
+        "corporate_action": true
+      },
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 20.75,
+        "entry_zone": [
+          20,
+          20.6
+        ],
+        "invalidation": 19.1,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.227,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      },
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "TMGH",
+      "rank": 11,
       "v6_score": 70.96,
       "v6_action": "NO_CHASE",
       "reference_close": 82,
@@ -293,8 +491,74 @@
       }
     },
     {
+      "symbol": "AMOC",
+      "rank": 5,
+      "v6_score": 74.24,
+      "v6_action": "ACCUMULATE",
+      "reference_close": 12.94,
+      "state": "ARMED_WAIT_MARKET",
+      "priority": 80,
+      "reason": "price_and_quality_ready_but_market_panic_gate_blocks_execution",
+      "recovery_score_100": 66.21,
+      "quality_score_10": 7.69,
+      "entry_state": {
+        "state": "IN_ZONE",
+        "distance_pct": 0,
+        "zone_low": 12.82,
+        "zone_high": 12.94
+      },
+      "entry_quality": 5.71,
+      "risk_reward": 6.35,
+      "cycle_strength": 4.7,
+      "institutional_intelligence": 5.64,
+      "day_change_pct": -4.22,
+      "relative_strength_vs_market_median_pct": 2.56,
+      "falling_knife_risk": false,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": true,
+        "fundamentals": true,
+        "valuation": true,
+        "corporate_action": true
+      },
+      "execution_plan": {
+        "status": "LIMIT_ON_WEAKNESS",
+        "reference_close": 12.94,
+        "entry_zone": [
+          12.82,
+          12.94
+        ],
+        "invalidation": 12.24,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.34,
+        "sizing": {
+          "probe_pct_of_target": 25,
+          "core_add_pct": 35,
+          "reserve_pct": 40
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      },
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
       "symbol": "ETEL",
-      "rank": 3,
+      "rank": 4,
       "v6_score": 74.42,
       "v6_action": "WAIT_ENTRY",
       "reference_close": 124.06,
@@ -360,7 +624,7 @@
     },
     {
       "symbol": "MASR",
-      "rank": 9,
+      "rank": 13,
       "v6_score": 70.08,
       "v6_action": "NO_CHASE",
       "reference_close": 5.9,
@@ -425,8 +689,206 @@
       }
     },
     {
+      "symbol": "ORWE",
+      "rank": 10,
+      "v6_score": 71.3,
+      "v6_action": "NO_CHASE",
+      "reference_close": 23.71,
+      "state": "MARKET_BLOCKED",
+      "priority": 50,
+      "reason": "risk_off_panic_gate",
+      "recovery_score_100": 62.59,
+      "quality_score_10": 7.47,
+      "entry_state": {
+        "state": "ABOVE_ZONE",
+        "distance_pct": 0.21,
+        "zone_low": 22.96,
+        "zone_high": 23.66
+      },
+      "entry_quality": 3.53,
+      "risk_reward": 8.83,
+      "cycle_strength": 2.3,
+      "institutional_intelligence": 3.72,
+      "day_change_pct": -5.73,
+      "relative_strength_vs_market_median_pct": 1.05,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": true,
+        "fundamentals": true,
+        "valuation": true,
+        "corporate_action": true
+      },
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 23.71,
+        "entry_zone": [
+          22.96,
+          23.66
+        ],
+        "invalidation": 21.93,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.167,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      },
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "EFID",
+      "rank": 9,
+      "v6_score": 72.1,
+      "v6_action": "NO_CHASE",
+      "reference_close": 16.33,
+      "state": "MARKET_BLOCKED",
+      "priority": 50,
+      "reason": "risk_off_panic_gate",
+      "recovery_score_100": 61.75,
+      "quality_score_10": 7.67,
+      "entry_state": {
+        "state": "IN_ZONE",
+        "distance_pct": 0,
+        "zone_low": 16.06,
+        "zone_high": 16.33
+      },
+      "entry_quality": 2.51,
+      "risk_reward": 8.83,
+      "cycle_strength": 2.5,
+      "institutional_intelligence": 3.31,
+      "day_change_pct": -10.27,
+      "relative_strength_vs_market_median_pct": -3.49,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": true,
+        "fundamentals": true,
+        "valuation": true,
+        "corporate_action": true
+      },
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 16.33,
+        "entry_zone": [
+          16.06,
+          16.33
+        ],
+        "invalidation": 15.33,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.016,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      },
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "JUFO",
+      "rank": 16,
+      "v6_score": 66.08,
+      "v6_action": "NO_CHASE",
+      "reference_close": 21.08,
+      "state": "MARKET_BLOCKED",
+      "priority": 50,
+      "reason": "risk_off_panic_gate",
+      "recovery_score_100": 61.14,
+      "quality_score_10": 7.29,
+      "entry_state": {
+        "state": "IN_ZONE",
+        "distance_pct": 0,
+        "zone_low": 20.69,
+        "zone_high": 21.08
+      },
+      "entry_quality": 2.65,
+      "risk_reward": 8.83,
+      "cycle_strength": 3.3,
+      "institutional_intelligence": 3.4,
+      "day_change_pct": -10.11,
+      "relative_strength_vs_market_median_pct": -3.33,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": true,
+        "fundamentals": true,
+        "valuation": true,
+        "corporate_action": true
+      },
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 21.08,
+        "entry_zone": [
+          20.69,
+          21.08
+        ],
+        "invalidation": 19.76,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.029,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      },
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
       "symbol": "ORAS",
-      "rank": 11,
+      "rank": 15,
       "v6_score": 67.48,
       "v6_action": "WAIT_ENTRY",
       "reference_close": 815,
@@ -465,6 +927,72 @@
         "invalidation": 778.32,
         "risk_from_low_pct": 4.71,
         "day_extension": 0.583,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      },
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "SVCE",
+      "rank": 49,
+      "v6_score": 52.86,
+      "v6_action": "NO_CHASE",
+      "reference_close": 7.69,
+      "state": "MARKET_BLOCKED",
+      "priority": 50,
+      "reason": "risk_off_panic_gate",
+      "recovery_score_100": 47.85,
+      "quality_score_10": 5.74,
+      "entry_state": {
+        "state": "ABOVE_ZONE",
+        "distance_pct": 1.59,
+        "zone_low": 7.23,
+        "zone_high": 7.57
+      },
+      "entry_quality": 3.51,
+      "risk_reward": 4.7,
+      "cycle_strength": 3,
+      "institutional_intelligence": 4.36,
+      "day_change_pct": -11.81,
+      "relative_strength_vs_market_median_pct": -5.03,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": true,
+        "fundamentals": true,
+        "valuation": true,
+        "corporate_action": true
+      },
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 7.69,
+        "entry_zone": [
+          7.23,
+          7.57
+        ],
+        "invalidation": 6.9,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.398,
         "sizing": {
           "probe_pct_of_target": 0,
           "core_add_pct": 0,
@@ -493,8 +1021,74 @@
   ],
   "no_average_down_watch": [
     {
+      "symbol": "HELI",
+      "rank": 2,
+      "v6_score": 75.37,
+      "v6_action": "NO_CHASE",
+      "reference_close": 6.12,
+      "state": "MARKET_BLOCKED",
+      "priority": 50,
+      "reason": "risk_off_panic_gate",
+      "recovery_score_100": 69.22,
+      "quality_score_10": 7.73,
+      "entry_state": {
+        "state": "ABOVE_ZONE",
+        "distance_pct": 1.16,
+        "zone_low": 5.87,
+        "zone_high": 6.05
+      },
+      "entry_quality": 4.72,
+      "risk_reward": 8.83,
+      "cycle_strength": 3.4,
+      "institutional_intelligence": 6.29,
+      "day_change_pct": -9.33,
+      "relative_strength_vs_market_median_pct": -2.55,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": true,
+        "fundamentals": true,
+        "valuation": true,
+        "corporate_action": true
+      },
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 6.12,
+        "entry_zone": [
+          5.87,
+          6.05
+        ],
+        "invalidation": 5.61,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.203,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      },
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
       "symbol": "EGAL",
-      "rank": 4,
+      "rank": 6,
       "v6_score": 74.1,
       "v6_action": "NO_CHASE",
       "reference_close": 290.1,
@@ -559,8 +1153,74 @@
       }
     },
     {
-      "symbol": "TMGH",
+      "symbol": "EFIH",
       "rank": 7,
+      "v6_score": 73.86,
+      "v6_action": "NO_CHASE",
+      "reference_close": 20.75,
+      "state": "MARKET_BLOCKED",
+      "priority": 50,
+      "reason": "risk_off_panic_gate",
+      "recovery_score_100": 67.41,
+      "quality_score_10": 7.67,
+      "entry_state": {
+        "state": "ABOVE_ZONE",
+        "distance_pct": 0.73,
+        "zone_low": 20,
+        "zone_high": 20.6
+      },
+      "entry_quality": 4.03,
+      "risk_reward": 8.83,
+      "cycle_strength": 3.1,
+      "institutional_intelligence": 6.09,
+      "day_change_pct": -1.19,
+      "relative_strength_vs_market_median_pct": 5.59,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": true,
+        "fundamentals": true,
+        "valuation": true,
+        "corporate_action": true
+      },
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 20.75,
+        "entry_zone": [
+          20,
+          20.6
+        ],
+        "invalidation": 19.1,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.227,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      },
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "TMGH",
+      "rank": 11,
       "v6_score": 70.96,
       "v6_action": "NO_CHASE",
       "reference_close": 82,
@@ -626,7 +1286,7 @@
     },
     {
       "symbol": "ETEL",
-      "rank": 3,
+      "rank": 4,
       "v6_score": 74.42,
       "v6_action": "WAIT_ENTRY",
       "reference_close": 124.06,
@@ -692,7 +1352,7 @@
     },
     {
       "symbol": "MASR",
-      "rank": 9,
+      "rank": 13,
       "v6_score": 70.08,
       "v6_action": "NO_CHASE",
       "reference_close": 5.9,
@@ -757,8 +1417,206 @@
       }
     },
     {
+      "symbol": "ORWE",
+      "rank": 10,
+      "v6_score": 71.3,
+      "v6_action": "NO_CHASE",
+      "reference_close": 23.71,
+      "state": "MARKET_BLOCKED",
+      "priority": 50,
+      "reason": "risk_off_panic_gate",
+      "recovery_score_100": 62.59,
+      "quality_score_10": 7.47,
+      "entry_state": {
+        "state": "ABOVE_ZONE",
+        "distance_pct": 0.21,
+        "zone_low": 22.96,
+        "zone_high": 23.66
+      },
+      "entry_quality": 3.53,
+      "risk_reward": 8.83,
+      "cycle_strength": 2.3,
+      "institutional_intelligence": 3.72,
+      "day_change_pct": -5.73,
+      "relative_strength_vs_market_median_pct": 1.05,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": true,
+        "fundamentals": true,
+        "valuation": true,
+        "corporate_action": true
+      },
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 23.71,
+        "entry_zone": [
+          22.96,
+          23.66
+        ],
+        "invalidation": 21.93,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.167,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      },
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "EFID",
+      "rank": 9,
+      "v6_score": 72.1,
+      "v6_action": "NO_CHASE",
+      "reference_close": 16.33,
+      "state": "MARKET_BLOCKED",
+      "priority": 50,
+      "reason": "risk_off_panic_gate",
+      "recovery_score_100": 61.75,
+      "quality_score_10": 7.67,
+      "entry_state": {
+        "state": "IN_ZONE",
+        "distance_pct": 0,
+        "zone_low": 16.06,
+        "zone_high": 16.33
+      },
+      "entry_quality": 2.51,
+      "risk_reward": 8.83,
+      "cycle_strength": 2.5,
+      "institutional_intelligence": 3.31,
+      "day_change_pct": -10.27,
+      "relative_strength_vs_market_median_pct": -3.49,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": true,
+        "fundamentals": true,
+        "valuation": true,
+        "corporate_action": true
+      },
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 16.33,
+        "entry_zone": [
+          16.06,
+          16.33
+        ],
+        "invalidation": 15.33,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.016,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      },
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "JUFO",
+      "rank": 16,
+      "v6_score": 66.08,
+      "v6_action": "NO_CHASE",
+      "reference_close": 21.08,
+      "state": "MARKET_BLOCKED",
+      "priority": 50,
+      "reason": "risk_off_panic_gate",
+      "recovery_score_100": 61.14,
+      "quality_score_10": 7.29,
+      "entry_state": {
+        "state": "IN_ZONE",
+        "distance_pct": 0,
+        "zone_low": 20.69,
+        "zone_high": 21.08
+      },
+      "entry_quality": 2.65,
+      "risk_reward": 8.83,
+      "cycle_strength": 3.3,
+      "institutional_intelligence": 3.4,
+      "day_change_pct": -10.11,
+      "relative_strength_vs_market_median_pct": -3.33,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": true,
+        "fundamentals": true,
+        "valuation": true,
+        "corporate_action": true
+      },
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 21.08,
+        "entry_zone": [
+          20.69,
+          21.08
+        ],
+        "invalidation": 19.76,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.029,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      },
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
       "symbol": "ORAS",
-      "rank": 11,
+      "rank": 15,
       "v6_score": 67.48,
       "v6_action": "WAIT_ENTRY",
       "reference_close": 815,
@@ -823,8 +1681,74 @@
       }
     },
     {
+      "symbol": "SVCE",
+      "rank": 49,
+      "v6_score": 52.86,
+      "v6_action": "NO_CHASE",
+      "reference_close": 7.69,
+      "state": "MARKET_BLOCKED",
+      "priority": 50,
+      "reason": "risk_off_panic_gate",
+      "recovery_score_100": 47.85,
+      "quality_score_10": 5.74,
+      "entry_state": {
+        "state": "ABOVE_ZONE",
+        "distance_pct": 1.59,
+        "zone_low": 7.23,
+        "zone_high": 7.57
+      },
+      "entry_quality": 3.51,
+      "risk_reward": 4.7,
+      "cycle_strength": 3,
+      "institutional_intelligence": 4.36,
+      "day_change_pct": -11.81,
+      "relative_strength_vs_market_median_pct": -5.03,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": true,
+        "fundamentals": true,
+        "valuation": true,
+        "corporate_action": true
+      },
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 7.69,
+        "entry_zone": [
+          7.23,
+          7.57
+        ],
+        "invalidation": 6.9,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.398,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      },
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
       "symbol": "ADIB",
-      "rank": 2,
+      "rank": 3,
       "v6_score": 75.27,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 45.1,
@@ -890,7 +1814,7 @@
     },
     {
       "symbol": "FWRY",
-      "rank": 5,
+      "rank": 8,
       "v6_score": 72.43,
       "v6_action": "DEEP_RESEARCH",
       "reference_close": 17.41,
@@ -956,7 +1880,7 @@
     },
     {
       "symbol": "EAST",
-      "rank": 39,
+      "rank": 42,
       "v6_score": 55.22,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 29.98,
@@ -1022,7 +1946,7 @@
     },
     {
       "symbol": "COMI",
-      "rank": 10,
+      "rank": 14,
       "v6_score": 69.81,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 122.03,
@@ -1088,7 +2012,7 @@
     },
     {
       "symbol": "EOSB",
-      "rank": 30,
+      "rank": 33,
       "v6_score": 56.9,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 1.64,
@@ -1134,7 +2058,7 @@
     },
     {
       "symbol": "EMFD",
-      "rank": 19,
+      "rank": 24,
       "v6_score": 62.3,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 11.79,
@@ -1199,74 +2123,8 @@
       }
     },
     {
-      "symbol": "AMOC",
-      "rank": 6,
-      "v6_score": 71.06,
-      "v6_action": "DEEP_RESEARCH",
-      "reference_close": 12.94,
-      "state": "RESEARCH_REQUIRED",
-      "priority": 0,
-      "reason": "fundamental_or_valuation_verification_incomplete",
-      "recovery_score_100": 64.19,
-      "quality_score_10": 7.24,
-      "entry_state": {
-        "state": "IN_ZONE",
-        "distance_pct": 0,
-        "zone_low": 12.82,
-        "zone_high": 12.94
-      },
-      "entry_quality": 5.71,
-      "risk_reward": 6.35,
-      "cycle_strength": 4.7,
-      "institutional_intelligence": 5.64,
-      "day_change_pct": -4.22,
-      "relative_strength_vs_market_median_pct": 2.56,
-      "falling_knife_risk": false,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": true,
-        "fundamentals": true,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": {
-        "status": "LIMIT_ON_WEAKNESS",
-        "reference_close": 12.94,
-        "entry_zone": [
-          12.82,
-          12.94
-        ],
-        "invalidation": 12.24,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.34,
-        "sizing": {
-          "probe_pct_of_target": 25,
-          "core_add_pct": 35,
-          "reserve_pct": 40
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      },
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
       "symbol": "ORHD",
-      "rank": 67,
+      "rank": 69,
       "v6_score": 49.62,
       "v6_action": "DEEP_RESEARCH",
       "reference_close": 9.22,
@@ -1332,7 +2190,7 @@
     },
     {
       "symbol": "ABUK",
-      "rank": 29,
+      "rank": 32,
       "v6_score": 57.08,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 89.52,
@@ -1398,7 +2256,7 @@
     },
     {
       "symbol": "ARCC",
-      "rank": 12,
+      "rank": 17,
       "v6_score": 66.01,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 61.99,
@@ -1464,7 +2322,7 @@
     },
     {
       "symbol": "HDBK",
-      "rank": 18,
+      "rank": 23,
       "v6_score": 62.81,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 103.66,
@@ -1510,7 +2368,7 @@
     },
     {
       "symbol": "MCQE",
-      "rank": 8,
+      "rank": 12,
       "v6_score": 70.24,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 148,
@@ -1556,7 +2414,7 @@
     },
     {
       "symbol": "ELNA",
-      "rank": 34,
+      "rank": 37,
       "v6_score": 56.24,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 38.82,
@@ -1622,7 +2480,7 @@
     },
     {
       "symbol": "PHDC",
-      "rank": 17,
+      "rank": 22,
       "v6_score": 63.68,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 11.91,
@@ -1688,7 +2546,7 @@
     },
     {
       "symbol": "ISPH",
-      "rank": 15,
+      "rank": 20,
       "v6_score": 64.7,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 9.22,
@@ -1753,74 +2611,8 @@
       }
     },
     {
-      "symbol": "HELI",
-      "rank": 20,
-      "v6_score": 62.19,
-      "v6_action": "DEEP_RESEARCH",
-      "reference_close": 6.12,
-      "state": "RESEARCH_REQUIRED",
-      "priority": 0,
-      "reason": "fundamental_or_valuation_verification_incomplete",
-      "recovery_score_100": 61.66,
-      "quality_score_10": 6.05,
-      "entry_state": {
-        "state": "ABOVE_ZONE",
-        "distance_pct": 1.16,
-        "zone_low": 5.87,
-        "zone_high": 6.05
-      },
-      "entry_quality": 4.72,
-      "risk_reward": 8.83,
-      "cycle_strength": 3.4,
-      "institutional_intelligence": 6.29,
-      "day_change_pct": -9.33,
-      "relative_strength_vs_market_median_pct": -2.55,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": true,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 6.12,
-        "entry_zone": [
-          5.87,
-          6.05
-        ],
-        "invalidation": 5.61,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.203,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      },
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
       "symbol": "FAITA",
-      "rank": 13,
+      "rank": 18,
       "v6_score": 65.03,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 0.98,
@@ -1866,7 +2658,7 @@
     },
     {
       "symbol": "EGCH",
-      "rank": 14,
+      "rank": 19,
       "v6_score": 64.73,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 10.28,
@@ -1912,7 +2704,7 @@
     },
     {
       "symbol": "EGBE",
-      "rank": 16,
+      "rank": 21,
       "v6_score": 64.57,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 0.484,
@@ -1957,74 +2749,8 @@
       }
     },
     {
-      "symbol": "EFIH",
-      "rank": 22,
-      "v6_score": 60.75,
-      "v6_action": "DEEP_RESEARCH",
-      "reference_close": 20.75,
-      "state": "RESEARCH_REQUIRED",
-      "priority": 0,
-      "reason": "fundamental_or_valuation_verification_incomplete",
-      "recovery_score_100": 59.67,
-      "quality_score_10": 5.95,
-      "entry_state": {
-        "state": "ABOVE_ZONE",
-        "distance_pct": 0.73,
-        "zone_low": 20,
-        "zone_high": 20.6
-      },
-      "entry_quality": 4.03,
-      "risk_reward": 8.83,
-      "cycle_strength": 3.1,
-      "institutional_intelligence": 6.09,
-      "day_change_pct": -1.19,
-      "relative_strength_vs_market_median_pct": 5.59,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": true,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 20.75,
-        "entry_zone": [
-          20,
-          20.6
-        ],
-        "invalidation": 19.1,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.227,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      },
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
       "symbol": "CCAP",
-      "rank": 25,
+      "rank": 28,
       "v6_score": 58.96,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 6.2,
@@ -2089,54 +2815,8 @@
       }
     },
     {
-      "symbol": "EFID",
-      "rank": 81,
-      "v6_score": 47.96,
-      "v6_action": "DEEP_RESEARCH",
-      "reference_close": 16.33,
-      "state": "BLOCK_CORPORATE_ACTION",
-      "priority": 0,
-      "reason": "technical_history_not_normalized",
-      "recovery_score_100": 58.6,
-      "quality_score_10": 6.97,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 2.51,
-      "risk_reward": 8.83,
-      "cycle_strength": 2.5,
-      "institutional_intelligence": 3.31,
-      "day_change_pct": -10.27,
-      "relative_strength_vs_market_median_pct": -3.49,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": true,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": false
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
       "symbol": "MBSC",
-      "rank": 21,
+      "rank": 25,
       "v6_score": 61.87,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 278.21,
@@ -2182,7 +2862,7 @@
     },
     {
       "symbol": "CPCI",
-      "rank": 24,
+      "rank": 27,
       "v6_score": 59.53,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 579.75,
@@ -2314,7 +2994,7 @@
     },
     {
       "symbol": "ALCN",
-      "rank": 33,
+      "rank": 36,
       "v6_score": 56.45,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 32,
@@ -2380,7 +3060,7 @@
     },
     {
       "symbol": "HRHO",
-      "rank": 35,
+      "rank": 38,
       "v6_score": 56.06,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 23.99,
@@ -2446,7 +3126,7 @@
     },
     {
       "symbol": "SWDY",
-      "rank": 43,
+      "rank": 45,
       "v6_score": 54.3,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 102.02,
@@ -2512,7 +3192,7 @@
     },
     {
       "symbol": "VLMRA",
-      "rank": 44,
+      "rank": 46,
       "v6_score": 54.11,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 25.96,
@@ -2578,7 +3258,7 @@
     },
     {
       "symbol": "SDTI",
-      "rank": 56,
+      "rank": 58,
       "v6_score": 51.24,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 81.83,
@@ -2644,7 +3324,7 @@
     },
     {
       "symbol": "OCDI",
-      "rank": 26,
+      "rank": 29,
       "v6_score": 57.62,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 23.72,
@@ -2710,7 +3390,7 @@
     },
     {
       "symbol": "QNBE",
-      "rank": 40,
+      "rank": 43,
       "v6_score": 55,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 52.5,
@@ -2776,7 +3456,7 @@
     },
     {
       "symbol": "FAIT",
-      "rank": 27,
+      "rank": 30,
       "v6_score": 57.5,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 42.49,
@@ -2842,7 +3522,7 @@
     },
     {
       "symbol": "GBCO",
-      "rank": 23,
+      "rank": 26,
       "v6_score": 60.1,
       "v6_action": "AVOID",
       "reference_close": 23.65,
@@ -2908,7 +3588,7 @@
     },
     {
       "symbol": "PHAR",
-      "rank": 28,
+      "rank": 31,
       "v6_score": 57.2,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 94.2,
@@ -2918,10 +3598,10 @@
       "recovery_score_100": 54.17,
       "quality_score_10": 5.76,
       "entry_state": {
-        "state": "ABOVE_ZONE",
-        "distance_pct": 1.31,
-        "zone_low": 90.24,
-        "zone_high": 92.98
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
       },
       "entry_quality": 3.95,
       "risk_reward": 7.18,
@@ -2937,27 +3617,7 @@
         "valuation": false,
         "corporate_action": true
       },
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 94.2,
-        "entry_zone": [
-          90.24,
-          92.98
-        ],
-        "invalidation": 86.18,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.252,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      },
+      "execution_plan": null,
       "alert_rules": {
         "buy_only_if": [
           "v6_action_is_buy",
@@ -2974,7 +3634,7 @@
     },
     {
       "symbol": "CIEB",
-      "rank": 31,
+      "rank": 34,
       "v6_score": 56.73,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 21.42,
@@ -3020,7 +3680,7 @@
     },
     {
       "symbol": "SCEM",
-      "rank": 50,
+      "rank": 52,
       "v6_score": 52.32,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 76.02,
@@ -3066,7 +3726,7 @@
     },
     {
       "symbol": "GOUR",
-      "rank": 37,
+      "rank": 40,
       "v6_score": 55.61,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 14.67,
@@ -3111,54 +3771,8 @@
       }
     },
     {
-      "symbol": "JUFO",
-      "rank": 45,
-      "v6_score": 54.06,
-      "v6_action": "DEEP_RESEARCH",
-      "reference_close": 21.08,
-      "state": "RESEARCH_REQUIRED",
-      "priority": 0,
-      "reason": "fundamental_or_valuation_verification_incomplete",
-      "recovery_score_100": 53.98,
-      "quality_score_10": 5.7,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 2.65,
-      "risk_reward": 8.83,
-      "cycle_strength": 3.3,
-      "institutional_intelligence": 3.4,
-      "day_change_pct": -10.11,
-      "relative_strength_vs_market_median_pct": -3.33,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": true,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
       "symbol": "OLFI",
-      "rank": 65,
+      "rank": 67,
       "v6_score": 49.8,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 19,
@@ -3204,7 +3818,7 @@
     },
     {
       "symbol": "EXPA",
-      "rank": 41,
+      "rank": 44,
       "v6_score": 54.76,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 13.15,
@@ -3249,54 +3863,8 @@
       }
     },
     {
-      "symbol": "ORWE",
-      "rank": 42,
-      "v6_score": 54.66,
-      "v6_action": "DEEP_RESEARCH",
-      "reference_close": 23.71,
-      "state": "RESEARCH_REQUIRED",
-      "priority": 0,
-      "reason": "fundamental_or_valuation_verification_incomplete",
-      "recovery_score_100": 52.82,
-      "quality_score_10": 5.3,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.53,
-      "risk_reward": 8.83,
-      "cycle_strength": 2.3,
-      "institutional_intelligence": 3.72,
-      "day_change_pct": -5.73,
-      "relative_strength_vs_market_median_pct": 1.05,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": true,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
       "symbol": "BONY",
-      "rank": 53,
+      "rank": 55,
       "v6_score": 51.83,
       "v6_action": "AVOID",
       "reference_close": 3.89,
@@ -3342,7 +3910,7 @@
     },
     {
       "symbol": "CLHO",
-      "rank": 38,
+      "rank": 41,
       "v6_score": 55.45,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 13.02,
@@ -3388,7 +3956,7 @@
     },
     {
       "symbol": "NARE",
-      "rank": 54,
+      "rank": 56,
       "v6_score": 51.36,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 13.62,
@@ -3434,7 +4002,7 @@
     },
     {
       "symbol": "MPCI",
-      "rank": 32,
+      "rank": 35,
       "v6_score": 56.67,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 251.65,
@@ -3480,7 +4048,7 @@
     },
     {
       "symbol": "AXPH",
-      "rank": 59,
+      "rank": 61,
       "v6_score": 50.6,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 1200,
@@ -3526,7 +4094,7 @@
     },
     {
       "symbol": "VLMR",
-      "rank": 79,
+      "rank": 81,
       "v6_score": 48.01,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 0.638,
@@ -3572,7 +4140,7 @@
     },
     {
       "symbol": "PACH",
-      "rank": 90,
+      "rank": 91,
       "v6_score": 46.95,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 90,
@@ -3618,7 +4186,7 @@
     },
     {
       "symbol": "ACAMD",
-      "rank": 36,
+      "rank": 39,
       "v6_score": 55.89,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 1.92,
@@ -3664,7 +4232,7 @@
     },
     {
       "symbol": "RUBX",
-      "rank": 47,
+      "rank": 48,
       "v6_score": 52.93,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 12.5,
@@ -3730,7 +4298,7 @@
     },
     {
       "symbol": "ECAP",
-      "rank": 49,
+      "rank": 51,
       "v6_score": 52.51,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 25.77,
@@ -3776,7 +4344,7 @@
     },
     {
       "symbol": "SNFC",
-      "rank": 55,
+      "rank": 57,
       "v6_score": 51.28,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 10.8,
@@ -3822,7 +4390,7 @@
     },
     {
       "symbol": "GTWL",
-      "rank": 48,
+      "rank": 50,
       "v6_score": 52.54,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 84.85,
@@ -3888,7 +4456,7 @@
     },
     {
       "symbol": "RMDA",
-      "rank": 82,
+      "rank": 83,
       "v6_score": 47.68,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 4.65,
@@ -4001,8 +4569,140 @@
       }
     },
     {
+      "symbol": "AMOC",
+      "rank": 5,
+      "v6_score": 74.24,
+      "v6_action": "ACCUMULATE",
+      "reference_close": 12.94,
+      "state": "ARMED_WAIT_MARKET",
+      "priority": 80,
+      "reason": "price_and_quality_ready_but_market_panic_gate_blocks_execution",
+      "recovery_score_100": 66.21,
+      "quality_score_10": 7.69,
+      "entry_state": {
+        "state": "IN_ZONE",
+        "distance_pct": 0,
+        "zone_low": 12.82,
+        "zone_high": 12.94
+      },
+      "entry_quality": 5.71,
+      "risk_reward": 6.35,
+      "cycle_strength": 4.7,
+      "institutional_intelligence": 5.64,
+      "day_change_pct": -4.22,
+      "relative_strength_vs_market_median_pct": 2.56,
+      "falling_knife_risk": false,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": true,
+        "fundamentals": true,
+        "valuation": true,
+        "corporate_action": true
+      },
+      "execution_plan": {
+        "status": "LIMIT_ON_WEAKNESS",
+        "reference_close": 12.94,
+        "entry_zone": [
+          12.82,
+          12.94
+        ],
+        "invalidation": 12.24,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.34,
+        "sizing": {
+          "probe_pct_of_target": 25,
+          "core_add_pct": 35,
+          "reserve_pct": 40
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      },
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "HELI",
+      "rank": 2,
+      "v6_score": 75.37,
+      "v6_action": "NO_CHASE",
+      "reference_close": 6.12,
+      "state": "MARKET_BLOCKED",
+      "priority": 50,
+      "reason": "risk_off_panic_gate",
+      "recovery_score_100": 69.22,
+      "quality_score_10": 7.73,
+      "entry_state": {
+        "state": "ABOVE_ZONE",
+        "distance_pct": 1.16,
+        "zone_low": 5.87,
+        "zone_high": 6.05
+      },
+      "entry_quality": 4.72,
+      "risk_reward": 8.83,
+      "cycle_strength": 3.4,
+      "institutional_intelligence": 6.29,
+      "day_change_pct": -9.33,
+      "relative_strength_vs_market_median_pct": -2.55,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": true,
+        "fundamentals": true,
+        "valuation": true,
+        "corporate_action": true
+      },
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 6.12,
+        "entry_zone": [
+          5.87,
+          6.05
+        ],
+        "invalidation": 5.61,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.203,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      },
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
       "symbol": "EGAL",
-      "rank": 4,
+      "rank": 6,
       "v6_score": 74.1,
       "v6_action": "NO_CHASE",
       "reference_close": 290.1,
@@ -4067,8 +4767,74 @@
       }
     },
     {
-      "symbol": "TMGH",
+      "symbol": "EFIH",
       "rank": 7,
+      "v6_score": 73.86,
+      "v6_action": "NO_CHASE",
+      "reference_close": 20.75,
+      "state": "MARKET_BLOCKED",
+      "priority": 50,
+      "reason": "risk_off_panic_gate",
+      "recovery_score_100": 67.41,
+      "quality_score_10": 7.67,
+      "entry_state": {
+        "state": "ABOVE_ZONE",
+        "distance_pct": 0.73,
+        "zone_low": 20,
+        "zone_high": 20.6
+      },
+      "entry_quality": 4.03,
+      "risk_reward": 8.83,
+      "cycle_strength": 3.1,
+      "institutional_intelligence": 6.09,
+      "day_change_pct": -1.19,
+      "relative_strength_vs_market_median_pct": 5.59,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": true,
+        "fundamentals": true,
+        "valuation": true,
+        "corporate_action": true
+      },
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 20.75,
+        "entry_zone": [
+          20,
+          20.6
+        ],
+        "invalidation": 19.1,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.227,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      },
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "TMGH",
+      "rank": 11,
       "v6_score": 70.96,
       "v6_action": "NO_CHASE",
       "reference_close": 82,
@@ -4134,7 +4900,7 @@
     },
     {
       "symbol": "ETEL",
-      "rank": 3,
+      "rank": 4,
       "v6_score": 74.42,
       "v6_action": "WAIT_ENTRY",
       "reference_close": 124.06,
@@ -4200,7 +4966,7 @@
     },
     {
       "symbol": "MASR",
-      "rank": 9,
+      "rank": 13,
       "v6_score": 70.08,
       "v6_action": "NO_CHASE",
       "reference_close": 5.9,
@@ -4265,8 +5031,206 @@
       }
     },
     {
+      "symbol": "ORWE",
+      "rank": 10,
+      "v6_score": 71.3,
+      "v6_action": "NO_CHASE",
+      "reference_close": 23.71,
+      "state": "MARKET_BLOCKED",
+      "priority": 50,
+      "reason": "risk_off_panic_gate",
+      "recovery_score_100": 62.59,
+      "quality_score_10": 7.47,
+      "entry_state": {
+        "state": "ABOVE_ZONE",
+        "distance_pct": 0.21,
+        "zone_low": 22.96,
+        "zone_high": 23.66
+      },
+      "entry_quality": 3.53,
+      "risk_reward": 8.83,
+      "cycle_strength": 2.3,
+      "institutional_intelligence": 3.72,
+      "day_change_pct": -5.73,
+      "relative_strength_vs_market_median_pct": 1.05,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": true,
+        "fundamentals": true,
+        "valuation": true,
+        "corporate_action": true
+      },
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 23.71,
+        "entry_zone": [
+          22.96,
+          23.66
+        ],
+        "invalidation": 21.93,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.167,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      },
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "EFID",
+      "rank": 9,
+      "v6_score": 72.1,
+      "v6_action": "NO_CHASE",
+      "reference_close": 16.33,
+      "state": "MARKET_BLOCKED",
+      "priority": 50,
+      "reason": "risk_off_panic_gate",
+      "recovery_score_100": 61.75,
+      "quality_score_10": 7.67,
+      "entry_state": {
+        "state": "IN_ZONE",
+        "distance_pct": 0,
+        "zone_low": 16.06,
+        "zone_high": 16.33
+      },
+      "entry_quality": 2.51,
+      "risk_reward": 8.83,
+      "cycle_strength": 2.5,
+      "institutional_intelligence": 3.31,
+      "day_change_pct": -10.27,
+      "relative_strength_vs_market_median_pct": -3.49,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": true,
+        "fundamentals": true,
+        "valuation": true,
+        "corporate_action": true
+      },
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 16.33,
+        "entry_zone": [
+          16.06,
+          16.33
+        ],
+        "invalidation": 15.33,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.016,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      },
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "JUFO",
+      "rank": 16,
+      "v6_score": 66.08,
+      "v6_action": "NO_CHASE",
+      "reference_close": 21.08,
+      "state": "MARKET_BLOCKED",
+      "priority": 50,
+      "reason": "risk_off_panic_gate",
+      "recovery_score_100": 61.14,
+      "quality_score_10": 7.29,
+      "entry_state": {
+        "state": "IN_ZONE",
+        "distance_pct": 0,
+        "zone_low": 20.69,
+        "zone_high": 21.08
+      },
+      "entry_quality": 2.65,
+      "risk_reward": 8.83,
+      "cycle_strength": 3.3,
+      "institutional_intelligence": 3.4,
+      "day_change_pct": -10.11,
+      "relative_strength_vs_market_median_pct": -3.33,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": true,
+        "fundamentals": true,
+        "valuation": true,
+        "corporate_action": true
+      },
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 21.08,
+        "entry_zone": [
+          20.69,
+          21.08
+        ],
+        "invalidation": 19.76,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.029,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      },
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
       "symbol": "ORAS",
-      "rank": 11,
+      "rank": 15,
       "v6_score": 67.48,
       "v6_action": "WAIT_ENTRY",
       "reference_close": 815,
@@ -4331,8 +5295,74 @@
       }
     },
     {
+      "symbol": "SVCE",
+      "rank": 49,
+      "v6_score": 52.86,
+      "v6_action": "NO_CHASE",
+      "reference_close": 7.69,
+      "state": "MARKET_BLOCKED",
+      "priority": 50,
+      "reason": "risk_off_panic_gate",
+      "recovery_score_100": 47.85,
+      "quality_score_10": 5.74,
+      "entry_state": {
+        "state": "ABOVE_ZONE",
+        "distance_pct": 1.59,
+        "zone_low": 7.23,
+        "zone_high": 7.57
+      },
+      "entry_quality": 3.51,
+      "risk_reward": 4.7,
+      "cycle_strength": 3,
+      "institutional_intelligence": 4.36,
+      "day_change_pct": -11.81,
+      "relative_strength_vs_market_median_pct": -5.03,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": true,
+        "fundamentals": true,
+        "valuation": true,
+        "corporate_action": true
+      },
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 7.69,
+        "entry_zone": [
+          7.23,
+          7.57
+        ],
+        "invalidation": 6.9,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.398,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      },
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
       "symbol": "ADIB",
-      "rank": 2,
+      "rank": 3,
       "v6_score": 75.27,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 45.1,
@@ -4398,7 +5428,7 @@
     },
     {
       "symbol": "FWRY",
-      "rank": 5,
+      "rank": 8,
       "v6_score": 72.43,
       "v6_action": "DEEP_RESEARCH",
       "reference_close": 17.41,
@@ -4464,7 +5494,7 @@
     },
     {
       "symbol": "EAST",
-      "rank": 39,
+      "rank": 42,
       "v6_score": 55.22,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 29.98,
@@ -4530,7 +5560,7 @@
     },
     {
       "symbol": "COMI",
-      "rank": 10,
+      "rank": 14,
       "v6_score": 69.81,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 122.03,
@@ -4596,7 +5626,7 @@
     },
     {
       "symbol": "EOSB",
-      "rank": 30,
+      "rank": 33,
       "v6_score": 56.9,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 1.64,
@@ -4642,7 +5672,7 @@
     },
     {
       "symbol": "EMFD",
-      "rank": 19,
+      "rank": 24,
       "v6_score": 62.3,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 11.79,
@@ -4707,74 +5737,8 @@
       }
     },
     {
-      "symbol": "AMOC",
-      "rank": 6,
-      "v6_score": 71.06,
-      "v6_action": "DEEP_RESEARCH",
-      "reference_close": 12.94,
-      "state": "RESEARCH_REQUIRED",
-      "priority": 0,
-      "reason": "fundamental_or_valuation_verification_incomplete",
-      "recovery_score_100": 64.19,
-      "quality_score_10": 7.24,
-      "entry_state": {
-        "state": "IN_ZONE",
-        "distance_pct": 0,
-        "zone_low": 12.82,
-        "zone_high": 12.94
-      },
-      "entry_quality": 5.71,
-      "risk_reward": 6.35,
-      "cycle_strength": 4.7,
-      "institutional_intelligence": 5.64,
-      "day_change_pct": -4.22,
-      "relative_strength_vs_market_median_pct": 2.56,
-      "falling_knife_risk": false,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": true,
-        "fundamentals": true,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": {
-        "status": "LIMIT_ON_WEAKNESS",
-        "reference_close": 12.94,
-        "entry_zone": [
-          12.82,
-          12.94
-        ],
-        "invalidation": 12.24,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.34,
-        "sizing": {
-          "probe_pct_of_target": 25,
-          "core_add_pct": 35,
-          "reserve_pct": 40
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      },
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
       "symbol": "ORHD",
-      "rank": 67,
+      "rank": 69,
       "v6_score": 49.62,
       "v6_action": "DEEP_RESEARCH",
       "reference_close": 9.22,
@@ -4840,7 +5804,7 @@
     },
     {
       "symbol": "ABUK",
-      "rank": 29,
+      "rank": 32,
       "v6_score": 57.08,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 89.52,
@@ -4906,7 +5870,7 @@
     },
     {
       "symbol": "ARCC",
-      "rank": 12,
+      "rank": 17,
       "v6_score": 66.01,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 61.99,
@@ -4972,7 +5936,7 @@
     },
     {
       "symbol": "HDBK",
-      "rank": 18,
+      "rank": 23,
       "v6_score": 62.81,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 103.66,
@@ -5018,7 +5982,7 @@
     },
     {
       "symbol": "MCQE",
-      "rank": 8,
+      "rank": 12,
       "v6_score": 70.24,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 148,
@@ -5064,7 +6028,7 @@
     },
     {
       "symbol": "ELNA",
-      "rank": 34,
+      "rank": 37,
       "v6_score": 56.24,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 38.82,
@@ -5130,7 +6094,7 @@
     },
     {
       "symbol": "PHDC",
-      "rank": 17,
+      "rank": 22,
       "v6_score": 63.68,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 11.91,
@@ -5196,7 +6160,7 @@
     },
     {
       "symbol": "ISPH",
-      "rank": 15,
+      "rank": 20,
       "v6_score": 64.7,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 9.22,
@@ -5261,74 +6225,8 @@
       }
     },
     {
-      "symbol": "HELI",
-      "rank": 20,
-      "v6_score": 62.19,
-      "v6_action": "DEEP_RESEARCH",
-      "reference_close": 6.12,
-      "state": "RESEARCH_REQUIRED",
-      "priority": 0,
-      "reason": "fundamental_or_valuation_verification_incomplete",
-      "recovery_score_100": 61.66,
-      "quality_score_10": 6.05,
-      "entry_state": {
-        "state": "ABOVE_ZONE",
-        "distance_pct": 1.16,
-        "zone_low": 5.87,
-        "zone_high": 6.05
-      },
-      "entry_quality": 4.72,
-      "risk_reward": 8.83,
-      "cycle_strength": 3.4,
-      "institutional_intelligence": 6.29,
-      "day_change_pct": -9.33,
-      "relative_strength_vs_market_median_pct": -2.55,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": true,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 6.12,
-        "entry_zone": [
-          5.87,
-          6.05
-        ],
-        "invalidation": 5.61,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.203,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      },
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
       "symbol": "FAITA",
-      "rank": 13,
+      "rank": 18,
       "v6_score": 65.03,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 0.98,
@@ -5374,7 +6272,7 @@
     },
     {
       "symbol": "EGCH",
-      "rank": 14,
+      "rank": 19,
       "v6_score": 64.73,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 10.28,
@@ -5420,7 +6318,7 @@
     },
     {
       "symbol": "EGBE",
-      "rank": 16,
+      "rank": 21,
       "v6_score": 64.57,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 0.484,
@@ -5465,74 +6363,8 @@
       }
     },
     {
-      "symbol": "EFIH",
-      "rank": 22,
-      "v6_score": 60.75,
-      "v6_action": "DEEP_RESEARCH",
-      "reference_close": 20.75,
-      "state": "RESEARCH_REQUIRED",
-      "priority": 0,
-      "reason": "fundamental_or_valuation_verification_incomplete",
-      "recovery_score_100": 59.67,
-      "quality_score_10": 5.95,
-      "entry_state": {
-        "state": "ABOVE_ZONE",
-        "distance_pct": 0.73,
-        "zone_low": 20,
-        "zone_high": 20.6
-      },
-      "entry_quality": 4.03,
-      "risk_reward": 8.83,
-      "cycle_strength": 3.1,
-      "institutional_intelligence": 6.09,
-      "day_change_pct": -1.19,
-      "relative_strength_vs_market_median_pct": 5.59,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": true,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 20.75,
-        "entry_zone": [
-          20,
-          20.6
-        ],
-        "invalidation": 19.1,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.227,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      },
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
       "symbol": "CCAP",
-      "rank": 25,
+      "rank": 28,
       "v6_score": 58.96,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 6.2,
@@ -5597,54 +6429,8 @@
       }
     },
     {
-      "symbol": "EFID",
-      "rank": 81,
-      "v6_score": 47.96,
-      "v6_action": "DEEP_RESEARCH",
-      "reference_close": 16.33,
-      "state": "BLOCK_CORPORATE_ACTION",
-      "priority": 0,
-      "reason": "technical_history_not_normalized",
-      "recovery_score_100": 58.6,
-      "quality_score_10": 6.97,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 2.51,
-      "risk_reward": 8.83,
-      "cycle_strength": 2.5,
-      "institutional_intelligence": 3.31,
-      "day_change_pct": -10.27,
-      "relative_strength_vs_market_median_pct": -3.49,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": true,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": false
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
       "symbol": "MBSC",
-      "rank": 21,
+      "rank": 25,
       "v6_score": 61.87,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 278.21,
@@ -5690,7 +6476,7 @@
     },
     {
       "symbol": "CPCI",
-      "rank": 24,
+      "rank": 27,
       "v6_score": 59.53,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 579.75,
@@ -5822,7 +6608,7 @@
     },
     {
       "symbol": "ALCN",
-      "rank": 33,
+      "rank": 36,
       "v6_score": 56.45,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 32,
@@ -5888,7 +6674,7 @@
     },
     {
       "symbol": "HRHO",
-      "rank": 35,
+      "rank": 38,
       "v6_score": 56.06,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 23.99,
@@ -5954,7 +6740,7 @@
     },
     {
       "symbol": "SWDY",
-      "rank": 43,
+      "rank": 45,
       "v6_score": 54.3,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 102.02,
@@ -6020,7 +6806,7 @@
     },
     {
       "symbol": "VLMRA",
-      "rank": 44,
+      "rank": 46,
       "v6_score": 54.11,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 25.96,
@@ -6086,7 +6872,7 @@
     },
     {
       "symbol": "SDTI",
-      "rank": 56,
+      "rank": 58,
       "v6_score": 51.24,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 81.83,
@@ -6152,7 +6938,7 @@
     },
     {
       "symbol": "OCDI",
-      "rank": 26,
+      "rank": 29,
       "v6_score": 57.62,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 23.72,
@@ -6218,7 +7004,7 @@
     },
     {
       "symbol": "QNBE",
-      "rank": 40,
+      "rank": 43,
       "v6_score": 55,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 52.5,
@@ -6284,7 +7070,7 @@
     },
     {
       "symbol": "FAIT",
-      "rank": 27,
+      "rank": 30,
       "v6_score": 57.5,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 42.49,
@@ -6350,7 +7136,7 @@
     },
     {
       "symbol": "GBCO",
-      "rank": 23,
+      "rank": 26,
       "v6_score": 60.1,
       "v6_action": "AVOID",
       "reference_close": 23.65,
@@ -6416,7 +7202,7 @@
     },
     {
       "symbol": "PHAR",
-      "rank": 28,
+      "rank": 31,
       "v6_score": 57.2,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 94.2,
@@ -6426,10 +7212,10 @@
       "recovery_score_100": 54.17,
       "quality_score_10": 5.76,
       "entry_state": {
-        "state": "ABOVE_ZONE",
-        "distance_pct": 1.31,
-        "zone_low": 90.24,
-        "zone_high": 92.98
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
       },
       "entry_quality": 3.95,
       "risk_reward": 7.18,
@@ -6445,27 +7231,7 @@
         "valuation": false,
         "corporate_action": true
       },
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 94.2,
-        "entry_zone": [
-          90.24,
-          92.98
-        ],
-        "invalidation": 86.18,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.252,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      },
+      "execution_plan": null,
       "alert_rules": {
         "buy_only_if": [
           "v6_action_is_buy",
@@ -6482,7 +7248,7 @@
     },
     {
       "symbol": "CIEB",
-      "rank": 31,
+      "rank": 34,
       "v6_score": 56.73,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 21.42,
@@ -6528,7 +7294,7 @@
     },
     {
       "symbol": "SCEM",
-      "rank": 50,
+      "rank": 52,
       "v6_score": 52.32,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 76.02,
@@ -6574,7 +7340,7 @@
     },
     {
       "symbol": "GOUR",
-      "rank": 37,
+      "rank": 40,
       "v6_score": 55.61,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 14.67,
@@ -6619,54 +7385,8 @@
       }
     },
     {
-      "symbol": "JUFO",
-      "rank": 45,
-      "v6_score": 54.06,
-      "v6_action": "DEEP_RESEARCH",
-      "reference_close": 21.08,
-      "state": "RESEARCH_REQUIRED",
-      "priority": 0,
-      "reason": "fundamental_or_valuation_verification_incomplete",
-      "recovery_score_100": 53.98,
-      "quality_score_10": 5.7,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 2.65,
-      "risk_reward": 8.83,
-      "cycle_strength": 3.3,
-      "institutional_intelligence": 3.4,
-      "day_change_pct": -10.11,
-      "relative_strength_vs_market_median_pct": -3.33,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": true,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
       "symbol": "OLFI",
-      "rank": 65,
+      "rank": 67,
       "v6_score": 49.8,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 19,
@@ -6712,7 +7432,7 @@
     },
     {
       "symbol": "EXPA",
-      "rank": 41,
+      "rank": 44,
       "v6_score": 54.76,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 13.15,
@@ -6757,54 +7477,8 @@
       }
     },
     {
-      "symbol": "ORWE",
-      "rank": 42,
-      "v6_score": 54.66,
-      "v6_action": "DEEP_RESEARCH",
-      "reference_close": 23.71,
-      "state": "RESEARCH_REQUIRED",
-      "priority": 0,
-      "reason": "fundamental_or_valuation_verification_incomplete",
-      "recovery_score_100": 52.82,
-      "quality_score_10": 5.3,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.53,
-      "risk_reward": 8.83,
-      "cycle_strength": 2.3,
-      "institutional_intelligence": 3.72,
-      "day_change_pct": -5.73,
-      "relative_strength_vs_market_median_pct": 1.05,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": true,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
       "symbol": "BONY",
-      "rank": 53,
+      "rank": 55,
       "v6_score": 51.83,
       "v6_action": "AVOID",
       "reference_close": 3.89,
@@ -6850,7 +7524,7 @@
     },
     {
       "symbol": "CLHO",
-      "rank": 38,
+      "rank": 41,
       "v6_score": 55.45,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 13.02,
@@ -6896,7 +7570,7 @@
     },
     {
       "symbol": "NARE",
-      "rank": 54,
+      "rank": 56,
       "v6_score": 51.36,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 13.62,
@@ -6942,7 +7616,7 @@
     },
     {
       "symbol": "MPCI",
-      "rank": 32,
+      "rank": 35,
       "v6_score": 56.67,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 251.65,
@@ -6988,7 +7662,7 @@
     },
     {
       "symbol": "AXPH",
-      "rank": 59,
+      "rank": 61,
       "v6_score": 50.6,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 1200,
@@ -7034,7 +7708,7 @@
     },
     {
       "symbol": "VLMR",
-      "rank": 79,
+      "rank": 81,
       "v6_score": 48.01,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 0.638,
@@ -7080,7 +7754,7 @@
     },
     {
       "symbol": "PACH",
-      "rank": 90,
+      "rank": 91,
       "v6_score": 46.95,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 90,
@@ -7126,7 +7800,7 @@
     },
     {
       "symbol": "ACAMD",
-      "rank": 36,
+      "rank": 39,
       "v6_score": 55.89,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 1.92,
@@ -7172,7 +7846,7 @@
     },
     {
       "symbol": "RUBX",
-      "rank": 47,
+      "rank": 48,
       "v6_score": 52.93,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 12.5,
@@ -7238,7 +7912,7 @@
     },
     {
       "symbol": "ECAP",
-      "rank": 49,
+      "rank": 51,
       "v6_score": 52.51,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 25.77,
@@ -7284,7 +7958,7 @@
     },
     {
       "symbol": "SNFC",
-      "rank": 55,
+      "rank": 57,
       "v6_score": 51.28,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 10.8,
@@ -7330,7 +8004,7 @@
     },
     {
       "symbol": "GTWL",
-      "rank": 48,
+      "rank": 50,
       "v6_score": 52.54,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 84.85,
@@ -7396,7 +8070,7 @@
     },
     {
       "symbol": "RMDA",
-      "rank": 82,
+      "rank": 83,
       "v6_score": 47.68,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 4.65,
@@ -7442,7 +8116,7 @@
     },
     {
       "symbol": "MOED",
-      "rank": 52,
+      "rank": 54,
       "v6_score": 51.84,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 0.427,
@@ -7488,7 +8162,7 @@
     },
     {
       "symbol": "CIRA",
-      "rank": 57,
+      "rank": 59,
       "v6_score": 51.22,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 33.26,
@@ -7554,7 +8228,7 @@
     },
     {
       "symbol": "ADRI",
-      "rank": 74,
+      "rank": 76,
       "v6_score": 48.24,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 13.09,
@@ -7620,7 +8294,7 @@
     },
     {
       "symbol": "CANA",
-      "rank": 66,
+      "rank": 68,
       "v6_score": 49.64,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 39.92,
@@ -7666,7 +8340,7 @@
     },
     {
       "symbol": "TORA",
-      "rank": 106,
+      "rank": 107,
       "v6_score": 45.86,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 59,
@@ -7712,7 +8386,7 @@
     },
     {
       "symbol": "MICH",
-      "rank": 60,
+      "rank": 62,
       "v6_score": 50.48,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 37.94,
@@ -7758,7 +8432,7 @@
     },
     {
       "symbol": "OBRI",
-      "rank": 46,
+      "rank": 47,
       "v6_score": 54.05,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 20,
@@ -7804,7 +8478,7 @@
     },
     {
       "symbol": "IEEC",
-      "rank": 51,
+      "rank": 53,
       "v6_score": 52.31,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 0.55,
@@ -7850,7 +8524,7 @@
     },
     {
       "symbol": "TALM",
-      "rank": 114,
+      "rank": 115,
       "v6_score": 45.04,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 18.47,
@@ -7896,7 +8570,7 @@
     },
     {
       "symbol": "SCTS",
-      "rank": 96,
+      "rank": 97,
       "v6_score": 46.59,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 434.3,
@@ -7906,10 +8580,10 @@
       "recovery_score_100": 47.52,
       "quality_score_10": 4.96,
       "entry_state": {
-        "state": "ABOVE_ZONE",
-        "distance_pct": 1.52,
-        "zone_low": 408.24,
-        "zone_high": 427.79
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
       },
       "entry_quality": 3.57,
       "risk_reward": 4.7,
@@ -7925,27 +8599,7 @@
         "valuation": false,
         "corporate_action": true
       },
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 434.3,
-        "entry_zone": [
-          408.24,
-          427.79
-        ],
-        "invalidation": 389.87,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.168,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      },
+      "execution_plan": null,
       "alert_rules": {
         "buy_only_if": [
           "v6_action_is_buy",
@@ -7962,7 +8616,7 @@
     },
     {
       "symbol": "UNIT",
-      "rank": 87,
+      "rank": 88,
       "v6_score": 47,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 15.5,
@@ -8008,7 +8662,7 @@
     },
     {
       "symbol": "SKPC",
-      "rank": 116,
+      "rank": 117,
       "v6_score": 44.86,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 14.26,
@@ -8054,7 +8708,7 @@
     },
     {
       "symbol": "ICID",
-      "rank": 92,
+      "rank": 93,
       "v6_score": 46.84,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 16.2,
@@ -8100,7 +8754,7 @@
     },
     {
       "symbol": "SCFM",
-      "rank": 70,
+      "rank": 72,
       "v6_score": 48.97,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 185,
@@ -8238,7 +8892,7 @@
     },
     {
       "symbol": "LUTS",
-      "rank": 86,
+      "rank": 87,
       "v6_score": 47.33,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 0.509,
@@ -8304,7 +8958,7 @@
     },
     {
       "symbol": "ACAP",
-      "rank": 68,
+      "rank": 70,
       "v6_score": 49.58,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 5.84,
@@ -8396,7 +9050,7 @@
     },
     {
       "symbol": "TAQA",
-      "rank": 91,
+      "rank": 92,
       "v6_score": 46.84,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 14.47,
@@ -8442,7 +9096,7 @@
     },
     {
       "symbol": "ADCI",
-      "rank": 63,
+      "rank": 65,
       "v6_score": 49.92,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 232.25,
@@ -8666,7 +9320,7 @@
     },
     {
       "symbol": "CRST",
-      "rank": 84,
+      "rank": 85,
       "v6_score": 47.49,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 1.81,
@@ -8732,7 +9386,7 @@
     },
     {
       "symbol": "BIOC",
-      "rank": 69,
+      "rank": 71,
       "v6_score": 49.38,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 218.14,
@@ -8778,7 +9432,7 @@
     },
     {
       "symbol": "UTOP",
-      "rank": 58,
+      "rank": 60,
       "v6_score": 51.08,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 77.54,
@@ -8824,7 +9478,7 @@
     },
     {
       "symbol": "MOIL",
-      "rank": 83,
+      "rank": 84,
       "v6_score": 47.58,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 0.636,
@@ -8870,7 +9524,7 @@
     },
     {
       "symbol": "DSCW",
-      "rank": 109,
+      "rank": 110,
       "v6_score": 45.64,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 1.4,
@@ -8916,7 +9570,7 @@
     },
     {
       "symbol": "GGRN",
-      "rank": 108,
+      "rank": 109,
       "v6_score": 45.73,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 1.01,
@@ -9100,7 +9754,7 @@
     },
     {
       "symbol": "EBSC",
-      "rank": 77,
+      "rank": 79,
       "v6_score": 48.18,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 1.27,
@@ -9146,7 +9800,7 @@
     },
     {
       "symbol": "ELSH",
-      "rank": 62,
+      "rank": 64,
       "v6_score": 50.12,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 8.71,
@@ -9284,7 +9938,7 @@
     },
     {
       "symbol": "AJWA",
-      "rank": 103,
+      "rank": 104,
       "v6_score": 46.07,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 201.29,
@@ -9416,7 +10070,7 @@
     },
     {
       "symbol": "OCPH",
-      "rank": 80,
+      "rank": 82,
       "v6_score": 48,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 151.41,
@@ -9462,7 +10116,7 @@
     },
     {
       "symbol": "EALR",
-      "rank": 111,
+      "rank": 112,
       "v6_score": 45.49,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 257.99,
@@ -9508,7 +10162,7 @@
     },
     {
       "symbol": "EEII",
-      "rank": 72,
+      "rank": 74,
       "v6_score": 48.66,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 1.5,
@@ -9554,7 +10208,7 @@
     },
     {
       "symbol": "ETRS",
-      "rank": 105,
+      "rank": 106,
       "v6_score": 45.89,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 9.59,
@@ -9600,7 +10254,7 @@
     },
     {
       "symbol": "NINH",
-      "rank": 64,
+      "rank": 66,
       "v6_score": 49.9,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 12.97,
@@ -9646,7 +10300,7 @@
     },
     {
       "symbol": "GRCA",
-      "rank": 100,
+      "rank": 101,
       "v6_score": 46.47,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 25.74,
@@ -9692,7 +10346,7 @@
     },
     {
       "symbol": "SAUD",
-      "rank": 61,
+      "rank": 63,
       "v6_score": 50.25,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 20.04,
@@ -9738,7 +10392,7 @@
     },
     {
       "symbol": "MISR",
-      "rank": 117,
+      "rank": 118,
       "v6_score": 44.73,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 5.51,
@@ -9784,7 +10438,7 @@
     },
     {
       "symbol": "AREH",
-      "rank": 73,
+      "rank": 75,
       "v6_score": 48.4,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 0.97,
@@ -9830,7 +10484,7 @@
     },
     {
       "symbol": "ZMID",
-      "rank": 71,
+      "rank": 73,
       "v6_score": 48.71,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 6.13,
@@ -9876,7 +10530,7 @@
     },
     {
       "symbol": "NDRL",
-      "rank": 93,
+      "rank": 94,
       "v6_score": 46.77,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 4.69,
@@ -9922,7 +10576,7 @@
     },
     {
       "symbol": "ISMQ",
-      "rank": 112,
+      "rank": 113,
       "v6_score": 45.38,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 6.17,
@@ -10014,7 +10668,7 @@
     },
     {
       "symbol": "FERC",
-      "rank": 85,
+      "rank": 86,
       "v6_score": 47.48,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 56.1,
@@ -10060,7 +10714,7 @@
     },
     {
       "symbol": "ELEC",
-      "rank": 107,
+      "rank": 108,
       "v6_score": 45.84,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 1.43,
@@ -10106,7 +10760,7 @@
     },
     {
       "symbol": "WKOL",
-      "rank": 75,
+      "rank": 77,
       "v6_score": 48.2,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 243.35,
@@ -10152,7 +10806,7 @@
     },
     {
       "symbol": "GIHD",
-      "rank": 78,
+      "rank": 80,
       "v6_score": 48.15,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 35.56,
@@ -10402,7 +11056,7 @@
     },
     {
       "symbol": "ARAB",
-      "rank": 118,
+      "rank": 119,
       "v6_score": 44.72,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 0.211,
@@ -10468,7 +11122,7 @@
     },
     {
       "symbol": "ICFC",
-      "rank": 119,
+      "rank": 120,
       "v6_score": 44.72,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 19.1,
@@ -10514,7 +11168,7 @@
     },
     {
       "symbol": "ACTF",
-      "rank": 115,
+      "rank": 116,
       "v6_score": 44.96,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 1.99,
@@ -10652,7 +11306,7 @@
     },
     {
       "symbol": "ALUM",
-      "rank": 89,
+      "rank": 90,
       "v6_score": 46.99,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 16.37,
@@ -10698,7 +11352,7 @@
     },
     {
       "symbol": "ELKA",
-      "rank": 76,
+      "rank": 78,
       "v6_score": 48.18,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 1.24,
@@ -10744,7 +11398,7 @@
     },
     {
       "symbol": "EGREF",
-      "rank": 88,
+      "rank": 89,
       "v6_score": 47,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 16.6,
@@ -10790,7 +11444,7 @@
     },
     {
       "symbol": "EPPK",
-      "rank": 110,
+      "rank": 111,
       "v6_score": 45.54,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 9.78,
@@ -10882,7 +11536,7 @@
     },
     {
       "symbol": "CAED",
-      "rank": 97,
+      "rank": 98,
       "v6_score": 46.51,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 70,
@@ -10928,7 +11582,7 @@
     },
     {
       "symbol": "UNIP",
-      "rank": 95,
+      "rank": 96,
       "v6_score": 46.7,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 0.262,
@@ -10973,54 +11627,8 @@
       }
     },
     {
-      "symbol": "SVCE",
-      "rank": 120,
-      "v6_score": 44.62,
-      "v6_action": "DEEP_RESEARCH",
-      "reference_close": 7.69,
-      "state": "RESEARCH_REQUIRED",
-      "priority": 0,
-      "reason": "fundamental_or_valuation_verification_incomplete",
-      "recovery_score_100": 43.31,
-      "quality_score_10": 4.73,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.51,
-      "risk_reward": 4.7,
-      "cycle_strength": 3,
-      "institutional_intelligence": 4.36,
-      "day_change_pct": -11.81,
-      "relative_strength_vs_market_median_pct": -5.03,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": true,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
       "symbol": "EPCO",
-      "rank": 94,
+      "rank": 95,
       "v6_score": 46.74,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 7.26,
@@ -11204,7 +11812,7 @@
     },
     {
       "symbol": "ASPI",
-      "rank": 99,
+      "rank": 100,
       "v6_score": 46.47,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 0.273,
@@ -11250,7 +11858,7 @@
     },
     {
       "symbol": "MTIE",
-      "rank": 101,
+      "rank": 102,
       "v6_score": 46.37,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 6.23,
@@ -11362,7 +11970,7 @@
     },
     {
       "symbol": "EASB",
-      "rank": 98,
+      "rank": 99,
       "v6_score": 46.51,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 5.21,
@@ -11546,7 +12154,7 @@
     },
     {
       "symbol": "MBEG",
-      "rank": 102,
+      "rank": 103,
       "v6_score": 46.08,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 4.3,
@@ -11684,7 +12292,7 @@
     },
     {
       "symbol": "GMCI",
-      "rank": 113,
+      "rank": 114,
       "v6_score": 45.2,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 1.47,
@@ -11868,7 +12476,7 @@
     },
     {
       "symbol": "MHOT",
-      "rank": 104,
+      "rank": 105,
       "v6_score": 45.97,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 13.47,
@@ -11924,10 +12532,10 @@
       "recovery_score_100": 41.97,
       "quality_score_10": 3.83,
       "entry_state": {
-        "state": "ABOVE_ZONE",
-        "distance_pct": 0.68,
-        "zone_low": 1.43,
-        "zone_high": 1.47
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
       },
       "entry_quality": 4.82,
       "risk_reward": 4.7,
@@ -11943,27 +12551,7 @@
         "valuation": false,
         "corporate_action": true
       },
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 1.48,
-        "entry_zone": [
-          1.43,
-          1.47
-        ],
-        "invalidation": 1.36,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.086,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      },
+      "execution_plan": null,
       "alert_rules": {
         "buy_only_if": [
           "v6_action_is_buy",
@@ -13379,8 +13967,100 @@
       }
     },
     {
-      "symbol": "MITR",
+      "symbol": "YAYT",
       "rank": 177,
+      "v6_score": 40.89,
+      "v6_action": "RESEARCH_SHARIA",
+      "reference_close": 10,
+      "state": "RESEARCH_REQUIRED",
+      "priority": 0,
+      "reason": "fundamental_or_valuation_verification_incomplete",
+      "recovery_score_100": 40.24,
+      "quality_score_10": 4.59,
+      "entry_state": {
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
+      },
+      "entry_quality": 3.79,
+      "risk_reward": 3.35,
+      "cycle_strength": 5.1,
+      "institutional_intelligence": 2.1,
+      "day_change_pct": 0,
+      "relative_strength_vs_market_median_pct": 6.78,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": false,
+        "fundamentals": false,
+        "valuation": false,
+        "corporate_action": true
+      },
+      "execution_plan": null,
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "EEP",
+      "rank": 178,
+      "v6_score": 40.89,
+      "v6_action": "RESEARCH_SHARIA",
+      "reference_close": 1,
+      "state": "RESEARCH_REQUIRED",
+      "priority": 0,
+      "reason": "fundamental_or_valuation_verification_incomplete",
+      "recovery_score_100": 40.24,
+      "quality_score_10": 4.59,
+      "entry_state": {
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
+      },
+      "entry_quality": 3.79,
+      "risk_reward": 3.35,
+      "cycle_strength": 5.1,
+      "institutional_intelligence": 2.1,
+      "day_change_pct": 0,
+      "relative_strength_vs_market_median_pct": 6.78,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": false,
+        "fundamentals": false,
+        "valuation": false,
+        "corporate_action": true
+      },
+      "execution_plan": null,
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "MITR",
+      "rank": 179,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 6,
@@ -13425,103 +14105,11 @@
       }
     },
     {
-      "symbol": "HDST",
-      "rank": 178,
-      "v6_score": 40.89,
-      "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 0.1,
-      "state": "RESEARCH_REQUIRED",
-      "priority": 0,
-      "reason": "fundamental_or_valuation_verification_incomplete",
-      "recovery_score_100": 40.24,
-      "quality_score_10": 4.59,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.79,
-      "risk_reward": 3.35,
-      "cycle_strength": 5.1,
-      "institutional_intelligence": 2.1,
-      "day_change_pct": 0,
-      "relative_strength_vs_market_median_pct": 6.78,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": false,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
-      "symbol": "EGOTH",
-      "rank": 179,
-      "v6_score": 40.89,
-      "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 100,
-      "state": "RESEARCH_REQUIRED",
-      "priority": 0,
-      "reason": "fundamental_or_valuation_verification_incomplete",
-      "recovery_score_100": 40.24,
-      "quality_score_10": 4.59,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.79,
-      "risk_reward": 3.35,
-      "cycle_strength": 5.1,
-      "institutional_intelligence": 2.1,
-      "day_change_pct": 0,
-      "relative_strength_vs_market_median_pct": 6.78,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": false,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
-      "symbol": "OCAP",
+      "symbol": "CID",
       "rank": 180,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 1,
+      "reference_close": 10,
       "state": "RESEARCH_REQUIRED",
       "priority": 0,
       "reason": "fundamental_or_valuation_verification_incomplete",
@@ -13563,11 +14151,11 @@
       }
     },
     {
-      "symbol": "GEOS",
+      "symbol": "POCO",
       "rank": 181,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 1,
+      "reference_close": 5,
       "state": "RESEARCH_REQUIRED",
       "priority": 0,
       "reason": "fundamental_or_valuation_verification_incomplete",
@@ -13609,7 +14197,7 @@
       }
     },
     {
-      "symbol": "MLIC",
+      "symbol": "ACFR",
       "rank": 182,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
@@ -13655,11 +14243,11 @@
       }
     },
     {
-      "symbol": "SINA",
+      "symbol": "PMSC",
       "rank": 183,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 15,
+      "reference_close": 10,
       "state": "RESEARCH_REQUIRED",
       "priority": 0,
       "reason": "fundamental_or_valuation_verification_incomplete",
@@ -13701,7 +14289,7 @@
       }
     },
     {
-      "symbol": "EEP",
+      "symbol": "OCAP",
       "rank": 184,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
@@ -13747,11 +14335,11 @@
       }
     },
     {
-      "symbol": "ELAB",
+      "symbol": "KNGC",
       "rank": 185,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 0.1,
+      "reference_close": 10,
       "state": "RESEARCH_REQUIRED",
       "priority": 0,
       "reason": "fundamental_or_valuation_verification_incomplete",
@@ -13793,7 +14381,7 @@
       }
     },
     {
-      "symbol": "CID",
+      "symbol": "MMHC",
       "rank": 186,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
@@ -13839,11 +14427,11 @@
       }
     },
     {
-      "symbol": "ALXD",
+      "symbol": "EGS72L31C011",
       "rank": 187,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 5,
+      "reference_close": 0.1,
       "state": "RESEARCH_REQUIRED",
       "priority": 0,
       "reason": "fundamental_or_valuation_verification_incomplete",
@@ -13885,11 +14473,11 @@
       }
     },
     {
-      "symbol": "NMIN",
+      "symbol": "GEOS",
       "rank": 188,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 10,
+      "reference_close": 1,
       "state": "RESEARCH_REQUIRED",
       "priority": 0,
       "reason": "fundamental_or_valuation_verification_incomplete",
@@ -13977,11 +14565,11 @@
       }
     },
     {
-      "symbol": "NBCC",
+      "symbol": "GROV",
       "rank": 190,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 5,
+      "reference_close": 1,
       "state": "RESEARCH_REQUIRED",
       "priority": 0,
       "reason": "fundamental_or_valuation_verification_incomplete",
@@ -14069,11 +14657,11 @@
       }
     },
     {
-      "symbol": "EGS65101C015",
+      "symbol": "EGOTH",
       "rank": 192,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 5,
+      "reference_close": 100,
       "state": "RESEARCH_REQUIRED",
       "priority": 0,
       "reason": "fundamental_or_valuation_verification_incomplete",
@@ -14115,7 +14703,7 @@
       }
     },
     {
-      "symbol": "ACFR",
+      "symbol": "MLIC",
       "rank": 193,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
@@ -14161,238 +14749,8 @@
       }
     },
     {
-      "symbol": "NAMI",
+      "symbol": "NFCI",
       "rank": 194,
-      "v6_score": 40.89,
-      "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 5,
-      "state": "RESEARCH_REQUIRED",
-      "priority": 0,
-      "reason": "fundamental_or_valuation_verification_incomplete",
-      "recovery_score_100": 40.24,
-      "quality_score_10": 4.59,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.79,
-      "risk_reward": 3.35,
-      "cycle_strength": 5.1,
-      "institutional_intelligence": 2.1,
-      "day_change_pct": 0,
-      "relative_strength_vs_market_median_pct": 6.78,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": false,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
-      "symbol": "KNGC",
-      "rank": 195,
-      "v6_score": 40.89,
-      "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 10,
-      "state": "RESEARCH_REQUIRED",
-      "priority": 0,
-      "reason": "fundamental_or_valuation_verification_incomplete",
-      "recovery_score_100": 40.24,
-      "quality_score_10": 4.59,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.79,
-      "risk_reward": 3.35,
-      "cycle_strength": 5.1,
-      "institutional_intelligence": 2.1,
-      "day_change_pct": 0,
-      "relative_strength_vs_market_median_pct": 6.78,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": false,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
-      "symbol": "EGS72L31C011",
-      "rank": 196,
-      "v6_score": 40.89,
-      "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 0.1,
-      "state": "RESEARCH_REQUIRED",
-      "priority": 0,
-      "reason": "fundamental_or_valuation_verification_incomplete",
-      "recovery_score_100": 40.24,
-      "quality_score_10": 4.59,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.79,
-      "risk_reward": 3.35,
-      "cycle_strength": 5.1,
-      "institutional_intelligence": 2.1,
-      "day_change_pct": 0,
-      "relative_strength_vs_market_median_pct": 6.78,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": false,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
-      "symbol": "PMSC",
-      "rank": 197,
-      "v6_score": 40.89,
-      "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 10,
-      "state": "RESEARCH_REQUIRED",
-      "priority": 0,
-      "reason": "fundamental_or_valuation_verification_incomplete",
-      "recovery_score_100": 40.24,
-      "quality_score_10": 4.59,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.79,
-      "risk_reward": 3.35,
-      "cycle_strength": 5.1,
-      "institutional_intelligence": 2.1,
-      "day_change_pct": 0,
-      "relative_strength_vs_market_median_pct": 6.78,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": false,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
-      "symbol": "YAYT",
-      "rank": 198,
-      "v6_score": 40.89,
-      "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 10,
-      "state": "RESEARCH_REQUIRED",
-      "priority": 0,
-      "reason": "fundamental_or_valuation_verification_incomplete",
-      "recovery_score_100": 40.24,
-      "quality_score_10": 4.59,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.79,
-      "risk_reward": 3.35,
-      "cycle_strength": 5.1,
-      "institutional_intelligence": 2.1,
-      "day_change_pct": 0,
-      "relative_strength_vs_market_median_pct": 6.78,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": false,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
-      "symbol": "MMHC",
-      "rank": 199,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 10,
@@ -14438,7 +14796,7 @@
     },
     {
       "symbol": "EGS65861C014",
-      "rank": 200,
+      "rank": 195,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 5,
@@ -14483,11 +14841,11 @@
       }
     },
     {
-      "symbol": "NFCI",
-      "rank": 201,
+      "symbol": "ALXD",
+      "rank": 196,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 10,
+      "reference_close": 5,
       "state": "RESEARCH_REQUIRED",
       "priority": 0,
       "reason": "fundamental_or_valuation_verification_incomplete",
@@ -14529,11 +14887,57 @@
       }
     },
     {
-      "symbol": "ANCC",
-      "rank": 202,
+      "symbol": "ELAB",
+      "rank": 197,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 10,
+      "reference_close": 0.1,
+      "state": "RESEARCH_REQUIRED",
+      "priority": 0,
+      "reason": "fundamental_or_valuation_verification_incomplete",
+      "recovery_score_100": 40.24,
+      "quality_score_10": 4.59,
+      "entry_state": {
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
+      },
+      "entry_quality": 3.79,
+      "risk_reward": 3.35,
+      "cycle_strength": 5.1,
+      "institutional_intelligence": 2.1,
+      "day_change_pct": 0,
+      "relative_strength_vs_market_median_pct": 6.78,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": false,
+        "fundamentals": false,
+        "valuation": false,
+        "corporate_action": true
+      },
+      "execution_plan": null,
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "SINA",
+      "rank": 198,
+      "v6_score": 40.89,
+      "v6_action": "RESEARCH_SHARIA",
+      "reference_close": 15,
       "state": "RESEARCH_REQUIRED",
       "priority": 0,
       "reason": "fundamental_or_valuation_verification_incomplete",
@@ -14576,10 +14980,194 @@
     },
     {
       "symbol": "ENPI",
-      "rank": 203,
+      "rank": 199,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 0.125,
+      "state": "RESEARCH_REQUIRED",
+      "priority": 0,
+      "reason": "fundamental_or_valuation_verification_incomplete",
+      "recovery_score_100": 40.24,
+      "quality_score_10": 4.59,
+      "entry_state": {
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
+      },
+      "entry_quality": 3.79,
+      "risk_reward": 3.35,
+      "cycle_strength": 5.1,
+      "institutional_intelligence": 2.1,
+      "day_change_pct": 0,
+      "relative_strength_vs_market_median_pct": 6.78,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": false,
+        "fundamentals": false,
+        "valuation": false,
+        "corporate_action": true
+      },
+      "execution_plan": null,
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "HDST",
+      "rank": 200,
+      "v6_score": 40.89,
+      "v6_action": "RESEARCH_SHARIA",
+      "reference_close": 0.1,
+      "state": "RESEARCH_REQUIRED",
+      "priority": 0,
+      "reason": "fundamental_or_valuation_verification_incomplete",
+      "recovery_score_100": 40.24,
+      "quality_score_10": 4.59,
+      "entry_state": {
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
+      },
+      "entry_quality": 3.79,
+      "risk_reward": 3.35,
+      "cycle_strength": 5.1,
+      "institutional_intelligence": 2.1,
+      "day_change_pct": 0,
+      "relative_strength_vs_market_median_pct": 6.78,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": false,
+        "fundamentals": false,
+        "valuation": false,
+        "corporate_action": true
+      },
+      "execution_plan": null,
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "NAMI",
+      "rank": 201,
+      "v6_score": 40.89,
+      "v6_action": "RESEARCH_SHARIA",
+      "reference_close": 5,
+      "state": "RESEARCH_REQUIRED",
+      "priority": 0,
+      "reason": "fundamental_or_valuation_verification_incomplete",
+      "recovery_score_100": 40.24,
+      "quality_score_10": 4.59,
+      "entry_state": {
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
+      },
+      "entry_quality": 3.79,
+      "risk_reward": 3.35,
+      "cycle_strength": 5.1,
+      "institutional_intelligence": 2.1,
+      "day_change_pct": 0,
+      "relative_strength_vs_market_median_pct": 6.78,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": false,
+        "fundamentals": false,
+        "valuation": false,
+        "corporate_action": true
+      },
+      "execution_plan": null,
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "EGS65101C015",
+      "rank": 202,
+      "v6_score": 40.89,
+      "v6_action": "RESEARCH_SHARIA",
+      "reference_close": 5,
+      "state": "RESEARCH_REQUIRED",
+      "priority": 0,
+      "reason": "fundamental_or_valuation_verification_incomplete",
+      "recovery_score_100": 40.24,
+      "quality_score_10": 4.59,
+      "entry_state": {
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
+      },
+      "entry_quality": 3.79,
+      "risk_reward": 3.35,
+      "cycle_strength": 5.1,
+      "institutional_intelligence": 2.1,
+      "day_change_pct": 0,
+      "relative_strength_vs_market_median_pct": 6.78,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": false,
+        "fundamentals": false,
+        "valuation": false,
+        "corporate_action": true
+      },
+      "execution_plan": null,
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "EGWA",
+      "rank": 203,
+      "v6_score": 40.89,
+      "v6_action": "RESEARCH_SHARIA",
+      "reference_close": 5,
       "state": "RESEARCH_REQUIRED",
       "priority": 0,
       "reason": "fundamental_or_valuation_verification_incomplete",
@@ -14667,7 +15255,7 @@
       }
     },
     {
-      "symbol": "EFAC",
+      "symbol": "ANCC",
       "rank": 205,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
@@ -14713,11 +15301,11 @@
       }
     },
     {
-      "symbol": "GROV",
+      "symbol": "EFAC",
       "rank": 206,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 1,
+      "reference_close": 10,
       "state": "RESEARCH_REQUIRED",
       "priority": 0,
       "reason": "fundamental_or_valuation_verification_incomplete",
@@ -14759,7 +15347,7 @@
       }
     },
     {
-      "symbol": "POCO",
+      "symbol": "NBCC",
       "rank": 207,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
@@ -14805,11 +15393,11 @@
       }
     },
     {
-      "symbol": "EGWA",
+      "symbol": "NMIN",
       "rank": 208,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 5,
+      "reference_close": 10,
       "state": "RESEARCH_REQUIRED",
       "priority": 0,
       "reason": "fundamental_or_valuation_verification_incomplete",
@@ -15782,10 +16370,10 @@
       "recovery_score_100": 39.16,
       "quality_score_10": 3.57,
       "entry_state": {
-        "state": "ABOVE_ZONE",
-        "distance_pct": 1.52,
-        "zone_low": 122.22,
-        "zone_high": 128.07
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
       },
       "entry_quality": 3.66,
       "risk_reward": 4.7,
@@ -15801,27 +16389,7 @@
         "valuation": false,
         "corporate_action": true
       },
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 130.02,
-        "entry_zone": [
-          122.22,
-          128.07
-        ],
-        "invalidation": 116.72,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.316,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      },
+      "execution_plan": null,
       "alert_rules": {
         "buy_only_if": [
           "v6_action_is_buy",
@@ -16390,7 +16958,7 @@
     },
     {
       "symbol": "MOSC",
-      "rank": 220,
+      "rank": 221,
       "v6_score": 39.93,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 228,
@@ -16436,7 +17004,7 @@
     },
     {
       "symbol": "KWIN",
-      "rank": 221,
+      "rank": 220,
       "v6_score": 39.93,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 49.38,
