@@ -17,6 +17,7 @@ name: EGX Resilient Bridge V5 + Decision Intelligence V6
       - 'egx-market-feed-v2/scripts/build-v6-performance-ledger.mts'
       - 'egx-market-feed-v2/scripts/build-private-portfolio-overlay.mts'
       - 'egx-market-feed-v2/scripts/build-capital-recovery-alerts.mts'
+      - 'egx-market-feed-v2/scripts/update-current-session-history.py'
       - 'egx-market-feed-v2/research-overrides.json'
       - 'research-overrides.json'
 permissions:
@@ -61,6 +62,9 @@ jobs:
           URL="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/egx-live/history.json?ts=$(date +%s)"
           curl -fsSL --retry 3 --retry-delay 1 "$URL" -o egx-market-feed-v2/out/history.json
           jq -e '.schema == "egx-session-history-v4" and (.sessions|length) >= 6 and (.cycle_quality|length) > 0' egx-market-feed-v2/out/history.json >/dev/null
+      - name: Update 60-session history using fresh V5 market observation
+        working-directory: egx-market-feed-v2
+        run: python3 scripts/update-current-session-history.py
       - name: Build Capital Allocation Engine V3
         working-directory: egx-market-feed-v2
         run: node --experimental-strip-types scripts/build-capital-allocation-engine.mts
@@ -84,6 +88,7 @@ jobs:
           jq -e '.execution_usable == true and .bridge_gate == "pass" and (.blockers | length == 0)' out/contract.json >/dev/null
           jq -e '.universe_operational == true and (((.stocks|length) + (.quarantined_symbols|length)) >= (.roster_target_count // 296)) and ((.quarantined_symbols|length) <= 1)' out/universe.json >/dev/null
           jq -e '.radar_version == 2 and .discovery.universe_operational == true and ((.discovery.universe_count + (.discovery.quarantined_symbols|length)) >= (.discovery.roster_target_count // 296)) and .discovery.safeguards.focus_is_not_discovery_boundary == true and .discovery.safeguards.missing_symbols_quarantined_not_fabricated == true and (.pre_move_sentinel|length)>0' out/radar.json >/dev/null
+          jq -e --arg d "$(jq -r '.expected_reference_session_date' out/contract.json)" '.schema == "egx-session-history-v4" and .coverage.latest_session_date == $d and (.cycle_quality|length) > 250' out/history.json >/dev/null
           jq -e '.engine == "EGX Capital Allocation Engine" and .version == 3 and .history_integration.loaded == true and .history_integration.sessions_available >= 6 and .methodology.history_cycle_integrated == true and (.ranked | length > 0)' out/capital-allocation.json >/dev/null
           jq -e '.engine == "EGX V5 Execution Engine" and .version == 1 and .fail_closed == true and .universe_operational == true and ((.universe_count + (.quarantined_symbols|length)) >= .universe_target) and .history_sessions >= 6' out/execution-engine.json >/dev/null
           jq -e '.ranked[] | select(.symbol=="GBCO") | .gates.sharia_pass == false and .gates.execution_ready == false' out/capital-allocation.json >/dev/null
@@ -105,10 +110,10 @@ jobs:
           git config user.name 'github-actions[bot]'; git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           if git ls-remote --exit-code --heads origin egx-live >/dev/null 2>&1; then git fetch -q origin egx-live; git checkout -q -B egx-live origin/egx-live; else git checkout -q --orphan egx-live; git rm -rf . >/dev/null 2>&1 || true; fi
-          for f in latest.json contract.json health.json transport.json focus.json universe.json radar.json capital-allocation.json execution-engine.json decision-intelligence-v6.json market-regime-v6.json research-queue-v6.json corporate-action-audit-v6.json replacement-challengers-v6.json performance-ledger-v6.json capital-recovery-alerts-v1.json; do cp "${SRC}/$f" "$f"; done
+          for f in history.json latest.json contract.json health.json transport.json focus.json universe.json radar.json capital-allocation.json execution-engine.json decision-intelligence-v6.json market-regime-v6.json research-queue-v6.json corporate-action-audit-v6.json replacement-challengers-v6.json performance-ledger-v6.json capital-recovery-alerts-v1.json; do cp "${SRC}/$f" "$f"; done
           SESSION="$(jq -r '.expected_reference_session_date' contract.json)"; SNAP="$(date -u +%H%M%SZ)"; mkdir -p "snapshots/${SESSION}"; cp focus.json "snapshots/${SESSION}/${SNAP}.json"
           mapfile -t SNAPSHOTS < <(find snapshots -type f -name '*.json' | sort); COUNT="${#SNAPSHOTS[@]}"; if [ "$COUNT" -gt 800 ]; then REMOVE=$((COUNT-800)); for ((i=0;i<REMOVE;i++)); do rm -f "${SNAPSHOTS[$i]}"; done; find snapshots -type d -empty -delete || true; fi
-          git add latest.json contract.json health.json transport.json focus.json universe.json radar.json capital-allocation.json execution-engine.json decision-intelligence-v6.json market-regime-v6.json research-queue-v6.json corporate-action-audit-v6.json replacement-challengers-v6.json performance-ledger-v6.json capital-recovery-alerts-v1.json snapshots
+          git add history.json latest.json contract.json health.json transport.json focus.json universe.json radar.json capital-allocation.json execution-engine.json decision-intelligence-v6.json market-regime-v6.json research-queue-v6.json corporate-action-audit-v6.json replacement-challengers-v6.json performance-ledger-v6.json capital-recovery-alerts-v1.json snapshots
           if git diff --cached --quiet; then exit 0; fi
           git commit -q -m "EGX V5 + V6 decision intelligence $(jq -r '.retrieved_at' contract.json)"
           for attempt in 1 2 3 4 5; do if git push -q origin egx-live; then exit 0; fi; git fetch -q origin egx-live; git rebase origin/egx-live || { git rebase --abort || true; }; sleep $((attempt*2)); done
