@@ -79,7 +79,9 @@ function alertFor(c:any){
   const fallingKnife=cycle<4 || entry<4.5 || change<=-8;
   const exceptionalRS=verified && q>=8 && entry>=7.5 && rr>=6.5 && inst>=7.5 && cycle>=6.5 && rsSpread>=4 && change>0;
   const buyAuthorized=BUY_ACTIONS.has(String(c?.action||'')) && c?.execution_ready===true && e.state==='IN_ZONE' && q>=7.4 && entry>=6.2 && rr>=6 && cycle>=5 && !fallingKnife && (!panicBlock||exceptionalRS);
-  const nearTrigger=verified && q>=7.4 && rr>=6 && !fallingKnife && (
+  const executablePlan=['BUY_ZONE','LIMIT_ON_WEAKNESS'].includes(String(c?.execution_plan?.status||''));
+  const nearTrigger=verified && q>=7.4 && rr>=6 && entry>=5.3 && cycle>=5 && !fallingKnife &&
+    executablePlan && !['NO_CHASE','AVOID','BLOCKED_CORPORATE_ACTION'].includes(String(c?.action||'')) && (
     e.state==='IN_ZONE' || (e.state==='ABOVE_ZONE' && e.distance_pct!=null && e.distance_pct<=2.5)
   );
   let state='WAIT';
