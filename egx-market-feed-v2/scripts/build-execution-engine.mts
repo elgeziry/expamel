@@ -20,7 +20,7 @@ function plan(c:any){
  if(!close) return {...c,execution_plan:{status:'NO_ORDER',reason:'missing_reference_price'}};
  const chase=c.action==='NO_CHASE'||change>=8;
  const anchor=[sma20,sma50,dayLow].filter((x):x is number=>x!=null&&x>0&&x<=close*1.03).sort((a,b)=>b-a)[0]||close*0.97;
- let zHigh=Math.min(close,Math.max(anchor*1.015,close*0.985)); let zLow=Math.min(zHigh,Math.max(anchor*0.985,close*0.94));
+ let zHigh=Math.min(close,Math.max(anchor*1.015,close*0.985)); let zLow=Math.min(zHigh*0.985,Math.max(anchor*0.985,close*0.94));
  const invalid=Math.min(zLow*0.955,(sma50&&sma50<zLow?sma50*0.975:zLow*0.955));
  const riskPct=pct(zLow,invalid); const extension=dayHigh&&dayLow&&dayHigh>dayLow?(close-dayLow)/(dayHigh-dayLow):null;
  let status='WATCH'; if(c.gates?.execution_ready&&c.action==='ACT_NOW'&&!chase)status='BUY_ZONE'; else if(c.gates?.execution_ready&&c.action==='ACCUMULATE_ON_WEAKNESS')status='LIMIT_ON_WEAKNESS'; else if(chase)status='NO_CHASE';
