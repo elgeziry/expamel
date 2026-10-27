@@ -48,7 +48,9 @@ function verifiedResearch(x:any){
     sharia_status:sh,sharia_verified:shariaVerified,sharia_pass:shariaPass,
     fundamentals_verified:fundamentalsVerified,valuation_verified:valuationVerified,
     freshness:{sharia:{as_of:x?.sharia_as_of||null,age_days:ageDays(x?.sharia_as_of),max_days:120,fresh:shariaFresh},fundamentals:{as_of:x?.fundamentals_as_of||null,age_days:ageDays(x?.fundamentals_as_of),max_days:210,fresh:fundamentalsFresh},valuation:{as_of:x?.valuation_as_of||null,age_days:ageDays(x?.valuation_as_of),max_days:45,fresh:valuationFresh}},
-    source_count:sourceCount(x), research_as_of:x?.updated_at||x?.fundamentals_as_of||x?.valuation_as_of||x?.sharia_as_of||null
+    source_count:sourceCount(x), research_as_of:x?.updated_at||x?.fundamentals_as_of||x?.valuation_as_of||x?.sharia_as_of||null,
+    analyst_target_egp:num(x?.analyst_target_egp),analyst_target_as_of:x?.analyst_target_as_of||null,
+    analyst_target_source:x?.analyst_target_source||null,analyst_target_analysts:num(x?.analyst_target_analysts)
   };
 }
 function marketRegime(stocks:any[]){
