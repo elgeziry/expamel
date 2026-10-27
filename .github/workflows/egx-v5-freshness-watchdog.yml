@@ -3,7 +3,8 @@ name: EGX V5 freshness watchdog
 'on':
   workflow_dispatch:
   schedule:
-    - cron: '3,13,23,33,43,53 7-12 * * 0-4'
+    # Independent off-minute watchdog begins before market open and runs through close.
+    - cron: '4,14,24,34,44,54 6-13 * * 0-4'
 
 permissions:
   contents: read
