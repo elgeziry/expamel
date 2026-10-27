@@ -82,7 +82,7 @@ def classify(row, recovery, independent, session, global_healthy, buy_symbols,
     verified = all([
         research.get("sharia_pass") is True,
         research.get("sharia_verified") is True,
-        research.get("sharia_source_conflict") is not True,
+        (research.get("sharia_source_conflict") is not True or research.get("sharia_conflict_resolved") is True),
         research.get("fundamentals_verified") is True,
         research.get("valuation_verified") is True,
         (row.get("corporate_action") or {}).get("technical_history_gate") is True,
