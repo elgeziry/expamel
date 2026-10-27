@@ -144,9 +144,9 @@
       "sharia_conflict_disclosure": "Older external filter disagreed; current EGX33 membership report is given precedence for index-screening purposes only. A distinct AAOIFI screen may classify differently."
     },
     "ORHD": {
-      "sharia_status": "compliant",
-      "sharia_verified": true,
-      "sharia_as_of": "2026-10-25",
+      "sharia_status": "pending_verification",
+      "sharia_verified": false,
+      "sharia_as_of": "2026-10-27",
       "fundamentals_verified": false,
       "valuation_verified": false,
       "catalyst_score": 7,
@@ -154,7 +154,9 @@
         "https://muslimxchange.com/ticker/orhd/",
         "https://stocks.templatesnippet.com/stocks/ORHD",
         "https://foudalens.com/ar/stock/ORHD.CA",
-        "https://banksmorning.com/%D9%85%D8%A4%D8%B4%D8%B1-%D8%A7%D9%84%D8%B4%D8%B1%D9%8A%D8%B9%D8%A9-%D8%A8%D8%A7%D9%84%D8%A8%D9%88%D8%B1%D8%B5%D8%A9-%D8%A7%D9%84%D9%85%D8%B5%D8%B1%D9%8A%D8%A9-%D9%8A%D8%B6%D9%85-33-%D8%B3%D9%87%D9%85/"
+        "https://banksmorning.com/%D9%85%D8%A4%D8%B4%D8%B1-%D8%A7%D9%84%D8%B4%D8%B1%D9%8A%D8%B9%D8%A9-%D8%A8%D8%A7%D9%84%D8%A8%D9%88%D8%B1%D8%B5%D8%A9-%D8%A7%D9%84%D9%85%D8%B5%D8%B1%D9%8A%D8%A9-%D9%8A%D8%B6%D9%85-33-%D8%B3%D9%87%D9%85/",
+        "https://www.orascomde.com/investor-relations/financial-reports",
+        "https://www.sigma-cap.com/main/news_page_exact?newsId=46062686&newsType=MIST"
       ],
       "sharia_source_conflict": true,
       "sharia_conflict_rule": "User methodology: when credible Sharia sources conflict, accept the compliant classification while recording the conflict.",
@@ -175,11 +177,20 @@
           "as_of": "2026-10-25"
         }
       ],
-      "sharia_conflict_resolved": true,
-      "sharia_conflict_resolution_basis": "EGX33_REPORTED_INDEX_MEMBERSHIP_2026_10_05",
+      "sharia_conflict_resolved": false,
+      "sharia_conflict_resolution_basis": "UNRESOLVED_INDEPENDENT_SCREEN_CONFLICT",
       "sharia_conflict_resolution_source": "https://banksmorning.com/%D9%85%D8%A4%D8%B4%D8%B1-%D8%A7%D9%84%D8%B4%D8%B1%D9%8A%D8%B9%D8%A9-%D8%A8%D8%A7%D9%84%D8%A8%D9%88%D8%B1%D8%B5%D8%A9-%D8%A7%D9%84%D9%85%D8%B5%D8%B1%D9%8A%D8%A9-%D9%8A%D8%B6%D9%85-33-%D8%B3%D9%87%D9%85/",
       "sharia_conflict_resolution_as_of": "2026-10-05",
-      "sharia_conflict_disclosure": "Older external filter disagreed; current EGX33 membership report is given precedence for index-screening purposes only. A distinct AAOIFI screen may classify differently."
+      "sharia_conflict_disclosure": "Reported EGX33 membership does not reconcile contradictory external AAOIFI-style classification or establish current financial ratios; retain research pending until authoritative constituent and independent ratio evidence.",
+      "research_state": "RESEARCH_PENDING_NOT_EXECUTABLE",
+      "purchase_authorized": false,
+      "research_note": "Company IR lists reviewed 1H 2026 consolidated financials; EGX-sourced disclosure reports consolidated net profit EGP 3.174bn vs EGP 3.036bn, with minority-rights convention requiring reconciliation. Corporate-action price normalization and debt/cash-flow/valuation analysis incomplete.",
+      "risk_flags": [
+        "conflicting_sharia_screen_unresolved",
+        "corporate_action_price_adjustment_unverified",
+        "cash_flow_and_debt_ratio_unverified",
+        "valuation_unverified"
+      ]
     },
     "ORAS": {
       "sharia_status": "compliant",
@@ -515,6 +526,140 @@
         "bank_specific_capital_quality_liquidity_and_credit_cost_review",
         "H1_2026_basic_EPS_lower_than_prior_year_despite_profit_growth",
         "Sharia_index_eligibility_not_personalized_religious_ruling"
+      ]
+    },
+    "COMI": {
+      "sharia_status": "non_compliant",
+      "sharia_verified": true,
+      "sharia_as_of": "2026-10-27",
+      "sharia_evidence_type": "PRIMARY_BUSINESS_ACTIVITY_EXCLUSION_CONVENTIONAL_INTEREST_BANKING",
+      "fundamentals_verified": false,
+      "valuation_verified": false,
+      "research_state": "SHARIA_NOT_ELIGIBLE",
+      "purchase_authorized": false,
+      "sources": [
+        "https://www.cibeg.com/-/media/project/downloads/investor-relations/ir-library/earning-releases/2025/4q25-press-release.pdf",
+        "https://www.cibeg.com/ar/investor-relations",
+        "https://www.investegate.co.uk/announcement/rns/commercial-international-bank-egypt-sae-gdr-reg-s---cbkd/cib-2q26-earnings-release/9678491"
+      ],
+      "evidence_periods": [
+        "2025-12-31",
+        "2026-06-30"
+      ],
+      "research_note": "CIB is a conventional interest-based bank. Official FY2025 results show net interest margin 8.95%; H1 2026 bank release reports EGP 60.826bn net interest income and 8.61% net interest margin. Core activity fails business-activity Sharia screen irrespective of attractive P/E or financial strength. Exclusion only: no standalone fundamentals or valuation verification asserted.",
+      "risk_flags": [
+        "conventional_interest_banking_core_activity",
+        "sharia_excluded_no_purchase",
+        "bank_accounting_not_comparable_to_nonfinancial_debt_ratios"
+      ]
+    },
+    "EAST": {
+      "sharia_status": "non_compliant",
+      "sharia_verified": true,
+      "sharia_as_of": "2026-10-27",
+      "sharia_evidence_type": "PRIMARY_BUSINESS_ACTIVITY_EXCLUSION_TOBACCO_MANUFACTURING",
+      "fundamentals_verified": false,
+      "valuation_verified": false,
+      "research_state": "SHARIA_NOT_ELIGIBLE",
+      "purchase_authorized": false,
+      "sources": [
+        "https://www.easternegypt.com/products-2/?lang=en",
+        "https://www.easternegypt.com/about-us-2-2/?lang=en",
+        "https://www.easternegypt.com/financial-statements/?lang=en"
+      ],
+      "evidence_periods": [
+        "2026-06-30"
+      ],
+      "research_note": "Eastern Company official website lists cigarettes, cigars and tobacco as principal products. Tobacco is a prohibited primary business activity under the user's Sharia investment restrictions. The company publishes H1 2026 financial statements, but profitability and valuation were not independently fully verified here because the core business exclusion is decisive.",
+      "risk_flags": [
+        "tobacco_core_activity",
+        "sharia_excluded_no_purchase"
+      ]
+    },
+    "CLHO": {
+      "sharia_status": "pending_verification",
+      "sharia_verified": false,
+      "sharia_as_of": "2026-10-27",
+      "fundamentals_verified": false,
+      "valuation_verified": false,
+      "research_state": "RESEARCH_PENDING_NOT_EXECUTABLE",
+      "purchase_authorized": false,
+      "financial_period": "2026-06-30",
+      "financial_report_type": "PWC_LIMITED_REVIEW_NOT_FULL_AUDIT",
+      "sources": [
+        "https://www.cleopatrahospitals.com/media/lu2hhgwg/chc-consolidated-fs-30-june-2026.pdf",
+        "https://www.cleopatrahospitals.com/media/sufdt2ur/cleopatra-earnings-release-2q2026.pdf",
+        "https://www.cleopatrahospitals.com/en/investors/",
+        "https://mondovisione.com/media-and-resources/news/the-egyptian-exchange-egx-announces-the-semi-annual-review-of-its-market-indic-2026816/"
+      ],
+      "financial_evidence_as_of": "2026-09-06",
+      "financial_evidence": {
+        "revenue_h1_2026_egp": 4309172850,
+        "revenue_h1_2025_egp": 3382144981,
+        "net_profit_h1_2026_egp": 342038711,
+        "net_profit_h1_2025_egp": 521547250,
+        "operating_cash_flow_reviewed_egp": 782879154,
+        "operating_cash_flow_earnings_release_egp": 758500000,
+        "capex_and_construction_cash_outflow_egp": 813136352,
+        "noncurrent_loans_egp": 2567505418,
+        "current_loans_egp": 635128020,
+        "bank_overdraft_egp": 608992576
+      },
+      "research_note": "PwC limited-reviewed 30 Jun 2026 statements: revenue +27.4% YoY but reported net profit -34.4%; operating cash EGP 782.879m vs capex and projects EGP 813.136m, before other investment flows. Company H1 earnings release instead reports operating cash EGP 758.5m, a material unreconciled EGP 24.4m difference. Borrowings and overdraft total approx EGP 3.812bn excluding leases. EGX-authored Sep-2026 index change states CLHO was added to EGX33, but this alone cannot establish independent AAOIFI ratios or purification. Hold all verification flags false until cash-flow reconciliation, current valuation, debt/interest and nonpermissible income screening.",
+      "risk_flags": [
+        "company_release_vs_reviewed_cash_flow_conflict_24_4m_egp",
+        "net_profit_down_34_4_percent_despite_revenue_growth",
+        "large_debt_and_interest_expense",
+        "hospital_expansion_capex_and_working_capital",
+        "sharia_debt_and_interest_income_ratios_unverified",
+        "valuation_unverified"
+      ]
+    },
+    "MCQE": {
+      "sharia_status": "pending_verification",
+      "sharia_verified": false,
+      "sharia_as_of": "2026-10-27",
+      "fundamentals_verified": false,
+      "valuation_verified": false,
+      "research_state": "RESEARCH_PENDING_NOT_EXECUTABLE",
+      "purchase_authorized": false,
+      "financial_period": "2026-06-30",
+      "sources": [
+        "https://misrcementgroup.com/investor-relations/investor-relations-downloads/",
+        "https://misrcementgroup.com/ir-downloads/h1-2026-consolidated/",
+        "https://www.sigma-cap.com/main/news_page_exact?newsId=46052018&newsType=EGX",
+        "https://www.arabfinance.com/en/news/newdetails/misr-cement-qena-logs-higher-consolidated-profits-in-h1-2026",
+        "https://misrcementgroup.com/investor-relations/"
+      ],
+      "research_note": "Company IR lists H1 2026 consolidated statements and EGX-sourced disclosure confirms reviewed financials, but primary cash flow/debt notes not yet extracted and reconciled. Consolidated net attributable profit EGP 1.166bn vs EGP 599.959m (+94.5%); sales EGP 4.938bn vs EGP 3.878bn (+27.3%). Separate EGX disclosure figure EGP 1.430bn vs EGP 784.127m includes different minority-rights basis; do not conflate profit definitions. Company IR index list shows EGX70/EGX100 rather than independently confirming reported EGX33 membership. No valuation or Sharia ratio proof.",
+      "risk_flags": [
+        "cement_energy_and_fuel_cost_cycle",
+        "attributable_vs_total_profit_definition_difference",
+        "sharia_index_membership_unconfirmed_by_official_constituent_list",
+        "cash_flow_debt_and_purification_not_reconciled",
+        "valuation_unverified"
+      ]
+    },
+    "ABUK": {
+      "sharia_status": "pending_verification",
+      "sharia_verified": false,
+      "sharia_as_of": "2026-10-27",
+      "fundamentals_verified": false,
+      "valuation_verified": false,
+      "research_state": "RESEARCH_PENDING_NOT_EXECUTABLE",
+      "purchase_authorized": false,
+      "financial_period": "2026-06-30",
+      "sources": [
+        "https://abuqir.net/abu-qir-fertilizers-delivers-exceptional-financial-results-for-the-first-half-of-2026/",
+        "https://abuqir.net/investor-relations/financial-statements/",
+        "https://www.mubasher.info/markets/EGX/stocks/ABUK/announcements"
+      ],
+      "research_note": "Official company 1H 2026 preliminary unaudited indicators: operating revenue EGP 23.52bn, operating profit EGP 10.72bn, net profit EGP 10.01bn. Company highlights ammonia reactor upgrade adding ~200 tonnes/day ammonia and ~210 tonnes/day urea capacity. A separate Sep-03-2026 EGX financial-statement announcement is indexed, but audited cash flow/debt/interest breakdown was not independently reconciled. No independent current valuation or Sharia ratio screen completed.",
+      "risk_flags": [
+        "preliminary_unaudited_figures_not_full_financial_verification",
+        "natural_gas_supply_price_and_export_risks",
+        "debt_and_nonpermissible_income_ratios_unverified",
+        "valuation_unverified"
       ]
     }
   },
