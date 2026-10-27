@@ -68,7 +68,7 @@ class OpportunityWatchTests(unittest.TestCase):
         first=self.make()
         self.assertEqual(first["new_events"][0]["kind"],"WATCH_ZONE_SOURCE_PENDING")
         self.assertTrue(first["new_events"][0]["requires_broker_price_confirmation"])
-        (self.root / "previous-opportunity-watch.json").write_text(json.dumps(first))
+        self.docs["previous-opportunity-watch.json"]=first
         second=self.make()
         self.assertEqual(second["new_events"],[])
 
