@@ -1,0 +1,42 @@
+name: EGX publication integrity
+on:
+  workflow_dispatch:
+    inputs:
+      verified_session:
+        description: "Verified latest completed EGX trading session (YYYY-MM-DD)"
+        required: true
+        type: string
+  push:
+    branches: [egx-live]
+    paths:
+      - 'decision-intelligence-v6.json'
+      - 'capital-recovery-alerts-v1.json'
+      - 'tools/egx_publication_audit.py'
+      - '.github/workflows/egx-publication-integrity.yml'
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify publication integrity
+        shell: bash
+        env:
+          VERIFIED_SESSION: ${{ inputs.verified_session }}
+        run: |
+          set -euo pipefail
+          if [[ -n "$VERIFIED_SESSION" ]]; then
+            python tools/egx_publication_audit.py --session "$VERIFIED_SESSION"
+          else
+            python - <<'PY'
+          import json, subprocess, sys
+          from pathlib import Path
+          d=json.loads(Path("decision-intelligence-v6.json").read_text())
+          session=d["reference_session"]
+          sys.exit(subprocess.call([sys.executable,"tools/egx_publication_audit.py","--session",session]))
+          PY
+          fi
