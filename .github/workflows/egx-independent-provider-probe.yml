@@ -11,28 +11,23 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Probe independently sourced market prices and explicit observation dates
+      - name: Probe Mubasher EGX share quote with source update time
         shell: bash
         run: |
           python3 - <<'PY'
-          import json,urllib.request,html,re,time
-          urls={
-            "stockanalysis_MFPC":"https://stockanalysis.com/quote/egx/MFPC/",
-            "stockanalysis_EFID":"https://stockanalysis.com/quote/egx/EFID/",
-            "mubasher_MFPC":"https://www.mubasher.info/markets/EGX/stocks/MFPC",
-            "egxnews_MFPC":"https://www.egx.news/en/stock/misr-fertilizers-production-company-mopco",
-            "egxnews_home":"https://www.egx.news/en",
-          }
-          for name,url in urls.items():
+          import json,urllib.request,html,re
+          for symbol in ("MFPC","EFID","EGAL","JUFO","ETEL"):
+            url=f"https://www.mubasher.info/markets/EGX/stocks/{symbol}"
             try:
-              request=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/126.0.0.0 Safari/537.36","Accept":"text/html"})
-              with urllib.request.urlopen(request,timeout=12) as r: page=r.read().decode("utf-8","replace"); status=r.status
-              cleaned=html.unescape(re.sub(r"<[^>]+>"," ",re.sub(r"<(script|style)[^>]*>.*?</\\1>"," ",page,flags=re.S|re.I)))
-              cleaned=re.sub(r"\\s+"," ",cleaned)
-              snippets=[]
-              for term in ["At close","Delayed Price","Last update","Last updated","آخر تحديث","Current Price","السعر الحالي","Oct 27, 2026","Oct 26, 2026"]:
-                m=re.search(re.escape(term),cleaned,re.I)
-                if m: snippets.append(cleaned[max(0,m.start()-75):m.start()+140])
-              print(json.dumps({"site":name,"code":status,"bytes":len(page),"snippets":snippets[:5],"start":cleaned[:200]},ensure_ascii=False))
-            except Exception as e: print(json.dumps({"site":name,"error":str(e)[:200]}))
+              req=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/126.0.0.0 Safari/537.36","Accept":"text/html"})
+              with urllib.request.urlopen(req,timeout=14) as resp: page=resp.read().decode("utf-8","replace"); server_date=resp.headers.get("Date")
+              start=page.find("آخر تحديث")
+              sample=page[start:start+1850] if start>=0 else page[:500]
+              stripped=re.sub(r"\\s+"," ",html.unescape(re.sub(r"<[^>]*>"," ",sample)))
+              stamps=[]
+              for pat in ["lastUpdate","last.update","last_trade","lastTrade","last-update","lastupdated","2026-10-27","2026/10/27","last_price_date"]:
+                z=re.search(pat,page,re.I)
+                if z: stamps.append({"term":pat,"context":page[max(0,z.start()-100):z.start()+190]})
+              print(json.dumps({"symbol":symbol,"server_date":server_date,"excerpt":stripped[:340],"found_html":sample[:900],"stamp_hints":stamps[:6]},ensure_ascii=False))
+            except Exception as e:print(json.dumps({"symbol":symbol,"error":str(e)[:160]}))
           PY
