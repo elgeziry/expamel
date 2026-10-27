@@ -159,17 +159,23 @@ def scan(root):
                 "primary_independent_difference_pct": evidence["price_difference_pct"]}
             accepted.append(item)
         else:
-            item["state"] = "BLOCK_EXTERNAL_QUOTE"
+            item["state"] = "BLOCKED_UNVERIFIED_EVIDENCE"
+            item["priority"] = 0
             item["reason"] = "independent_timestamped_quote_not_verified"
             item["independent_quote_evidence"] = {"reason": evidence.get("reason", "unverified")}
             blocked.append(item)
     blocked_symbols = {str(x.get("symbol", "")).upper() for x in blocked}
-    for item in alerts.get("all_alerts", []):
-        if str(item.get("symbol", "")).upper() in blocked_symbols:
-            item["state"] = "BLOCK_EXTERNAL_QUOTE"
-            item["reason"] = "independent_timestamped_quote_not_verified"
+    # A rejected trigger must not remain BUY_TRIGGER in a secondary ranking or UI.
+    for section in ("all_alerts", "verified_recovery_ranking", "no_average_down_watch"):
+        for item in alerts.get(section, []):
+            if str(item.get("symbol", "")).upper() in blocked_symbols:
+                item["state"] = "BLOCKED_UNVERIFIED_EVIDENCE"
+                item["priority"] = 0
+                item["reason"] = "independent_timestamped_quote_not_verified"
+                item["independent_quote_evidence"] = {"reason": records.get(item["symbol"], {}).get("reason", "unverified")}
     alerts["buy_triggers"] = accepted
     alerts.setdefault("summary", {})["buy_triggers"] = len(accepted)
+    alerts.setdefault("market_gate", {})["new_buy_orders_allowed"] = len(accepted) > 0
     alerts["blocked_independent_quotes"] = blocked
     alerts["independent_source_gate"] = {
         "provider": PROVIDER,
