@@ -133,7 +133,7 @@ jobs:
           set -euo pipefail
           python3 ../tools/egx_independent_source.py --root out
           jq -e '.fully_independent_provider == true and .execution_price_must_be_confirmed_at_broker == true and .buy_triggers_after <= .buy_triggers_before' out/independent-quote-audit.json >/dev/null
-          jq -e '(.buy_triggers | length) == .summary.buy_triggers and .independent_source_gate.enforces_buy_trigger_gate == true' out/capital-recovery-alerts-v1.json >/dev/null
+          jq -e '(.buy_triggers | length) == .summary.buy_triggers and .independent_source_gate.enforces_buy_trigger_gate == true and .market_gate.new_buy_orders_allowed == ((.buy_triggers | length) > 0) and ([.verified_recovery_ranking[] | select(.state == "BUY_TRIGGER") | .symbol] | sort) == ([.buy_triggers[].symbol] | sort) and ([.all_alerts[] | select(.state == "BUY_TRIGGER") | .symbol] | sort) == ([.buy_triggers[].symbol] | sort)' out/capital-recovery-alerts-v1.json >/dev/null
       - name: Run alert safety regression tests
         shell: bash
         run: python3 -m unittest discover -s tools -p 'test_egx_*.py' -v
