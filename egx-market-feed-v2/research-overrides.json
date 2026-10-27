@@ -60,7 +60,7 @@
         "https://stockanalysis.com/quote/egx/FWRY/statistics/"
       ],
       "sharia_source_conflict": true,
-      "sharia_conflict_rule": "User methodology: when credible Sharia sources conflict, accept the compliant classification while recording the conflict.",
+      "sharia_conflict_rule": "FAIL_CLOSED: conflicting independent Sharia classifications require dated financial-ratio and business-activity reconciliation; do not infer compliance from index membership or marketing labels; purchase remains blocked.",
       "sharia_conflicting_sources": [
         {
           "url": "https://muslimxchange.com/ticker/fwry/",
@@ -159,7 +159,7 @@
         "https://www.sigma-cap.com/main/news_page_exact?newsId=46062686&newsType=MIST"
       ],
       "sharia_source_conflict": true,
-      "sharia_conflict_rule": "User methodology: when credible Sharia sources conflict, accept the compliant classification while recording the conflict.",
+      "sharia_conflict_rule": "FAIL_CLOSED: conflicting independent Sharia classifications require dated financial-ratio and business-activity reconciliation; do not infer compliance from index membership or marketing labels; purchase remains blocked.",
       "sharia_conflicting_sources": [
         {
           "url": "https://muslimxchange.com/ticker/orhd/",
@@ -662,6 +662,59 @@
         "natural_gas_supply_price_and_export_risks",
         "debt_and_nonpermissible_income_ratios_unverified",
         "valuation_unverified"
+      ]
+    },
+    "PHDC": {
+      "sharia_status": "pending_verification",
+      "sharia_verified": false,
+      "sharia_as_of": "2026-10-27",
+      "fundamentals_verified": false,
+      "valuation_verified": false,
+      "research_state": "RESEARCH_PENDING_NOT_EXECUTABLE",
+      "purchase_authorized": false,
+      "financial_period": "2026-06-30",
+      "financial_report_type": "FORVIS_MAZARS_LIMITED_REVIEW_NOT_FULL_AUDIT",
+      "financial_report_signed_date": "2026-08-17",
+      "egx_disclosure_date": "2026-08-18",
+      "financial_evidence_verified": true,
+      "financial_evidence": {
+        "revenue_h1_2026_egp": 19528117727,
+        "revenue_h1_2025_egp": 15579129165,
+        "consolidated_net_profit_h1_2026_egp": 2292526276,
+        "consolidated_net_profit_h1_2025_egp": 2582379370,
+        "parent_attributable_net_profit_h1_2026_egp": 2264822717,
+        "operating_cash_flow_h1_2026_egp": 1499068217,
+        "operating_cash_flow_h1_2025_egp": 494411464,
+        "investing_cash_flow_h1_2026_egp": -3495865155,
+        "financing_cash_flow_h1_2026_egp": 254599656,
+        "finance_costs_and_interest_h1_2026_egp": 1676543172,
+        "credit_interest_and_returns_on_amortized_cost_investments_h1_2026_egp": 455606067,
+        "cash_and_equivalents_2026_06_30_egp": 7804246906,
+        "total_assets_2026_06_30_egp": 194767286727,
+        "noncurrent_loans_2026_06_30_egp": 10236280237,
+        "current_short_term_loans_2026_06_30_egp": 650151650,
+        "bank_credit_balances_2026_06_30_egp": 1529842495,
+        "credit_facilities_2026_06_30_egp": 13922422891,
+        "long_term_notes_payable_2026_06_30_egp": 4016714644,
+        "short_term_notes_payable_2026_06_30_egp": 4778461505
+      },
+      "sources": [
+        "https://foudalens.com/disclosures/PHDC.CA/financial_statement/2026-08-18_293547_2.pdf",
+        "https://foudalens.com/en/news/293548",
+        "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=293548",
+        "https://invest.palmhillsdevelopments.com/en-us/financial",
+        "https://banksmorning.com/%D9%85%D8%A4%D8%B4%D8%B1-%D8%A7%D9%84%D8%B4%D8%B1%D9%8A%D8%B9%D8%A9-%D8%A8%D8%A7%D9%84%D8%A8%D9%88%D8%B1%D8%B5%D8%A9-%D8%A7%D9%84%D9%85%D8%B5%D8%B1%D9%8A%D8%A9-%D9%8A%D8%B6%D9%85-33-%D8%B3%D9%87%D9%85/"
+      ],
+      "research_note": "Original signed H1 2026 consolidated financial statements (FORVIS Mazars limited review signed 17 Aug 2026; mirrored EGX attachment) show revenue EGP 19.528bn vs 15.579bn (+25.3%), consolidated net profit EGP 2.293bn vs 2.582bn (-11.2%); operating cash EGP 1.499bn vs 0.494bn but investing outflow EGP 3.496bn and cash fell to EGP 7.804bn. Material finance costs EGP 1.677bn and credit interest/returns EGP 455.606m, alongside significant bank facilities, loans and notes payable, require independent AAOIFI-style ratio and impermissible-income/purification calculations. EGX secondary metadata labels audit status Audited, but original auditor explicitly states limited review and no audit opinion: classify LIMITED_REVIEW. Oct-05 EGX33 membership reported by a secondary list, not an official current constituent file. No independently fresh quote, intrinsic valuation, full debt classification, Sharia ratio proof or purification calculation. Research only; no purchase.",
+      "risk_flags": [
+        "egx_metadata_audited_vs_signed_report_limited_review_mismatch",
+        "profit_decline_despite_revenue_growth",
+        "cash_consuming_investing_and_liquidity_pressure",
+        "material_financing_costs_and_interest_income",
+        "bank_loans_facilities_and_notes_payable_require_sharia_ratio_classification",
+        "sharia_index_membership_secondary_only_not_authoritative",
+        "purification_and_sharia_ratio_unverified",
+        "current_independent_valuation_and_broker_quote_unverified"
       ]
     }
   },
