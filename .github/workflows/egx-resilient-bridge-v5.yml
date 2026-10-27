@@ -4,7 +4,9 @@ name: EGX Resilient Bridge V5 + Decision Intelligence V6
   repository_dispatch:
     types: [egx_bridge_refresh]
   schedule:
-    - cron: '*/5 6-13 * * 0-4'
+    # Avoid minute 0 / multiples of 5: GitHub schedule events may be delayed under load.
+    # Cairo trading hours: 10:00-14:30 (DST-aware UTC buffer 06:00-13:59).
+    - cron: '2,7,12,17,22,27,32,37,42,47,52,57 6-13 * * 0-4'
   push:
     branches: [master]
     paths:
