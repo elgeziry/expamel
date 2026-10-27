@@ -71,6 +71,47 @@ def quote(symbol):
     }
 
 
+def focus_universe(root):
+    """Keep the named portfolio staples, but independently probe emerging leaders.
+
+    Full-universe screening takes place in the scout; this is the capped
+    secondary-provider verification pool, not a cap on opportunity discovery.
+    """
+    base = list(FOCUS)
+    try:
+        decision = load(root, "decision-intelligence-v6.json")
+        ranked = decision.get("all_ranked") or []
+        extra = []
+        for item in ranked:
+            symbol = str(item.get("symbol", "")).upper()
+            research = item.get("research") or {}
+            zone = (item.get("execution_plan") or {}).get("entry_zone") or []
+            price = number(item.get("reference_close"))
+            upper = number(zone[1]) if len(zone) == 2 else None
+            if not symbol or symbol in base or not price or not upper:
+                continue
+            if item.get("execution_ready") is not True or item.get("score", 0) < 67:
+                continue
+            if not (research.get("sharia_pass") is True and
+                    research.get("fundamentals_verified") is True and
+                    research.get("valuation_verified") is True and
+                    research.get("sharia_source_conflict") is not True):
+                continue
+            # Add close-to-entry research-complete names; never choose by rank alone.
+            distance = max(0.0, (price / upper - 1) * 100)
+            if distance <= 4.0:
+                extra.append((distance, -float(item.get("score") or 0), symbol))
+        for _, _, symbol in sorted(extra):
+            if symbol not in base:
+                base.append(symbol)
+            if len(base) >= 16:
+                break
+    except (OSError, ValueError, KeyError, TypeError):
+        # A missing V6 file in isolated tests is not a reason to change gates.
+        pass
+    return tuple(base)
+
+
 def scan(root):
     contract = load(root, "contract.json")
     universe = load(root, "universe.json")
@@ -81,7 +122,8 @@ def scan(root):
     prior_sessions = [s for s in history.get("sessions", []) if s.get("date", "") < str(session)]
     previous = {str(row.get("symbol", "")).upper(): row for row in prior_sessions[-1].get("stocks", [])} if prior_sessions else {}
     records = {}
-    for symbol in FOCUS:
+    selected_symbols = focus_universe(root)
+    for symbol in selected_symbols:
         try:
             q = quote(symbol)
             reference = number(current.get(symbol, {}).get("close"))
@@ -133,6 +175,7 @@ def scan(root):
         "provider": PROVIDER,
         "as_of": "market_local_update_time_date_inferred_and_correlated",
         "checked_symbols": len(records),
+        "verification_symbol_policy": "fixed_portfolio_plus_dynamic_top_near_entry_verified",
         "verified_symbols": sorted(k for k, v in records.items() if v.get("verified")),
         "blocked_buy_triggers": len(blocked),
         "enforces_buy_trigger_gate": True,
@@ -150,6 +193,7 @@ def scan(root):
         "source_quotes_are_delayed": True,
         "execution_price_must_be_confirmed_at_broker": True,
         "quotes": records,
+        "selected_symbols": list(selected_symbols),
         "buy_triggers_before": len(initial),
         "buy_triggers_after": len(accepted),
         "buy_triggers_blocked": len(blocked),
