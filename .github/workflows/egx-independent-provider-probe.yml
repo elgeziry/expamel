@@ -1,0 +1,35 @@
+name: EGX independent quote provider discovery
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths: ['.github/workflows/egx-independent-provider-probe.yml']
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Probe timestamped independent Yahoo Finance EGX quotes
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json,urllib.request,datetime as dt
+          for symbol in ("MFPC.CA","EGAL.CA","EFID.CA","JUFO.CA","ETEL.CA"):
+            for host in ("query1.finance.yahoo.com","query2.finance.yahoo.com"):
+              url=f"https://{host}/v8/finance/chart/{symbol}?interval=1m&range=1d"
+              try:
+                q=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0 (compatible; EGXQuoteVerifier/1.0)","Accept":"application/json"})
+                with urllib.request.urlopen(q,timeout=12) as resp: raw=json.load(resp)
+                c=raw["chart"]["result"][0]; m=c["meta"]
+                stamps=c.get("timestamp") or []
+                quote=c["indicators"]["quote"][0].get("close") or []
+                points=[(t,v) for t,v in zip(stamps,quote) if isinstance(v,(float,int)) and v>0]
+                observed=points[-1] if points else None
+                stamp=dt.datetime.fromtimestamp(observed[0],dt.timezone.utc).isoformat() if observed else None
+                print(json.dumps({"symbol":symbol,"host":host,"currency":m.get("currency"),"exchange":m.get("exchangeName"),"price":observed[1] if observed else m.get("regularMarketPrice"),"observation_utc":stamp,"regular_market_time":m.get("regularMarketTime"),"status":"OK" if observed else "NO_BAR"}))
+                break
+              except Exception as e:
+                print(json.dumps({"symbol":symbol,"host":host,"error":str(e)[:180]}))
+          PY
