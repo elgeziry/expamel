@@ -54,10 +54,30 @@ class OpportunityWatchTests(unittest.TestCase):
         self.assertFalse(report["new_events"])
         self.assertEqual(self.stocks(report)["EGAL"]["suggested_quantity_after_final_checks"],0)
 
-    def test_independent_stale_quote_blocks_alert(self):
+    def test_independent_stale_quote_allows_watch_only_not_buy(self):
         self.docs["independent-quote-audit.json"]["quotes"]["EGAL"]["verified"]=False
         report=self.make()
-        self.assertEqual(self.stocks(report)["EGAL"]["state"],"NO_ALERT_DATA_OR_RESEARCH_BLOCKED")
+        self.assertEqual(self.stocks(report)["EGAL"]["state"],"WATCH_ZONE_SOURCE_PENDING")
+        self.assertFalse(self.stocks(report)["EGAL"]["can_place_order_automatically"])
+        self.assertEqual(report["new_events"],[])
+
+    def test_zone_entry_with_stale_independent_quote_notifies_once_without_order(self):
+        self.docs["independent-quote-audit.json"]["quotes"]["EGAL"]["verified"]=False
+        self.docs["previous-opportunity-watch.json"]={"session":"2026-10-26",
+            "targets":[{"symbol":"EGAL","state":"WAIT_PRICE"}]}
+        first=self.make()
+        self.assertEqual(first["new_events"][0]["kind"],"WATCH_ZONE_SOURCE_PENDING")
+        self.assertTrue(first["new_events"][0]["requires_broker_price_confirmation"])
+        (self.root / "previous-opportunity-watch.json").write_text(json.dumps(first))
+        second=self.make()
+        self.assertEqual(second["new_events"],[])
+
+    def test_pending_watch_does_not_repeat_alert_when_independent_recovers(self):
+        self.docs["previous-opportunity-watch.json"]={"session":"2026-10-26",
+            "targets":[{"symbol":"EGAL","state":"WATCH_ZONE_SOURCE_PENDING"}]}
+        report=self.make()
+        self.assertEqual(self.stocks(report)["EGAL"]["state"],"WATCH_ZONE_NO_BUY_ORDER")
+        self.assertEqual(report["new_events"],[])
 
     def test_buy_candidate_remains_non_executable_until_macro_check(self):
         a=self.docs["capital-recovery-alerts-v1.json"]
