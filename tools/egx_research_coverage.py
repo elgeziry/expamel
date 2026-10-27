@@ -61,7 +61,7 @@ def make(root, membership_file):
         independent_finance=research.get("fundamentals_verified") is True
         independent_valuation=research.get("valuation_verified") is True
         indexed=symbol in sharia_index
-        source_conflict=research.get("sharia_source_conflict") is True
+        source_conflict=research.get("sharia_source_conflict") is True and research.get("sharia_conflict_resolved") is not True
         if not sharia_verified:gaps.append("independent_sharia_verification")
         if source_conflict:gaps.append("sharia_source_conflict_resolution")
         if not independent_finance:gaps.append("company_financial_statements")
