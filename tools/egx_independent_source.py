@@ -18,7 +18,7 @@ from zoneinfo import ZoneInfo
 
 CAIRO = ZoneInfo("Africa/Cairo")
 PROVIDER = "Mubasher Egypt (delayed)"
-FOCUS = ("MFPC", "EFID", "EGAL", "JUFO", "ETEL")
+FOCUS = ("MFPC", "EFID", "EGAL", "ORWE", "JUFO", "ETEL")
 MAX_QUOTE_AGE_MIN = 75
 MAX_PRICE_DIFF_PCT = 2.5
 MAX_PREV_CLOSE_DIFF_PCT = 1.0
