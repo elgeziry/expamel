@@ -111,6 +111,12 @@ jobs:
           python3 ../tools/egx_publication_audit.py --root out --session "$SESSION"
           test "$(jq -r '.reference_session' out/decision-intelligence-v6.json)" = "$SESSION"
           test "$(jq -r '.reference_session' out/capital-recovery-alerts-v1.json)" = "$SESSION"
+      - name: Recheck focus quotes with a separate upstream request
+        working-directory: egx-market-feed-v2
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 ../tools/egx_quote_recheck.py --root out
       - name: Publish complete V5 + V6 stack to egx-live without force
         shell: bash
         env:
