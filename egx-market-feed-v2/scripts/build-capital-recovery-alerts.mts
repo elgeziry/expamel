@@ -76,11 +76,20 @@ function alertFor(c:any){
   const research=c?.research||{};
   const corpPass=c?.corporate_action?.technical_history_gate===true;
   const verified=research?.sharia_pass===true&&research?.fundamentals_verified===true&&research?.valuation_verified===true&&corpPass;
+  // Distinguish a statistical R/R proxy from real reward versus technical downside.
+  // If an independently sourced analyst consensus exists, a low payoff must veto buy alerts.
+  const price=num(c?.reference_close);
+  const invalidation=num(c?.execution_plan?.invalidation);
+  const analystTarget=num(research?.analyst_target_egp);
+  const downside=price!=null&&invalidation!=null&&price>invalidation?price-invalidation:null;
+  const upside=price!=null&&analystTarget!=null?Math.max(0,analystTarget-price):null;
+  const consensusRR=downside!=null&&downside>0&&upside!=null?upside/downside:null;
+  const consensusRiskBlock=consensusRR!=null&&consensusRR<1.25;
   const fallingKnife=cycle<4 || entry<4.5 || change<=-8;
   const exceptionalRS=verified && q>=8 && entry>=7.5 && rr>=6.5 && inst>=7.5 && cycle>=6.5 && rsSpread>=4 && change>0;
-  const buyAuthorized=BUY_ACTIONS.has(String(c?.action||'')) && c?.execution_ready===true && e.state==='IN_ZONE' && q>=7.4 && entry>=6.2 && rr>=6 && cycle>=5 && !fallingKnife && (!panicBlock||exceptionalRS);
+  const buyAuthorized=BUY_ACTIONS.has(String(c?.action||'')) && c?.execution_ready===true && e.state==='IN_ZONE' && q>=7.4 && entry>=6.2 && rr>=6 && cycle>=5 && !fallingKnife && !consensusRiskBlock && (!panicBlock||exceptionalRS);
   const executablePlan=['BUY_ZONE','LIMIT_ON_WEAKNESS'].includes(String(c?.execution_plan?.status||''));
-  const nearTrigger=verified && q>=7.4 && rr>=6 && entry>=5.3 && cycle>=5 && !fallingKnife &&
+  const nearTrigger=verified && q>=7.4 && rr>=6 && entry>=5.3 && cycle>=5 && !fallingKnife && !consensusRiskBlock &&
     executablePlan && !['NO_CHASE','AVOID','BLOCKED_CORPORATE_ACTION'].includes(String(c?.action||'')) && (
     e.state==='IN_ZONE' || (e.state==='ABOVE_ZONE' && e.distance_pct!=null && e.distance_pct<=2.5)
   );
@@ -90,6 +99,7 @@ function alertFor(c:any){
   if(research?.sharia_verified===true&&research?.sharia_pass!==true){state='BLOCK_SHARIA';reason='sharia_gate_failed';}
   else if(!corpPass){state='BLOCK_CORPORATE_ACTION';reason='technical_history_not_normalized';}
   else if(!verified){state='BLOCKED_UNVERIFIED_EVIDENCE';reason='evidence_incomplete_transaction_not_authorized';}
+  else if(consensusRiskBlock){state='BLOCK_VALUATION_RR';priority=72;reason='verified_consensus_upside_insufficient_vs_technical_downside';}
   else if(buyAuthorized){state='BUY_TRIGGER';priority=100;reason=exceptionalRS&&panicBlock?'exceptional_relative_strength_overrides_market_panic':'all_execution_gates_passed';}
   else if(panicBlock){
     if(exceptionalRS){state='PREPARE_ORDER';priority=88;reason='exceptional_relative_strength_but_v6_buy_action_not_yet_confirmed';}
@@ -102,12 +112,19 @@ function alertFor(c:any){
     symbol,rank:c?.rank??null,v6_score:c?.score??null,v6_action:c?.action??null,reference_close:num(c?.reference_close),
     state,priority,reason,recovery_score_100:recoveryScore,quality_score_10:q,
     entry_state:e,entry_quality:entry,risk_reward:rr,cycle_strength:cycle,institutional_intelligence:inst,
+    valuation_payoff_check:{analyst_target_egp:analystTarget,analyst_target_as_of:research?.analyst_target_as_of??null,
+      analyst_target_source:research?.analyst_target_source??null,
+      upside_to_consensus_pct:price!=null&&upside!=null?round(upside/price*100):null,
+      downside_to_invalidation_pct:price!=null&&downside!=null?round(downside/price*100):null,
+      actual_reward_risk_to_consensus:consensusRR!=null?round(consensusRR):null,
+      minimum_required:1.25,execution_blocked:consensusRiskBlock,
+      note:'Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends.'},
     day_change_pct:round(change),relative_strength_vs_market_median_pct:round(rsSpread),
     falling_knife_risk:fallingKnife,exceptional_relative_strength:exceptionalRS,
     verified:{sharia:research?.sharia_pass===true,fundamentals:research?.fundamentals_verified===true,valuation:research?.valuation_verified===true,corporate_action:corpPass},
     execution_plan:c?.execution_plan||null,
     alert_rules:{
-      buy_only_if:['v6_action_is_buy','price_inside_entry_zone','quality_score>=7.4','entry_quality>=6.2','risk_reward>=6','cycle>=5','not_falling_knife','market_not_panic_or_exceptional_relative_strength'],
+      buy_only_if:['v6_action_is_buy','price_inside_entry_zone','quality_score>=7.4','entry_quality>=6.2','risk_reward_proxy>=6','cycle>=5','not_falling_knife','if_analyst_target_verified_actual_reward_risk>=1.25','market_not_panic_or_exceptional_relative_strength'],
       average_down_rule:'Never average solely because price is below cost basis; require recovery trigger first.'
     }
   };
@@ -118,7 +135,7 @@ const buyNow=alerts.filter((x:any)=>x.state==='BUY_TRIGGER');
 const armed=alerts.filter((x:any)=>['PREPARE_ORDER','ARMED_WAIT_MARKET'].includes(x.state));
 const verifiedRecovery=alerts.filter((x:any)=>x.verified.sharia&&x.verified.fundamentals&&x.verified.valuation&&x.verified.corporate_action)
   .sort((a:any,b:any)=>b.recovery_score_100-a.recovery_score_100).slice(0,20);
-const noAverage=alerts.filter((x:any)=>x.falling_knife_risk||['BLOCK_SHARIA','BLOCK_CORPORATE_ACTION','BLOCKED_UNVERIFIED_EVIDENCE'].includes(x.state)).slice(0,60);
+const noAverage=alerts.filter((x:any)=>x.falling_knife_risk||['BLOCK_SHARIA','BLOCK_CORPORATE_ACTION','BLOCKED_UNVERIFIED_EVIDENCE','BLOCK_VALUATION_RR'].includes(x.state)).slice(0,60);
 
 const packet={
   engine:'EGX Capital Recovery Alert Engine',version:1,generated_at:new Date().toISOString(),reference_session:v6.reference_session,
