@@ -99,6 +99,15 @@ jobs:
           jq -e '.engine == "EGX Portfolio Replacement Challengers" and .version == 1 and .private_portfolio_required == true' out/replacement-challengers-v6.json >/dev/null
           jq -e '.engine == "EGX V6 Performance Learning Ledger" and .version == 1' out/performance-ledger-v6.json >/dev/null
           jq -e '.engine == "EGX Capital Recovery Alert Engine" and .version == 1 and .reference_session != null and (.all_alerts|length) == .summary.total_scanned and .summary.total_scanned > 250 and .market_gate.state != null' out/capital-recovery-alerts-v1.json >/dev/null
+      - name: Audit session freshness and cross-engine buy gates before publication
+        working-directory: egx-market-feed-v2
+        shell: bash
+        run: |
+          set -euo pipefail
+          SESSION="$(jq -r '.expected_reference_session_date' out/contract.json)"
+          python3 ../tools/egx_publication_audit.py --root out --session "$SESSION"
+          test "$(jq -r '.reference_session' out/decision-intelligence-v6.json)" = "$SESSION"
+          test "$(jq -r '.reference_session' out/capital-recovery-alerts-v1.json)" = "$SESSION"
       - name: Publish complete V5 + V6 stack to egx-live without force
         shell: bash
         env:
