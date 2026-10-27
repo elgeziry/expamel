@@ -71,6 +71,8 @@ class OpportunityWatchTests(unittest.TestCase):
         self.docs["previous-opportunity-watch.json"]=first
         second=self.make()
         self.assertEqual(second["new_events"],[])
+        self.assertEqual(len(first["recent_events"]),1)
+        self.assertEqual(second["recent_events"][0]["event_id"],first["recent_events"][0]["event_id"])
 
     def test_pending_watch_does_not_repeat_alert_when_independent_recovers(self):
         self.docs["previous-opportunity-watch.json"]={"session":"2026-10-26",
@@ -111,6 +113,15 @@ class OpportunityWatchTests(unittest.TestCase):
         report=self.make()
         self.assertEqual(self.stocks(report)["EGAL"]["state"],"INVALIDATED")
         self.assertTrue(any(x["kind"]=="CANCEL_SETUP" for x in report["new_events"]))
+
+    def test_old_alert_history_expires_without_realerting(self):
+        self.docs["previous-opportunity-watch.json"]={
+            "session":"2026-10-26","targets":[],
+            "recent_events":[{"event_id":"yesterday-old", "session":"2026-10-26",
+                              "occurred_at_utc":"2026-10-26T01:00:00+00:00",
+                              "symbol":"EGAL","kind":"WATCH_ZONE_SOURCE_PENDING"}]}
+        report=self.make()
+        self.assertEqual(report["recent_events"],[])
 
     def test_noncompliant_research_never_authorizes_buy(self):
         self.docs["decision-intelligence-v6.json"]["all_ranked"][0]["research"]["sharia_pass"]=False
