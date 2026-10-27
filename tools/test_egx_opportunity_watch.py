@@ -116,7 +116,8 @@ class OpportunityWatchTests(unittest.TestCase):
 
     def test_old_alert_history_expires_without_realerting(self):
         self.docs["previous-opportunity-watch.json"]={
-            "session":"2026-10-26","targets":[],
+            "session":"2026-10-27",
+            "targets":[{"symbol":"EGAL","state":"WATCH_ZONE_NO_BUY_ORDER"}],
             "recent_events":[{"event_id":"yesterday-old", "session":"2026-10-26",
                               "occurred_at_utc":"2026-10-26T01:00:00+00:00",
                               "symbol":"EGAL","kind":"WATCH_ZONE_SOURCE_PENDING"}]}
