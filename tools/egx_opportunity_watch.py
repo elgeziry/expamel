@@ -89,7 +89,7 @@ def build(root):
                                    and stock.get("action") in ("BUY","STRONG_BUY","ACCUMULATE")
                                    and stock.get("execution_ready") is True
                                    and (alerts.get("market_gate") or {}).get("new_buy_orders_allowed") is True)
-        if not valid_feed or not verified_research or sharia_conflict or not verified_quote:
+        if not valid_feed or not verified_research or sharia_conflict:
             state = "NO_ALERT_DATA_OR_RESEARCH_BLOCKED"
         elif invalidated:
             state = "INVALIDATED"
@@ -97,6 +97,10 @@ def build(root):
             state = "WAIT_PRICE"
         elif not trend_ok:
             state = "WAIT_REVERSAL"
+        elif not verified_quote:
+            # Make the price-area crossing visible to the watch, but NEVER allow a buy.
+            # The real-time quote is primary-only; it must be rechecked at the broker.
+            state = "WATCH_ZONE_SOURCE_PENDING"
         elif buy_confirmed_by_engine:
             state = "BUY_CANDIDATE_MACRO_CHECK_REQUIRED"
         else:
@@ -125,13 +129,20 @@ def build(root):
             "order_status": "NOT_PLACED",
         }
         old_state = (prev_rows.get(symbol) or {}).get("state")
-        if old_state != state and state in ("WATCH_ZONE_NO_BUY_ORDER","BUY_CANDIDATE_MACRO_CHECK_REQUIRED"):
-            # Initial informational zone is not an alert; verified full candidate is.
+        watch_states = ("WATCH_ZONE_SOURCE_PENDING","WATCH_ZONE_NO_BUY_ORDER",
+                        "BUY_CANDIDATE_MACRO_CHECK_REQUIRED")
+        old_is_watch = old_state in watch_states
+        if state in watch_states and (not old_is_watch or
+                                      (state == "BUY_CANDIDATE_MACRO_CHECK_REQUIRED" and
+                                       old_state != state)):
+            # Alert once on first zone entry, and once again only on promotion to
+            # a confirmed engine candidate. No repetitive stale-source messages.
             if previous.get("session") or state == "BUY_CANDIDATE_MACRO_CHECK_REQUIRED":
                 events.append({"symbol":symbol, "kind":state,
                                "needs_external_macro_validation": True,
-                               "message":"Candidate only; no order executed or authorized without external checks"})
-        if old_state in ("WATCH_ZONE_NO_BUY_ORDER","BUY_CANDIDATE_MACRO_CHECK_REQUIRED") and state == "INVALIDATED":
+                               "requires_broker_price_confirmation": True,
+                               "message":"Watch-only candidate; not a placed or authorized buy order"})
+        if old_state in watch_states and state == "INVALIDATED":
             events.append({"symbol":symbol,"kind":"CANCEL_SETUP","message":"Technical setup invalidated; do not buy"})
         rows.append(row)
 
