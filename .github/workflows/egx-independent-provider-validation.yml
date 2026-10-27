@@ -30,7 +30,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          jq -e '.fully_independent_provider == true and .source_quotes_are_delayed == true and (.quotes|length) == 5 and .buy_triggers_after <= .buy_triggers_before' /tmp/egx-independent-fixture/independent-quote-audit.json
+          jq -e '.fully_independent_provider == true and .source_quotes_are_delayed == true and (.quotes|length) == 6 and .buy_triggers_after <= .buy_triggers_before' /tmp/egx-independent-fixture/independent-quote-audit.json
           jq -e '.independent_source_gate.enforces_buy_trigger_gate == true' /tmp/egx-independent-fixture/capital-recovery-alerts-v1.json
       - uses: actions/upload-artifact@v4
         with:
