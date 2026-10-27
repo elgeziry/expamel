@@ -20,6 +20,8 @@ name: EGX Resilient Bridge V5 + Decision Intelligence V6
       - 'egx-market-feed-v2/scripts/build-private-portfolio-overlay.mts'
       - 'egx-market-feed-v2/scripts/build-capital-recovery-alerts.mts'
       - 'egx-market-feed-v2/scripts/update-current-session-history.py'
+      - 'tools/egx_independent_source.py'
+      - 'tools/egx_quote_recheck.py'
       - 'egx-market-feed-v2/research-overrides.json'
       - 'research-overrides.json'
 permissions:
@@ -117,6 +119,14 @@ jobs:
         run: |
           set -euo pipefail
           python3 ../tools/egx_quote_recheck.py --root out
+      - name: Independent Mubasher quote gate and timestamped audit
+        working-directory: egx-market-feed-v2
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 ../tools/egx_independent_source.py --root out
+          jq -e '.fully_independent_provider == true and .execution_price_must_be_confirmed_at_broker == true and .buy_triggers_after <= .buy_triggers_before' out/independent-quote-audit.json >/dev/null
+          jq -e '(.buy_triggers | length) == .summary.buy_triggers and .independent_source_gate.enforces_buy_trigger_gate == true' out/capital-recovery-alerts-v1.json >/dev/null
       - name: Publish complete V5 + V6 stack to egx-live without force
         shell: bash
         env:
@@ -128,10 +138,10 @@ jobs:
           git config user.name 'github-actions[bot]'; git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           if git ls-remote --exit-code --heads origin egx-live >/dev/null 2>&1; then git fetch -q origin egx-live; git checkout -q -B egx-live origin/egx-live; else git checkout -q --orphan egx-live; git rm -rf . >/dev/null 2>&1 || true; fi
-          for f in history.json latest.json contract.json health.json transport.json focus.json universe.json radar.json capital-allocation.json execution-engine.json decision-intelligence-v6.json market-regime-v6.json research-queue-v6.json corporate-action-audit-v6.json replacement-challengers-v6.json performance-ledger-v6.json capital-recovery-alerts-v1.json; do cp "${SRC}/$f" "$f"; done
+          for f in history.json latest.json contract.json health.json transport.json focus.json universe.json radar.json capital-allocation.json execution-engine.json decision-intelligence-v6.json market-regime-v6.json research-queue-v6.json corporate-action-audit-v6.json replacement-challengers-v6.json performance-ledger-v6.json capital-recovery-alerts-v1.json independent-quote-audit.json; do cp "${SRC}/$f" "$f"; done
           SESSION="$(jq -r '.expected_reference_session_date' contract.json)"; SNAP="$(date -u +%H%M%SZ)"; mkdir -p "snapshots/${SESSION}"; cp focus.json "snapshots/${SESSION}/${SNAP}.json"
           mapfile -t SNAPSHOTS < <(find snapshots -type f -name '*.json' | sort); COUNT="${#SNAPSHOTS[@]}"; if [ "$COUNT" -gt 800 ]; then REMOVE=$((COUNT-800)); for ((i=0;i<REMOVE;i++)); do rm -f "${SNAPSHOTS[$i]}"; done; find snapshots -type d -empty -delete || true; fi
-          git add history.json latest.json contract.json health.json transport.json focus.json universe.json radar.json capital-allocation.json execution-engine.json decision-intelligence-v6.json market-regime-v6.json research-queue-v6.json corporate-action-audit-v6.json replacement-challengers-v6.json performance-ledger-v6.json capital-recovery-alerts-v1.json snapshots
+          git add history.json latest.json contract.json health.json transport.json focus.json universe.json radar.json capital-allocation.json execution-engine.json decision-intelligence-v6.json market-regime-v6.json research-queue-v6.json corporate-action-audit-v6.json replacement-challengers-v6.json performance-ledger-v6.json capital-recovery-alerts-v1.json independent-quote-audit.json snapshots
           if git diff --cached --quiet; then exit 0; fi
           git commit -q -m "EGX V5 + V6 decision intelligence $(jq -r '.retrieved_at' contract.json)"
           for attempt in 1 2 3 4 5; do if git push -q origin egx-live; then exit 0; fi; git fetch -q origin egx-live; git rebase origin/egx-live || { git rebase --abort || true; }; sleep $((attempt*2)); done
