@@ -80,7 +80,7 @@ function alertFor(c:any){
   // If an independently sourced analyst consensus exists, a low payoff must veto buy alerts.
   const price=num(c?.reference_close);
   const invalidation=num(c?.execution_plan?.invalidation);
-  const analystTarget=num(research?.analyst_target_egp);
+  const analystTarget=research?.analyst_target_egp==null?null:num(research.analyst_target_egp);
   const downside=price!=null&&invalidation!=null&&price>invalidation?price-invalidation:null;
   const upside=price!=null&&analystTarget!=null?Math.max(0,analystTarget-price):null;
   const consensusRR=downside!=null&&downside>0&&upside!=null?upside/downside:null;
