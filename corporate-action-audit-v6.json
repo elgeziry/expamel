@@ -1,8 +1,8 @@
 {
   "engine": "EGX Corporate Action Anomaly Guard",
   "version": 1,
-  "generated_at": "2026-10-26T17:38:33.920Z",
-  "reference_session": "2026-10-26",
+  "generated_at": "2026-10-27T09:33:13.459Z",
+  "reference_session": "2026-10-27",
   "method": "detect >45% up-gap or >31% down-gap across retained closes unless explicitly verified adjusted",
   "flagged": [
     {
@@ -36,21 +36,6 @@
       "verified_adjustment_override": false
     },
     {
-      "symbol": "KORA",
-      "status": "suspected_unadjusted_event",
-      "technical_history_gate": false,
-      "anomalies": [
-        {
-          "date": "2026-10-14",
-          "previous_close": 4.62,
-          "close": 2.92,
-          "ratio": 0.632
-        }
-      ],
-      "lookback_sessions": 30,
-      "verified_adjustment_override": false
-    },
-    {
       "symbol": "DTPP",
       "status": "suspected_unadjusted_event",
       "technical_history_gate": false,
@@ -60,6 +45,21 @@
           "previous_close": 242,
           "close": 52.79,
           "ratio": 0.2181
+        }
+      ],
+      "lookback_sessions": 30,
+      "verified_adjustment_override": false
+    },
+    {
+      "symbol": "KORA",
+      "status": "suspected_unadjusted_event",
+      "technical_history_gate": false,
+      "anomalies": [
+        {
+          "date": "2026-10-14",
+          "previous_close": 4.62,
+          "close": 2.92,
+          "ratio": 0.632
         }
       ],
       "lookback_sessions": 30,
@@ -92,7 +92,7 @@
           "ratio": 245
         }
       ],
-      "lookback_sessions": 23,
+      "lookback_sessions": 24,
       "verified_adjustment_override": false
     }
   ],
