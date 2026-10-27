@@ -114,6 +114,19 @@ class MarketScoutTests(unittest.TestCase):
         r2=self.run_scout()
         self.assertEqual(self.find(r2,"NEWCO")["state"],"WATCH_QUOTE_PENDING")
 
+    def test_sharia_conflict_needs_explicit_verified_resolution(self):
+        r=self.rows[239]
+        r["research"]["sharia_source_conflict"]=True
+        r["research"]["sharia_conflict_resolved"]=False
+        a=self.run_scout()
+        states={x["symbol"]:x["state"] for x in a["all_stock_states"]}
+        self.assertEqual(states["NEWCO"],"RESEARCH_REQUIRED")
+        r["research"]["sharia_conflict_resolved"]=True
+        b=self.run_scout()
+        states2={x["symbol"]:x["state"] for x in b["all_stock_states"]}
+        self.assertEqual(states2["NEWCO"],"WATCH_PRICE_CONFIRMED")
+        self.assertFalse(any(x["symbol"]=="NEWCO" for x in b["new_events"]))
+
     def test_noncompliant_or_incomplete_cannot_buy(self):
         self.rows[239]["research"]["sharia_pass"]=False
         self.rows[1]["research"]["valuation_verified"]=False
