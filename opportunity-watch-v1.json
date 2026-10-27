@@ -1,0 +1,98 @@
+{
+  "schema": "egx-opportunity-watch-v1",
+  "generated_at": "2026-10-27T10:08:35.186156+00:00",
+  "session": "2026-10-27",
+  "source_sessions_consistent": true,
+  "bridge_usable": true,
+  "source_files": [
+    "contract.json",
+    "decision-intelligence-v6.json",
+    "capital-recovery-alerts-v1.json",
+    "independent-quote-audit.json"
+  ],
+  "capital_limit_egp": 15000,
+  "first_tranche_limit_egp": 6000,
+  "per_stock_max_egp": 3000,
+  "reserved_cash_at_least_egp": 9000,
+  "no_auto_execution": true,
+  "candidate_always_requires_external_egx30_foreign_flow_broker_validation": true,
+  "targets": [
+    {
+      "symbol": "EGAL",
+      "name_ar": "مصر للألومنيوم",
+      "priority": 1,
+      "reference_price_egp": 303.87,
+      "engine_entry_zone": [
+        285.64,
+        299.31
+      ],
+      "watch_zone_egp": [
+        289.47,
+        293.84
+      ],
+      "initial_watch_zone_20261027_egp": [
+        289,
+        293
+      ],
+      "watch_zone_method": "dynamic_fraction_of_latest_v6_entry_zone",
+      "invalidation_egp": 272.78,
+      "engine_action": "WAIT_ENTRY",
+      "recovery_state": "WATCH_REVERSAL",
+      "verified_research": true,
+      "sharia_source_conflict": false,
+      "independent_quote_verified": false,
+      "independent_source_time": "2026-10-27T11:19:00+03:00",
+      "independent_quote_age_minutes": 109.5,
+      "engine_buy_trigger": false,
+      "price_in_watch_zone": false,
+      "reversal_confirmed": true,
+      "state": "NO_ALERT_DATA_OR_RESEARCH_BLOCKED",
+      "can_place_order_automatically": false,
+      "requires_egx30_foreign_flow_and_macro_check": true,
+      "max_planned_budget_egp": 3000,
+      "suggested_quantity_after_final_checks": 0,
+      "suggested_notional_before_fees_egp": 0,
+      "order_status": "NOT_PLACED"
+    },
+    {
+      "symbol": "ORWE",
+      "name_ar": "النساجون الشرقيون",
+      "priority": 2,
+      "reference_price_egp": 23.95,
+      "engine_entry_zone": [
+        23.14,
+        23.84
+      ],
+      "watch_zone_egp": [
+        23.4,
+        23.7
+      ],
+      "initial_watch_zone_20261027_egp": [
+        23.4,
+        23.7
+      ],
+      "watch_zone_method": "dynamic_fraction_of_latest_v6_entry_zone",
+      "invalidation_egp": 22.1,
+      "engine_action": "WAIT_ENTRY",
+      "recovery_state": "WATCH_REVERSAL",
+      "verified_research": true,
+      "sharia_source_conflict": false,
+      "independent_quote_verified": false,
+      "independent_source_time": "2026-10-27T11:19:00+03:00",
+      "independent_quote_age_minutes": 109.5,
+      "engine_buy_trigger": false,
+      "price_in_watch_zone": false,
+      "reversal_confirmed": false,
+      "state": "NO_ALERT_DATA_OR_RESEARCH_BLOCKED",
+      "can_place_order_automatically": false,
+      "requires_egx30_foreign_flow_and_macro_check": true,
+      "max_planned_budget_egp": 3000,
+      "suggested_quantity_after_final_checks": 0,
+      "suggested_notional_before_fees_egp": 0,
+      "order_status": "NOT_PLACED"
+    }
+  ],
+  "new_events": [],
+  "new_event_count": 0,
+  "notes": "Watch levels derive from each fresh V6 dynamic entry zone; original 27 Oct levels are historical reference only. Source delay never implies current tradable price."
+}
