@@ -9,27 +9,30 @@ permissions:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 4
+    timeout-minutes: 5
     steps:
-      - name: Probe timestamped independent Yahoo Finance EGX quotes
+      - name: Probe independently sourced market prices and explicit observation dates
         shell: bash
         run: |
           python3 - <<'PY'
-          import json,urllib.request,datetime as dt
-          for symbol in ("MFPC.CA","EGAL.CA","EFID.CA","JUFO.CA","ETEL.CA"):
-            for host in ("query1.finance.yahoo.com","query2.finance.yahoo.com"):
-              url=f"https://{host}/v8/finance/chart/{symbol}?interval=1m&range=1d"
-              try:
-                q=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0 (compatible; EGXQuoteVerifier/1.0)","Accept":"application/json"})
-                with urllib.request.urlopen(q,timeout=12) as resp: raw=json.load(resp)
-                c=raw["chart"]["result"][0]; m=c["meta"]
-                stamps=c.get("timestamp") or []
-                quote=c["indicators"]["quote"][0].get("close") or []
-                points=[(t,v) for t,v in zip(stamps,quote) if isinstance(v,(float,int)) and v>0]
-                observed=points[-1] if points else None
-                stamp=dt.datetime.fromtimestamp(observed[0],dt.timezone.utc).isoformat() if observed else None
-                print(json.dumps({"symbol":symbol,"host":host,"currency":m.get("currency"),"exchange":m.get("exchangeName"),"price":observed[1] if observed else m.get("regularMarketPrice"),"observation_utc":stamp,"regular_market_time":m.get("regularMarketTime"),"status":"OK" if observed else "NO_BAR"}))
-                break
-              except Exception as e:
-                print(json.dumps({"symbol":symbol,"host":host,"error":str(e)[:180]}))
+          import json,urllib.request,html,re,time
+          urls={
+            "stockanalysis_MFPC":"https://stockanalysis.com/quote/egx/MFPC/",
+            "stockanalysis_EFID":"https://stockanalysis.com/quote/egx/EFID/",
+            "mubasher_MFPC":"https://www.mubasher.info/markets/EGX/stocks/MFPC",
+            "egxnews_MFPC":"https://www.egx.news/en/stock/misr-fertilizers-production-company-mopco",
+            "egxnews_home":"https://www.egx.news/en",
+          }
+          for name,url in urls.items():
+            try:
+              request=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/126.0.0.0 Safari/537.36","Accept":"text/html"})
+              with urllib.request.urlopen(request,timeout=12) as r: page=r.read().decode("utf-8","replace"); status=r.status
+              cleaned=html.unescape(re.sub(r"<[^>]+>"," ",re.sub(r"<(script|style)[^>]*>.*?</\\1>"," ",page,flags=re.S|re.I)))
+              cleaned=re.sub(r"\\s+"," ",cleaned)
+              snippets=[]
+              for term in ["At close","Delayed Price","Last update","Last updated","آخر تحديث","Current Price","السعر الحالي","Oct 27, 2026","Oct 26, 2026"]:
+                m=re.search(re.escape(term),cleaned,re.I)
+                if m: snippets.append(cleaned[max(0,m.start()-75):m.start()+140])
+              print(json.dumps({"site":name,"code":status,"bytes":len(page),"snippets":snippets[:5],"start":cleaned[:200]},ensure_ascii=False))
+            except Exception as e: print(json.dumps({"site":name,"error":str(e)[:200]}))
           PY
