@@ -43,9 +43,21 @@ function verifiedResearch(x:any){
   const shariaVerified=x?.sharia_verified===true&&shariaFresh;
   const fundamentalsVerified=x?.fundamentals_verified===true&&fundamentalsFresh;
   const valuationVerified=x?.valuation_verified===true&&valuationFresh;
-  const shariaPass=shariaVerified&&['compliant','purification_required'].includes(sh);
+  // Do not silently disregard contradictory Sharia screening sources.
+  // A current documented EGX33 resolution can prevail only when specifically
+  // recorded; an unresolved conflict must NEVER become an execution approval.
+  const shariaConflict=x?.sharia_source_conflict===true;
+  const conflictResolved=shariaConflict&&x?.sharia_conflict_resolved===true&&
+    String(x?.sharia_conflict_resolution_basis||'')==='EGX33_REPORTED_INDEX_MEMBERSHIP_2026_10_05'&&
+    String(x?.sharia_conflict_resolution_source||'').startsWith('https://')&&
+    fresh(x?.sharia_conflict_resolution_as_of,120);
+  const shariaPass=shariaVerified&&['compliant','purification_required'].includes(sh)&&
+    (!shariaConflict||conflictResolved);
   return {
     sharia_status:sh,sharia_verified:shariaVerified,sharia_pass:shariaPass,
+    sharia_source_conflict:shariaConflict,
+    sharia_conflict_resolved:conflictResolved,
+    sharia_conflict_resolution_source:conflictResolved?x.sharia_conflict_resolution_source:null,
     fundamentals_verified:fundamentalsVerified,valuation_verified:valuationVerified,
     freshness:{sharia:{as_of:x?.sharia_as_of||null,age_days:ageDays(x?.sharia_as_of),max_days:120,fresh:shariaFresh},fundamentals:{as_of:x?.fundamentals_as_of||null,age_days:ageDays(x?.fundamentals_as_of),max_days:210,fresh:fundamentalsFresh},valuation:{as_of:x?.valuation_as_of||null,age_days:ageDays(x?.valuation_as_of),max_days:45,fresh:valuationFresh}},
     source_count:sourceCount(x), research_as_of:x?.updated_at||x?.fundamentals_as_of||x?.valuation_as_of||x?.sharia_as_of||null,
@@ -78,7 +90,7 @@ function redTeam(r:any, research:any, corp:any, cycle:any){ const flags:string[]
 function penaltyFromFlags(flags:string[]){ let p=0; for(const f of flags){ if(f==='suspected_corporate_action_distortion')p+=18; else if(f==='high_chase_risk')p+=9; else if(['negative_free_cash_flow_ttm','high_leverage_proxy','earnings_contraction','high_pe_proxy','price_above_analyst_target_proxy'].includes(f))p+=3; } return Math.min(30,p); }
 function decisionFor(x:any, regime:any){
   if(x.research.sharia_verified&&x.research.sharia_status==='non_compliant')return 'AVOID';
-  if(!x.research.sharia_verified)return 'RESEARCH_SHARIA';
+  if(!x.research.sharia_verified||!x.research.sharia_pass)return 'RESEARCH_SHARIA';
   if(!x.research.fundamentals_verified||!x.research.valuation_verified)return 'DEEP_RESEARCH';
   if(!x.corporate_action.technical_history_gate)return 'BLOCKED_CORPORATE_ACTION';
   if(String(x.market_row?.decision_support?.chase_risk)==='high'||x.entry_quality<5)return 'NO_CHASE';
