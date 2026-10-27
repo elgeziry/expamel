@@ -95,7 +95,7 @@ def focus_universe(root):
             if not (research.get("sharia_pass") is True and
                     research.get("fundamentals_verified") is True and
                     research.get("valuation_verified") is True and
-                    research.get("sharia_source_conflict") is not True):
+                    (research.get("sharia_source_conflict") is not True or research.get("sharia_conflict_resolved") is True)):
                 continue
             # Add close-to-entry research-complete names; never choose by rank alone.
             distance = max(0.0, (price / upper - 1) * 100)
