@@ -24,6 +24,8 @@ class IndependentSourceGateTests(unittest.TestCase):
             "capital-recovery-alerts-v1.json": {
                 "buy_triggers": [{"symbol": "MFPC", "state": "BUY_TRIGGER", "reason": "test"}],
                 "summary": {"buy_triggers": 1, "total_scanned": 295},
+                "market_gate": {"new_buy_orders_allowed": True},
+                "verified_recovery_ranking": [{"symbol": "MFPC", "state": "BUY_TRIGGER", "reason": "test"}],
                 "all_alerts": [{"symbol": "MFPC", "state": "BUY_TRIGGER", "reason": "test"}],
             },
         }
@@ -60,12 +62,16 @@ class IndependentSourceGateTests(unittest.TestCase):
         self.assertEqual(report["buy_triggers_after"], 1)
         self.assertEqual(alerts["buy_triggers"][0]["symbol"], "MFPC")
         self.assertTrue(report["quotes"]["MFPC"]["verified"])
+        self.assertTrue(alerts["market_gate"]["new_buy_orders_allowed"])
+        self.assertEqual(alerts["verified_recovery_ranking"][0]["state"], "BUY_TRIGGER")
 
     def test_two_hour_old_quote_blocks_buy_trigger(self):
         report, alerts = self.run_case(self.sample_quote(age_minutes=110))
         self.assertEqual(report["buy_triggers_after"], 0)
         self.assertEqual(report["buy_triggers_blocked"], 1)
-        self.assertEqual(alerts["all_alerts"][0]["state"], "BLOCK_EXTERNAL_QUOTE")
+        self.assertEqual(alerts["all_alerts"][0]["state"], "BLOCKED_UNVERIFIED_EVIDENCE")
+        self.assertEqual(alerts["verified_recovery_ranking"][0]["state"], "BLOCKED_UNVERIFIED_EVIDENCE")
+        self.assertFalse(alerts["market_gate"]["new_buy_orders_allowed"])
 
     def test_price_mismatch_blocks_buy_trigger(self):
         report, _ = self.run_case(self.sample_quote(price_egp=38.0))
