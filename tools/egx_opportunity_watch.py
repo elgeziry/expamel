@@ -146,6 +146,28 @@ def build(root):
             events.append({"symbol":symbol,"kind":"CANCEL_SETUP","message":"Technical setup invalidated; do not buy"})
         rows.append(row)
 
+    # The market publisher refreshes every few minutes, while ChatGPT alerts
+    # check hourly. Retain pending events so a transient crossing cannot vanish.
+    # Use stable IDs across republishes for deduplication by the alert task.
+    utc_now = dt.datetime.now(dt.timezone.utc)
+    lookback_hours = 8
+    recent = []
+    for old in previous.get("recent_events", []):
+        if old.get("session") != session or not old.get("event_id"):
+            continue
+        try:
+            seen = dt.datetime.fromisoformat(old["occurred_at_utc"].replace("Z", "+00:00"))
+            if seen.tzinfo and dt.timedelta(0) <= utc_now-seen <= dt.timedelta(hours=lookback_hours):
+                recent.append(old)
+        except (KeyError, ValueError, TypeError):
+            continue
+    for event in events:
+        event["session"] = session
+        event["occurred_at_utc"] = utc_now.isoformat()
+        event["event_id"] = f"{session}:{event['symbol']}:{event['kind']}:{utc_now.strftime('%H%M%S%f')}"
+        recent.append(event)
+    recent = list({event["event_id"]: event for event in recent}.values())[-100:]
+
     result = {
         "schema":"egx-opportunity-watch-v1", "generated_at":dt.datetime.now(dt.timezone.utc).isoformat(),
         "session":session, "source_sessions_consistent":same_session, "bridge_usable":valid_feed,
@@ -156,6 +178,8 @@ def build(root):
         "no_auto_execution":True,
         "candidate_always_requires_external_egx30_foreign_flow_broker_validation":True,
         "targets":rows, "new_events":events, "new_event_count":len(events),
+        "recent_events":recent, "recent_events_count":len(recent),
+        "event_history_retention_hours":lookback_hours,
         "notes":"Watch levels derive from each fresh V6 dynamic entry zone; original 27 Oct levels are historical reference only. Source delay never implies current tradable price."
     }
     (root / "opportunity-watch-v1.json").write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding="utf-8")
