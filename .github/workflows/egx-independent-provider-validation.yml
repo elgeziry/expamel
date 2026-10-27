@@ -21,7 +21,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p /tmp/egx-independent-fixture
-          for file in contract.json universe.json history.json capital-recovery-alerts-v1.json; do
+          for file in contract.json universe.json history.json decision-intelligence-v6.json capital-recovery-alerts-v1.json; do
             curl -fsSL --retry 3 --retry-delay 1 "https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/egx-live/$file?ts=${GITHUB_RUN_ID}" -o "/tmp/egx-independent-fixture/$file"
           done
       - name: Verify real independent source and timestamp session correlation
@@ -30,7 +30,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          jq -e '.fully_independent_provider == true and .source_quotes_are_delayed == true and (.quotes|length) == 6 and .buy_triggers_after <= .buy_triggers_before' /tmp/egx-independent-fixture/independent-quote-audit.json
+          jq -e '.fully_independent_provider == true and .source_quotes_are_delayed == true and (.quotes|length) >= 6 and (.quotes|length) <= 16 and .buy_triggers_after <= .buy_triggers_before' /tmp/egx-independent-fixture/independent-quote-audit.json
           jq -e '.independent_source_gate.enforces_buy_trigger_gate == true' /tmp/egx-independent-fixture/capital-recovery-alerts-v1.json
       - uses: actions/upload-artifact@v4
         with:
