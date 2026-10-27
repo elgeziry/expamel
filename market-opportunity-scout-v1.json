@@ -1,11 +1,11 @@
 {
   "schema": "egx-full-market-opportunity-scout-v1",
-  "generated_at_utc": "2026-10-27T10:59:04.423835+00:00",
+  "generated_at_utc": "2026-10-27T11:01:30.136836+00:00",
   "session": "2026-10-27",
   "reference_source": "decision-intelligence-v6.json",
-  "primary_retrieved_at_utc": "2026-10-27T10:58:52.137Z",
-  "primary_age_minutes": 0.2,
-  "independent_source_checked_at_utc": "2026-10-27T10:59:03.450658+00:00",
+  "primary_retrieved_at_utc": "2026-10-27T11:01:14.342Z",
+  "primary_age_minutes": 0.26,
+  "independent_source_checked_at_utc": "2026-10-27T11:01:29.182566+00:00",
   "health": "PASS",
   "all_295_stocks_evaluated": true,
   "does_not_limit_discovery_to_fixed_symbols": true,
@@ -19,27 +19,67 @@
   "summary": {
     "scanned": 295,
     "v6_ranked": 295,
-    "research_fully_verified": 13,
-    "research_incomplete": 4,
+    "research_fully_verified": 14,
+    "research_incomplete": 3,
     "sharia_excluded": 8,
     "watchable": 15,
-    "eligible_quality_scanned": 11,
+    "eligible_quality_scanned": 12,
     "engine_confirmed_buy_triggers": 0,
-    "new_events": 0,
-    "retained_recent_events": 0,
+    "new_events": 1,
+    "retained_recent_events": 1,
     "states": {
+      "WATCH_QUOTE_PENDING": 1,
       "NEAR_ENTRY": 3,
       "WAIT_REVERSAL": 8,
-      "RESEARCH_REQUIRED": 4,
+      "RESEARCH_REQUIRED": 3,
       "NOT_READY": 272,
       "EXCLUDED": 8
     }
   },
   "shortlist": [
     {
+      "symbol": "ADIB",
+      "name": "Abu Dhabi Islamic Bank-Egypt",
+      "rank": 3,
+      "score_100": 76.4,
+      "reference_price_egp": 46.45,
+      "entry_zone_egp": [
+        45.75,
+        46.45
+      ],
+      "distance_above_zone_pct": 0,
+      "technical_invalidation_egp": 43.69,
+      "quality_score_10": 7.72,
+      "fundamental_score_10": 8.5,
+      "valuation_score_10": 8.2,
+      "liquidity_score_10": 10.0,
+      "cycle_score_10": 6.1,
+      "entry_quality_10": 7.29,
+      "risk_reward_proxy_10": 7.72,
+      "sharia_pass": true,
+      "financial_and_sharia_verified": true,
+      "independent_quote_verified": false,
+      "independent_quote_price_egp": 46.49,
+      "independent_quote_time_cairo": "2026-10-27T12:06:00+03:00",
+      "independent_quote_age_minutes": 115.4,
+      "independent_quote_reason": "delayed_quote_beyond_freshness_window",
+      "engine_action": "ACCUMULATE",
+      "recovery_state": "BLOCK_EXTERNAL_QUOTE",
+      "engine_buy_trigger": false,
+      "falling_knife_risk": false,
+      "state": "WATCH_QUOTE_PENDING",
+      "reason": "price_in_zone_reversal_ok_buy_engine_not_yet_confirmed",
+      "rank_priority": 78,
+      "max_initial_budget_egp": 3000,
+      "order_status": "NOT_PLACED",
+      "auto_execute": false,
+      "requires_live_broker_quote": true,
+      "requires_verified_egx30_foreign_flow_macro": true
+    },
+    {
       "symbol": "EGAL",
       "name": "Egypt Aluminum",
-      "rank": 3,
+      "rank": 4,
       "score_100": 76.15,
       "reference_price_egp": 303.0,
       "entry_zone_egp": [
@@ -58,9 +98,9 @@
       "sharia_pass": true,
       "financial_and_sharia_verified": true,
       "independent_quote_verified": false,
-      "independent_quote_price_egp": 303.02,
-      "independent_quote_time_cairo": "2026-10-27T12:04:00+03:00",
-      "independent_quote_age_minutes": 115.0,
+      "independent_quote_price_egp": 303.17,
+      "independent_quote_time_cairo": "2026-10-27T12:06:00+03:00",
+      "independent_quote_age_minutes": 115.3,
       "independent_quote_reason": "delayed_quote_beyond_freshness_window",
       "engine_action": "WAIT_ENTRY",
       "recovery_state": "WATCH_REVERSAL",
@@ -79,27 +119,27 @@
       "symbol": "TMGH",
       "name": "Talaat Moustafa Group Holding",
       "rank": 11,
-      "score_100": 73.48,
-      "reference_price_egp": 82.79,
+      "score_100": 73.52,
+      "reference_price_egp": 82.8,
       "entry_zone_egp": [
         80.38,
-        82.79
+        82.8
       ],
       "distance_above_zone_pct": 0,
       "technical_invalidation_egp": 76.76,
-      "quality_score_10": 7.8,
+      "quality_score_10": 7.81,
       "fundamental_score_10": 8.5,
       "valuation_score_10": 8.2,
       "liquidity_score_10": 10.0,
       "cycle_score_10": 5.6,
-      "entry_quality_10": 5.04,
+      "entry_quality_10": 5.05,
       "risk_reward_proxy_10": 8.83,
       "sharia_pass": true,
       "financial_and_sharia_verified": true,
       "independent_quote_verified": false,
-      "independent_quote_price_egp": 82.83,
-      "independent_quote_time_cairo": "2026-10-27T12:04:00+03:00",
-      "independent_quote_age_minutes": 115.0,
+      "independent_quote_price_egp": 82.8,
+      "independent_quote_time_cairo": "2026-10-27T12:07:00+03:00",
+      "independent_quote_age_minutes": 114.4,
       "independent_quote_reason": "delayed_quote_beyond_freshness_window",
       "engine_action": "ACCUMULATE",
       "recovery_state": "WAIT",
@@ -118,27 +158,27 @@
       "symbol": "JUFO",
       "name": "Juhayna Food Industries",
       "rank": 16,
-      "score_100": 70.81,
-      "reference_price_egp": 23.35,
+      "score_100": 70.61,
+      "reference_price_egp": 23.28,
       "entry_zone_egp": [
-        21.95,
-        23.0
+        21.88,
+        22.93
       ],
-      "distance_above_zone_pct": 1.52,
-      "technical_invalidation_egp": 20.96,
-      "quality_score_10": 7.69,
+      "distance_above_zone_pct": 1.53,
+      "technical_invalidation_egp": 20.9,
+      "quality_score_10": 7.68,
       "fundamental_score_10": 8.8,
       "valuation_score_10": 8.1,
       "liquidity_score_10": 7.0,
-      "cycle_score_10": 4.9,
-      "entry_quality_10": 5.53,
+      "cycle_score_10": 4.8,
+      "entry_quality_10": 5.46,
       "risk_reward_proxy_10": 8.28,
       "sharia_pass": true,
       "financial_and_sharia_verified": true,
       "independent_quote_verified": false,
-      "independent_quote_price_egp": 23.28,
-      "independent_quote_time_cairo": "2026-10-27T12:04:00+03:00",
-      "independent_quote_age_minutes": 115.0,
+      "independent_quote_price_egp": 23.29,
+      "independent_quote_time_cairo": "2026-10-27T12:07:00+03:00",
+      "independent_quote_age_minutes": 114.4,
       "independent_quote_reason": "delayed_quote_beyond_freshness_window",
       "engine_action": "WAIT_ENTRY",
       "recovery_state": "WATCH_REVERSAL",
@@ -157,27 +197,27 @@
       "symbol": "EFID",
       "name": "Edita Food Industries SAE",
       "rank": 2,
-      "score_100": 77.17,
-      "reference_price_egp": 18.0,
+      "score_100": 77.15,
+      "reference_price_egp": 17.99,
       "entry_zone_egp": [
-        17.73,
-        18.0
+        17.72,
+        17.99
       ],
       "distance_above_zone_pct": 0,
-      "technical_invalidation_egp": 16.93,
+      "technical_invalidation_egp": 16.92,
       "quality_score_10": 8.07,
       "fundamental_score_10": 9.2,
       "valuation_score_10": 9.1,
       "liquidity_score_10": 8.0,
       "cycle_score_10": 3.9,
-      "entry_quality_10": 4.79,
+      "entry_quality_10": 4.78,
       "risk_reward_proxy_10": 8.83,
       "sharia_pass": true,
       "financial_and_sharia_verified": true,
       "independent_quote_verified": false,
-      "independent_quote_price_egp": 17.99,
-      "independent_quote_time_cairo": "2026-10-27T12:04:00+03:00",
-      "independent_quote_age_minutes": 115.0,
+      "independent_quote_price_egp": 17.96,
+      "independent_quote_time_cairo": "2026-10-27T12:07:00+03:00",
+      "independent_quote_age_minutes": 114.3,
       "independent_quote_reason": "delayed_quote_beyond_freshness_window",
       "engine_action": "NO_CHASE",
       "recovery_state": "WATCH_REVERSAL",
@@ -195,28 +235,28 @@
     {
       "symbol": "ETEL",
       "name": "Telecom Egypt",
-      "rank": 4,
-      "score_100": 76.1,
-      "reference_price_egp": 125.0,
+      "rank": 5,
+      "score_100": 76.02,
+      "reference_price_egp": 124.55,
       "entry_zone_egp": [
-        117.5,
-        123.13
+        117.08,
+        122.68
       ],
       "distance_above_zone_pct": 1.52,
-      "technical_invalidation_egp": 112.21,
-      "quality_score_10": 7.87,
+      "technical_invalidation_egp": 111.81,
+      "quality_score_10": 7.86,
       "fundamental_score_10": 9.3,
       "valuation_score_10": 7.1,
       "liquidity_score_10": 10.0,
       "cycle_score_10": 3.6,
-      "entry_quality_10": 6.49,
+      "entry_quality_10": 6.44,
       "risk_reward_proxy_10": 6.35,
       "sharia_pass": true,
       "financial_and_sharia_verified": true,
       "independent_quote_verified": false,
-      "independent_quote_price_egp": 126.74,
-      "independent_quote_time_cairo": "2026-10-27T12:04:00+03:00",
-      "independent_quote_age_minutes": 115.0,
+      "independent_quote_price_egp": 126.0,
+      "independent_quote_time_cairo": "2026-10-27T12:07:00+03:00",
+      "independent_quote_age_minutes": 114.4,
       "independent_quote_reason": "delayed_quote_beyond_freshness_window",
       "engine_action": "WAIT_ENTRY",
       "recovery_state": "WATCH_REVERSAL",
@@ -234,28 +274,28 @@
     {
       "symbol": "HELI",
       "name": "Heliopolis Housing",
-      "rank": 5,
-      "score_100": 75.86,
-      "reference_price_egp": 6.48,
+      "rank": 6,
+      "score_100": 75.96,
+      "reference_price_egp": 6.5,
       "entry_zone_egp": [
         6.11,
-        6.38
+        6.4
       ],
-      "distance_above_zone_pct": 1.57,
-      "technical_invalidation_egp": 5.83,
-      "quality_score_10": 7.78,
+      "distance_above_zone_pct": 1.56,
+      "technical_invalidation_egp": 5.84,
+      "quality_score_10": 7.79,
       "fundamental_score_10": 8.5,
       "valuation_score_10": 9.0,
       "liquidity_score_10": 9.0,
       "cycle_score_10": 3.6,
-      "entry_quality_10": 6.0,
+      "entry_quality_10": 6.06,
       "risk_reward_proxy_10": 8.83,
       "sharia_pass": true,
       "financial_and_sharia_verified": true,
       "independent_quote_verified": false,
       "independent_quote_price_egp": 6.39,
-      "independent_quote_time_cairo": "2026-10-27T12:03:00+03:00",
-      "independent_quote_age_minutes": 116.0,
+      "independent_quote_time_cairo": "2026-10-27T12:07:00+03:00",
+      "independent_quote_age_minutes": 114.5,
       "independent_quote_reason": "delayed_quote_beyond_freshness_window",
       "engine_action": "WAIT_ENTRY",
       "recovery_state": "WATCH_REVERSAL",
@@ -274,27 +314,27 @@
       "symbol": "EFIH",
       "name": "e-finance for Digital and Financial Investments S.A.E.",
       "rank": 7,
-      "score_100": 74.82,
-      "reference_price_egp": 21.79,
+      "score_100": 74.99,
+      "reference_price_egp": 21.9,
       "entry_zone_egp": [
-        20.48,
-        21.46
+        20.59,
+        21.57
       ],
-      "distance_above_zone_pct": 1.54,
-      "technical_invalidation_egp": 19.56,
-      "quality_score_10": 7.77,
+      "distance_above_zone_pct": 1.53,
+      "technical_invalidation_egp": 19.66,
+      "quality_score_10": 7.78,
       "fundamental_score_10": 9.0,
       "valuation_score_10": 7.5,
       "liquidity_score_10": 8.0,
       "cycle_score_10": 3.7,
-      "entry_quality_10": 5.82,
+      "entry_quality_10": 5.92,
       "risk_reward_proxy_10": 8.28,
       "sharia_pass": true,
       "financial_and_sharia_verified": true,
       "independent_quote_verified": false,
       "independent_quote_price_egp": 21.39,
-      "independent_quote_time_cairo": "2026-10-27T12:04:00+03:00",
-      "independent_quote_age_minutes": 115.0,
+      "independent_quote_time_cairo": "2026-10-27T12:07:00+03:00",
+      "independent_quote_age_minutes": 114.5,
       "independent_quote_reason": "delayed_quote_beyond_freshness_window",
       "engine_action": "WAIT_ENTRY",
       "recovery_state": "WATCH_REVERSAL",
@@ -313,27 +353,27 @@
       "symbol": "ORWE",
       "name": "Oriental Weavers Carpet",
       "rank": 8,
-      "score_100": 74.58,
-      "reference_price_egp": 24.0,
+      "score_100": 74.78,
+      "reference_price_egp": 24.07,
       "entry_zone_egp": [
         23.14,
         23.84
       ],
-      "distance_above_zone_pct": 0.67,
+      "distance_above_zone_pct": 0.96,
       "technical_invalidation_egp": 22.1,
-      "quality_score_10": 7.74,
+      "quality_score_10": 7.75,
       "fundamental_score_10": 8.8,
       "valuation_score_10": 9.0,
       "liquidity_score_10": 8.0,
       "cycle_score_10": 2.7,
-      "entry_quality_10": 5.45,
+      "entry_quality_10": 5.57,
       "risk_reward_proxy_10": 8.83,
       "sharia_pass": true,
       "financial_and_sharia_verified": true,
       "independent_quote_verified": false,
       "independent_quote_price_egp": 23.9,
-      "independent_quote_time_cairo": "2026-10-27T12:03:00+03:00",
-      "independent_quote_age_minutes": 116.0,
+      "independent_quote_time_cairo": "2026-10-27T12:07:00+03:00",
+      "independent_quote_age_minutes": 114.4,
       "independent_quote_reason": "delayed_quote_beyond_freshness_window",
       "engine_action": "WAIT_ENTRY",
       "recovery_state": "WATCH_REVERSAL",
@@ -352,27 +392,27 @@
       "symbol": "MASR",
       "name": "Madinet Masr for Housing & Development",
       "rank": 9,
-      "score_100": 74.06,
-      "reference_price_egp": 6.62,
+      "score_100": 74.05,
+      "reference_price_egp": 6.6,
       "entry_zone_egp": [
-        6.22,
-        6.52
+        6.2,
+        6.5
       ],
-      "distance_above_zone_pct": 1.53,
-      "technical_invalidation_egp": 5.94,
+      "distance_above_zone_pct": 1.54,
+      "technical_invalidation_egp": 5.92,
       "quality_score_10": 7.5,
       "fundamental_score_10": 8.0,
       "valuation_score_10": 8.8,
       "liquidity_score_10": 9.0,
       "cycle_score_10": 3.5,
-      "entry_quality_10": 6.3,
+      "entry_quality_10": 6.26,
       "risk_reward_proxy_10": 8.83,
       "sharia_pass": true,
       "financial_and_sharia_verified": true,
       "independent_quote_verified": false,
       "independent_quote_price_egp": 6.48,
-      "independent_quote_time_cairo": "2026-10-27T12:04:00+03:00",
-      "independent_quote_age_minutes": 115.0,
+      "independent_quote_time_cairo": "2026-10-27T12:06:00+03:00",
+      "independent_quote_age_minutes": 115.5,
       "independent_quote_reason": "delayed_quote_beyond_freshness_window",
       "engine_action": "WAIT_ENTRY",
       "recovery_state": "WATCH_REVERSAL",
@@ -391,30 +431,30 @@
       "symbol": "AMOC",
       "name": "Alexandria Mineral Oils Co.",
       "rank": 10,
-      "score_100": 73.52,
-      "reference_price_egp": 13.0,
+      "score_100": 73.62,
+      "reference_price_egp": 13.02,
       "entry_zone_egp": [
-        12.8,
-        13.0
+        12.82,
+        13.02
       ],
       "distance_above_zone_pct": 0,
-      "technical_invalidation_egp": 12.23,
-      "quality_score_10": 7.65,
+      "technical_invalidation_egp": 12.25,
+      "quality_score_10": 7.66,
       "fundamental_score_10": 9.1,
       "valuation_score_10": 7.3,
       "liquidity_score_10": 9.0,
       "cycle_score_10": 4.0,
-      "entry_quality_10": 6.07,
+      "entry_quality_10": 6.13,
       "risk_reward_proxy_10": 6.35,
       "sharia_pass": true,
       "financial_and_sharia_verified": true,
       "independent_quote_verified": false,
-      "independent_quote_price_egp": 13.06,
-      "independent_quote_time_cairo": "2026-10-27T12:04:00+03:00",
-      "independent_quote_age_minutes": 115.0,
+      "independent_quote_price_egp": 13.09,
+      "independent_quote_time_cairo": "2026-10-27T12:07:00+03:00",
+      "independent_quote_age_minutes": 114.4,
       "independent_quote_reason": "delayed_quote_beyond_freshness_window",
-      "engine_action": "ACCUMULATE",
-      "recovery_state": "WAIT",
+      "engine_action": "WAIT_ENTRY",
+      "recovery_state": "WATCH_REVERSAL",
       "engine_buy_trigger": false,
       "falling_knife_risk": false,
       "state": "WAIT_REVERSAL",
@@ -430,27 +470,27 @@
       "symbol": "ORAS",
       "name": "Orascom Construction Plc",
       "rank": 17,
-      "score_100": 70.48,
-      "reference_price_egp": 821.99,
+      "score_100": 70.43,
+      "reference_price_egp": 821.0,
       "entry_zone_egp": [
-        809.66,
-        821.99
+        808.68,
+        821.0
       ],
       "distance_above_zone_pct": 0,
-      "technical_invalidation_egp": 773.23,
-      "quality_score_10": 7.56,
+      "technical_invalidation_egp": 772.29,
+      "quality_score_10": 7.55,
       "fundamental_score_10": 8.6,
       "valuation_score_10": 7.2,
       "liquidity_score_10": 10.0,
       "cycle_score_10": 3.7,
-      "entry_quality_10": 7.11,
+      "entry_quality_10": 7.09,
       "risk_reward_proxy_10": 4.7,
       "sharia_pass": true,
       "financial_and_sharia_verified": true,
       "independent_quote_verified": false,
-      "independent_quote_price_egp": 814.55,
-      "independent_quote_time_cairo": "2026-10-27T12:04:00+03:00",
-      "independent_quote_age_minutes": 115.0,
+      "independent_quote_price_egp": 814.65,
+      "independent_quote_time_cairo": "2026-10-27T12:07:00+03:00",
+      "independent_quote_age_minutes": 114.4,
       "independent_quote_reason": "delayed_quote_beyond_freshness_window",
       "engine_action": "ACCUMULATE",
       "recovery_state": "WAIT",
@@ -466,56 +506,17 @@
       "requires_verified_egx30_foreign_flow_macro": true
     },
     {
-      "symbol": "ADIB",
-      "name": "Abu Dhabi Islamic Bank-Egypt",
-      "rank": 6,
-      "score_100": 75.51,
-      "reference_price_egp": 46.49,
-      "entry_zone_egp": [
-        45.79,
-        46.49
-      ],
-      "distance_above_zone_pct": 0,
-      "technical_invalidation_egp": 43.73,
-      "quality_score_10": 7.68,
-      "fundamental_score_10": 7.88,
-      "valuation_score_10": 8.05,
-      "liquidity_score_10": 10.0,
-      "cycle_score_10": 6.2,
-      "entry_quality_10": 7.33,
-      "risk_reward_proxy_10": 7.72,
-      "sharia_pass": false,
-      "financial_and_sharia_verified": false,
-      "independent_quote_verified": false,
-      "independent_quote_price_egp": null,
-      "independent_quote_time_cairo": null,
-      "independent_quote_age_minutes": null,
-      "independent_quote_reason": null,
-      "engine_action": "RESEARCH_SHARIA",
-      "recovery_state": "BLOCKED_UNVERIFIED_EVIDENCE",
-      "engine_buy_trigger": false,
-      "falling_knife_risk": false,
-      "state": "RESEARCH_REQUIRED",
-      "reason": "financial_valuation_or_sharia_evidence_missing",
-      "rank_priority": 20,
-      "max_initial_budget_egp": 3000,
-      "order_status": "NOT_PLACED",
-      "auto_execute": false,
-      "requires_live_broker_quote": true,
-      "requires_verified_egx30_foreign_flow_macro": true
-    },
-    {
       "symbol": "COMI",
       "name": "Commercial International Bank - Egypt (CIB) S.A.E.",
       "rank": 13,
-      "score_100": 71.97,
-      "reference_price_egp": 121.9,
+      "score_100": 71.96,
+      "reference_price_egp": 121.89,
       "entry_zone_egp": [
-        120.07,
-        121.9
+        120.06,
+        121.89
       ],
       "distance_above_zone_pct": 0,
-      "technical_invalidation_egp": 114.67,
+      "technical_invalidation_egp": 114.66,
       "quality_score_10": 7.31,
       "fundamental_score_10": 7.38,
       "valuation_score_10": 8.95,
@@ -544,10 +545,46 @@
       "requires_verified_egx30_foreign_flow_macro": true
     },
     {
+      "symbol": "MCQE",
+      "name": "Misr Cement Co. (Qena)",
+      "rank": 14,
+      "score_100": 71.21,
+      "reference_price_egp": 164.0,
+      "entry_zone_egp": null,
+      "distance_above_zone_pct": null,
+      "technical_invalidation_egp": null,
+      "quality_score_10": 7.43,
+      "fundamental_score_10": 8.63,
+      "valuation_score_10": 8.5,
+      "liquidity_score_10": 9.0,
+      "cycle_score_10": 4.0,
+      "entry_quality_10": 4.18,
+      "risk_reward_proxy_10": 7.48,
+      "sharia_pass": false,
+      "financial_and_sharia_verified": false,
+      "independent_quote_verified": false,
+      "independent_quote_price_egp": null,
+      "independent_quote_time_cairo": null,
+      "independent_quote_age_minutes": null,
+      "independent_quote_reason": null,
+      "engine_action": "RESEARCH_SHARIA",
+      "recovery_state": "BLOCKED_UNVERIFIED_EVIDENCE",
+      "engine_buy_trigger": false,
+      "falling_knife_risk": true,
+      "state": "RESEARCH_REQUIRED",
+      "reason": "financial_valuation_or_sharia_evidence_missing",
+      "rank_priority": 20,
+      "max_initial_budget_egp": 3000,
+      "order_status": "NOT_PLACED",
+      "auto_execute": false,
+      "requires_live_broker_quote": true,
+      "requires_verified_egx30_foreign_flow_macro": true
+    },
+    {
       "symbol": "FWRY",
       "name": "Fawry For Banking Technology And Electronic Payment",
-      "rank": 14,
-      "score_100": 71.0,
+      "rank": 15,
+      "score_100": 70.99,
       "reference_price_egp": 17.14,
       "entry_zone_egp": [
         16.57,
@@ -570,42 +607,6 @@
       "independent_quote_age_minutes": null,
       "independent_quote_reason": null,
       "engine_action": "DEEP_RESEARCH",
-      "recovery_state": "BLOCKED_UNVERIFIED_EVIDENCE",
-      "engine_buy_trigger": false,
-      "falling_knife_risk": true,
-      "state": "RESEARCH_REQUIRED",
-      "reason": "financial_valuation_or_sharia_evidence_missing",
-      "rank_priority": 20,
-      "max_initial_budget_egp": 3000,
-      "order_status": "NOT_PLACED",
-      "auto_execute": false,
-      "requires_live_broker_quote": true,
-      "requires_verified_egx30_foreign_flow_macro": true
-    },
-    {
-      "symbol": "MCQE",
-      "name": "Misr Cement Co. (Qena)",
-      "rank": 15,
-      "score_100": 70.89,
-      "reference_price_egp": 163.0,
-      "entry_zone_egp": null,
-      "distance_above_zone_pct": null,
-      "technical_invalidation_egp": null,
-      "quality_score_10": 7.4,
-      "fundamental_score_10": 8.63,
-      "valuation_score_10": 8.5,
-      "liquidity_score_10": 9.0,
-      "cycle_score_10": 3.8,
-      "entry_quality_10": 4.07,
-      "risk_reward_proxy_10": 7.48,
-      "sharia_pass": false,
-      "financial_and_sharia_verified": false,
-      "independent_quote_verified": false,
-      "independent_quote_price_egp": null,
-      "independent_quote_time_cairo": null,
-      "independent_quote_age_minutes": null,
-      "independent_quote_reason": null,
-      "engine_action": "RESEARCH_SHARIA",
       "recovery_state": "BLOCKED_UNVERIFIED_EVIDENCE",
       "engine_buy_trigger": false,
       "falling_knife_risk": true,
@@ -621,56 +622,17 @@
   ],
   "research_queue": [
     {
-      "symbol": "ADIB",
-      "name": "Abu Dhabi Islamic Bank-Egypt",
-      "rank": 6,
-      "score_100": 75.51,
-      "reference_price_egp": 46.49,
-      "entry_zone_egp": [
-        45.79,
-        46.49
-      ],
-      "distance_above_zone_pct": 0,
-      "technical_invalidation_egp": 43.73,
-      "quality_score_10": 7.68,
-      "fundamental_score_10": 7.88,
-      "valuation_score_10": 8.05,
-      "liquidity_score_10": 10.0,
-      "cycle_score_10": 6.2,
-      "entry_quality_10": 7.33,
-      "risk_reward_proxy_10": 7.72,
-      "sharia_pass": false,
-      "financial_and_sharia_verified": false,
-      "independent_quote_verified": false,
-      "independent_quote_price_egp": null,
-      "independent_quote_time_cairo": null,
-      "independent_quote_age_minutes": null,
-      "independent_quote_reason": null,
-      "engine_action": "RESEARCH_SHARIA",
-      "recovery_state": "BLOCKED_UNVERIFIED_EVIDENCE",
-      "engine_buy_trigger": false,
-      "falling_knife_risk": false,
-      "state": "RESEARCH_REQUIRED",
-      "reason": "financial_valuation_or_sharia_evidence_missing",
-      "rank_priority": 20,
-      "max_initial_budget_egp": 3000,
-      "order_status": "NOT_PLACED",
-      "auto_execute": false,
-      "requires_live_broker_quote": true,
-      "requires_verified_egx30_foreign_flow_macro": true
-    },
-    {
       "symbol": "COMI",
       "name": "Commercial International Bank - Egypt (CIB) S.A.E.",
       "rank": 13,
-      "score_100": 71.97,
-      "reference_price_egp": 121.9,
+      "score_100": 71.96,
+      "reference_price_egp": 121.89,
       "entry_zone_egp": [
-        120.07,
-        121.9
+        120.06,
+        121.89
       ],
       "distance_above_zone_pct": 0,
-      "technical_invalidation_egp": 114.67,
+      "technical_invalidation_egp": 114.66,
       "quality_score_10": 7.31,
       "fundamental_score_10": 7.38,
       "valuation_score_10": 8.95,
@@ -699,10 +661,46 @@
       "requires_verified_egx30_foreign_flow_macro": true
     },
     {
+      "symbol": "MCQE",
+      "name": "Misr Cement Co. (Qena)",
+      "rank": 14,
+      "score_100": 71.21,
+      "reference_price_egp": 164.0,
+      "entry_zone_egp": null,
+      "distance_above_zone_pct": null,
+      "technical_invalidation_egp": null,
+      "quality_score_10": 7.43,
+      "fundamental_score_10": 8.63,
+      "valuation_score_10": 8.5,
+      "liquidity_score_10": 9.0,
+      "cycle_score_10": 4.0,
+      "entry_quality_10": 4.18,
+      "risk_reward_proxy_10": 7.48,
+      "sharia_pass": false,
+      "financial_and_sharia_verified": false,
+      "independent_quote_verified": false,
+      "independent_quote_price_egp": null,
+      "independent_quote_time_cairo": null,
+      "independent_quote_age_minutes": null,
+      "independent_quote_reason": null,
+      "engine_action": "RESEARCH_SHARIA",
+      "recovery_state": "BLOCKED_UNVERIFIED_EVIDENCE",
+      "engine_buy_trigger": false,
+      "falling_knife_risk": true,
+      "state": "RESEARCH_REQUIRED",
+      "reason": "financial_valuation_or_sharia_evidence_missing",
+      "rank_priority": 20,
+      "max_initial_budget_egp": 3000,
+      "order_status": "NOT_PLACED",
+      "auto_execute": false,
+      "requires_live_broker_quote": true,
+      "requires_verified_egx30_foreign_flow_macro": true
+    },
+    {
       "symbol": "FWRY",
       "name": "Fawry For Banking Technology And Electronic Payment",
-      "rank": 14,
-      "score_100": 71.0,
+      "rank": 15,
+      "score_100": 70.99,
       "reference_price_egp": 17.14,
       "entry_zone_egp": [
         16.57,
@@ -736,49 +734,52 @@
       "auto_execute": false,
       "requires_live_broker_quote": true,
       "requires_verified_egx30_foreign_flow_macro": true
-    },
+    }
+  ],
+  "top_quality_waiting": [
     {
-      "symbol": "MCQE",
-      "name": "Misr Cement Co. (Qena)",
-      "rank": 15,
-      "score_100": 70.89,
-      "reference_price_egp": 163.0,
-      "entry_zone_egp": null,
-      "distance_above_zone_pct": null,
-      "technical_invalidation_egp": null,
-      "quality_score_10": 7.4,
-      "fundamental_score_10": 8.63,
-      "valuation_score_10": 8.5,
-      "liquidity_score_10": 9.0,
-      "cycle_score_10": 3.8,
-      "entry_quality_10": 4.07,
-      "risk_reward_proxy_10": 7.48,
-      "sharia_pass": false,
-      "financial_and_sharia_verified": false,
+      "symbol": "ADIB",
+      "name": "Abu Dhabi Islamic Bank-Egypt",
+      "rank": 3,
+      "score_100": 76.4,
+      "reference_price_egp": 46.45,
+      "entry_zone_egp": [
+        45.75,
+        46.45
+      ],
+      "distance_above_zone_pct": 0,
+      "technical_invalidation_egp": 43.69,
+      "quality_score_10": 7.72,
+      "fundamental_score_10": 8.5,
+      "valuation_score_10": 8.2,
+      "liquidity_score_10": 10.0,
+      "cycle_score_10": 6.1,
+      "entry_quality_10": 7.29,
+      "risk_reward_proxy_10": 7.72,
+      "sharia_pass": true,
+      "financial_and_sharia_verified": true,
       "independent_quote_verified": false,
-      "independent_quote_price_egp": null,
-      "independent_quote_time_cairo": null,
-      "independent_quote_age_minutes": null,
-      "independent_quote_reason": null,
-      "engine_action": "RESEARCH_SHARIA",
-      "recovery_state": "BLOCKED_UNVERIFIED_EVIDENCE",
+      "independent_quote_price_egp": 46.49,
+      "independent_quote_time_cairo": "2026-10-27T12:06:00+03:00",
+      "independent_quote_age_minutes": 115.4,
+      "independent_quote_reason": "delayed_quote_beyond_freshness_window",
+      "engine_action": "ACCUMULATE",
+      "recovery_state": "BLOCK_EXTERNAL_QUOTE",
       "engine_buy_trigger": false,
-      "falling_knife_risk": true,
-      "state": "RESEARCH_REQUIRED",
-      "reason": "financial_valuation_or_sharia_evidence_missing",
-      "rank_priority": 20,
+      "falling_knife_risk": false,
+      "state": "WATCH_QUOTE_PENDING",
+      "reason": "price_in_zone_reversal_ok_buy_engine_not_yet_confirmed",
+      "rank_priority": 78,
       "max_initial_budget_egp": 3000,
       "order_status": "NOT_PLACED",
       "auto_execute": false,
       "requires_live_broker_quote": true,
       "requires_verified_egx30_foreign_flow_macro": true
-    }
-  ],
-  "top_quality_waiting": [
+    },
     {
       "symbol": "EGAL",
       "name": "Egypt Aluminum",
-      "rank": 3,
+      "rank": 4,
       "score_100": 76.15,
       "reference_price_egp": 303.0,
       "entry_zone_egp": [
@@ -797,9 +798,9 @@
       "sharia_pass": true,
       "financial_and_sharia_verified": true,
       "independent_quote_verified": false,
-      "independent_quote_price_egp": 303.02,
-      "independent_quote_time_cairo": "2026-10-27T12:04:00+03:00",
-      "independent_quote_age_minutes": 115.0,
+      "independent_quote_price_egp": 303.17,
+      "independent_quote_time_cairo": "2026-10-27T12:06:00+03:00",
+      "independent_quote_age_minutes": 115.3,
       "independent_quote_reason": "delayed_quote_beyond_freshness_window",
       "engine_action": "WAIT_ENTRY",
       "recovery_state": "WATCH_REVERSAL",
@@ -818,27 +819,27 @@
       "symbol": "TMGH",
       "name": "Talaat Moustafa Group Holding",
       "rank": 11,
-      "score_100": 73.48,
-      "reference_price_egp": 82.79,
+      "score_100": 73.52,
+      "reference_price_egp": 82.8,
       "entry_zone_egp": [
         80.38,
-        82.79
+        82.8
       ],
       "distance_above_zone_pct": 0,
       "technical_invalidation_egp": 76.76,
-      "quality_score_10": 7.8,
+      "quality_score_10": 7.81,
       "fundamental_score_10": 8.5,
       "valuation_score_10": 8.2,
       "liquidity_score_10": 10.0,
       "cycle_score_10": 5.6,
-      "entry_quality_10": 5.04,
+      "entry_quality_10": 5.05,
       "risk_reward_proxy_10": 8.83,
       "sharia_pass": true,
       "financial_and_sharia_verified": true,
       "independent_quote_verified": false,
-      "independent_quote_price_egp": 82.83,
-      "independent_quote_time_cairo": "2026-10-27T12:04:00+03:00",
-      "independent_quote_age_minutes": 115.0,
+      "independent_quote_price_egp": 82.8,
+      "independent_quote_time_cairo": "2026-10-27T12:07:00+03:00",
+      "independent_quote_age_minutes": 114.4,
       "independent_quote_reason": "delayed_quote_beyond_freshness_window",
       "engine_action": "ACCUMULATE",
       "recovery_state": "WAIT",
@@ -857,27 +858,27 @@
       "symbol": "JUFO",
       "name": "Juhayna Food Industries",
       "rank": 16,
-      "score_100": 70.81,
-      "reference_price_egp": 23.35,
+      "score_100": 70.61,
+      "reference_price_egp": 23.28,
       "entry_zone_egp": [
-        21.95,
-        23.0
+        21.88,
+        22.93
       ],
-      "distance_above_zone_pct": 1.52,
-      "technical_invalidation_egp": 20.96,
-      "quality_score_10": 7.69,
+      "distance_above_zone_pct": 1.53,
+      "technical_invalidation_egp": 20.9,
+      "quality_score_10": 7.68,
       "fundamental_score_10": 8.8,
       "valuation_score_10": 8.1,
       "liquidity_score_10": 7.0,
-      "cycle_score_10": 4.9,
-      "entry_quality_10": 5.53,
+      "cycle_score_10": 4.8,
+      "entry_quality_10": 5.46,
       "risk_reward_proxy_10": 8.28,
       "sharia_pass": true,
       "financial_and_sharia_verified": true,
       "independent_quote_verified": false,
-      "independent_quote_price_egp": 23.28,
-      "independent_quote_time_cairo": "2026-10-27T12:04:00+03:00",
-      "independent_quote_age_minutes": 115.0,
+      "independent_quote_price_egp": 23.29,
+      "independent_quote_time_cairo": "2026-10-27T12:07:00+03:00",
+      "independent_quote_age_minutes": 114.4,
       "independent_quote_reason": "delayed_quote_beyond_freshness_window",
       "engine_action": "WAIT_ENTRY",
       "recovery_state": "WATCH_REVERSAL",
@@ -896,27 +897,27 @@
       "symbol": "EFID",
       "name": "Edita Food Industries SAE",
       "rank": 2,
-      "score_100": 77.17,
-      "reference_price_egp": 18.0,
+      "score_100": 77.15,
+      "reference_price_egp": 17.99,
       "entry_zone_egp": [
-        17.73,
-        18.0
+        17.72,
+        17.99
       ],
       "distance_above_zone_pct": 0,
-      "technical_invalidation_egp": 16.93,
+      "technical_invalidation_egp": 16.92,
       "quality_score_10": 8.07,
       "fundamental_score_10": 9.2,
       "valuation_score_10": 9.1,
       "liquidity_score_10": 8.0,
       "cycle_score_10": 3.9,
-      "entry_quality_10": 4.79,
+      "entry_quality_10": 4.78,
       "risk_reward_proxy_10": 8.83,
       "sharia_pass": true,
       "financial_and_sharia_verified": true,
       "independent_quote_verified": false,
-      "independent_quote_price_egp": 17.99,
-      "independent_quote_time_cairo": "2026-10-27T12:04:00+03:00",
-      "independent_quote_age_minutes": 115.0,
+      "independent_quote_price_egp": 17.96,
+      "independent_quote_time_cairo": "2026-10-27T12:07:00+03:00",
+      "independent_quote_age_minutes": 114.3,
       "independent_quote_reason": "delayed_quote_beyond_freshness_window",
       "engine_action": "NO_CHASE",
       "recovery_state": "WATCH_REVERSAL",
@@ -934,28 +935,28 @@
     {
       "symbol": "ETEL",
       "name": "Telecom Egypt",
-      "rank": 4,
-      "score_100": 76.1,
-      "reference_price_egp": 125.0,
+      "rank": 5,
+      "score_100": 76.02,
+      "reference_price_egp": 124.55,
       "entry_zone_egp": [
-        117.5,
-        123.13
+        117.08,
+        122.68
       ],
       "distance_above_zone_pct": 1.52,
-      "technical_invalidation_egp": 112.21,
-      "quality_score_10": 7.87,
+      "technical_invalidation_egp": 111.81,
+      "quality_score_10": 7.86,
       "fundamental_score_10": 9.3,
       "valuation_score_10": 7.1,
       "liquidity_score_10": 10.0,
       "cycle_score_10": 3.6,
-      "entry_quality_10": 6.49,
+      "entry_quality_10": 6.44,
       "risk_reward_proxy_10": 6.35,
       "sharia_pass": true,
       "financial_and_sharia_verified": true,
       "independent_quote_verified": false,
-      "independent_quote_price_egp": 126.74,
-      "independent_quote_time_cairo": "2026-10-27T12:04:00+03:00",
-      "independent_quote_age_minutes": 115.0,
+      "independent_quote_price_egp": 126.0,
+      "independent_quote_time_cairo": "2026-10-27T12:07:00+03:00",
+      "independent_quote_age_minutes": 114.4,
       "independent_quote_reason": "delayed_quote_beyond_freshness_window",
       "engine_action": "WAIT_ENTRY",
       "recovery_state": "WATCH_REVERSAL",
@@ -973,28 +974,28 @@
     {
       "symbol": "HELI",
       "name": "Heliopolis Housing",
-      "rank": 5,
-      "score_100": 75.86,
-      "reference_price_egp": 6.48,
+      "rank": 6,
+      "score_100": 75.96,
+      "reference_price_egp": 6.5,
       "entry_zone_egp": [
         6.11,
-        6.38
+        6.4
       ],
-      "distance_above_zone_pct": 1.57,
-      "technical_invalidation_egp": 5.83,
-      "quality_score_10": 7.78,
+      "distance_above_zone_pct": 1.56,
+      "technical_invalidation_egp": 5.84,
+      "quality_score_10": 7.79,
       "fundamental_score_10": 8.5,
       "valuation_score_10": 9.0,
       "liquidity_score_10": 9.0,
       "cycle_score_10": 3.6,
-      "entry_quality_10": 6.0,
+      "entry_quality_10": 6.06,
       "risk_reward_proxy_10": 8.83,
       "sharia_pass": true,
       "financial_and_sharia_verified": true,
       "independent_quote_verified": false,
       "independent_quote_price_egp": 6.39,
-      "independent_quote_time_cairo": "2026-10-27T12:03:00+03:00",
-      "independent_quote_age_minutes": 116.0,
+      "independent_quote_time_cairo": "2026-10-27T12:07:00+03:00",
+      "independent_quote_age_minutes": 114.5,
       "independent_quote_reason": "delayed_quote_beyond_freshness_window",
       "engine_action": "WAIT_ENTRY",
       "recovery_state": "WATCH_REVERSAL",
@@ -1013,27 +1014,27 @@
       "symbol": "EFIH",
       "name": "e-finance for Digital and Financial Investments S.A.E.",
       "rank": 7,
-      "score_100": 74.82,
-      "reference_price_egp": 21.79,
+      "score_100": 74.99,
+      "reference_price_egp": 21.9,
       "entry_zone_egp": [
-        20.48,
-        21.46
+        20.59,
+        21.57
       ],
-      "distance_above_zone_pct": 1.54,
-      "technical_invalidation_egp": 19.56,
-      "quality_score_10": 7.77,
+      "distance_above_zone_pct": 1.53,
+      "technical_invalidation_egp": 19.66,
+      "quality_score_10": 7.78,
       "fundamental_score_10": 9.0,
       "valuation_score_10": 7.5,
       "liquidity_score_10": 8.0,
       "cycle_score_10": 3.7,
-      "entry_quality_10": 5.82,
+      "entry_quality_10": 5.92,
       "risk_reward_proxy_10": 8.28,
       "sharia_pass": true,
       "financial_and_sharia_verified": true,
       "independent_quote_verified": false,
       "independent_quote_price_egp": 21.39,
-      "independent_quote_time_cairo": "2026-10-27T12:04:00+03:00",
-      "independent_quote_age_minutes": 115.0,
+      "independent_quote_time_cairo": "2026-10-27T12:07:00+03:00",
+      "independent_quote_age_minutes": 114.5,
       "independent_quote_reason": "delayed_quote_beyond_freshness_window",
       "engine_action": "WAIT_ENTRY",
       "recovery_state": "WATCH_REVERSAL",
@@ -1052,27 +1053,27 @@
       "symbol": "ORWE",
       "name": "Oriental Weavers Carpet",
       "rank": 8,
-      "score_100": 74.58,
-      "reference_price_egp": 24.0,
+      "score_100": 74.78,
+      "reference_price_egp": 24.07,
       "entry_zone_egp": [
         23.14,
         23.84
       ],
-      "distance_above_zone_pct": 0.67,
+      "distance_above_zone_pct": 0.96,
       "technical_invalidation_egp": 22.1,
-      "quality_score_10": 7.74,
+      "quality_score_10": 7.75,
       "fundamental_score_10": 8.8,
       "valuation_score_10": 9.0,
       "liquidity_score_10": 8.0,
       "cycle_score_10": 2.7,
-      "entry_quality_10": 5.45,
+      "entry_quality_10": 5.57,
       "risk_reward_proxy_10": 8.83,
       "sharia_pass": true,
       "financial_and_sharia_verified": true,
       "independent_quote_verified": false,
       "independent_quote_price_egp": 23.9,
-      "independent_quote_time_cairo": "2026-10-27T12:03:00+03:00",
-      "independent_quote_age_minutes": 116.0,
+      "independent_quote_time_cairo": "2026-10-27T12:07:00+03:00",
+      "independent_quote_age_minutes": 114.4,
       "independent_quote_reason": "delayed_quote_beyond_freshness_window",
       "engine_action": "WAIT_ENTRY",
       "recovery_state": "WATCH_REVERSAL",
@@ -1091,27 +1092,27 @@
       "symbol": "MASR",
       "name": "Madinet Masr for Housing & Development",
       "rank": 9,
-      "score_100": 74.06,
-      "reference_price_egp": 6.62,
+      "score_100": 74.05,
+      "reference_price_egp": 6.6,
       "entry_zone_egp": [
-        6.22,
-        6.52
+        6.2,
+        6.5
       ],
-      "distance_above_zone_pct": 1.53,
-      "technical_invalidation_egp": 5.94,
+      "distance_above_zone_pct": 1.54,
+      "technical_invalidation_egp": 5.92,
       "quality_score_10": 7.5,
       "fundamental_score_10": 8.0,
       "valuation_score_10": 8.8,
       "liquidity_score_10": 9.0,
       "cycle_score_10": 3.5,
-      "entry_quality_10": 6.3,
+      "entry_quality_10": 6.26,
       "risk_reward_proxy_10": 8.83,
       "sharia_pass": true,
       "financial_and_sharia_verified": true,
       "independent_quote_verified": false,
       "independent_quote_price_egp": 6.48,
-      "independent_quote_time_cairo": "2026-10-27T12:04:00+03:00",
-      "independent_quote_age_minutes": 115.0,
+      "independent_quote_time_cairo": "2026-10-27T12:06:00+03:00",
+      "independent_quote_age_minutes": 115.5,
       "independent_quote_reason": "delayed_quote_beyond_freshness_window",
       "engine_action": "WAIT_ENTRY",
       "recovery_state": "WATCH_REVERSAL",
@@ -1130,30 +1131,30 @@
       "symbol": "AMOC",
       "name": "Alexandria Mineral Oils Co.",
       "rank": 10,
-      "score_100": 73.52,
-      "reference_price_egp": 13.0,
+      "score_100": 73.62,
+      "reference_price_egp": 13.02,
       "entry_zone_egp": [
-        12.8,
-        13.0
+        12.82,
+        13.02
       ],
       "distance_above_zone_pct": 0,
-      "technical_invalidation_egp": 12.23,
-      "quality_score_10": 7.65,
+      "technical_invalidation_egp": 12.25,
+      "quality_score_10": 7.66,
       "fundamental_score_10": 9.1,
       "valuation_score_10": 7.3,
       "liquidity_score_10": 9.0,
       "cycle_score_10": 4.0,
-      "entry_quality_10": 6.07,
+      "entry_quality_10": 6.13,
       "risk_reward_proxy_10": 6.35,
       "sharia_pass": true,
       "financial_and_sharia_verified": true,
       "independent_quote_verified": false,
-      "independent_quote_price_egp": 13.06,
-      "independent_quote_time_cairo": "2026-10-27T12:04:00+03:00",
-      "independent_quote_age_minutes": 115.0,
+      "independent_quote_price_egp": 13.09,
+      "independent_quote_time_cairo": "2026-10-27T12:07:00+03:00",
+      "independent_quote_age_minutes": 114.4,
       "independent_quote_reason": "delayed_quote_beyond_freshness_window",
-      "engine_action": "ACCUMULATE",
-      "recovery_state": "WAIT",
+      "engine_action": "WAIT_ENTRY",
+      "recovery_state": "WATCH_REVERSAL",
       "engine_buy_trigger": false,
       "falling_knife_risk": false,
       "state": "WAIT_REVERSAL",
@@ -1169,27 +1170,27 @@
       "symbol": "ORAS",
       "name": "Orascom Construction Plc",
       "rank": 17,
-      "score_100": 70.48,
-      "reference_price_egp": 821.99,
+      "score_100": 70.43,
+      "reference_price_egp": 821.0,
       "entry_zone_egp": [
-        809.66,
-        821.99
+        808.68,
+        821.0
       ],
       "distance_above_zone_pct": 0,
-      "technical_invalidation_egp": 773.23,
-      "quality_score_10": 7.56,
+      "technical_invalidation_egp": 772.29,
+      "quality_score_10": 7.55,
       "fundamental_score_10": 8.6,
       "valuation_score_10": 7.2,
       "liquidity_score_10": 10.0,
       "cycle_score_10": 3.7,
-      "entry_quality_10": 7.11,
+      "entry_quality_10": 7.09,
       "risk_reward_proxy_10": 4.7,
       "sharia_pass": true,
       "financial_and_sharia_verified": true,
       "independent_quote_verified": false,
-      "independent_quote_price_egp": 814.55,
-      "independent_quote_time_cairo": "2026-10-27T12:04:00+03:00",
-      "independent_quote_age_minutes": 115.0,
+      "independent_quote_price_egp": 814.65,
+      "independent_quote_time_cairo": "2026-10-27T12:07:00+03:00",
+      "independent_quote_age_minutes": 114.4,
       "independent_quote_reason": "delayed_quote_beyond_freshness_window",
       "engine_action": "ACCUMULATE",
       "recovery_state": "WAIT",
@@ -1207,8 +1208,16 @@
   ],
   "all_stock_states": [
     {
-      "symbol": "EGAL",
+      "symbol": "ADIB",
       "rank": 3,
+      "score": 76.4,
+      "state": "WATCH_QUOTE_PENDING",
+      "sharia_pass": true,
+      "research_complete": true
+    },
+    {
+      "symbol": "EGAL",
+      "rank": 4,
       "score": 76.15,
       "state": "NEAR_ENTRY",
       "sharia_pass": true,
@@ -1217,7 +1226,7 @@
     {
       "symbol": "TMGH",
       "rank": 11,
-      "score": 73.48,
+      "score": 73.52,
       "state": "NEAR_ENTRY",
       "sharia_pass": true,
       "research_complete": true
@@ -1225,7 +1234,7 @@
     {
       "symbol": "JUFO",
       "rank": 16,
-      "score": 70.81,
+      "score": 70.61,
       "state": "NEAR_ENTRY",
       "sharia_pass": true,
       "research_complete": true
@@ -1233,23 +1242,23 @@
     {
       "symbol": "EFID",
       "rank": 2,
-      "score": 77.17,
+      "score": 77.15,
       "state": "WAIT_REVERSAL",
       "sharia_pass": true,
       "research_complete": true
     },
     {
       "symbol": "ETEL",
-      "rank": 4,
-      "score": 76.1,
+      "rank": 5,
+      "score": 76.02,
       "state": "WAIT_REVERSAL",
       "sharia_pass": true,
       "research_complete": true
     },
     {
       "symbol": "HELI",
-      "rank": 5,
-      "score": 75.86,
+      "rank": 6,
+      "score": 75.96,
       "state": "WAIT_REVERSAL",
       "sharia_pass": true,
       "research_complete": true
@@ -1257,7 +1266,7 @@
     {
       "symbol": "EFIH",
       "rank": 7,
-      "score": 74.82,
+      "score": 74.99,
       "state": "WAIT_REVERSAL",
       "sharia_pass": true,
       "research_complete": true
@@ -1265,7 +1274,7 @@
     {
       "symbol": "ORWE",
       "rank": 8,
-      "score": 74.58,
+      "score": 74.78,
       "state": "WAIT_REVERSAL",
       "sharia_pass": true,
       "research_complete": true
@@ -1273,7 +1282,7 @@
     {
       "symbol": "MASR",
       "rank": 9,
-      "score": 74.06,
+      "score": 74.05,
       "state": "WAIT_REVERSAL",
       "sharia_pass": true,
       "research_complete": true
@@ -1281,7 +1290,7 @@
     {
       "symbol": "AMOC",
       "rank": 10,
-      "score": 73.52,
+      "score": 73.62,
       "state": "WAIT_REVERSAL",
       "sharia_pass": true,
       "research_complete": true
@@ -1289,47 +1298,39 @@
     {
       "symbol": "ORAS",
       "rank": 17,
-      "score": 70.48,
+      "score": 70.43,
       "state": "WAIT_REVERSAL",
       "sharia_pass": true,
       "research_complete": true
     },
     {
-      "symbol": "ADIB",
-      "rank": 6,
-      "score": 75.51,
+      "symbol": "COMI",
+      "rank": 13,
+      "score": 71.96,
       "state": "RESEARCH_REQUIRED",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "COMI",
-      "rank": 13,
-      "score": 71.97,
+      "symbol": "MCQE",
+      "rank": 14,
+      "score": 71.21,
       "state": "RESEARCH_REQUIRED",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "FWRY",
-      "rank": 14,
-      "score": 71.0,
+      "rank": 15,
+      "score": 70.99,
       "state": "RESEARCH_REQUIRED",
       "sharia_pass": true,
       "research_complete": false
     },
     {
-      "symbol": "MCQE",
-      "rank": 15,
-      "score": 70.89,
-      "state": "RESEARCH_REQUIRED",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
       "symbol": "MFPC",
       "rank": 1,
-      "score": 77.33,
+      "score": 77.63,
       "state": "NOT_READY",
       "sharia_pass": true,
       "research_complete": true
@@ -1345,7 +1346,7 @@
     {
       "symbol": "EGBE",
       "rank": 19,
-      "score": 68.48,
+      "score": 68.47,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1361,7 +1362,7 @@
     {
       "symbol": "EGCH",
       "rank": 21,
-      "score": 66.77,
+      "score": 66.6,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1369,23 +1370,23 @@
     {
       "symbol": "ISPH",
       "rank": 22,
-      "score": 65.58,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "ARCC",
-      "rank": 23,
-      "score": 65.05,
+      "score": 65.44,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "MBSC",
-      "rank": 24,
+      "rank": 23,
       "score": 64.79,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "ARCC",
+      "rank": 24,
+      "score": 64.52,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1393,7 +1394,7 @@
     {
       "symbol": "PHAR",
       "rank": 25,
-      "score": 62.89,
+      "score": 62.8,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1401,7 +1402,7 @@
     {
       "symbol": "PHDC",
       "rank": 26,
-      "score": 62.6,
+      "score": 62.7,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1409,7 +1410,7 @@
     {
       "symbol": "HDBK",
       "rank": 27,
-      "score": 61.21,
+      "score": 61.68,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1417,7 +1418,7 @@
     {
       "symbol": "EMFD",
       "rank": 28,
-      "score": 60.99,
+      "score": 60.97,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1425,7 +1426,7 @@
     {
       "symbol": "CLHO",
       "rank": 29,
-      "score": 59.8,
+      "score": 59.98,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1433,47 +1434,47 @@
     {
       "symbol": "MPCI",
       "rank": 30,
-      "score": 59.32,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "EXPA",
-      "rank": 31,
-      "score": 58.54,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "CPCI",
-      "rank": 32,
-      "score": 58.38,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "SCEM",
-      "rank": 33,
-      "score": 58.25,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "CIEB",
-      "rank": 35,
-      "score": 58.08,
+      "score": 59.25,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "ACAMD",
+      "rank": 31,
+      "score": 58.23,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "EXPA",
+      "rank": 33,
+      "score": 58.15,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "SCEM",
+      "rank": 34,
+      "score": 58.11,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "CPCI",
+      "rank": 35,
+      "score": 58.07,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "CIEB",
       "rank": 36,
-      "score": 57.84,
+      "score": 58.04,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1481,7 +1482,7 @@
     {
       "symbol": "GOUR",
       "rank": 37,
-      "score": 57.61,
+      "score": 57.58,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1521,7 +1522,7 @@
     {
       "symbol": "SVCE",
       "rank": 42,
-      "score": 56.37,
+      "score": 56.55,
       "state": "NOT_READY",
       "sharia_pass": true,
       "research_complete": true
@@ -1529,31 +1530,31 @@
     {
       "symbol": "CANA",
       "rank": 43,
-      "score": 56.23,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "SAUD",
-      "rank": 44,
-      "score": 56.21,
+      "score": 55.97,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "HRHO",
-      "rank": 45,
-      "score": 56.03,
+      "rank": 44,
+      "score": 55.77,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "OBRI",
+      "rank": 45,
+      "score": 55.63,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "SAUD",
       "rank": 46,
-      "score": 55.51,
+      "score": 55.43,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1561,7 +1562,7 @@
     {
       "symbol": "OCDI",
       "rank": 47,
-      "score": 55.28,
+      "score": 55.27,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1569,7 +1570,7 @@
     {
       "symbol": "UTOP",
       "rank": 48,
-      "score": 55.13,
+      "score": 55.11,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1583,17 +1584,17 @@
       "research_complete": false
     },
     {
-      "symbol": "EEII",
+      "symbol": "VLMRA",
       "rank": 50,
-      "score": 54.23,
+      "score": 54.54,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "VLMRA",
+      "symbol": "EEII",
       "rank": 51,
-      "score": 54.18,
+      "score": 54.23,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1601,23 +1602,23 @@
     {
       "symbol": "ADCI",
       "rank": 52,
-      "score": 54.02,
+      "score": 54.01,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "QNBE",
+      "rank": 53,
+      "score": 53.81,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "IEEC",
-      "rank": 53,
-      "score": 53.27,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "ECAP",
       "rank": 54,
-      "score": 53.23,
+      "score": 53.29,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1625,7 +1626,7 @@
     {
       "symbol": "GTWL",
       "rank": 55,
-      "score": 53.07,
+      "score": 53.16,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1633,39 +1634,39 @@
     {
       "symbol": "BIOC",
       "rank": 56,
-      "score": 53.02,
+      "score": 52.98,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "QNBE",
+      "symbol": "ECAP",
       "rank": 57,
-      "score": 52.78,
+      "score": 52.79,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "CIRA",
+      "rank": 58,
+      "score": 52.71,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "EOSB",
-      "rank": 58,
-      "score": 52.61,
+      "rank": 59,
+      "score": 52.6,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "ELKA",
-      "rank": 59,
-      "score": 52.43,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "ELNA",
       "rank": 60,
-      "score": 52.04,
+      "score": 52.42,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1673,39 +1674,39 @@
     {
       "symbol": "RUBX",
       "rank": 61,
-      "score": 51.94,
+      "score": 52.05,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "ELNA",
+      "rank": 62,
+      "score": 52.04,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "MICH",
-      "rank": 62,
-      "score": 51.68,
+      "rank": 63,
+      "score": 51.99,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "OLFI",
-      "rank": 63,
-      "score": 51.63,
+      "rank": 64,
+      "score": 51.65,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "ASPI",
-      "rank": 64,
-      "score": 51.41,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "ZMID",
       "rank": 65,
-      "score": 51.38,
+      "score": 51.47,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1713,23 +1714,23 @@
     {
       "symbol": "MOED",
       "rank": 66,
-      "score": 51.38,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "CIRA",
-      "rank": 67,
-      "score": 51.32,
+      "score": 51.36,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "RMDA",
-      "rank": 68,
+      "rank": 67,
       "score": 51.3,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "ZMID",
+      "rank": 68,
+      "score": 51.21,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1737,7 +1738,7 @@
     {
       "symbol": "NINH",
       "rank": 69,
-      "score": 50.97,
+      "score": 50.98,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1745,7 +1746,7 @@
     {
       "symbol": "SCTS",
       "rank": 70,
-      "score": 50.63,
+      "score": 50.62,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1753,7 +1754,7 @@
     {
       "symbol": "MOIL",
       "rank": 71,
-      "score": 50.6,
+      "score": 50.59,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1761,23 +1762,23 @@
     {
       "symbol": "MHOT",
       "rank": 72,
-      "score": 50.57,
+      "score": 50.56,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "NARE",
+      "rank": 74,
+      "score": 50.26,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "CPME",
-      "rank": 74,
-      "score": 50.06,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "WKOL",
       "rank": 75,
-      "score": 50.01,
+      "score": 50.04,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1785,7 +1786,7 @@
     {
       "symbol": "OCPH",
       "rank": 76,
-      "score": 49.91,
+      "score": 49.93,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1799,24 +1800,32 @@
       "research_complete": false
     },
     {
-      "symbol": "FERC",
+      "symbol": "WKOL",
       "rank": 78,
+      "score": 49.87,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "FERC",
+      "rank": 79,
       "score": 49.78,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "EPCO",
-      "rank": 79,
-      "score": 49.65,
+      "symbol": "AXPH",
+      "rank": 80,
+      "score": 49.68,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "UNIP",
-      "rank": 80,
+      "rank": 81,
       "score": 49.61,
       "state": "NOT_READY",
       "sharia_pass": false,
@@ -1824,7 +1833,7 @@
     },
     {
       "symbol": "AREH",
-      "rank": 81,
+      "rank": 82,
       "score": 49.6,
       "state": "NOT_READY",
       "sharia_pass": false,
@@ -1832,14 +1841,6 @@
     },
     {
       "symbol": "ELSH",
-      "rank": 82,
-      "score": 49.59,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "AXPH",
       "rank": 83,
       "score": 49.5,
       "state": "NOT_READY",
@@ -1855,73 +1856,73 @@
       "research_complete": false
     },
     {
-      "symbol": "EASB",
+      "symbol": "EPCO",
       "rank": 85,
-      "score": 49.32,
+      "score": 49.47,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "EASB",
+      "rank": 86,
+      "score": 49.31,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "SCFM",
-      "rank": 86,
-      "score": 49.26,
+      "rank": 87,
+      "score": 49.25,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "MBEG",
-      "rank": 87,
-      "score": 49.2,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "NARE",
       "rank": 88,
-      "score": 49.06,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "RAKT",
-      "rank": 89,
-      "score": 48.98,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "SKPC",
-      "rank": 90,
-      "score": 48.89,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "ETRS",
-      "rank": 91,
-      "score": 48.63,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "GIHD",
-      "rank": 92,
-      "score": 48.61,
+      "score": 49.22,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "KABO",
+      "rank": 89,
+      "score": 49.07,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "RAKT",
+      "rank": 90,
+      "score": 48.97,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "SKPC",
+      "rank": 91,
+      "score": 48.71,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "ETRS",
+      "rank": 92,
+      "score": 48.62,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "GIHD",
       "rank": 93,
-      "score": 48.55,
+      "score": 48.6,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1929,6 +1930,14 @@
     {
       "symbol": "MTIE",
       "rank": 94,
+      "score": 48.59,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "EBSC",
+      "rank": 95,
       "score": 48.4,
       "state": "NOT_READY",
       "sharia_pass": false,
@@ -1936,16 +1945,8 @@
     },
     {
       "symbol": "EGREF",
-      "rank": 95,
-      "score": 48.34,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "FIRE",
       "rank": 96,
-      "score": 48.28,
+      "score": 48.34,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -1953,55 +1954,55 @@
     {
       "symbol": "OFH",
       "rank": 97,
-      "score": 48.2,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "ALUM",
-      "rank": 98,
-      "score": 48.2,
+      "score": 48.25,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "UNIT",
-      "rank": 99,
+      "rank": 98,
       "score": 48.08,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "GRCA",
+      "symbol": "CAED",
+      "rank": 99,
+      "score": 47.9,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "ALUM",
       "rank": 100,
+      "score": 47.88,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "GRCA",
+      "rank": 101,
       "score": 47.83,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "CAED",
-      "rank": 101,
-      "score": 47.78,
+      "symbol": "CRST",
+      "rank": 102,
+      "score": 47.73,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "NDRL",
-      "rank": 102,
-      "score": 47.69,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "CRST",
       "rank": 103,
-      "score": 47.68,
+      "score": 47.69,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -2017,78 +2018,70 @@
     {
       "symbol": "RREI",
       "rank": 105,
-      "score": 47.6,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "EBSC",
-      "rank": 106,
-      "score": 47.53,
+      "score": 47.47,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "TAQA",
-      "rank": 107,
+      "rank": 106,
       "score": 47.39,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "CEFM",
-      "rank": 108,
-      "score": 47.36,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "TALM",
-      "rank": 109,
-      "score": 47.33,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "ICFC",
-      "rank": 110,
-      "score": 47.31,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
       "symbol": "NIPH",
-      "rank": 111,
-      "score": 47.28,
+      "rank": 107,
+      "score": 47.25,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "AJWA",
-      "rank": 112,
+      "rank": 108,
       "score": 47.21,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
+      "symbol": "CEFM",
+      "rank": 109,
+      "score": 47.17,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "GGCC",
+      "rank": 110,
+      "score": 47.13,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "SDTI",
+      "rank": 111,
+      "score": 47.1,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
       "symbol": "DSCW",
-      "rank": 113,
-      "score": 47.09,
+      "rank": 112,
+      "score": 47.08,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "ACGC",
-      "rank": 114,
+      "rank": 113,
       "score": 47.02,
       "state": "NOT_READY",
       "sharia_pass": false,
@@ -2096,95 +2089,95 @@
     },
     {
       "symbol": "AMES",
-      "rank": 115,
+      "rank": 114,
       "score": 46.97,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "GGCC",
-      "rank": 116,
-      "score": 46.73,
+      "symbol": "TALM",
+      "rank": 115,
+      "score": 46.82,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "SNFC",
-      "rank": 117,
-      "score": 46.69,
+      "rank": 116,
+      "score": 46.8,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "LUTS",
-      "rank": 118,
+      "rank": 117,
       "score": 46.51,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "ATQA",
-      "rank": 119,
-      "score": 46.36,
+      "symbol": "EALR",
+      "rank": 118,
+      "score": 46.5,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "AIFI",
+      "rank": 119,
+      "score": 46.34,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "ELEC",
       "rank": 120,
-      "score": 46.31,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "SDTI",
-      "rank": 121,
-      "score": 46.14,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "TWSA",
-      "rank": 122,
-      "score": 46.1,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "ACAP",
-      "rank": 123,
-      "score": 46.1,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "SPIN",
-      "rank": 124,
-      "score": 46.09,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "EALR",
-      "rank": 125,
-      "score": 46.06,
+      "score": 46.3,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "MOIN",
-      "rank": 126,
+      "rank": 121,
+      "score": 46.22,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "ACAP",
+      "rank": 122,
+      "score": 46.09,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "SPIN",
+      "rank": 123,
+      "score": 46.08,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "ICFC",
+      "rank": 124,
+      "score": 46.07,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "TWSA",
+      "rank": 125,
       "score": 46.05,
       "state": "NOT_READY",
       "sharia_pass": false,
@@ -2192,23 +2185,15 @@
     },
     {
       "symbol": "ICID",
-      "rank": 127,
-      "score": 46.02,
+      "rank": 126,
+      "score": 46.01,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "MENA",
-      "rank": 128,
-      "score": 45.98,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "ISMA",
-      "rank": 129,
+      "rank": 127,
       "score": 45.97,
       "state": "NOT_READY",
       "sharia_pass": false,
@@ -2216,16 +2201,32 @@
     },
     {
       "symbol": "EGSA",
-      "rank": 130,
+      "rank": 128,
       "score": 45.91,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "PHGC",
+      "symbol": "ISMA",
+      "rank": 129,
+      "score": 45.78,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "ADRI",
+      "rank": 130,
+      "score": 45.77,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "FIRE",
       "rank": 131,
-      "score": 45.89,
+      "score": 45.7,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -2233,7 +2234,7 @@
     {
       "symbol": "ACTF",
       "rank": 132,
-      "score": 45.59,
+      "score": 45.58,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -2247,7 +2248,7 @@
       "research_complete": false
     },
     {
-      "symbol": "GGRN",
+      "symbol": "PHGC",
       "rank": 134,
       "score": 45.53,
       "state": "NOT_READY",
@@ -2255,9 +2256,9 @@
       "research_complete": false
     },
     {
-      "symbol": "ADRI",
+      "symbol": "GGRN",
       "rank": 135,
-      "score": 45.53,
+      "score": 45.52,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -2273,7 +2274,7 @@
     {
       "symbol": "GTEX",
       "rank": 137,
-      "score": 45.34,
+      "score": 45.33,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -2281,23 +2282,23 @@
     {
       "symbol": "UEFM",
       "rank": 138,
-      "score": 45.32,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "EGS3I0S1C019",
-      "rank": 139,
-      "score": 45.23,
+      "score": 45.3,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "PHTV",
+      "rank": 139,
+      "score": 45.18,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "EGS3I0S1C019",
       "rank": 140,
-      "score": 45.19,
+      "score": 45.06,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -2313,47 +2314,47 @@
     {
       "symbol": "KZPC",
       "rank": 142,
-      "score": 45.03,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "ELEC",
-      "rank": 143,
       "score": 45.02,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "HBCO",
+      "symbol": "AMIA",
+      "rank": 143,
+      "score": 44.94,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "ATQA",
       "rank": 144,
+      "score": 44.93,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "EDFM",
+      "rank": 145,
+      "score": 44.88,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "HBCO",
+      "rank": 146,
       "score": 44.75,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "GDWA",
-      "rank": 145,
-      "score": 44.73,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
       "symbol": "MISR",
-      "rank": 146,
-      "score": 44.73,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "FTNS",
       "rank": 147,
-      "score": 44.71,
+      "score": 44.73,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -2361,7 +2362,7 @@
     {
       "symbol": "ADPC",
       "rank": 148,
-      "score": 44.62,
+      "score": 44.61,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -2369,7 +2370,7 @@
     {
       "symbol": "INEG",
       "rank": 149,
-      "score": 44.61,
+      "score": 44.6,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -2377,7 +2378,7 @@
     {
       "symbol": "RTVC",
       "rank": 150,
-      "score": 44.58,
+      "score": 44.6,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -2385,13 +2386,13 @@
     {
       "symbol": "ISMQ",
       "rank": 151,
-      "score": 44.55,
+      "score": 44.53,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "NAHO",
+      "symbol": "GDWA",
       "rank": 152,
       "score": 44.41,
       "state": "NOT_READY",
@@ -2399,9 +2400,9 @@
       "research_complete": false
     },
     {
-      "symbol": "AMIA",
+      "symbol": "NAHO",
       "rank": 153,
-      "score": 44.38,
+      "score": 44.41,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -2415,33 +2416,33 @@
       "research_complete": false
     },
     {
-      "symbol": "EDFM",
-      "rank": 155,
-      "score": 44.32,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
       "symbol": "DGTZ",
-      "rank": 156,
-      "score": 44.2,
+      "rank": 155,
+      "score": 44.19,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "KWIN",
-      "rank": 157,
-      "score": 44.17,
+      "rank": 156,
+      "score": 44.14,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "PRDC",
+      "rank": 157,
+      "score": 44.11,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "MCRO",
       "rank": 158,
-      "score": 44.12,
+      "score": 44.03,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -2449,22 +2450,14 @@
     {
       "symbol": "SPMD",
       "rank": 159,
-      "score": 44.09,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "MCRO",
-      "rank": 160,
-      "score": 44.04,
+      "score": 43.91,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "CSAG",
-      "rank": 161,
+      "rank": 160,
       "score": 43.74,
       "state": "NOT_READY",
       "sharia_pass": false,
@@ -2472,15 +2465,15 @@
     },
     {
       "symbol": "LKGP",
-      "rank": 162,
-      "score": 43.65,
+      "rank": 161,
+      "score": 43.62,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "DEIN",
-      "rank": 163,
+      "rank": 162,
       "score": 43.46,
       "state": "NOT_READY",
       "sharia_pass": false,
@@ -2488,24 +2481,32 @@
     },
     {
       "symbol": "SMPP",
-      "rank": 164,
+      "rank": 163,
       "score": 43.44,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "MAAL",
-      "rank": 165,
-      "score": 43.33,
+      "symbol": "SNFI",
+      "rank": 164,
+      "score": 43.28,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "SNFI",
+      "symbol": "RAYA",
+      "rank": 165,
+      "score": 43.24,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "PACH",
       "rank": 166,
-      "score": 43.31,
+      "score": 43.23,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -2513,23 +2514,23 @@
     {
       "symbol": "TYCN",
       "rank": 167,
-      "score": 43.3,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "PACH",
-      "rank": 168,
-      "score": 43.24,
+      "score": 43.16,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "IRON",
+      "rank": 168,
+      "score": 43.13,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "AIH",
       "rank": 169,
-      "score": 43.23,
+      "score": 43.12,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -2537,70 +2538,54 @@
     {
       "symbol": "INFI",
       "rank": 170,
-      "score": 43.19,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "AIH",
-      "rank": 171,
-      "score": 43.03,
+      "score": 43.06,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "MMAT",
-      "rank": 172,
-      "score": 42.94,
+      "rank": 171,
+      "score": 42.93,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "MILS",
-      "rank": 173,
-      "score": 42.83,
+      "symbol": "MAAL",
+      "rank": 172,
+      "score": 42.85,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "EGAS",
-      "rank": 174,
+      "rank": 173,
       "score": 42.82,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "RAYA",
-      "rank": 175,
-      "score": 42.71,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
       "symbol": "MEPA",
-      "rank": 176,
+      "rank": 174,
       "score": 42.7,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "OIH",
-      "rank": 177,
-      "score": 42.67,
+      "symbol": "IRAX",
+      "rank": 175,
+      "score": 42.65,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "IRAX",
-      "rank": 178,
+      "symbol": "FTNS",
+      "rank": 176,
       "score": 42.65,
       "state": "NOT_READY",
       "sharia_pass": false,
@@ -2608,39 +2593,31 @@
     },
     {
       "symbol": "NBKE",
-      "rank": 179,
-      "score": 42.55,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "PRMH",
-      "rank": 180,
+      "rank": 177,
       "score": 42.54,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "AIDC",
-      "rank": 181,
-      "score": 42.25,
+      "symbol": "PRMH",
+      "rank": 178,
+      "score": 42.53,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "EGS370O1C013",
-      "rank": 182,
-      "score": 42.25,
+      "symbol": "AIDC",
+      "rank": 179,
+      "score": 42.34,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "ASCM",
-      "rank": 183,
+      "rank": 180,
       "score": 42.2,
       "state": "NOT_READY",
       "sharia_pass": false,
@@ -2648,23 +2625,23 @@
     },
     {
       "symbol": "MPRC",
-      "rank": 184,
-      "score": 42.11,
+      "rank": 181,
+      "score": 42.1,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "ALEX",
-      "rank": 185,
-      "score": 42.09,
+      "rank": 182,
+      "score": 42.08,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "AMPI",
-      "rank": 186,
+      "rank": 183,
       "score": 41.98,
       "state": "NOT_READY",
       "sharia_pass": false,
@@ -2672,15 +2649,15 @@
     },
     {
       "symbol": "CFGH",
-      "rank": 187,
-      "score": 41.88,
+      "rank": 184,
+      "score": 41.87,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "SEIG",
-      "rank": 188,
+      "rank": 185,
       "score": 41.84,
       "state": "NOT_READY",
       "sharia_pass": false,
@@ -2688,7 +2665,7 @@
     },
     {
       "symbol": "GPPL",
-      "rank": 189,
+      "rank": 186,
       "score": 41.81,
       "state": "NOT_READY",
       "sharia_pass": false,
@@ -2696,119 +2673,79 @@
     },
     {
       "symbol": "GTHE",
-      "rank": 190,
+      "rank": 187,
       "score": 41.74,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "CCRS",
-      "rank": 191,
-      "score": 41.72,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "EITP",
-      "rank": 192,
-      "score": 41.67,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "MFSC",
-      "rank": 193,
-      "score": 41.61,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
       "symbol": "ZEOT",
-      "rank": 194,
+      "rank": 188,
       "score": 41.55,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "ENGC",
-      "rank": 195,
-      "score": 41.18,
+      "symbol": "CCRS",
+      "rank": 189,
+      "score": 41.49,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "LCSW",
-      "rank": 196,
-      "score": 41.15,
+      "symbol": "OIH",
+      "rank": 190,
+      "score": 41.42,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "EITP",
+      "rank": 191,
+      "score": 41.4,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "ENGC",
+      "rank": 192,
+      "score": 41.17,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "MOSC",
-      "rank": 197,
-      "score": 41.11,
+      "rank": 193,
+      "score": 41.13,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "SIPC",
-      "rank": 198,
-      "score": 41.06,
+      "rank": 194,
+      "score": 41.05,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "NCGC",
-      "rank": 199,
-      "score": 41.06,
+      "rank": 195,
+      "score": 41.05,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "EGOTH",
-      "rank": 200,
-      "score": 40.89,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "OCAP",
-      "rank": 201,
-      "score": 40.89,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "ENPI",
-      "rank": 202,
-      "score": 40.89,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "ACFR",
-      "rank": 203,
-      "score": 40.89,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "KNGC",
-      "rank": 204,
+      "symbol": "MITR",
+      "rank": 196,
       "score": 40.89,
       "state": "NOT_READY",
       "sharia_pass": false,
@@ -2816,7 +2753,23 @@
     },
     {
       "symbol": "EGS72L31C011",
-      "rank": 205,
+      "rank": 197,
+      "score": 40.89,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "MMHC",
+      "rank": 198,
+      "score": 40.89,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "POCO",
+      "rank": 199,
       "score": 40.89,
       "state": "NOT_READY",
       "sharia_pass": false,
@@ -2824,6 +2777,54 @@
     },
     {
       "symbol": "NMIN",
+      "rank": 200,
+      "score": 40.89,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "GEOS",
+      "rank": 201,
+      "score": 40.89,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "EFAC",
+      "rank": 202,
+      "score": 40.89,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "SINA",
+      "rank": 203,
+      "score": 40.89,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "GROV",
+      "rank": 204,
+      "score": 40.89,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "YAYT",
+      "rank": 205,
+      "score": 40.89,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "EGOTH",
       "rank": 206,
       "score": 40.89,
       "state": "NOT_READY",
@@ -2839,7 +2840,7 @@
       "research_complete": false
     },
     {
-      "symbol": "MMHC",
+      "symbol": "ACFR",
       "rank": 208,
       "score": 40.89,
       "state": "NOT_READY",
@@ -2847,7 +2848,7 @@
       "research_complete": false
     },
     {
-      "symbol": "EFAC",
+      "symbol": "NFCI",
       "rank": 209,
       "score": 40.89,
       "state": "NOT_READY",
@@ -2855,7 +2856,7 @@
       "research_complete": false
     },
     {
-      "symbol": "EGS65101C015",
+      "symbol": "EGWA",
       "rank": 210,
       "score": 40.89,
       "state": "NOT_READY",
@@ -2863,7 +2864,7 @@
       "research_complete": false
     },
     {
-      "symbol": "CID",
+      "symbol": "HDST",
       "rank": 211,
       "score": 40.89,
       "state": "NOT_READY",
@@ -2871,7 +2872,7 @@
       "research_complete": false
     },
     {
-      "symbol": "DCCC",
+      "symbol": "ENPI",
       "rank": 212,
       "score": 40.89,
       "state": "NOT_READY",
@@ -2879,7 +2880,7 @@
       "research_complete": false
     },
     {
-      "symbol": "POCO",
+      "symbol": "KNGC",
       "rank": 213,
       "score": 40.89,
       "state": "NOT_READY",
@@ -2887,7 +2888,7 @@
       "research_complete": false
     },
     {
-      "symbol": "ELAB",
+      "symbol": "SIEG",
       "rank": 214,
       "score": 40.89,
       "state": "NOT_READY",
@@ -2895,7 +2896,7 @@
       "research_complete": false
     },
     {
-      "symbol": "EGS65621C012",
+      "symbol": "PMSC",
       "rank": 215,
       "score": 40.89,
       "state": "NOT_READY",
@@ -2903,7 +2904,7 @@
       "research_complete": false
     },
     {
-      "symbol": "HDST",
+      "symbol": "CID",
       "rank": 216,
       "score": 40.89,
       "state": "NOT_READY",
@@ -2911,7 +2912,7 @@
       "research_complete": false
     },
     {
-      "symbol": "YAYT",
+      "symbol": "EGS65861C014",
       "rank": 217,
       "score": 40.89,
       "state": "NOT_READY",
@@ -2919,7 +2920,7 @@
       "research_complete": false
     },
     {
-      "symbol": "NFCI",
+      "symbol": "NBCC",
       "rank": 218,
       "score": 40.89,
       "state": "NOT_READY",
@@ -2927,7 +2928,7 @@
       "research_complete": false
     },
     {
-      "symbol": "PMSC",
+      "symbol": "OCAP",
       "rank": 219,
       "score": 40.89,
       "state": "NOT_READY",
@@ -2935,7 +2936,7 @@
       "research_complete": false
     },
     {
-      "symbol": "EGS65861C014",
+      "symbol": "ELAB",
       "rank": 220,
       "score": 40.89,
       "state": "NOT_READY",
@@ -2943,7 +2944,7 @@
       "research_complete": false
     },
     {
-      "symbol": "ANCC",
+      "symbol": "DCCC",
       "rank": 221,
       "score": 40.89,
       "state": "NOT_READY",
@@ -2951,7 +2952,7 @@
       "research_complete": false
     },
     {
-      "symbol": "MITR",
+      "symbol": "EGS65621C012",
       "rank": 222,
       "score": 40.89,
       "state": "NOT_READY",
@@ -2959,7 +2960,7 @@
       "research_complete": false
     },
     {
-      "symbol": "EGWA",
+      "symbol": "ANCC",
       "rank": 223,
       "score": 40.89,
       "state": "NOT_READY",
@@ -2967,7 +2968,7 @@
       "research_complete": false
     },
     {
-      "symbol": "GROV",
+      "symbol": "MLIC",
       "rank": 224,
       "score": 40.89,
       "state": "NOT_READY",
@@ -2975,7 +2976,7 @@
       "research_complete": false
     },
     {
-      "symbol": "NAMI",
+      "symbol": "EGS65101C015",
       "rank": 225,
       "score": 40.89,
       "state": "NOT_READY",
@@ -2983,7 +2984,7 @@
       "research_complete": false
     },
     {
-      "symbol": "NBCC",
+      "symbol": "NAMI",
       "rank": 226,
       "score": 40.89,
       "state": "NOT_READY",
@@ -2991,7 +2992,7 @@
       "research_complete": false
     },
     {
-      "symbol": "SIEG",
+      "symbol": "ALXD",
       "rank": 227,
       "score": 40.89,
       "state": "NOT_READY",
@@ -2999,48 +3000,24 @@
       "research_complete": false
     },
     {
-      "symbol": "ALXD",
+      "symbol": "MILS",
       "rank": 228,
-      "score": 40.89,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "SINA",
-      "rank": 229,
-      "score": 40.89,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "GEOS",
-      "rank": 230,
-      "score": 40.89,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "MLIC",
-      "rank": 231,
-      "score": 40.89,
+      "score": 40.81,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "WCDF",
-      "rank": 232,
-      "score": 40.74,
+      "rank": 229,
+      "score": 40.73,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "SPHT",
-      "rank": 233,
+      "rank": 230,
       "score": 40.66,
       "state": "NOT_READY",
       "sharia_pass": false,
@@ -3048,32 +3025,56 @@
     },
     {
       "symbol": "WATP",
-      "rank": 234,
+      "rank": 231,
       "score": 40.65,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
+      "symbol": "EGS370O1C013",
+      "rank": 232,
+      "score": 40.63,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
       "symbol": "EGS3E071C013-EGP",
-      "rank": 235,
+      "rank": 233,
       "score": 40.56,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
+      "symbol": "MFSC",
+      "rank": 234,
+      "score": 40.54,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
       "symbol": "SMFR",
-      "rank": 236,
-      "score": 40.53,
+      "rank": 235,
+      "score": 40.52,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "GSSC",
+      "rank": 236,
+      "score": 40.35,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "LCSW",
       "rank": 237,
-      "score": 40.36,
+      "score": 40.33,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -3081,7 +3082,7 @@
     {
       "symbol": "EGS30AJ1C016-EGP",
       "rank": 238,
-      "score": 40.21,
+      "score": 40.2,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -3089,7 +3090,7 @@
     {
       "symbol": "TORA",
       "rank": 239,
-      "score": 40.0,
+      "score": 39.99,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -3097,7 +3098,7 @@
     {
       "symbol": "APPC",
       "rank": 240,
-      "score": 39.44,
+      "score": 39.43,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -3105,7 +3106,7 @@
     {
       "symbol": "EGS659O1C015",
       "rank": 241,
-      "score": 39.2,
+      "score": 39.19,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -3121,7 +3122,7 @@
     {
       "symbol": "SUCE",
       "rank": 243,
-      "score": 38.88,
+      "score": 38.87,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -3137,7 +3138,7 @@
     {
       "symbol": "GPIM",
       "rank": 245,
-      "score": 38.19,
+      "score": 38.4,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -3145,7 +3146,7 @@
     {
       "symbol": "MIPH",
       "rank": 247,
-      "score": 38.06,
+      "score": 38.08,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -3153,22 +3154,14 @@
     {
       "symbol": "TRTO",
       "rank": 248,
-      "score": 37.15,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "COPR",
-      "rank": 249,
-      "score": 36.89,
+      "score": 37.14,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "COSG",
-      "rank": 250,
+      "rank": 249,
       "score": 36.85,
       "state": "NOT_READY",
       "sharia_pass": false,
@@ -3176,24 +3169,32 @@
     },
     {
       "symbol": "CNFN",
+      "rank": 250,
+      "score": 36.77,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "COPR",
       "rank": 251,
-      "score": 36.78,
+      "score": 36.67,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "NHPS",
+      "rank": 252,
+      "score": 36.63,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "AFMC",
-      "rank": 252,
-      "score": 36.52,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "RACC",
       "rank": 253,
-      "score": 36.19,
+      "score": 36.5,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -3215,16 +3216,24 @@
       "research_complete": false
     },
     {
-      "symbol": "NHPS",
+      "symbol": "VERT",
       "rank": 256,
-      "score": 35.75,
+      "score": 36.04,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "RACC",
+      "rank": 257,
+      "score": 35.67,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "UBEE",
-      "rank": 257,
+      "rank": 258,
       "score": 35.66,
       "state": "NOT_READY",
       "sharia_pass": false,
@@ -3232,16 +3241,8 @@
     },
     {
       "symbol": "TANM",
-      "rank": 258,
-      "score": 35.46,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "VERT",
       "rank": 259,
-      "score": 35.08,
+      "score": 35.45,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -3249,7 +3250,15 @@
     {
       "symbol": "IBCT",
       "rank": 260,
-      "score": 34.84,
+      "score": 34.83,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "AMER",
+      "rank": 261,
+      "score": 34.7,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -3265,7 +3274,7 @@
     {
       "symbol": "BINV",
       "rank": 263,
-      "score": 34.11,
+      "score": 34.12,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -3281,7 +3290,7 @@
     {
       "symbol": "VALU",
       "rank": 265,
-      "score": 33.97,
+      "score": 33.98,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -3289,15 +3298,15 @@
     {
       "symbol": "AMII",
       "rank": 266,
-      "score": 33.84,
+      "score": 33.81,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "AMER",
+      "symbol": "IDRE",
       "rank": 267,
-      "score": 33.74,
+      "score": 33.76,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -3305,15 +3314,7 @@
     {
       "symbol": "MPCO",
       "rank": 268,
-      "score": 33.38,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "ROTO",
-      "rank": 269,
-      "score": 33.01,
+      "score": 33.37,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -3321,7 +3322,7 @@
     {
       "symbol": "FNAR",
       "rank": 270,
-      "score": 32.92,
+      "score": 32.91,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -3329,47 +3330,47 @@
     {
       "symbol": "ATLC",
       "rank": 271,
-      "score": 32.44,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "DAPH",
-      "rank": 272,
-      "score": 32.39,
+      "score": 32.84,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "ODIN",
+      "rank": 272,
+      "score": 32.63,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "ROTO",
       "rank": 273,
-      "score": 32.33,
+      "score": 32.57,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "DAPH",
+      "rank": 274,
+      "score": 32.41,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "AALR",
-      "rank": 274,
-      "score": 31.91,
+      "rank": 275,
+      "score": 31.88,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "NCCW",
-      "rank": 275,
-      "score": 31.81,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "IDRE",
       "rank": 276,
-      "score": 31.73,
+      "score": 31.8,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -3377,7 +3378,7 @@
     {
       "symbol": "APSW",
       "rank": 277,
-      "score": 31.42,
+      "score": 31.41,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -3393,7 +3394,7 @@
     {
       "symbol": "NEDA",
       "rank": 279,
-      "score": 31.07,
+      "score": 31.05,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -3416,32 +3417,32 @@
     },
     {
       "symbol": "ELWA",
-      "rank": 282,
-      "score": 30.72,
+      "rank": 283,
+      "score": 30.71,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "AFDI",
-      "rank": 283,
-      "score": 30.7,
-      "state": "NOT_READY",
-      "sharia_pass": false,
-      "research_complete": false
-    },
-    {
-      "symbol": "BTFH",
-      "rank": 285,
-      "score": 29.5,
+      "rank": 284,
+      "score": 30.69,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "MEGM",
-      "rank": 286,
+      "rank": 285,
       "score": 29.41,
+      "state": "NOT_READY",
+      "sharia_pass": false,
+      "research_complete": false
+    },
+    {
+      "symbol": "ICLE",
+      "rank": 286,
+      "score": 29.26,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -3449,15 +3450,15 @@
     {
       "symbol": "KRDI",
       "rank": 287,
-      "score": 29.29,
+      "score": 29.2,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
-      "symbol": "ICLE",
+      "symbol": "BTFH",
       "rank": 288,
-      "score": 29.26,
+      "score": 29.06,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -3489,15 +3490,15 @@
     {
       "symbol": "CERA",
       "rank": 292,
-      "score": 27.6,
+      "score": 26.96,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "RKAZ",
-      "rank": 294,
-      "score": 22.0,
+      "rank": 295,
+      "score": 21.61,
       "state": "NOT_READY",
       "sharia_pass": false,
       "research_complete": false
@@ -3505,15 +3506,15 @@
     {
       "symbol": "BONY",
       "rank": 12,
-      "score": 72.18,
+      "score": 72.5,
       "state": "EXCLUDED",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "GBCO",
-      "rank": 34,
-      "score": 58.13,
+      "rank": 32,
+      "score": 58.21,
       "state": "EXCLUDED",
       "sharia_pass": false,
       "research_complete": false
@@ -3521,7 +3522,7 @@
     {
       "symbol": "ORHD",
       "rank": 73,
-      "score": 50.47,
+      "score": 50.29,
       "state": "EXCLUDED",
       "sharia_pass": true,
       "research_complete": false
@@ -3529,23 +3530,23 @@
     {
       "symbol": "POUL",
       "rank": 246,
-      "score": 38.15,
+      "score": 38.28,
       "state": "EXCLUDED",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "DTPP",
-      "rank": 261,
-      "score": 34.67,
+      "rank": 269,
+      "score": 33.27,
       "state": "EXCLUDED",
       "sharia_pass": false,
       "research_complete": false
     },
     {
       "symbol": "KORA",
-      "rank": 284,
-      "score": 30.63,
+      "rank": 282,
+      "score": 30.72,
       "state": "EXCLUDED",
       "sharia_pass": false,
       "research_complete": false
@@ -3560,14 +3561,15 @@
     },
     {
       "symbol": "HALN",
-      "rank": 295,
-      "score": 21.75,
+      "rank": 294,
+      "score": 21.67,
       "state": "EXCLUDED",
       "sharia_pass": false,
       "research_complete": false
     }
   ],
   "state_by_symbol": {
+    "ADIB": "WATCH_QUOTE_PENDING",
     "EGAL": "NEAR_ENTRY",
     "TMGH": "NEAR_ENTRY",
     "JUFO": "NEAR_ENTRY",
@@ -3579,29 +3581,28 @@
     "MASR": "WAIT_REVERSAL",
     "AMOC": "WAIT_REVERSAL",
     "ORAS": "WAIT_REVERSAL",
-    "ADIB": "RESEARCH_REQUIRED",
     "COMI": "RESEARCH_REQUIRED",
-    "FWRY": "RESEARCH_REQUIRED",
     "MCQE": "RESEARCH_REQUIRED",
+    "FWRY": "RESEARCH_REQUIRED",
     "MFPC": "NOT_READY",
     "FAITA": "NOT_READY",
     "EGBE": "NOT_READY",
     "ABUK": "NOT_READY",
     "EGCH": "NOT_READY",
     "ISPH": "NOT_READY",
-    "ARCC": "NOT_READY",
     "MBSC": "NOT_READY",
+    "ARCC": "NOT_READY",
     "PHAR": "NOT_READY",
     "PHDC": "NOT_READY",
     "HDBK": "NOT_READY",
     "EMFD": "NOT_READY",
     "CLHO": "NOT_READY",
     "MPCI": "NOT_READY",
-    "EXPA": "NOT_READY",
-    "CPCI": "NOT_READY",
-    "SCEM": "NOT_READY",
-    "CIEB": "NOT_READY",
     "ACAMD": "NOT_READY",
+    "EXPA": "NOT_READY",
+    "SCEM": "NOT_READY",
+    "CPCI": "NOT_READY",
+    "CIEB": "NOT_READY",
     "GOUR": "NOT_READY",
     "FAIT": "NOT_READY",
     "SWDY": "NOT_READY",
@@ -3609,144 +3610,141 @@
     "CCAP": "NOT_READY",
     "SVCE": "NOT_READY",
     "CANA": "NOT_READY",
-    "SAUD": "NOT_READY",
     "HRHO": "NOT_READY",
     "OBRI": "NOT_READY",
+    "SAUD": "NOT_READY",
     "OCDI": "NOT_READY",
     "UTOP": "NOT_READY",
     "ALCN": "NOT_READY",
-    "EEII": "NOT_READY",
     "VLMRA": "NOT_READY",
+    "EEII": "NOT_READY",
     "ADCI": "NOT_READY",
+    "QNBE": "NOT_READY",
     "IEEC": "NOT_READY",
-    "ECAP": "NOT_READY",
     "GTWL": "NOT_READY",
     "BIOC": "NOT_READY",
-    "QNBE": "NOT_READY",
+    "ECAP": "NOT_READY",
+    "CIRA": "NOT_READY",
     "EOSB": "NOT_READY",
     "ELKA": "NOT_READY",
-    "ELNA": "NOT_READY",
     "RUBX": "NOT_READY",
+    "ELNA": "NOT_READY",
     "MICH": "NOT_READY",
     "OLFI": "NOT_READY",
     "ASPI": "NOT_READY",
-    "ZMID": "NOT_READY",
     "MOED": "NOT_READY",
-    "CIRA": "NOT_READY",
     "RMDA": "NOT_READY",
+    "ZMID": "NOT_READY",
     "NINH": "NOT_READY",
     "SCTS": "NOT_READY",
     "MOIL": "NOT_READY",
     "MHOT": "NOT_READY",
+    "NARE": "NOT_READY",
     "CPME": "NOT_READY",
-    "WKOL": "NOT_READY",
     "OCPH": "NOT_READY",
     "VLMR": "NOT_READY",
+    "WKOL": "NOT_READY",
     "FERC": "NOT_READY",
-    "EPCO": "NOT_READY",
+    "AXPH": "NOT_READY",
     "UNIP": "NOT_READY",
     "AREH": "NOT_READY",
     "ELSH": "NOT_READY",
-    "AXPH": "NOT_READY",
     "GMCI": "NOT_READY",
+    "EPCO": "NOT_READY",
     "EASB": "NOT_READY",
     "SCFM": "NOT_READY",
     "MBEG": "NOT_READY",
-    "NARE": "NOT_READY",
+    "KABO": "NOT_READY",
     "RAKT": "NOT_READY",
     "SKPC": "NOT_READY",
     "ETRS": "NOT_READY",
     "GIHD": "NOT_READY",
-    "KABO": "NOT_READY",
     "MTIE": "NOT_READY",
+    "EBSC": "NOT_READY",
     "EGREF": "NOT_READY",
-    "FIRE": "NOT_READY",
     "OFH": "NOT_READY",
-    "ALUM": "NOT_READY",
     "UNIT": "NOT_READY",
-    "GRCA": "NOT_READY",
     "CAED": "NOT_READY",
-    "NDRL": "NOT_READY",
+    "ALUM": "NOT_READY",
+    "GRCA": "NOT_READY",
     "CRST": "NOT_READY",
+    "NDRL": "NOT_READY",
     "ARAB": "NOT_READY",
     "RREI": "NOT_READY",
-    "EBSC": "NOT_READY",
     "TAQA": "NOT_READY",
-    "CEFM": "NOT_READY",
-    "TALM": "NOT_READY",
-    "ICFC": "NOT_READY",
     "NIPH": "NOT_READY",
     "AJWA": "NOT_READY",
+    "CEFM": "NOT_READY",
+    "GGCC": "NOT_READY",
+    "SDTI": "NOT_READY",
     "DSCW": "NOT_READY",
     "ACGC": "NOT_READY",
     "AMES": "NOT_READY",
-    "GGCC": "NOT_READY",
+    "TALM": "NOT_READY",
     "SNFC": "NOT_READY",
     "LUTS": "NOT_READY",
-    "ATQA": "NOT_READY",
+    "EALR": "NOT_READY",
     "AIFI": "NOT_READY",
-    "SDTI": "NOT_READY",
-    "TWSA": "NOT_READY",
+    "ELEC": "NOT_READY",
+    "MOIN": "NOT_READY",
     "ACAP": "NOT_READY",
     "SPIN": "NOT_READY",
-    "EALR": "NOT_READY",
-    "MOIN": "NOT_READY",
+    "ICFC": "NOT_READY",
+    "TWSA": "NOT_READY",
     "ICID": "NOT_READY",
     "MENA": "NOT_READY",
-    "ISMA": "NOT_READY",
     "EGSA": "NOT_READY",
-    "PHGC": "NOT_READY",
+    "ISMA": "NOT_READY",
+    "ADRI": "NOT_READY",
+    "FIRE": "NOT_READY",
     "ACTF": "NOT_READY",
     "EPPK": "NOT_READY",
+    "PHGC": "NOT_READY",
     "GGRN": "NOT_READY",
-    "ADRI": "NOT_READY",
     "BIGP": "NOT_READY",
     "GTEX": "NOT_READY",
     "UEFM": "NOT_READY",
-    "EGS3I0S1C019": "NOT_READY",
     "PHTV": "NOT_READY",
+    "EGS3I0S1C019": "NOT_READY",
     "UEGC": "NOT_READY",
     "KZPC": "NOT_READY",
-    "ELEC": "NOT_READY",
+    "AMIA": "NOT_READY",
+    "ATQA": "NOT_READY",
+    "EDFM": "NOT_READY",
     "HBCO": "NOT_READY",
-    "GDWA": "NOT_READY",
     "MISR": "NOT_READY",
-    "FTNS": "NOT_READY",
     "ADPC": "NOT_READY",
     "INEG": "NOT_READY",
     "RTVC": "NOT_READY",
     "ISMQ": "NOT_READY",
+    "GDWA": "NOT_READY",
     "NAHO": "NOT_READY",
-    "AMIA": "NOT_READY",
     "UPMS": "NOT_READY",
-    "EDFM": "NOT_READY",
     "DGTZ": "NOT_READY",
     "KWIN": "NOT_READY",
     "PRDC": "NOT_READY",
-    "SPMD": "NOT_READY",
     "MCRO": "NOT_READY",
+    "SPMD": "NOT_READY",
     "CSAG": "NOT_READY",
     "LKGP": "NOT_READY",
     "DEIN": "NOT_READY",
     "SMPP": "NOT_READY",
-    "MAAL": "NOT_READY",
     "SNFI": "NOT_READY",
-    "TYCN": "NOT_READY",
-    "PACH": "NOT_READY",
-    "IRON": "NOT_READY",
-    "INFI": "NOT_READY",
-    "AIH": "NOT_READY",
-    "MMAT": "NOT_READY",
-    "MILS": "NOT_READY",
-    "EGAS": "NOT_READY",
     "RAYA": "NOT_READY",
+    "PACH": "NOT_READY",
+    "TYCN": "NOT_READY",
+    "IRON": "NOT_READY",
+    "AIH": "NOT_READY",
+    "INFI": "NOT_READY",
+    "MMAT": "NOT_READY",
+    "MAAL": "NOT_READY",
+    "EGAS": "NOT_READY",
     "MEPA": "NOT_READY",
-    "OIH": "NOT_READY",
     "IRAX": "NOT_READY",
+    "FTNS": "NOT_READY",
     "NBKE": "NOT_READY",
     "PRMH": "NOT_READY",
     "AIDC": "NOT_READY",
-    "EGS370O1C013": "NOT_READY",
     "ASCM": "NOT_READY",
     "MPRC": "NOT_READY",
     "ALEX": "NOT_READY",
@@ -3755,53 +3753,56 @@
     "SEIG": "NOT_READY",
     "GPPL": "NOT_READY",
     "GTHE": "NOT_READY",
-    "CCRS": "NOT_READY",
-    "EITP": "NOT_READY",
-    "MFSC": "NOT_READY",
     "ZEOT": "NOT_READY",
+    "CCRS": "NOT_READY",
+    "OIH": "NOT_READY",
+    "EITP": "NOT_READY",
     "ENGC": "NOT_READY",
-    "LCSW": "NOT_READY",
     "MOSC": "NOT_READY",
     "SIPC": "NOT_READY",
     "NCGC": "NOT_READY",
-    "EGOTH": "NOT_READY",
-    "OCAP": "NOT_READY",
-    "ENPI": "NOT_READY",
-    "ACFR": "NOT_READY",
-    "KNGC": "NOT_READY",
-    "EGS72L31C011": "NOT_READY",
-    "NMIN": "NOT_READY",
-    "EEP": "NOT_READY",
-    "MMHC": "NOT_READY",
-    "EFAC": "NOT_READY",
-    "EGS65101C015": "NOT_READY",
-    "CID": "NOT_READY",
-    "DCCC": "NOT_READY",
-    "POCO": "NOT_READY",
-    "ELAB": "NOT_READY",
-    "EGS65621C012": "NOT_READY",
-    "HDST": "NOT_READY",
-    "YAYT": "NOT_READY",
-    "NFCI": "NOT_READY",
-    "PMSC": "NOT_READY",
-    "EGS65861C014": "NOT_READY",
-    "ANCC": "NOT_READY",
     "MITR": "NOT_READY",
-    "EGWA": "NOT_READY",
-    "GROV": "NOT_READY",
-    "NAMI": "NOT_READY",
-    "NBCC": "NOT_READY",
-    "SIEG": "NOT_READY",
-    "ALXD": "NOT_READY",
-    "SINA": "NOT_READY",
+    "EGS72L31C011": "NOT_READY",
+    "MMHC": "NOT_READY",
+    "POCO": "NOT_READY",
+    "NMIN": "NOT_READY",
     "GEOS": "NOT_READY",
+    "EFAC": "NOT_READY",
+    "SINA": "NOT_READY",
+    "GROV": "NOT_READY",
+    "YAYT": "NOT_READY",
+    "EGOTH": "NOT_READY",
+    "EEP": "NOT_READY",
+    "ACFR": "NOT_READY",
+    "NFCI": "NOT_READY",
+    "EGWA": "NOT_READY",
+    "HDST": "NOT_READY",
+    "ENPI": "NOT_READY",
+    "KNGC": "NOT_READY",
+    "SIEG": "NOT_READY",
+    "PMSC": "NOT_READY",
+    "CID": "NOT_READY",
+    "EGS65861C014": "NOT_READY",
+    "NBCC": "NOT_READY",
+    "OCAP": "NOT_READY",
+    "ELAB": "NOT_READY",
+    "DCCC": "NOT_READY",
+    "EGS65621C012": "NOT_READY",
+    "ANCC": "NOT_READY",
     "MLIC": "NOT_READY",
+    "EGS65101C015": "NOT_READY",
+    "NAMI": "NOT_READY",
+    "ALXD": "NOT_READY",
+    "MILS": "NOT_READY",
     "WCDF": "NOT_READY",
     "SPHT": "NOT_READY",
     "WATP": "NOT_READY",
+    "EGS370O1C013": "NOT_READY",
     "EGS3E071C013-EGP": "NOT_READY",
+    "MFSC": "NOT_READY",
     "SMFR": "NOT_READY",
     "GSSC": "NOT_READY",
+    "LCSW": "NOT_READY",
     "EGS30AJ1C016-EGP": "NOT_READY",
     "TORA": "NOT_READY",
     "APPC": "NOT_READY",
@@ -3812,33 +3813,33 @@
     "GPIM": "NOT_READY",
     "MIPH": "NOT_READY",
     "TRTO": "NOT_READY",
-    "COPR": "NOT_READY",
     "COSG": "NOT_READY",
     "CNFN": "NOT_READY",
+    "COPR": "NOT_READY",
+    "NHPS": "NOT_READY",
     "AFMC": "NOT_READY",
-    "RACC": "NOT_READY",
     "CICH": "NOT_READY",
     "DOMT": "NOT_READY",
-    "NHPS": "NOT_READY",
+    "VERT": "NOT_READY",
+    "RACC": "NOT_READY",
     "UBEE": "NOT_READY",
     "TANM": "NOT_READY",
-    "VERT": "NOT_READY",
     "IBCT": "NOT_READY",
+    "AMER": "NOT_READY",
     "EGTS": "NOT_READY",
     "BINV": "NOT_READY",
     "PRCL": "NOT_READY",
     "VALU": "NOT_READY",
     "AMII": "NOT_READY",
-    "AMER": "NOT_READY",
+    "IDRE": "NOT_READY",
     "MPCO": "NOT_READY",
-    "ROTO": "NOT_READY",
     "FNAR": "NOT_READY",
     "ATLC": "NOT_READY",
-    "DAPH": "NOT_READY",
     "ODIN": "NOT_READY",
+    "ROTO": "NOT_READY",
+    "DAPH": "NOT_READY",
     "AALR": "NOT_READY",
     "NCCW": "NOT_READY",
-    "IDRE": "NOT_READY",
     "APSW": "NOT_READY",
     "IFAP": "NOT_READY",
     "NEDA": "NOT_READY",
@@ -3846,10 +3847,10 @@
     "SUGR": "NOT_READY",
     "ELWA": "NOT_READY",
     "AFDI": "NOT_READY",
-    "BTFH": "NOT_READY",
     "MEGM": "NOT_READY",
-    "KRDI": "NOT_READY",
     "ICLE": "NOT_READY",
+    "KRDI": "NOT_READY",
+    "BTFH": "NOT_READY",
     "TOUR": "NOT_READY",
     "BIDI": "NOT_READY",
     "EFIC": "NOT_READY",
@@ -3864,8 +3865,42 @@
     "DCRC": "EXCLUDED",
     "HALN": "EXCLUDED"
   },
-  "new_events": [],
-  "recent_events": [],
+  "new_events": [
+    {
+      "symbol": "ADIB",
+      "kind": "WATCH_QUOTE_PENDING",
+      "previous_state": "RESEARCH_REQUIRED",
+      "session": "2026-10-27",
+      "observed_at_utc": "2026-10-27T11:01:30.136836+00:00",
+      "event_id": "2026-10-27:ADIB:WATCH_QUOTE_PENDING:110130136836",
+      "reference_price_egp": 46.45,
+      "entry_zone_egp": [
+        45.75,
+        46.45
+      ],
+      "independent_quote_verified": false,
+      "broker_and_macro_check_required": true,
+      "not_an_order": true
+    }
+  ],
+  "recent_events": [
+    {
+      "symbol": "ADIB",
+      "kind": "WATCH_QUOTE_PENDING",
+      "previous_state": "RESEARCH_REQUIRED",
+      "session": "2026-10-27",
+      "observed_at_utc": "2026-10-27T11:01:30.136836+00:00",
+      "event_id": "2026-10-27:ADIB:WATCH_QUOTE_PENDING:110130136836",
+      "reference_price_egp": 46.45,
+      "entry_zone_egp": [
+        45.75,
+        46.45
+      ],
+      "independent_quote_verified": false,
+      "broker_and_macro_check_required": true,
+      "not_an_order": true
+    }
+  ],
   "recent_event_retention_hours": 8,
   "events_are_preliminary_not_orders": true,
   "note": "Scans all V6 symbols. Independent provider quote checks are capped and stale sources never authorize buys; provisional zone alerts may prompt manual confirmation."
