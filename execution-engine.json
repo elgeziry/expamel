@@ -1,8 +1,8 @@
 {
   "engine": "EGX V5 Execution Engine",
   "version": 1,
-  "generated_at": "2026-10-27T16:25:39.198Z",
-  "reference_session": "2026-10-27",
+  "generated_at": "2026-10-28T09:45:30.252Z",
+  "reference_session": "2026-10-28",
   "architecture": [
     "V5_resilient_data",
     "history_cycle_quality",
@@ -17,90 +17,16 @@
   "coverage_mode": "complete",
   "quarantined_symbols": [],
   "history_sessions": 60,
-  "executable_count": 4,
+  "executable_count": 3,
   "execution_queue": [
     {
-      "symbol": "ADIB",
-      "score": 74.3,
-      "raw_score": 74.3,
+      "symbol": "MFPC",
+      "score": 75.66,
+      "raw_score": 75.66,
       "penalty": 0,
       "action": "ACCUMULATE_ON_WEAKNESS",
       "stage": "confirming",
-      "discovery_score": 8.08,
-      "gates": {
-        "sharia_pass": true,
-        "fundamental_verified": true,
-        "valuation_verified": true,
-        "execution_ready": true
-      },
-      "sharia_status": "compliant",
-      "history_cycle": {
-        "symbol": "ADIB",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 58,
-        "native_sessions": 28,
-        "external_validated_sessions": 30,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 6.992506061273982,
-          "breakout_strength": 4.612930667800935,
-          "volume_asymmetry": 8.294801410236378,
-          "retest_quality": 7,
-          "higher_low": 3
-        },
-        "score": 6.2
-      },
-      "components": {
-        "fundamentals": 8.5,
-        "valuation": 8.2,
-        "catalyst_transmission": 7.5,
-        "cycle_quality": 6.2,
-        "pre_move_stage": 7,
-        "institutional_proxy": 7.22,
-        "entry_quality": 7.19,
-        "risk_reward": 8.08,
-        "portfolio_fit": 5,
-        "liquidity": 10,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 1,
-      "previous_rank": 1,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "LIMIT_ON_WEAKNESS",
-        "reference_close": 46.5,
-        "entry_zone": [
-          45.8,
-          46.5
-        ],
-        "invalidation": 43.74,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.833,
-        "sizing": {
-          "probe_pct_of_target": 25,
-          "core_add_pct": 35,
-          "reserve_pct": 40
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "MFPC",
-      "score": 73.42,
-      "raw_score": 73.42,
-      "penalty": 0,
-      "action": "ACCUMULATE_ON_WEAKNESS",
-      "stage": "pre_move_watch",
-      "discovery_score": 6.72,
+      "discovery_score": 8.36,
       "gates": {
         "sharia_pass": true,
         "fundamental_verified": true,
@@ -113,48 +39,48 @@
         "current_session_present": true,
         "freshness": "current_session",
         "sessions_available": 53,
-        "native_sessions": 28,
-        "external_validated_sessions": 25,
+        "native_sessions": 29,
+        "external_validated_sessions": 24,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
-          "weekly_structure": 2.897457992244723,
-          "breakout_strength": 5.9382099045888195,
-          "volume_asymmetry": 7.322449934742343,
+          "weekly_structure": 2.5630252100840245,
+          "breakout_strength": 4.7964239551917265,
+          "volume_asymmetry": 5.618304640195578,
           "retest_quality": 7,
           "higher_low": 7.421800947867297
         },
-        "score": 5.9
+        "score": 5.2
       },
       "components": {
         "fundamentals": 9.2,
         "valuation": 8.1,
         "catalyst_transmission": 8.4,
-        "cycle_quality": 5.9,
-        "pre_move_stage": 9,
-        "institutional_proxy": 5.55,
-        "entry_quality": 6.62,
-        "risk_reward": 6.72,
+        "cycle_quality": 5.2,
+        "pre_move_stage": 7,
+        "institutional_proxy": 7.33,
+        "entry_quality": 7.64,
+        "risk_reward": 8.36,
         "portfolio_fit": 5,
-        "liquidity": 8,
+        "liquidity": 9,
         "opportunity_cost": 5
       },
       "missing_deep_analysis": [],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 2,
+      "rank": 1,
       "previous_rank": 2,
-      "rank_change": 0,
+      "rank_change": 1,
       "execution_plan": {
         "status": "LIMIT_ON_WEAKNESS",
-        "reference_close": 45.2,
+        "reference_close": 46.15,
         "entry_zone": [
-          44.52,
-          45.2
+          44.62,
+          45.98
         ],
-        "invalidation": 42.52,
+        "invalidation": 42.61,
         "risk_from_low_pct": 4.71,
-        "day_extension": 0.6,
+        "day_extension": 0.622,
         "sizing": {
           "probe_pct_of_target": 25,
           "core_add_pct": 35,
@@ -168,13 +94,13 @@
       }
     },
     {
-      "symbol": "TMGH",
-      "score": 73.36,
-      "raw_score": 73.36,
+      "symbol": "ORAS",
+      "score": 71.78,
+      "raw_score": 71.78,
       "penalty": 0,
       "action": "ACCUMULATE_ON_WEAKNESS",
       "stage": "pre_move_watch",
-      "discovery_score": 6.69,
+      "discovery_score": 7.46,
       "gates": {
         "sharia_pass": true,
         "fundamental_verified": true,
@@ -183,50 +109,50 @@
       },
       "sharia_status": "compliant",
       "history_cycle": {
-        "symbol": "TMGH",
+        "symbol": "ORAS",
         "current_session_present": true,
         "freshness": "current_session",
-        "sessions_available": 58,
-        "native_sessions": 28,
+        "sessions_available": 59,
+        "native_sessions": 29,
         "external_validated_sessions": 30,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
-          "weekly_structure": 2.933718598891364,
-          "breakout_strength": 3.8207767898923697,
-          "volume_asymmetry": 8.879625942312147,
+          "weekly_structure": 2.187565784857206,
+          "breakout_strength": 1.83572216097023,
+          "volume_asymmetry": 8.519547796771837,
           "retest_quality": 7,
-          "higher_low": 6.061425061425058
+          "higher_low": 3
         },
-        "score": 5.6
+        "score": 4.5
       },
       "components": {
-        "fundamentals": 8.5,
-        "valuation": 8.2,
-        "catalyst_transmission": 8.4,
-        "cycle_quality": 5.6,
+        "fundamentals": 8.6,
+        "valuation": 7.2,
+        "catalyst_transmission": 8.3,
+        "cycle_quality": 4.5,
         "pre_move_stage": 9,
-        "institutional_proxy": 6.71,
-        "entry_quality": 6.39,
-        "risk_reward": 6.69,
+        "institutional_proxy": 5.93,
+        "entry_quality": 6.97,
+        "risk_reward": 7.46,
         "portfolio_fit": 5,
         "liquidity": 10,
         "opportunity_cost": 5
       },
       "missing_deep_analysis": [],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 3,
-      "previous_rank": 3,
-      "rank_change": 0,
+      "rank": 2,
+      "previous_rank": 4,
+      "rank_change": 2,
       "execution_plan": {
         "status": "LIMIT_ON_WEAKNESS",
-        "reference_close": 82.6,
+        "reference_close": 825,
         "entry_zone": [
-          80.38,
-          82.6
+          812.63,
+          825
         ],
-        "invalidation": 76.76,
+        "invalidation": 776.06,
         "risk_from_low_pct": 4.71,
         "day_extension": 0.546,
         "sizing": {
@@ -242,13 +168,13 @@
       }
     },
     {
-      "symbol": "ORAS",
-      "score": 71.64,
-      "raw_score": 71.64,
+      "symbol": "EGAL",
+      "score": 70.55,
+      "raw_score": 70.55,
       "penalty": 0,
       "action": "ACCUMULATE_ON_WEAKNESS",
-      "stage": "confirming",
-      "discovery_score": 8.1,
+      "stage": "pre_move_watch",
+      "discovery_score": 6.44,
       "gates": {
         "sharia_pass": true,
         "fundamental_verified": true,
@@ -257,52 +183,52 @@
       },
       "sharia_status": "compliant",
       "history_cycle": {
-        "symbol": "ORAS",
+        "symbol": "EGAL",
         "current_session_present": true,
         "freshness": "current_session",
-        "sessions_available": 59,
-        "native_sessions": 28,
-        "external_validated_sessions": 31,
+        "sessions_available": 54,
+        "native_sessions": 29,
+        "external_validated_sessions": 25,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
-          "weekly_structure": 0.22758620689655729,
-          "breakout_strength": 1.5694597574421163,
-          "volume_asymmetry": 6.960645546070518,
+          "weekly_structure": 5.01583426799499,
+          "breakout_strength": 3.5822784810126587,
+          "volume_asymmetry": 4.294675200607106,
           "retest_quality": 7,
-          "higher_low": 3
+          "higher_low": 6.71124512238383
         },
-        "score": 3.6
+        "score": 5.2
       },
       "components": {
-        "fundamentals": 8.6,
-        "valuation": 7.2,
-        "catalyst_transmission": 8.3,
-        "cycle_quality": 3.6,
-        "pre_move_stage": 7,
-        "institutional_proxy": 7.78,
-        "entry_quality": 7.28,
-        "risk_reward": 8.1,
+        "fundamentals": 9,
+        "valuation": 7.8,
+        "catalyst_transmission": 7.6,
+        "cycle_quality": 5.2,
+        "pre_move_stage": 9,
+        "institutional_proxy": 5.51,
+        "entry_quality": 6.06,
+        "risk_reward": 6.44,
         "portfolio_fit": 5,
-        "liquidity": 10,
+        "liquidity": 9,
         "opportunity_cost": 5
       },
       "missing_deep_analysis": [],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 4,
-      "previous_rank": 4,
-      "rank_change": 0,
+      "rank": 3,
+      "previous_rank": 5,
+      "rank_change": 2,
       "execution_plan": {
         "status": "LIMIT_ON_WEAKNESS",
-        "reference_close": 818.1,
+        "reference_close": 303.2,
         "entry_zone": [
-          805.83,
-          818.1
+          296.49,
+          303.2
         ],
-        "invalidation": 769.57,
+        "invalidation": 283.14,
         "risk_from_low_pct": 4.71,
-        "day_extension": 0.791,
+        "day_extension": 0.355,
         "sizing": {
           "probe_pct_of_target": 25,
           "core_add_pct": 35,
@@ -318,87 +244,13 @@
   ],
   "ranked": [
     {
-      "symbol": "ADIB",
-      "score": 74.3,
-      "raw_score": 74.3,
+      "symbol": "MFPC",
+      "score": 75.66,
+      "raw_score": 75.66,
       "penalty": 0,
       "action": "ACCUMULATE_ON_WEAKNESS",
       "stage": "confirming",
-      "discovery_score": 8.08,
-      "gates": {
-        "sharia_pass": true,
-        "fundamental_verified": true,
-        "valuation_verified": true,
-        "execution_ready": true
-      },
-      "sharia_status": "compliant",
-      "history_cycle": {
-        "symbol": "ADIB",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 58,
-        "native_sessions": 28,
-        "external_validated_sessions": 30,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 6.992506061273982,
-          "breakout_strength": 4.612930667800935,
-          "volume_asymmetry": 8.294801410236378,
-          "retest_quality": 7,
-          "higher_low": 3
-        },
-        "score": 6.2
-      },
-      "components": {
-        "fundamentals": 8.5,
-        "valuation": 8.2,
-        "catalyst_transmission": 7.5,
-        "cycle_quality": 6.2,
-        "pre_move_stage": 7,
-        "institutional_proxy": 7.22,
-        "entry_quality": 7.19,
-        "risk_reward": 8.08,
-        "portfolio_fit": 5,
-        "liquidity": 10,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 1,
-      "previous_rank": 1,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "LIMIT_ON_WEAKNESS",
-        "reference_close": 46.5,
-        "entry_zone": [
-          45.8,
-          46.5
-        ],
-        "invalidation": 43.74,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.833,
-        "sizing": {
-          "probe_pct_of_target": 25,
-          "core_add_pct": 35,
-          "reserve_pct": 40
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "MFPC",
-      "score": 73.42,
-      "raw_score": 73.42,
-      "penalty": 0,
-      "action": "ACCUMULATE_ON_WEAKNESS",
-      "stage": "pre_move_watch",
-      "discovery_score": 6.72,
+      "discovery_score": 8.36,
       "gates": {
         "sharia_pass": true,
         "fundamental_verified": true,
@@ -411,48 +263,48 @@
         "current_session_present": true,
         "freshness": "current_session",
         "sessions_available": 53,
-        "native_sessions": 28,
-        "external_validated_sessions": 25,
+        "native_sessions": 29,
+        "external_validated_sessions": 24,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
-          "weekly_structure": 2.897457992244723,
-          "breakout_strength": 5.9382099045888195,
-          "volume_asymmetry": 7.322449934742343,
+          "weekly_structure": 2.5630252100840245,
+          "breakout_strength": 4.7964239551917265,
+          "volume_asymmetry": 5.618304640195578,
           "retest_quality": 7,
           "higher_low": 7.421800947867297
         },
-        "score": 5.9
+        "score": 5.2
       },
       "components": {
         "fundamentals": 9.2,
         "valuation": 8.1,
         "catalyst_transmission": 8.4,
-        "cycle_quality": 5.9,
-        "pre_move_stage": 9,
-        "institutional_proxy": 5.55,
-        "entry_quality": 6.62,
-        "risk_reward": 6.72,
+        "cycle_quality": 5.2,
+        "pre_move_stage": 7,
+        "institutional_proxy": 7.33,
+        "entry_quality": 7.64,
+        "risk_reward": 8.36,
         "portfolio_fit": 5,
-        "liquidity": 8,
+        "liquidity": 9,
         "opportunity_cost": 5
       },
       "missing_deep_analysis": [],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 2,
+      "rank": 1,
       "previous_rank": 2,
-      "rank_change": 0,
+      "rank_change": 1,
       "execution_plan": {
         "status": "LIMIT_ON_WEAKNESS",
-        "reference_close": 45.2,
+        "reference_close": 46.15,
         "entry_zone": [
-          44.52,
-          45.2
+          44.62,
+          45.98
         ],
-        "invalidation": 42.52,
+        "invalidation": 42.61,
         "risk_from_low_pct": 4.71,
-        "day_extension": 0.6,
+        "day_extension": 0.622,
         "sizing": {
           "probe_pct_of_target": 25,
           "core_add_pct": 35,
@@ -466,13 +318,13 @@
       }
     },
     {
-      "symbol": "TMGH",
-      "score": 73.36,
-      "raw_score": 73.36,
+      "symbol": "ORAS",
+      "score": 71.78,
+      "raw_score": 71.78,
       "penalty": 0,
       "action": "ACCUMULATE_ON_WEAKNESS",
       "stage": "pre_move_watch",
-      "discovery_score": 6.69,
+      "discovery_score": 7.46,
       "gates": {
         "sharia_pass": true,
         "fundamental_verified": true,
@@ -481,50 +333,50 @@
       },
       "sharia_status": "compliant",
       "history_cycle": {
-        "symbol": "TMGH",
+        "symbol": "ORAS",
         "current_session_present": true,
         "freshness": "current_session",
-        "sessions_available": 58,
-        "native_sessions": 28,
+        "sessions_available": 59,
+        "native_sessions": 29,
         "external_validated_sessions": 30,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
-          "weekly_structure": 2.933718598891364,
-          "breakout_strength": 3.8207767898923697,
-          "volume_asymmetry": 8.879625942312147,
+          "weekly_structure": 2.187565784857206,
+          "breakout_strength": 1.83572216097023,
+          "volume_asymmetry": 8.519547796771837,
           "retest_quality": 7,
-          "higher_low": 6.061425061425058
+          "higher_low": 3
         },
-        "score": 5.6
+        "score": 4.5
       },
       "components": {
-        "fundamentals": 8.5,
-        "valuation": 8.2,
-        "catalyst_transmission": 8.4,
-        "cycle_quality": 5.6,
+        "fundamentals": 8.6,
+        "valuation": 7.2,
+        "catalyst_transmission": 8.3,
+        "cycle_quality": 4.5,
         "pre_move_stage": 9,
-        "institutional_proxy": 6.71,
-        "entry_quality": 6.39,
-        "risk_reward": 6.69,
+        "institutional_proxy": 5.93,
+        "entry_quality": 6.97,
+        "risk_reward": 7.46,
         "portfolio_fit": 5,
         "liquidity": 10,
         "opportunity_cost": 5
       },
       "missing_deep_analysis": [],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 3,
-      "previous_rank": 3,
-      "rank_change": 0,
+      "rank": 2,
+      "previous_rank": 4,
+      "rank_change": 2,
       "execution_plan": {
         "status": "LIMIT_ON_WEAKNESS",
-        "reference_close": 82.6,
+        "reference_close": 825,
         "entry_zone": [
-          80.38,
-          82.6
+          812.63,
+          825
         ],
-        "invalidation": 76.76,
+        "invalidation": 776.06,
         "risk_from_low_pct": 4.71,
         "day_extension": 0.546,
         "sizing": {
@@ -540,13 +392,13 @@
       }
     },
     {
-      "symbol": "ORAS",
-      "score": 71.64,
-      "raw_score": 71.64,
+      "symbol": "EGAL",
+      "score": 70.55,
+      "raw_score": 70.55,
       "penalty": 0,
       "action": "ACCUMULATE_ON_WEAKNESS",
-      "stage": "confirming",
-      "discovery_score": 8.1,
+      "stage": "pre_move_watch",
+      "discovery_score": 6.44,
       "gates": {
         "sharia_pass": true,
         "fundamental_verified": true,
@@ -555,52 +407,52 @@
       },
       "sharia_status": "compliant",
       "history_cycle": {
-        "symbol": "ORAS",
+        "symbol": "EGAL",
         "current_session_present": true,
         "freshness": "current_session",
-        "sessions_available": 59,
-        "native_sessions": 28,
-        "external_validated_sessions": 31,
+        "sessions_available": 54,
+        "native_sessions": 29,
+        "external_validated_sessions": 25,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
-          "weekly_structure": 0.22758620689655729,
-          "breakout_strength": 1.5694597574421163,
-          "volume_asymmetry": 6.960645546070518,
+          "weekly_structure": 5.01583426799499,
+          "breakout_strength": 3.5822784810126587,
+          "volume_asymmetry": 4.294675200607106,
           "retest_quality": 7,
-          "higher_low": 3
+          "higher_low": 6.71124512238383
         },
-        "score": 3.6
+        "score": 5.2
       },
       "components": {
-        "fundamentals": 8.6,
-        "valuation": 7.2,
-        "catalyst_transmission": 8.3,
-        "cycle_quality": 3.6,
-        "pre_move_stage": 7,
-        "institutional_proxy": 7.78,
-        "entry_quality": 7.28,
-        "risk_reward": 8.1,
+        "fundamentals": 9,
+        "valuation": 7.8,
+        "catalyst_transmission": 7.6,
+        "cycle_quality": 5.2,
+        "pre_move_stage": 9,
+        "institutional_proxy": 5.51,
+        "entry_quality": 6.06,
+        "risk_reward": 6.44,
         "portfolio_fit": 5,
-        "liquidity": 10,
+        "liquidity": 9,
         "opportunity_cost": 5
       },
       "missing_deep_analysis": [],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 4,
-      "previous_rank": 4,
-      "rank_change": 0,
+      "rank": 3,
+      "previous_rank": 5,
+      "rank_change": 2,
       "execution_plan": {
         "status": "LIMIT_ON_WEAKNESS",
-        "reference_close": 818.1,
+        "reference_close": 303.2,
         "entry_zone": [
-          805.83,
-          818.1
+          296.49,
+          303.2
         ],
-        "invalidation": 769.57,
+        "invalidation": 283.14,
         "risk_from_low_pct": 4.71,
-        "day_extension": 0.791,
+        "day_extension": 0.355,
         "sizing": {
           "probe_pct_of_target": 25,
           "core_add_pct": 35,
@@ -614,13 +466,13 @@
       }
     },
     {
-      "symbol": "EGAL",
-      "score": 69.86,
-      "raw_score": 69.86,
+      "symbol": "ETEL",
+      "score": 69.44,
+      "raw_score": 69.44,
       "penalty": 0,
       "action": "PRE_MOVE_WATCH",
-      "stage": "confirming",
-      "discovery_score": 6.5,
+      "stage": "pre_move_watch",
+      "discovery_score": 6.81,
       "gates": {
         "sharia_pass": true,
         "fundamental_verified": true,
@@ -629,274 +481,52 @@
       },
       "sharia_status": "compliant",
       "history_cycle": {
-        "symbol": "EGAL",
+        "symbol": "ETEL",
         "current_session_present": true,
         "freshness": "current_session",
-        "sessions_available": 54,
-        "native_sessions": 28,
-        "external_validated_sessions": 26,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 5.129368667700742,
-          "breakout_strength": 2.5344563552833073,
-          "volume_asymmetry": 4.448828754426234,
-          "retest_quality": 7,
-          "higher_low": 6.71124512238383
-        },
-        "score": 5.1
-      },
-      "components": {
-        "fundamentals": 9,
-        "valuation": 7.8,
-        "catalyst_transmission": 7.6,
-        "cycle_quality": 5.1,
-        "pre_move_stage": 7,
-        "institutional_proxy": 6.07,
-        "entry_quality": 6.62,
-        "risk_reward": 6.5,
-        "portfolio_fit": 5,
-        "liquidity": 9,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 5,
-      "previous_rank": 5,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 303.5,
-        "entry_zone": [
-          285.57,
-          298.95
-        ],
-        "invalidation": 272.72,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.971,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "JUFO",
-      "score": 69.76,
-      "raw_score": 69.76,
-      "penalty": 0,
-      "action": "PRE_MOVE_WATCH",
-      "stage": "confirming",
-      "discovery_score": 6.33,
-      "gates": {
-        "sharia_pass": true,
-        "fundamental_verified": true,
-        "valuation_verified": true,
-        "execution_ready": true
-      },
-      "sharia_status": "compliant",
-      "history_cycle": {
-        "symbol": "JUFO",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 43,
-        "native_sessions": 28,
-        "external_validated_sessions": 15,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 3.7494719053654357,
-          "breakout_strength": 3.0429497568881696,
-          "volume_asymmetry": 7.799068609461559,
-          "retest_quality": 7,
-          "higher_low": 3
-        },
-        "score": 5
-      },
-      "components": {
-        "fundamentals": 8.8,
-        "valuation": 8.1,
-        "catalyst_transmission": 7.6,
-        "cycle_quality": 5,
-        "pre_move_stage": 7,
-        "institutional_proxy": 7.04,
-        "entry_quality": 6.29,
-        "risk_reward": 6.33,
-        "portfolio_fit": 5,
-        "liquidity": 8,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 6,
-      "previous_rank": 6,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 23.3,
-        "entry_zone": [
-          21.9,
-          22.95
-        ],
-        "invalidation": 20.92,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.946,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "EFIH",
-      "score": 69.15,
-      "raw_score": 69.15,
-      "penalty": 0,
-      "action": "PRE_MOVE_WATCH",
-      "stage": "confirming",
-      "discovery_score": 6.63,
-      "gates": {
-        "sharia_pass": true,
-        "fundamental_verified": true,
-        "valuation_verified": true,
-        "execution_ready": true
-      },
-      "sharia_status": "compliant",
-      "history_cycle": {
-        "symbol": "EFIH",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 57,
-        "native_sessions": 28,
-        "external_validated_sessions": 29,
+        "sessions_available": 59,
+        "native_sessions": 29,
+        "external_validated_sessions": 30,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
           "weekly_structure": 0,
-          "breakout_strength": 1.5057518488085444,
-          "volume_asymmetry": 7.923512336613504,
+          "breakout_strength": 0,
+          "volume_asymmetry": 8.869142480056682,
           "retest_quality": 7,
           "higher_low": 3
         },
-        "score": 3.7
+        "score": 3.6
       },
       "components": {
-        "fundamentals": 9,
-        "valuation": 7.5,
-        "catalyst_transmission": 8.2,
-        "cycle_quality": 3.7,
-        "pre_move_stage": 7,
-        "institutional_proxy": 6.46,
-        "entry_quality": 6.72,
-        "risk_reward": 6.63,
+        "fundamentals": 9.3,
+        "valuation": 7.1,
+        "catalyst_transmission": 8.5,
+        "cycle_quality": 3.6,
+        "pre_move_stage": 9,
+        "institutional_proxy": 5.34,
+        "entry_quality": 5.63,
+        "risk_reward": 6.81,
         "portfolio_fit": 5,
-        "liquidity": 9,
+        "liquidity": 10,
         "opportunity_cost": 5
       },
       "missing_deep_analysis": [],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 7,
-      "previous_rank": 7,
-      "rank_change": 0,
+      "rank": 4,
+      "previous_rank": 15,
+      "rank_change": 11,
       "execution_plan": {
         "status": "WATCH",
-        "reference_close": 21.91,
+        "reference_close": 125.25,
         "entry_zone": [
-          20.6,
-          21.58
+          123.08,
+          125.25
         ],
-        "invalidation": 19.67,
+        "invalidation": 117.54,
         "risk_from_low_pct": 4.71,
-        "day_extension": 0.971,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "MASR",
-      "score": 69,
-      "raw_score": 69,
-      "penalty": 0,
-      "action": "PRE_MOVE_WATCH",
-      "stage": "confirming",
-      "discovery_score": 6.59,
-      "gates": {
-        "sharia_pass": true,
-        "fundamental_verified": true,
-        "valuation_verified": true,
-        "execution_ready": true
-      },
-      "sharia_status": "compliant",
-      "history_cycle": {
-        "symbol": "MASR",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 55,
-        "native_sessions": 28,
-        "external_validated_sessions": 27,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 0,
-          "breakout_strength": 0.9182305630026821,
-          "volume_asymmetry": 7.416698936752585,
-          "retest_quality": 7,
-          "higher_low": 3
-        },
-        "score": 3.5
-      },
-      "components": {
-        "fundamentals": 8,
-        "valuation": 8.8,
-        "catalyst_transmission": 7.8,
-        "cycle_quality": 3.5,
-        "pre_move_stage": 7,
-        "institutional_proxy": 6.61,
-        "entry_quality": 6.67,
-        "risk_reward": 6.59,
-        "portfolio_fit": 5,
-        "liquidity": 9,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 8,
-      "previous_rank": 8,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 6.59,
-        "entry_zone": [
-          6.19,
-          6.49
-        ],
-        "invalidation": 5.92,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.919,
+        "day_extension": 0.074,
         "sizing": {
           "probe_pct_of_target": 0,
           "core_add_pct": 0,
@@ -911,12 +541,12 @@
     },
     {
       "symbol": "AMOC",
-      "score": 68.89,
-      "raw_score": 68.89,
+      "score": 68.66,
+      "raw_score": 68.66,
       "penalty": 0,
       "action": "PRE_MOVE_WATCH",
-      "stage": "confirming",
-      "discovery_score": 6.98,
+      "stage": "pre_move_watch",
+      "discovery_score": 6.46,
       "gates": {
         "sharia_pass": true,
         "fundamental_verified": true,
@@ -929,196 +559,48 @@
         "current_session_present": true,
         "freshness": "current_session",
         "sessions_available": 59,
-        "native_sessions": 28,
-        "external_validated_sessions": 31,
+        "native_sessions": 29,
+        "external_validated_sessions": 30,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
-          "weekly_structure": 1.4835164835164871,
-          "breakout_strength": 3.683628318584071,
-          "volume_asymmetry": 5.703367285659596,
-          "retest_quality": 7,
-          "higher_low": 3
-        },
-        "score": 4.1
-      },
-      "components": {
-        "fundamentals": 9.1,
-        "valuation": 7.3,
-        "catalyst_transmission": 8.1,
-        "cycle_quality": 4.1,
-        "pre_move_stage": 7,
-        "institutional_proxy": 5.72,
-        "entry_quality": 6.41,
-        "risk_reward": 6.98,
-        "portfolio_fit": 5,
-        "liquidity": 9,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 9,
-      "previous_rank": 9,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 13.05,
-        "entry_zone": [
-          12.85,
-          13.05
-        ],
-        "invalidation": 12.28,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.682,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "HELI",
-      "score": 68.74,
-      "raw_score": 68.74,
-      "penalty": 0,
-      "action": "PRE_MOVE_WATCH",
-      "stage": "confirming",
-      "discovery_score": 6.48,
-      "gates": {
-        "sharia_pass": true,
-        "fundamental_verified": true,
-        "valuation_verified": true,
-        "execution_ready": true
-      },
-      "sharia_status": "compliant",
-      "history_cycle": {
-        "symbol": "HELI",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 56,
-        "native_sessions": 28,
-        "external_validated_sessions": 28,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 0,
-          "breakout_strength": 0.5950752393980867,
-          "volume_asymmetry": 7.759635468345419,
-          "retest_quality": 7,
-          "higher_low": 3
-        },
-        "score": 3.5
-      },
-      "components": {
-        "fundamentals": 8.5,
-        "valuation": 9,
-        "catalyst_transmission": 8,
-        "cycle_quality": 3.5,
-        "pre_move_stage": 7,
-        "institutional_proxy": 5.89,
-        "entry_quality": 5.79,
-        "risk_reward": 6.48,
-        "portfolio_fit": 5,
-        "liquidity": 9,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 10,
-      "previous_rank": 10,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 6.39,
-        "entry_zone": [
-          6.11,
-          6.29
-        ],
-        "invalidation": 5.83,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.475,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "EFID",
-      "score": 67.73,
-      "raw_score": 67.73,
-      "penalty": 0,
-      "action": "PRE_MOVE_WATCH",
-      "stage": "confirming",
-      "discovery_score": 4.92,
-      "gates": {
-        "sharia_pass": true,
-        "fundamental_verified": true,
-        "valuation_verified": true,
-        "execution_ready": true
-      },
-      "sharia_status": "compliant",
-      "history_cycle": {
-        "symbol": "EFID",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 53,
-        "native_sessions": 28,
-        "external_validated_sessions": 25,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 1.7058823529411793,
-          "breakout_strength": 3.2741251325556746,
-          "volume_asymmetry": 4.714213486674221,
+          "weekly_structure": 1.1904761904761862,
+          "breakout_strength": 3.3333333333333313,
+          "volume_asymmetry": 5.479450803232888,
           "retest_quality": 7,
           "higher_low": 3
         },
         "score": 3.9
       },
       "components": {
-        "fundamentals": 9.2,
-        "valuation": 9.1,
-        "catalyst_transmission": 8.3,
+        "fundamentals": 9.1,
+        "valuation": 7.3,
+        "catalyst_transmission": 8.1,
         "cycle_quality": 3.9,
-        "pre_move_stage": 7,
-        "institutional_proxy": 5.13,
-        "entry_quality": 5.58,
-        "risk_reward": 4.92,
+        "pre_move_stage": 9,
+        "institutional_proxy": 4.82,
+        "entry_quality": 6.03,
+        "risk_reward": 6.46,
         "portfolio_fit": 5,
-        "liquidity": 8,
+        "liquidity": 9,
         "opportunity_cost": 5
       },
       "missing_deep_analysis": [],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 11,
-      "previous_rank": 11,
-      "rank_change": 0,
+      "rank": 5,
+      "previous_rank": 9,
+      "rank_change": 4,
       "execution_plan": {
         "status": "WATCH",
-        "reference_close": 17.93,
+        "reference_close": 13,
         "entry_zone": [
-          16.85,
-          17.66
+          12.8,
+          13
         ],
-        "invalidation": 16.1,
+        "invalidation": 12.23,
         "risk_from_low_pct": 4.71,
-        "day_extension": 0.861,
+        "day_extension": 0.259,
         "sizing": {
           "probe_pct_of_target": 0,
           "core_add_pct": 0,
@@ -1132,69 +614,141 @@
       }
     },
     {
-      "symbol": "FWRY",
-      "score": 66.61,
-      "raw_score": 66.61,
+      "symbol": "TMGH",
+      "score": 68.63,
+      "raw_score": 68.63,
       "penalty": 0,
       "action": "PRE_MOVE_WATCH",
-      "stage": "confirming",
-      "discovery_score": 6.04,
+      "stage": "pre_move_watch",
+      "discovery_score": 5.72,
       "gates": {
-        "sharia_pass": false,
+        "sharia_pass": true,
         "fundamental_verified": true,
         "valuation_verified": true,
-        "execution_ready": false
+        "execution_ready": true
       },
-      "sharia_status": "pending_verification",
+      "sharia_status": "compliant",
       "history_cycle": {
-        "symbol": "FWRY",
+        "symbol": "TMGH",
         "current_session_present": true,
         "freshness": "current_session",
-        "sessions_available": 55,
-        "native_sessions": 28,
-        "external_validated_sessions": 27,
+        "sessions_available": 59,
+        "native_sessions": 29,
+        "external_validated_sessions": 30,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
           "weekly_structure": 0,
-          "breakout_strength": 2.038318254390632,
-          "volume_asymmetry": 7.29308428669108,
+          "breakout_strength": 3.794669182686638,
+          "volume_asymmetry": 5.022386483362287,
           "retest_quality": 7,
-          "higher_low": 3
+          "higher_low": 6.061425061425058
         },
-        "score": 3.7
+        "score": 4.1
       },
       "components": {
         "fundamentals": 8.5,
-        "valuation": 7.5,
-        "catalyst_transmission": 8.1,
-        "cycle_quality": 3.7,
-        "pre_move_stage": 7,
-        "institutional_proxy": 6.12,
-        "entry_quality": 5.98,
-        "risk_reward": 6.04,
+        "valuation": 8.2,
+        "catalyst_transmission": 8.4,
+        "cycle_quality": 4.1,
+        "pre_move_stage": 9,
+        "institutional_proxy": 5.52,
+        "entry_quality": 5.15,
+        "risk_reward": 5.72,
         "portfolio_fit": 5,
-        "liquidity": 9,
+        "liquidity": 10,
         "opportunity_cost": 5
       },
-      "missing_deep_analysis": [
-        "sharia_verification"
-      ],
+      "missing_deep_analysis": [],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 12,
-      "previous_rank": 12,
-      "rank_change": 0,
+      "rank": 6,
+      "previous_rank": 3,
+      "rank_change": -3,
       "execution_plan": {
         "status": "WATCH",
-        "reference_close": 17.2,
+        "reference_close": 81.87,
         "entry_zone": [
-          16.57,
-          17.07
+          80.41,
+          81.87
         ],
-        "invalidation": 15.82,
+        "invalidation": 76.79,
         "risk_from_low_pct": 4.71,
-        "day_extension": 0.792,
+        "day_extension": 0.163,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "ADIB",
+      "score": 68.54,
+      "raw_score": 68.54,
+      "penalty": 0,
+      "action": "PRE_MOVE_WATCH",
+      "stage": "pre_move_watch",
+      "discovery_score": 5.81,
+      "gates": {
+        "sharia_pass": true,
+        "fundamental_verified": true,
+        "valuation_verified": true,
+        "execution_ready": true
+      },
+      "sharia_status": "compliant",
+      "history_cycle": {
+        "symbol": "ADIB",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 58,
+        "native_sessions": 29,
+        "external_validated_sessions": 29,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 3.3145350074483915,
+          "breakout_strength": 4.240748617609525,
+          "volume_asymmetry": 8.678660527191179,
+          "retest_quality": 7,
+          "higher_low": 3
+        },
+        "score": 5.3
+      },
+      "components": {
+        "fundamentals": 8.5,
+        "valuation": 8.2,
+        "catalyst_transmission": 7.5,
+        "cycle_quality": 5.3,
+        "pre_move_stage": 9,
+        "institutional_proxy": 4.66,
+        "entry_quality": 5.85,
+        "risk_reward": 5.81,
+        "portfolio_fit": 5,
+        "liquidity": 8,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 7,
+      "previous_rank": 1,
+      "rank_change": -6,
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 46,
+        "entry_zone": [
+          45.31,
+          46
+        ],
+        "invalidation": 43.27,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.358,
         "sizing": {
           "probe_pct_of_target": 0,
           "core_add_pct": 0,
@@ -1209,12 +763,12 @@
     },
     {
       "symbol": "BONY",
-      "score": 66.21,
-      "raw_score": 74.21,
-      "penalty": 8,
+      "score": 68.04,
+      "raw_score": 68.04,
+      "penalty": 0,
       "action": "PRE_MOVE_WATCH",
-      "stage": "confirming",
-      "discovery_score": 7.61,
+      "stage": "pre_move_watch",
+      "discovery_score": 5.53,
       "gates": {
         "sharia_pass": false,
         "fundamental_verified": true,
@@ -1227,15 +781,15 @@
         "current_session_present": true,
         "freshness": "current_session",
         "sessions_available": 59,
-        "native_sessions": 28,
-        "external_validated_sessions": 31,
+        "native_sessions": 29,
+        "external_validated_sessions": 30,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
-          "weekly_structure": 4.2307692307692335,
-          "breakout_strength": 4.089834515366429,
-          "volume_asymmetry": 5.907082297163982,
+          "weekly_structure": 4.024390243902438,
+          "breakout_strength": 3.911483253588517,
+          "volume_asymmetry": 6.17112836967912,
           "retest_quality": 7,
           "higher_low": 3
         },
@@ -1246,31 +800,31 @@
         "valuation": 8.8,
         "catalyst_transmission": 8,
         "cycle_quality": 4.9,
-        "pre_move_stage": 7,
-        "institutional_proxy": 7.9,
-        "entry_quality": 8.45,
-        "risk_reward": 7.61,
+        "pre_move_stage": 9,
+        "institutional_proxy": 4.66,
+        "entry_quality": 5.75,
+        "risk_reward": 5.53,
         "portfolio_fit": 5,
-        "liquidity": 9,
+        "liquidity": 8,
         "opportunity_cost": 5
       },
       "missing_deep_analysis": [
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 13,
+      "rank": 8,
       "previous_rank": 13,
-      "rank_change": 0,
+      "rank_change": 5,
       "execution_plan": {
-        "status": "NO_CHASE",
-        "reference_close": 4.12,
+        "status": "WATCH",
+        "reference_close": 4.05,
         "entry_zone": [
-          4.02,
-          4.12
+          3.99,
+          4.05
         ],
-        "invalidation": 3.84,
+        "invalidation": 3.81,
         "risk_from_low_pct": 4.71,
-        "day_extension": 0.97,
+        "day_extension": 0.5,
         "sizing": {
           "probe_pct_of_target": 0,
           "core_add_pct": 0,
@@ -1284,13 +838,13 @@
       }
     },
     {
-      "symbol": "ORWE",
-      "score": 66,
-      "raw_score": 66,
+      "symbol": "JUFO",
+      "score": 67.32,
+      "raw_score": 67.32,
       "penalty": 0,
       "action": "PRE_MOVE_WATCH",
       "stage": "pre_move_watch",
-      "discovery_score": 4.98,
+      "discovery_score": 5.35,
       "gates": {
         "sharia_pass": true,
         "fundamental_verified": true,
@@ -1299,52 +853,52 @@
       },
       "sharia_status": "compliant",
       "history_cycle": {
-        "symbol": "ORWE",
+        "symbol": "JUFO",
         "current_session_present": true,
         "freshness": "current_session",
-        "sessions_available": 54,
-        "native_sessions": 28,
-        "external_validated_sessions": 26,
+        "sessions_available": 44,
+        "native_sessions": 29,
+        "external_validated_sessions": 15,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
-          "weekly_structure": 0,
-          "breakout_strength": 0,
-          "volume_asymmetry": 4.1762704519260945,
+          "weekly_structure": 2.5466224616659794,
+          "breakout_strength": 3.510028653295132,
+          "volume_asymmetry": 7.8068445033218925,
           "retest_quality": 7,
           "higher_low": 3
         },
-        "score": 2.7
+        "score": 4.8
       },
       "components": {
         "fundamentals": 8.8,
-        "valuation": 9,
-        "catalyst_transmission": 7.8,
-        "cycle_quality": 2.7,
+        "valuation": 8.1,
+        "catalyst_transmission": 7.6,
+        "cycle_quality": 4.8,
         "pre_move_stage": 9,
-        "institutional_proxy": 5.05,
-        "entry_quality": 4.7,
-        "risk_reward": 4.98,
+        "institutional_proxy": 4.93,
+        "entry_quality": 5.39,
+        "risk_reward": 5.35,
         "portfolio_fit": 5,
-        "liquidity": 8,
+        "liquidity": 7,
         "opportunity_cost": 5
       },
       "missing_deep_analysis": [],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 14,
-      "previous_rank": 14,
-      "rank_change": 0,
+      "rank": 9,
+      "previous_rank": 6,
+      "rank_change": -3,
       "execution_plan": {
         "status": "WATCH",
-        "reference_close": 23,
+        "reference_close": 23.39,
         "entry_zone": [
-          22.66,
-          23
+          23.04,
+          23.39
         ],
-        "invalidation": 21.64,
+        "invalidation": 22,
         "risk_from_low_pct": 4.71,
-        "day_extension": 0,
+        "day_extension": 0.638,
         "sizing": {
           "probe_pct_of_target": 0,
           "core_add_pct": 0,
@@ -1358,13 +912,13 @@
       }
     },
     {
-      "symbol": "ETEL",
-      "score": 64.27,
-      "raw_score": 72.27,
-      "penalty": 8,
+      "symbol": "EFIH",
+      "score": 67.31,
+      "raw_score": 67.31,
+      "penalty": 0,
       "action": "PRE_MOVE_WATCH",
-      "stage": "confirming",
-      "discovery_score": 7.67,
+      "stage": "pre_move_watch",
+      "discovery_score": 5.72,
       "gates": {
         "sharia_pass": true,
         "fundamental_verified": true,
@@ -1373,52 +927,52 @@
       },
       "sharia_status": "compliant",
       "history_cycle": {
-        "symbol": "ETEL",
+        "symbol": "EFIH",
         "current_session_present": true,
         "freshness": "current_session",
-        "sessions_available": 59,
-        "native_sessions": 28,
-        "external_validated_sessions": 31,
+        "sessions_available": 57,
+        "native_sessions": 29,
+        "external_validated_sessions": 28,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
           "weekly_structure": 0,
-          "breakout_strength": 0.13623978201634657,
-          "volume_asymmetry": 8.945714986660255,
+          "breakout_strength": 1.419474116680362,
+          "volume_asymmetry": 7.791732896410812,
           "retest_quality": 7,
           "higher_low": 3
         },
         "score": 3.7
       },
       "components": {
-        "fundamentals": 9.3,
-        "valuation": 7.1,
-        "catalyst_transmission": 8.5,
+        "fundamentals": 9,
+        "valuation": 7.5,
+        "catalyst_transmission": 8.2,
         "cycle_quality": 3.7,
-        "pre_move_stage": 7,
-        "institutional_proxy": 7.94,
-        "entry_quality": 7.11,
-        "risk_reward": 7.67,
+        "pre_move_stage": 9,
+        "institutional_proxy": 4.67,
+        "entry_quality": 5.93,
+        "risk_reward": 5.72,
         "portfolio_fit": 5,
-        "liquidity": 10,
+        "liquidity": 8,
         "opportunity_cost": 5
       },
       "missing_deep_analysis": [],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 15,
-      "previous_rank": 15,
-      "rank_change": 0,
+      "rank": 10,
+      "previous_rank": 7,
+      "rank_change": -3,
       "execution_plan": {
-        "status": "NO_CHASE",
-        "reference_close": 126.4,
+        "status": "WATCH",
+        "reference_close": 21.85,
         "entry_zone": [
-          118.82,
-          124.5
+          21.18,
+          21.82
         ],
-        "invalidation": 113.47,
+        "invalidation": 20.22,
         "risk_from_low_pct": 4.71,
-        "day_extension": 0.897,
+        "day_extension": 0.583,
         "sizing": {
           "probe_pct_of_target": 0,
           "core_add_pct": 0,
@@ -1432,1078 +986,67 @@
       }
     },
     {
-      "symbol": "LCSW",
-      "score": 62.71,
-      "raw_score": 62.71,
+      "symbol": "FWRY",
+      "score": 67.17,
+      "raw_score": 67.17,
       "penalty": 0,
       "action": "PRE_MOVE_WATCH",
-      "stage": "confirming",
-      "discovery_score": 8.09,
+      "stage": "pre_move_watch",
+      "discovery_score": 5.57,
       "gates": {
         "sharia_pass": false,
-        "fundamental_verified": false,
-        "valuation_verified": false,
-        "execution_ready": false
-      },
-      "sharia_status": "pending_verification",
-      "history_cycle": {
-        "symbol": "LCSW",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 55,
-        "native_sessions": 28,
-        "external_validated_sessions": 27,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 4.952195996414712,
-          "breakout_strength": 4.433823529411766,
-          "volume_asymmetry": 7.09764022727679,
-          "retest_quality": 7,
-          "higher_low": 3
-        },
-        "score": 5.4
-      },
-      "components": {
-        "fundamentals": 5,
-        "valuation": 5,
-        "catalyst_transmission": 5,
-        "cycle_quality": 5.4,
-        "pre_move_stage": 7,
-        "institutional_proxy": 8.64,
-        "entry_quality": 8.55,
-        "risk_reward": 8.09,
-        "portfolio_fit": 5,
-        "liquidity": 8,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [
-        "fundamentals",
-        "valuation",
-        "sharia_verification"
-      ],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 16,
-      "previous_rank": 16,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 33.45,
-        "entry_zone": [
-          32.95,
-          33.45
-        ],
-        "invalidation": 31.47,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.98,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "ABUK",
-      "score": 61.44,
-      "raw_score": 61.44,
-      "penalty": 0,
-      "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "confirming",
-      "discovery_score": 8.17,
-      "gates": {
-        "sharia_pass": false,
-        "fundamental_verified": false,
-        "valuation_verified": false,
-        "execution_ready": false
-      },
-      "sharia_status": "pending_verification",
-      "history_cycle": {
-        "symbol": "ABUK",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 59,
-        "native_sessions": 28,
-        "external_validated_sessions": 31,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 3.0320855614973308,
-          "breakout_strength": 6.268605840245428,
-          "volume_asymmetry": 5.792737315849661,
-          "retest_quality": 7,
-          "higher_low": 7.631610576923076
-        },
-        "score": 5.7
-      },
-      "components": {
-        "fundamentals": 5,
-        "valuation": 5,
-        "catalyst_transmission": 5,
-        "cycle_quality": 5.7,
-        "pre_move_stage": 7,
-        "institutional_proxy": 6.42,
-        "entry_quality": 8.14,
-        "risk_reward": 8.17,
-        "portfolio_fit": 5,
-        "liquidity": 9,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [
-        "fundamentals",
-        "valuation",
-        "sharia_verification"
-      ],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 17,
-      "previous_rank": 17,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 91.2,
-        "entry_zone": [
-          86.95,
-          89.83
-        ],
-        "invalidation": 83.04,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 1,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "SVCE",
-      "score": 60.21,
-      "raw_score": 60.21,
-      "penalty": 0,
-      "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "confirming",
-      "discovery_score": 6.1,
-      "gates": {
-        "sharia_pass": true,
         "fundamental_verified": true,
         "valuation_verified": true,
-        "execution_ready": true
-      },
-      "sharia_status": "compliant",
-      "history_cycle": {
-        "symbol": "SVCE",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 58,
-        "native_sessions": 28,
-        "external_validated_sessions": 30,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 0,
-          "breakout_strength": 1.9052631578947365,
-          "volume_asymmetry": 6.141175786848492,
-          "retest_quality": 7,
-          "higher_low": 3
-        },
-        "score": 3.5
-      },
-      "components": {
-        "fundamentals": 6.8,
-        "valuation": 5.8,
-        "catalyst_transmission": 6.2,
-        "cycle_quality": 3.5,
-        "pre_move_stage": 7,
-        "institutional_proxy": 6.28,
-        "entry_quality": 6.59,
-        "risk_reward": 6.1,
-        "portfolio_fit": 5,
-        "liquidity": 9,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 18,
-      "previous_rank": 18,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 8.66,
-        "entry_zone": [
-          8.14,
-          8.53
-        ],
-        "invalidation": 7.77,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.844,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "EAST",
-      "score": 59.99,
-      "raw_score": 59.99,
-      "penalty": 0,
-      "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "confirming",
-      "discovery_score": 6.01,
-      "gates": {
-        "sharia_pass": false,
-        "fundamental_verified": false,
-        "valuation_verified": false,
-        "execution_ready": false
-      },
-      "sharia_status": "non_compliant",
-      "history_cycle": {
-        "symbol": "EAST",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 55,
-        "native_sessions": 28,
-        "external_validated_sessions": 27,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 10,
-          "breakout_strength": 8.093856655290104,
-          "volume_asymmetry": 9.189390963229174,
-          "retest_quality": 7,
-          "higher_low": 7.989557075981274
-        },
-        "score": 8.6
-      },
-      "components": {
-        "fundamentals": 5,
-        "valuation": 5,
-        "catalyst_transmission": 5,
-        "cycle_quality": 8.6,
-        "pre_move_stage": 7,
-        "institutional_proxy": 5.44,
-        "entry_quality": 7.37,
-        "risk_reward": 6.01,
-        "portfolio_fit": 5,
-        "liquidity": 8,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [
-        "fundamentals",
-        "valuation",
-        "sharia_verification"
-      ],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 19,
-      "previous_rank": 19,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 31.89,
-        "entry_zone": [
-          31.41,
-          31.89
-        ],
-        "invalidation": 30,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 1,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "SCTS",
-      "score": 59.61,
-      "raw_score": 59.61,
-      "penalty": 0,
-      "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "confirming",
-      "discovery_score": 7.11,
-      "gates": {
-        "sharia_pass": false,
-        "fundamental_verified": false,
-        "valuation_verified": false,
         "execution_ready": false
       },
       "sharia_status": "pending_verification",
       "history_cycle": {
-        "symbol": "SCTS",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 53,
-        "native_sessions": 28,
-        "external_validated_sessions": 25,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 10,
-          "breakout_strength": 5.4762183235867425,
-          "volume_asymmetry": 10,
-          "retest_quality": 7,
-          "higher_low": 3
-        },
-        "score": 7.4
-      },
-      "components": {
-        "fundamentals": 5,
-        "valuation": 5,
-        "catalyst_transmission": 5,
-        "cycle_quality": 7.4,
-        "pre_move_stage": 7,
-        "institutional_proxy": 6.15,
-        "entry_quality": 6.97,
-        "risk_reward": 7.11,
-        "portfolio_fit": 5,
-        "liquidity": 6,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [
-        "fundamentals",
-        "valuation",
-        "sharia_verification"
-      ],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 20,
-      "previous_rank": 20,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 519.98,
-        "entry_zone": [
-          500.85,
-          516.11
-        ],
-        "invalidation": 478.31,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.535,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "HDBK",
-      "score": 59.3,
-      "raw_score": 59.3,
-      "penalty": 0,
-      "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "confirming",
-      "discovery_score": 7.23,
-      "gates": {
-        "sharia_pass": false,
-        "fundamental_verified": false,
-        "valuation_verified": false,
-        "execution_ready": false
-      },
-      "sharia_status": "pending_verification",
-      "history_cycle": {
-        "symbol": "HDBK",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 57,
-        "native_sessions": 28,
-        "external_validated_sessions": 29,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 6.549838558483483,
-          "breakout_strength": 2.3155660377358496,
-          "volume_asymmetry": 7.824423783511341,
-          "retest_quality": 7,
-          "higher_low": 6.483491826049792
-        },
-        "score": 6
-      },
-      "components": {
-        "fundamentals": 5,
-        "valuation": 5,
-        "catalyst_transmission": 5,
-        "cycle_quality": 6,
-        "pre_move_stage": 7,
-        "institutional_proxy": 7.12,
-        "entry_quality": 6.63,
-        "risk_reward": 7.23,
-        "portfolio_fit": 5,
-        "liquidity": 8,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [
-        "fundamentals",
-        "valuation",
-        "sharia_verification"
-      ],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 21,
-      "previous_rank": 21,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 97.87,
-        "entry_zone": [
-          92.69,
-          96.4
-        ],
-        "invalidation": 88.52,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 1,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "SWDY",
-      "score": 59.16,
-      "raw_score": 59.16,
-      "penalty": 0,
-      "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "confirming",
-      "discovery_score": 7.46,
-      "gates": {
-        "sharia_pass": false,
-        "fundamental_verified": false,
-        "valuation_verified": false,
-        "execution_ready": false
-      },
-      "sharia_status": "pending_verification",
-      "history_cycle": {
-        "symbol": "SWDY",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 54,
-        "native_sessions": 28,
-        "external_validated_sessions": 26,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 3.8900900900900837,
-          "breakout_strength": 3.6061403508771894,
-          "volume_asymmetry": 6.528939704392027,
-          "retest_quality": 7,
-          "higher_low": 3
-        },
-        "score": 4.8
-      },
-      "components": {
-        "fundamentals": 5,
-        "valuation": 5,
-        "catalyst_transmission": 5,
-        "cycle_quality": 4.8,
-        "pre_move_stage": 7,
-        "institutional_proxy": 7.28,
-        "entry_quality": 7.02,
-        "risk_reward": 7.46,
-        "portfolio_fit": 5,
-        "liquidity": 9,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [
-        "fundamentals",
-        "valuation",
-        "sharia_verification"
-      ],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 22,
-      "previous_rank": 22,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 109.46,
-        "entry_zone": [
-          107.82,
-          109.46
-        ],
-        "invalidation": 102.97,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.854,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "PHAR",
-      "score": 58.98,
-      "raw_score": 58.98,
-      "penalty": 0,
-      "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "confirming",
-      "discovery_score": 7.39,
-      "gates": {
-        "sharia_pass": false,
-        "fundamental_verified": false,
-        "valuation_verified": false,
-        "execution_ready": false
-      },
-      "sharia_status": "pending_verification",
-      "history_cycle": {
-        "symbol": "PHAR",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 57,
-        "native_sessions": 28,
-        "external_validated_sessions": 29,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 0,
-          "breakout_strength": 1.646550923776811,
-          "volume_asymmetry": 7.791613832383167,
-          "retest_quality": 7,
-          "higher_low": 3
-        },
-        "score": 3.7
-      },
-      "components": {
-        "fundamentals": 5,
-        "valuation": 5,
-        "catalyst_transmission": 5,
-        "cycle_quality": 3.7,
-        "pre_move_stage": 7,
-        "institutional_proxy": 8.54,
-        "entry_quality": 7.13,
-        "risk_reward": 7.39,
-        "portfolio_fit": 5,
-        "liquidity": 9,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [
-        "fundamentals",
-        "valuation",
-        "sharia_verification"
-      ],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 23,
-      "previous_rank": 23,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 97.39,
-        "entry_zone": [
-          91.7,
-          95.93
-        ],
-        "invalidation": 87.58,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.949,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "COMI",
-      "score": 58.01,
-      "raw_score": 58.01,
-      "penalty": 0,
-      "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "confirming",
-      "discovery_score": 6.84,
-      "gates": {
-        "sharia_pass": false,
-        "fundamental_verified": false,
-        "valuation_verified": false,
-        "execution_ready": false
-      },
-      "sharia_status": "non_compliant",
-      "history_cycle": {
-        "symbol": "COMI",
+        "symbol": "FWRY",
         "current_session_present": true,
         "freshness": "current_session",
         "sessions_available": 56,
-        "native_sessions": 28,
-        "external_validated_sessions": 28,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 3.0301826846703683,
-          "breakout_strength": 4.383999999999998,
-          "volume_asymmetry": 7.326994072436259,
-          "retest_quality": 7,
-          "higher_low": 3
-        },
-        "score": 4.9
-      },
-      "components": {
-        "fundamentals": 5,
-        "valuation": 5,
-        "catalyst_transmission": 5,
-        "cycle_quality": 4.9,
-        "pre_move_stage": 7,
-        "institutional_proxy": 7.13,
-        "entry_quality": 6.31,
-        "risk_reward": 6.84,
-        "portfolio_fit": 5,
-        "liquidity": 10,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [
-        "fundamentals",
-        "valuation",
-        "sharia_verification"
-      ],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 24,
-      "previous_rank": 24,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 122.8,
-        "entry_zone": [
-          120.96,
-          122.8
-        ],
-        "invalidation": 115.51,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.931,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "ARAB",
-      "score": 57.71,
-      "raw_score": 57.71,
-      "penalty": 0,
-      "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "confirming",
-      "discovery_score": 7.71,
-      "gates": {
-        "sharia_pass": false,
-        "fundamental_verified": false,
-        "valuation_verified": false,
-        "execution_ready": false
-      },
-      "sharia_status": "pending_verification",
-      "history_cycle": {
-        "symbol": "ARAB",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 56,
-        "native_sessions": 28,
-        "external_validated_sessions": 28,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 0,
-          "breakout_strength": 0,
-          "volume_asymmetry": 6.456326332977687,
-          "retest_quality": 7,
-          "higher_low": 3
-        },
-        "score": 3.1
-      },
-      "components": {
-        "fundamentals": 5,
-        "valuation": 5,
-        "catalyst_transmission": 5,
-        "cycle_quality": 3.1,
-        "pre_move_stage": 7,
-        "institutional_proxy": 6.96,
-        "entry_quality": 6.89,
-        "risk_reward": 7.71,
-        "portfolio_fit": 5,
-        "liquidity": 10,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [
-        "fundamentals",
-        "valuation",
-        "sharia_verification"
-      ],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 25,
-      "previous_rank": 25,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 0.23,
-        "entry_zone": [
-          0.22,
-          0.23
-        ],
-        "invalidation": 0.21,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.8,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "GBCO",
-      "score": 57.32,
-      "raw_score": 57.32,
-      "penalty": 0,
-      "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "confirming",
-      "discovery_score": 5.29,
-      "gates": {
-        "sharia_pass": false,
-        "fundamental_verified": true,
-        "valuation_verified": false,
-        "execution_ready": false
-      },
-      "sharia_status": "non_compliant",
-      "history_cycle": {
-        "symbol": "GBCO",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 55,
-        "native_sessions": 28,
+        "native_sessions": 29,
         "external_validated_sessions": 27,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
           "weekly_structure": 0,
-          "breakout_strength": 0,
-          "volume_asymmetry": 6.896300188828574,
+          "breakout_strength": 2.075572112825971,
+          "volume_asymmetry": 7.712211528100701,
           "retest_quality": 7,
           "higher_low": 3
         },
-        "score": 3.2
+        "score": 3.8
       },
       "components": {
-        "fundamentals": 7.5,
-        "valuation": 5,
-        "catalyst_transmission": 7,
-        "cycle_quality": 3.2,
-        "pre_move_stage": 7,
-        "institutional_proxy": 4.88,
-        "entry_quality": 5.3,
-        "risk_reward": 5.29,
+        "fundamentals": 8.5,
+        "valuation": 7.5,
+        "catalyst_transmission": 8.1,
+        "cycle_quality": 3.8,
+        "pre_move_stage": 9,
+        "institutional_proxy": 5.38,
+        "entry_quality": 5.92,
+        "risk_reward": 5.57,
         "portfolio_fit": 5,
         "liquidity": 9,
         "opportunity_cost": 5
       },
       "missing_deep_analysis": [
-        "valuation",
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 26,
-      "previous_rank": 26,
-      "rank_change": 0,
+      "rank": 11,
+      "previous_rank": 12,
+      "rank_change": 1,
       "execution_plan": {
         "status": "WATCH",
-        "reference_close": 23.6,
+        "reference_close": 17.22,
         "entry_zone": [
-          22.65,
-          23.33
+          16.71,
+          17.21
         ],
-        "invalidation": 21.63,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.642,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "CANA",
-      "score": 57.23,
-      "raw_score": 57.23,
-      "penalty": 0,
-      "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "confirming",
-      "discovery_score": 6.46,
-      "gates": {
-        "sharia_pass": false,
-        "fundamental_verified": false,
-        "valuation_verified": false,
-        "execution_ready": false
-      },
-      "sharia_status": "pending_verification",
-      "history_cycle": {
-        "symbol": "CANA",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 55,
-        "native_sessions": 28,
-        "external_validated_sessions": 27,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 8.700097370983446,
-          "breakout_strength": 3.5406911928651024,
-          "volume_asymmetry": 5.795688897111865,
-          "retest_quality": 7,
-          "higher_low": 3
-        },
-        "score": 5.9
-      },
-      "components": {
-        "fundamentals": 5,
-        "valuation": 5,
-        "catalyst_transmission": 5,
-        "cycle_quality": 5.9,
-        "pre_move_stage": 7,
-        "institutional_proxy": 6.01,
-        "entry_quality": 6.67,
-        "risk_reward": 6.46,
-        "portfolio_fit": 5,
-        "liquidity": 7,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [
-        "fundamentals",
-        "valuation",
-        "sharia_verification"
-      ],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 27,
-      "previous_rank": 27,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 42.98,
-        "entry_zone": [
-          42.34,
-          42.98
-        ],
-        "invalidation": 40.43,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 1,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "ACGC",
-      "score": 57.22,
-      "raw_score": 57.22,
-      "penalty": 0,
-      "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "confirming",
-      "discovery_score": 6.71,
-      "gates": {
-        "sharia_pass": false,
-        "fundamental_verified": false,
-        "valuation_verified": false,
-        "execution_ready": false
-      },
-      "sharia_status": "pending_verification",
-      "history_cycle": {
-        "symbol": "ACGC",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 56,
-        "native_sessions": 28,
-        "external_validated_sessions": 28,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 3.4266263237518935,
-          "breakout_strength": 3.6000000000000028,
-          "volume_asymmetry": 6.771388981852578,
-          "retest_quality": 7,
-          "higher_low": 3
-        },
-        "score": 4.8
-      },
-      "components": {
-        "fundamentals": 5,
-        "valuation": 5,
-        "catalyst_transmission": 5,
-        "cycle_quality": 4.8,
-        "pre_move_stage": 7,
-        "institutional_proxy": 6.77,
-        "entry_quality": 6.93,
-        "risk_reward": 6.71,
-        "portfolio_fit": 5,
-        "liquidity": 7,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [
-        "fundamentals",
-        "valuation",
-        "sharia_verification"
-      ],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 28,
-      "previous_rank": 28,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 12.96,
-        "entry_zone": [
-          12.18,
-          12.77
-        ],
-        "invalidation": 11.63,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.987,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "CPME",
-      "score": 57.1,
-      "raw_score": 57.1,
-      "penalty": 0,
-      "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "confirming",
-      "discovery_score": 6.65,
-      "gates": {
-        "sharia_pass": false,
-        "fundamental_verified": false,
-        "valuation_verified": false,
-        "execution_ready": false
-      },
-      "sharia_status": "pending_verification",
-      "history_cycle": {
-        "symbol": "CPME",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 59,
-        "native_sessions": 28,
-        "external_validated_sessions": 31,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 0,
-          "breakout_strength": 1.0624999999999982,
-          "volume_asymmetry": 10,
-          "retest_quality": 7,
-          "higher_low": 6.031201248049928
-        },
-        "score": 4.5
-      },
-      "components": {
-        "fundamentals": 5,
-        "valuation": 5,
-        "catalyst_transmission": 5,
-        "cycle_quality": 4.5,
-        "pre_move_stage": 7,
-        "institutional_proxy": 7.97,
-        "entry_quality": 6.64,
-        "risk_reward": 6.65,
-        "portfolio_fit": 5,
-        "liquidity": 6,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [
-        "fundamentals",
-        "valuation",
-        "sharia_verification"
-      ],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 29,
-      "previous_rank": 29,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 35.5,
-        "entry_zone": [
-          33.37,
-          34.97
-        ],
-        "invalidation": 31.87,
+        "invalidation": 15.95,
         "risk_from_low_pct": 4.71,
         "day_extension": 0.667,
         "sizing": {
@@ -2519,13 +1062,1397 @@
       }
     },
     {
-      "symbol": "CPCI",
-      "score": 56.91,
-      "raw_score": 56.91,
+      "symbol": "EFID",
+      "score": 66.88,
+      "raw_score": 66.88,
+      "penalty": 0,
+      "action": "PRE_MOVE_WATCH",
+      "stage": "pre_move_watch",
+      "discovery_score": 4.49,
+      "gates": {
+        "sharia_pass": true,
+        "fundamental_verified": true,
+        "valuation_verified": true,
+        "execution_ready": true
+      },
+      "sharia_status": "compliant",
+      "history_cycle": {
+        "symbol": "EFID",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 53,
+        "native_sessions": 29,
+        "external_validated_sessions": 24,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 0.7446808510638272,
+          "breakout_strength": 3.032873806998943,
+          "volume_asymmetry": 4.699403508650182,
+          "retest_quality": 7,
+          "higher_low": 3
+        },
+        "score": 3.6
+      },
+      "components": {
+        "fundamentals": 9.2,
+        "valuation": 9.1,
+        "catalyst_transmission": 8.3,
+        "cycle_quality": 3.6,
+        "pre_move_stage": 9,
+        "institutional_proxy": 4.09,
+        "entry_quality": 4.98,
+        "risk_reward": 4.49,
+        "portfolio_fit": 5,
+        "liquidity": 7,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 12,
+      "previous_rank": 11,
+      "rank_change": -1,
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 17.8,
+        "entry_zone": [
+          17.34,
+          17.8
+        ],
+        "invalidation": 16.56,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.426,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "HELI",
+      "score": 66.81,
+      "raw_score": 66.81,
+      "penalty": 0,
+      "action": "PRE_MOVE_WATCH",
+      "stage": "pre_move_watch",
+      "discovery_score": 5.38,
+      "gates": {
+        "sharia_pass": true,
+        "fundamental_verified": true,
+        "valuation_verified": true,
+        "execution_ready": true
+      },
+      "sharia_status": "compliant",
+      "history_cycle": {
+        "symbol": "HELI",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 56,
+        "native_sessions": 29,
+        "external_validated_sessions": 27,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 0,
+          "breakout_strength": 0.11627906976744473,
+          "volume_asymmetry": 6.622841804399682,
+          "retest_quality": 7,
+          "higher_low": 3
+        },
+        "score": 3.2
+      },
+      "components": {
+        "fundamentals": 8.5,
+        "valuation": 9,
+        "catalyst_transmission": 8,
+        "cycle_quality": 3.2,
+        "pre_move_stage": 9,
+        "institutional_proxy": 4.29,
+        "entry_quality": 5.3,
+        "risk_reward": 5.38,
+        "portfolio_fit": 5,
+        "liquidity": 8,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 13,
+      "previous_rank": 10,
+      "rank_change": -3,
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 6.29,
+        "entry_zone": [
+          6.16,
+          6.29
+        ],
+        "invalidation": 5.88,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.2,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "LCSW",
+      "score": 66.16,
+      "raw_score": 66.16,
+      "penalty": 0,
+      "action": "PRE_MOVE_WATCH",
+      "stage": "confirming",
+      "discovery_score": 8.75,
+      "gates": {
+        "sharia_pass": false,
+        "fundamental_verified": false,
+        "valuation_verified": false,
+        "execution_ready": false
+      },
+      "sharia_status": "pending_verification",
+      "history_cycle": {
+        "symbol": "LCSW",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 55,
+        "native_sessions": 29,
+        "external_validated_sessions": 26,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 10,
+          "breakout_strength": 6.44117647058823,
+          "volume_asymmetry": 8.379191095086306,
+          "retest_quality": 7,
+          "higher_low": 3
+        },
+        "score": 7.3
+      },
+      "components": {
+        "fundamentals": 5,
+        "valuation": 5,
+        "catalyst_transmission": 5,
+        "cycle_quality": 7.3,
+        "pre_move_stage": 7,
+        "institutional_proxy": 8.96,
+        "entry_quality": 8.79,
+        "risk_reward": 8.75,
+        "portfolio_fit": 5,
+        "liquidity": 9,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [
+        "fundamentals",
+        "valuation",
+        "sharia_verification"
+      ],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 14,
+      "previous_rank": 16,
+      "rank_change": 2,
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 35.4,
+        "entry_zone": [
+          33.28,
+          34.87
+        ],
+        "invalidation": 31.78,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 1,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "MASR",
+      "score": 64.92,
+      "raw_score": 64.92,
+      "penalty": 0,
+      "action": "PRE_MOVE_WATCH",
+      "stage": "pre_move_watch",
+      "discovery_score": 4.6,
+      "gates": {
+        "sharia_pass": true,
+        "fundamental_verified": true,
+        "valuation_verified": true,
+        "execution_ready": true
+      },
+      "sharia_status": "compliant",
+      "history_cycle": {
+        "symbol": "MASR",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 55,
+        "native_sessions": 29,
+        "external_validated_sessions": 26,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 0,
+          "breakout_strength": 0,
+          "volume_asymmetry": 7.59943961787163,
+          "retest_quality": 7,
+          "higher_low": 3
+        },
+        "score": 3.4
+      },
+      "components": {
+        "fundamentals": 8,
+        "valuation": 8.8,
+        "catalyst_transmission": 7.8,
+        "cycle_quality": 3.4,
+        "pre_move_stage": 9,
+        "institutional_proxy": 4.68,
+        "entry_quality": 5.12,
+        "risk_reward": 4.6,
+        "portfolio_fit": 5,
+        "liquidity": 8,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 15,
+      "previous_rank": 8,
+      "rank_change": -7,
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 6.38,
+        "entry_zone": [
+          6.18,
+          6.36
+        ],
+        "invalidation": 5.9,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.333,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "ORWE",
+      "score": 64.23,
+      "raw_score": 64.23,
+      "penalty": 0,
+      "action": "PRE_MOVE_WATCH",
+      "stage": "confirming",
+      "discovery_score": 5.22,
+      "gates": {
+        "sharia_pass": true,
+        "fundamental_verified": true,
+        "valuation_verified": true,
+        "execution_ready": true
+      },
+      "sharia_status": "compliant",
+      "history_cycle": {
+        "symbol": "ORWE",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 55,
+        "native_sessions": 29,
+        "external_validated_sessions": 26,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 0,
+          "breakout_strength": 0,
+          "volume_asymmetry": 3.9942042646864975,
+          "retest_quality": 7,
+          "higher_low": 3
+        },
+        "score": 2.6
+      },
+      "components": {
+        "fundamentals": 8.8,
+        "valuation": 9,
+        "catalyst_transmission": 7.8,
+        "cycle_quality": 2.6,
+        "pre_move_stage": 7,
+        "institutional_proxy": 4.42,
+        "entry_quality": 4.78,
+        "risk_reward": 5.22,
+        "portfolio_fit": 5,
+        "liquidity": 8,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 16,
+      "previous_rank": 14,
+      "rank_change": -2,
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 23.5,
+        "entry_zone": [
+          22.66,
+          23.34
+        ],
+        "invalidation": 21.64,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.49,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "CANA",
+      "score": 63.81,
+      "raw_score": 63.81,
+      "penalty": 0,
+      "action": "PRE_MOVE_WATCH",
+      "stage": "confirming",
+      "discovery_score": 8.71,
+      "gates": {
+        "sharia_pass": false,
+        "fundamental_verified": false,
+        "valuation_verified": false,
+        "execution_ready": false
+      },
+      "sharia_status": "pending_verification",
+      "history_cycle": {
+        "symbol": "CANA",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 55,
+        "native_sessions": 29,
+        "external_validated_sessions": 26,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 6.728058208276497,
+          "breakout_strength": 5.062430323299888,
+          "volume_asymmetry": 5.81446657843798,
+          "retest_quality": 7,
+          "higher_low": 3
+        },
+        "score": 5.7
+      },
+      "components": {
+        "fundamentals": 5,
+        "valuation": 5,
+        "catalyst_transmission": 5,
+        "cycle_quality": 5.7,
+        "pre_move_stage": 7,
+        "institutional_proxy": 9.05,
+        "entry_quality": 8.02,
+        "risk_reward": 8.71,
+        "portfolio_fit": 5,
+        "liquidity": 9,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [
+        "fundamentals",
+        "valuation",
+        "sharia_verification"
+      ],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 17,
+      "previous_rank": 27,
+      "rank_change": 10,
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 44.93,
+        "entry_zone": [
+          42.97,
+          44.27
+        ],
+        "invalidation": 41.03,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.568,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "AMER",
+      "score": 61.6,
+      "raw_score": 61.6,
+      "penalty": 0,
+      "action": "DEEP_ANALYSIS_REQUIRED",
+      "stage": "confirming",
+      "discovery_score": 8.13,
+      "gates": {
+        "sharia_pass": false,
+        "fundamental_verified": false,
+        "valuation_verified": false,
+        "execution_ready": false
+      },
+      "sharia_status": "pending_verification",
+      "history_cycle": {
+        "symbol": "AMER",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 59,
+        "native_sessions": 29,
+        "external_validated_sessions": 30,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 5.945626477541364,
+          "breakout_strength": 1.4705882352941222,
+          "volume_asymmetry": 6.333563940356235,
+          "retest_quality": 7,
+          "higher_low": 3
+        },
+        "score": 4.9
+      },
+      "components": {
+        "fundamentals": 5,
+        "valuation": 5,
+        "catalyst_transmission": 5,
+        "cycle_quality": 4.9,
+        "pre_move_stage": 7,
+        "institutional_proxy": 8.49,
+        "entry_quality": 7.4,
+        "risk_reward": 8.13,
+        "portfolio_fit": 5,
+        "liquidity": 10,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [
+        "fundamentals",
+        "valuation",
+        "sharia_verification"
+      ],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 18,
+      "previous_rank": null,
+      "rank_change": null,
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 4.28,
+        "entry_zone": [
+          4.02,
+          4.22
+        ],
+        "invalidation": 3.84,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.75,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "ABUK",
+      "score": 61.14,
+      "raw_score": 61.14,
       "penalty": 0,
       "action": "DEEP_ANALYSIS_REQUIRED",
       "stage": "pre_move_watch",
-      "discovery_score": 6,
+      "discovery_score": 8,
+      "gates": {
+        "sharia_pass": false,
+        "fundamental_verified": false,
+        "valuation_verified": false,
+        "execution_ready": false
+      },
+      "sharia_status": "pending_verification",
+      "history_cycle": {
+        "symbol": "ABUK",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 59,
+        "native_sessions": 29,
+        "external_validated_sessions": 30,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 0.6637075718015675,
+          "breakout_strength": 3.8994652406417134,
+          "volume_asymmetry": 4.794924899710794,
+          "retest_quality": 7,
+          "higher_low": 7.631610576923076
+        },
+        "score": 4.4
+      },
+      "components": {
+        "fundamentals": 5,
+        "valuation": 5,
+        "catalyst_transmission": 5,
+        "cycle_quality": 4.4,
+        "pre_move_stage": 9,
+        "institutional_proxy": 6.6,
+        "entry_quality": 7.62,
+        "risk_reward": 8,
+        "portfolio_fit": 5,
+        "liquidity": 9,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [
+        "fundamentals",
+        "valuation",
+        "sharia_verification"
+      ],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 19,
+      "previous_rank": 17,
+      "rank_change": -2,
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 90.56,
+        "entry_zone": [
+          88.26,
+          90.56
+        ],
+        "invalidation": 84.28,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.352,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "EAST",
+      "score": 59.98,
+      "raw_score": 59.98,
+      "penalty": 0,
+      "action": "DEEP_ANALYSIS_REQUIRED",
+      "stage": "pre_move_watch",
+      "discovery_score": 5.92,
+      "gates": {
+        "sharia_pass": false,
+        "fundamental_verified": false,
+        "valuation_verified": false,
+        "execution_ready": false
+      },
+      "sharia_status": "non_compliant",
+      "history_cycle": {
+        "symbol": "EAST",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 56,
+        "native_sessions": 29,
+        "external_validated_sessions": 27,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 9.719999999999995,
+          "breakout_strength": 7.950511945392491,
+          "volume_asymmetry": 6.343086881350223,
+          "retest_quality": 7,
+          "higher_low": 7.362996834329932
+        },
+        "score": 7.8
+      },
+      "components": {
+        "fundamentals": 5,
+        "valuation": 5,
+        "catalyst_transmission": 5,
+        "cycle_quality": 7.8,
+        "pre_move_stage": 9,
+        "institutional_proxy": 4.8,
+        "entry_quality": 7.12,
+        "risk_reward": 5.92,
+        "portfolio_fit": 5,
+        "liquidity": 8,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [
+        "fundamentals",
+        "valuation",
+        "sharia_verification"
+      ],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 20,
+      "previous_rank": 19,
+      "rank_change": -1,
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 31.77,
+        "entry_zone": [
+          31.29,
+          31.77
+        ],
+        "invalidation": 29.89,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.692,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "SWDY",
+      "score": 59.29,
+      "raw_score": 59.29,
+      "penalty": 0,
+      "action": "DEEP_ANALYSIS_REQUIRED",
+      "stage": "confirming",
+      "discovery_score": 7.63,
+      "gates": {
+        "sharia_pass": false,
+        "fundamental_verified": false,
+        "valuation_verified": false,
+        "execution_ready": false
+      },
+      "sharia_status": "pending_verification",
+      "history_cycle": {
+        "symbol": "SWDY",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 54,
+        "native_sessions": 29,
+        "external_validated_sessions": 25,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 5.653950953678475,
+          "breakout_strength": 4.078947368421054,
+          "volume_asymmetry": 7.129708628244835,
+          "retest_quality": 7,
+          "higher_low": 3
+        },
+        "score": 5.5
+      },
+      "components": {
+        "fundamentals": 5,
+        "valuation": 5,
+        "catalyst_transmission": 5,
+        "cycle_quality": 5.5,
+        "pre_move_stage": 7,
+        "institutional_proxy": 7.27,
+        "entry_quality": 6.25,
+        "risk_reward": 7.63,
+        "portfolio_fit": 5,
+        "liquidity": 9,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [
+        "fundamentals",
+        "valuation",
+        "sharia_verification"
+      ],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 21,
+      "previous_rank": 22,
+      "rank_change": 1,
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 111,
+        "entry_zone": [
+          109.33,
+          111
+        ],
+        "invalidation": 104.41,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.392,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "PHAR",
+      "score": 59.17,
+      "raw_score": 59.17,
+      "penalty": 0,
+      "action": "DEEP_ANALYSIS_REQUIRED",
+      "stage": "confirming",
+      "discovery_score": 7.74,
+      "gates": {
+        "sharia_pass": false,
+        "fundamental_verified": false,
+        "valuation_verified": false,
+        "execution_ready": false
+      },
+      "sharia_status": "pending_verification",
+      "history_cycle": {
+        "symbol": "PHAR",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 57,
+        "native_sessions": 29,
+        "external_validated_sessions": 28,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 1.9501693275278154,
+          "breakout_strength": 2.3359665427509295,
+          "volume_asymmetry": 8.12364482562013,
+          "retest_quality": 7,
+          "higher_low": 3
+        },
+        "score": 4.4
+      },
+      "components": {
+        "fundamentals": 5,
+        "valuation": 5,
+        "catalyst_transmission": 5,
+        "cycle_quality": 4.4,
+        "pre_move_stage": 7,
+        "institutional_proxy": 7.95,
+        "entry_quality": 6.61,
+        "risk_reward": 7.74,
+        "portfolio_fit": 5,
+        "liquidity": 9,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [
+        "fundamentals",
+        "valuation",
+        "sharia_verification"
+      ],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 22,
+      "previous_rank": 23,
+      "rank_change": 1,
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 99.41,
+        "entry_zone": [
+          94.89,
+          97.92
+        ],
+        "invalidation": 90.62,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.657,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "NIPH",
+      "score": 58.74,
+      "raw_score": 58.74,
+      "penalty": 0,
+      "action": "DEEP_ANALYSIS_REQUIRED",
+      "stage": "confirming",
+      "discovery_score": 7.81,
+      "gates": {
+        "sharia_pass": false,
+        "fundamental_verified": false,
+        "valuation_verified": false,
+        "execution_ready": false
+      },
+      "sharia_status": "pending_verification",
+      "history_cycle": {
+        "symbol": "NIPH",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 44,
+        "native_sessions": 29,
+        "external_validated_sessions": 15,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 0.8334572490706371,
+          "breakout_strength": 0.14473417550496492,
+          "volume_asymmetry": 5.625397517261343,
+          "retest_quality": 7,
+          "higher_low": 3
+        },
+        "score": 3.2
+      },
+      "components": {
+        "fundamentals": 5,
+        "valuation": 5,
+        "catalyst_transmission": 5,
+        "cycle_quality": 3.2,
+        "pre_move_stage": 7,
+        "institutional_proxy": 8.27,
+        "entry_quality": 6.78,
+        "risk_reward": 7.81,
+        "portfolio_fit": 5,
+        "liquidity": 10,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [
+        "fundamentals",
+        "valuation",
+        "sharia_verification"
+      ],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 23,
+      "previous_rank": 43,
+      "rank_change": 20,
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 254.99,
+        "entry_zone": [
+          239.69,
+          251.17
+        ],
+        "invalidation": 228.9,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.625,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "ARAB",
+      "score": 58.17,
+      "raw_score": 58.17,
+      "penalty": 0,
+      "action": "DEEP_ANALYSIS_REQUIRED",
+      "stage": "pre_move_watch",
+      "discovery_score": 7.26,
+      "gates": {
+        "sharia_pass": false,
+        "fundamental_verified": false,
+        "valuation_verified": false,
+        "execution_ready": false
+      },
+      "sharia_status": "pending_verification",
+      "history_cycle": {
+        "symbol": "ARAB",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 57,
+        "native_sessions": 29,
+        "external_validated_sessions": 28,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 0,
+          "breakout_strength": 0.2037037037037024,
+          "volume_asymmetry": 6.710087922602877,
+          "retest_quality": 7,
+          "higher_low": 3
+        },
+        "score": 3.2
+      },
+      "components": {
+        "fundamentals": 5,
+        "valuation": 5,
+        "catalyst_transmission": 5,
+        "cycle_quality": 3.2,
+        "pre_move_stage": 9,
+        "institutional_proxy": 6.3,
+        "entry_quality": 6.66,
+        "risk_reward": 7.26,
+        "portfolio_fit": 5,
+        "liquidity": 10,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [
+        "fundamentals",
+        "valuation",
+        "sharia_verification"
+      ],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 24,
+      "previous_rank": 25,
+      "rank_change": 1,
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 0.23,
+        "entry_zone": [
+          0.23,
+          0.23
+        ],
+        "invalidation": 0.22,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.5,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "EMFD",
+      "score": 58.04,
+      "raw_score": 58.04,
+      "penalty": 0,
+      "action": "DEEP_ANALYSIS_REQUIRED",
+      "stage": "confirming",
+      "discovery_score": 7.52,
+      "gates": {
+        "sharia_pass": false,
+        "fundamental_verified": false,
+        "valuation_verified": false,
+        "execution_ready": false
+      },
+      "sharia_status": "pending_verification",
+      "history_cycle": {
+        "symbol": "EMFD",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 56,
+        "native_sessions": 29,
+        "external_validated_sessions": 27,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 2.605985037406491,
+          "breakout_strength": 3.5069729286300264,
+          "volume_asymmetry": 5.466470563215058,
+          "retest_quality": 7,
+          "higher_low": 3
+        },
+        "score": 4.3
+      },
+      "components": {
+        "fundamentals": 5,
+        "valuation": 5,
+        "catalyst_transmission": 5,
+        "cycle_quality": 4.3,
+        "pre_move_stage": 7,
+        "institutional_proxy": 7.22,
+        "entry_quality": 6.36,
+        "risk_reward": 7.52,
+        "portfolio_fit": 5,
+        "liquidity": 9,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [
+        "fundamentals",
+        "valuation",
+        "sharia_verification"
+      ],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 25,
+      "previous_rank": 34,
+      "rank_change": 9,
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 11.67,
+        "entry_zone": [
+          11.33,
+          11.67
+        ],
+        "invalidation": 10.82,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.567,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "MPCI",
+      "score": 58.02,
+      "raw_score": 58.02,
+      "penalty": 0,
+      "action": "DEEP_ANALYSIS_REQUIRED",
+      "stage": "confirming",
+      "discovery_score": 7.71,
+      "gates": {
+        "sharia_pass": false,
+        "fundamental_verified": false,
+        "valuation_verified": false,
+        "execution_ready": false
+      },
+      "sharia_status": "pending_verification",
+      "history_cycle": {
+        "symbol": "MPCI",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 57,
+        "native_sessions": 29,
+        "external_validated_sessions": 28,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 0.9034072113794167,
+          "breakout_strength": 1.6648266725546512,
+          "volume_asymmetry": 5.35448650066878,
+          "retest_quality": 7,
+          "higher_low": 3
+        },
+        "score": 3.5
+      },
+      "components": {
+        "fundamentals": 5,
+        "valuation": 5,
+        "catalyst_transmission": 5,
+        "cycle_quality": 3.5,
+        "pre_move_stage": 7,
+        "institutional_proxy": 7.19,
+        "entry_quality": 6.64,
+        "risk_reward": 7.71,
+        "portfolio_fit": 5,
+        "liquidity": 10,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [
+        "fundamentals",
+        "valuation",
+        "sharia_verification"
+      ],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 26,
+      "previous_rank": null,
+      "rank_change": null,
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 286.82,
+        "entry_zone": [
+          269.61,
+          282.52
+        ],
+        "invalidation": 257.48,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.656,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "TALM",
+      "score": 57.87,
+      "raw_score": 57.87,
+      "penalty": 0,
+      "action": "DEEP_ANALYSIS_REQUIRED",
+      "stage": "confirming",
+      "discovery_score": 7.39,
+      "gates": {
+        "sharia_pass": false,
+        "fundamental_verified": false,
+        "valuation_verified": false,
+        "execution_ready": false
+      },
+      "sharia_status": "pending_verification",
+      "history_cycle": {
+        "symbol": "TALM",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 55,
+        "native_sessions": 29,
+        "external_validated_sessions": 26,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 3.244002041858094,
+          "breakout_strength": 1.706855791962178,
+          "volume_asymmetry": 7.375640183988791,
+          "retest_quality": 7,
+          "higher_low": 3
+        },
+        "score": 4.5
+      },
+      "components": {
+        "fundamentals": 5,
+        "valuation": 5,
+        "catalyst_transmission": 5,
+        "cycle_quality": 4.5,
+        "pre_move_stage": 7,
+        "institutional_proxy": 7.98,
+        "entry_quality": 5.92,
+        "risk_reward": 7.39,
+        "portfolio_fit": 5,
+        "liquidity": 8,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [
+        "fundamentals",
+        "valuation",
+        "sharia_verification"
+      ],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 27,
+      "previous_rank": null,
+      "rank_change": null,
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 19.16,
+        "entry_zone": [
+          18.25,
+          18.87
+        ],
+        "invalidation": 17.43,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.426,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "SVCE",
+      "score": 57.68,
+      "raw_score": 57.68,
+      "penalty": 0,
+      "action": "DEEP_ANALYSIS_REQUIRED",
+      "stage": "pre_move_watch",
+      "discovery_score": 5.14,
+      "gates": {
+        "sharia_pass": true,
+        "fundamental_verified": true,
+        "valuation_verified": true,
+        "execution_ready": true
+      },
+      "sharia_status": "compliant",
+      "history_cycle": {
+        "symbol": "SVCE",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 58,
+        "native_sessions": 29,
+        "external_validated_sessions": 29,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 0,
+          "breakout_strength": 1.852248394004282,
+          "volume_asymmetry": 6.172258369501099,
+          "retest_quality": 7,
+          "higher_low": 3
+        },
+        "score": 3.5
+      },
+      "components": {
+        "fundamentals": 6.8,
+        "valuation": 5.8,
+        "catalyst_transmission": 6.2,
+        "cycle_quality": 3.5,
+        "pre_move_stage": 9,
+        "institutional_proxy": 4.27,
+        "entry_quality": 5.32,
+        "risk_reward": 5.14,
+        "portfolio_fit": 5,
+        "liquidity": 8,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 28,
+      "previous_rank": 18,
+      "rank_change": -10,
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 8.5,
+        "entry_zone": [
+          8.09,
+          8.37
+        ],
+        "invalidation": 7.72,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.537,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "CCAP",
+      "score": 57.46,
+      "raw_score": 57.46,
+      "penalty": 0,
+      "action": "DEEP_ANALYSIS_REQUIRED",
+      "stage": "pre_move_watch",
+      "discovery_score": 6.88,
+      "gates": {
+        "sharia_pass": false,
+        "fundamental_verified": false,
+        "valuation_verified": false,
+        "execution_ready": false
+      },
+      "sharia_status": "pending_verification",
+      "history_cycle": {
+        "symbol": "CCAP",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 50,
+        "native_sessions": 29,
+        "external_validated_sessions": 21,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 2.7033492822966565,
+          "breakout_strength": 3.304687499999999,
+          "volume_asymmetry": 5.000113738407952,
+          "retest_quality": 7,
+          "higher_low": 3
+        },
+        "score": 4.2
+      },
+      "components": {
+        "fundamentals": 5,
+        "valuation": 5,
+        "catalyst_transmission": 5,
+        "cycle_quality": 4.2,
+        "pre_move_stage": 9,
+        "institutional_proxy": 5.17,
+        "entry_quality": 6.19,
+        "risk_reward": 6.88,
+        "portfolio_fit": 5,
+        "liquidity": 10,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [
+        "fundamentals",
+        "valuation",
+        "sharia_verification"
+      ],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 29,
+      "previous_rank": 33,
+      "rank_change": 4,
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 6.09,
+        "entry_zone": [
+          5.94,
+          6.09
+        ],
+        "invalidation": 5.67,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.429,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "CPCI",
+      "score": 57.01,
+      "raw_score": 57.01,
+      "penalty": 0,
+      "action": "DEEP_ANALYSIS_REQUIRED",
+      "stage": "pre_move_watch",
+      "discovery_score": 6.08,
       "gates": {
         "sharia_pass": false,
         "fundamental_verified": false,
@@ -2538,29 +2465,29 @@
         "current_session_present": true,
         "freshness": "current_session",
         "sessions_available": 57,
-        "native_sessions": 28,
-        "external_validated_sessions": 29,
+        "native_sessions": 29,
+        "external_validated_sessions": 28,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
-          "weekly_structure": 6.740259740259731,
-          "breakout_strength": 4.454880719142561,
-          "volume_asymmetry": 6.2408515977576755,
+          "weekly_structure": 6.290453759869887,
+          "breakout_strength": 4.556874495793481,
+          "volume_asymmetry": 6.123541235167481,
           "retest_quality": 7,
           "higher_low": 6.256595685358796
         },
-        "score": 6.2
+        "score": 6
       },
       "components": {
         "fundamentals": 5,
         "valuation": 5,
         "catalyst_transmission": 5,
-        "cycle_quality": 6.2,
+        "cycle_quality": 6,
         "pre_move_stage": 9,
-        "institutional_proxy": 4.04,
-        "entry_quality": 7.13,
-        "risk_reward": 6,
+        "institutional_proxy": 4.35,
+        "entry_quality": 7.12,
+        "risk_reward": 6.08,
         "portfolio_fit": 5,
         "liquidity": 4.5,
         "opportunity_cost": 5
@@ -2576,14 +2503,170 @@
       "rank_change": 0,
       "execution_plan": {
         "status": "WATCH",
-        "reference_close": 597.93,
+        "reference_close": 599.7,
         "entry_zone": [
-          583.09,
-          597.93
+          584.18,
+          599.7
         ],
-        "invalidation": 550.17,
-        "risk_from_low_pct": 5.98,
-        "day_extension": 0.628,
+        "invalidation": 551.35,
+        "risk_from_low_pct": 5.95,
+        "day_extension": 0.614,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "LUTS",
+      "score": 56.44,
+      "raw_score": 56.44,
+      "penalty": 0,
+      "action": "DEEP_ANALYSIS_REQUIRED",
+      "stage": "confirming",
+      "discovery_score": 6.88,
+      "gates": {
+        "sharia_pass": false,
+        "fundamental_verified": false,
+        "valuation_verified": false,
+        "execution_ready": false
+      },
+      "sharia_status": "pending_verification",
+      "history_cycle": {
+        "symbol": "LUTS",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 43,
+        "native_sessions": 29,
+        "external_validated_sessions": 14,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 0,
+          "breakout_strength": 0,
+          "volume_asymmetry": 7.75617398275214,
+          "retest_quality": 7,
+          "higher_low": 3
+        },
+        "score": 3.4
+      },
+      "components": {
+        "fundamentals": 5,
+        "valuation": 5,
+        "catalyst_transmission": 5,
+        "cycle_quality": 3.4,
+        "pre_move_stage": 7,
+        "institutional_proxy": 6.79,
+        "entry_quality": 6.73,
+        "risk_reward": 6.88,
+        "portfolio_fit": 5,
+        "liquidity": 9,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [
+        "fundamentals",
+        "valuation",
+        "sharia_verification"
+      ],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 31,
+      "previous_rank": null,
+      "rank_change": null,
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 0.63,
+        "entry_zone": [
+          0.59,
+          0.62
+        ],
+        "invalidation": 0.56,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.71,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "ETRS",
+      "score": 56.3,
+      "raw_score": 56.3,
+      "penalty": 0,
+      "action": "DEEP_ANALYSIS_REQUIRED",
+      "stage": "pre_move_watch",
+      "discovery_score": 6.11,
+      "gates": {
+        "sharia_pass": false,
+        "fundamental_verified": false,
+        "valuation_verified": false,
+        "execution_ready": false
+      },
+      "sharia_status": "pending_verification",
+      "history_cycle": {
+        "symbol": "ETRS",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 59,
+        "native_sessions": 29,
+        "external_validated_sessions": 30,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 2.9026217228464457,
+          "breakout_strength": 4.0505144995322775,
+          "volume_asymmetry": 8.264477611131262,
+          "retest_quality": 7,
+          "higher_low": 3
+        },
+        "score": 5
+      },
+      "components": {
+        "fundamentals": 5,
+        "valuation": 5,
+        "catalyst_transmission": 5,
+        "cycle_quality": 5,
+        "pre_move_stage": 9,
+        "institutional_proxy": 4.8,
+        "entry_quality": 6.3,
+        "risk_reward": 6.11,
+        "portfolio_fit": 5,
+        "liquidity": 7,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [
+        "fundamentals",
+        "valuation",
+        "sharia_verification"
+      ],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 32,
+      "previous_rank": 38,
+      "rank_change": 6,
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 10.4,
+        "entry_zone": [
+          10.24,
+          10.4
+        ],
+        "invalidation": 9.78,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.522,
         "sizing": {
           "probe_pct_of_target": 0,
           "core_add_pct": 0,
@@ -2598,12 +2681,12 @@
     },
     {
       "symbol": "MEPA",
-      "score": 56.88,
-      "raw_score": 56.88,
+      "score": 56.17,
+      "raw_score": 56.17,
       "penalty": 0,
       "action": "DEEP_ANALYSIS_REQUIRED",
       "stage": "confirming",
-      "discovery_score": 6.58,
+      "discovery_score": 6.38,
       "gates": {
         "sharia_pass": false,
         "fundamental_verified": false,
@@ -2616,8 +2699,8 @@
         "current_session_present": true,
         "freshness": "current_session",
         "sessions_available": 57,
-        "native_sessions": 28,
-        "external_validated_sessions": 29,
+        "native_sessions": 29,
+        "external_validated_sessions": 28,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
@@ -2636,9 +2719,9 @@
         "catalyst_transmission": 5,
         "cycle_quality": 3.9,
         "pre_move_stage": 7,
-        "institutional_proxy": 7.91,
-        "entry_quality": 6.24,
-        "risk_reward": 6.58,
+        "institutional_proxy": 7.7,
+        "entry_quality": 5.92,
+        "risk_reward": 6.38,
         "portfolio_fit": 5,
         "liquidity": 9,
         "opportunity_cost": 5
@@ -2649,19 +2732,19 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 31,
+      "rank": 33,
       "previous_rank": 31,
-      "rank_change": 0,
+      "rank_change": -2,
       "execution_plan": {
         "status": "WATCH",
-        "reference_close": 1.25,
+        "reference_close": 1.26,
         "entry_zone": [
-          1.18,
-          1.23
+          1.19,
+          1.24
         ],
-        "invalidation": 1.13,
+        "invalidation": 1.14,
         "risk_from_low_pct": 4.71,
-        "day_extension": 0.714,
+        "day_extension": 0.625,
         "sizing": {
           "probe_pct_of_target": 0,
           "core_add_pct": 0,
@@ -2675,227 +2758,70 @@
       }
     },
     {
-      "symbol": "ORHD",
-      "score": 56.76,
-      "raw_score": 56.76,
+      "symbol": "GBCO",
+      "score": 55.89,
+      "raw_score": 55.89,
       "penalty": 0,
       "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "confirming",
-      "discovery_score": 6.06,
+      "stage": "pre_move_watch",
+      "discovery_score": 4.34,
       "gates": {
         "sharia_pass": false,
-        "fundamental_verified": false,
+        "fundamental_verified": true,
         "valuation_verified": false,
         "execution_ready": false
       },
-      "sharia_status": "pending_verification",
+      "sharia_status": "non_compliant",
       "history_cycle": {
-        "symbol": "ORHD",
+        "symbol": "GBCO",
         "current_session_present": true,
         "freshness": "current_session",
-        "sessions_available": 54,
-        "native_sessions": 28,
+        "sessions_available": 55,
+        "native_sessions": 29,
         "external_validated_sessions": 26,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
-          "weekly_structure": 0.33980582524271163,
-          "breakout_strength": 0.8636363636363606,
-          "volume_asymmetry": 6.458385875600218,
+          "weekly_structure": 0,
+          "breakout_strength": 0,
+          "volume_asymmetry": 5.697190370580987,
           "retest_quality": 7,
           "higher_low": 3
         },
-        "score": 3.4
+        "score": 3
       },
       "components": {
-        "fundamentals": 5,
+        "fundamentals": 7.5,
         "valuation": 5,
         "catalyst_transmission": 7,
-        "cycle_quality": 3.4,
-        "pre_move_stage": 7,
-        "institutional_proxy": 6.64,
-        "entry_quality": 5.84,
-        "risk_reward": 6.06,
-        "portfolio_fit": 5,
-        "liquidity": 10,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [
-        "fundamentals",
-        "valuation",
-        "sharia_verification"
-      ],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 32,
-      "previous_rank": 32,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 9.7,
-        "entry_zone": [
-          9.12,
-          9.55
-        ],
-        "invalidation": 8.71,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.647,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "CCAP",
-      "score": 56.69,
-      "raw_score": 56.69,
-      "penalty": 0,
-      "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "confirming",
-      "discovery_score": 7.29,
-      "gates": {
-        "sharia_pass": false,
-        "fundamental_verified": false,
-        "valuation_verified": false,
-        "execution_ready": false
-      },
-      "sharia_status": "pending_verification",
-      "history_cycle": {
-        "symbol": "CCAP",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 50,
-        "native_sessions": 28,
-        "external_validated_sessions": 22,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 0.9999999999999964,
-          "breakout_strength": 3.9393939393939403,
-          "volume_asymmetry": 5.111304540739005,
-          "retest_quality": 7,
-          "higher_low": 3
-        },
-        "score": 3.9
-      },
-      "components": {
-        "fundamentals": 5,
-        "valuation": 5,
-        "catalyst_transmission": 5,
-        "cycle_quality": 3.9,
-        "pre_move_stage": 7,
-        "institutional_proxy": 5.7,
-        "entry_quality": 6.45,
-        "risk_reward": 7.29,
-        "portfolio_fit": 5,
-        "liquidity": 10,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [
-        "fundamentals",
-        "valuation",
-        "sharia_verification"
-      ],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 33,
-      "previous_rank": 33,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 6.08,
-        "entry_zone": [
-          5.81,
-          5.99
-        ],
-        "invalidation": 5.55,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.75,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "EMFD",
-      "score": 56.62,
-      "raw_score": 56.62,
-      "penalty": 0,
-      "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "pre_move_watch",
-      "discovery_score": 6.45,
-      "gates": {
-        "sharia_pass": false,
-        "fundamental_verified": false,
-        "valuation_verified": false,
-        "execution_ready": false
-      },
-      "sharia_status": "pending_verification",
-      "history_cycle": {
-        "symbol": "EMFD",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 55,
-        "native_sessions": 28,
-        "external_validated_sessions": 27,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 1.3904840032813848,
-          "breakout_strength": 3.284313725490198,
-          "volume_asymmetry": 5.900788299046082,
-          "retest_quality": 7,
-          "higher_low": 3
-        },
-        "score": 4
-      },
-      "components": {
-        "fundamentals": 5,
-        "valuation": 5,
-        "catalyst_transmission": 5,
-        "cycle_quality": 4,
+        "cycle_quality": 3,
         "pre_move_stage": 9,
-        "institutional_proxy": 5.26,
-        "entry_quality": 6.6,
-        "risk_reward": 6.45,
+        "institutional_proxy": 3.8,
+        "entry_quality": 4.67,
+        "risk_reward": 4.34,
         "portfolio_fit": 5,
         "liquidity": 8,
         "opportunity_cost": 5
       },
       "missing_deep_analysis": [
-        "fundamentals",
         "valuation",
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
       "rank": 34,
-      "previous_rank": 34,
-      "rank_change": 0,
+      "previous_rank": 26,
+      "rank_change": -8,
       "execution_plan": {
         "status": "WATCH",
-        "reference_close": 11.64,
+        "reference_close": 23.24,
         "entry_zone": [
-          10.96,
-          11.47
+          22.71,
+          23.24
         ],
-        "invalidation": 10.47,
+        "invalidation": 21.69,
         "risk_from_low_pct": 4.71,
-        "day_extension": 0.81,
+        "day_extension": 0.228,
         "sizing": {
           "probe_pct_of_target": 0,
           "core_add_pct": 0,
@@ -2909,13 +2835,13 @@
       }
     },
     {
-      "symbol": "ALCN",
-      "score": 56.49,
-      "raw_score": 56.49,
+      "symbol": "CRST",
+      "score": 55.84,
+      "raw_score": 55.84,
       "penalty": 0,
       "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "pre_move_watch",
-      "discovery_score": 6.19,
+      "stage": "confirming",
+      "discovery_score": 6.86,
       "gates": {
         "sharia_pass": false,
         "fundamental_verified": false,
@@ -2924,35 +2850,35 @@
       },
       "sharia_status": "pending_verification",
       "history_cycle": {
-        "symbol": "ALCN",
+        "symbol": "CRST",
         "current_session_present": true,
         "freshness": "current_session",
-        "sessions_available": 57,
-        "native_sessions": 28,
-        "external_validated_sessions": 29,
+        "sessions_available": 59,
+        "native_sessions": 29,
+        "external_validated_sessions": 30,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
-          "weekly_structure": 2.9442724458204417,
-          "breakout_strength": 2.1122448979591857,
-          "volume_asymmetry": 7.757871677475412,
+          "weekly_structure": 0,
+          "breakout_strength": 0,
+          "volume_asymmetry": 7.164847936671764,
           "retest_quality": 7,
           "higher_low": 3
         },
-        "score": 4.6
+        "score": 3.3
       },
       "components": {
         "fundamentals": 5,
         "valuation": 5,
         "catalyst_transmission": 5,
-        "cycle_quality": 4.6,
-        "pre_move_stage": 9,
-        "institutional_proxy": 5.23,
-        "entry_quality": 6.5,
-        "risk_reward": 6.19,
+        "cycle_quality": 3.3,
+        "pre_move_stage": 7,
+        "institutional_proxy": 7.13,
+        "entry_quality": 5.72,
+        "risk_reward": 6.86,
         "portfolio_fit": 5,
-        "liquidity": 7,
+        "liquidity": 10,
         "opportunity_cost": 5
       },
       "missing_deep_analysis": [
@@ -2962,18 +2888,18 @@
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
       "rank": 35,
-      "previous_rank": 35,
-      "rank_change": 0,
+      "previous_rank": null,
+      "rank_change": null,
       "execution_plan": {
         "status": "WATCH",
-        "reference_close": 31.47,
+        "reference_close": 2.16,
         "entry_zone": [
-          30.09,
-          31.01
+          2.09,
+          2.15
         ],
-        "invalidation": 28.74,
+        "invalidation": 1.99,
         "risk_from_low_pct": 4.71,
-        "day_extension": 1,
+        "day_extension": 0.19,
         "sizing": {
           "probe_pct_of_target": 0,
           "core_add_pct": 0,
@@ -2987,13 +2913,13 @@
       }
     },
     {
-      "symbol": "RMDA",
-      "score": 56.37,
-      "raw_score": 56.37,
+      "symbol": "ADCI",
+      "score": 55.67,
+      "raw_score": 55.67,
       "penalty": 0,
       "action": "DEEP_ANALYSIS_REQUIRED",
       "stage": "confirming",
-      "discovery_score": 6.44,
+      "discovery_score": 6.32,
       "gates": {
         "sharia_pass": false,
         "fundamental_verified": false,
@@ -3002,35 +2928,35 @@
       },
       "sharia_status": "pending_verification",
       "history_cycle": {
-        "symbol": "RMDA",
+        "symbol": "ADCI",
         "current_session_present": true,
         "freshness": "current_session",
-        "sessions_available": 56,
-        "native_sessions": 28,
-        "external_validated_sessions": 28,
+        "sessions_available": 58,
+        "native_sessions": 29,
+        "external_validated_sessions": 29,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
-          "weekly_structure": 3.1538461538461515,
-          "breakout_strength": 4.061302681992341,
-          "volume_asymmetry": 6.276802582492957,
+          "weekly_structure": 5.877473749951214,
+          "breakout_strength": 3.700137551581842,
+          "volume_asymmetry": 7.848173251777153,
           "retest_quality": 7,
           "higher_low": 3
         },
-        "score": 4.7
+        "score": 5.6
       },
       "components": {
         "fundamentals": 5,
         "valuation": 5,
         "catalyst_transmission": 5,
-        "cycle_quality": 4.7,
+        "cycle_quality": 5.6,
         "pre_move_stage": 7,
-        "institutional_proxy": 6.21,
-        "entry_quality": 6.6,
-        "risk_reward": 6.44,
+        "institutional_proxy": 6.83,
+        "entry_quality": 5.75,
+        "risk_reward": 6.32,
         "portfolio_fit": 5,
-        "liquidity": 8,
+        "liquidity": 4.5,
         "opportunity_cost": 5
       },
       "missing_deep_analysis": [
@@ -3040,18 +2966,18 @@
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
       "rank": 36,
-      "previous_rank": 36,
-      "rank_change": 0,
+      "previous_rank": null,
+      "rank_change": null,
       "execution_plan": {
         "status": "WATCH",
-        "reference_close": 5.08,
+        "reference_close": 259,
         "entry_zone": [
-          5,
-          5.08
+          255.12,
+          259
         ],
-        "invalidation": 4.78,
+        "invalidation": 243.63,
         "risk_from_low_pct": 4.71,
-        "day_extension": 0.966,
+        "day_extension": 0.499,
         "sizing": {
           "probe_pct_of_target": 0,
           "core_add_pct": 0,
@@ -3065,13 +2991,13 @@
       }
     },
     {
-      "symbol": "MIPH",
-      "score": 56.12,
-      "raw_score": 56.12,
+      "symbol": "SCEM",
+      "score": 55.57,
+      "raw_score": 55.57,
       "penalty": 0,
       "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "confirming",
-      "discovery_score": 6.7,
+      "stage": "pre_move_watch",
+      "discovery_score": 6.22,
       "gates": {
         "sharia_pass": false,
         "fundamental_verified": false,
@@ -3080,175 +3006,19 @@
       },
       "sharia_status": "pending_verification",
       "history_cycle": {
-        "symbol": "MIPH",
+        "symbol": "SCEM",
         "current_session_present": true,
         "freshness": "current_session",
-        "sessions_available": 57,
-        "native_sessions": 28,
-        "external_validated_sessions": 29,
+        "sessions_available": 56,
+        "native_sessions": 29,
+        "external_validated_sessions": 27,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
-          "weekly_structure": 4.373805597005154,
-          "breakout_strength": 2.7530864197530858,
-          "volume_asymmetry": 5.015329337874935,
-          "retest_quality": 7,
-          "higher_low": 3
-        },
-        "score": 4.5
-      },
-      "components": {
-        "fundamentals": 5,
-        "valuation": 5,
-        "catalyst_transmission": 5,
-        "cycle_quality": 4.5,
-        "pre_move_stage": 7,
-        "institutional_proxy": 6.47,
-        "entry_quality": 6.65,
-        "risk_reward": 6.7,
-        "portfolio_fit": 5,
-        "liquidity": 6,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [
-        "fundamentals",
-        "valuation",
-        "sharia_verification"
-      ],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 37,
-      "previous_rank": 37,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 758,
-        "entry_zone": [
-          746.63,
-          758
-        ],
-        "invalidation": 713.03,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.8,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "ETRS",
-      "score": 55.72,
-      "raw_score": 55.72,
-      "penalty": 0,
-      "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "confirming",
-      "discovery_score": 6.59,
-      "gates": {
-        "sharia_pass": false,
-        "fundamental_verified": false,
-        "valuation_verified": false,
-        "execution_ready": false
-      },
-      "sharia_status": "pending_verification",
-      "history_cycle": {
-        "symbol": "ETRS",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 59,
-        "native_sessions": 28,
-        "external_validated_sessions": 31,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 2.605238540692234,
-          "breakout_strength": 4.208294062205464,
-          "volume_asymmetry": 8.66995938694978,
-          "retest_quality": 7,
-          "higher_low": 3
-        },
-        "score": 5.1
-      },
-      "components": {
-        "fundamentals": 5,
-        "valuation": 5,
-        "catalyst_transmission": 5,
-        "cycle_quality": 5.1,
-        "pre_move_stage": 7,
-        "institutional_proxy": 6.04,
-        "entry_quality": 5.79,
-        "risk_reward": 6.59,
-        "portfolio_fit": 5,
-        "liquidity": 7,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [
-        "fundamentals",
-        "valuation",
-        "sharia_verification"
-      ],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 38,
-      "previous_rank": 38,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 10.37,
-        "entry_zone": [
-          10.21,
-          10.37
-        ],
-        "invalidation": 9.75,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.28,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "GPIM",
-      "score": 55.69,
-      "raw_score": 55.69,
-      "penalty": 0,
-      "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "confirming",
-      "discovery_score": 6.83,
-      "gates": {
-        "sharia_pass": false,
-        "fundamental_verified": false,
-        "valuation_verified": false,
-        "execution_ready": false
-      },
-      "sharia_status": "pending_verification",
-      "history_cycle": {
-        "symbol": "GPIM",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 59,
-        "native_sessions": 28,
-        "external_validated_sessions": 31,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 0,
-          "breakout_strength": 0,
-          "volume_asymmetry": 9.502870942490807,
+          "weekly_structure": 1.9141665701378408,
+          "breakout_strength": 2.28136459606623,
+          "volume_asymmetry": 5.132756204084138,
           "retest_quality": 7,
           "higher_low": 3
         },
@@ -3259,10 +3029,10 @@
         "valuation": 5,
         "catalyst_transmission": 5,
         "cycle_quality": 3.8,
-        "pre_move_stage": 7,
-        "institutional_proxy": 6.45,
-        "entry_quality": 6.17,
-        "risk_reward": 6.83,
+        "pre_move_stage": 9,
+        "institutional_proxy": 4.78,
+        "entry_quality": 6.36,
+        "risk_reward": 6.22,
         "portfolio_fit": 5,
         "liquidity": 8,
         "opportunity_cost": 5
@@ -3273,19 +3043,175 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 39,
-      "previous_rank": 39,
-      "rank_change": 0,
+      "rank": 37,
+      "previous_rank": null,
+      "rank_change": null,
       "execution_plan": {
         "status": "WATCH",
-        "reference_close": 1.52,
+        "reference_close": 83,
         "entry_zone": [
-          1.44,
-          1.5
+          81.75,
+          83
         ],
-        "invalidation": 1.37,
+        "invalidation": 78.08,
         "risk_from_low_pct": 4.71,
-        "day_extension": 0.6,
+        "day_extension": 0.591,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "SCTS",
+      "score": 55.47,
+      "raw_score": 55.47,
+      "penalty": 0,
+      "action": "DEEP_ANALYSIS_REQUIRED",
+      "stage": "pre_move_watch",
+      "discovery_score": 4.63,
+      "gates": {
+        "sharia_pass": false,
+        "fundamental_verified": false,
+        "valuation_verified": false,
+        "execution_ready": false
+      },
+      "sharia_status": "pending_verification",
+      "history_cycle": {
+        "symbol": "SCTS",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 53,
+        "native_sessions": 29,
+        "external_validated_sessions": 24,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 10,
+          "breakout_strength": 4.445959566016481,
+          "volume_asymmetry": 10,
+          "retest_quality": 7,
+          "higher_low": 3
+        },
+        "score": 7.2
+      },
+      "components": {
+        "fundamentals": 5,
+        "valuation": 5,
+        "catalyst_transmission": 5,
+        "cycle_quality": 7.2,
+        "pre_move_stage": 9,
+        "institutional_proxy": 4.66,
+        "entry_quality": 5.46,
+        "risk_reward": 4.63,
+        "portfolio_fit": 5,
+        "liquidity": 6,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [
+        "fundamentals",
+        "valuation",
+        "sharia_verification"
+      ],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 38,
+      "previous_rank": 20,
+      "rank_change": -18,
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 498,
+        "entry_zone": [
+          490.53,
+          498
+        ],
+        "invalidation": 468.46,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.266,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "OCPH",
+      "score": 55.18,
+      "raw_score": 55.18,
+      "penalty": 0,
+      "action": "DEEP_ANALYSIS_REQUIRED",
+      "stage": "confirming",
+      "discovery_score": 6.8,
+      "gates": {
+        "sharia_pass": false,
+        "fundamental_verified": false,
+        "valuation_verified": false,
+        "execution_ready": false
+      },
+      "sharia_status": "pending_verification",
+      "history_cycle": {
+        "symbol": "OCPH",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 44,
+        "native_sessions": 29,
+        "external_validated_sessions": 15,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 0,
+          "breakout_strength": 0.26301650874279314,
+          "volume_asymmetry": 8.390687869782301,
+          "retest_quality": 7,
+          "higher_low": 3
+        },
+        "score": 3.6
+      },
+      "components": {
+        "fundamentals": 5,
+        "valuation": 5,
+        "catalyst_transmission": 5,
+        "cycle_quality": 3.6,
+        "pre_move_stage": 7,
+        "institutional_proxy": 7.33,
+        "entry_quality": 5.59,
+        "risk_reward": 6.8,
+        "portfolio_fit": 5,
+        "liquidity": 7,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [
+        "fundamentals",
+        "valuation",
+        "sharia_verification"
+      ],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 39,
+      "previous_rank": null,
+      "rank_change": null,
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 177.03,
+        "entry_zone": [
+          166.93,
+          174.37
+        ],
+        "invalidation": 159.42,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.336,
         "sizing": {
           "probe_pct_of_target": 0,
           "core_add_pct": 0,
@@ -3300,12 +3226,12 @@
     },
     {
       "symbol": "AIH",
-      "score": 55.66,
-      "raw_score": 55.66,
+      "score": 55.15,
+      "raw_score": 55.15,
       "penalty": 0,
       "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "confirming",
-      "discovery_score": 6.9,
+      "stage": "pre_move_watch",
+      "discovery_score": 6.12,
       "gates": {
         "sharia_pass": false,
         "fundamental_verified": false,
@@ -3318,29 +3244,29 @@
         "current_session_present": true,
         "freshness": "current_session",
         "sessions_available": 59,
-        "native_sessions": 28,
-        "external_validated_sessions": 31,
+        "native_sessions": 29,
+        "external_validated_sessions": 30,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
           "weekly_structure": 0,
-          "breakout_strength": 1.5416666666666674,
-          "volume_asymmetry": 8.415064732447275,
+          "breakout_strength": 2.090361445783136,
+          "volume_asymmetry": 6.933909968922627,
           "retest_quality": 7,
           "higher_low": 3
         },
-        "score": 3.8
+        "score": 3.7
       },
       "components": {
         "fundamentals": 5,
         "valuation": 5,
         "catalyst_transmission": 5,
-        "cycle_quality": 3.8,
-        "pre_move_stage": 7,
-        "institutional_proxy": 5.6,
-        "entry_quality": 6.66,
-        "risk_reward": 6.9,
+        "cycle_quality": 3.7,
+        "pre_move_stage": 9,
+        "institutional_proxy": 4.73,
+        "entry_quality": 6.19,
+        "risk_reward": 6.12,
         "portfolio_fit": 5,
         "liquidity": 8,
         "opportunity_cost": 5
@@ -3358,12 +3284,12 @@
         "status": "WATCH",
         "reference_close": 0.76,
         "entry_zone": [
-          0.72,
-          0.75
+          0.74,
+          0.76
         ],
-        "invalidation": 0.69,
+        "invalidation": 0.7,
         "risk_from_low_pct": 4.71,
-        "day_extension": 0.711,
+        "day_extension": 0.429,
         "sizing": {
           "probe_pct_of_target": 0,
           "core_add_pct": 0,
@@ -3377,13 +3303,13 @@
       }
     },
     {
-      "symbol": "GOUR",
-      "score": 55.43,
-      "raw_score": 55.43,
+      "symbol": "NINH",
+      "score": 55.06,
+      "raw_score": 55.06,
       "penalty": 0,
       "action": "DEEP_ANALYSIS_REQUIRED",
       "stage": "confirming",
-      "discovery_score": 6.53,
+      "discovery_score": 5.59,
       "gates": {
         "sharia_pass": false,
         "fundamental_verified": false,
@@ -3392,33 +3318,33 @@
       },
       "sharia_status": "pending_verification",
       "history_cycle": {
-        "symbol": "GOUR",
+        "symbol": "NINH",
         "current_session_present": true,
         "freshness": "current_session",
-        "sessions_available": 59,
-        "native_sessions": 28,
-        "external_validated_sessions": 31,
+        "sessions_available": 56,
+        "native_sessions": 29,
+        "external_validated_sessions": 27,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
-          "weekly_structure": 0,
-          "breakout_strength": 1.898734177215189,
-          "volume_asymmetry": 5.735277387829706,
+          "weekly_structure": 5.320213475650437,
+          "breakout_strength": 1.3541666666666679,
+          "volume_asymmetry": 6.15505483684436,
           "retest_quality": 7,
           "higher_low": 3
         },
-        "score": 3.4
+        "score": 4.7
       },
       "components": {
         "fundamentals": 5,
         "valuation": 5,
         "catalyst_transmission": 5,
-        "cycle_quality": 3.4,
+        "cycle_quality": 4.7,
         "pre_move_stage": 7,
-        "institutional_proxy": 7.68,
-        "entry_quality": 5.82,
-        "risk_reward": 6.53,
+        "institutional_proxy": 7.44,
+        "entry_quality": 5.45,
+        "risk_reward": 5.59,
         "portfolio_fit": 5,
         "liquidity": 8,
         "opportunity_cost": 5
@@ -3430,18 +3356,18 @@
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
       "rank": 41,
-      "previous_rank": 41,
-      "rank_change": 0,
+      "previous_rank": null,
+      "rank_change": null,
       "execution_plan": {
         "status": "WATCH",
-        "reference_close": 14.4,
+        "reference_close": 15.05,
         "entry_zone": [
-          13.9,
-          14.32
+          14.15,
+          14.82
         ],
-        "invalidation": 13.27,
+        "invalidation": 13.51,
         "risk_from_low_pct": 4.71,
-        "day_extension": 0.333,
+        "day_extension": 0.475,
         "sizing": {
           "probe_pct_of_target": 0,
           "core_add_pct": 0,
@@ -3455,13 +3381,13 @@
       }
     },
     {
-      "symbol": "PHDC",
-      "score": 55.27,
-      "raw_score": 55.27,
+      "symbol": "TWSA",
+      "score": 54.98,
+      "raw_score": 54.98,
       "penalty": 0,
       "action": "DEEP_ANALYSIS_REQUIRED",
       "stage": "pre_move_watch",
-      "discovery_score": 5.66,
+      "discovery_score": 6.14,
       "gates": {
         "sharia_pass": false,
         "fundamental_verified": false,
@@ -3470,35 +3396,35 @@
       },
       "sharia_status": "pending_verification",
       "history_cycle": {
-        "symbol": "PHDC",
+        "symbol": "TWSA",
         "current_session_present": true,
         "freshness": "current_session",
-        "sessions_available": 57,
-        "native_sessions": 28,
-        "external_validated_sessions": 29,
-        "provenance": "hybrid_validated_external_plus_v4",
+        "sessions_available": 29,
+        "native_sessions": 29,
+        "external_validated_sessions": 0,
+        "provenance": "v4_native",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
-          "weekly_structure": 0,
-          "breakout_strength": 1.9173811379579098,
-          "volume_asymmetry": 7.095746003597851,
+          "weekly_structure": 0.4502369668246411,
+          "breakout_strength": 0,
+          "volume_asymmetry": 5.186440903833175,
           "retest_quality": 7,
           "higher_low": 3
         },
-        "score": 3.7
+        "score": 3
       },
       "components": {
         "fundamentals": 5,
         "valuation": 5,
         "catalyst_transmission": 5,
-        "cycle_quality": 3.7,
+        "cycle_quality": 3,
         "pre_move_stage": 9,
-        "institutional_proxy": 5.3,
-        "entry_quality": 6.17,
-        "risk_reward": 5.66,
+        "institutional_proxy": 5.22,
+        "entry_quality": 6.36,
+        "risk_reward": 6.14,
         "portfolio_fit": 5,
-        "liquidity": 9,
+        "liquidity": 8,
         "opportunity_cost": 5
       },
       "missing_deep_analysis": [
@@ -3508,18 +3434,18 @@
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
       "rank": 42,
-      "previous_rank": 42,
-      "rank_change": 0,
+      "previous_rank": null,
+      "rank_change": null,
       "execution_plan": {
         "status": "WATCH",
-        "reference_close": 11.7,
+        "reference_close": 5.97,
         "entry_zone": [
-          11.19,
-          11.53
+          5.61,
+          5.88
         ],
-        "invalidation": 10.69,
+        "invalidation": 5.36,
         "risk_from_low_pct": 4.71,
-        "day_extension": 0.739,
+        "day_extension": 0.552,
         "sizing": {
           "probe_pct_of_target": 0,
           "core_add_pct": 0,
@@ -3533,48 +3459,48 @@
       }
     },
     {
-      "symbol": "NIPH",
-      "score": 55.24,
-      "raw_score": 55.24,
+      "symbol": "COMI",
+      "score": 54.73,
+      "raw_score": 54.73,
       "penalty": 0,
       "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "confirming",
-      "discovery_score": 6.59,
+      "stage": "pre_move_watch",
+      "discovery_score": 5.7,
       "gates": {
         "sharia_pass": false,
         "fundamental_verified": false,
         "valuation_verified": false,
         "execution_ready": false
       },
-      "sharia_status": "pending_verification",
+      "sharia_status": "non_compliant",
       "history_cycle": {
-        "symbol": "NIPH",
+        "symbol": "COMI",
         "current_session_present": true,
         "freshness": "current_session",
-        "sessions_available": 43,
-        "native_sessions": 28,
-        "external_validated_sessions": 15,
+        "sessions_available": 56,
+        "native_sessions": 29,
+        "external_validated_sessions": 27,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
-          "weekly_structure": 0,
-          "breakout_strength": 0,
-          "volume_asymmetry": 4.824445580800894,
+          "weekly_structure": 0.0387596899224798,
+          "breakout_strength": 3.63780778395552,
+          "volume_asymmetry": 7.558713570485782,
           "retest_quality": 7,
           "higher_low": 3
         },
-        "score": 2.8
+        "score": 4.1
       },
       "components": {
         "fundamentals": 5,
         "valuation": 5,
         "catalyst_transmission": 5,
-        "cycle_quality": 2.8,
-        "pre_move_stage": 7,
-        "institutional_proxy": 6.14,
-        "entry_quality": 6.64,
-        "risk_reward": 6.59,
+        "cycle_quality": 4.1,
+        "pre_move_stage": 9,
+        "institutional_proxy": 5,
+        "entry_quality": 5.09,
+        "risk_reward": 5.7,
         "portfolio_fit": 5,
         "liquidity": 10,
         "opportunity_cost": 5
@@ -3586,18 +3512,18 @@
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
       "rank": 43,
-      "previous_rank": 43,
-      "rank_change": 0,
+      "previous_rank": 24,
+      "rank_change": -19,
       "execution_plan": {
         "status": "WATCH",
-        "reference_close": 242.01,
+        "reference_close": 121,
         "entry_zone": [
-          227.49,
-          238.38
+          119.19,
+          121
         ],
-        "invalidation": 217.25,
+        "invalidation": 113.82,
         "risk_from_low_pct": 4.71,
-        "day_extension": 0.942,
+        "day_extension": 0.097,
         "sizing": {
           "probe_pct_of_target": 0,
           "core_add_pct": 0,
@@ -3611,13 +3537,13 @@
       }
     },
     {
-      "symbol": "BTFH",
-      "score": 55.09,
-      "raw_score": 55.09,
+      "symbol": "AXPH",
+      "score": 54.71,
+      "raw_score": 54.71,
       "penalty": 0,
       "action": "DEEP_ANALYSIS_REQUIRED",
       "stage": "confirming",
-      "discovery_score": 6.07,
+      "discovery_score": 5.79,
       "gates": {
         "sharia_pass": false,
         "fundamental_verified": false,
@@ -3626,35 +3552,35 @@
       },
       "sharia_status": "pending_verification",
       "history_cycle": {
-        "symbol": "BTFH",
+        "symbol": "AXPH",
         "current_session_present": true,
         "freshness": "current_session",
-        "sessions_available": 58,
-        "native_sessions": 28,
-        "external_validated_sessions": 30,
+        "sessions_available": 54,
+        "native_sessions": 29,
+        "external_validated_sessions": 25,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
-          "weekly_structure": 0,
-          "breakout_strength": 0,
-          "volume_asymmetry": 8.24786833146439,
+          "weekly_structure": 6.341365153666114,
+          "breakout_strength": 2.9295396610121376,
+          "volume_asymmetry": 6.359238401716278,
           "retest_quality": 7,
           "higher_low": 3
         },
-        "score": 3.5
+        "score": 5.3
       },
       "components": {
         "fundamentals": 5,
         "valuation": 5,
         "catalyst_transmission": 5,
-        "cycle_quality": 3.5,
+        "cycle_quality": 5.3,
         "pre_move_stage": 7,
-        "institutional_proxy": 6.59,
-        "entry_quality": 6.09,
-        "risk_reward": 6.07,
+        "institutional_proxy": 5.75,
+        "entry_quality": 6.03,
+        "risk_reward": 5.79,
         "portfolio_fit": 5,
-        "liquidity": 10,
+        "liquidity": 6,
         "opportunity_cost": 5
       },
       "missing_deep_analysis": [
@@ -3664,18 +3590,18 @@
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
       "rank": 44,
-      "previous_rank": 44,
-      "rank_change": 0,
+      "previous_rank": null,
+      "rank_change": null,
       "execution_plan": {
         "status": "WATCH",
-        "reference_close": 2.27,
+        "reference_close": 1325,
         "entry_zone": [
-          2.14,
-          2.24
+          1245.5,
+          1305.13
         ],
-        "invalidation": 2.04,
+        "invalidation": 1189.45,
         "risk_from_low_pct": 4.71,
-        "day_extension": 0.714,
+        "day_extension": 0.765,
         "sizing": {
           "probe_pct_of_target": 0,
           "core_add_pct": 0,
@@ -3689,13 +3615,13 @@
       }
     },
     {
-      "symbol": "CLHO",
-      "score": 54.9,
-      "raw_score": 54.9,
+      "symbol": "SIPC",
+      "score": 54.63,
+      "raw_score": 54.63,
       "penalty": 0,
       "action": "DEEP_ANALYSIS_REQUIRED",
       "stage": "confirming",
-      "discovery_score": 5.66,
+      "discovery_score": 6.82,
       "gates": {
         "sharia_pass": false,
         "fundamental_verified": false,
@@ -3704,33 +3630,33 @@
       },
       "sharia_status": "pending_verification",
       "history_cycle": {
-        "symbol": "CLHO",
+        "symbol": "SIPC",
         "current_session_present": true,
         "freshness": "current_session",
-        "sessions_available": 58,
-        "native_sessions": 28,
-        "external_validated_sessions": 30,
+        "sessions_available": 54,
+        "native_sessions": 29,
+        "external_validated_sessions": 25,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
-          "weekly_structure": 3.857142857142861,
-          "breakout_strength": 3.2415691672401947,
-          "volume_asymmetry": 3.900274460430608,
+          "weekly_structure": 0,
+          "breakout_strength": 0,
+          "volume_asymmetry": 5.301197632170687,
           "retest_quality": 7,
           "higher_low": 3
         },
-        "score": 4.2
+        "score": 2.9
       },
       "components": {
         "fundamentals": 5,
         "valuation": 5,
         "catalyst_transmission": 5,
-        "cycle_quality": 4.2,
+        "cycle_quality": 2.9,
         "pre_move_stage": 7,
-        "institutional_proxy": 6.32,
-        "entry_quality": 6.19,
-        "risk_reward": 5.66,
+        "institutional_proxy": 5.94,
+        "entry_quality": 6.09,
+        "risk_reward": 6.82,
         "portfolio_fit": 5,
         "liquidity": 9,
         "opportunity_cost": 5
@@ -3742,18 +3668,18 @@
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
       "rank": 45,
-      "previous_rank": 45,
-      "rank_change": 0,
+      "previous_rank": null,
+      "rank_change": null,
       "execution_plan": {
         "status": "WATCH",
-        "reference_close": 13.8,
+        "reference_close": 4.55,
         "entry_zone": [
-          12.97,
-          13.59
+          4.31,
+          4.48
         ],
-        "invalidation": 12.39,
+        "invalidation": 4.12,
         "risk_from_low_pct": 4.71,
-        "day_extension": 1,
+        "day_extension": 0.567,
         "sizing": {
           "probe_pct_of_target": 0,
           "core_add_pct": 0,
@@ -3767,13 +3693,13 @@
       }
     },
     {
-      "symbol": "POUL",
-      "score": 54.87,
-      "raw_score": 54.87,
+      "symbol": "RMDA",
+      "score": 54.38,
+      "raw_score": 54.38,
       "penalty": 0,
       "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "confirming",
-      "discovery_score": 6.53,
+      "stage": "pre_move_watch",
+      "discovery_score": 5.56,
       "gates": {
         "sharia_pass": false,
         "fundamental_verified": false,
@@ -3782,99 +3708,21 @@
       },
       "sharia_status": "pending_verification",
       "history_cycle": {
-        "symbol": "POUL",
+        "symbol": "RMDA",
         "current_session_present": true,
         "freshness": "current_session",
-        "sessions_available": 58,
-        "native_sessions": 28,
-        "external_validated_sessions": 30,
+        "sessions_available": 56,
+        "native_sessions": 29,
+        "external_validated_sessions": 27,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
-          "weekly_structure": 0.06467661691541338,
-          "breakout_strength": 2.0436893203883475,
-          "volume_asymmetry": 5.472135298984184,
+          "weekly_structure": 3.759689922480618,
+          "breakout_strength": 4.061302681992341,
+          "volume_asymmetry": 6.264765064444984,
           "retest_quality": 7,
           "higher_low": 3
-        },
-        "score": 3.4
-      },
-      "components": {
-        "fundamentals": 5,
-        "valuation": 5,
-        "catalyst_transmission": 5,
-        "cycle_quality": 3.4,
-        "pre_move_stage": 7,
-        "institutional_proxy": 5.69,
-        "entry_quality": 6.35,
-        "risk_reward": 6.53,
-        "portfolio_fit": 5,
-        "liquidity": 9,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [
-        "fundamentals",
-        "valuation",
-        "sharia_verification"
-      ],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 46,
-      "previous_rank": 46,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 9.43,
-        "entry_zone": [
-          8.89,
-          9.29
-        ],
-        "invalidation": 8.49,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.851,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "QNBE",
-      "score": 54.86,
-      "raw_score": 54.86,
-      "penalty": 0,
-      "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "confirming",
-      "discovery_score": 6.29,
-      "gates": {
-        "sharia_pass": false,
-        "fundamental_verified": false,
-        "valuation_verified": false,
-        "execution_ready": false
-      },
-      "sharia_status": "pending_verification",
-      "history_cycle": {
-        "symbol": "QNBE",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 28,
-        "native_sessions": 28,
-        "external_validated_sessions": 0,
-        "provenance": "v4_native",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 5.456187036685041,
-          "breakout_strength": 2.460122699386501,
-          "volume_asymmetry": 3.7627259054887565,
-          "retest_quality": 7,
-          "higher_low": 6.220588235294117
         },
         "score": 4.9
       },
@@ -3883,10 +3731,10 @@
         "valuation": 5,
         "catalyst_transmission": 5,
         "cycle_quality": 4.9,
-        "pre_move_stage": 7,
-        "institutional_proxy": 5.13,
-        "entry_quality": 6.12,
-        "risk_reward": 6.29,
+        "pre_move_stage": 9,
+        "institutional_proxy": 4.24,
+        "entry_quality": 5.54,
+        "risk_reward": 5.56,
         "portfolio_fit": 5,
         "liquidity": 7,
         "opportunity_cost": 5
@@ -3897,19 +3745,19 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 47,
-      "previous_rank": 47,
-      "rank_change": 0,
+      "rank": 46,
+      "previous_rank": 36,
+      "rank_change": -10,
       "execution_plan": {
         "status": "WATCH",
-        "reference_close": 52.91,
+        "reference_close": 5.08,
         "entry_zone": [
-          50.68,
-          52.22
+          5,
+          5.08
         ],
-        "invalidation": 48.4,
+        "invalidation": 4.78,
         "risk_from_low_pct": 4.71,
-        "day_extension": 0.973,
+        "day_extension": 0.471,
         "sizing": {
           "probe_pct_of_target": 0,
           "core_add_pct": 0,
@@ -3923,13 +3771,13 @@
       }
     },
     {
-      "symbol": "KABO",
-      "score": 54.79,
-      "raw_score": 54.79,
+      "symbol": "ARCC",
+      "score": 54.08,
+      "raw_score": 54.08,
       "penalty": 0,
       "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "confirming",
-      "discovery_score": 6.07,
+      "stage": "pre_move_watch",
+      "discovery_score": 5.93,
       "gates": {
         "sharia_pass": false,
         "fundamental_verified": false,
@@ -3938,33 +3786,33 @@
       },
       "sharia_status": "pending_verification",
       "history_cycle": {
-        "symbol": "KABO",
+        "symbol": "ARCC",
         "current_session_present": true,
         "freshness": "current_session",
-        "sessions_available": 57,
-        "native_sessions": 28,
+        "sessions_available": 58,
+        "native_sessions": 29,
         "external_validated_sessions": 29,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
-          "weekly_structure": 0,
-          "breakout_strength": 0,
-          "volume_asymmetry": 9.133106774473259,
+          "weekly_structure": 1.0440223126790293,
+          "breakout_strength": 2.745956373349159,
+          "volume_asymmetry": 2.926881667637619,
           "retest_quality": 7,
           "higher_low": 3
         },
-        "score": 3.7
+        "score": 3.2
       },
       "components": {
         "fundamentals": 5,
         "valuation": 5,
         "catalyst_transmission": 5,
-        "cycle_quality": 3.7,
-        "pre_move_stage": 7,
-        "institutional_proxy": 7.44,
-        "entry_quality": 5.6,
-        "risk_reward": 6.07,
+        "cycle_quality": 3.2,
+        "pre_move_stage": 9,
+        "institutional_proxy": 4.63,
+        "entry_quality": 5.92,
+        "risk_reward": 5.93,
         "portfolio_fit": 5,
         "liquidity": 8,
         "opportunity_cost": 5
@@ -3975,19 +3823,19 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 48,
-      "previous_rank": 48,
-      "rank_change": 0,
+      "rank": 47,
+      "previous_rank": null,
+      "rank_change": null,
       "execution_plan": {
         "status": "WATCH",
-        "reference_close": 6.69,
+        "reference_close": 63.05,
         "entry_zone": [
-          6.34,
-          6.59
+          60.59,
+          62.43
         ],
-        "invalidation": 6.06,
+        "invalidation": 57.86,
         "risk_from_low_pct": 4.71,
-        "day_extension": 0.625,
+        "day_extension": 0.572,
         "sizing": {
           "probe_pct_of_target": 0,
           "core_add_pct": 0,
@@ -4001,13 +3849,13 @@
       }
     },
     {
-      "symbol": "SKPC",
-      "score": 54.36,
-      "raw_score": 54.36,
+      "symbol": "FAIT",
+      "score": 54.01,
+      "raw_score": 54.01,
       "penalty": 0,
       "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "confirming",
-      "discovery_score": 5.96,
+      "stage": "pre_move_watch",
+      "discovery_score": 5.45,
       "gates": {
         "sharia_pass": false,
         "fundamental_verified": false,
@@ -4016,33 +3864,189 @@
       },
       "sharia_status": "pending_verification",
       "history_cycle": {
-        "symbol": "SKPC",
+        "symbol": "FAIT",
         "current_session_present": true,
         "freshness": "current_session",
-        "sessions_available": 57,
-        "native_sessions": 28,
-        "external_validated_sessions": 29,
+        "sessions_available": 55,
+        "native_sessions": 29,
+        "external_validated_sessions": 26,
         "provenance": "hybrid_validated_external_plus_v4",
         "status": "complete",
         "confidence_pct": 100,
         "components": {
-          "weekly_structure": 0.003186743148511084,
-          "breakout_strength": 3.2161290322580665,
-          "volume_asymmetry": 5.651767407394231,
+          "weekly_structure": 3.513145965548503,
+          "breakout_strength": 4.592558776535033,
+          "volume_asymmetry": 6.235000281039117,
           "retest_quality": 7,
           "higher_low": 3
         },
-        "score": 3.6
+        "score": 4.9
       },
       "components": {
         "fundamentals": 5,
         "valuation": 5,
         "catalyst_transmission": 5,
-        "cycle_quality": 3.6,
+        "cycle_quality": 4.9,
+        "pre_move_stage": 9,
+        "institutional_proxy": 4.03,
+        "entry_quality": 6.2,
+        "risk_reward": 5.45,
+        "portfolio_fit": 5,
+        "liquidity": 4.5,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [
+        "fundamentals",
+        "valuation",
+        "sharia_verification"
+      ],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 48,
+      "previous_rank": null,
+      "rank_change": null,
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 43.3,
+        "entry_zone": [
+          42.65,
+          43.3
+        ],
+        "invalidation": 40.73,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.792,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "EXPA",
+      "score": 54.01,
+      "raw_score": 54.01,
+      "penalty": 0,
+      "action": "DEEP_ANALYSIS_REQUIRED",
+      "stage": "pre_move_watch",
+      "discovery_score": 5.27,
+      "gates": {
+        "sharia_pass": false,
+        "fundamental_verified": false,
+        "valuation_verified": false,
+        "execution_ready": false
+      },
+      "sharia_status": "pending_verification",
+      "history_cycle": {
+        "symbol": "EXPA",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 55,
+        "native_sessions": 29,
+        "external_validated_sessions": 26,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 2.0041608876560346,
+          "breakout_strength": 3.4342739160357905,
+          "volume_asymmetry": 8.663188783399614,
+          "retest_quality": 7,
+          "higher_low": 3
+        },
+        "score": 4.8
+      },
+      "components": {
+        "fundamentals": 5,
+        "valuation": 5,
+        "catalyst_transmission": 5,
+        "cycle_quality": 4.8,
+        "pre_move_stage": 9,
+        "institutional_proxy": 4.25,
+        "entry_quality": 5.61,
+        "risk_reward": 5.27,
+        "portfolio_fit": 5,
+        "liquidity": 7,
+        "opportunity_cost": 5
+      },
+      "missing_deep_analysis": [
+        "fundamentals",
+        "valuation",
+        "sharia_verification"
+      ],
+      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
+      "rank": 49,
+      "previous_rank": null,
+      "rank_change": null,
+      "execution_plan": {
+        "status": "WATCH",
+        "reference_close": 13.88,
+        "entry_zone": [
+          13.18,
+          13.67
+        ],
+        "invalidation": 12.59,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.543,
+        "sizing": {
+          "probe_pct_of_target": 0,
+          "core_add_pct": 0,
+          "reserve_pct": 100
+        },
+        "rules": [
+          "do_not_chase_above_entry_zone",
+          "cancel_if_invalidation_breaks_on_confirmed_close",
+          "position_size_must_respect_portfolio_risk_budget"
+        ]
+      }
+    },
+    {
+      "symbol": "SPMD",
+      "score": 54,
+      "raw_score": 54,
+      "penalty": 0,
+      "action": "DEEP_ANALYSIS_REQUIRED",
+      "stage": "confirming",
+      "discovery_score": 6.03,
+      "gates": {
+        "sharia_pass": false,
+        "fundamental_verified": false,
+        "valuation_verified": false,
+        "execution_ready": false
+      },
+      "sharia_status": "pending_verification",
+      "history_cycle": {
+        "symbol": "SPMD",
+        "current_session_present": true,
+        "freshness": "current_session",
+        "sessions_available": 54,
+        "native_sessions": 29,
+        "external_validated_sessions": 25,
+        "provenance": "hybrid_validated_external_plus_v4",
+        "status": "complete",
+        "confidence_pct": 100,
+        "components": {
+          "weekly_structure": 0,
+          "breakout_strength": 0.8661417322834639,
+          "volume_asymmetry": 6.575678765611073,
+          "retest_quality": 7,
+          "higher_low": 3
+        },
+        "score": 3.3
+      },
+      "components": {
+        "fundamentals": 5,
+        "valuation": 5,
+        "catalyst_transmission": 5,
+        "cycle_quality": 3.3,
         "pre_move_stage": 7,
-        "institutional_proxy": 6.13,
-        "entry_quality": 6.02,
-        "risk_reward": 5.96,
+        "institutional_proxy": 7.22,
+        "entry_quality": 5.11,
+        "risk_reward": 6.03,
         "portfolio_fit": 5,
         "liquidity": 9,
         "opportunity_cost": 5
@@ -4053,97 +4057,19 @@
         "sharia_verification"
       ],
       "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
-      "rank": 49,
-      "previous_rank": 49,
-      "rank_change": 0,
-      "execution_plan": {
-        "status": "WATCH",
-        "reference_close": 14.71,
-        "entry_zone": [
-          14.11,
-          14.53
-        ],
-        "invalidation": 13.47,
-        "risk_from_low_pct": 4.71,
-        "day_extension": 0.83,
-        "sizing": {
-          "probe_pct_of_target": 0,
-          "core_add_pct": 0,
-          "reserve_pct": 100
-        },
-        "rules": [
-          "do_not_chase_above_entry_zone",
-          "cancel_if_invalidation_breaks_on_confirmed_close",
-          "position_size_must_respect_portfolio_risk_budget"
-        ]
-      }
-    },
-    {
-      "symbol": "SDTI",
-      "score": 54.05,
-      "raw_score": 54.05,
-      "penalty": 0,
-      "action": "DEEP_ANALYSIS_REQUIRED",
-      "stage": "pre_move_watch",
-      "discovery_score": 5.37,
-      "gates": {
-        "sharia_pass": false,
-        "fundamental_verified": false,
-        "valuation_verified": false,
-        "execution_ready": false
-      },
-      "sharia_status": "pending_verification",
-      "history_cycle": {
-        "symbol": "SDTI",
-        "current_session_present": true,
-        "freshness": "current_session",
-        "sessions_available": 57,
-        "native_sessions": 28,
-        "external_validated_sessions": 29,
-        "provenance": "hybrid_validated_external_plus_v4",
-        "status": "complete",
-        "confidence_pct": 100,
-        "components": {
-          "weekly_structure": 2.8836987607245046,
-          "breakout_strength": 3.250000000000002,
-          "volume_asymmetry": 7.504906072646957,
-          "retest_quality": 7,
-          "higher_low": 3
-        },
-        "score": 4.7
-      },
-      "components": {
-        "fundamentals": 5,
-        "valuation": 5,
-        "catalyst_transmission": 5,
-        "cycle_quality": 4.7,
-        "pre_move_stage": 9,
-        "institutional_proxy": 3.79,
-        "entry_quality": 6.26,
-        "risk_reward": 5.37,
-        "portfolio_fit": 5,
-        "liquidity": 6,
-        "opportunity_cost": 5
-      },
-      "missing_deep_analysis": [
-        "fundamentals",
-        "valuation",
-        "sharia_verification"
-      ],
-      "capital_rule": "Executable allocation requires explicitly verified Sharia, fundamentals and valuation.",
       "rank": 50,
-      "previous_rank": 50,
-      "rank_change": 0,
+      "previous_rank": null,
+      "rank_change": null,
       "execution_plan": {
         "status": "WATCH",
-        "reference_close": 81.7,
+        "reference_close": 0.34,
         "entry_zone": [
-          80.47,
-          81.7
+          0.32,
+          0.33
         ],
-        "invalidation": 75.66,
-        "risk_from_low_pct": 6.37,
-        "day_extension": 0.862,
+        "invalidation": 0.31,
+        "risk_from_low_pct": 4.71,
+        "day_extension": 0.171,
         "sizing": {
           "probe_pct_of_target": 0,
           "core_add_pct": 0,
