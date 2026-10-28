@@ -64,3 +64,34 @@ jobs:
               print(json.dumps({'url':url,'status':status,'server_date':date,'bytes':len(raw),'data':structure},ensure_ascii=False))
             except Exception as e: print(json.dumps({'url':url,'error':f'{type(e).__name__}: {str(e)[:220]}'},ensure_ascii=False))
           PY
+
+
+      - name: Inspect DirectFN table semantics for safe quote parser
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          import urllib.request,re,json,html
+          class Tables(HTMLParser):
+            def __init__(self): super().__init__();self.table=0;self.row=None;self.cell=None;self.rows=[]
+            def handle_starttag(self,tag,attrs):
+              if tag=='tr':self.row=[]
+              if tag in ('td','th') and self.row is not None:self.cell=[]
+            def handle_data(self,data):
+              if self.cell is not None:self.cell.append(data)
+            def handle_endtag(self,tag):
+              if tag in ('td','th') and self.cell is not None and self.row is not None:
+                self.row.append(' '.join(' '.join(self.cell).split()));self.cell=None
+              if tag=='tr' and self.row is not None:self.rows.append(self.row);self.row=None
+          u='https://www.directfn.com.eg/tradingData.aspx'
+          with urllib.request.urlopen(urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0','Cache-Control':'no-cache'}),timeout=18) as f: h=f.read().decode('utf-8','replace');dt=f.headers.get('Date')
+          p=Tables();p.feed(h)
+          rows=p.rows
+          for sym in ['EGAL','ADIB','EFID','MFPC','JUFO','ETEL','AMOC']:
+            hits=[x for x in rows if sym in x]
+            print(json.dumps({'symbol':sym,'matches':hits[:2]},ensure_ascii=False))
+          print(json.dumps({'row_count':len(rows),'first_rows':rows[:12],'server_date':dt,
+            'date_fragments':re.findall(r'.{0,70}(?:28 Oct 2026|28 October 2026|28/10/2026|28-10-2026|Oct 28|28 أكتوبر 2026).{0,70}',h,re.I)[:7],
+            'delay_notice': bool(re.search('15 minutes late|15 minute|15 دقيقة',h,re.I)),
+            'closed':bool(re.search(r'>\s*Closed\s*<',h,re.I))},ensure_ascii=False))
+          PY
