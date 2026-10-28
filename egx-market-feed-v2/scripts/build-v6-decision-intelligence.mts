@@ -50,7 +50,7 @@ function verifiedResearch(x:any){
   const conflictResolved=shariaConflict&&x?.sharia_conflict_resolved===true&&
     String(x?.sharia_conflict_resolution_basis||'')==='PRIMARY_FILINGS_ACTIVITY_AND_FINANCIAL_RATIOS_RECONCILED'&&
     String(x?.sharia_conflict_resolution_source||'').startsWith('https://')&&
-    /^\\d{4}-\\d{2}-\\d{2}$/.test(String(x?.sharia_conflict_resolution_period_end||''))&&
+    /^\d{4}-\d{2}-\d{2}$/.test(String(x?.sharia_conflict_resolution_period_end||''))&&
     fresh(x?.sharia_conflict_resolution_as_of,120);
   const shariaPass=shariaVerified&&['compliant','purification_required'].includes(sh)&&
     (!shariaConflict||conflictResolved);
