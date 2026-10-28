@@ -2,6 +2,9 @@ name: EGX V4 comprehensive market scan
 
 'on':
   workflow_dispatch:
+  workflow_run:
+    workflows: [EGX Resilient Bridge V5 + Decision Intelligence V6]
+    types: [completed]
   push:
     branches: [master]
     paths:
@@ -18,6 +21,7 @@ concurrency:
 
 jobs:
   scan:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
