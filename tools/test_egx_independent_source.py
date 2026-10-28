@@ -73,6 +73,28 @@ class IndependentSourceGateTests(unittest.TestCase):
         self.assertEqual(alerts["verified_recovery_ranking"][0]["state"], "BLOCKED_UNVERIFIED_EVIDENCE")
         self.assertFalse(alerts["market_gate"]["new_buy_orders_allowed"])
 
+    def test_postclose_same_session_reference_is_analysis_only(self):
+        report, alerts = self.run_case(self.sample_quote(
+            retrieved_at_utc="2026-10-27T12:15:00+00:00",
+            observation_time_cairo="2026-10-27T13:29:00+03:00",
+            age_minutes=106))
+        q = report["quotes"]["MFPC"]
+        self.assertEqual(q["status"], "CLOSING_REFERENCE_ONLY")
+        self.assertTrue(q["reference_verified"])
+        self.assertFalse(q["verified"])
+        self.assertFalse(q["execution_quote_valid"])
+        self.assertEqual(report["buy_triggers_after"], 0)
+        self.assertFalse(alerts["market_gate"]["new_buy_orders_allowed"])
+
+    def test_postclose_early_source_timestamp_remains_rejected(self):
+        report, _ = self.run_case(self.sample_quote(
+            retrieved_at_utc="2026-10-27T12:15:00+00:00",
+            observation_time_cairo="2026-10-27T11:08:00+03:00",
+            age_minutes=247))
+        q = report["quotes"]["MFPC"]
+        self.assertFalse(q["reference_verified"])
+        self.assertEqual(report["buy_triggers_after"], 0)
+
     def test_price_mismatch_blocks_buy_trigger(self):
         report, _ = self.run_case(self.sample_quote(price_egp=38.0))
         self.assertEqual(report["buy_triggers_after"], 0)
