@@ -64,7 +64,9 @@ jobs:
           if q.get('focus_complete') is not True: reasons.append('focus_incomplete')
           if q.get('full_market_fresh') is not True: reasons.append('full_market_not_fresh')
           rows=universe.get('stocks') or []
-          if len(rows)<296: reasons.append(f'universe_rows:{len(rows)}')
+          required_rows=int(q.get('effective_universe_floor') or q.get('expected_universe_floor') or 296)
+          if len(rows)<required_rows: reasons.append(f'universe_rows:{len(rows)}_required:{required_rows}')
+          if len(rows)!=len({r.get('symbol') for r in rows if r.get('symbol')}): reasons.append('duplicate_symbols')
           fp=contract.get('data_fingerprint_sha256')
           if not isinstance(fp,str) or len(fp)!=64: reasons.append('invalid_fingerprint')
 
