@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-27",
+  "updated_at": "2026-10-28",
   "stocks": {
     "AMOC": {
       "sharia_status": "compliant",
@@ -91,8 +91,8 @@
       ]
     },
     "EFIH": {
-      "sharia_status": "compliant",
-      "sharia_verified": true,
+      "sharia_status": "pending_verification",
+      "sharia_verified": false,
       "sharia_as_of": "2026-10-25",
       "fundamentals_verified": true,
       "valuation_verified": true,
@@ -108,7 +108,7 @@
         "https://banksmorning.com/%D9%85%D8%A4%D8%B4%D8%B1-%D8%A7%D9%84%D8%B4%D8%B1%D9%8A%D8%B9%D8%A9-%D8%A8%D8%A7%D9%84%D8%A8%D9%88%D8%B1%D8%B5%D8%A9-%D8%A7%D9%84%D9%85%D8%B5%D8%B1%D9%8A%D8%A9-%D9%8A%D8%B6%D9%85-33-%D8%B3%D9%87%D9%85/"
       ],
       "sharia_source_conflict": true,
-      "sharia_conflict_rule": "User methodology: when credible Sharia sources conflict, accept the compliant classification while recording the conflict.",
+      "sharia_conflict_rule": "FAIL_CLOSED: EGX33 reported membership alone cannot resolve conflicting Sharia screeners; requires dated issuer activity, financing, impermissible-income ratios, and purification analysis for matching period.",
       "sharia_conflicting_sources": [
         {
           "url": "https://muslimxchange.com/ticker/efih/",
@@ -135,13 +135,15 @@
       "research_note": "H1 2026 sales EGP 4.175bn vs EGP 3.230bn; net income EGP 1.806bn vs EGP 1.098bn (+64.5%). Valuation is premium (2026 P/E ~23x / forward P/E ~20x) but supported by strong growth and analyst average target EGP 28.10, about one-third above the Oct-22 market price. Score remains below deep-value names because multiples are rich.",
       "risk_flags": [
         "premium_valuation",
-        "government_and_digital_payments_concentration"
+        "government_and_digital_payments_concentration",
+        "conflicting_sharia_screens_pending_primary_ratio_reconciliation"
       ],
-      "sharia_conflict_resolved": true,
-      "sharia_conflict_resolution_basis": "EGX33_REPORTED_INDEX_MEMBERSHIP_2026_10_05",
+      "sharia_conflict_resolved": false,
+      "sharia_conflict_resolution_basis": "PENDING_PRIMARY_FINANCIAL_AND_ACTIVITY_RECONCILIATION",
       "sharia_conflict_resolution_source": "https://banksmorning.com/%D9%85%D8%A4%D8%B4%D8%B1-%D8%A7%D9%84%D8%B4%D8%B1%D9%8A%D8%B9%D8%A9-%D8%A8%D8%A7%D9%84%D8%A8%D9%88%D8%B1%D8%B5%D8%A9-%D8%A7%D9%84%D9%85%D8%B5%D8%B1%D9%8A%D8%A9-%D9%8A%D8%B6%D9%85-33-%D8%B3%D9%87%D9%85/",
       "sharia_conflict_resolution_as_of": "2026-10-05",
-      "sharia_conflict_disclosure": "Older external filter disagreed; current EGX33 membership report is given precedence for index-screening purposes only. A distinct AAOIFI screen may classify differently."
+      "sharia_conflict_disclosure": "Older external filter disagreed; current EGX33 membership report is given precedence for index-screening purposes only. A distinct AAOIFI screen may classify differently.",
+      "sharia_research_checked_at": "2026-10-28"
     },
     "ORHD": {
       "sharia_status": "pending_verification",
