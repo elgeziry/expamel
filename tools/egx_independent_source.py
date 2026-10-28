@@ -134,15 +134,37 @@ def scan(root):
             q["price_difference_pct"] = round(abs(reference - q["price_egp"]) / q["price_egp"] * 100, 3) if reference and q["price_egp"] else None
             q["previous_close_difference_pct"] = round(abs(past - prev) / past * 100, 3) if past and prev else None
             q["same_session_correlated"] = q["observation_time_cairo"][:10] == session and q["previous_close_difference_pct"] is not None and q["previous_close_difference_pct"] <= MAX_PREV_CLOSE_DIFF_PCT
+            # During trading use only age-bounded quotes. After the close, a
+            # price can be a verified same-session analysis reference without
+            # being a live execution quote. Never turn a closing reference into
+            # an executable BUY_TRIGGER or silently increase the live age limit.
+            check_utc = dt.datetime.fromisoformat(q["retrieved_at_utc"].replace("Z", "+00:00"))
+            now_local = check_utc.astimezone(CAIRO)
+            observed_local = dt.datetime.fromisoformat(q["observation_time_cairo"])
+            after_close = now_local.hour * 60 + now_local.minute >= 14 * 60 + 30
+            near_close_sample = observed_local.hour * 60 + observed_local.minute >= 13 * 60 + 15
+            price_correlated = (q["price_difference_pct"] is not None
+                                and q["price_difference_pct"] <= MAX_PRICE_DIFF_PCT)
             q["verified"] = (q["same_session_correlated"] and 0 <= q["age_minutes"] <= MAX_QUOTE_AGE_MIN
-                             and q["price_difference_pct"] is not None and q["price_difference_pct"] <= MAX_PRICE_DIFF_PCT)
-            q["status"] = "VERIFIED_DELAYED" if q["verified"] else "UNVERIFIED"
-            if q["age_minutes"] > MAX_QUOTE_AGE_MIN:
-                q["reason"] = "delayed_quote_beyond_freshness_window"
-            elif not q["same_session_correlated"]:
+                             and price_correlated and not after_close)
+            q["reference_verified"] = bool(q["verified"] or (
+                after_close and near_close_sample and q["same_session_correlated"]
+                and 0 <= q["age_minutes"] <= 180 and price_correlated))
+            q["execution_quote_valid"] = q["verified"]
+            q["status"] = ("VERIFIED_DELAYED" if q["verified"] else
+                            "CLOSING_REFERENCE_ONLY" if q["reference_verified"] else
+                            "UNVERIFIED")
+            if not q["same_session_correlated"]:
                 q["reason"] = "observation_date_or_previous_close_not_corroborated"
-            elif q["price_difference_pct"] is None or q["price_difference_pct"] > MAX_PRICE_DIFF_PCT:
+            elif not price_correlated:
                 q["reason"] = "independent_source_price_mismatch"
+            elif q["reference_verified"] and not q["verified"]:
+                q["reason"] = "postclose_correlated_reference_not_execution_quote"
+            elif q["age_minutes"] > MAX_QUOTE_AGE_MIN:
+                q["reason"] = "delayed_quote_beyond_freshness_window"
+            elif after_close:
+                q["reason"] = "market_closed_no_new_order"
+
             records[symbol] = q
         except Exception as exc:
             records[symbol] = {"symbol": symbol, "source": PROVIDER, "verified": False,
@@ -200,6 +222,8 @@ def scan(root):
         "execution_price_must_be_confirmed_at_broker": True,
         "quotes": records,
         "selected_symbols": list(selected_symbols),
+        "reference_verified_symbols": sorted(k for k, v in records.items() if v.get("reference_verified")),
+        "postclose_reference_is_not_executable": True,
         "buy_triggers_before": len(initial),
         "buy_triggers_after": len(accepted),
         "buy_triggers_blocked": len(blocked),
@@ -207,6 +231,7 @@ def scan(root):
     (root / "independent-quote-audit.json").write_text(json.dumps(report, ensure_ascii=False, indent=2))
     print(json.dumps({"session": session, "provider": PROVIDER,
         "verified": sorted(k for k, v in records.items() if v.get("verified")),
+        "postclose_reference_only": sorted(k for k, v in records.items() if v.get("status") == "CLOSING_REFERENCE_ONLY"),
         "failures": {k: v.get("reason") for k, v in records.items() if not v.get("verified")},
         "buy_before": len(initial), "buy_after": len(accepted)}, ensure_ascii=False))
     return report
