@@ -31,3 +31,36 @@ jobs:
               print(json.dumps({"symbol":symbol,"server_date":server_date,"excerpt":stripped[:340],"found_html":sample[:900],"stamp_hints":stamps[:6]},ensure_ascii=False))
             except Exception as e:print(json.dumps({"symbol":symbol,"error":str(e)[:160]}))
           PY
+
+      - name: Probe EGID delayed API and DirectFN date-coded trading data
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import urllib.request, urllib.error, json, re, datetime
+          urls=[
+            'https://ticker.egidegypt.com/swagger/v1/swagger.json',
+            'https://ticker.egidegypt.com/api/DelayedFeed/getEGXMarketWatch',
+            'https://ticker.egidegypt.com/api/DelayedFeed/getTodayMarketWatch',
+            'https://ticker.egidegypt.com/api/DelayedFeed/getMarketStatus',
+            'https://ticker.egidegypt.com/api/DelayedFeed/getMarketSummary',
+            'https://www.directfn.com.eg/tradingData.aspx',
+            'https://directfn.com.eg/tradingData.aspx',
+          ]
+          for url in urls:
+            try:
+              req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0','Accept':'application/json,text/html,*/*','Cache-Control':'no-cache'})
+              with urllib.request.urlopen(req,timeout=12) as r:
+                raw=r.read(450000).decode('utf-8','replace')
+                status=r.status; date=r.headers.get('Date')
+              try:
+                data=json.loads(raw)
+                structure={'type':type(data).__name__,'keys':list(data)[:30] if isinstance(data,dict) else None,'sample':str(data)[:500]}
+                if url.endswith('swagger.json') and isinstance(data,dict):
+                  structure={'paths':[p for p in data.get('paths',{}) if 'MarketWatch' in p or 'MarketStatus' in p][:20]}
+              except Exception:
+                structure={'html_sample':re.sub(r'\s+',' ',re.sub(r'<[^>]*>',' ',raw[:2200]))[:550],
+                  'EGAL_present':'EGAL' in raw,'ADIB_present':'ADIB' in raw,
+                  'contains_session_date':bool(re.search(r'28 (Oct|أكتوبر) 2026',raw,re.I))}
+              print(json.dumps({'url':url,'status':status,'server_date':date,'bytes':len(raw),'data':structure},ensure_ascii=False))
+            except Exception as e: print(json.dumps({'url':url,'error':f'{type(e).__name__}: {str(e)[:220]}'},ensure_ascii=False))
+          PY
