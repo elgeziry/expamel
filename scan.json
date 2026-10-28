@@ -1,10 +1,10 @@
 {
   "schema": "egx-v4-comprehensive-scan-v1",
-  "generated_at": "2026-10-28T09:47:42.097491Z",
+  "generated_at": "2026-10-28T18:31:08.715020Z",
   "session_date": "2026-10-28",
-  "session_status": "continuous",
-  "v4_contract_retrieved_at": "2026-10-28T09:46:28.718Z",
-  "v4_age_seconds": 73.4,
+  "session_status": "closed",
+  "v4_contract_retrieved_at": "2026-10-28T16:58:28.922Z",
+  "v4_age_seconds": 5559.8,
   "execution_contract_valid": true,
   "candidate_only": true,
   "execution_source": "EGX Resilient Bridge V4 only",
@@ -21,21 +21,21 @@
   "market": {
     "regime": "weak",
     "breadth": {
-      "advancers": 88,
-      "decliners": 149,
-      "unchanged": 58,
-      "positive_pct": 29.8
+      "advancers": 98,
+      "decliners": 141,
+      "unchanged": 56,
+      "positive_pct": 33.2
     }
   },
   "top_candidates": [
     {
       "symbol": "LCSW",
       "name": "Lecico Egypt SAE",
-      "last_price": 35.4,
-      "change_percent": 5.82959641255604,
-      "value": 37023444.0,
-      "volume": 1045860,
-      "relative_volume_10d": 3.24,
+      "last_price": 35.73,
+      "change_percent": 6.816143497757829,
+      "value": 64222030.98,
+      "volume": 1797426,
+      "relative_volume_10d": 3.42,
       "long_term_trend": "long_term_uptrend",
       "demand_confirmation_score": 9.7,
       "setup_score": 9.1,
@@ -55,22 +55,48 @@
       }
     },
     {
-      "symbol": "CANA",
-      "name": "Suez Canal Bank SAE",
-      "last_price": 45,
-      "change_percent": 4.69986040018614,
-      "value": 39891690.0,
-      "volume": 886482,
-      "relative_volume_10d": 3.72,
+      "symbol": "ABUK",
+      "name": "Abou Kir Fertilizers & Chemical Industries Co.",
+      "last_price": 91.23,
+      "change_percent": 0.03289473684210651,
+      "value": 121059381.87,
+      "volume": 1326969,
+      "relative_volume_10d": 1.25,
       "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 8.5,
+      "demand_confirmation_score": 7.3,
+      "setup_score": 8.9,
+      "event_risk": {
+        "level": "high",
+        "next_event": {
+          "type": "earnings",
+          "at": 1793620800,
+          "trading_days": 3
+        }
+      },
+      "decision_support": {
+        "technical_score": 9,
+        "liquidity_score": 10,
+        "setup_score": 8.9,
+        "chase_risk": "low"
+      }
+    },
+    {
+      "symbol": "SWDY",
+      "name": "El Sewedy Electric Company",
+      "last_price": 113,
+      "change_percent": 3.2340581034167792,
+      "value": 79600477.0,
+      "volume": 704429,
+      "relative_volume_10d": 1.55,
+      "long_term_trend": "long_term_uptrend",
+      "demand_confirmation_score": 8.6,
       "setup_score": 8.9,
       "event_risk": {
         "level": "low",
         "next_event": {
           "type": "earnings",
-          "at": 1796212800,
-          "trading_days": 25
+          "at": 1794830400,
+          "trading_days": 13
         }
       },
       "decision_support": {
@@ -83,11 +109,11 @@
     {
       "symbol": "MFPC",
       "name": "Misr Fertilizers Production Company MOPCO",
-      "last_price": 46.15,
-      "change_percent": 2.101769911504415,
-      "value": 49479814.8,
-      "volume": 1072152,
-      "relative_volume_10d": 1.37,
+      "last_price": 46,
+      "change_percent": 1.7699115044247724,
+      "value": 79027172.0,
+      "volume": 1717982,
+      "relative_volume_10d": 1.35,
       "long_term_trend": "long_term_uptrend",
       "demand_confirmation_score": 7,
       "setup_score": 8.6,
@@ -107,16 +133,64 @@
       }
     },
     {
+      "symbol": "CANA",
+      "name": "Suez Canal Bank SAE",
+      "last_price": 44.88,
+      "change_percent": 4.420660772452317,
+      "value": 45017961.12,
+      "volume": 1003074,
+      "relative_volume_10d": 2.59,
+      "long_term_trend": "long_term_uptrend",
+      "demand_confirmation_score": 8.1,
+      "setup_score": 8.6,
+      "event_risk": {
+        "level": "low",
+        "next_event": {
+          "type": "earnings",
+          "at": 1796212800,
+          "trading_days": 25
+        }
+      },
+      "decision_support": {
+        "technical_score": 9,
+        "liquidity_score": 8,
+        "setup_score": 8.6,
+        "chase_risk": "low"
+      }
+    },
+    {
+      "symbol": "CPME",
+      "name": "Catalyst Partners Middle East",
+      "last_price": 38.5,
+      "change_percent": 8.450704225352112,
+      "value": 11655875.0,
+      "volume": 302750,
+      "relative_volume_10d": 2.44,
+      "long_term_trend": "short_term_positive_sma200_unavailable",
+      "demand_confirmation_score": 8.8,
+      "setup_score": 8.5,
+      "event_risk": {
+        "level": "unknown_or_low",
+        "next_event": null
+      },
+      "decision_support": {
+        "technical_score": 9,
+        "liquidity_score": 7,
+        "setup_score": 8.5,
+        "chase_risk": "low"
+      }
+    },
+    {
       "symbol": "BIOC",
       "name": "GlaxoSmithKline S.A.E.",
-      "last_price": 287,
-      "change_percent": 11.13692688971499,
-      "value": 165166491.0,
-      "volume": 575493,
-      "relative_volume_10d": 5.09,
+      "last_price": 281.03,
+      "change_percent": 8.825123915737285,
+      "value": 192575807.5,
+      "volume": 685250,
+      "relative_volume_10d": 3.72,
       "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 9.7,
-      "setup_score": 8.5,
+      "demand_confirmation_score": 8.4,
+      "setup_score": 8.2,
       "event_risk": {
         "level": "unknown_or_low",
         "next_event": null
@@ -124,54 +198,24 @@
       "decision_support": {
         "technical_score": 7.3,
         "liquidity_score": 10,
-        "setup_score": 8.5,
-        "chase_risk": "medium"
-      }
-    },
-    {
-      "symbol": "ABUK",
-      "name": "Abou Kir Fertilizers & Chemical Industries Co.",
-      "last_price": 90.95,
-      "change_percent": -0.2741228070175438,
-      "value": 60661831.0,
-      "volume": 666980,
-      "relative_volume_10d": 1.02,
-      "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 6.2,
-      "setup_score": 8.4,
-      "event_risk": {
-        "level": "high",
-        "next_event": {
-          "type": "earnings",
-          "at": 1793620800,
-          "trading_days": 3
-        }
-      },
-      "decision_support": {
-        "technical_score": 9,
-        "liquidity_score": 9,
-        "setup_score": 8.4,
+        "setup_score": 8.2,
         "chase_risk": "low"
       }
     },
     {
-      "symbol": "SWDY",
-      "name": "El Sewedy Electric Company",
-      "last_price": 111.35,
-      "change_percent": 1.726658139959803,
-      "value": 50233659.55,
-      "volume": 451133,
-      "relative_volume_10d": 1.62,
+      "symbol": "AMOC",
+      "name": "Alexandria Mineral Oils Co.",
+      "last_price": 13.35,
+      "change_percent": 2.2988505747126355,
+      "value": 85714128.9,
+      "volume": 6420534,
+      "relative_volume_10d": 0.84,
       "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 6.7,
+      "demand_confirmation_score": 6.5,
       "setup_score": 7.6,
       "event_risk": {
-        "level": "low",
-        "next_event": {
-          "type": "earnings",
-          "at": 1794830400,
-          "trading_days": 13
-        }
+        "level": "unknown_or_low",
+        "next_event": null
       },
       "decision_support": {
         "technical_score": 7.3,
@@ -181,35 +225,57 @@
       }
     },
     {
-      "symbol": "AMER",
-      "name": "Amer Group Holding",
-      "last_price": 4.29,
-      "change_percent": 5.405405405405399,
-      "value": 62545072.59,
-      "volume": 14579271,
-      "relative_volume_10d": 2.32,
-      "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 8.3,
-      "setup_score": 7.2,
+      "symbol": "ENGC",
+      "name": "Industrial Engineering Co. for Construction & Development",
+      "last_price": 33.89,
+      "change_percent": 8.378637671889994,
+      "value": 17004748.07,
+      "volume": 501763,
+      "relative_volume_10d": 2.4,
+      "long_term_trend": "below_sma200",
+      "demand_confirmation_score": 7.5,
+      "setup_score": 7.5,
       "event_risk": {
         "level": "unknown_or_low",
         "next_event": null
       },
       "decision_support": {
-        "technical_score": 5.6,
-        "liquidity_score": 10,
-        "setup_score": 7.2,
+        "technical_score": 7.7,
+        "liquidity_score": 7,
+        "setup_score": 7.5,
+        "chase_risk": "low"
+      }
+    },
+    {
+      "symbol": "ICFC",
+      "name": "International Co. for Fertilizers & Chemicals",
+      "last_price": 21.58,
+      "change_percent": 4.200869145340403,
+      "value": 21458202.48,
+      "volume": 994356,
+      "relative_volume_10d": 1.47,
+      "long_term_trend": "long_term_uptrend",
+      "demand_confirmation_score": 6.4,
+      "setup_score": 7.3,
+      "event_risk": {
+        "level": "unknown_or_low",
+        "next_event": null
+      },
+      "decision_support": {
+        "technical_score": 7.3,
+        "liquidity_score": 8,
+        "setup_score": 7.3,
         "chase_risk": "low"
       }
     },
     {
       "symbol": "EAST",
       "name": "Eastern Company",
-      "last_price": 31.74,
-      "change_percent": -0.4703668861712202,
-      "value": 12493657.5,
-      "volume": 393625,
-      "relative_volume_10d": 0.42,
+      "last_price": 31.8,
+      "change_percent": -0.2822201317027277,
+      "value": 45099618.6,
+      "volume": 1418227,
+      "relative_volume_10d": 0.93,
       "long_term_trend": "below_sma200",
       "demand_confirmation_score": 4.7,
       "setup_score": 7.2,
@@ -229,16 +295,16 @@
       }
     },
     {
-      "symbol": "CPCI",
-      "name": "Kahira Pharmaceuticals & Chemical Industries Co.",
-      "last_price": 599.7,
-      "change_percent": 0.29602127339322254,
-      "value": 2889954.3,
-      "volume": 4819,
-      "relative_volume_10d": 0.78,
+      "symbol": "UNIT",
+      "name": "United Housing Construction SA",
+      "last_price": 17,
+      "change_percent": 1.1302795954788893,
+      "value": 2450703.0,
+      "volume": 144159,
+      "relative_volume_10d": 1.29,
       "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 5.3,
-      "setup_score": 7.1,
+      "demand_confirmation_score": 5.6,
+      "setup_score": 7.2,
       "event_risk": {
         "level": "unknown_or_low",
         "next_event": null
@@ -246,21 +312,21 @@
       "decision_support": {
         "technical_score": 9,
         "liquidity_score": 4.5,
-        "setup_score": 7.1,
+        "setup_score": 7.2,
         "chase_risk": "low"
       }
     },
     {
-      "symbol": "ORAS",
-      "name": "Orascom Construction Plc",
-      "last_price": 825.11,
-      "change_percent": 0.856863464124189,
-      "value": 91116897.3,
-      "volume": 110430,
-      "relative_volume_10d": 0.7,
+      "symbol": "ARAB",
+      "name": "Arab Developers Holding",
+      "last_price": 0.241,
+      "change_percent": 2.991452991452982,
+      "value": 119959851.52,
+      "volume": 497758720,
+      "relative_volume_10d": 1.39,
       "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 5.8,
-      "setup_score": 6.7,
+      "demand_confirmation_score": 7.3,
+      "setup_score": 7.0,
       "event_risk": {
         "level": "unknown_or_low",
         "next_event": null
@@ -268,7 +334,51 @@
       "decision_support": {
         "technical_score": 5.6,
         "liquidity_score": 10,
-        "setup_score": 6.7,
+        "setup_score": 7,
+        "chase_risk": "low"
+      }
+    },
+    {
+      "symbol": "CPCI",
+      "name": "Kahira Pharmaceuticals & Chemical Industries Co.",
+      "last_price": 597.17,
+      "change_percent": -0.1271051795360646,
+      "value": 3744853.07,
+      "volume": 6271,
+      "relative_volume_10d": 0.62,
+      "long_term_trend": "long_term_uptrend",
+      "demand_confirmation_score": 4.5,
+      "setup_score": 7.0,
+      "event_risk": {
+        "level": "unknown_or_low",
+        "next_event": null
+      },
+      "decision_support": {
+        "technical_score": 9,
+        "liquidity_score": 4.5,
+        "setup_score": 7,
+        "chase_risk": "low"
+      }
+    },
+    {
+      "symbol": "BONY",
+      "name": "Bonyan for Development and Trade",
+      "last_price": 4.1,
+      "change_percent": -0.4854368932038947,
+      "value": 25081286.7,
+      "volume": 6117387,
+      "relative_volume_10d": 0.85,
+      "long_term_trend": "decision_zone_near_sma200",
+      "demand_confirmation_score": 4.3,
+      "setup_score": 6.9,
+      "event_risk": {
+        "level": "unknown_or_low",
+        "next_event": null
+      },
+      "decision_support": {
+        "technical_score": 7.3,
+        "liquidity_score": 8,
+        "setup_score": 6.9,
         "chase_risk": "low"
       }
     },
@@ -277,41 +387,107 @@
       "name": "MNT-Halan",
       "last_price": 24.1,
       "change_percent": 0.41666666666667257,
-      "value": 10628485.6,
-      "volume": 441016,
+      "value": 22272039.1,
+      "volume": 924151,
       "relative_volume_10d": 0,
       "long_term_trend": "short_term_positive_sma200_unavailable",
-      "demand_confirmation_score": 3.8,
-      "setup_score": 6.6,
+      "demand_confirmation_score": 4.3,
+      "setup_score": 6.9,
       "event_risk": {
         "level": "unknown_or_low",
         "next_event": null
       },
       "decision_support": {
         "technical_score": 7.4,
-        "liquidity_score": 7,
-        "setup_score": 6.6,
+        "liquidity_score": 8,
+        "setup_score": 6.9,
         "chase_risk": "high"
       }
     },
     {
-      "symbol": "MPCI",
-      "name": "Memphis Pharmaceutical & Chemical Industries",
-      "last_price": 288.9,
-      "change_percent": 5.054545454545447,
-      "value": 85426863.3,
-      "volume": 295697,
-      "relative_volume_10d": 1.67,
+      "symbol": "AMER",
+      "name": "Amer Group Holding",
+      "last_price": 4.31,
+      "change_percent": 5.89680589680588,
+      "value": 80061594.56,
+      "volume": 18575776,
+      "relative_volume_10d": 1.81,
       "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 7.7,
+      "demand_confirmation_score": 7.4,
+      "setup_score": 6.8,
+      "event_risk": {
+        "level": "unknown_or_low",
+        "next_event": null
+      },
+      "decision_support": {
+        "technical_score": 5.6,
+        "liquidity_score": 9,
+        "setup_score": 6.8,
+        "chase_risk": "low"
+      }
+    },
+    {
+      "symbol": "ETRS",
+      "name": "Egyptian Transport And Commercial Services Co. (Egytrans Nosco)",
+      "last_price": 10.4,
+      "change_percent": 0.28929604628737837,
+      "value": 32256900.0,
+      "volume": 3101625,
+      "relative_volume_10d": 2.74,
+      "long_term_trend": "long_term_uptrend",
+      "demand_confirmation_score": 7.4,
+      "setup_score": 6.6,
+      "event_risk": {
+        "level": "unknown_or_low",
+        "next_event": null
+      },
+      "decision_support": {
+        "technical_score": 5.6,
+        "liquidity_score": 8,
+        "setup_score": 6.6,
+        "chase_risk": "low"
+      }
+    },
+    {
+      "symbol": "TWSA",
+      "name": "Tawasoa Factoring",
+      "last_price": 6.47,
+      "change_percent": 10.221465076660982,
+      "value": 32543291.25,
+      "volume": 5029875,
+      "relative_volume_10d": 1.5,
+      "long_term_trend": "long_term_uptrend",
+      "demand_confirmation_score": 7,
       "setup_score": 6.5,
       "event_risk": {
         "level": "unknown_or_low",
         "next_event": null
       },
       "decision_support": {
-        "technical_score": 4.4,
-        "liquidity_score": 10,
+        "technical_score": 5.6,
+        "liquidity_score": 8,
+        "setup_score": 6.5,
+        "chase_risk": "low"
+      }
+    },
+    {
+      "symbol": "ADCI",
+      "name": "Arab Pharmaceuticals",
+      "last_price": 260.21,
+      "change_percent": 1.3121009188599926,
+      "value": 3700706.62,
+      "volume": 14222,
+      "relative_volume_10d": 2.47,
+      "long_term_trend": "long_term_uptrend",
+      "demand_confirmation_score": 6.7,
+      "setup_score": 6.5,
+      "event_risk": {
+        "level": "unknown_or_low",
+        "next_event": null
+      },
+      "decision_support": {
+        "technical_score": 7.3,
+        "liquidity_score": 4.5,
         "setup_score": 6.5,
         "chase_risk": "low"
       }
@@ -319,11 +495,11 @@
     {
       "symbol": "NIPH",
       "name": "El-Nile Co. for Pharmaceuticals & Chemical Industries",
-      "last_price": 255.94,
-      "change_percent": 5.755960497500107,
-      "value": 153208755.28,
-      "volume": 598612,
-      "relative_volume_10d": 2.09,
+      "last_price": 254.5,
+      "change_percent": 5.16094376265444,
+      "value": 252815210.0,
+      "volume": 993380,
+      "relative_volume_10d": 2.14,
       "long_term_trend": "long_term_uptrend",
       "demand_confirmation_score": 7.6,
       "setup_score": 6.4,
@@ -339,15 +515,81 @@
       }
     },
     {
-      "symbol": "ARAB",
-      "name": "Arab Developers Holding",
-      "last_price": 0.234,
-      "change_percent": 0,
-      "value": 66151753.2,
-      "volume": 282699800,
-      "relative_volume_10d": 1.29,
+      "symbol": "ORAS",
+      "name": "Orascom Construction Plc",
+      "last_price": 815,
+      "change_percent": -0.37892678156704834,
+      "value": 122845765.0,
+      "volume": 150731,
+      "relative_volume_10d": 0.59,
       "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 6.6,
+      "demand_confirmation_score": 4.2,
+      "setup_score": 6.4,
+      "event_risk": {
+        "level": "unknown_or_low",
+        "next_event": null
+      },
+      "decision_support": {
+        "technical_score": 5.6,
+        "liquidity_score": 10,
+        "setup_score": 6.4,
+        "chase_risk": "low"
+      }
+    },
+    {
+      "symbol": "GTWL",
+      "name": "Golden Textiles & Clothes Wool",
+      "last_price": 95.99,
+      "change_percent": 2.6301721372821487,
+      "value": 191252011.84,
+      "volume": 1992416,
+      "relative_volume_10d": 1.51,
+      "long_term_trend": "long_term_uptrend",
+      "demand_confirmation_score": 7,
+      "setup_score": 6.3,
+      "event_risk": {
+        "level": "unknown_or_low",
+        "next_event": null
+      },
+      "decision_support": {
+        "technical_score": 4.4,
+        "liquidity_score": 10,
+        "setup_score": 6.3,
+        "chase_risk": "low"
+      }
+    },
+    {
+      "symbol": "ICID",
+      "name": "International Company for Investment & Development",
+      "last_price": 17,
+      "change_percent": 0.17678255745433788,
+      "value": 15842334.0,
+      "volume": 931902,
+      "relative_volume_10d": 3.09,
+      "long_term_trend": "long_term_uptrend",
+      "demand_confirmation_score": 7.1,
+      "setup_score": 6.3,
+      "event_risk": {
+        "level": "unknown_or_low",
+        "next_event": null
+      },
+      "decision_support": {
+        "technical_score": 5.6,
+        "liquidity_score": 7,
+        "setup_score": 6.3,
+        "chase_risk": "low"
+      }
+    },
+    {
+      "symbol": "CRST",
+      "name": "Creast Mark For Contracting And Real Estate Development",
+      "last_price": 2.2,
+      "change_percent": -1.785714285714287,
+      "value": 285336077.4,
+      "volume": 129698217,
+      "relative_volume_10d": 1.71,
+      "long_term_trend": "long_term_uptrend",
+      "demand_confirmation_score": 6.2,
       "setup_score": 6.2,
       "event_risk": {
         "level": "unknown_or_low",
@@ -363,11 +605,11 @@
     {
       "symbol": "LUTS",
       "name": "Lotus For Agricultural Investments And Development",
-      "last_price": 0.625,
-      "change_percent": 6.112054329371822,
-      "value": 45036253.13,
-      "volume": 72058005,
-      "relative_volume_10d": 1.65,
+      "last_price": 0.635,
+      "change_percent": 7.809847198641773,
+      "value": 81950473.0,
+      "volume": 129055863,
+      "relative_volume_10d": 1.82,
       "long_term_trend": "long_term_uptrend",
       "demand_confirmation_score": 7.4,
       "setup_score": 6.2,
@@ -383,64 +625,38 @@
       }
     },
     {
-      "symbol": "PHAR",
-      "name": "Egyptian International Pharmaceutical Industries Co.",
-      "last_price": 99.42,
-      "change_percent": 2.0844029161104847,
-      "value": 59826084.42,
-      "volume": 601751,
-      "relative_volume_10d": 2.08,
+      "symbol": "ADRI",
+      "name": "Arab Development & Real Estate Investment",
+      "last_price": 12.8,
+      "change_percent": 2.64635124298316,
+      "value": 22293414.4,
+      "volume": 1741673,
+      "relative_volume_10d": 0.7,
       "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 7.3,
-      "setup_score": 6.1,
-      "event_risk": {
-        "level": "low",
-        "next_event": {
-          "type": "earnings",
-          "at": 1795003200,
-          "trading_days": 15
-        }
-      },
-      "decision_support": {
-        "technical_score": 4.4,
-        "liquidity_score": 9,
-        "setup_score": 6.1,
-        "chase_risk": "low"
-      }
-    },
-    {
-      "symbol": "AMOC",
-      "name": "Alexandria Mineral Oils Co.",
-      "last_price": 12.99,
-      "change_percent": -0.45977011494253256,
-      "value": 34871577.06,
-      "volume": 2684494,
-      "relative_volume_10d": 0.57,
-      "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 3.9,
-      "setup_score": 6.1,
+      "demand_confirmation_score": 5.8,
+      "setup_score": 6.2,
       "event_risk": {
         "level": "unknown_or_low",
         "next_event": null
       },
       "decision_support": {
         "technical_score": 5.6,
-        "liquidity_score": 9,
-        "setup_score": 6.1,
+        "liquidity_score": 8,
+        "setup_score": 6.2,
         "chase_risk": "low"
       }
     },
     {
-      "symbol": "CRST",
-      "name": "Creast Mark For Contracting And Real Estate Development",
-      "last_price": 2.15,
-      "change_percent": -4.017857142857156,
-      "value": 196907038.35,
-      "volume": 91584669,
-      "relative_volume_10d": 1.97,
+      "symbol": "MPCI",
+      "name": "Memphis Pharmaceutical & Chemical Industries",
+      "last_price": 289,
+      "change_percent": 5.090909090909091,
+      "value": 117260016.0,
+      "volume": 405744,
+      "relative_volume_10d": 1.41,
       "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 5.4,
-      "setup_score": 6.0,
+      "demand_confirmation_score": 6.1,
+      "setup_score": 6.1,
       "event_risk": {
         "level": "unknown_or_low",
         "next_event": null
@@ -448,69 +664,21 @@
       "decision_support": {
         "technical_score": 4.4,
         "liquidity_score": 10,
-        "setup_score": 6,
-        "chase_risk": "low"
-      }
-    },
-    {
-      "symbol": "EMFD",
-      "name": "Emaar Misr for Development SAE",
-      "last_price": 11.66,
-      "change_percent": 0.17182130584192074,
-      "value": 39223890.2,
-      "volume": 3363970,
-      "relative_volume_10d": 1.57,
-      "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 6.7,
-      "setup_score": 6.0,
-      "event_risk": {
-        "level": "low",
-        "next_event": {
-          "type": "earnings",
-          "at": 1796212800,
-          "trading_days": 25
-        }
-      },
-      "decision_support": {
-        "technical_score": 4.4,
-        "liquidity_score": 9,
-        "setup_score": 6,
-        "chase_risk": "low"
-      }
-    },
-    {
-      "symbol": "AIH",
-      "name": "Arabia Investments Holding SAE",
-      "last_price": 0.761,
-      "change_percent": 0.5284015852047561,
-      "value": 22050800.68,
-      "volume": 28976085,
-      "relative_volume_10d": 0.99,
-      "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 4.3,
-      "setup_score": 5.9,
-      "event_risk": {
-        "level": "unknown_or_low",
-        "next_event": null
-      },
-      "decision_support": {
-        "technical_score": 5.6,
-        "liquidity_score": 8,
-        "setup_score": 5.9,
+        "setup_score": 6.1,
         "chase_risk": "low"
       }
     },
     {
       "symbol": "SCEM",
       "name": "Sinai Cement Co.",
-      "last_price": 83,
-      "change_percent": -0.3122748018256126,
-      "value": 15852087.0,
-      "volume": 190989,
-      "relative_volume_10d": 0.59,
+      "last_price": 83.3,
+      "change_percent": 0.04804227720392991,
+      "value": 27060421.5,
+      "volume": 324855,
+      "relative_volume_10d": 0.62,
       "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 4.3,
-      "setup_score": 5.9,
+      "demand_confirmation_score": 5.1,
+      "setup_score": 6.1,
       "event_risk": {
         "level": "unknown_or_low",
         "next_event": null
@@ -518,6 +686,50 @@
       "decision_support": {
         "technical_score": 5.6,
         "liquidity_score": 8,
+        "setup_score": 6.1,
+        "chase_risk": "low"
+      }
+    },
+    {
+      "symbol": "MBEG",
+      "name": "MB for Engineering & Contracting",
+      "last_price": 4.69,
+      "change_percent": 14.390243902439043,
+      "value": 36144859.17,
+      "volume": 7706793,
+      "relative_volume_10d": 2.1,
+      "long_term_trend": "decision_zone_near_sma200",
+      "demand_confirmation_score": 7.6,
+      "setup_score": 5.9,
+      "event_risk": {
+        "level": "unknown_or_low",
+        "next_event": null
+      },
+      "decision_support": {
+        "technical_score": 4.4,
+        "liquidity_score": 8,
+        "setup_score": 5.9,
+        "chase_risk": "low"
+      }
+    },
+    {
+      "symbol": "HBCO",
+      "name": "Heibco for Commercial Investments & Real Estate Development",
+      "last_price": 7.62,
+      "change_percent": 8.392603129445233,
+      "value": 12190879.86,
+      "volume": 1599853,
+      "relative_volume_10d": 0.73,
+      "long_term_trend": "long_term_uptrend",
+      "demand_confirmation_score": 5.3,
+      "setup_score": 5.9,
+      "event_risk": {
+        "level": "unknown_or_low",
+        "next_event": null
+      },
+      "decision_support": {
+        "technical_score": 5.6,
+        "liquidity_score": 7,
         "setup_score": 5.9,
         "chase_risk": "low"
       }
@@ -525,11 +737,11 @@
     {
       "symbol": "KORA",
       "name": "KORRA",
-      "last_price": 1.83,
-      "change_percent": -2.1390374331550817,
-      "value": 197698666.14,
-      "volume": 108032058,
-      "relative_volume_10d": 0.59,
+      "last_price": 1.81,
+      "change_percent": -3.208556149732623,
+      "value": 293768947.66,
+      "volume": 162303286,
+      "relative_volume_10d": 0.55,
       "long_term_trend": "short_term_weak_sma200_unavailable",
       "demand_confirmation_score": 4.5,
       "setup_score": 5.8,
@@ -545,45 +757,23 @@
       }
     },
     {
-      "symbol": "CCAP",
-      "name": "QALA For Financial Investments",
-      "last_price": 6.09,
-      "change_percent": 0.1644736842105228,
-      "value": 155508905.16,
-      "volume": 25535124,
-      "relative_volume_10d": 0.55,
-      "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 4.5,
+      "symbol": "PHAR",
+      "name": "Egyptian International Pharmaceutical Industries Co.",
+      "last_price": 98.2,
+      "change_percent": 0.8317075675120673,
+      "value": 72578343.4,
+      "volume": 739087,
+      "relative_volume_10d": 1.57,
+      "long_term_trend": "decision_zone_near_sma200",
+      "demand_confirmation_score": 5.9,
       "setup_score": 5.8,
       "event_risk": {
         "level": "low",
         "next_event": {
           "type": "earnings",
-          "at": 1796904000,
-          "trading_days": 31
+          "at": 1795003200,
+          "trading_days": 15
         }
-      },
-      "decision_support": {
-        "technical_score": 4.4,
-        "liquidity_score": 10,
-        "setup_score": 5.8,
-        "chase_risk": "low"
-      }
-    },
-    {
-      "symbol": "SIPC",
-      "name": "Sabaa International Company for Pharmaceutial and Chemical Industry",
-      "last_price": 4.55,
-      "change_percent": 2.477477477477464,
-      "value": 35239458.8,
-      "volume": 7744936,
-      "relative_volume_10d": 1.38,
-      "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 5.8,
-      "setup_score": 5.8,
-      "event_risk": {
-        "level": "unknown_or_low",
-        "next_event": null
       },
       "decision_support": {
         "technical_score": 4.4,
@@ -593,22 +783,48 @@
       }
     },
     {
-      "symbol": "TALM",
-      "name": "Taaleem Management Services S.A.E",
-      "last_price": 19.3,
-      "change_percent": 2.116402116402128,
-      "value": 25233302.5,
-      "volume": 1307425,
-      "relative_volume_10d": 2.69,
+      "symbol": "EMFD",
+      "name": "Emaar Misr for Development SAE",
+      "last_price": 11.68,
+      "change_percent": 0.34364261168384147,
+      "value": 50315010.56,
+      "volume": 4307792,
+      "relative_volume_10d": 1.23,
       "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 6.9,
+      "demand_confirmation_score": 5.8,
+      "setup_score": 5.8,
+      "event_risk": {
+        "level": "low",
+        "next_event": {
+          "type": "earnings",
+          "at": 1796212800,
+          "trading_days": 25
+        }
+      },
+      "decision_support": {
+        "technical_score": 4.4,
+        "liquidity_score": 9,
+        "setup_score": 5.8,
+        "chase_risk": "low"
+      }
+    },
+    {
+      "symbol": "AIH",
+      "name": "Arabia Investments Holding SAE",
+      "last_price": 0.756,
+      "change_percent": -0.13210039630118903,
+      "value": 31066789.57,
+      "volume": 41093637,
+      "relative_volume_10d": 0.86,
+      "long_term_trend": "long_term_uptrend",
+      "demand_confirmation_score": 3.5,
       "setup_score": 5.8,
       "event_risk": {
         "level": "unknown_or_low",
         "next_event": null
       },
       "decision_support": {
-        "technical_score": 4.4,
+        "technical_score": 5.6,
         "liquidity_score": 8,
         "setup_score": 5.8,
         "chase_risk": "low"
@@ -617,11 +833,11 @@
     {
       "symbol": "CAED",
       "name": "Cairo Educational Services",
-      "last_price": 87.99,
-      "change_percent": 10.540201005025127,
-      "value": 20628551.58,
-      "volume": 234442,
-      "relative_volume_10d": 4.29,
+      "last_price": 86.96,
+      "change_percent": 9.246231155778894,
+      "value": 25167441.44,
+      "volume": 289414,
+      "relative_volume_10d": 3.26,
       "long_term_trend": "decision_zone_near_sma200",
       "demand_confirmation_score": 6.9,
       "setup_score": 5.8,
@@ -637,35 +853,39 @@
       }
     },
     {
-      "symbol": "ETRS",
-      "name": "Egyptian Transport And Commercial Services Co. (Egytrans Nosco)",
-      "last_price": 10.4,
-      "change_percent": 0.28929604628737837,
-      "value": 6543191.2,
-      "volume": 629153,
-      "relative_volume_10d": 0.9,
+      "symbol": "CCAP",
+      "name": "QALA For Financial Investments",
+      "last_price": 6.04,
+      "change_percent": -0.6578947368421059,
+      "value": 343190631.64,
+      "volume": 56819641,
+      "relative_volume_10d": 0.75,
       "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 4.6,
-      "setup_score": 5.8,
+      "demand_confirmation_score": 3.7,
+      "setup_score": 5.7,
       "event_risk": {
-        "level": "unknown_or_low",
-        "next_event": null
+        "level": "low",
+        "next_event": {
+          "type": "earnings",
+          "at": 1796904000,
+          "trading_days": 31
+        }
       },
       "decision_support": {
-        "technical_score": 5.6,
-        "liquidity_score": 7,
-        "setup_score": 5.8,
+        "technical_score": 4.4,
+        "liquidity_score": 10,
+        "setup_score": 5.7,
         "chase_risk": "low"
       }
     },
     {
       "symbol": "ETEL",
       "name": "Telecom Egypt",
-      "last_price": 125.25,
-      "change_percent": -0.909810126582283,
-      "value": 96558982.5,
-      "volume": 770930,
-      "relative_volume_10d": 0.52,
+      "last_price": 122.12,
+      "change_percent": -3.3860759493670893,
+      "value": 190051936.64,
+      "volume": 1556272,
+      "relative_volume_10d": 0.65,
       "long_term_trend": "long_term_uptrend",
       "demand_confirmation_score": 3.7,
       "setup_score": 5.7,
@@ -687,14 +907,14 @@
     {
       "symbol": "EGAL",
       "name": "Egypt Aluminum",
-      "last_price": 303.5,
-      "change_percent": 0,
-      "value": 44266082.0,
-      "volume": 145852,
-      "relative_volume_10d": 0.56,
+      "last_price": 303.01,
+      "change_percent": -0.1614497528830343,
+      "value": 57913998.29,
+      "volume": 191129,
+      "relative_volume_10d": 0.46,
       "long_term_trend": "decision_zone_near_sma200",
-      "demand_confirmation_score": 4.7,
-      "setup_score": 5.6,
+      "demand_confirmation_score": 4.2,
+      "setup_score": 5.5,
       "event_risk": {
         "level": "low",
         "next_event": {
@@ -706,28 +926,24 @@
       "decision_support": {
         "technical_score": 4.4,
         "liquidity_score": 9,
-        "setup_score": 5.6,
+        "setup_score": 5.5,
         "chase_risk": "low"
       }
     },
     {
-      "symbol": "INFI",
-      "name": "Ismailia National Food Industries",
-      "last_price": 114.2,
-      "change_percent": 5.819125277983693,
-      "value": 17656233.6,
-      "volume": 154608,
-      "relative_volume_10d": 1.14,
+      "symbol": "SIPC",
+      "name": "Sabaa International Company for Pharmaceutial and Chemical Industry",
+      "last_price": 4.53,
+      "change_percent": 2.0270270270270236,
+      "value": 41688049.8,
+      "volume": 9202660,
+      "relative_volume_10d": 1.01,
       "long_term_trend": "long_term_uptrend",
       "demand_confirmation_score": 5.4,
       "setup_score": 5.5,
       "event_risk": {
-        "level": "low",
-        "next_event": {
-          "type": "dividend_ex_date",
-          "at": 1797163140,
-          "trading_days": 32
-        }
+        "level": "unknown_or_low",
+        "next_event": null
       },
       "decision_support": {
         "technical_score": 4.4,
@@ -737,16 +953,108 @@
       }
     },
     {
+      "symbol": "TALM",
+      "name": "Taaleem Management Services S.A.E",
+      "last_price": 19.09,
+      "change_percent": 1.005291005291012,
+      "value": 29670250.7,
+      "volume": 1554230,
+      "relative_volume_10d": 1.97,
+      "long_term_trend": "long_term_uptrend",
+      "demand_confirmation_score": 5.5,
+      "setup_score": 5.5,
+      "event_risk": {
+        "level": "unknown_or_low",
+        "next_event": null
+      },
+      "decision_support": {
+        "technical_score": 4.4,
+        "liquidity_score": 8,
+        "setup_score": 5.5,
+        "chase_risk": "low"
+      }
+    },
+    {
+      "symbol": "GOUR",
+      "name": "Gourmet Egypt.Com Foods",
+      "last_price": 14.64,
+      "change_percent": 1.666666666666668,
+      "value": 8610252.48,
+      "volume": 588132,
+      "relative_volume_10d": 0.63,
+      "long_term_trend": "short_term_weak_sma200_unavailable",
+      "demand_confirmation_score": 4.1,
+      "setup_score": 5.4,
+      "event_risk": {
+        "level": "unknown_or_low",
+        "next_event": null
+      },
+      "decision_support": {
+        "technical_score": 5.6,
+        "liquidity_score": 6,
+        "setup_score": 5.4,
+        "chase_risk": "low"
+      }
+    },
+    {
+      "symbol": "AMII",
+      "name": "Arabian Metal Industries and Industrial Investments",
+      "last_price": 7.17,
+      "change_percent": 9.132420091324194,
+      "value": 91141842.18,
+      "volume": 12711554,
+      "relative_volume_10d": 3.86,
+      "long_term_trend": "below_sma200",
+      "demand_confirmation_score": 6.5,
+      "setup_score": 5.3,
+      "event_risk": {
+        "level": "unknown_or_low",
+        "next_event": null
+      },
+      "decision_support": {
+        "technical_score": 3.1,
+        "liquidity_score": 9,
+        "setup_score": 5.3,
+        "chase_risk": "low"
+      }
+    },
+    {
+      "symbol": "POUL",
+      "name": "Cairo Poultry Co.",
+      "last_price": 9.48,
+      "change_percent": 0.5302226935312907,
+      "value": 37372994.52,
+      "volume": 3942299,
+      "relative_volume_10d": 0.45,
+      "long_term_trend": "decision_zone_near_sma200",
+      "demand_confirmation_score": 4.6,
+      "setup_score": 5.3,
+      "event_risk": {
+        "level": "low",
+        "next_event": {
+          "type": "earnings",
+          "at": 1796212800,
+          "trading_days": 25
+        }
+      },
+      "decision_support": {
+        "technical_score": 4.4,
+        "liquidity_score": 8,
+        "setup_score": 5.3,
+        "chase_risk": "low"
+      }
+    },
+    {
       "symbol": "EFIH",
       "name": "e-finance for Digital and Financial Investments S.A.E.",
-      "last_price": 21.95,
-      "change_percent": 0.18256503879506686,
-      "value": 15908218.6,
-      "volume": 724748,
-      "relative_volume_10d": 0.54,
+      "last_price": 22.02,
+      "change_percent": 0.502053856686442,
+      "value": 36978053.88,
+      "volume": 1679294,
+      "relative_volume_10d": 0.76,
       "long_term_trend": "decision_zone_near_sma200",
-      "demand_confirmation_score": 5.3,
-      "setup_score": 5.5,
+      "demand_confirmation_score": 4.6,
+      "setup_score": 5.3,
       "event_risk": {
         "level": "low",
         "next_event": {
@@ -758,85 +1066,19 @@
       "decision_support": {
         "technical_score": 4.4,
         "liquidity_score": 8,
-        "setup_score": 5.5,
+        "setup_score": 5.3,
         "chase_risk": "low"
       }
     },
     {
-      "symbol": "TWSA",
-      "name": "Tawasoa Factoring",
-      "last_price": 5.97,
-      "change_percent": 1.7035775127768253,
-      "value": 13568621.97,
-      "volume": 2272801,
-      "relative_volume_10d": 1.11,
+      "symbol": "ARCC",
+      "name": "Arabian Cement Company",
+      "last_price": 63.52,
+      "change_percent": -0.7499999999999951,
+      "value": 21052306.56,
+      "volume": 331428,
+      "relative_volume_10d": 0.46,
       "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 5.4,
-      "setup_score": 5.5,
-      "event_risk": {
-        "level": "unknown_or_low",
-        "next_event": null
-      },
-      "decision_support": {
-        "technical_score": 4.4,
-        "liquidity_score": 8,
-        "setup_score": 5.5,
-        "chase_risk": "low"
-      }
-    },
-    {
-      "symbol": "ICFC",
-      "name": "International Co. for Fertilizers & Chemicals",
-      "last_price": 21.2,
-      "change_percent": 2.3660067600193067,
-      "value": 6086944.0,
-      "volume": 287120,
-      "relative_volume_10d": 0.69,
-      "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 4.8,
-      "setup_score": 5.5,
-      "event_risk": {
-        "level": "unknown_or_low",
-        "next_event": null
-      },
-      "decision_support": {
-        "technical_score": 5.6,
-        "liquidity_score": 6,
-        "setup_score": 5.5,
-        "chase_risk": "low"
-      }
-    },
-    {
-      "symbol": "AMII",
-      "name": "Arabian Metal Industries and Industrial Investments",
-      "last_price": 7.06,
-      "change_percent": 7.458143074581421,
-      "value": 65363294.42,
-      "volume": 9258257,
-      "relative_volume_10d": 4.57,
-      "long_term_trend": "below_sma200",
-      "demand_confirmation_score": 6,
-      "setup_score": 5.4,
-      "event_risk": {
-        "level": "unknown_or_low",
-        "next_event": null
-      },
-      "decision_support": {
-        "technical_score": 3.1,
-        "liquidity_score": 10,
-        "setup_score": 5.4,
-        "chase_risk": "low"
-      }
-    },
-    {
-      "symbol": "ADIB",
-      "name": "Abu Dhabi Islamic Bank-Egypt",
-      "last_price": 46,
-      "change_percent": -1.0752688172043012,
-      "value": 20903826.0,
-      "volume": 454431,
-      "relative_volume_10d": 0.41,
-      "long_term_trend": "decision_zone_near_sma200",
       "demand_confirmation_score": 4.3,
       "setup_score": 5.3,
       "event_risk": {
@@ -855,142 +1097,28 @@
       }
     },
     {
-      "symbol": "OFH",
-      "name": "O B Financial Holding",
-      "last_price": 0.7,
-      "change_percent": 0.5747126436781614,
-      "value": 18386987.5,
-      "volume": 26267125,
-      "relative_volume_10d": 1.47,
-      "long_term_trend": "decision_zone_near_sma200",
+      "symbol": "INFI",
+      "name": "Ismailia National Food Industries",
+      "last_price": 113.9,
+      "change_percent": 5.54114158636027,
+      "value": 20744265.3,
+      "volume": 182127,
+      "relative_volume_10d": 0.83,
+      "long_term_trend": "long_term_uptrend",
       "demand_confirmation_score": 4.6,
       "setup_score": 5.3,
       "event_risk": {
-        "level": "unknown_or_low",
-        "next_event": null
-      },
-      "decision_support": {
-        "technical_score": 4.4,
-        "liquidity_score": 8,
-        "setup_score": 5.3,
-        "chase_risk": "low"
-      }
-    },
-    {
-      "symbol": "OCPH",
-      "name": "October Pharma Co.",
-      "last_price": 179,
-      "change_percent": 5.623414173600048,
-      "value": 6983685.0,
-      "volume": 39015,
-      "relative_volume_10d": 4.05,
-      "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 5.6,
-      "setup_score": 5.3,
-      "event_risk": {
-        "level": "unknown_or_low",
-        "next_event": null
-      },
-      "decision_support": {
-        "technical_score": 4.4,
-        "liquidity_score": 7,
-        "setup_score": 5.3,
-        "chase_risk": "low"
-      }
-    },
-    {
-      "symbol": "ADCI",
-      "name": "Arab Pharmaceuticals",
-      "last_price": 259,
-      "change_percent": 0.8409904999221403,
-      "value": 2684017.0,
-      "volume": 10363,
-      "relative_volume_10d": 2.93,
-      "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 5.6,
-      "setup_score": 5.3,
-      "event_risk": {
-        "level": "unknown_or_low",
-        "next_event": null
-      },
-      "decision_support": {
-        "technical_score": 5.6,
-        "liquidity_score": 4.5,
-        "setup_score": 5.3,
-        "chase_risk": "low"
-      }
-    },
-    {
-      "symbol": "MBSC",
-      "name": "Misr Beni Suef Cement Co. SAE",
-      "last_price": 300,
-      "change_percent": -2.101553322020623,
-      "value": 29840100.0,
-      "volume": 99467,
-      "relative_volume_10d": 0.7,
-      "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 3.8,
-      "setup_score": 5.2,
-      "event_risk": {
         "level": "low",
         "next_event": {
-          "type": "earnings",
-          "at": 1796212800,
-          "trading_days": 25
+          "type": "dividend_ex_date",
+          "at": 1797163140,
+          "trading_days": 32
         }
       },
       "decision_support": {
         "technical_score": 4.4,
         "liquidity_score": 8,
-        "setup_score": 5.2,
-        "chase_risk": "low"
-      }
-    },
-    {
-      "symbol": "RUBX",
-      "name": "Rubex International for Plastic & Acrylic Manufacturing",
-      "last_price": 12.57,
-      "change_percent": -1.9500780031201248,
-      "value": 29573514.42,
-      "volume": 2352706,
-      "relative_volume_10d": 0.74,
-      "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 3.8,
-      "setup_score": 5.2,
-      "event_risk": {
-        "level": "unknown_or_low",
-        "next_event": null
-      },
-      "decision_support": {
-        "technical_score": 4.4,
-        "liquidity_score": 8,
-        "setup_score": 5.2,
-        "chase_risk": "low"
-      }
-    },
-    {
-      "symbol": "POUL",
-      "name": "Cairo Poultry Co.",
-      "last_price": 9.45,
-      "change_percent": 0.2120890774125087,
-      "value": 25113375.0,
-      "volume": 2657500,
-      "relative_volume_10d": 0.5,
-      "long_term_trend": "decision_zone_near_sma200",
-      "demand_confirmation_score": 3.8,
-      "setup_score": 5.2,
-      "event_risk": {
-        "level": "low",
-        "next_event": {
-          "type": "earnings",
-          "at": 1796212800,
-          "trading_days": 25
-        }
-      },
-      "decision_support": {
-        "technical_score": 4.4,
-        "liquidity_score": 8,
-        "setup_score": 5.2,
+        "setup_score": 5.3,
         "chase_risk": "low"
       }
     },
@@ -999,9 +1127,9 @@
       "name": "Industrial & Engineering Enterprises Co.",
       "last_price": 0.64,
       "change_percent": -2.1406727828746197,
-      "value": 20278276.48,
-      "volume": 31684807,
-      "relative_volume_10d": 1.42,
+      "value": 25147000.32,
+      "volume": 39292188,
+      "relative_volume_10d": 1.08,
       "long_term_trend": "long_term_uptrend",
       "demand_confirmation_score": 3.8,
       "setup_score": 5.2,
@@ -1017,49 +1145,19 @@
       }
     },
     {
-      "symbol": "ARCC",
-      "name": "Arabian Cement Company",
-      "last_price": 63.06,
-      "change_percent": -1.4687499999999964,
-      "value": 16495234.8,
-      "volume": 261580,
-      "relative_volume_10d": 0.59,
-      "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 3.8,
-      "setup_score": 5.2,
-      "event_risk": {
-        "level": "low",
-        "next_event": {
-          "type": "earnings",
-          "at": 1796212800,
-          "trading_days": 25
-        }
-      },
-      "decision_support": {
-        "technical_score": 4.4,
-        "liquidity_score": 8,
-        "setup_score": 5.2,
-        "chase_risk": "low"
-      }
-    },
-    {
-      "symbol": "OCDI",
-      "name": "Six of October Development & Investment (SODIC)",
-      "last_price": 23.74,
-      "change_percent": -1.0833333333333397,
-      "value": 13327636.0,
-      "volume": 561400,
-      "relative_volume_10d": 0.58,
+      "symbol": "OFH",
+      "name": "O B Financial Holding",
+      "last_price": 0.693,
+      "change_percent": -0.4310344827586211,
+      "value": 21028428.04,
+      "volume": 30344052,
+      "relative_volume_10d": 1.04,
       "long_term_trend": "decision_zone_near_sma200",
       "demand_confirmation_score": 3.8,
       "setup_score": 5.2,
       "event_risk": {
-        "level": "high",
-        "next_event": {
-          "type": "earnings",
-          "at": 1793188800,
-          "trading_days": 0
-        }
+        "level": "unknown_or_low",
+        "next_event": null
       },
       "decision_support": {
         "technical_score": 4.4,
@@ -1069,13 +1167,13 @@
       }
     },
     {
-      "symbol": "AFMC",
-      "name": "Alexandria Flour Mills Co.",
-      "last_price": 110.5,
-      "change_percent": 0.6100336884275714,
-      "value": 10359817.0,
-      "volume": 93754,
-      "relative_volume_10d": 1.78,
+      "symbol": "COPR",
+      "name": "Cooper for Commercial Investment & Real Estate Development",
+      "last_price": 0.395,
+      "change_percent": -1.7412935323383099,
+      "value": 18053114.76,
+      "volume": 45704088,
+      "relative_volume_10d": 1.68,
       "long_term_trend": "long_term_uptrend",
       "demand_confirmation_score": 5,
       "setup_score": 5.2,
@@ -1087,116 +1185,6 @@
         "technical_score": 4.4,
         "liquidity_score": 7,
         "setup_score": 5.2,
-        "chase_risk": "low"
-      }
-    },
-    {
-      "symbol": "SCTS",
-      "name": "Sues Canal Co. for Technology Settling",
-      "last_price": 492,
-      "change_percent": -5.38097619139198,
-      "value": 3781512.0,
-      "volume": 7686,
-      "relative_volume_10d": 0.96,
-      "long_term_trend": "decision_zone_near_sma200",
-      "demand_confirmation_score": 3,
-      "setup_score": 5.2,
-      "event_risk": {
-        "level": "unknown_or_low",
-        "next_event": null
-      },
-      "decision_support": {
-        "technical_score": 5.6,
-        "liquidity_score": 6,
-        "setup_score": 5.2,
-        "chase_risk": "low"
-      }
-    },
-    {
-      "symbol": "AJWA",
-      "name": "Ajwa for Food Industries Co. Egypt",
-      "last_price": 201.01,
-      "change_percent": -3.3605769230769273,
-      "value": 3345007.41,
-      "volume": 16641,
-      "relative_volume_10d": 0.2,
-      "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 3,
-      "setup_score": 5.2,
-      "event_risk": {
-        "level": "unknown_or_low",
-        "next_event": null
-      },
-      "decision_support": {
-        "technical_score": 5.6,
-        "liquidity_score": 6,
-        "setup_score": 5.2,
-        "chase_risk": "low"
-      }
-    },
-    {
-      "symbol": "BONY",
-      "name": "Bonyan for Development and Trade",
-      "last_price": 4.07,
-      "change_percent": -1.2135922330097044,
-      "value": 16073064.92,
-      "volume": 3949156,
-      "relative_volume_10d": 0.89,
-      "long_term_trend": "decision_zone_near_sma200",
-      "demand_confirmation_score": 3.5,
-      "setup_score": 5.1,
-      "event_risk": {
-        "level": "unknown_or_low",
-        "next_event": null
-      },
-      "decision_support": {
-        "technical_score": 4.3,
-        "liquidity_score": 8,
-        "setup_score": 5.1,
-        "chase_risk": "low"
-      }
-    },
-    {
-      "symbol": "AXPH",
-      "name": "Alexandria Company for Pharmaceuticals and Chemical Industries",
-      "last_price": 1325,
-      "change_percent": 4.612420849847627,
-      "value": 3972350.0,
-      "volume": 2998,
-      "relative_volume_10d": 1.4,
-      "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 6.1,
-      "setup_score": 5.1,
-      "event_risk": {
-        "level": "unknown_or_low",
-        "next_event": null
-      },
-      "decision_support": {
-        "technical_score": 4.4,
-        "liquidity_score": 6,
-        "setup_score": 5.1,
-        "chase_risk": "low"
-      }
-    },
-    {
-      "symbol": "UNIT",
-      "name": "United Housing Construction SA",
-      "last_price": 16.86,
-      "change_percent": 0.29744199881023625,
-      "value": 1619386.14,
-      "volume": 96049,
-      "relative_volume_10d": 1.39,
-      "long_term_trend": "long_term_uptrend",
-      "demand_confirmation_score": 4.4,
-      "setup_score": 5.1,
-      "event_risk": {
-        "level": "unknown_or_low",
-        "next_event": null
-      },
-      "decision_support": {
-        "technical_score": 5.6,
-        "liquidity_score": 4.5,
-        "setup_score": 5.1,
         "chase_risk": "low"
       }
     }
