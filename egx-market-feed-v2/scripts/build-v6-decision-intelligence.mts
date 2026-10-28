@@ -43,13 +43,14 @@ function verifiedResearch(x:any){
   const shariaVerified=x?.sharia_verified===true&&shariaFresh;
   const fundamentalsVerified=x?.fundamentals_verified===true&&fundamentalsFresh;
   const valuationVerified=x?.valuation_verified===true&&valuationFresh;
-  // Do not silently disregard contradictory Sharia screening sources.
-  // A current documented EGX33 resolution can prevail only when specifically
-  // recorded; an unresolved conflict must NEVER become an execution approval.
+  // Reported index membership is NOT a sufficient Sharia conflict resolution.
+  // Resolve only against dated issuer filings, business-activity and financial
+  // ratio reconciliation for a named accounting period; otherwise fail closed.
   const shariaConflict=x?.sharia_source_conflict===true;
   const conflictResolved=shariaConflict&&x?.sharia_conflict_resolved===true&&
-    String(x?.sharia_conflict_resolution_basis||'')==='EGX33_REPORTED_INDEX_MEMBERSHIP_2026_10_05'&&
+    String(x?.sharia_conflict_resolution_basis||'')==='PRIMARY_FILINGS_ACTIVITY_AND_FINANCIAL_RATIOS_RECONCILED'&&
     String(x?.sharia_conflict_resolution_source||'').startsWith('https://')&&
+    /^\\d{4}-\\d{2}-\\d{2}$/.test(String(x?.sharia_conflict_resolution_period_end||''))&&
     fresh(x?.sharia_conflict_resolution_as_of,120);
   const shariaPass=shariaVerified&&['compliant','purification_required'].includes(sh)&&
     (!shariaConflict||conflictResolved);
