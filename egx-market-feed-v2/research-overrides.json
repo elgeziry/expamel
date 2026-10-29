@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-28",
+  "updated_at": "2026-10-29",
   "stocks": {
     "AMOC": {
       "sharia_status": "compliant",
@@ -922,6 +922,95 @@
         "valuation_verified": false
       },
       "research_note": " [2026-10-28 primary consolidated review] Auditor-signed 2026-06-30 income, balance and cash flow statements checked; fundamental evidence gate supported, but valuation and Sharia screens remain pending. OCF vs prior: EGP 714.98m vs 1,436.65m, despite attributable profit EGP 2,172.40m. No buy authorization."
+    },
+    "ISPH": {
+      "sharia_status": "pending_verification",
+      "sharia_verified": false,
+      "sharia_source_conflict": false,
+      "sharia_index_membership_reported_unconfirmed": true,
+      "fundamentals_verified": true,
+      "fundamentals_as_of": "2026-06-30",
+      "fundamentals_evidence_status": "VERIFIED_REVIEWED_CONSOLIDATED_2026_H1",
+      "fundamental_score": 4,
+      "earnings_quality_score": 2,
+      "valuation_verified": false,
+      "valuation_score": 4,
+      "valuation_as_of": null,
+      "catalyst_score": 5,
+      "research_state": "RESEARCH_PENDING_NOT_EXECUTABLE",
+      "purchase_authorized": false,
+      "financial_period": "2026-06-30",
+      "research_checked_at": "2026-10-29",
+      "sources": [
+        "https://foudalens.com/disclosures/ISPH.CA/financial_statement/2026-08-12_292880_2.pdf",
+        "https://foudalens.com/en/disclosures/ISPH.CA",
+        "https://ibnsina-pharma.com/investors-categories/result-center/",
+        "https://stockanalysis.com/quote/egx/ISPH/statistics/",
+        "https://stockanalysis.com/quote/egx/ISPH/",
+        "https://beta.egx.com.eg/ar"
+      ],
+      "primary_financial_evidence": {
+        "type": "consolidated_interim_limited_review",
+        "period_end": "2026-06-30",
+        "auditor": "Ghorab & Co. (Nexia International)",
+        "auditor_report_date": "2026-08-11",
+        "board_approval_date": "2026-08-11",
+        "egx_disclosure_date": "2026-08-12",
+        "original_language": "Arabic; reviewed English translation",
+        "revenue_egp": 41492005562,
+        "revenue_comparative_egp": 35045259048,
+        "net_profit_attributable_egp": 511299061,
+        "net_profit_comparative_egp": 388807364,
+        "eps_h1_egp": 0.41,
+        "operating_cash_flow_egp": -2013871101,
+        "operating_cash_flow_comparative_egp": -2648479607,
+        "capex_fixed_and_construction_egp": 573701730,
+        "capex_intangibles_egp": 10355384,
+        "credit_facilities_egp": 7532189291,
+        "current_loans_egp": 426128534,
+        "noncurrent_loans_egp": 1144345920,
+        "interest_bearing_loans_and_facilities_egp": 9102663745,
+        "lease_liabilities_current_egp": 234311834,
+        "lease_liabilities_noncurrent_egp": 733970853,
+        "trade_payables_egp": 26321185328,
+        "cash_egp": 958731219,
+        "total_assets_egp": 40180625208,
+        "total_equity_egp": 3137279411,
+        "finance_expense_egp": 1008333103,
+        "finance_income_egp": 3143697,
+        "interest_bearing_debt_to_total_assets_pct": 22.65,
+        "interest_bearing_debt_to_book_equity_pct": 290.15,
+        "source": "https://foudalens.com/disclosures/ISPH.CA/financial_statement/2026-08-12_292880_2.pdf",
+        "limitations": [
+          "Limited review, not a full-year audit",
+          "Operating cash flow remains materially negative despite positive net profit",
+          "Large inventory and supplier financing; trade payables must not be misclassified as interest-bearing loans",
+          "Sharia methodology denominator and impermissible income/purification not reconciled",
+          "Reported EGX Shariah index membership is secondary and not independently authenticated"
+        ]
+      },
+      "valuation_research_reference": {
+        "as_of": "2026-10-28",
+        "price_egp": 9.86,
+        "market_cap_egp": 9940000000,
+        "ttm_pe": 11.42,
+        "forward_pe": 7.57,
+        "analyst_consensus_target_egp": 16.51,
+        "analyst_count": 3,
+        "source": "https://stockanalysis.com/quote/egx/ISPH/statistics/",
+        "limitation": "Delayed Oct-28 quote, not Oct-29 broker-executable; provider debt 27.64bn appears broader than primary statement's loans/facilities 9.103bn; reconcile EV/debt classification and valuation before verifying"
+      },
+      "risk_flags": [
+        "CRITICAL_2026-10-29: H1 2026 operating cash outflow EGP 2.014bn despite EGP 511.3m profit",
+        "2026-10-29: Interest-bearing facilities and loans EGP 9.103bn vs total equity EGP 3.137bn; credit and refinancing sensitivity",
+        "2026-10-29: Current assets EGP 36.124bn vs current liabilities EGP 35.165bn, thin current ratio",
+        "2026-10-29: Working capital consumed by inventory build of EGP 3.190bn",
+        "2026-10-29: Vendor total-debt definition inconsistent with primary statement; do not use vendor debt/equity for Sharia pass/fail",
+        "2026-10-29: Sharia interest-bearing-debt ratio may breach some market-cap-denominator standards; requires dated denominator and method reconciliation",
+        "2026-10-29: EGX Shariah membership secondary-source only, not proof of compliance",
+        "2026-10-29: Valuation PE and target are unverified proxies for intrinsic value"
+      ],
+      "research_note": "[2026-10-29 primary evidence] Reviewed original EGX-mirrored 34-page consolidated H1 2026 statements (Ghorab & Co limited review dated Aug 11). Revenue EGP 41.492bn (+18.4% YoY); net profit EGP 511.299m (+31.5%), EPS EGP 0.41. Crucial earnings-quality warning: operating cash flow NEGATIVE EGP 2.014bn (vs negative EGP 2.648bn), driven notably by EGP 3.190bn inventory cash absorption; finance costs EGP 1.008bn. Credit facilities 7.532bn + short loans 0.426bn + long loans 1.144bn = EGP 9.103bn; book equity EGP 3.137bn; cash EGP 0.959bn. Do not confuse EGP 26.321bn trade payables with interest-bearing debt. Oct-28 market vendor PE 11.42 and target 16.51 do NOT establish verified valuation; vendor debt 27.64bn is inconsistent with primary interest-bearing loan classification. Reported Sharia index membership does not clear debt/impermissible-income tests. Only FUNDAMENTALS verification upgraded; Sharia and valuation pending; NO BUY."
     }
   },
   "methodology": {
@@ -929,6 +1018,7 @@
     "fundamentals": "Verified company/EGX/IR financial disclosures where fundamentals_verified=true.",
     "valuation": "Current market multiples/targets from V5 market feed plus current public valuation evidence where valuation_verified=true.",
     "fail_closed": "Missing explicit verification cannot authorize execution.",
-    "research_2026_10_28": "Original/EGX-mirrored limited-reviewed financial statements count for dated consolidated fundamentals only when income, balance, cash flow, and auditor report checked; individual-only ABUK remains pending. Sharia conflicts always fail closed; illustrative H1 annualization does not verify valuation."
+    "research_2026_10_28": "Original/EGX-mirrored limited-reviewed financial statements count for dated consolidated fundamentals only when income, balance, cash flow, and auditor report checked; individual-only ABUK remains pending. Sharia conflicts always fail closed; illustrative H1 annualization does not verify valuation.",
+    "research_2026_10_29": "ISPH 2026-06-30 consolidated limited-reviewed financial statements independently checked (income, balance, cash flow, auditor); fundamentals_verified true records evidence completeness, NOT financial strength. Valuation and Sharia fail closed due cash-flow/debt concerns, conflicting denominator methodologies, and non-reconciled current pricing. ABUK remains individual-only pending."
   }
 }
