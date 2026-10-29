@@ -1,7 +1,7 @@
 {
   "schema": "egx-scheduler-heartbeat-v1",
-  "last_requested_at_utc": "2026-10-29T08:05:50Z",
+  "last_requested_at_utc": "2026-10-29T09:35:00Z",
   "purpose": "independent scheduler contingency; changes trigger V5 only when primary GitHub schedule missed",
   "execution_policy": "no trades; preserve all quote and Sharia gates",
-  "reason": "2026-10-29 Cairo session open; contract retrieved_at 2026-10-28T18:32:18.780Z (>20 min stale) and expected_reference_session_date 2026-10-28 != 2026-10-29; no V5 run in progress among latest GitHub Actions runs"
+  "reason": "2026-10-29 Cairo 11:35 session: contract retrieved_at 2026-10-29T08:06:20.094Z is >20 min stale; expected_reference_session_date matches 2026-10-29; latest V5 run 40839749918 completed successfully at 08:06:45Z, no in-progress V5 among latest GitHub Actions runs; prior heartbeat 08:05:50Z >20 min old"
 }
