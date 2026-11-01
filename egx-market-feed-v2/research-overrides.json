@@ -1037,7 +1037,7 @@
     "SCEM": {
       "sharia_status": "pending_verification",
       "sharia_verified": false,
-      "sharia_source_conflict": false,
+      "sharia_source_conflict": true,
       "fundamentals_verified": true,
       "fundamentals_as_of": "2026-06-30",
       "fundamentals_evidence_status": "VERIFIED_REVIEWED_CONSOLIDATED_2026_H1",
@@ -1052,7 +1052,9 @@
         "https://foudalens.com/ar/news/293333",
         "https://www.sigma-cap.com/main/news_page_exact?newsId=46069471&newsType=EGX",
         "https://stockanalysis.com/quote/egx/SCEM/market-cap/",
-        "https://www.marketscreener.com/quote/stock/SINAI-CEMENT-CO-S-A-E-6498220/valuation/"
+        "https://www.marketscreener.com/quote/stock/SINAI-CEMENT-CO-S-A-E-6498220/valuation/",
+        "https://muslimxchange.com/ticker/scem/",
+        "https://musaffa.com/stock/SCEM.CA/"
       ],
       "primary_financial_evidence": {
         "type": "consolidated_interim_limited_review",
@@ -1094,9 +1096,27 @@
         "2026-11-01: H1 profit EGP 1.561bn vs EGP 0.769bn (+103%) but FX gains and cyclical cement margins need normalization",
         "2026-11-01: Sharia interest income and financing/asset ratios plus purification unverified",
         "2026-11-01: No primary-date-matched intrinsic valuation; delayed vendor P/E is not valuation verification",
-        "2026-11-01: Limited-review not full audit; no buy authorization"
+        "2026-11-01: Limited-review not full audit; no buy authorization",
+        "MATERIAL_2026-11-01: SCEM independent Sharia source conflict (MuslimXchange compliant vs Musaffa non-compliant); no verified Sharia pass"
       ],
-      "research_note": "[2026-11-01] Primary 38-page Arabic consolidated H1 2026 limited-reviewed financial report inspected: auditor Medhat Ghaly report Aug 13, balance, income and operating cash-flow statements; H1 net profit EGP 1,561,119,085 vs 768,818,154 (+103%); sales about EGP 4.75bn vs 4.02bn; operating cash flow positive in scanned statement, exact number deliberately not transcribed. Fundamentals evidence gate upgraded only. Oct 29 delayed vendor close EGP 84.26, P/E ~6.65x is NOT independent valuation. No verified EGX33 membership, no dated interest-income/debt/asset Sharia ratios or purification; SHARIA and VALUATION remain FALSE; NO BUY."
+      "research_note": "[2026-11-01] Primary 38-page Arabic consolidated H1 2026 limited-reviewed financial report inspected: auditor Medhat Ghaly report Aug 13, balance, income and operating cash-flow statements; H1 net profit EGP 1,561,119,085 vs 768,818,154 (+103%); sales about EGP 4.75bn vs 4.02bn; operating cash flow positive in scanned statement, exact number deliberately not transcribed. Fundamentals evidence gate upgraded only. Oct 29 delayed vendor close EGP 84.26, P/E ~6.65x is NOT independent valuation. No verified EGX33 membership, no dated interest-income/debt/asset Sharia ratios or purification; SHARIA and VALUATION remain FALSE; NO BUY. [2026-11-01 new material Sharia conflict] MuslimXchange Sep10 COMPLIANT vs Musaffa Oct2026 NOT HALAL; primary H1 2026 financial screening and purification unresolved; maintain FALSE.",
+      "sharia_conflict_resolved": false,
+      "sharia_conflicting_sources": [
+        {
+          "url": "https://muslimxchange.com/ticker/scem/",
+          "classification": "compliant",
+          "as_of": "2026-09-10",
+          "methodology": "AAOIFI-oriented headline; full dated ratios behind paywall"
+        },
+        {
+          "url": "https://musaffa.com/stock/SCEM.CA/",
+          "classification": "non_compliant",
+          "as_of": "2026-10",
+          "methodology": "AAOIFI-based headline; financial screening criteria not itemized"
+        }
+      ],
+      "sharia_conflict_rule": "FAIL_CLOSED: opposing AAOIFI-based provider classifications for SCEM; do not clear without 2026-06-30 matched financing, interest income, financial asset and denominator ratios plus purification, and dated official EGX33 membership if available.",
+      "sharia_conflict_disclosure": "MuslimXchange 2026-09-10 calls SCEM compliant; Musaffa Oct-2026 calls it NOT HALAL. Both label AAOIFI-style but publish no free full underlying ratios. Original H1 2026 reviewed statements include interest income; ratios/purification and methodology differences remain unresolved. Keep purchase blocked."
     },
     "IEEC": {
       "sharia_status": "pending_verification",
@@ -1109,7 +1129,8 @@
       "research_checked_at": "2026-11-01",
       "sources": [
         "https://foudalens.com/disclosures/IEEC.CA/financial_statement/2026-08-13_292953_1.pdf",
-        "https://foudalens.com/en/news/292953"
+        "https://foudalens.com/en/news/292953",
+        "https://muslimxchange.com/ticker/ieec/"
       ],
       "primary_financial_evidence": {
         "type": "standalone_interim_limited_review_QUALIFIED_CONCLUSION",
@@ -1133,7 +1154,18 @@
         "2026-11-01: H1 profit EGP 10.91m vs 10.55m does not override qualified accounting evidence",
         "2026-11-01: Keep fundamentals_verified=false pending auditor qualification resolution; Sharia and valuation pending; no buy"
       ],
-      "research_note": " [2026-11-01] Inspected primary 26-page H1 2026 report: Crowe auditor qualified conclusion due to missing expected credit loss assessment and allowances on trade/contractor/supplier and other receivables; unable to quantify impact on profit/equity. Profit 10.910522m vs 10.549649m. DO NOT upgrade fundamentals, valuation or Sharia; research pending."
+      "research_note": " [2026-11-01] Inspected primary 26-page H1 2026 report: Crowe auditor qualified conclusion due to missing expected credit loss assessment and allowances on trade/contractor/supplier and other receivables; unable to quantify impact on profit/equity. Profit 10.910522m vs 10.549649m. DO NOT upgrade fundamentals, valuation or Sharia; research pending.",
+      "sharia_research_reference": {
+        "source": "https://muslimxchange.com/ticker/ieec/",
+        "as_of": "2026-09-10",
+        "provider_headline": "compliant",
+        "status": "UNVERIFIED_FOR_THIS_RESEARCH",
+        "limitations": [
+          "Provider detailed financial-ratio and purification evidence behind paywall",
+          "Not reconciled to same-period audited/reviewed company figures",
+          "No official EGX33 membership verification; cannot set sharia_verified=true"
+        ]
+      }
     },
     "MPCI": {
       "sharia_status": "pending_verification",
@@ -1149,7 +1181,8 @@
         "https://www.sigma-cap.com/main/news_page_exact?newsId=46112288&newsType=MIST",
         "https://foudalens.com/ar/disclosures/MPCI.CA",
         "https://stockanalysis.com/quote/egx/MPCI/statistics/",
-        "https://stockanalysis.com/quote/egx/MPCI/financials/"
+        "https://stockanalysis.com/quote/egx/MPCI/financials/",
+        "https://muslimxchange.com/ticker/mpci/"
       ],
       "financial_research_reference": {
         "period_end": "2026-06-30",
@@ -1175,7 +1208,18 @@
         "2026-11-01: Oct 29 close EGP 326 after +12.8% session; valuation/entry risk; no buy",
         "2026-11-01: Primary audit PDF redirect inaccessible; retain fundamentals_verified=false"
       ],
-      "research_note": " [2026-11-01] FY ended 30 Jun 2026 EGX-sourced AUDITED summary profit 479.955799m vs 505.279620m (-5%). Vendor annual OCF 220.28m, debt 73.03m, cash 611.39m and Oct29 PE 15.45 are cross-check leads, NOT original primary financial audit verification. PDF storage redirect prevented full review. Sharia/valuation/fundamentals pending; no buy."
+      "research_note": " [2026-11-01] FY ended 30 Jun 2026 EGX-sourced AUDITED summary profit 479.955799m vs 505.279620m (-5%). Vendor annual OCF 220.28m, debt 73.03m, cash 611.39m and Oct29 PE 15.45 are cross-check leads, NOT original primary financial audit verification. PDF storage redirect prevented full review. Sharia/valuation/fundamentals pending; no buy.",
+      "sharia_research_reference": {
+        "source": "https://muslimxchange.com/ticker/mpci/",
+        "as_of": "2026-09-10",
+        "provider_headline": "compliant",
+        "status": "UNVERIFIED_FOR_THIS_RESEARCH",
+        "limitations": [
+          "Provider detailed financial-ratio and purification evidence behind paywall",
+          "Not reconciled to same-period audited/reviewed company figures",
+          "No official EGX33 membership verification; cannot set sharia_verified=true"
+        ]
+      }
     }
   },
   "methodology": {
