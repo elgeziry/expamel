@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-11-01",
+  "updated_at": "2026-11-02",
   "stocks": {
     "AMOC": {
       "sharia_status": "compliant",
@@ -1220,6 +1220,102 @@
           "No official EGX33 membership verification; cannot set sharia_verified=true"
         ]
       }
+    },
+    "MBSC": {
+      "sharia_status": "pending_verification",
+      "sharia_verified": false,
+      "fundamentals_verified": false,
+      "valuation_verified": false,
+      "research_state": "RESEARCH_PENDING_NOT_EXECUTABLE",
+      "purchase_authorized": false,
+      "financial_period": "2026-06-30",
+      "research_checked_at": "2026-11-02",
+      "sources": [
+        "https://foudalens.com/disclosures/MBSC.CA/financial_statement/2026-08-12_292890_1.pdf",
+        "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=292890",
+        "https://foudalens.com/ar/news/292890",
+        "https://foudalens.com/ar/disclosures/MBSC.CA",
+        "https://foudalens.com/disclosures/MBSC.CA/other/2026-10-27_296577_1.pdf",
+        "https://muslimxchange.com/ticker/mbsc/",
+        "https://foudalens.com/ar/stock/MBSC.CA"
+      ],
+      "primary_financial_evidence": {
+        "type": "consolidated_interim_limited_review",
+        "period_end": "2026-06-30",
+        "auditor": "Kreston Egypt Salem & Co.",
+        "auditor_report_date": "2026-08-01",
+        "egx_disclosure_date": "2026-08-12",
+        "report_conclusion_2026_interim": "unmodified_limited_review",
+        "prior_2025_annual_audit": "QUALIFIED per interim auditor's other-matter paragraph; issued 2026-04-21; reason and possible carryover not yet reconciled",
+        "net_profit_attributable_egp": 1250768752,
+        "net_profit_attributable_comparative_egp": 952805541,
+        "revenue_egp_approx": 2990000000,
+        "operating_cash_flow_egp_approx": 929500000,
+        "operating_cash_flow_direction": "POSITIVE",
+        "financial_investments_fvtpl_egp_approx": 2870461000,
+        "cash_and_banks_net_egp_approx": 451737000,
+        "interest_income_egp_approx": 39860000,
+        "financial_investments_composition": "gold fund, listed securities, USD fund per note 8; underlying assets, yield and purification not verified",
+        "source": "https://foudalens.com/disclosures/MBSC.CA/financial_statement/2026-08-12_292890_1.pdf",
+        "pages_inspected": [
+          "limited review p2",
+          "balance sheet p3",
+          "income p4",
+          "cash flow p7",
+          "financial risk pp16-18",
+          "investment note p22",
+          "cash note p23",
+          "treasury shares p25"
+        ],
+        "limitations": [
+          "2025 annual audit was qualified according to 2026 interim auditor; underlying qualified opinion and potential effect on opening balances not independently resolved",
+          "2026 half-year is a limited review, not full audit",
+          "Rounded operating cash flow, revenue, investments, and cash amounts are reference figures; do not treat them as exact transcriptions",
+          "Listed securities and funds must be individually screened; interest income and purification denominator unverified",
+          "EGX primary NewsDetails link returned 502, EGX-mirrored company-signed original PDF inspected"
+        ]
+      },
+      "corporate_action_research": {
+        "event": "treasury_share_buyback",
+        "board_resolution_date": "2026-08-11",
+        "disclosure_date": "2026-10-27",
+        "session": "2026-10-26",
+        "purchased_in_session_shares": 622686,
+        "cumulative_purchased_shares": 1166128,
+        "authorized_purchase_shares": 2751116,
+        "source": "https://foudalens.com/disclosures/MBSC.CA/other/2026-10-27_296577_1.pdf",
+        "risk": "Buyback changes float/share count; do not treat buyback as a guaranteed price floor or intrinsic valuation."
+      },
+      "sharia_research_reference": {
+        "status": "UNVERIFIED_FOR_THIS_RESEARCH",
+        "provider": "MuslimXchange",
+        "provider_headline": "compliant",
+        "provider_as_of": "2026-09-10",
+        "source": "https://muslimxchange.com/ticker/mbsc/",
+        "egx33_membership": "not confirmed in a dated official constituent list",
+        "methodology": "AAOIFI-oriented: business activities, debt, interest-bearing assets, impermissible revenue, market cap/asset denominators and purification must be calculated for matching financial period",
+        "limitations": [
+          "Provider exact ratios/purification behind paywall",
+          "Interest income and FVTPL funds/securities require underlying classification",
+          "2026-06-30 ratios and matching market capitalization denominator not independently reconciled"
+        ]
+      },
+      "valuation_research_reference": {
+        "as_of": "2026-11-02",
+        "reference_close_egp": 303.02,
+        "vendor_pe_approx": 4.2,
+        "source": "https://foudalens.com/ar/stock/MBSC.CA",
+        "limitation": "Delayed vendor P/E and price are not independent intrinsic valuation; treasury share changes and prior audit qualification must be reconciled; no verified fair-value range"
+      },
+      "risk_flags": [
+        "MATERIAL_2026-11-02: H1 2026 interim reviewer states 2025 consolidated annual audit opinion was QUALIFIED (2026-04-21); reason not independently retrieved; retain fundamentals gate pending",
+        "2026-11-02: H1 attributable profit 1.250769bn vs 0.952806bn; operating cash flow approximately 0.9295bn; revenue approximately 2.99bn",
+        "2026-11-02: Financial investments at FVTPL approximately EGP 2.870bn; holdings include gold fund, listed securities and USD fund, require underlying Sharia screen and purification",
+        "2026-11-02: Interest income approximately EGP 39.86m, Sharia income denominator unverified",
+        "2026-11-02: Oct26 treasury share buybacks cumulative 1,166,128 shares; corporate action/share count normalization needed for valuation",
+        "2026-11-02: Vendor P/E ~4.2 is NOT verified intrinsic valuation; no buy"
+      ],
+      "research_note": "[2026-11-02 PRIMARY DOCUMENT REVIEW] Read 32-page issuer-signed 2026-06-30 consolidated H1 limited-reviewed statements and Kreston Egypt Salem & Co. review dated Aug 1, published by EGX Aug 12. Attributable net profit EGP 1.250769bn vs EGP 0.952806bn; revenue ~EGP 2.99bn, OCF ~EGP 0.9295bn. The reviewer explicitly notes a QUALIFIED annual 2025 audit opinion issued Apr 21, 2026; original qualification and opening-balance effect not yet reviewed. FVTPL financial assets ~EGP 2.870bn (gold fund, listed securities, USD fund), interest income ~EGP 39.86m, exact AAOIFI ratios/purification not reconciled. Issuer treasury buyback disclosure Oct27: 622,686 shares bought Oct26, 1,166,128 cumulative, authorization 2,751,116. Nov2 reference close EGP 303.02, vendor PE ~4.2 does NOT verify intrinsic value. Current review evidence is substantial but prior audit qualification, Sharia and valuation unresolved; all verification flags FALSE; research pending, NO BUY."
     }
   },
   "methodology": {
@@ -1229,6 +1325,7 @@
     "fail_closed": "Missing explicit verification cannot authorize execution.",
     "research_2026_10_28": "Original/EGX-mirrored limited-reviewed financial statements count for dated consolidated fundamentals only when income, balance, cash flow, and auditor report checked; individual-only ABUK remains pending. Sharia conflicts always fail closed; illustrative H1 annualization does not verify valuation.",
     "research_2026_10_29": "ISPH 2026-06-30 consolidated limited-reviewed financial statements independently checked (income, balance, cash flow, auditor); fundamentals_verified true records evidence completeness, NOT financial strength. Valuation and Sharia fail closed due cash-flow/debt concerns, conflicting denominator methodologies, and non-reconciled current pricing. ABUK remains individual-only pending.",
-    "research_2026_11_01": "SCEM original 2026-06-30 consolidated limited-reviewed report audited for evidence of income, balance, cash flow and auditor report: upgrade fundamentals only. IEEC original 2026-06-30 report contains qualified conclusion on unassessed ECL impairments: keep fundamentals pending. MPCI audited EGX summary corroborated but full primary report inaccessible: keep fundamentals pending. No Sharia/valuation upgrades from index membership or market multiples."
+    "research_2026_11_01": "SCEM original 2026-06-30 consolidated limited-reviewed report audited for evidence of income, balance, cash flow and auditor report: upgrade fundamentals only. IEEC original 2026-06-30 report contains qualified conclusion on unassessed ECL impairments: keep fundamentals pending. MPCI audited EGX summary corroborated but full primary report inaccessible: keep fundamentals pending. No Sharia/valuation upgrades from index membership or market multiples.",
+    "research_2026_11_02": "MBSC original 2026-06-30 consolidated interim reviewed financial statements and Oct26 issuer treasury buyback disclosure inspected. Current interim unmodified review references QUALIFIED 2025 annual audit; unresolved qualification keeps fundamentals_verified=false. FVTPL financial holdings/interest income and AAOIFI purification unresolved; no Sharia or valuation upgrade, no buy. Keep existing verified stock flags unchanged."
   }
 }
