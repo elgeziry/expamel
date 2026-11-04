@@ -170,12 +170,21 @@ def scan(root):
     stamps = [clean_date(contract.get("retrieved_at")), clean_date(v6.get("generated_at")),
               clean_date(recovery.get("generated_at")), clean_date(second.get("checked_at_utc"))]
     max_age = (now - stamps[0]).total_seconds() / 60 if stamps[0] else None
+    symbols = [str(x.get("symbol") or "").upper().strip() for x in stocks]
+    unique_universe = (len(symbols) >= MIN_UNIVERSE and
+                       len(set(symbols)) == len(symbols) and
+                       all(symbols))
+    recovery_symbols = [str(x.get("symbol") or "").upper().strip()
+                        for x in (recovery.get("all_alerts") or [])]
+    recovery_complete = (len(recovery_symbols) == len(symbols) and
+                         len(set(recovery_symbols)) == len(recovery_symbols) and
+                         set(recovery_symbols) == set(symbols))
     globally_ok = bool(
         session and session == v6.get("reference_session") == recovery.get("reference_session") == second.get("session")
         and contract.get("bridge_gate") == "pass"
         and contract.get("execution_usable") is True
         and (v6.get("data_gates") or {}).get("pass") is True
-        and len(stocks) >= MIN_UNIVERSE
+        and unique_universe and recovery_complete
         and all(stamps)
         and 0 <= max_age <= 20
     )
@@ -254,7 +263,8 @@ def scan(root):
         "primary_age_minutes":round(max_age,2) if max_age is not None else None,
         "independent_source_checked_at_utc":second.get("checked_at_utc"),
         "health":"PASS" if globally_ok else "BLOCKED",
-        "all_295_stocks_evaluated":len(ranked)>=MIN_UNIVERSE and len(ranked)==len(stocks),
+        "all_295_stocks_evaluated":unique_universe and recovery_complete and len(ranked)==len(stocks),
+        "universe_unique_and_recovery_matched":unique_universe and recovery_complete,
         "does_not_limit_discovery_to_fixed_symbols":True,
         "sharia_and_fundamentals_fail_closed":True,
         "max_additional_cash_egp":MAX_NEW_CAPITAL,
