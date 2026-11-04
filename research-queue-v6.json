@@ -1,14 +1,14 @@
 {
   "engine": "EGX V6 Research Queue",
   "version": 1,
-  "generated_at": "2026-11-04T12:27:17.587Z",
+  "generated_at": "2026-11-04T14:19:44.807Z",
   "reference_session": "2026-11-04",
   "queue": [
     {
       "priority": 1,
       "symbol": "RMDA",
-      "score": 56.12,
-      "discovery_score": 8.65,
+      "score": 56.42,
+      "discovery_score": 8.74,
       "action": "RESEARCH_SHARIA",
       "missing": [
         "sharia",
@@ -22,17 +22,40 @@
         "valuation_not_verified"
       ],
       "why_now": {
-        "cycle": 7.8,
-        "institutional_proxy": 8.19,
-        "entry": 8.81,
+        "cycle": 7.9,
+        "institutional_proxy": 8.36,
+        "entry": 8.92,
         "rr_proxy": 5.53
       }
     },
     {
       "priority": 2,
+      "symbol": "EMFD",
+      "score": 69.46,
+      "discovery_score": 8.65,
+      "action": "RESEARCH_SHARIA",
+      "missing": [
+        "sharia",
+        "fundamentals",
+        "valuation"
+      ],
+      "red_team_flags": [
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "why_now": {
+        "cycle": 7.7,
+        "institutional_proxy": 8.2,
+        "entry": 8.77,
+        "rr_proxy": 8.28
+      }
+    },
+    {
+      "priority": 3,
       "symbol": "AMER",
-      "score": 45.31,
-      "discovery_score": 8.57,
+      "score": 45.35,
+      "discovery_score": 8.6,
       "action": "RESEARCH_SHARIA",
       "missing": [
         "sharia",
@@ -48,88 +71,16 @@
       ],
       "why_now": {
         "cycle": 7.7,
-        "institutional_proxy": 7.83,
+        "institutional_proxy": 7.88,
         "entry": 8.46,
         "rr_proxy": 4.7
       }
     },
     {
-      "priority": 3,
-      "symbol": "OIH",
-      "score": 49.41,
-      "discovery_score": 8.3,
-      "action": "RESEARCH_SHARIA",
-      "missing": [
-        "sharia",
-        "fundamentals",
-        "valuation"
-      ],
-      "red_team_flags": [
-        "high_leverage_proxy",
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "why_now": {
-        "cycle": 6.8,
-        "institutional_proxy": 7.47,
-        "entry": 8.48,
-        "rr_proxy": 4.7
-      }
-    },
-    {
       "priority": 4,
-      "symbol": "EMFD",
-      "score": 68.28,
-      "discovery_score": 8.08,
-      "action": "RESEARCH_SHARIA",
-      "missing": [
-        "sharia",
-        "fundamentals",
-        "valuation"
-      ],
-      "red_team_flags": [
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "why_now": {
-        "cycle": 7.5,
-        "institutional_proxy": 7.51,
-        "entry": 8.18,
-        "rr_proxy": 8.28
-      }
-    },
-    {
-      "priority": 5,
-      "symbol": "ZEOT",
-      "score": 53.96,
-      "discovery_score": 8.02,
-      "action": "RESEARCH_SHARIA",
-      "missing": [
-        "sharia",
-        "fundamentals",
-        "valuation"
-      ],
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "why_now": {
-        "cycle": 7.2,
-        "institutional_proxy": 7.41,
-        "entry": 8.06,
-        "rr_proxy": 4.7
-      }
-    },
-    {
-      "priority": 6,
-      "symbol": "ORHD",
-      "score": 57.45,
-      "discovery_score": 8,
+      "symbol": "POUL",
+      "score": 42.41,
+      "discovery_score": 8.04,
       "action": "RESEARCH_SHARIA",
       "missing": [
         "sharia",
@@ -140,19 +91,41 @@
         "suspected_corporate_action_distortion",
         "sharia_not_verified",
         "fundamentals_not_verified",
-        "valuation_not_verified",
-        "conflicting_sharia_screen_unresolved",
-        "corporate_action_price_adjustment_unverified"
+        "valuation_not_verified"
       ],
       "why_now": {
-        "cycle": 7.3,
-        "institutional_proxy": 7.62,
-        "entry": 7.93,
-        "rr_proxy": 8.83
+        "cycle": 7.6,
+        "institutional_proxy": 7.13,
+        "entry": 8.19,
+        "rr_proxy": 5.53
       }
     },
     {
-      "priority": 7,
+      "priority": 5,
+      "symbol": "ARCC",
+      "score": 66.39,
+      "discovery_score": 7.92,
+      "action": "RESEARCH_SHARIA",
+      "missing": [
+        "sharia",
+        "valuation"
+      ],
+      "red_team_flags": [
+        "sharia_not_verified",
+        "valuation_not_verified",
+        "2026-10-28: Operating cash flow down approximately 50% YoY and substantially below net profit",
+        "2026-10-28: Large capex and working-capital movement reduce near-term cash conversion",
+        "2026-10-28: Review not full audit; complete Sharia ratio and purification screening outstanding"
+      ],
+      "why_now": {
+        "cycle": 6.7,
+        "institutional_proxy": 7.24,
+        "entry": 8.07,
+        "rr_proxy": 7.72
+      }
+    },
+    {
+      "priority": 6,
       "symbol": "SCEM",
       "score": 62.82,
       "discovery_score": 7.9,
@@ -172,15 +145,135 @@
       "why_now": {
         "cycle": 8,
         "institutional_proxy": 7.01,
-        "entry": 8.44,
+        "entry": 8.43,
         "rr_proxy": 8.28
       }
     },
     {
+      "priority": 7,
+      "symbol": "ETRS",
+      "score": 53.93,
+      "discovery_score": 7.81,
+      "action": "RESEARCH_SHARIA",
+      "missing": [
+        "sharia",
+        "fundamentals",
+        "valuation"
+      ],
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "why_now": {
+        "cycle": 6.5,
+        "institutional_proxy": 6.83,
+        "entry": 8.06,
+        "rr_proxy": 4.7
+      }
+    },
+    {
       "priority": 8,
+      "symbol": "ZEOT",
+      "score": 53.6,
+      "discovery_score": 7.8,
+      "action": "RESEARCH_SHARIA",
+      "missing": [
+        "sharia",
+        "fundamentals",
+        "valuation"
+      ],
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "why_now": {
+        "cycle": 7.2,
+        "institutional_proxy": 7.21,
+        "entry": 7.81,
+        "rr_proxy": 4.7
+      }
+    },
+    {
+      "priority": 9,
+      "symbol": "ACAMD",
+      "score": 66.07,
+      "discovery_score": 7.76,
+      "action": "RESEARCH_SHARIA",
+      "missing": [
+        "sharia",
+        "fundamentals",
+        "valuation"
+      ],
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "why_now": {
+        "cycle": 7.2,
+        "institutional_proxy": 7.58,
+        "entry": 7.09,
+        "rr_proxy": 4.7
+      }
+    },
+    {
+      "priority": 10,
+      "symbol": "ASPI",
+      "score": 57.87,
+      "discovery_score": 7.76,
+      "action": "RESEARCH_SHARIA",
+      "missing": [
+        "sharia",
+        "fundamentals",
+        "valuation"
+      ],
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "why_now": {
+        "cycle": 7.1,
+        "institutional_proxy": 6.93,
+        "entry": 8.13,
+        "rr_proxy": 4.7
+      }
+    },
+    {
+      "priority": 11,
+      "symbol": "CIRA",
+      "score": 59.99,
+      "discovery_score": 7.72,
+      "action": "RESEARCH_SHARIA",
+      "missing": [
+        "sharia",
+        "fundamentals",
+        "valuation"
+      ],
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "why_now": {
+        "cycle": 7.8,
+        "institutional_proxy": 7.26,
+        "entry": 7.39,
+        "rr_proxy": 4.7
+      }
+    },
+    {
+      "priority": 12,
       "symbol": "AIFI",
-      "score": 53.78,
-      "discovery_score": 7.87,
+      "score": 53.38,
+      "discovery_score": 7.66,
       "action": "RESEARCH_SHARIA",
       "missing": [
         "sharia",
@@ -195,16 +288,16 @@
       ],
       "why_now": {
         "cycle": 8.2,
-        "institutional_proxy": 6.95,
-        "entry": 8.3,
+        "institutional_proxy": 6.77,
+        "entry": 7.98,
         "rr_proxy": 4.7
       }
     },
     {
-      "priority": 9,
-      "symbol": "POUL",
-      "score": 41.84,
-      "discovery_score": 7.71,
+      "priority": 13,
+      "symbol": "ZMID",
+      "score": 60.08,
+      "discovery_score": 7.58,
       "action": "RESEARCH_SHARIA",
       "missing": [
         "sharia",
@@ -212,46 +305,23 @@
         "valuation"
       ],
       "red_team_flags": [
-        "suspected_corporate_action_distortion",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "why_now": {
-        "cycle": 7.6,
-        "institutional_proxy": 6.75,
-        "entry": 7.86,
-        "rr_proxy": 5.53
-      }
-    },
-    {
-      "priority": 10,
-      "symbol": "CIRA",
-      "score": 59.77,
-      "discovery_score": 7.67,
-      "action": "RESEARCH_SHARIA",
-      "missing": [
-        "sharia",
-        "fundamentals",
-        "valuation"
-      ],
-      "red_team_flags": [
+        "negative_free_cash_flow_ttm",
         "price_above_analyst_target_proxy",
         "sharia_not_verified",
         "fundamentals_not_verified",
         "valuation_not_verified"
       ],
       "why_now": {
-        "cycle": 7.7,
-        "institutional_proxy": 7.16,
-        "entry": 7.31,
+        "cycle": 7.4,
+        "institutional_proxy": 6.77,
+        "entry": 7.54,
         "rr_proxy": 4.7
       }
     },
     {
-      "priority": 11,
-      "symbol": "TANM",
-      "score": 46.4,
+      "priority": 14,
+      "symbol": "TWSA",
+      "score": 54.93,
       "discovery_score": 7.56,
       "action": "RESEARCH_SHARIA",
       "missing": [
@@ -260,23 +330,22 @@
         "valuation"
       ],
       "red_team_flags": [
-        "earnings_contraction",
         "price_above_analyst_target_proxy",
         "sharia_not_verified",
         "fundamentals_not_verified",
         "valuation_not_verified"
       ],
       "why_now": {
-        "cycle": 8.4,
-        "institutional_proxy": 6.41,
-        "entry": 7.86,
-        "rr_proxy": 4.7
+        "cycle": 8.5,
+        "institutional_proxy": 7.5,
+        "entry": 7.33,
+        "rr_proxy": 3.9
       }
     },
     {
-      "priority": 12,
+      "priority": 15,
       "symbol": "AMIA",
-      "score": 51.13,
+      "score": 51.06,
       "discovery_score": 7.55,
       "action": "RESEARCH_SHARIA",
       "missing": [
@@ -294,89 +363,16 @@
       ],
       "why_now": {
         "cycle": 7.4,
-        "institutional_proxy": 6.65,
-        "entry": 8.03,
-        "rr_proxy": 4.7
-      }
-    },
-    {
-      "priority": 13,
-      "symbol": "ZMID",
-      "score": 60,
-      "discovery_score": 7.53,
-      "action": "RESEARCH_SHARIA",
-      "missing": [
-        "sharia",
-        "fundamentals",
-        "valuation"
-      ],
-      "red_team_flags": [
-        "negative_free_cash_flow_ttm",
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "why_now": {
-        "cycle": 7.4,
         "institutional_proxy": 6.67,
-        "entry": 7.54,
-        "rr_proxy": 4.7
-      }
-    },
-    {
-      "priority": 14,
-      "symbol": "ARCC",
-      "score": 65.18,
-      "discovery_score": 7.48,
-      "action": "RESEARCH_SHARIA",
-      "missing": [
-        "sharia",
-        "valuation"
-      ],
-      "red_team_flags": [
-        "sharia_not_verified",
-        "valuation_not_verified",
-        "2026-10-28: Operating cash flow down approximately 50% YoY and substantially below net profit",
-        "2026-10-28: Large capex and working-capital movement reduce near-term cash conversion",
-        "2026-10-28: Review not full audit; complete Sharia ratio and purification screening outstanding"
-      ],
-      "why_now": {
-        "cycle": 6.3,
-        "institutional_proxy": 6.67,
-        "entry": 7.53,
-        "rr_proxy": 7.72
-      }
-    },
-    {
-      "priority": 15,
-      "symbol": "ETRS",
-      "score": 52.98,
-      "discovery_score": 7.38,
-      "action": "RESEARCH_SHARIA",
-      "missing": [
-        "sharia",
-        "fundamentals",
-        "valuation"
-      ],
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "why_now": {
-        "cycle": 6.4,
-        "institutional_proxy": 6.27,
-        "entry": 7.54,
+        "entry": 7.92,
         "rr_proxy": 4.7
       }
     },
     {
       "priority": 16,
-      "symbol": "BIOC",
-      "score": 60.32,
-      "discovery_score": 7.36,
+      "symbol": "TANM",
+      "score": 46.39,
+      "discovery_score": 7.55,
       "action": "RESEARCH_SHARIA",
       "missing": [
         "sharia",
@@ -384,23 +380,24 @@
         "valuation"
       ],
       "red_team_flags": [
+        "earnings_contraction",
         "price_above_analyst_target_proxy",
         "sharia_not_verified",
         "fundamentals_not_verified",
         "valuation_not_verified"
       ],
       "why_now": {
-        "cycle": 8.8,
-        "institutional_proxy": 7.51,
-        "entry": 6.94,
-        "rr_proxy": 3.45
+        "cycle": 8.4,
+        "institutional_proxy": 6.41,
+        "entry": 7.84,
+        "rr_proxy": 4.7
       }
     },
     {
       "priority": 17,
-      "symbol": "AIH",
-      "score": 46.43,
-      "discovery_score": 7.33,
+      "symbol": "INFI",
+      "score": 50.69,
+      "discovery_score": 7.49,
       "action": "RESEARCH_SHARIA",
       "missing": [
         "sharia",
@@ -408,146 +405,23 @@
         "valuation"
       ],
       "red_team_flags": [
-        "high_leverage_proxy",
         "price_above_analyst_target_proxy",
         "sharia_not_verified",
         "fundamentals_not_verified",
         "valuation_not_verified"
       ],
       "why_now": {
-        "cycle": 6.3,
-        "institutional_proxy": 5.97,
-        "entry": 7.88,
-        "rr_proxy": 4.25
+        "cycle": 6.8,
+        "institutional_proxy": 6.44,
+        "entry": 7.85,
+        "rr_proxy": 4.7
       }
     },
     {
       "priority": 18,
-      "symbol": "ELSH",
-      "score": 60.52,
-      "discovery_score": 7.29,
-      "action": "RESEARCH_SHARIA",
-      "missing": [
-        "sharia",
-        "fundamentals",
-        "valuation"
-      ],
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "why_now": {
-        "cycle": 7,
-        "institutional_proxy": 7.3,
-        "entry": 7.29,
-        "rr_proxy": 4.7
-      }
-    },
-    {
-      "priority": 19,
-      "symbol": "GGCC",
-      "score": 55.62,
-      "discovery_score": 7.22,
-      "action": "RESEARCH_SHARIA",
-      "missing": [
-        "sharia",
-        "fundamentals",
-        "valuation"
-      ],
-      "red_team_flags": [
-        "negative_free_cash_flow_ttm",
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "why_now": {
-        "cycle": 6.4,
-        "institutional_proxy": 7.4,
-        "entry": 6.84,
-        "rr_proxy": 4.7
-      }
-    },
-    {
-      "priority": 20,
-      "symbol": "INFI",
-      "score": 50.02,
-      "discovery_score": 7.2,
-      "action": "RESEARCH_SHARIA",
-      "missing": [
-        "sharia",
-        "fundamentals",
-        "valuation"
-      ],
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "why_now": {
-        "cycle": 7,
-        "institutional_proxy": 6.15,
-        "entry": 7.78,
-        "rr_proxy": 4.7
-      }
-    },
-    {
-      "priority": 21,
-      "symbol": "EASB",
-      "score": 58.36,
-      "discovery_score": 7.09,
-      "action": "RESEARCH_SHARIA",
-      "missing": [
-        "sharia",
-        "fundamentals",
-        "valuation"
-      ],
-      "red_team_flags": [
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "why_now": {
-        "cycle": 7.7,
-        "institutional_proxy": 5.93,
-        "entry": 7.1,
-        "rr_proxy": 4.7
-      }
-    },
-    {
-      "priority": 22,
-      "symbol": "TALM",
-      "score": 51.98,
-      "discovery_score": 7.09,
-      "action": "RESEARCH_SHARIA",
-      "missing": [
-        "sharia",
-        "fundamentals",
-        "valuation"
-      ],
-      "red_team_flags": [
-        "negative_free_cash_flow_ttm",
-        "price_above_analyst_target_proxy",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "why_now": {
-        "cycle": 6.5,
-        "institutional_proxy": 6.43,
-        "entry": 7.51,
-        "rr_proxy": 4.7
-      }
-    },
-    {
-      "priority": 23,
       "symbol": "IEEC",
-      "score": 61.9,
-      "discovery_score": 7.05,
+      "score": 63.2,
+      "discovery_score": 7.47,
       "action": "RESEARCH_SHARIA",
       "missing": [
         "sharia",
@@ -563,17 +437,17 @@
         "2026-11-01: H1 profit EGP 10.91m vs 10.55m does not override qualified accounting evidence"
       ],
       "why_now": {
-        "cycle": 8.4,
-        "institutional_proxy": 6.69,
-        "entry": 7.4,
+        "cycle": 8.5,
+        "institutional_proxy": 7.21,
+        "entry": 7.73,
         "rr_proxy": 3.9
       }
     },
     {
-      "priority": 24,
-      "symbol": "SWDY",
-      "score": 56.27,
-      "discovery_score": 7.05,
+      "priority": 19,
+      "symbol": "OIH",
+      "score": 48.09,
+      "discovery_score": 7.44,
       "action": "RESEARCH_SHARIA",
       "missing": [
         "sharia",
@@ -581,71 +455,24 @@
         "valuation"
       ],
       "red_team_flags": [
-        "negative_free_cash_flow_ttm",
-        "sharia_not_verified",
-        "fundamentals_not_verified",
-        "valuation_not_verified"
-      ],
-      "why_now": {
-        "cycle": 5.6,
-        "institutional_proxy": 6.26,
-        "entry": 7.44,
-        "rr_proxy": 6.35
-      }
-    },
-    {
-      "priority": 25,
-      "symbol": "ACAMD",
-      "score": 64.62,
-      "discovery_score": 7.01,
-      "action": "RESEARCH_SHARIA",
-      "missing": [
-        "sharia",
-        "fundamentals",
-        "valuation"
-      ],
-      "red_team_flags": [
+        "high_leverage_proxy",
         "price_above_analyst_target_proxy",
         "sharia_not_verified",
         "fundamentals_not_verified",
         "valuation_not_verified"
       ],
       "why_now": {
-        "cycle": 6.9,
-        "institutional_proxy": 7.17,
-        "entry": 6.36,
+        "cycle": 6.7,
+        "institutional_proxy": 7.03,
+        "entry": 7.37,
         "rr_proxy": 4.7
       }
     },
     {
-      "priority": 26,
-      "symbol": "EFIH",
-      "score": 79.03,
-      "discovery_score": 6.98,
-      "action": "RESEARCH_SHARIA",
-      "missing": [
-        "sharia"
-      ],
-      "red_team_flags": [
-        "sharia_not_verified",
-        "premium_valuation",
-        "government_and_digital_payments_concentration",
-        "conflicting_sharia_screens_pending_primary_ratio_reconciliation",
-        "2026-10-28: FVTPL and fund earnings require underlying-asset classification for prohibited-income screening",
-        "2026-10-28: EGX 1.824545bn consolidated total vs 1.806164bn attributable are different profit definitions"
-      ],
-      "why_now": {
-        "cycle": 7.5,
-        "institutional_proxy": 5.87,
-        "entry": 7.92,
-        "rr_proxy": 7.72
-      }
-    },
-    {
-      "priority": 27,
-      "symbol": "ADRI",
-      "score": 50.73,
-      "discovery_score": 6.98,
+      "priority": 20,
+      "symbol": "ELSH",
+      "score": 61.04,
+      "discovery_score": 7.43,
       "action": "RESEARCH_SHARIA",
       "missing": [
         "sharia",
@@ -659,17 +486,42 @@
         "valuation_not_verified"
       ],
       "why_now": {
-        "cycle": 5.2,
-        "institutional_proxy": 5.88,
-        "entry": 7.33,
+        "cycle": 7.2,
+        "institutional_proxy": 7.55,
+        "entry": 7.49,
+        "rr_proxy": 4.7
+      }
+    },
+    {
+      "priority": 21,
+      "symbol": "AIH",
+      "score": 46.57,
+      "discovery_score": 7.35,
+      "action": "RESEARCH_SHARIA",
+      "missing": [
+        "sharia",
+        "fundamentals",
+        "valuation"
+      ],
+      "red_team_flags": [
+        "high_leverage_proxy",
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "why_now": {
+        "cycle": 6.4,
+        "institutional_proxy": 6,
+        "entry": 7.93,
         "rr_proxy": 4.25
       }
     },
     {
-      "priority": 28,
-      "symbol": "CCAP",
-      "score": 58.8,
-      "discovery_score": 6.94,
+      "priority": 22,
+      "symbol": "BIOC",
+      "score": 60.14,
+      "discovery_score": 7.33,
       "action": "RESEARCH_SHARIA",
       "missing": [
         "sharia",
@@ -683,17 +535,17 @@
         "valuation_not_verified"
       ],
       "why_now": {
-        "cycle": 4.6,
-        "institutional_proxy": 6.69,
-        "entry": 6.62,
-        "rr_proxy": 4.7
+        "cycle": 8.7,
+        "institutional_proxy": 7.48,
+        "entry": 6.84,
+        "rr_proxy": 3.45
       }
     },
     {
-      "priority": 29,
+      "priority": 23,
       "symbol": "NIPH",
-      "score": 47.11,
-      "discovery_score": 6.94,
+      "score": 47.64,
+      "discovery_score": 7.24,
       "action": "RESEARCH_SHARIA",
       "missing": [
         "sharia",
@@ -710,15 +562,161 @@
       ],
       "why_now": {
         "cycle": 7.6,
-        "institutional_proxy": 5.71,
-        "entry": 7.17,
+        "institutional_proxy": 6.04,
+        "entry": 7.51,
         "rr_proxy": 4.7
+      }
+    },
+    {
+      "priority": 24,
+      "symbol": "CCAP",
+      "score": 59.31,
+      "discovery_score": 7.21,
+      "action": "RESEARCH_SHARIA",
+      "missing": [
+        "sharia",
+        "fundamentals",
+        "valuation"
+      ],
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "why_now": {
+        "cycle": 4.7,
+        "institutional_proxy": 6.88,
+        "entry": 6.97,
+        "rr_proxy": 4.7
+      }
+    },
+    {
+      "priority": 25,
+      "symbol": "TALM",
+      "score": 52.06,
+      "discovery_score": 7.14,
+      "action": "RESEARCH_SHARIA",
+      "missing": [
+        "sharia",
+        "fundamentals",
+        "valuation"
+      ],
+      "red_team_flags": [
+        "negative_free_cash_flow_ttm",
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "why_now": {
+        "cycle": 6.5,
+        "institutional_proxy": 6.53,
+        "entry": 7.51,
+        "rr_proxy": 4.7
+      }
+    },
+    {
+      "priority": 26,
+      "symbol": "SWDY",
+      "score": 56.32,
+      "discovery_score": 7.07,
+      "action": "RESEARCH_SHARIA",
+      "missing": [
+        "sharia",
+        "fundamentals",
+        "valuation"
+      ],
+      "red_team_flags": [
+        "negative_free_cash_flow_ttm",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "why_now": {
+        "cycle": 5.6,
+        "institutional_proxy": 6.3,
+        "entry": 7.46,
+        "rr_proxy": 6.35
+      }
+    },
+    {
+      "priority": 27,
+      "symbol": "BQDC",
+      "score": 45.33,
+      "discovery_score": 7.04,
+      "action": "RESEARCH_SHARIA",
+      "missing": [
+        "sharia",
+        "fundamentals",
+        "valuation"
+      ],
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "history_confidence_below_85",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "why_now": {
+        "cycle": 0,
+        "institutional_proxy": 6.91,
+        "entry": 6.22,
+        "rr_proxy": 3.35
+      }
+    },
+    {
+      "priority": 28,
+      "symbol": "ADRI",
+      "score": 50.85,
+      "discovery_score": 6.99,
+      "action": "RESEARCH_SHARIA",
+      "missing": [
+        "sharia",
+        "fundamentals",
+        "valuation"
+      ],
+      "red_team_flags": [
+        "price_above_analyst_target_proxy",
+        "sharia_not_verified",
+        "fundamentals_not_verified",
+        "valuation_not_verified"
+      ],
+      "why_now": {
+        "cycle": 5.3,
+        "institutional_proxy": 5.91,
+        "entry": 7.35,
+        "rr_proxy": 4.25
+      }
+    },
+    {
+      "priority": 29,
+      "symbol": "EFIH",
+      "score": 78.81,
+      "discovery_score": 6.9,
+      "action": "RESEARCH_SHARIA",
+      "missing": [
+        "sharia"
+      ],
+      "red_team_flags": [
+        "sharia_not_verified",
+        "premium_valuation",
+        "government_and_digital_payments_concentration",
+        "conflicting_sharia_screens_pending_primary_ratio_reconciliation",
+        "2026-10-28: FVTPL and fund earnings require underlying-asset classification for prohibited-income screening",
+        "2026-10-28: EGX 1.824545bn consolidated total vs 1.806164bn attributable are different profit definitions"
+      ],
+      "why_now": {
+        "cycle": 7.5,
+        "institutional_proxy": 5.75,
+        "entry": 7.77,
+        "rr_proxy": 7.72
       }
     },
     {
       "priority": 30,
       "symbol": "ISPH",
-      "score": 58.67,
+      "score": 58.45,
       "discovery_score": 6.86,
       "action": "RESEARCH_SHARIA",
       "missing": [
@@ -734,9 +732,9 @@
         "2026-10-29: Working capital consumed by inventory build of EGP 3.190bn"
       ],
       "why_now": {
-        "cycle": 6.3,
-        "institutional_proxy": 8.35,
-        "entry": 5.85,
+        "cycle": 6.1,
+        "institutional_proxy": 8.36,
+        "entry": 5.77,
         "rr_proxy": 8.83
       }
     }
