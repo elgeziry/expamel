@@ -46,6 +46,14 @@ def make(root, membership_file):
         raise ValueError("Full EGX universe missing; no successful evidence coverage audit")
     if session!=v6.get("reference_session") or session!=alerts.get("reference_session"):
         raise ValueError("Reference sessions disagree")
+    v6_symbols=[str(r.get("symbol") or "").upper().strip() for r in candidates]
+    recovery_symbols=[str(r.get("symbol") or "").upper().strip() for r in alerts.get("all_alerts",[])]
+    if (not all(v6_symbols) or len(set(v6_symbols))!=len(v6_symbols)
+            or set(v6_symbols)!=set(universe_stocks)
+            or len(recovery_symbols)!=len(v6_symbols)
+            or len(set(recovery_symbols))!=len(recovery_symbols)
+            or set(recovery_symbols)!=set(v6_symbols)):
+        raise ValueError("Full-market research symbol reconciliation failed")
     rows=[]
     for stock in candidates:
         symbol=str(stock.get("symbol") or "").upper()
@@ -140,7 +148,7 @@ def make(root, membership_file):
         "reference_session":session,
         "source_universe_total":len(universe_stocks),
         "scanned":len(rows),
-        "full_market_audit_pass":len(rows)==len(candidates)>=MIN_MARKET,
+        "full_market_audit_pass":len(rows)==len(candidates)==len(universe_stocks)>=MIN_MARKET,
         "source_v6":"decision-intelligence-v6.json",
         "reported_index_source":membership.get("source_url"),
         "index_membership_evidence_limitations":membership.get("count_discrepancy_note"),
@@ -167,7 +175,7 @@ def make(root, membership_file):
         "verified_research_watch":sorted(known_good,key=lambda x:-x["research_priority_score"])[:30],
         "full_research_queue":research_queue,
         "all_coverage":sorted(rows,key=lambda x:(x["v6_rank"] or 9999,x["symbol"])),
-        "non_trade_recommendation_policy":"All 295 can be discussed with tagged research quality, but no purchase without verified financial+Sharia+valuation, independent fresh quote, technical setup and broker/macro check",
+        "non_trade_recommendation_policy":"All V6 stocks can be discussed with tagged research quality, but no purchase without verified financial+Sharia+valuation, independent fresh quote, technical setup and broker/macro check",
     }
     (root/"research-coverage-v1.json").write_text(json.dumps(result,indent=2,ensure_ascii=False),encoding="utf-8")
     print(json.dumps({"status":"PASS","scanned":len(rows),"summary":result["summary"],
