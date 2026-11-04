@@ -144,6 +144,20 @@ class MarketScoutTests(unittest.TestCase):
         self.assertEqual(r["new_events"],[])
         self.assertEqual(r["orders_placed"],0)
 
+    def test_duplicate_v6_symbol_blocks_success(self):
+        self.rows[10]["symbol"] = self.rows[11]["symbol"]
+        r = self.run_scout()
+        self.assertEqual(r["health"], "BLOCKED")
+        self.assertFalse(r["all_295_stocks_evaluated"])
+        self.assertEqual(r["new_events"], [])
+
+    def test_missing_recovery_symbol_blocks_success(self):
+        self.alerts.pop()
+        r = self.run_scout()
+        self.assertEqual(r["health"], "BLOCKED")
+        self.assertFalse(r["universe_unique_and_recovery_matched"])
+        self.assertEqual(r["new_events"], [])
+
     def test_extra_equity_research_is_not_discovery_boundary(self):
         self.rows[239]["research"]["fundamentals_verified"]=False
         r=self.run_scout()
