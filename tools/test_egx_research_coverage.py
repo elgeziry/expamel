@@ -34,7 +34,7 @@ class ResearchCoverageTests(unittest.TestCase):
             "universe.json":{"stocks":[{"symbol":x["symbol"],"close":x["reference_close"],
                       "price_earnings_current":12.5,"debt_to_equity_fq":0.2} for x in self.stocks]},
             "decision-intelligence-v6.json":{"reference_session":SESSION,"all_ranked":self.stocks},
-            "capital-recovery-alerts-v1.json":{"reference_session":SESSION,"all_alerts":[]}
+            "capital-recovery-alerts-v1.json":{"reference_session":SESSION,"all_alerts":[{"symbol":x["symbol"]} for x in self.stocks]}
         }
     def tearDown(self):self.tmp.cleanup()
     def run_coverage(self):
@@ -73,6 +73,11 @@ class ResearchCoverageTests(unittest.TestCase):
         self.assertEqual(r["summary"]["market_scanned"],255)
         self.assertIn("INDEX",[x["symbol"] for x in r["priority_research_queue"][:20]])
         self.assertEqual(r["summary"]["research_backlog"],253)
+    def test_missing_recovery_symbol_blocks_research_publication(self):
+        self.docs["capital-recovery-alerts-v1.json"]["all_alerts"].pop()
+        with self.assertRaisesRegex(ValueError,"symbol reconciliation failed"):
+            self.run_coverage()
+
     def test_session_mismatch_blocks_publication(self):
         self.docs["contract.json"]["expected_reference_session_date"]="2026-10-26"
         with self.assertRaisesRegex(ValueError,"sessions disagree"):
