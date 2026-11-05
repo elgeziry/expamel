@@ -1,8 +1,8 @@
 {
   "engine": "EGX Corporate Action Anomaly Guard",
   "version": 1,
-  "generated_at": "2026-11-05T07:22:59.381Z",
-  "reference_session": "2026-11-04",
+  "generated_at": "2026-11-05T08:31:42.085Z",
+  "reference_session": "2026-11-05",
   "method": "detect >45% up-gap or >31% down-gap across retained closes unless explicitly verified adjusted",
   "flagged": [
     {
@@ -15,21 +15,6 @@
           "previous_close": 38.84,
           "close": 12,
           "ratio": 0.309
-        }
-      ],
-      "lookback_sessions": 30,
-      "verified_adjustment_override": false
-    },
-    {
-      "symbol": "POUL",
-      "status": "suspected_unadjusted_event",
-      "technical_history_gate": false,
-      "anomalies": [
-        {
-          "date": "2026-09-27",
-          "previous_close": 38.2,
-          "close": 9.53,
-          "ratio": 0.2495
         }
       ],
       "lookback_sessions": 30,
@@ -66,21 +51,6 @@
       "verified_adjustment_override": false
     },
     {
-      "symbol": "HALN",
-      "status": "suspected_unadjusted_event",
-      "technical_history_gate": false,
-      "anomalies": [
-        {
-          "date": "2026-10-25",
-          "previous_close": 0.1,
-          "close": 24.5,
-          "ratio": 245
-        }
-      ],
-      "lookback_sessions": 30,
-      "verified_adjustment_override": false
-    },
-    {
       "symbol": "DCRC",
       "status": "suspected_unadjusted_event",
       "technical_history_gate": false,
@@ -90,6 +60,21 @@
           "previous_close": 52,
           "close": 90,
           "ratio": 1.7308
+        }
+      ],
+      "lookback_sessions": 30,
+      "verified_adjustment_override": false
+    },
+    {
+      "symbol": "HALN",
+      "status": "suspected_unadjusted_event",
+      "technical_history_gate": false,
+      "anomalies": [
+        {
+          "date": "2026-10-25",
+          "previous_close": 0.1,
+          "close": 24.5,
+          "ratio": 245
         }
       ],
       "lookback_sessions": 30,
