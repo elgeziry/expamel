@@ -1,7 +1,7 @@
 {
   "engine": "EGX Capital Recovery Alert Engine",
   "version": 1,
-  "generated_at": "2026-11-08T18:24:16.462Z",
+  "generated_at": "2026-11-08T18:24:48.346Z",
   "reference_session": "2026-11-08",
   "objective": "Recover capital through verified quality and timed entries, not indiscriminate averaging down.",
   "market_gate": {
@@ -21095,472 +21095,8 @@
       }
     },
     {
-      "symbol": "ELAB",
+      "symbol": "ACFR",
       "rank": 213,
-      "v6_score": 40.89,
-      "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 0.1,
-      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
-      "priority": 0,
-      "reason": "evidence_incomplete_transaction_not_authorized",
-      "recovery_score_100": 40.24,
-      "quality_score_10": 4.59,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.79,
-      "risk_reward": 3.35,
-      "cycle_strength": 5.1,
-      "institutional_intelligence": 2.1,
-      "valuation_payoff_check": {
-        "analyst_target_egp": null,
-        "analyst_target_as_of": null,
-        "analyst_target_source": null,
-        "upside_to_consensus_pct": null,
-        "downside_to_invalidation_pct": null,
-        "actual_reward_risk_to_consensus": null,
-        "minimum_required": 1.25,
-        "execution_blocked": false,
-        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
-      },
-      "day_change_pct": 0,
-      "relative_strength_vs_market_median_pct": 0,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": false,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward_proxy>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "if_analyst_target_verified_actual_reward_risk>=1.25",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
-      "symbol": "GROV",
-      "rank": 214,
-      "v6_score": 40.89,
-      "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 1,
-      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
-      "priority": 0,
-      "reason": "evidence_incomplete_transaction_not_authorized",
-      "recovery_score_100": 40.24,
-      "quality_score_10": 4.59,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.79,
-      "risk_reward": 3.35,
-      "cycle_strength": 5.1,
-      "institutional_intelligence": 2.1,
-      "valuation_payoff_check": {
-        "analyst_target_egp": null,
-        "analyst_target_as_of": null,
-        "analyst_target_source": null,
-        "upside_to_consensus_pct": null,
-        "downside_to_invalidation_pct": null,
-        "actual_reward_risk_to_consensus": null,
-        "minimum_required": 1.25,
-        "execution_blocked": false,
-        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
-      },
-      "day_change_pct": 0,
-      "relative_strength_vs_market_median_pct": 0,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": false,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward_proxy>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "if_analyst_target_verified_actual_reward_risk>=1.25",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
-      "symbol": "DCCC",
-      "rank": 215,
-      "v6_score": 40.89,
-      "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 10,
-      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
-      "priority": 0,
-      "reason": "evidence_incomplete_transaction_not_authorized",
-      "recovery_score_100": 40.24,
-      "quality_score_10": 4.59,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.79,
-      "risk_reward": 3.35,
-      "cycle_strength": 5.1,
-      "institutional_intelligence": 2.1,
-      "valuation_payoff_check": {
-        "analyst_target_egp": null,
-        "analyst_target_as_of": null,
-        "analyst_target_source": null,
-        "upside_to_consensus_pct": null,
-        "downside_to_invalidation_pct": null,
-        "actual_reward_risk_to_consensus": null,
-        "minimum_required": 1.25,
-        "execution_blocked": false,
-        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
-      },
-      "day_change_pct": 0,
-      "relative_strength_vs_market_median_pct": 0,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": false,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward_proxy>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "if_analyst_target_verified_actual_reward_risk>=1.25",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
-      "symbol": "EGOTH",
-      "rank": 216,
-      "v6_score": 40.89,
-      "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 100,
-      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
-      "priority": 0,
-      "reason": "evidence_incomplete_transaction_not_authorized",
-      "recovery_score_100": 40.24,
-      "quality_score_10": 4.59,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.79,
-      "risk_reward": 3.35,
-      "cycle_strength": 5.1,
-      "institutional_intelligence": 2.1,
-      "valuation_payoff_check": {
-        "analyst_target_egp": null,
-        "analyst_target_as_of": null,
-        "analyst_target_source": null,
-        "upside_to_consensus_pct": null,
-        "downside_to_invalidation_pct": null,
-        "actual_reward_risk_to_consensus": null,
-        "minimum_required": 1.25,
-        "execution_blocked": false,
-        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
-      },
-      "day_change_pct": 0,
-      "relative_strength_vs_market_median_pct": 0,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": false,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward_proxy>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "if_analyst_target_verified_actual_reward_risk>=1.25",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
-      "symbol": "NMIN",
-      "rank": 217,
-      "v6_score": 40.89,
-      "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 10,
-      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
-      "priority": 0,
-      "reason": "evidence_incomplete_transaction_not_authorized",
-      "recovery_score_100": 40.24,
-      "quality_score_10": 4.59,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.79,
-      "risk_reward": 3.35,
-      "cycle_strength": 5.1,
-      "institutional_intelligence": 2.1,
-      "valuation_payoff_check": {
-        "analyst_target_egp": null,
-        "analyst_target_as_of": null,
-        "analyst_target_source": null,
-        "upside_to_consensus_pct": null,
-        "downside_to_invalidation_pct": null,
-        "actual_reward_risk_to_consensus": null,
-        "minimum_required": 1.25,
-        "execution_blocked": false,
-        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
-      },
-      "day_change_pct": 0,
-      "relative_strength_vs_market_median_pct": 0,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": false,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward_proxy>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "if_analyst_target_verified_actual_reward_risk>=1.25",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
-      "symbol": "ANCC",
-      "rank": 218,
-      "v6_score": 40.89,
-      "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 10,
-      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
-      "priority": 0,
-      "reason": "evidence_incomplete_transaction_not_authorized",
-      "recovery_score_100": 40.24,
-      "quality_score_10": 4.59,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.79,
-      "risk_reward": 3.35,
-      "cycle_strength": 5.1,
-      "institutional_intelligence": 2.1,
-      "valuation_payoff_check": {
-        "analyst_target_egp": null,
-        "analyst_target_as_of": null,
-        "analyst_target_source": null,
-        "upside_to_consensus_pct": null,
-        "downside_to_invalidation_pct": null,
-        "actual_reward_risk_to_consensus": null,
-        "minimum_required": 1.25,
-        "execution_blocked": false,
-        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
-      },
-      "day_change_pct": 0,
-      "relative_strength_vs_market_median_pct": 0,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": false,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward_proxy>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "if_analyst_target_verified_actual_reward_risk>=1.25",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
-      "symbol": "MLIC",
-      "rank": 219,
-      "v6_score": 40.89,
-      "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 10,
-      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
-      "priority": 0,
-      "reason": "evidence_incomplete_transaction_not_authorized",
-      "recovery_score_100": 40.24,
-      "quality_score_10": 4.59,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.79,
-      "risk_reward": 3.35,
-      "cycle_strength": 5.1,
-      "institutional_intelligence": 2.1,
-      "valuation_payoff_check": {
-        "analyst_target_egp": null,
-        "analyst_target_as_of": null,
-        "analyst_target_source": null,
-        "upside_to_consensus_pct": null,
-        "downside_to_invalidation_pct": null,
-        "actual_reward_risk_to_consensus": null,
-        "minimum_required": 1.25,
-        "execution_blocked": false,
-        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
-      },
-      "day_change_pct": 0,
-      "relative_strength_vs_market_median_pct": 0,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": false,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward_proxy>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "if_analyst_target_verified_actual_reward_risk>=1.25",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
-      "symbol": "EGS65861C014",
-      "rank": 220,
-      "v6_score": 40.89,
-      "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 5,
-      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
-      "priority": 0,
-      "reason": "evidence_incomplete_transaction_not_authorized",
-      "recovery_score_100": 40.24,
-      "quality_score_10": 4.59,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.79,
-      "risk_reward": 3.35,
-      "cycle_strength": 5.1,
-      "institutional_intelligence": 2.1,
-      "valuation_payoff_check": {
-        "analyst_target_egp": null,
-        "analyst_target_as_of": null,
-        "analyst_target_source": null,
-        "upside_to_consensus_pct": null,
-        "downside_to_invalidation_pct": null,
-        "actual_reward_risk_to_consensus": null,
-        "minimum_required": 1.25,
-        "execution_blocked": false,
-        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
-      },
-      "day_change_pct": 0,
-      "relative_strength_vs_market_median_pct": 0,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": false,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward_proxy>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "if_analyst_target_verified_actual_reward_risk>=1.25",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
-      "symbol": "CID",
-      "rank": 221,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 10,
@@ -21618,7 +21154,7 @@
     },
     {
       "symbol": "EGS72L31C011",
-      "rank": 222,
+      "rank": 214,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 0.1,
@@ -21675,11 +21211,243 @@
       }
     },
     {
-      "symbol": "EGWA",
-      "rank": 223,
+      "symbol": "GEOS",
+      "rank": 215,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 5,
+      "reference_close": 1,
+      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
+      "priority": 0,
+      "reason": "evidence_incomplete_transaction_not_authorized",
+      "recovery_score_100": 40.24,
+      "quality_score_10": 4.59,
+      "entry_state": {
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
+      },
+      "entry_quality": 3.79,
+      "risk_reward": 3.35,
+      "cycle_strength": 5.1,
+      "institutional_intelligence": 2.1,
+      "valuation_payoff_check": {
+        "analyst_target_egp": null,
+        "analyst_target_as_of": null,
+        "analyst_target_source": null,
+        "upside_to_consensus_pct": null,
+        "downside_to_invalidation_pct": null,
+        "actual_reward_risk_to_consensus": null,
+        "minimum_required": 1.25,
+        "execution_blocked": false,
+        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
+      },
+      "day_change_pct": 0,
+      "relative_strength_vs_market_median_pct": 0,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": false,
+        "fundamentals": false,
+        "valuation": false,
+        "corporate_action": true
+      },
+      "execution_plan": null,
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward_proxy>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "if_analyst_target_verified_actual_reward_risk>=1.25",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "PMSC",
+      "rank": 216,
+      "v6_score": 40.89,
+      "v6_action": "RESEARCH_SHARIA",
+      "reference_close": 10,
+      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
+      "priority": 0,
+      "reason": "evidence_incomplete_transaction_not_authorized",
+      "recovery_score_100": 40.24,
+      "quality_score_10": 4.59,
+      "entry_state": {
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
+      },
+      "entry_quality": 3.79,
+      "risk_reward": 3.35,
+      "cycle_strength": 5.1,
+      "institutional_intelligence": 2.1,
+      "valuation_payoff_check": {
+        "analyst_target_egp": null,
+        "analyst_target_as_of": null,
+        "analyst_target_source": null,
+        "upside_to_consensus_pct": null,
+        "downside_to_invalidation_pct": null,
+        "actual_reward_risk_to_consensus": null,
+        "minimum_required": 1.25,
+        "execution_blocked": false,
+        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
+      },
+      "day_change_pct": 0,
+      "relative_strength_vs_market_median_pct": 0,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": false,
+        "fundamentals": false,
+        "valuation": false,
+        "corporate_action": true
+      },
+      "execution_plan": null,
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward_proxy>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "if_analyst_target_verified_actual_reward_risk>=1.25",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "DCCC",
+      "rank": 217,
+      "v6_score": 40.89,
+      "v6_action": "RESEARCH_SHARIA",
+      "reference_close": 10,
+      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
+      "priority": 0,
+      "reason": "evidence_incomplete_transaction_not_authorized",
+      "recovery_score_100": 40.24,
+      "quality_score_10": 4.59,
+      "entry_state": {
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
+      },
+      "entry_quality": 3.79,
+      "risk_reward": 3.35,
+      "cycle_strength": 5.1,
+      "institutional_intelligence": 2.1,
+      "valuation_payoff_check": {
+        "analyst_target_egp": null,
+        "analyst_target_as_of": null,
+        "analyst_target_source": null,
+        "upside_to_consensus_pct": null,
+        "downside_to_invalidation_pct": null,
+        "actual_reward_risk_to_consensus": null,
+        "minimum_required": 1.25,
+        "execution_blocked": false,
+        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
+      },
+      "day_change_pct": 0,
+      "relative_strength_vs_market_median_pct": 0,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": false,
+        "fundamentals": false,
+        "valuation": false,
+        "corporate_action": true
+      },
+      "execution_plan": null,
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward_proxy>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "if_analyst_target_verified_actual_reward_risk>=1.25",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "NMIN",
+      "rank": 218,
+      "v6_score": 40.89,
+      "v6_action": "RESEARCH_SHARIA",
+      "reference_close": 10,
+      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
+      "priority": 0,
+      "reason": "evidence_incomplete_transaction_not_authorized",
+      "recovery_score_100": 40.24,
+      "quality_score_10": 4.59,
+      "entry_state": {
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
+      },
+      "entry_quality": 3.79,
+      "risk_reward": 3.35,
+      "cycle_strength": 5.1,
+      "institutional_intelligence": 2.1,
+      "valuation_payoff_check": {
+        "analyst_target_egp": null,
+        "analyst_target_as_of": null,
+        "analyst_target_source": null,
+        "upside_to_consensus_pct": null,
+        "downside_to_invalidation_pct": null,
+        "actual_reward_risk_to_consensus": null,
+        "minimum_required": 1.25,
+        "execution_blocked": false,
+        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
+      },
+      "day_change_pct": 0,
+      "relative_strength_vs_market_median_pct": 0,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": false,
+        "fundamentals": false,
+        "valuation": false,
+        "corporate_action": true
+      },
+      "execution_plan": null,
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward_proxy>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "if_analyst_target_verified_actual_reward_risk>=1.25",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "OCAP",
+      "rank": 219,
+      "v6_score": 40.89,
+      "v6_action": "RESEARCH_SHARIA",
+      "reference_close": 1,
       "state": "BLOCKED_UNVERIFIED_EVIDENCE",
       "priority": 0,
       "reason": "evidence_incomplete_transaction_not_authorized",
@@ -21734,7 +21502,7 @@
     },
     {
       "symbol": "NAMI",
-      "rank": 224,
+      "rank": 220,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 5,
@@ -21791,7 +21559,239 @@
       }
     },
     {
-      "symbol": "POCO",
+      "symbol": "ELAB",
+      "rank": 221,
+      "v6_score": 40.89,
+      "v6_action": "RESEARCH_SHARIA",
+      "reference_close": 0.1,
+      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
+      "priority": 0,
+      "reason": "evidence_incomplete_transaction_not_authorized",
+      "recovery_score_100": 40.24,
+      "quality_score_10": 4.59,
+      "entry_state": {
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
+      },
+      "entry_quality": 3.79,
+      "risk_reward": 3.35,
+      "cycle_strength": 5.1,
+      "institutional_intelligence": 2.1,
+      "valuation_payoff_check": {
+        "analyst_target_egp": null,
+        "analyst_target_as_of": null,
+        "analyst_target_source": null,
+        "upside_to_consensus_pct": null,
+        "downside_to_invalidation_pct": null,
+        "actual_reward_risk_to_consensus": null,
+        "minimum_required": 1.25,
+        "execution_blocked": false,
+        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
+      },
+      "day_change_pct": 0,
+      "relative_strength_vs_market_median_pct": 0,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": false,
+        "fundamentals": false,
+        "valuation": false,
+        "corporate_action": true
+      },
+      "execution_plan": null,
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward_proxy>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "if_analyst_target_verified_actual_reward_risk>=1.25",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "NBCC",
+      "rank": 222,
+      "v6_score": 40.89,
+      "v6_action": "RESEARCH_SHARIA",
+      "reference_close": 5,
+      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
+      "priority": 0,
+      "reason": "evidence_incomplete_transaction_not_authorized",
+      "recovery_score_100": 40.24,
+      "quality_score_10": 4.59,
+      "entry_state": {
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
+      },
+      "entry_quality": 3.79,
+      "risk_reward": 3.35,
+      "cycle_strength": 5.1,
+      "institutional_intelligence": 2.1,
+      "valuation_payoff_check": {
+        "analyst_target_egp": null,
+        "analyst_target_as_of": null,
+        "analyst_target_source": null,
+        "upside_to_consensus_pct": null,
+        "downside_to_invalidation_pct": null,
+        "actual_reward_risk_to_consensus": null,
+        "minimum_required": 1.25,
+        "execution_blocked": false,
+        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
+      },
+      "day_change_pct": 0,
+      "relative_strength_vs_market_median_pct": 0,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": false,
+        "fundamentals": false,
+        "valuation": false,
+        "corporate_action": true
+      },
+      "execution_plan": null,
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward_proxy>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "if_analyst_target_verified_actual_reward_risk>=1.25",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "ENPI",
+      "rank": 223,
+      "v6_score": 40.89,
+      "v6_action": "RESEARCH_SHARIA",
+      "reference_close": 0.125,
+      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
+      "priority": 0,
+      "reason": "evidence_incomplete_transaction_not_authorized",
+      "recovery_score_100": 40.24,
+      "quality_score_10": 4.59,
+      "entry_state": {
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
+      },
+      "entry_quality": 3.79,
+      "risk_reward": 3.35,
+      "cycle_strength": 5.1,
+      "institutional_intelligence": 2.1,
+      "valuation_payoff_check": {
+        "analyst_target_egp": null,
+        "analyst_target_as_of": null,
+        "analyst_target_source": null,
+        "upside_to_consensus_pct": null,
+        "downside_to_invalidation_pct": null,
+        "actual_reward_risk_to_consensus": null,
+        "minimum_required": 1.25,
+        "execution_blocked": false,
+        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
+      },
+      "day_change_pct": 0,
+      "relative_strength_vs_market_median_pct": 0,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": false,
+        "fundamentals": false,
+        "valuation": false,
+        "corporate_action": true
+      },
+      "execution_plan": null,
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward_proxy>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "if_analyst_target_verified_actual_reward_risk>=1.25",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "KNGC",
+      "rank": 224,
+      "v6_score": 40.89,
+      "v6_action": "RESEARCH_SHARIA",
+      "reference_close": 10,
+      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
+      "priority": 0,
+      "reason": "evidence_incomplete_transaction_not_authorized",
+      "recovery_score_100": 40.24,
+      "quality_score_10": 4.59,
+      "entry_state": {
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
+      },
+      "entry_quality": 3.79,
+      "risk_reward": 3.35,
+      "cycle_strength": 5.1,
+      "institutional_intelligence": 2.1,
+      "valuation_payoff_check": {
+        "analyst_target_egp": null,
+        "analyst_target_as_of": null,
+        "analyst_target_source": null,
+        "upside_to_consensus_pct": null,
+        "downside_to_invalidation_pct": null,
+        "actual_reward_risk_to_consensus": null,
+        "minimum_required": 1.25,
+        "execution_blocked": false,
+        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
+      },
+      "day_change_pct": 0,
+      "relative_strength_vs_market_median_pct": 0,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": false,
+        "fundamentals": false,
+        "valuation": false,
+        "corporate_action": true
+      },
+      "execution_plan": null,
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward_proxy>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "if_analyst_target_verified_actual_reward_risk>=1.25",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "EGWA",
       "rank": 225,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
@@ -21849,417 +21849,11 @@
       }
     },
     {
-      "symbol": "NFCI",
+      "symbol": "EGS65621C012",
       "rank": 226,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 10,
-      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
-      "priority": 0,
-      "reason": "evidence_incomplete_transaction_not_authorized",
-      "recovery_score_100": 40.24,
-      "quality_score_10": 4.59,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.79,
-      "risk_reward": 3.35,
-      "cycle_strength": 5.1,
-      "institutional_intelligence": 2.1,
-      "valuation_payoff_check": {
-        "analyst_target_egp": null,
-        "analyst_target_as_of": null,
-        "analyst_target_source": null,
-        "upside_to_consensus_pct": null,
-        "downside_to_invalidation_pct": null,
-        "actual_reward_risk_to_consensus": null,
-        "minimum_required": 1.25,
-        "execution_blocked": false,
-        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
-      },
-      "day_change_pct": 0,
-      "relative_strength_vs_market_median_pct": 0,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": false,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward_proxy>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "if_analyst_target_verified_actual_reward_risk>=1.25",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
-      "symbol": "EGS65621C012",
-      "rank": 227,
-      "v6_score": 40.89,
-      "v6_action": "RESEARCH_SHARIA",
       "reference_close": 5,
-      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
-      "priority": 0,
-      "reason": "evidence_incomplete_transaction_not_authorized",
-      "recovery_score_100": 40.24,
-      "quality_score_10": 4.59,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.79,
-      "risk_reward": 3.35,
-      "cycle_strength": 5.1,
-      "institutional_intelligence": 2.1,
-      "valuation_payoff_check": {
-        "analyst_target_egp": null,
-        "analyst_target_as_of": null,
-        "analyst_target_source": null,
-        "upside_to_consensus_pct": null,
-        "downside_to_invalidation_pct": null,
-        "actual_reward_risk_to_consensus": null,
-        "minimum_required": 1.25,
-        "execution_blocked": false,
-        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
-      },
-      "day_change_pct": 0,
-      "relative_strength_vs_market_median_pct": 0,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": false,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward_proxy>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "if_analyst_target_verified_actual_reward_risk>=1.25",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
-      "symbol": "NBCC",
-      "rank": 228,
-      "v6_score": 40.89,
-      "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 5,
-      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
-      "priority": 0,
-      "reason": "evidence_incomplete_transaction_not_authorized",
-      "recovery_score_100": 40.24,
-      "quality_score_10": 4.59,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.79,
-      "risk_reward": 3.35,
-      "cycle_strength": 5.1,
-      "institutional_intelligence": 2.1,
-      "valuation_payoff_check": {
-        "analyst_target_egp": null,
-        "analyst_target_as_of": null,
-        "analyst_target_source": null,
-        "upside_to_consensus_pct": null,
-        "downside_to_invalidation_pct": null,
-        "actual_reward_risk_to_consensus": null,
-        "minimum_required": 1.25,
-        "execution_blocked": false,
-        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
-      },
-      "day_change_pct": 0,
-      "relative_strength_vs_market_median_pct": 0,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": false,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward_proxy>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "if_analyst_target_verified_actual_reward_risk>=1.25",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
-      "symbol": "EEP",
-      "rank": 229,
-      "v6_score": 40.89,
-      "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 1,
-      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
-      "priority": 0,
-      "reason": "evidence_incomplete_transaction_not_authorized",
-      "recovery_score_100": 40.24,
-      "quality_score_10": 4.59,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.79,
-      "risk_reward": 3.35,
-      "cycle_strength": 5.1,
-      "institutional_intelligence": 2.1,
-      "valuation_payoff_check": {
-        "analyst_target_egp": null,
-        "analyst_target_as_of": null,
-        "analyst_target_source": null,
-        "upside_to_consensus_pct": null,
-        "downside_to_invalidation_pct": null,
-        "actual_reward_risk_to_consensus": null,
-        "minimum_required": 1.25,
-        "execution_blocked": false,
-        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
-      },
-      "day_change_pct": 0,
-      "relative_strength_vs_market_median_pct": 0,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": false,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward_proxy>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "if_analyst_target_verified_actual_reward_risk>=1.25",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
-      "symbol": "EFAC",
-      "rank": 230,
-      "v6_score": 40.89,
-      "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 10,
-      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
-      "priority": 0,
-      "reason": "evidence_incomplete_transaction_not_authorized",
-      "recovery_score_100": 40.24,
-      "quality_score_10": 4.59,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.79,
-      "risk_reward": 3.35,
-      "cycle_strength": 5.1,
-      "institutional_intelligence": 2.1,
-      "valuation_payoff_check": {
-        "analyst_target_egp": null,
-        "analyst_target_as_of": null,
-        "analyst_target_source": null,
-        "upside_to_consensus_pct": null,
-        "downside_to_invalidation_pct": null,
-        "actual_reward_risk_to_consensus": null,
-        "minimum_required": 1.25,
-        "execution_blocked": false,
-        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
-      },
-      "day_change_pct": 0,
-      "relative_strength_vs_market_median_pct": 0,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": false,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward_proxy>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "if_analyst_target_verified_actual_reward_risk>=1.25",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
-      "symbol": "EGS65101C015",
-      "rank": 231,
-      "v6_score": 40.89,
-      "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 5,
-      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
-      "priority": 0,
-      "reason": "evidence_incomplete_transaction_not_authorized",
-      "recovery_score_100": 40.24,
-      "quality_score_10": 4.59,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.79,
-      "risk_reward": 3.35,
-      "cycle_strength": 5.1,
-      "institutional_intelligence": 2.1,
-      "valuation_payoff_check": {
-        "analyst_target_egp": null,
-        "analyst_target_as_of": null,
-        "analyst_target_source": null,
-        "upside_to_consensus_pct": null,
-        "downside_to_invalidation_pct": null,
-        "actual_reward_risk_to_consensus": null,
-        "minimum_required": 1.25,
-        "execution_blocked": false,
-        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
-      },
-      "day_change_pct": 0,
-      "relative_strength_vs_market_median_pct": 0,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": false,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward_proxy>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "if_analyst_target_verified_actual_reward_risk>=1.25",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
-      "symbol": "OCAP",
-      "rank": 232,
-      "v6_score": 40.89,
-      "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 1,
-      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
-      "priority": 0,
-      "reason": "evidence_incomplete_transaction_not_authorized",
-      "recovery_score_100": 40.24,
-      "quality_score_10": 4.59,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.79,
-      "risk_reward": 3.35,
-      "cycle_strength": 5.1,
-      "institutional_intelligence": 2.1,
-      "valuation_payoff_check": {
-        "analyst_target_egp": null,
-        "analyst_target_as_of": null,
-        "analyst_target_source": null,
-        "upside_to_consensus_pct": null,
-        "downside_to_invalidation_pct": null,
-        "actual_reward_risk_to_consensus": null,
-        "minimum_required": 1.25,
-        "execution_blocked": false,
-        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
-      },
-      "day_change_pct": 0,
-      "relative_strength_vs_market_median_pct": 0,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": false,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward_proxy>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "if_analyst_target_verified_actual_reward_risk>=1.25",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
-      "symbol": "MITR",
-      "rank": 233,
-      "v6_score": 40.89,
-      "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 6,
       "state": "BLOCKED_UNVERIFIED_EVIDENCE",
       "priority": 0,
       "reason": "evidence_incomplete_transaction_not_authorized",
@@ -22314,7 +21908,7 @@
     },
     {
       "symbol": "MMHC",
-      "rank": 234,
+      "rank": 227,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 10,
@@ -22371,11 +21965,11 @@
       }
     },
     {
-      "symbol": "ENPI",
-      "rank": 235,
+      "symbol": "HDST",
+      "rank": 228,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 0.125,
+      "reference_close": 0.1,
       "state": "BLOCKED_UNVERIFIED_EVIDENCE",
       "priority": 0,
       "reason": "evidence_incomplete_transaction_not_authorized",
@@ -22429,8 +22023,66 @@
       }
     },
     {
-      "symbol": "GEOS",
-      "rank": 236,
+      "symbol": "ANCC",
+      "rank": 229,
+      "v6_score": 40.89,
+      "v6_action": "RESEARCH_SHARIA",
+      "reference_close": 10,
+      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
+      "priority": 0,
+      "reason": "evidence_incomplete_transaction_not_authorized",
+      "recovery_score_100": 40.24,
+      "quality_score_10": 4.59,
+      "entry_state": {
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
+      },
+      "entry_quality": 3.79,
+      "risk_reward": 3.35,
+      "cycle_strength": 5.1,
+      "institutional_intelligence": 2.1,
+      "valuation_payoff_check": {
+        "analyst_target_egp": null,
+        "analyst_target_as_of": null,
+        "analyst_target_source": null,
+        "upside_to_consensus_pct": null,
+        "downside_to_invalidation_pct": null,
+        "actual_reward_risk_to_consensus": null,
+        "minimum_required": 1.25,
+        "execution_blocked": false,
+        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
+      },
+      "day_change_pct": 0,
+      "relative_strength_vs_market_median_pct": 0,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": false,
+        "fundamentals": false,
+        "valuation": false,
+        "corporate_action": true
+      },
+      "execution_plan": null,
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward_proxy>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "if_analyst_target_verified_actual_reward_risk>=1.25",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "EEP",
+      "rank": 230,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 1,
@@ -22487,66 +22139,8 @@
       }
     },
     {
-      "symbol": "YAYT",
-      "rank": 237,
-      "v6_score": 40.89,
-      "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 10,
-      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
-      "priority": 0,
-      "reason": "evidence_incomplete_transaction_not_authorized",
-      "recovery_score_100": 40.24,
-      "quality_score_10": 4.59,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.79,
-      "risk_reward": 3.35,
-      "cycle_strength": 5.1,
-      "institutional_intelligence": 2.1,
-      "valuation_payoff_check": {
-        "analyst_target_egp": null,
-        "analyst_target_as_of": null,
-        "analyst_target_source": null,
-        "upside_to_consensus_pct": null,
-        "downside_to_invalidation_pct": null,
-        "actual_reward_risk_to_consensus": null,
-        "minimum_required": 1.25,
-        "execution_blocked": false,
-        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
-      },
-      "day_change_pct": 0,
-      "relative_strength_vs_market_median_pct": 0,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": false,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward_proxy>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "if_analyst_target_verified_actual_reward_risk>=1.25",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
       "symbol": "SINA",
-      "rank": 238,
+      "rank": 231,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 15,
@@ -22603,66 +22197,8 @@
       }
     },
     {
-      "symbol": "ACFR",
-      "rank": 239,
-      "v6_score": 40.89,
-      "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 10,
-      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
-      "priority": 0,
-      "reason": "evidence_incomplete_transaction_not_authorized",
-      "recovery_score_100": 40.24,
-      "quality_score_10": 4.59,
-      "entry_state": {
-        "state": "NO_ZONE",
-        "distance_pct": null,
-        "zone_low": null,
-        "zone_high": null
-      },
-      "entry_quality": 3.79,
-      "risk_reward": 3.35,
-      "cycle_strength": 5.1,
-      "institutional_intelligence": 2.1,
-      "valuation_payoff_check": {
-        "analyst_target_egp": null,
-        "analyst_target_as_of": null,
-        "analyst_target_source": null,
-        "upside_to_consensus_pct": null,
-        "downside_to_invalidation_pct": null,
-        "actual_reward_risk_to_consensus": null,
-        "minimum_required": 1.25,
-        "execution_blocked": false,
-        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
-      },
-      "day_change_pct": 0,
-      "relative_strength_vs_market_median_pct": 0,
-      "falling_knife_risk": true,
-      "exceptional_relative_strength": false,
-      "verified": {
-        "sharia": false,
-        "fundamentals": false,
-        "valuation": false,
-        "corporate_action": true
-      },
-      "execution_plan": null,
-      "alert_rules": {
-        "buy_only_if": [
-          "v6_action_is_buy",
-          "price_inside_entry_zone",
-          "quality_score>=7.4",
-          "entry_quality>=6.2",
-          "risk_reward_proxy>=6",
-          "cycle>=5",
-          "not_falling_knife",
-          "if_analyst_target_verified_actual_reward_risk>=1.25",
-          "market_not_panic_or_exceptional_relative_strength"
-        ],
-        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
-      }
-    },
-    {
-      "symbol": "KNGC",
-      "rank": 240,
+      "symbol": "NFCI",
+      "rank": 232,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 10,
@@ -22720,7 +22256,65 @@
     },
     {
       "symbol": "SIEG",
-      "rank": 241,
+      "rank": 233,
+      "v6_score": 40.89,
+      "v6_action": "RESEARCH_SHARIA",
+      "reference_close": 10,
+      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
+      "priority": 0,
+      "reason": "evidence_incomplete_transaction_not_authorized",
+      "recovery_score_100": 40.24,
+      "quality_score_10": 4.59,
+      "entry_state": {
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
+      },
+      "entry_quality": 3.79,
+      "risk_reward": 3.35,
+      "cycle_strength": 5.1,
+      "institutional_intelligence": 2.1,
+      "valuation_payoff_check": {
+        "analyst_target_egp": null,
+        "analyst_target_as_of": null,
+        "analyst_target_source": null,
+        "upside_to_consensus_pct": null,
+        "downside_to_invalidation_pct": null,
+        "actual_reward_risk_to_consensus": null,
+        "minimum_required": 1.25,
+        "execution_blocked": false,
+        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
+      },
+      "day_change_pct": 0,
+      "relative_strength_vs_market_median_pct": 0,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": false,
+        "fundamentals": false,
+        "valuation": false,
+        "corporate_action": true
+      },
+      "execution_plan": null,
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward_proxy>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "if_analyst_target_verified_actual_reward_risk>=1.25",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "EFAC",
+      "rank": 234,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 10,
@@ -22778,7 +22372,7 @@
     },
     {
       "symbol": "ALXD",
-      "rank": 242,
+      "rank": 235,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 5,
@@ -22835,11 +22429,11 @@
       }
     },
     {
-      "symbol": "HDST",
-      "rank": 243,
+      "symbol": "POCO",
+      "rank": 236,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
-      "reference_close": 0.1,
+      "reference_close": 5,
       "state": "BLOCKED_UNVERIFIED_EVIDENCE",
       "priority": 0,
       "reason": "evidence_incomplete_transaction_not_authorized",
@@ -22893,11 +22487,417 @@
       }
     },
     {
-      "symbol": "PMSC",
-      "rank": 244,
+      "symbol": "MLIC",
+      "rank": 237,
       "v6_score": 40.89,
       "v6_action": "RESEARCH_SHARIA",
       "reference_close": 10,
+      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
+      "priority": 0,
+      "reason": "evidence_incomplete_transaction_not_authorized",
+      "recovery_score_100": 40.24,
+      "quality_score_10": 4.59,
+      "entry_state": {
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
+      },
+      "entry_quality": 3.79,
+      "risk_reward": 3.35,
+      "cycle_strength": 5.1,
+      "institutional_intelligence": 2.1,
+      "valuation_payoff_check": {
+        "analyst_target_egp": null,
+        "analyst_target_as_of": null,
+        "analyst_target_source": null,
+        "upside_to_consensus_pct": null,
+        "downside_to_invalidation_pct": null,
+        "actual_reward_risk_to_consensus": null,
+        "minimum_required": 1.25,
+        "execution_blocked": false,
+        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
+      },
+      "day_change_pct": 0,
+      "relative_strength_vs_market_median_pct": 0,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": false,
+        "fundamentals": false,
+        "valuation": false,
+        "corporate_action": true
+      },
+      "execution_plan": null,
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward_proxy>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "if_analyst_target_verified_actual_reward_risk>=1.25",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "YAYT",
+      "rank": 238,
+      "v6_score": 40.89,
+      "v6_action": "RESEARCH_SHARIA",
+      "reference_close": 10,
+      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
+      "priority": 0,
+      "reason": "evidence_incomplete_transaction_not_authorized",
+      "recovery_score_100": 40.24,
+      "quality_score_10": 4.59,
+      "entry_state": {
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
+      },
+      "entry_quality": 3.79,
+      "risk_reward": 3.35,
+      "cycle_strength": 5.1,
+      "institutional_intelligence": 2.1,
+      "valuation_payoff_check": {
+        "analyst_target_egp": null,
+        "analyst_target_as_of": null,
+        "analyst_target_source": null,
+        "upside_to_consensus_pct": null,
+        "downside_to_invalidation_pct": null,
+        "actual_reward_risk_to_consensus": null,
+        "minimum_required": 1.25,
+        "execution_blocked": false,
+        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
+      },
+      "day_change_pct": 0,
+      "relative_strength_vs_market_median_pct": 0,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": false,
+        "fundamentals": false,
+        "valuation": false,
+        "corporate_action": true
+      },
+      "execution_plan": null,
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward_proxy>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "if_analyst_target_verified_actual_reward_risk>=1.25",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "GROV",
+      "rank": 239,
+      "v6_score": 40.89,
+      "v6_action": "RESEARCH_SHARIA",
+      "reference_close": 1,
+      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
+      "priority": 0,
+      "reason": "evidence_incomplete_transaction_not_authorized",
+      "recovery_score_100": 40.24,
+      "quality_score_10": 4.59,
+      "entry_state": {
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
+      },
+      "entry_quality": 3.79,
+      "risk_reward": 3.35,
+      "cycle_strength": 5.1,
+      "institutional_intelligence": 2.1,
+      "valuation_payoff_check": {
+        "analyst_target_egp": null,
+        "analyst_target_as_of": null,
+        "analyst_target_source": null,
+        "upside_to_consensus_pct": null,
+        "downside_to_invalidation_pct": null,
+        "actual_reward_risk_to_consensus": null,
+        "minimum_required": 1.25,
+        "execution_blocked": false,
+        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
+      },
+      "day_change_pct": 0,
+      "relative_strength_vs_market_median_pct": 0,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": false,
+        "fundamentals": false,
+        "valuation": false,
+        "corporate_action": true
+      },
+      "execution_plan": null,
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward_proxy>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "if_analyst_target_verified_actual_reward_risk>=1.25",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "EGS65101C015",
+      "rank": 240,
+      "v6_score": 40.89,
+      "v6_action": "RESEARCH_SHARIA",
+      "reference_close": 5,
+      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
+      "priority": 0,
+      "reason": "evidence_incomplete_transaction_not_authorized",
+      "recovery_score_100": 40.24,
+      "quality_score_10": 4.59,
+      "entry_state": {
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
+      },
+      "entry_quality": 3.79,
+      "risk_reward": 3.35,
+      "cycle_strength": 5.1,
+      "institutional_intelligence": 2.1,
+      "valuation_payoff_check": {
+        "analyst_target_egp": null,
+        "analyst_target_as_of": null,
+        "analyst_target_source": null,
+        "upside_to_consensus_pct": null,
+        "downside_to_invalidation_pct": null,
+        "actual_reward_risk_to_consensus": null,
+        "minimum_required": 1.25,
+        "execution_blocked": false,
+        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
+      },
+      "day_change_pct": 0,
+      "relative_strength_vs_market_median_pct": 0,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": false,
+        "fundamentals": false,
+        "valuation": false,
+        "corporate_action": true
+      },
+      "execution_plan": null,
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward_proxy>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "if_analyst_target_verified_actual_reward_risk>=1.25",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "EGS65861C014",
+      "rank": 241,
+      "v6_score": 40.89,
+      "v6_action": "RESEARCH_SHARIA",
+      "reference_close": 5,
+      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
+      "priority": 0,
+      "reason": "evidence_incomplete_transaction_not_authorized",
+      "recovery_score_100": 40.24,
+      "quality_score_10": 4.59,
+      "entry_state": {
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
+      },
+      "entry_quality": 3.79,
+      "risk_reward": 3.35,
+      "cycle_strength": 5.1,
+      "institutional_intelligence": 2.1,
+      "valuation_payoff_check": {
+        "analyst_target_egp": null,
+        "analyst_target_as_of": null,
+        "analyst_target_source": null,
+        "upside_to_consensus_pct": null,
+        "downside_to_invalidation_pct": null,
+        "actual_reward_risk_to_consensus": null,
+        "minimum_required": 1.25,
+        "execution_blocked": false,
+        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
+      },
+      "day_change_pct": 0,
+      "relative_strength_vs_market_median_pct": 0,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": false,
+        "fundamentals": false,
+        "valuation": false,
+        "corporate_action": true
+      },
+      "execution_plan": null,
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward_proxy>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "if_analyst_target_verified_actual_reward_risk>=1.25",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "CID",
+      "rank": 242,
+      "v6_score": 40.89,
+      "v6_action": "RESEARCH_SHARIA",
+      "reference_close": 10,
+      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
+      "priority": 0,
+      "reason": "evidence_incomplete_transaction_not_authorized",
+      "recovery_score_100": 40.24,
+      "quality_score_10": 4.59,
+      "entry_state": {
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
+      },
+      "entry_quality": 3.79,
+      "risk_reward": 3.35,
+      "cycle_strength": 5.1,
+      "institutional_intelligence": 2.1,
+      "valuation_payoff_check": {
+        "analyst_target_egp": null,
+        "analyst_target_as_of": null,
+        "analyst_target_source": null,
+        "upside_to_consensus_pct": null,
+        "downside_to_invalidation_pct": null,
+        "actual_reward_risk_to_consensus": null,
+        "minimum_required": 1.25,
+        "execution_blocked": false,
+        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
+      },
+      "day_change_pct": 0,
+      "relative_strength_vs_market_median_pct": 0,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": false,
+        "fundamentals": false,
+        "valuation": false,
+        "corporate_action": true
+      },
+      "execution_plan": null,
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward_proxy>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "if_analyst_target_verified_actual_reward_risk>=1.25",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "MITR",
+      "rank": 243,
+      "v6_score": 40.89,
+      "v6_action": "RESEARCH_SHARIA",
+      "reference_close": 6,
+      "state": "BLOCKED_UNVERIFIED_EVIDENCE",
+      "priority": 0,
+      "reason": "evidence_incomplete_transaction_not_authorized",
+      "recovery_score_100": 40.24,
+      "quality_score_10": 4.59,
+      "entry_state": {
+        "state": "NO_ZONE",
+        "distance_pct": null,
+        "zone_low": null,
+        "zone_high": null
+      },
+      "entry_quality": 3.79,
+      "risk_reward": 3.35,
+      "cycle_strength": 5.1,
+      "institutional_intelligence": 2.1,
+      "valuation_payoff_check": {
+        "analyst_target_egp": null,
+        "analyst_target_as_of": null,
+        "analyst_target_source": null,
+        "upside_to_consensus_pct": null,
+        "downside_to_invalidation_pct": null,
+        "actual_reward_risk_to_consensus": null,
+        "minimum_required": 1.25,
+        "execution_blocked": false,
+        "note": "Analyst consensus is not intrinsic value; this is a conservative price-only payoff veto, excluding uncertain future dividends."
+      },
+      "day_change_pct": 0,
+      "relative_strength_vs_market_median_pct": 0,
+      "falling_knife_risk": true,
+      "exceptional_relative_strength": false,
+      "verified": {
+        "sharia": false,
+        "fundamentals": false,
+        "valuation": false,
+        "corporate_action": true
+      },
+      "execution_plan": null,
+      "alert_rules": {
+        "buy_only_if": [
+          "v6_action_is_buy",
+          "price_inside_entry_zone",
+          "quality_score>=7.4",
+          "entry_quality>=6.2",
+          "risk_reward_proxy>=6",
+          "cycle>=5",
+          "not_falling_knife",
+          "if_analyst_target_verified_actual_reward_risk>=1.25",
+          "market_not_panic_or_exceptional_relative_strength"
+        ],
+        "average_down_rule": "Never average solely because price is below cost basis; require recovery trigger first."
+      }
+    },
+    {
+      "symbol": "EGOTH",
+      "rank": 244,
+      "v6_score": 40.89,
+      "v6_action": "RESEARCH_SHARIA",
+      "reference_close": 100,
       "state": "BLOCKED_UNVERIFIED_EVIDENCE",
       "priority": 0,
       "reason": "evidence_incomplete_transaction_not_authorized",
