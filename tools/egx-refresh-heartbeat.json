@@ -1,7 +1,7 @@
 {
   "schema": "egx-scheduler-heartbeat-v1",
-  "last_requested_at_utc": "2026-11-08T08:16:46Z",
+  "last_requested_at_utc": "2026-11-08T10:22:19Z",
   "purpose": "independent scheduler contingency; changes trigger V5 only when primary GitHub schedule missed",
   "execution_policy": "no trades; preserve all quote and Sharia gates",
-  "reason": "2026-11-08 10:16 Africa/Cairo: latest contract session 2026-11-05, retrieved_at 2026-11-05T14:30:36.994Z; latest V5 completed, no active V5 in latest runs; prior heartbeat older than 20 minutes. Request market-only refresh with all independent quote, Sharia, and execution safeguards unchanged."
+  "reason": "2026-11-08 12:22 Africa/Cairo: egx-live contract remains on 2026-11-05; latest V5 run 42462257785 failed, no active V5; heartbeat older than 20 minutes. Request V5 refresh without relaxing completeness, independent quote, Sharia or trading gates."
 }
