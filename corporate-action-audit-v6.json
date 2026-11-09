@@ -1,10 +1,18 @@
 {
   "engine": "EGX Corporate Action Anomaly Guard",
   "version": 1,
-  "generated_at": "2026-11-08T18:24:47.978Z",
-  "reference_session": "2026-11-08",
+  "generated_at": "2026-11-09T08:15:22.936Z",
+  "reference_session": "2026-11-09",
   "method": "detect >45% up-gap or >31% down-gap across retained closes unless explicitly verified adjusted",
   "flagged": [
+    {
+      "symbol": "EFID",
+      "status": "unverified_adjustment",
+      "technical_history_gate": false,
+      "anomalies": [],
+      "lookback_sessions": 30,
+      "verified_adjustment_override": false
+    },
     {
       "symbol": "ORHD",
       "status": "suspected_unadjusted_event",
