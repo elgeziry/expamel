@@ -5,6 +5,8 @@ on:
     branches: [master]
     paths:
       - 'tools/egx_independent_source.py'
+      - 'tools/egx_rapidapi_source.py'
+      - 'tools/test_egx_rapidapi_source.py'
       - 'tools/egx_full_market_scout.py'
       - 'tools/test_egx_independent_source.py'
       - 'tools/test_egx_full_market_scout.py'
@@ -14,6 +16,8 @@ on:
     paths:
       - '.github/workflows/egx-independent-provider-validation.yml'
       - 'tools/egx_independent_source.py'
+      - 'tools/egx_rapidapi_source.py'
+      - 'tools/test_egx_rapidapi_source.py'
       - 'tools/egx_full_market_scout.py'
       - 'tools/test_egx_independent_source.py'
       - 'tools/test_egx_full_market_scout.py'
@@ -29,6 +33,7 @@ jobs:
         run: |
           python3 -m unittest discover -s tools -p 'test_egx_independent_source.py' -v
           python3 -m unittest discover -s tools -p 'test_egx_full_market_scout.py' -v
+          python3 -m unittest discover -s tools -p 'test_egx_rapidapi_source.py' -v
       - name: Retrieve published EGX engine state
         shell: bash
         run: |
@@ -37,7 +42,11 @@ jobs:
           for file in contract.json universe.json history.json decision-intelligence-v6.json capital-recovery-alerts-v1.json; do
             curl -fsSL --retry 3 --retry-delay 1 "https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/egx-live/$file?ts=${GITHUB_RUN_ID}" -o "/tmp/egx-independent-fixture/$file"
           done
-      - name: Verify real independent source and timestamp session correlation
+      - name: Verify actual sources and authenticated API failover if configured
+        env:
+          EGX_RAPIDAPI_KEY: ${{ secrets.EGX_RAPIDAPI_KEY }}
+          EGX_RAPIDAPI_HOST: ${{ vars.EGX_RAPIDAPI_HOST }}
+          EGX_RAPIDAPI_MAX_PER_RUN: ${{ vars.EGX_RAPIDAPI_MAX_PER_RUN || '0' }}
         run: python3 tools/egx_independent_source.py --root /tmp/egx-independent-fixture
       - name: Assert gate is actually enforced
         shell: bash

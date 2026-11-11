@@ -121,6 +121,35 @@ class IndependentSourceGateTests(unittest.TestCase):
         self.assertEqual(report["buy_triggers_after"], 0)
         self.assertFalse(alerts["market_gate"]["new_buy_orders_allowed"])
 
+    def test_authorized_egx_news_quote_can_verify_without_mubasher(self):
+        import os
+        q = self.sample_quote(
+            source="EGX.news / EGX Live via RapidAPI",
+            source_url="https://egx-live.p.rapidapi.com/api/price/MFPC",
+            source_delay_class="API_EXPLICIT_EXCHANGE_TRADE_TIMESTAMP")
+        with patch.dict(os.environ, {
+                "EGX_RAPIDAPI_KEY":"synthetic_test_key",
+                "EGX_RAPIDAPI_HOST":"egx-live.p.rapidapi.com",
+                "EGX_RAPIDAPI_MAX_PER_RUN":"8"}, clear=False):
+            with patch.object(gate.egx_live,"quote",return_value=q) as provider:
+                with patch.object(gate,"quote",side_effect=ConnectionError("Mubasher outage")):
+                    report=gate.scan(self.root)
+        self.assertTrue(provider.called)
+        self.assertEqual(report["buy_triggers_after"],1)
+        self.assertEqual(report["quotes"]["MFPC"]["source"],"EGX.news / EGX Live via RapidAPI")
+
+    def test_unavailable_authorized_api_falls_back_to_mubasher(self):
+        import os
+        with patch.dict(os.environ, {
+                "EGX_RAPIDAPI_KEY":"synthetic_test_key",
+                "EGX_RAPIDAPI_HOST":"egx-live.p.rapidapi.com",
+                "EGX_RAPIDAPI_MAX_PER_RUN":"8"}, clear=False):
+            with patch.object(gate.egx_live,"quote",side_effect=TimeoutError("API timeout")):
+                report, alerts=self.run_case(self.sample_quote())
+        self.assertEqual(report["buy_triggers_after"],1)
+        self.assertEqual(alerts["buy_triggers"][0]["symbol"],"MFPC")
+        self.assertTrue(report["provider_failures"]["MFPC"].startswith("egx_live_failed:"))
+
     def test_network_failure_blocks_buy_trigger(self):
         with patch.object(gate, "quote", side_effect=ConnectionError("provider offline")):
             report = gate.scan(self.root)
