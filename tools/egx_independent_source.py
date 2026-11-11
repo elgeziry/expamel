@@ -15,6 +15,7 @@ import re
 import urllib.request
 from pathlib import Path
 from zoneinfo import ZoneInfo
+from egx_reference_fallback import fetch as fetch_closing_reference
 
 CAIRO = ZoneInfo("Africa/Cairo")
 PROVIDER = "Mubasher Egypt (delayed)"
@@ -183,8 +184,39 @@ def scan(root):
 
             records[symbol] = q
         except Exception as exc:
-            records[symbol] = {"symbol": symbol, "source": PROVIDER, "verified": False,
-                               "status": "UNAVAILABLE", "reason": str(exc)[:200]}
+            # A source outage or absence of an intraday quote before opening
+            # must not erase an independently dated close for analytical use.
+            # This is a READ-ONLY fallback and can NEVER authorize buy_triggers.
+            try:
+                secondary = fetch_closing_reference(symbol)
+                reference = number(current.get(symbol, {}).get("close"))
+                alt_price = number(secondary.get("price_egp"))
+                difference = (round(abs(reference - alt_price) / alt_price * 100, 3)
+                              if reference and alt_price else None)
+                same_session = secondary.get("source_session_date") == session
+                correlated = bool(same_session and difference is not None
+                                  and difference <= MAX_PRICE_DIFF_PCT)
+                secondary.update({
+                    "primary_price_egp": reference,
+                    "historical_previous_close_egp": number(previous.get(symbol, {}).get("close")),
+                    "price_difference_pct": difference,
+                    "previous_close_difference_pct": None,
+                    "same_session_correlated": same_session,
+                    "reference_verified": correlated,
+                    "status": "CLOSING_REFERENCE_ONLY" if correlated else "UNVERIFIED",
+                    "reason": ("dated_secondary_close_correlated_not_executable"
+                               if correlated else
+                               "secondary_reference_stale_or_price_disagreement"),
+                    "primary_source_unavailable_reason": str(exc)[:160],
+                })
+                records[symbol] = secondary
+            except Exception as fallback_exc:
+                records[symbol] = {
+                    "symbol": symbol, "source": PROVIDER, "verified": False,
+                    "reference_verified": False, "status": "UNAVAILABLE",
+                    "reason": ("primary: " + str(exc)[:90] +
+                               "; secondary: " + str(fallback_exc)[:90])
+                }
     initial = list(alerts.get("buy_triggers") or [])
     accepted, blocked = [], []
     for item in initial:
@@ -236,10 +268,16 @@ def scan(root):
         "timestamp_limitation": "Provider displays time but not always the date; date corroborated using prior close.",
         "fully_independent_provider": True,
         "source_quotes_are_delayed": True,
+        "provider_fallback_policy": "Mubasher timestamped intraday first; dated delayed AskBorsa close only for analysis, never for execution.",
         "execution_price_must_be_confirmed_at_broker": True,
         "quotes": records,
         "selected_symbols": list(selected_symbols),
         "reference_verified_symbols": sorted(k for k, v in records.items() if v.get("reference_verified")),
+        "dated_secondary_reference_provider": "AskBorsa (dated delayed reference)",
+        "dated_secondary_reference_symbols": sorted(
+            k for k, v in records.items() if v.get("reference_verified")
+            and v.get("source_delay_class") == "DATED_EOD_NO_TRADE_TIME"),
+        "dated_secondary_cannot_authorize_buy": True,
         "postclose_reference_is_not_executable": True,
         "buy_triggers_before": len(initial),
         "buy_triggers_after": len(accepted),
