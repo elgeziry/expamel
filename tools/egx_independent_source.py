@@ -15,6 +15,8 @@ import re
 import urllib.request
 from pathlib import Path
 from zoneinfo import ZoneInfo
+import os
+import egx_rapidapi_source as egx_live
 
 CAIRO = ZoneInfo("Africa/Cairo")
 PROVIDER = "Mubasher Egypt (delayed)"
@@ -123,9 +125,26 @@ def scan(root):
     previous = {str(row.get("symbol", "")).upper(): row for row in prior_sessions[-1].get("stocks", [])} if prior_sessions else {}
     records = {}
     selected_symbols = focus_universe(root)
+    # Reserve paid/free-tier API calls for current dynamic leaders as well as
+    # established positions. The API is optional; no credentials, no API calls.
+    api_limit = max(0, min(16, int(os.environ.get("EGX_RAPIDAPI_MAX_PER_RUN", "8"))))
+    discovered = [s for s in selected_symbols if s not in FOCUS]
+    staples = [s for s in selected_symbols if s in FOCUS]
+    api_priority = discovered[:4] + staples[:4] + discovered[4:] + staples[4:]
+    api_symbols = set(api_priority[:api_limit]) if egx_live.enabled() else set()
+    provider_failures = {}
     for symbol in selected_symbols:
         try:
-            q = quote(symbol)
+            q = None
+            if symbol in api_symbols:
+                try:
+                    q = egx_live.quote(symbol)
+                except Exception as api_exc:
+                    # Authorized API unavailable/response uncertain: use
+                    # time-stamped Mubasher instead, never a synthetic quote.
+                    provider_failures[symbol] = "egx_live_failed: " + type(api_exc).__name__
+            if q is None:
+                q = quote(symbol)
             reference = number(current.get(symbol, {}).get("close"))
             past = number(previous.get(symbol, {}).get("close"))
             prev = q["previous_close_egp"]
@@ -191,7 +210,7 @@ def scan(root):
         symbol = str(item.get("symbol", "")).upper()
         evidence = records.get(symbol, {"verified": False, "reason": "symbol_not_independently_checked"})
         if evidence.get("verified") is True:
-            item["independent_quote_evidence"] = {"source": PROVIDER,
+            item["independent_quote_evidence"] = {"source": evidence.get("source", PROVIDER),
                 "source_market_time": evidence["observation_time_cairo"],
                 "age_minutes": evidence["age_minutes"],
                 "primary_independent_difference_pct": evidence["price_difference_pct"]}
@@ -216,10 +235,10 @@ def scan(root):
     alerts.setdefault("market_gate", {})["new_buy_orders_allowed"] = len(accepted) > 0
     alerts["blocked_independent_quotes"] = blocked
     alerts["independent_source_gate"] = {
-        "provider": PROVIDER,
-        "as_of": "market_local_update_time_date_inferred_and_correlated",
+        "provider": "EGX.news authorized RapidAPI when configured, otherwise Mubasher delayed",
+        "as_of": "explicit_exchange_trade_timestamp_or_correlated_market_update_time",
         "checked_symbols": len(records),
-        "verification_symbol_policy": "fixed_portfolio_plus_dynamic_top_near_entry_verified",
+        "verification_symbol_policy": "dynamic_leaders_plus_portfolio; use API quota cap and Mubasher backup",
         "verified_symbols": sorted(k for k, v in records.items() if v.get("verified")),
         "blocked_buy_triggers": len(blocked),
         "enforces_buy_trigger_gate": True,
@@ -228,7 +247,10 @@ def scan(root):
     report = {
         "schema": "egx-independent-quote-audit-v1",
         "session": session,
-        "provider": PROVIDER,
+        "provider": "EGX.news RapidAPI (authorized) + Mubasher (delayed)",
+        "authorized_api_configured": egx_live.enabled(),
+        "authorized_api_attempted_symbols": sorted(api_symbols),
+        "provider_failures": provider_failures,
         "checked_at_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
         "maximum_quote_age_minutes": MAX_QUOTE_AGE_MIN,
         "validity_policy": "Source market observation time + 75 minutes; only during active EGX session; revalidate expiry on every downstream scan.",
