@@ -36,6 +36,11 @@ class AuthorizedFeedTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             feed.parse_api_quote(GOOD,"ORWE",DATE)
 
+    def test_nested_quote_cannot_bypass_wrong_root_ticker(self):
+        with self.assertRaises(ValueError):
+            feed.parse_api_quote({"symbol":"ORWE", "data":{"quote":GOOD}},
+                                 "EGAL", DATE)
+
     def test_future_and_naive_timestamps_rejected(self):
         with self.assertRaises(ValueError):
             feed.parse_api_quote({**GOOD,"lastTradeTime":"2026-11-11T09:00:00Z"},"EGAL",DATE)
