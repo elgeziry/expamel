@@ -31,6 +31,11 @@ class IndependentSourceGateTests(unittest.TestCase):
         }
         for name, doc in docs.items():
             (self.root / name).write_text(json.dumps(doc))
+        self._secondary = patch.object(
+            gate, "fetch_closing_reference",
+            side_effect=ValueError("No secondary source in default test"))
+        self._secondary.start()
+        self.addCleanup(self._secondary.stop)
 
     def tearDown(self):
         self.temp.cleanup()
@@ -120,6 +125,39 @@ class IndependentSourceGateTests(unittest.TestCase):
         self.assertFalse(report["quotes"]["MFPC"]["execution_quote_valid"])
         self.assertEqual(report["buy_triggers_after"], 0)
         self.assertFalse(alerts["market_gate"]["new_buy_orders_allowed"])
+
+    def test_secondary_dated_close_is_analysis_only(self):
+        from unittest.mock import patch as mock_patch
+        sample = {
+            "symbol": "MFPC", "source": "AskBorsa (dated delayed reference)",
+            "source_url": "https://www.askborsa.com/company/MFPC",
+            "source_session_date": SESSION, "price_egp": 45.2,
+            "verified": False, "execution_quote_valid": False,
+            "reference_verified": False, "quote_valid_until_utc": None,
+            "observation_time_cairo": None, "age_minutes": None,
+            "source_delay_class": "DATED_EOD_NO_TRADE_TIME",
+        }
+        with mock_patch.object(gate, "quote", side_effect=ValueError("No source update time")):
+            with mock_patch.object(gate, "fetch_closing_reference", return_value=sample):
+                result = gate.scan(self.root)
+        q = result["quotes"]["MFPC"]
+        self.assertTrue(q["reference_verified"])
+        self.assertFalse(q["verified"])
+        self.assertFalse(q["execution_quote_valid"])
+        self.assertEqual(q["status"], "CLOSING_REFERENCE_ONLY")
+        self.assertEqual(result["buy_triggers_after"], 0)
+        self.assertEqual(result["dated_secondary_reference_symbols"], ["MFPC"])
+
+    def test_mismatched_secondary_close_never_authorizes_anything(self):
+        with patch.object(gate, "quote", side_effect=ValueError("Mubasher absent")):
+            with patch.object(gate, "fetch_closing_reference", return_value={
+                    "symbol": "MFPC", "source_session_date": SESSION, "price_egp": 38.0,
+                    "verified": False, "execution_quote_valid": False,
+                    "source_delay_class": "DATED_EOD_NO_TRADE_TIME"}):
+                result = gate.scan(self.root)
+        self.assertEqual(result["quotes"]["MFPC"]["status"], "UNVERIFIED")
+        self.assertFalse(result["quotes"]["MFPC"]["reference_verified"])
+        self.assertEqual(result["buy_triggers_after"], 0)
 
     def test_network_failure_blocks_buy_trigger(self):
         with patch.object(gate, "quote", side_effect=ConnectionError("provider offline")):
