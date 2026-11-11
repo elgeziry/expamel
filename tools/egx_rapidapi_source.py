@@ -70,6 +70,11 @@ def parse_api_quote(data, symbol, retrieved_utc):
         raise ValueError("Invalid symbol")
     if retrieved_utc.tzinfo is None:
         raise ValueError("Retrieval time has no time zone")
+    if not isinstance(data, dict):
+        raise ValueError("Unexpected API response")
+    root_symbol = data.get("symbol") or data.get("ticker") or data.get("code")
+    if root_symbol and str(root_symbol).strip().upper() != symbol:
+        raise ValueError("API response belongs to another stock")
     price_keys=("last_price", "lastPrice", "last", "last_traded_price",
                 "lastTradedPrice", "ltp", "price")
     prev_keys=("previous_close", "previousClose", "prev_close",
