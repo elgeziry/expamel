@@ -127,7 +127,12 @@ def scan(root):
     selected_symbols = focus_universe(root)
     # Reserve paid/free-tier API calls for current dynamic leaders as well as
     # established positions. The API is optional; no credentials, no API calls.
-    api_limit = max(0, min(16, int(os.environ.get("EGX_RAPIDAPI_MAX_PER_RUN", "8"))))
+    # Default OFF: RapidAPI free-tier limits and overage terms must be
+    # explicitly approved by the owner, not inferred from a saved API key.
+    try:
+        api_limit = max(0, min(16, int(os.environ.get("EGX_RAPIDAPI_MAX_PER_RUN", "0"))))
+    except ValueError:
+        api_limit = 0
     discovered = [s for s in selected_symbols if s not in FOCUS]
     staples = [s for s in selected_symbols if s in FOCUS]
     api_priority = discovered[:4] + staples[:4] + discovered[4:] + staples[4:]
@@ -145,6 +150,8 @@ def scan(root):
                     provider_failures[symbol] = "egx_live_failed: " + type(api_exc).__name__
             if q is None:
                 q = quote(symbol)
+            if str(q.get("symbol", "")).upper() != symbol:
+                raise ValueError("Independent quote symbol mismatch")
             reference = number(current.get(symbol, {}).get("close"))
             past = number(previous.get(symbol, {}).get("close"))
             prev = q["previous_close_egp"]
@@ -249,6 +256,7 @@ def scan(root):
         "session": session,
         "provider": "EGX.news RapidAPI (authorized) + Mubasher (delayed)",
         "authorized_api_configured": egx_live.enabled(),
+        "authorized_api_quota_approved_this_run": api_limit,
         "authorized_api_attempted_symbols": sorted(api_symbols),
         "provider_failures": provider_failures,
         "checked_at_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
