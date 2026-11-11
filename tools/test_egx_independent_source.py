@@ -62,6 +62,9 @@ class IndependentSourceGateTests(unittest.TestCase):
         self.assertEqual(report["buy_triggers_after"], 1)
         self.assertEqual(alerts["buy_triggers"][0]["symbol"], "MFPC")
         self.assertTrue(report["quotes"]["MFPC"]["verified"])
+        self.assertTrue(report["quotes"]["MFPC"]["market_session_open_at_check"])
+        self.assertEqual(report["quotes"]["MFPC"]["quote_valid_until_utc"],
+                         "2026-10-27T10:50:00+00:00")
         self.assertTrue(alerts["market_gate"]["new_buy_orders_allowed"])
         self.assertEqual(alerts["verified_recovery_ranking"][0]["state"], "BUY_TRIGGER")
 
@@ -107,6 +110,16 @@ class IndependentSourceGateTests(unittest.TestCase):
     def test_corporate_action_or_prior_close_mismatch_blocks_buy_trigger(self):
         report, _ = self.run_case(self.sample_quote(previous_close_egp=34.0))
         self.assertEqual(report["buy_triggers_after"], 0)
+
+    def test_preopen_quote_cannot_authorize_a_trade(self):
+        report, alerts = self.run_case(self.sample_quote(
+            retrieved_at_utc="2026-10-27T06:45:00+00:00",
+            observation_time_cairo="2026-10-27T09:35:00+03:00",
+            age_minutes=10))
+        self.assertFalse(report["quotes"]["MFPC"]["market_session_open_at_check"])
+        self.assertFalse(report["quotes"]["MFPC"]["execution_quote_valid"])
+        self.assertEqual(report["buy_triggers_after"], 0)
+        self.assertFalse(alerts["market_gate"]["new_buy_orders_allowed"])
 
     def test_network_failure_blocks_buy_trigger(self):
         with patch.object(gate, "quote", side_effect=ConnectionError("provider offline")):
