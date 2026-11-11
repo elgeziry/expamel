@@ -46,7 +46,7 @@ jobs:
         env:
           EGX_RAPIDAPI_KEY: ${{ secrets.EGX_RAPIDAPI_KEY }}
           EGX_RAPIDAPI_HOST: ${{ vars.EGX_RAPIDAPI_HOST }}
-          EGX_RAPIDAPI_MAX_PER_RUN: '8'
+          EGX_RAPIDAPI_MAX_PER_RUN: ${{ vars.EGX_RAPIDAPI_MAX_PER_RUN || '0' }}
         run: python3 tools/egx_independent_source.py --root /tmp/egx-independent-fixture
       - name: Assert gate is actually enforced
         shell: bash
