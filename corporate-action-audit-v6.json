@@ -1,7 +1,7 @@
 {
   "engine": "EGX Corporate Action Anomaly Guard",
   "version": 1,
-  "generated_at": "2026-11-11T12:24:17.277Z",
+  "generated_at": "2026-11-11T14:02:03.282Z",
   "reference_session": "2026-11-11",
   "method": "detect >45% up-gap or >31% down-gap across retained closes unless explicitly verified adjusted",
   "flagged": [
@@ -83,6 +83,21 @@
           "previous_close": 0.1,
           "close": 24.5,
           "ratio": 245
+        }
+      ],
+      "lookback_sessions": 30,
+      "verified_adjustment_override": false
+    },
+    {
+      "symbol": "MLIC",
+      "status": "suspected_unadjusted_event",
+      "technical_history_gate": false,
+      "anomalies": [
+        {
+          "date": "2026-11-11",
+          "previous_close": 10,
+          "close": 1,
+          "ratio": 0.1
         }
       ],
       "lookback_sessions": 30,
