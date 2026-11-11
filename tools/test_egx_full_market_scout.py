@@ -37,6 +37,7 @@ class MarketScoutTests(unittest.TestCase):
         self.tmp=tempfile.TemporaryDirectory()
         self.root=Path(self.tmp.name)
         self.now=dt.datetime.now(dt.timezone.utc).isoformat()
+        self.expiry=(dt.datetime.now(dt.timezone.utc)+dt.timedelta(minutes=65)).isoformat()
         self.rows=[stock("N%03d"%i,i+1,score=32,complete=False) for i in range(255)]
         self.rows[239]=stock("NEWCO",240,score=78)
         self.rows[1]=stock("EGAL",2,score=76)
@@ -44,7 +45,8 @@ class MarketScoutTests(unittest.TestCase):
         self.alerts=[alert(z["symbol"]) for z in self.rows]
         self.docs={
             "contract.json":{"retrieved_at":self.now,"expected_reference_session_date":SESSION,
-                             "bridge_gate":"pass","execution_usable":True},
+                             "bridge_gate":"pass","execution_usable":True,
+                             "session_status":"continuous"},
             "decision-intelligence-v6.json":{"reference_session":SESSION,"generated_at":self.now,
                 "data_gates":{"pass":True},"all_ranked":self.rows},
             "capital-recovery-alerts-v1.json":{"reference_session":SESSION,"generated_at":self.now,
@@ -52,8 +54,12 @@ class MarketScoutTests(unittest.TestCase):
                 "market_gate":{"new_buy_orders_allowed":False}},
             "independent-quote-audit.json":{"session":SESSION,"checked_at_utc":self.now,
                 "quotes":{"NEWCO":{"verified":True,"price_egp":19.8,
+                                   "market_session_open_at_check":True,
+                                   "quote_valid_until_utc":self.expiry,
                                    "observation_time_cairo":"2026-10-27T12:45:00+03:00"},
                           "EGAL":{"verified":True,"price_egp":19.8,
+                                  "market_session_open_at_check":True,
+                                  "quote_valid_until_utc":self.expiry,
                                   "observation_time_cairo":"2026-10-27T12:45:00+03:00"}}},
         }
 
@@ -113,6 +119,39 @@ class MarketScoutTests(unittest.TestCase):
         self.docs["independent-quote-audit.json"]["quotes"]["NEWCO"]["verified"]=False
         r2=self.run_scout()
         self.assertEqual(self.find(r2,"NEWCO")["state"],"WATCH_QUOTE_PENDING")
+
+    def test_expired_independent_quote_does_not_authorize_buy(self):
+        self.docs["independent-quote-audit.json"]["quotes"]["NEWCO"]["quote_valid_until_utc"] = (
+            dt.datetime.now(dt.timezone.utc)-dt.timedelta(minutes=1)).isoformat()
+        r = self.run_scout()
+        self.assertEqual(self.find(r,"NEWCO")["state"],"WATCH_QUOTE_PENDING")
+        self.assertFalse(self.find(r,"NEWCO")["independent_quote_verified"])
+
+    def test_postclose_close_reference_is_not_reported_as_source_failure(self):
+        prev = {"session":SESSION, "state_by_symbol":{"NEWCO":"BUY_CANDIDATE_FINAL_CHECK",
+                                                       "EGAL":"WATCH_PRICE_CONFIRMED"},
+                "recent_events":[]}
+        self.docs["previous-market-opportunity-scout.json"]=prev
+        self.docs["contract.json"]["session_status"]="closed"
+        q = self.docs["independent-quote-audit.json"]["quotes"]["NEWCO"]
+        q.update({"verified":False, "reference_verified":True,
+                  "status":"CLOSING_REFERENCE_ONLY"})
+        r = self.run_scout()
+        x = self.find(r,"NEWCO")
+        self.assertEqual(x["state"],"WATCH_POSTCLOSE_REFERENCE")
+        self.assertFalse(x["independent_quote_verified"])
+        self.assertEqual(r["new_events"],[])
+        self.assertEqual(r["summary"]["engine_confirmed_buy_triggers"],0)
+
+    def test_buy_candidate_downgrade_is_not_new_opportunity(self):
+        self.docs["previous-market-opportunity-scout.json"] = {
+            "session":SESSION, "state_by_symbol":{"NEWCO":"BUY_CANDIDATE_FINAL_CHECK",
+                                                   "EGAL":"WATCH_PRICE_CONFIRMED"},
+            "recent_events":[]}
+        self.docs["independent-quote-audit.json"]["quotes"]["NEWCO"]["verified"]=False
+        r = self.run_scout()
+        self.assertEqual(self.find(r,"NEWCO")["state"],"WATCH_QUOTE_PENDING")
+        self.assertFalse(any(e["symbol"]=="NEWCO" for e in r["new_events"]))
 
     def test_sharia_conflict_needs_explicit_verified_resolution(self):
         r=self.rows[239]
