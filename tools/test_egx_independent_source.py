@@ -129,7 +129,8 @@ class IndependentSourceGateTests(unittest.TestCase):
             source_delay_class="API_EXPLICIT_EXCHANGE_TRADE_TIMESTAMP")
         with patch.dict(os.environ, {
                 "EGX_RAPIDAPI_KEY":"synthetic_test_key",
-                "EGX_RAPIDAPI_HOST":"egx-live.p.rapidapi.com"}, clear=False):
+                "EGX_RAPIDAPI_HOST":"egx-live.p.rapidapi.com",
+                "EGX_RAPIDAPI_MAX_PER_RUN":"8"}, clear=False):
             with patch.object(gate.egx_live,"quote",return_value=q) as provider:
                 with patch.object(gate,"quote",side_effect=ConnectionError("Mubasher outage")):
                     report=gate.scan(self.root)
@@ -141,7 +142,8 @@ class IndependentSourceGateTests(unittest.TestCase):
         import os
         with patch.dict(os.environ, {
                 "EGX_RAPIDAPI_KEY":"synthetic_test_key",
-                "EGX_RAPIDAPI_HOST":"egx-live.p.rapidapi.com"}, clear=False):
+                "EGX_RAPIDAPI_HOST":"egx-live.p.rapidapi.com",
+                "EGX_RAPIDAPI_MAX_PER_RUN":"8"}, clear=False):
             with patch.object(gate.egx_live,"quote",side_effect=TimeoutError("API timeout")):
                 report, alerts=self.run_case(self.sample_quote())
         self.assertEqual(report["buy_triggers_after"],1)
