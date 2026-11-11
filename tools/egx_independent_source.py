@@ -141,19 +141,35 @@ def scan(root):
             check_utc = dt.datetime.fromisoformat(q["retrieved_at_utc"].replace("Z", "+00:00"))
             now_local = check_utc.astimezone(CAIRO)
             observed_local = dt.datetime.fromisoformat(q["observation_time_cairo"])
-            after_close = now_local.hour * 60 + now_local.minute >= 14 * 60 + 30
+            local_minutes = now_local.hour * 60 + now_local.minute
+            after_close = local_minutes >= 14 * 60 + 30
+            market_open = (10 * 60 <= local_minutes < 14 * 60 + 30
+                           and now_local.strftime("%Y-%m-%d") == session
+                           and now_local.weekday() in (6, 0, 1, 2, 3)
+                           and contract.get("session_status") != "closed")
             near_close_sample = observed_local.hour * 60 + observed_local.minute >= 13 * 60 + 15
             price_correlated = (q["price_difference_pct"] is not None
                                 and q["price_difference_pct"] <= MAX_PRICE_DIFF_PCT)
-            q["verified"] = (q["same_session_correlated"] and 0 <= q["age_minutes"] <= MAX_QUOTE_AGE_MIN
-                             and price_correlated and not after_close)
+            # The validity deadline derives from the source's observed market
+            # time, NEVER the time a GitHub job or JSON reader fetches a file.
+            # Consumers must check this deadline again before using a signal.
+            q["quote_valid_until_utc"] = (
+                observed_local.astimezone(dt.timezone.utc)
+                + dt.timedelta(minutes=MAX_QUOTE_AGE_MIN)
+            ).isoformat()
+            q["market_session_open_at_check"] = market_open
+            q["verified"] = bool(q["same_session_correlated"]
+                                 and 0 <= q["age_minutes"] <= MAX_QUOTE_AGE_MIN
+                                 and price_correlated and market_open)
+            # Post-close observations can corroborate the session close for
+            # research, but must never be represented as executable quotes.
             q["reference_verified"] = bool(q["verified"] or (
                 after_close and near_close_sample and q["same_session_correlated"]
                 and 0 <= q["age_minutes"] <= 180 and price_correlated))
             q["execution_quote_valid"] = q["verified"]
             q["status"] = ("VERIFIED_DELAYED" if q["verified"] else
-                            "CLOSING_REFERENCE_ONLY" if q["reference_verified"] else
-                            "UNVERIFIED")
+                           "CLOSING_REFERENCE_ONLY" if q["reference_verified"] else
+                           "UNVERIFIED")
             if not q["same_session_correlated"]:
                 q["reason"] = "observation_date_or_previous_close_not_corroborated"
             elif not price_correlated:
@@ -162,8 +178,8 @@ def scan(root):
                 q["reason"] = "postclose_correlated_reference_not_execution_quote"
             elif q["age_minutes"] > MAX_QUOTE_AGE_MIN:
                 q["reason"] = "delayed_quote_beyond_freshness_window"
-            elif after_close:
-                q["reason"] = "market_closed_no_new_order"
+            elif not market_open:
+                q["reason"] = "outside_active_egx_session"
 
             records[symbol] = q
         except Exception as exc:
@@ -215,6 +231,7 @@ def scan(root):
         "provider": PROVIDER,
         "checked_at_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
         "maximum_quote_age_minutes": MAX_QUOTE_AGE_MIN,
+        "validity_policy": "Source market observation time + 75 minutes; only during active EGX session; revalidate expiry on every downstream scan.",
         "max_independent_price_difference_pct": MAX_PRICE_DIFF_PCT,
         "timestamp_limitation": "Provider displays time but not always the date; date corroborated using prior close.",
         "fully_independent_provider": True,

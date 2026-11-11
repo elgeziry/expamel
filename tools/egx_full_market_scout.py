@@ -24,11 +24,13 @@ BLOCKED_STATES = {"BLOCK_SHARIA", "BLOCK_VALUATION_RR",
                   "BLOCK_CORPORATE_ACTION", "BLOCKED_UNVERIFIED_EVIDENCE",
                   "BLOCK_EXTERNAL_QUOTE"}
 INTERESTING = {"BUY_CANDIDATE_FINAL_CHECK", "WATCH_PRICE_CONFIRMED",
-               "WATCH_QUOTE_PENDING", "NEAR_ENTRY", "RESEARCH_REQUIRED"}
+               "WATCH_QUOTE_PENDING", "WATCH_POSTCLOSE_REFERENCE",
+               "NEAR_ENTRY", "RESEARCH_REQUIRED"}
 POSITION_PRIORITY = {
     "BUY_CANDIDATE_FINAL_CHECK": 100,
     "WATCH_PRICE_CONFIRMED": 84,
     "WATCH_QUOTE_PENDING": 78,
+    "WATCH_POSTCLOSE_REFERENCE": 75,
     "NEAR_ENTRY": 66,
     "WAIT_REVERSAL": 45,
     "WAIT_PRICE": 30,
@@ -63,7 +65,7 @@ def clean_date(value):
 
 
 def classify(row, recovery, independent, session, global_healthy, buy_symbols,
-             buy_market_allowed):
+             buy_market_allowed, checked_at_utc, market_closed):
     symbol = str(row.get("symbol") or "").upper()
     research = row.get("research") or {}
     plan = row.get("execution_plan") or {}
@@ -87,7 +89,11 @@ def classify(row, recovery, independent, session, global_healthy, buy_symbols,
         research.get("valuation_verified") is True,
         (row.get("corporate_action") or {}).get("technical_history_gate") is True,
     ])
-    independent_ok = independent.get("verified") is True
+    expiry = clean_date(independent.get("quote_valid_until_utc"))
+    independent_ok = bool(independent.get("verified") is True
+                          and independent.get("market_session_open_at_check") is True
+                          and expiry is not None and checked_at_utc <= expiry
+                          and not market_closed)
     low_risk = (recovery.get("falling_knife_risk") is False and cycle >= 5
                 and entry >= 6.2 and rr >= 6 and quality >= 7.4)
     no_chase = str(row.get("action") or "") in ("NO_CHASE", "AVOID")
@@ -118,8 +124,12 @@ def classify(row, recovery, independent, session, global_healthy, buy_symbols,
     elif trigger and in_zone and low_risk and independent_ok and not no_chase:
         state, reason = "BUY_CANDIDATE_FINAL_CHECK", "all_engine_gates_passed_broker_and_macro_still_required"
     elif in_zone and low_risk and not no_chase:
-        state = "WATCH_PRICE_CONFIRMED" if independent_ok else "WATCH_QUOTE_PENDING"
-        reason = "price_in_zone_reversal_ok_buy_engine_not_yet_confirmed"
+        if market_closed and independent.get("reference_verified") is True:
+            state, reason = ("WATCH_POSTCLOSE_REFERENCE",
+                             "verified_close_for_analysis_only_recheck_next_trading_session")
+        else:
+            state = "WATCH_PRICE_CONFIRMED" if independent_ok else "WATCH_QUOTE_PENDING"
+            reason = "price_in_zone_reversal_ok_buy_engine_not_yet_confirmed"
     elif near and not no_chase and score >= 70 and cycle >= 4.5 and not recovery.get("falling_knife_risk"):
         state, reason = "NEAR_ENTRY", "within_three_percent_of_zone_watch_for_trigger"
     elif (in_zone or near) and score >= 70:
@@ -138,6 +148,8 @@ def classify(row, recovery, independent, session, global_healthy, buy_symbols,
         "risk_reward_proxy_10": rr, "sharia_pass": research.get("sharia_pass") is True,
         "financial_and_sharia_verified": verified,
         "independent_quote_verified": independent_ok,
+        "independent_quote_valid_until_utc": independent.get("quote_valid_until_utc"),
+        "market_session_closed": market_closed,
         "independent_postclose_reference_verified": independent.get("reference_verified") is True and not independent_ok,
         "independent_quote_status": independent.get("status"),
         "independent_quote_price_egp": independent.get("price_egp"),
@@ -189,13 +201,14 @@ def scan(root):
         and 0 <= max_age <= 20
     )
     allowed = (recovery.get("market_gate") or {}).get("new_buy_orders_allowed") is True
+    market_closed = contract.get("session_status") == "closed"
     buys = {z.get("symbol") for z in (recovery.get("buy_triggers") or [])}
     ranked = []
     for x in stocks:
         sym = str(x.get("symbol") or "").upper()
         ranked.append(classify(x, recovery_by_symbol.get(sym) or {},
                                secondary_by_symbol.get(sym) or {}, session,
-                               globally_ok, buys, allowed))
+                               globally_ok, buys, allowed, now, market_closed))
     ranked.sort(key=lambda z: (-z["rank_priority"], -z["score_100"], z.get("rank") or 9999))
     watchable = [r for r in ranked if r["state"] in INTERESTING or r["state"] == "WAIT_REVERSAL"]
     promising = [r for r in ranked if r["financial_and_sharia_verified"] and r["state"] not in ("EXCLUDED","NOT_READY")]
@@ -204,7 +217,9 @@ def scan(root):
     prev_states = previous.get("state_by_symbol") or {}
     bootstrap = not bool(previous.get("session"))
     events = []
-    if globally_ok:
+    # A closed market never emits a fresh trade-entry alert simply because a
+    # live quote aged into a correlated closing reference.
+    if globally_ok and not market_closed:
         for r in ranked:
             state = r["state"]
             sym = r["symbol"]
@@ -216,11 +231,16 @@ def scan(root):
                                             r["cycle_score_10"] < 5):
                 continue
             # Avoid duplicate alerts when a delayed source later catches up.
-            prior_is_watch = prior in ("WATCH_PRICE_CONFIRMED","WATCH_QUOTE_PENDING")
+            # Downgrading a prior buy candidate to quote-pending is NOT a new
+            # opportunity. Treat it as already seen, not a fresh zone entry.
+            prior_is_watch = prior in ("WATCH_PRICE_CONFIRMED","WATCH_QUOTE_PENDING",
+                                       "WATCH_POSTCLOSE_REFERENCE",
+                                       "BUY_CANDIDATE_FINAL_CHECK")
             new_buy = state == "BUY_CANDIDATE_FINAL_CHECK" and prior != state
             new_zone = state in ("WATCH_PRICE_CONFIRMED","WATCH_QUOTE_PENDING") and not prior_is_watch
             new_near = state == "NEAR_ENTRY" and prior not in ("NEAR_ENTRY","WATCH_PRICE_CONFIRMED",
-                                                                 "WATCH_QUOTE_PENDING","BUY_CANDIDATE_FINAL_CHECK")
+                                                                 "WATCH_QUOTE_PENDING","WATCH_POSTCLOSE_REFERENCE",
+                                                                 "BUY_CANDIDATE_FINAL_CHECK")
             if not (new_buy or new_zone or new_near):
                 continue
             if bootstrap and not new_buy:
@@ -286,6 +306,8 @@ def scan(root):
         "new_events":events,"recent_events":recent,
         "recent_event_retention_hours":EVENT_RETENTION_HOURS,
         "events_are_preliminary_not_orders":True,
+        "quote_expiry_rechecked_at_scan":True,
+        "postclose_reference_is_analysis_only":True,
         "note":"Scans all V6 symbols. Independent provider quote checks are capped and stale sources never authorize buys; provisional zone alerts may prompt manual confirmation.",
     }
     (root/"market-opportunity-scout-v1.json").write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding="utf-8")
