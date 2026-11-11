@@ -1,11 +1,22 @@
 name: EGX independent provider integration validation
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [master]
+    paths:
+      - 'tools/egx_independent_source.py'
+      - 'tools/egx_full_market_scout.py'
+      - 'tools/test_egx_independent_source.py'
+      - 'tools/test_egx_full_market_scout.py'
+      - '.github/workflows/egx-independent-provider-validation.yml'
   push:
     branches: [master]
     paths:
       - '.github/workflows/egx-independent-provider-validation.yml'
       - 'tools/egx_independent_source.py'
+      - 'tools/egx_full_market_scout.py'
+      - 'tools/test_egx_independent_source.py'
+      - 'tools/test_egx_full_market_scout.py'
 permissions:
   contents: read
 jobs:
@@ -14,8 +25,10 @@ jobs:
     timeout-minutes: 6
     steps:
       - uses: actions/checkout@v4
-      - name: Test fail-closed buy gate with six offline regression scenarios
-        run: python3 -m unittest discover -s tools -p 'test_egx_independent_source.py' -v
+      - name: Test source timestamp, expiry, closed-market and scout regressions
+        run: |
+          python3 -m unittest discover -s tools -p 'test_egx_independent_source.py' -v
+          python3 -m unittest discover -s tools -p 'test_egx_full_market_scout.py' -v
       - name: Retrieve published EGX engine state
         shell: bash
         run: |
