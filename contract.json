@@ -3,26 +3,27 @@
   "version": "7.2.1",
   "bridge_version": "5.0-github-direct",
   "transport": "github-actions-direct-upstream",
-  "retrieved_at": "2026-11-12T12:06:47.391Z",
-  "session_status": "continuous",
+  "retrieved_at": "2026-11-12T15:01:59.996Z",
+  "session_status": "closed",
   "expected_reference_session_date": "2026-11-12",
   "execution_usable": true,
   "live_age_seconds": 0,
   "max_live_age_seconds": 600,
-  "stale_risk": "controlled_by_fingerprint_heartbeat",
+  "stale_risk": "medium_reference_date_calendar_derived",
   "blockers": [],
   "warnings": [
     "official_holiday_calendar_not_verified",
+    "degraded_universe_quarantine:SEIGA",
     "transport_netlify_independent",
     "quote_timestamp_not_exposed_liveness_guard_enabled"
   ],
   "quality": {
-    "row_count": 298,
-    "upstream_total_count": 298,
+    "row_count": 297,
+    "upstream_total_count": 296,
     "expected_universe_floor": 295,
-    "universe_coverage_pct": 101.02,
-    "universe_complete": true,
-    "unique_symbols": 298,
+    "universe_coverage_pct": 100.68,
+    "universe_complete": false,
+    "unique_symbols": 297,
     "coverage_scope": "field_coverage_within_returned_universe",
     "close_coverage_pct": 100,
     "volume_coverage_pct": 100,
@@ -30,13 +31,13 @@
     "live_session_consistent": true,
     "live_execution_usable": true,
     "analytics_complete_count": 0,
-    "analytics_provisional_count": 298,
+    "analytics_provisional_count": 297,
     "bridge_live_age_seconds": 0,
     "bridge_gate": "pass",
     "legacy_universe_target": 296,
     "expected_universe_target": 295,
     "effective_universe_floor": 295,
-    "current_universe_count": 298,
+    "current_universe_count": 297,
     "roster_retired_from_main_market": [
       "RMTV"
     ],
@@ -46,32 +47,36 @@
     "supplemental_symbols": [
       "HALN"
     ],
-    "full_market_fresh": true,
+    "full_market_fresh": false,
     "universe_operational": true,
-    "coverage_mode": "complete",
-    "missing_symbols": [],
+    "coverage_mode": "degraded_selective_quarantine",
+    "missing_symbols": [
+      "SEIGA"
+    ],
     "added_symbols_vs_target": [
       "APPF",
       "BQDC",
       "EHDR"
     ],
-    "quarantined_symbols": [],
-    "selective_execution_only": false,
+    "quarantined_symbols": [
+      "SEIGA"
+    ],
+    "selective_execution_only": true,
     "focus_requested": 22,
     "focus_returned": 22,
     "focus_complete": true,
     "discovery_full_market_scanned": true,
-    "discovery_universe_count": 298,
+    "discovery_universe_count": 297,
     "permanent_focus_count": 22,
-    "dynamic_focus_promoted_count": 58,
-    "effective_focus_count": 80,
+    "dynamic_focus_promoted_count": 59,
+    "effective_focus_count": 81,
     "pre_move_sentinel_count": 30
   },
-  "data_fingerprint_sha256": "7ad74db8c739aaa198e91f5548311dd1337b84301b8d31ddc74d3baadbfc0d30",
+  "data_fingerprint_sha256": "ed81f64af040c7d8133c22f33553584380d273e979905f751d404cca2f134f23",
   "bridge_gate": "pass",
   "liveness": {
     "method": "full_market_fingerprint_heartbeat",
-    "fingerprint_first_seen_at": "2026-11-12T12:06:47.391Z",
+    "fingerprint_first_seen_at": "2026-11-12T15:01:59.996Z",
     "stagnation_seconds": 0,
     "max_stagnation_seconds": 1200,
     "passed": true
