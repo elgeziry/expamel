@@ -6,7 +6,7 @@
   "authorized_api_quota_approved_this_run": 0,
   "authorized_api_attempted_symbols": [],
   "provider_failures": {},
-  "checked_at_utc": "2026-11-15T09:07:46.927956+00:00",
+  "checked_at_utc": "2026-11-15T11:09:26.908425+00:00",
   "maximum_quote_age_minutes": 75,
   "validity_policy": "Source market observation time + 75 minutes; only during active EGX session; revalidate expiry on every downstream scan.",
   "max_independent_price_difference_pct": 2.5,
@@ -57,22 +57,15 @@
       "status": "UNAVAILABLE",
       "reason": "No source price, prior close, or market update time"
     },
-    "HELI": {
-      "symbol": "HELI",
-      "source": "Mubasher Egypt (delayed)",
-      "verified": false,
-      "status": "UNAVAILABLE",
-      "reason": "No source price, prior close, or market update time"
-    },
-    "TMGH": {
-      "symbol": "TMGH",
-      "source": "Mubasher Egypt (delayed)",
-      "verified": false,
-      "status": "UNAVAILABLE",
-      "reason": "No source price, prior close, or market update time"
-    },
     "AMOC": {
       "symbol": "AMOC",
+      "source": "Mubasher Egypt (delayed)",
+      "verified": false,
+      "status": "UNAVAILABLE",
+      "reason": "No source price, prior close, or market update time"
+    },
+    "HELI": {
+      "symbol": "HELI",
       "source": "Mubasher Egypt (delayed)",
       "verified": false,
       "status": "UNAVAILABLE",
@@ -91,6 +84,13 @@
       "verified": false,
       "status": "UNAVAILABLE",
       "reason": "No source price, prior close, or market update time"
+    },
+    "TMGH": {
+      "symbol": "TMGH",
+      "source": "Mubasher Egypt (delayed)",
+      "verified": false,
+      "status": "UNAVAILABLE",
+      "reason": "No source price, prior close, or market update time"
     }
   },
   "selected_symbols": [
@@ -100,15 +100,15 @@
     "ORWE",
     "JUFO",
     "ETEL",
-    "HELI",
-    "TMGH",
     "AMOC",
+    "HELI",
     "MASR",
-    "ORAS"
+    "ORAS",
+    "TMGH"
   ],
   "reference_verified_symbols": [],
   "postclose_reference_is_not_executable": true,
-  "buy_triggers_before": 5,
+  "buy_triggers_before": 6,
   "buy_triggers_after": 0,
-  "buy_triggers_blocked": 5
+  "buy_triggers_blocked": 6
 }
