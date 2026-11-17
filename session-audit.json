@@ -1,13 +1,13 @@
 {
   "schema": "egx-v4-session-audit-v1",
-  "generated_at": "2026-11-16T22:58:12.628388Z",
-  "session_date": "2026-11-16",
-  "status": "fail",
-  "valid_snapshot_count": 4,
+  "generated_at": "2026-11-17T21:51:06.784892Z",
+  "session_date": "2026-11-17",
+  "status": "partial",
+  "valid_snapshot_count": 2,
   "invalid_snapshot_count": 0,
-  "first_snapshot_cairo": "2026-11-16T12:55:52.613000+02:00",
-  "last_snapshot_cairo": "2026-11-16T17:33:43.577000+02:00",
-  "max_gap_minutes": 190.08,
+  "first_snapshot_cairo": "2026-11-17T17:52:32.364000+02:00",
+  "last_snapshot_cairo": "2026-11-17T17:53:04.023000+02:00",
+  "max_gap_minutes": 0.53,
   "pass_criteria": {
     "min_snapshots": 40,
     "first_by_cairo": "10:15",
@@ -16,8 +16,7 @@
   },
   "reasons": [
     "insufficient_snapshot_count",
-    "session_start_not_covered",
-    "continuity_gap_over_12m_or_unmeasurable"
+    "session_start_not_covered"
   ],
   "invalid_samples": [],
   "interpretation": "pass=full-session continuity evidenced; partial=valid data exists but full session not proven; fail=continuity or integrity materially broken"
