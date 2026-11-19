@@ -1,8 +1,8 @@
 {
   "engine": "EGX Corporate Action Anomaly Guard",
   "version": 1,
-  "generated_at": "2026-11-18T15:30:32.940Z",
-  "reference_session": "2026-11-18",
+  "generated_at": "2026-11-19T10:35:15.664Z",
+  "reference_session": "2026-11-19",
   "method": "detect >45% up-gap or >31% down-gap across retained closes unless explicitly verified adjusted",
   "flagged": [
     {
@@ -29,15 +29,15 @@
       "verified_adjustment_override": false
     },
     {
-      "symbol": "CANA",
+      "symbol": "HALN",
       "status": "suspected_unadjusted_event",
       "technical_history_gate": false,
       "anomalies": [
         {
-          "date": "2026-11-12",
-          "previous_close": 51.02,
-          "close": 34.74,
-          "ratio": 0.6809
+          "date": "2026-10-25",
+          "previous_close": 0.1,
+          "close": 24.5,
+          "ratio": 245
         }
       ],
       "lookback_sessions": 30,
@@ -59,15 +59,15 @@
       "verified_adjustment_override": false
     },
     {
-      "symbol": "HALN",
+      "symbol": "CANA",
       "status": "suspected_unadjusted_event",
       "technical_history_gate": false,
       "anomalies": [
         {
-          "date": "2026-10-25",
-          "previous_close": 0.1,
-          "close": 24.5,
-          "ratio": 245
+          "date": "2026-11-12",
+          "previous_close": 51.02,
+          "close": 34.74,
+          "ratio": 0.6809
         }
       ],
       "lookback_sessions": 30,
