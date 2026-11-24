@@ -1,12 +1,12 @@
 {
   "schema": "egx-independent-quote-audit-v1",
-  "session": "2026-11-23",
+  "session": "2026-11-24",
   "provider": "EGX.news RapidAPI (authorized) + Mubasher (delayed)",
   "authorized_api_configured": false,
   "authorized_api_quota_approved_this_run": 0,
   "authorized_api_attempted_symbols": [],
   "provider_failures": {},
-  "checked_at_utc": "2026-11-23T17:56:49.386496+00:00",
+  "checked_at_utc": "2026-11-24T08:23:24.065080+00:00",
   "maximum_quote_age_minutes": 75,
   "validity_policy": "Source market observation time + 75 minutes; only during active EGX session; revalidate expiry on every downstream scan.",
   "max_independent_price_difference_pct": 2.5,
@@ -57,15 +57,15 @@
       "status": "UNAVAILABLE",
       "reason": "No source price, prior close, or market update time"
     },
-    "AMOC": {
-      "symbol": "AMOC",
+    "HELI": {
+      "symbol": "HELI",
       "source": "Mubasher Egypt (delayed)",
       "verified": false,
       "status": "UNAVAILABLE",
       "reason": "No source price, prior close, or market update time"
     },
-    "HELI": {
-      "symbol": "HELI",
+    "AMOC": {
+      "symbol": "AMOC",
       "source": "Mubasher Egypt (delayed)",
       "verified": false,
       "status": "UNAVAILABLE",
@@ -79,8 +79,8 @@
     "ORWE",
     "JUFO",
     "ETEL",
-    "AMOC",
-    "HELI"
+    "HELI",
+    "AMOC"
   ],
   "reference_verified_symbols": [],
   "postclose_reference_is_not_executable": true,
